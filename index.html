@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhitzardAgent - 智能体系统全栈安全技术矩阵</title>
+    <meta name="description" content="WhitzardAgent 是由复旦大学与上海创智学院联合打造的 AI 智能体全栈安全攻防技术矩阵，提供风险扫描、安全测评、安全加固与安全基建四大能力，覆盖 Agent 开发、测试、部署、运维全生命周期。">
+    <meta name="keywords" content="智能体安全,Agent安全,LLM安全,AI安全,大模型安全,漏洞挖掘,RAG安全,浏览器Agent,桌面Agent,MCP,WhitzardAgent,复旦大学,创智学院,安全测评,安全加固,Agent Safety,Agent Security,AI Security">
+    <meta name="author" content="复旦大学系统软件与安全实验室, 上海创智学院">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- Open Graph (用于微信、QQ、Facebook 等分享) -->
+    <meta property="og:title" content="WhitzardAgent - 智能体全栈安全攻防技术矩阵">
+    <meta property="og:description" content="从漏洞发现到运行时防护，覆盖开发、测试、部署、运维全链路的 AI 智能体安全能力">
+    <meta property="og:site_name" content="WhitzardAgent">
+    <!-- 使用国内 Staticfile CDN -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <!-- Logo 和品牌信息 -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <!-- 添加的图标 -->
+            <img src="favicon.png" alt="WhitzardAgent Logo" width="60" height="60" class="me-2">
+            <div>
+                <span class="brand-badge">WhitzardAgent</span>
+                <span class="brand-title d-block text-muted small">智能体系统全栈安全技术矩阵</span>
+            </div>
+        </a>
+
+        <!-- 折叠按钮 -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- 导航链接 -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#ability">首页</a></li>
+                <li class="nav-item"><a class="nav-link news-nav-link" href="#news-section">新闻动态</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">技术博客</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">中 / EN</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="particles-container">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="logo-container">
+            <img src="http://8.130.215.70/assets/fdu-logo-BKPqPkHl.png" alt="复旦大学" style="height: 60px;">
+            <img src="http://8.130.215.70/assets/chuangZhi-QfcyQu2j.png" alt="上海创智学院" style="height: 60px;">
+        </div>
+        <div class="hero-content">
+            <h1>AI智能体时代的全栈安全引擎</h1>
+            <div class="hero-blue-text">从漏洞发现到运行时防护，覆盖开发、测试、部署、运维全链路的安全能力</div>
+            <div class="hero-blue-text-second">支持企业Agent｜桌面Agent｜浏览器Agent｜Agent互联网 | Agent基础设施</div>
+            <div class="hero-buttons">
+                <a href="#ability" class="btn btn-hero btn-hero-primary">能力介绍</a>
+                <a href="#team" class="btn btn-hero btn-hero-secondary">团队介绍</a>
+                <a href="mailto:whitzardindex@github.com?subject=合作意向咨询" class="btn btn-hero btn-hero-secondary">合作咨询</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容容器 -->
+    <div class="container pb-5" id="ability">
+        <h2 class="section-title">能力介绍</h2>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="category-card active" onclick="switchTab('scan', this)">
+                    <h5>风险扫描</h5>
+                    <p>发现Agent系统未知重大安全漏洞</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="category-card" onclick="switchTab('eval', this)">
+                    <h5>安全测评</h5>
+                    <p>提供一站式Agent安全测试风洞</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="category-card" onclick="switchTab('harden', this)">
+                    <h5>安全加固</h5>
+                    <p>“乐高式”可插拔安全工具箱</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="category-card" onclick="switchTab('infra', this)">
+                    <h5>安全基建</h5>
+                    <p>面向Agent产业的安全基础设施</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 内容 Tab 切换 -->
+        <div id="content-scan" class="tab-content active">
+            <div class="detail-header">
+                <h3>风险扫描</h3>
+                <p class="text-muted">深度挖掘Agent框架与应用层的潜在风险，保障系统健壮性</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>Agent框架风险建模与漏洞挖掘引擎</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/agent_fuzz.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">
+                                面向主流 Agent 框架的自动化漏洞挖掘，快速发现跨层调用中的0-Day安全风险
+                            </div>
+                            <div class="btn-group-custom">
+                                <a href="https://conf.researchr.org/details/ase-2025/ase-2025-papers/19/Security-Debt-in-LLM-Agent-Applications-A-Measurement-Study-of-Vulnerabilities-and-M" class="btn-outline-custom"><i class="fas fa-file-alt"></i>ASE 2025</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>Agent应用注入类漏洞挖掘工具</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/agent_fuzz_ui.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">
+                                针对 LLM 智能体交互接口的注入漏洞检测能力，有效阻断命令注入等高危攻击载荷
+                            </div>
+                            <div class="btn-group-custom">
+                                <a href="https://www.usenix.org/conference/usenixsecurity25/presentation/liu-fengyu" class="btn-outline-custom"><i class="fas fa-file-alt"></i>USENIX Security 2025</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>Agent应用DoS类漏洞挖掘工具</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/fuzzing_approach.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">
+                                实现对智能体资源调用行为的自动化滥用检测，预防因内存、磁盘或网络耗尽导致的服务中断
+                            </div>
+                            <div class="btn-group-custom">
+                              <a href="#" class="btn-outline-custom"><i class="fas fa-file-alt"></i>USENIX Security 2026 (敬请期待)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-eval" class="tab-content">
+            <div class="detail-header">
+                <h3>安全测评</h3>
+                <p class="text-muted">全方位、多维度的Agent安全基准测试与红队演练</p>
+            </div>
+            <div class="row g-4">
+                <!-- <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>规则驱动的安全测试用例合成技术</h6>
+                        </div>
+                        <div class="img-placeholder"><i class="fas fa-code-branch fa-2x"></i> &nbsp; 用例生成流程图</div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">基于主流App安全规则，自动化生成12000+智能体行为安全测试用例，覆盖真实风险场景</div>
+                            <div class="btn-group-custom">
+                                <a href="#" class="btn-outline-custom">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>规则导向的行为轨迹风险判定模组</h6>
+                        </div>
+                        <div class="img-placeholder"><i class="fas fa-route fa-2x"></i> &nbsp; 轨迹分析示意图</div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">基于安全规则的轻量级轨迹判定模型，准确率超95%，响应快于100ms</div>
+                            <div class="btn-group-custom">
+                                <a href="#" class="btn-outline-custom">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>知识库应用安全压测套件 RAG-Thief</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/rag-thief.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">为RAG知识库设计的自动化数据泄露压测套件，产出端到端修复方案</div>
+                            <div class="btn-group-custom">
+                                <a href="https://arxiv.org/abs/2411.14110" class="btn-outline-custom"><i class="fas fa-file-alt"></i>Arxiv</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>GUI操作型智能体动态安全评测套件</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/guibench.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">动态任务场景合成与安全判定，支持多框架、多环境的可扩展安全测试风洞</div>
+                            <div class="btn-group-custom">
+                                <a href="#" class="btn-outline-custom"><i class="fab fa-github"></i> GitHub (TBD)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>浏览器Agent动态安全测评套件</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/web_eval_2.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">面向浏览器智能体的端到端安全评测基准，覆盖多类诱导攻击，支持跨架构风险评估</div>
+                            <div class="btn-group-custom">
+                                <a href="#" class="btn-outline-custom"><i class="fab fa-github"></i>GitHub (TBD)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-harden" class="tab-content">
+            <div class="detail-header">
+                <h3>安全加固</h3>
+                <p class="text-muted">模块化防御组件，快速提升现有Agent系统的安全性</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>工具流Agent安全矫正模组 Thought-Aligner</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/thought-aligner.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">1.5B轻量CoT层矫正模组，无感提升安全性至90%+，兼容任意基模，修正越权/危险工具调用</div>
+                            <div class="btn-group-custom">
+                                <a href="https://arxiv.org/abs/2505.11063" class="btn-outline-custom"><i class="fas fa-file-alt"></i>Arxiv</a>
+                                <a href="https://huggingface.co/fgdrg/Thought-Aligner-7B-v1.0" class="btn-outline-custom">🤗 HuggingFace</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>桌面Agent安全矫正模组 Hand-Aligner</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/hand-aligner.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">CoT层矫正，电脑/手机操作场景非预期风险发生率从90%降至5%</div>
+                            <div class="btn-group-custom">
+                                <a href="#" class="btn-outline-custom">GitHub (TBD)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>浏览器智能体安全助手 Web Supervisor</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/web_eval.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">运行时防护框架，在任务理解与执行全流程中抵御攻击，安全性提升显著且性能损耗低于 8%</div>
+                            <div class="btn-group-custom">
+                                <a href="#" class="btn-outline-custom">GitHub (TBD)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>多智能体交互风险意图检测模组 SentinelNet</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/sentinelnet.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">精准检测恶意智能体攻击意图，准确率超90%，误报率低于10%</div>
+                            <div class="btn-group-custom">
+                                <a href="https://arxiv.org/pdf/2510.16219" class="btn-outline-custom"><i class="fas fa-file-alt"></i>Arxiv</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-infra" class="tab-content">
+            <div class="detail-header">
+                <h3>安全基建</h3>
+                <p class="text-muted">为Agent研发者提供底层环境支持与仿真沙箱</p>
+            </div>
+            <div class="row g-4">
+                <!-- MCP Zoo -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>全球最大的MCP活样本库 MCPZoo</h6>
+                        </div>
+                          <div class="ability-card-img">
+                            <img src="assets/tools/mcp_zoo.png" alt="MCP Zoo" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">
+                                持续增长的 MCP 服务样本库，汇聚并标准化各类为 AI 提供外部工具能力
+                            </div>
+                            <div class="btn-group-custom">
+                                <a href="http://8.130.215.70/" class="btn-outline-custom">
+                                <i class="fas fa-external-link-alt"></i> Homepage
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WhitzardBox -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>智能安全执行桌面环境 XuanwuBox</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/xuanwubox.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">
+                                根据执行状态动态生成"安全Tips"，非预期风险行为发生率降低至 1%
+                            </div>
+                            <div class="btn-group-custom">
+                                <a href="#" class="btn-outline-custom"><i class="fab fa-github"></i> GitHub (TBD)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MirrorGUI -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>虚实结合的行为仿真沙箱 MirrorGUI</h6>
+                        </div>
+                        <div class="ability-card-img">
+                            <img src="assets/tools/mirror_gui.png" alt="Xuanwu Box" />
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">
+                                融合大模型与程序仿真的高拟真GUI交互沙箱，快速批量开展行为测试
+                            </div>
+                            <div class="btn-group-custom">
+                                <a href="https://github.com/WhitzardAgent/Mirror-GUI" class="btn-outline-custom"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- WhitzardBrowser -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="card-header-custom">
+                            <h6>即插即用的安全浏览器沙箱 WhitzardBrowser</h6>
+                        </div>
+                        <div class="img-placeholder">
+                            <i class="fas fa-browser fa-2x"></i> &nbsp; 浏览器沙箱界面
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="intro-box">
+                                提供便捷编程API，为智能体提供方便易用、安全可靠的网页浏览服务
+                            </div>
+                            <div class="btn-group-custom">
+                                <a href="#" class="btn-outline-custom"><i class="fab fa-github"></i> GitHub (TBD)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+<div class="container py-5" id="team">
+    <h2 class="section-title">技术委员会</h2>
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+            <div class="team-member card h-100 shadow-sm border rounded-3">
+                <img src="https://security.fudan.edu.cn/assets/img/avatar_staff/pxd.jpg" alt="潘旭东" class="card-img-top" style="height: 200px; object-fit: contain; width: 100%; border-radius: 0;">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-1">潘旭东 博士</h5>
+                    <p class="card-text text-muted mb-2">复旦大学副研究员 / 上海创智学院导师</p>
+                    <div class="mb-3 d-flex justify-content-center gap-2">
+                        <span class="badge badge-secondary-custom">AI安全评测</span>
+                        <span class="badge badge-secondary-custom">模型安全攻防</span>
+                    </div>
+                    <div class="card-text small">
+                        <p>世界人工智能大会WAIC云帆奖</p>
+                        <p>入选华为"天才少年"</p>
+                        <p>主持国家重点研发计划课题</p>
+                        <p>AI安全技术服务多家大型企业</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="team-member card h-100 shadow-sm border rounded-3">
+                <img src="https://security.fudan.edu.cn/assets/img/avatar_staff/djr.jpg" alt="戴嘉润" class="card-img-top" style="height: 200px; object-fit: contain; width: 100%; border-radius: 0;">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-1">戴嘉润 博士</h5>
+                    <p class="card-text text-muted mb-2">复旦大学副研究员</p>
+                    <div class="mb-3 d-flex justify-content-center gap-2">
+                        <span class="badge badge-secondary-custom">AI系统安全</span>
+                        <span class="badge badge-secondary-custom">漏洞攻防</span>
+                    </div>
+                    <div class="card-text small">
+                        <p>累计挖掘 600+零天漏洞</p>
+                        <p>产业化应用于阿里、华为等</p>
+                        <p>数项国际网安攻防赛事冠军</p>
+                        <p>上海市技术发明奖一等奖</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+                <div class="col-md-6 col-lg-4">
+            <div class="team-member card h-100 shadow-sm border rounded-3">
+                <img src="https://security.fudan.edu.cn/assets/img/avatar_staff/hg.jpg" alt="洪赓" class="card-img-top" style="height: 200px; object-fit: contain; width: 100%; border-radius: 0;">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-1">洪赓 博士</h5>
+                    <p class="card-text text-muted mb-2">复旦大学助理研究员</p>
+                    <div class="mb-3 d-flex justify-content-center gap-2">
+                        <span class="badge badge-secondary-custom">AI安全与治理</span>
+                        <span class="badge badge-secondary-custom">网络测绘</span>
+                    </div>
+                    <div class="card-text small">
+                        <p>ACM CCS 2018焦点论文（Highlight Award）</p>
+                        <p>决咨建议多次获重要批示</p>
+                        <p>ACM中国计算机安全分会优博奖</p>
+                        <p>深度参与多项大模型安全国标建设工作</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- 工作基础 -->
+    <div class="work-foundation">
+        <div class="container">
+            <h2 class="section-title">团队实力</h2>
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="foundation-item">
+                        <div class="icon"><i class="fas fa-code"></i></div>
+                        <div class="content">
+                            <h3>智能体应用基础框架风险</h3>
+                            <p>在 LangChain、AutoGPT、LangFlow 等主流框架中发现上百个高危漏洞，涉及远程命令执行、数据窃取等风险；<span class="blue-bold">已获 100+国际/国内漏洞库编号</span>，并收到多家厂商致谢。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="foundation-item">
+                        <div class="icon"><i class="fas fa-database"></i></div>
+                        <div class="content">
+                            <h3>智能体数据资产风险</h3>
+                            <p>通过红队测试验证，攻击者可利用大模型漏洞对私有知识库实施"脱库"攻击，在 OpenAI 与字节Coze平台的多款应用中成功提取近 80% 的原始文本，引发<span class="blue-bold">10+家AI头部企业关注</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="foundation-item">
+                        <div class="icon"><i class="fas fa-brain"></i></div>
+                        <div class="content">
+                            <h3>智能体行为失控风险</h3>
+                            <p>系统评估自主复制、伪装、心理操控、密谋自保等智能体红线风险，得到福布斯、LiveScience等媒体报道；<span class="blue-bold">代表中国学者受邀向联合国秘书长科学顾问委员会</span>分享发现，并纳入其科学简报。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="foundation-item">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="content">
+                            <h3>基础大模型安全评测与防护</h3>
+                            <p>研发大模型动态安全测评平台，<span class="blue-bold">多次服务国家专项行动</span>，获中央领导批示；参与《生成式人工智能服务安全基本要求》等国家标准编制，<span class="blue-bold">联合发布国标安全测试集</span>，支撑近千家AI+企业安全合规。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="foundation-item">
+                        <div class="icon"><i class="fas fa-server"></i></div>
+                        <div class="content">
+                            <h3>智能体服务部署风险测绘</h3>
+                            <p>结合网络空间测绘技术，发现公网环境<span class="blue-bold">上万个基于含已知漏洞软件部署的智能体服务</span>，攻击者可利用漏洞实现设备完全控制。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新闻动态瀑布流 -->
+    <div class="news-section" id="news-section">
+        <div class="news-container">
+            <div class="container">
+                <h2 class="section-title">新闻动态</h2>
+                <div class="news-grid">
+                    <!-- 新闻1: 联合国AI欺骗风险研讨会 (2025-12-05) -->
+                    <div class="news-card">
+                        <div class="news-image">
+                        <img src="assets/news/deception_workshop.jpeg" alt="联合国AI欺骗研讨会" />
+                        </div>
+                        <div class="news-content">
+                        <span class="news-date">2025年12月5日</span>
+                        <h3 class="news-title">团队受邀参加联合国AI欺骗风险研讨会并作发言</h3>
+                        <p class="news-excerpt">团队受邀在由联合国秘书长技术特使与图灵奖得主Yoshua Bengio共同牵头的AI欺骗专家圆桌会议上发言，分享了在AI欺骗领域的三项实证研究：安全评测中的伪装行为、开放式交互欺骗及AI自主复制密谋行为，为全球AI治理贡献中国智慧。</p>
+                        <div class="news-tags">
+                            <span class="news-tag">AI安全</span>
+                            <span class="news-tag">AI欺骗</span>
+                            <span class="news-tag">联合国</span>
+                            <span class="news-tag">全球治理</span>
+                        </div>
+                        <a href="https://mp.weixin.qq.com/s/YtMqL3aGboe8U2vEgUle2Q" class="news-link" target="_blank">查看详情 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 新闻2: MCPZoo 主页上线 (2025-11-28) -->
+                    <div class="news-card">
+                        <div class="news-image">
+                        <img src="assets/news/mcp_zoo_online.jpeg" alt="MCP Zoo上线啦" />
+                        </div>
+                        <div class="news-content">
+                        <span class="news-date">2025年11月28日</span>
+                        <h3 class="news-title">MCPZoo 主页上线｜让 MCP 生态第一次“看得见、摸得着”</h3>
+                        <p class="news-excerpt">团队正式发布 MCPZoo 官网，提供全球规模最大的 MCP（模型上下文协议）服务器运行样本库。用户可开箱即用地探索、连接与测试真实部署的 MCP 服务，并查看其工具集，为 MCP 生态的观测与安全评估奠定基础。</p>
+                        <div class="news-tags">
+                            <span class="news-tag">MCP</span>
+                            <span class="news-tag">AI基础设施</span>
+                            <span class="news-tag">生态测量</span>
+                        </div>
+                        <a href="https://mp.weixin.qq.com/s/RtqRSIXoap7Voy7jEvnaFg" class="news-link" target="_blank">查看详情 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 新闻3: MCPZoo 数据集发布 (2025-11-14) -->
+                    <div class="news-card">
+                        <div class="news-image">
+                        <img src="assets/news/mcp_zoo_web.png" alt="MCP Zoo上线啦" />
+                        </div>
+                        <div class="news-content">
+                        <span class="news-date">2025年11月14日</span>
+                        <h3 class="news-title">成果分享 | MCPZoo：世界上（目前）最大的MCP动物园要来了！</h3>
+                        <p class="news-excerpt">团队构建了全球最大的 MCP（模型上下文协议）服务器运行样本库 MCPZoo，通过自动化收集、解析与容器化部署，成功汇聚万余个可交互的 MCP 镜像。研究揭示了当前 MCP 生态“平台主导、企业跟进、个人分布广泛”的格局，并指出生态正从分散走向集成。</p>
+                        <div class="news-tags">
+                            <span class="news-tag">MCP</span>
+                            <span class="news-tag">互联网测量</span>
+                            <span class="news-tag">AI安全</span>
+                        </div>
+                        <a href="https://mp.weixin.qq.com/s/KinrcfG9hOqOpQcpcirNzg" class="news-link" target="_blank">查看详情 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 新闻4: ASE 2025 智能体漏洞研究 (2025-10-29) -->
+                    <div class="news-card">
+                        <div class="news-image">
+                        <img src="assets/news/ase_25.png" alt="Security Debt" />
+                        </div>
+                        <div class="news-content">
+                        <span class="news-date">2025年10月29日</span>
+                        <h3 class="news-title">成果分享｜[ASE 2025] 在智能体应用的漏洞缓解中，开发者将面临怎样的艰难权衡？</h3>
+                        <p class="news-excerpt">团队的研究成果《Security Debt in LLM Agent Applications》被软件工程顶会 ASE 2025 录用。研究系统评测了50个热门智能体应用，揭示其漏洞态势严峻（74.1%为高危/致命级），并深入分析了开发者在修复漏洞时面临的“安全 vs 功能”两难困境及责任归属争议。</p>
+                        <div class="news-tags">
+                            <span class="news-tag">智能体安全</span>
+                            <span class="news-tag">漏洞挖掘</span>
+                            <span class="news-tag">ASE2025</span>
+                        </div>
+                        <a href="https://mp.weixin.qq.com/s/9bu002cwmehIWPzQNxpTFQ" class="news-link" target="_blank">查看详情 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 新闻5: WAIC 青年思辨会 (2025-08-03) -->
+                    <div class="news-card">
+                        <div class="news-image">
+                        <img src="assets/news/waic.jpeg" alt="WAIC" />
+                        </div>
+                        <div class="news-content">
+                        <span class="news-date">2025年8月3日</span>
+                        <h3 class="news-title">智能体元年，安全准备好了吗？——WAIC 2025 青年思辨会成功举办</h3>
+                        <p class="news-excerpt">在2025世界人工智能大会（WAIC）期间，由团队主办的“智能体元年，安全准备好了吗？”青年思辨会成功举办。来自学界、产业界与标准化机构的顶尖专家齐聚一堂，围绕智能体安全的风险图谱、技术挑战与治理路径展开深度思辨，强调需建立“产学研用”多方共治生态。</p>
+                        <div class="news-tags">
+                            <span class="news-tag">WAIC2025</span>
+                            <span class="news-tag">AI治理</span>
+                            <span class="news-tag">多方共治</span>
+                        </div>
+                        <a href="https://mp.weixin.qq.com/s/1v-KGo5Ihj6fWOV3-zWAGw" class="news-link" target="_blank">查看详情 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 新闻6: WWW'25 安全防护 vs 模型能力 (2025-07-24) -->
+                    <div class="news-card">
+                        <div class="news-image">
+                        <img src="assets/news/www_25.png" alt="WWW 2025" />
+                        </div>
+                        <div class="news-content">
+                        <span class="news-date">2025年7月24日</span>
+                        <h3 class="news-title">成果分享｜[WWW'25] 安全防护让大语言模型变“傻”了吗？</h3>
+                        <p class="news-excerpt">团队成果发表于国际顶会 ACM WWW'25 ：越狱防护虽提升安全性，却显著降低模型实用性与可用性。通过构建 USEBench 基准，评估7种主流防御策略，揭示“更安全”与“更聪明”难以兼得的困境，并指出模型迭代常以牺牲安全性为代价换取性能提升。</p>
+                        <div class="news-tags">
+                            <span class="news-tag">LLM安全</span>
+                            <span class="news-tag">越狱防护</span>
+                            <span class="news-tag">WWW2025</span>
+                            <span class="news-tag">能力退化</span>
+                        </div>
+                        <a href="https://mp.weixin.qq.com/s/g0N9-ty-WGEEAhCuks573A" class="news-link" target="_blank">查看详情 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 新闻7: ReasoningShield 推理轨迹安全 (2025-07-17) -->
+                    <div class="news-card">
+                        <div class="news-image">
+                        <img src="assets/news/reasoningshield.png" alt="ReasoningShield开源" />
+                        </div>
+                        <div class="news-content">
+                        <span class="news-date">2025年7月17日</span>
+                        <h3 class="news-title">研究分享 | 当大模型开始 "思考"，谁来守护它的安全？ReasoningShield 重磅登场！</h3>
+                        <p class="news-excerpt">针对大型推理模型（LRMs）长推理轨迹中隐藏的安全风险，团队提出 ReasoningShield: 首个专为“Question-Thought”对设计的安全检测模型。该模型基于1B/3B小参数架构，在推理轨迹检测任务上达到SOTA，同时兼顾轻量化、可解释性与跨任务泛化能力，代码与数据集已开源。</p>
+                        <div class="news-tags">
+                            <span class="news-tag">推理安全</span>
+                            <span class="news-tag">ReasoningShield</span>
+                            <span class="news-tag">思维链</span>
+                            <span class="news-tag">开源</span>
+                        </div>
+                        <a href="https://mp.weixin.qq.com/s/33YX3UXLoHkoO4yhyrIL6A" class="news-link" target="_blank">查看详情 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h5>WhitzardAgent · 智能体系统全栈安全技术矩阵</h5>
+            <p>由<a href="https://security.fudan.edu.cn/">复旦大学系统软件与安全实验室</a>与<a href="https://www.sii.edu.cn/">上海创智学院</a>联合打造</p>
+            <div class="footer-links">
+                <a href="mailto:whitzardindex@fudan.edu.cn">联系我们</a>
+                <a href="mailto:whitzardindex@fudan.edu.cn">合作申请</a>
+                <a href="#">版权声明</a>
+            </div>
+            <p>&copy; 2025 WhitzardAgent. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabName, element) {
+            // 1. 移除所有卡片的 active 状态
+            document.querySelectorAll('.category-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            const targetId = 'content-' + tabName;
+            document.getElementById(targetId).classList.add('active');
+        }
+        
+        
+        // 为新闻分页按钮添加交互功能
+        document.querySelectorAll('.news-page-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.news-page-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+    
+    <!-- 使用国内 Staticfile CDN -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+
