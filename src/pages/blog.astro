@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const allContent = await Promise.all([
+  getCollection("posts", ({ data }) => !data.draft),
+  getCollection("briefs", ({ data }) => !data.draft),
+  getCollection("notes", ({ data }) => !data.draft),
+  getCollection("updates", ({ data }) => !data.draft),
+]);
+
+const items = allContent
+  .flat()
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const typeLabel: Record<string, string> = {
+  posts: "Post",
+  briefs: "Brief",
+  notes: "Note",
+  updates: "Update",
+};
+---
+
+<BaseLayout
+  title="Blog"
+  description="Posts, briefs, notes, and updates from Whitzard and Nuwa Frontier AI Safety Lab."
+>
+  <section class="py-24 md:py-32">
+    <div class="max-w-[1180px] mx-auto px-6">
+      <h1
+        class="text-wz-ink font-semibold tracking-tight mb-4"
+        style="font-size: var(--text-h1);"
+      >
+        Blog
+      </h1>
+      <p class="text-wz-body text-lg leading-relaxed max-w-2xl mb-12">
+        Posts, briefs, notes, and updates from Whitzard and Nuwa Frontier AI Safety Lab.
+      </p>
+
+      {items.length > 0 ? (
+        <div class="space-y-4">
+          {items.map((item) => (
+            <article class="bg-white border border-wz-hairline rounded-lg p-6 hover:shadow-md transition-shadow">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-wz-teal text-xs font-medium uppercase">{typeLabel[item.collection] || item.data.type || item.collection}</span>
+                <span class="text-wz-subtle text-xs">
+                  {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                </span>
+                {item.data.brand && (
+                  <span class:list={[
+                    "text-xs font-medium px-2 py-0.5 rounded-full",
+                    item.data.brand === "nuwa" && "bg-nw-jade-pale text-nw-jade",
+                    item.data.brand === "whitzard" && "bg-wz-panel-blue text-wz-blue",
+                    item.data.brand === "whitzardagent" && "bg-wz-teal-soft text-wz-teal",
+                  ]}>
+                    {item.data.brand}
+                  </span>
+                )}
+              </div>
+              <h3 class="text-wz-ink font-semibold mb-1">{item.data.title}</h3>
+              {item.data.summary && (
+                <p class="text-wz-muted text-sm leading-relaxed">{item.data.summary}</p>
+              )}
+              {item.data.tags && item.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-1 mt-2">
+                  {item.data.tags.map((tag) => (
+                    <span class="text-xs text-wz-subtle bg-wz-panel px-2 py-0.5 rounded-full">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="bg-wz-panel border border-wz-hairline rounded-lg p-12 text-center">
+          <p class="text-wz-muted text-sm">No content published yet. Content will appear here when available.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

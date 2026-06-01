@@ -1,0 +1,110 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { links } from "../data/links";
+---
+
+<BaseLayout
+  title="Contact"
+  description="Collaborate with Whitzard and Nuwa Frontier AI Safety Lab on frontier AI safety."
+>
+  <section class="py-24 md:py-32">
+    <div class="max-w-[1180px] mx-auto px-6">
+      <div class="max-w-2xl mb-16">
+        <h1
+          class="text-wz-ink font-semibold tracking-tight mb-4"
+          style="font-size: var(--text-h1);"
+        >
+          Contact &amp; Collaboration
+        </h1>
+        <p class="text-wz-body text-lg leading-relaxed">
+          We collaborate on frontier AI safety evaluation, agent safety, runtime defense, and governance. Reach out to discuss partnership, research collaboration, or consulting.
+        </p>
+      </div>
+
+      <!-- Contact Categories -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div class="bg-white border border-wz-hairline rounded-xl p-6">
+          <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">Research</span>
+          <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">Research Collaboration</h3>
+          <p class="text-wz-muted text-sm leading-relaxed">
+            Joint research on frontier AI safety, agent behavior, and evaluation methodologies.
+          </p>
+        </div>
+        <div class="bg-white border border-wz-hairline rounded-xl p-6">
+          <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">Industry</span>
+          <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">Industry Partnership</h3>
+          <p class="text-wz-muted text-sm leading-relaxed">
+            Deploy Whitzard safety infrastructure in your AI systems and agent pipelines.
+          </p>
+        </div>
+        <div class="bg-white border border-wz-hairline rounded-xl p-6">
+          <span class="text-wz-navy text-xs font-medium uppercase tracking-wide">Policy</span>
+          <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">Policy &amp; Governance</h3>
+          <p class="text-wz-muted text-sm leading-relaxed">
+            AI safety governance frameworks, risk assessment, and policy advisory.
+          </p>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="bg-wz-panel border border-wz-hairline rounded-xl p-8 mb-16 text-center">
+        <h2 class="text-wz-ink font-semibold mb-2" style="font-size: var(--text-h3);">Email Us</h2>
+        <p class="text-wz-muted text-sm mb-4">For collaboration and general inquiries:</p>
+        <a
+          href="mailto:whitzardindex@github.com"
+          class="text-wz-blue text-lg font-medium hover:underline no-underline"
+        >
+          whitzardindex@github.com
+        </a>
+      </div>
+
+      <!-- Links -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a
+          href={links.x}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white border border-wz-hairline rounded-lg p-6 hover:border-wz-blue transition-colors no-underline group"
+        >
+          <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">X (Twitter)</span>
+          <p class="text-wz-ink font-semibold mt-2 text-sm group-hover:text-wz-blue transition-colors">
+            @NuwaAISafety &rarr;
+          </p>
+        </a>
+        <a
+          href={links.substack}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white border border-wz-hairline rounded-lg p-6 hover:border-wz-teal transition-colors no-underline group"
+        >
+          <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">Substack</span>
+          <p class="text-wz-ink font-semibold mt-2 text-sm group-hover:text-wz-teal transition-colors">
+            Nuwa Brief &rarr;
+          </p>
+        </a>
+        <a
+          href={links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white border border-wz-hairline rounded-lg p-6 hover:border-wz-ink transition-colors no-underline group"
+        >
+          <span class="text-wz-ink text-xs font-medium uppercase tracking-wide">GitHub</span>
+          <p class="text-wz-ink font-semibold mt-2 text-sm group-hover:text-wz-blue transition-colors">
+            WhitzardAgent &rarr;
+          </p>
+        </a>
+        <a
+          href={links.huggingface}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white border border-wz-hairline rounded-lg p-6 hover:border-wz-azure transition-colors no-underline group"
+        >
+          <span class="text-wz-azure text-xs font-medium uppercase tracking-wide">Hugging Face</span>
+          <p class="text-wz-ink font-semibold mt-2 text-sm group-hover:text-wz-azure transition-colors">
+            Datasets &amp; Benchmarks &rarr;
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

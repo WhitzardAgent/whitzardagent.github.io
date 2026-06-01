@@ -1,0 +1,64 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  theme: {
+    extend: {
+      colors: {
+        // Whitzard
+        "wz-ink": "var(--wz-ink)",
+        "wz-navy": "var(--wz-navy)",
+        "wz-blue": "var(--wz-blue)",
+        "wz-blue-active": "var(--wz-blue-active)",
+        "wz-azure": "var(--wz-azure)",
+        "wz-teal": "var(--wz-teal)",
+        "wz-teal-soft": "var(--wz-teal-soft)",
+        "wz-mist": "var(--wz-mist)",
+        "wz-canvas": "var(--wz-canvas)",
+        "wz-body": "var(--wz-body)",
+        "wz-muted": "var(--wz-muted)",
+        "wz-subtle": "var(--wz-subtle)",
+        "wz-hairline": "var(--wz-hairline)",
+        "wz-border-strong": "var(--wz-border-strong)",
+        "wz-panel": "var(--wz-panel)",
+        "wz-panel-blue": "var(--wz-panel-blue)",
+        "wz-panel-ink": "var(--wz-panel-ink)",
+
+        // Nuwa
+        "nw-ink": "var(--nw-ink)",
+        "nw-deep-blue": "var(--nw-deep-blue)",
+        "nw-sky-blue": "var(--nw-sky-blue)",
+        "nw-jade": "var(--nw-jade)",
+        "nw-jade-soft": "var(--nw-jade-soft)",
+        "nw-jade-pale": "var(--nw-jade-pale)",
+        "nw-canvas": "var(--nw-canvas)",
+        "nw-paper": "var(--nw-paper)",
+        "nw-warm-paper": "var(--nw-warm-paper)",
+        "nw-mist": "var(--nw-mist)",
+        "nw-hairline": "var(--nw-hairline)",
+        "nw-body": "var(--nw-body)",
+        "nw-muted": "var(--nw-muted)",
+        "nw-subtle": "var(--nw-subtle)",
+
+        // Five-stone
+        "stone-ink": "var(--stone-ink)",
+        "stone-jade": "var(--stone-jade)",
+        "stone-vermilion": "var(--stone-vermilion)",
+        "stone-ochre": "var(--stone-ochre)",
+        "stone-ivory": "var(--stone-ivory)",
+      },
+      fontFamily: {
+        sans: [
+          "Inter",
+          "Noto Sans SC",
+          "Source Han Sans SC",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
+        serif: ["Source Serif 4", "Georgia", "serif"],
+        mono: ["JetBrains Mono", "SFMono-Regular", "Consolas", "monospace"],
+      },
+    },
+  },
+  plugins: [],
+};

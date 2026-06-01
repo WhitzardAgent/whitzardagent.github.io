@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { links } from "../data/links";
+---
+
+<BaseLayout
+  title="AgentGuard"
+  description="AgentGuard provides zero-trust access control for AI agent tool calls."
+>
+  <section class="py-24 md:py-32">
+    <div class="max-w-[1180px] mx-auto px-6">
+      <!-- Hero -->
+      <div class="max-w-2xl mb-16">
+        <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">Flagship Project</span>
+        <h1
+          class="text-wz-ink font-semibold tracking-tight mt-2 mb-4"
+          style="font-size: var(--text-hero); line-height: 1.05;"
+        >
+          AgentGuard
+        </h1>
+        <p class="text-wz-body text-xl leading-relaxed mb-8">
+          Zero-trust access control for AI agent tool calls.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href={links.agentguard}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-3 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
+          >
+            View on GitHub
+          </a>
+          <a
+            href={links.agentguard}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-3 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
+          >
+            Quickstart
+          </a>
+        </div>
+      </div>
+
+      <!-- Problem -->
+      <section class="mb-16">
+        <h2 class="text-wz-ink font-semibold mb-4" style="font-size: var(--text-h2);">The Problem</h2>
+        <p class="text-wz-body text-base leading-relaxed max-w-2xl mb-4">
+          AI agents with tool-use capabilities create runtime risks. When an LLM-powered agent can execute code, access files, or make API calls, a single prompt injection or misalignment can lead to unauthorized actions.
+        </p>
+        <p class="text-wz-muted text-base leading-relaxed max-w-2xl">
+          Traditional access control models assume trusted users. AI agents operate with delegated authority, making them a fundamentally different security challenge.
+        </p>
+      </section>
+
+      <!-- How It Works -->
+      <section class="mb-16">
+        <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { title: "Policy", desc: "Define fine-grained access control policies for every tool call an agent can make." },
+            { title: "Trace", desc: "Full traceability of agent actions with structured audit logs." },
+            { title: "Approval", desc: "Human-in-the-loop approval gates for high-risk operations." },
+            { title: "Audit", desc: "Comprehensive audit trail for compliance and incident investigation." },
+          ].map((step) => (
+            <div class="bg-wz-panel border border-wz-hairline rounded-lg p-5">
+              <div class="text-wz-teal text-xs font-mono mb-2">&#9679;</div>
+              <h3 class="text-wz-ink font-semibold mb-2">{step.title}</h3>
+              <p class="text-wz-muted text-sm leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Use Cases -->
+      <section class="mb-16">
+        <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">Use Cases</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { title: "Code Execution Agents", desc: "Control what code AI agents can execute and what resources they can access." },
+            { title: "Browser Automation", desc: "Restrict browser agents from accessing unauthorized URLs or submitting forms." },
+            { title: "API-Connected Agents", desc: "Enforce policies on which APIs agents can call and what data they can send." },
+            { title: "Multi-Agent Systems", desc: "Coordinate access control across multiple collaborating AI agents." },
+          ].map((uc) => (
+            <div class="bg-white border border-wz-hairline rounded-lg p-5">
+              <h3 class="text-wz-ink font-semibold text-sm mb-2">{uc.title}</h3>
+              <p class="text-wz-muted text-sm leading-relaxed">{uc.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Nuwa Framework Link -->
+      <div class="bg-nw-jade-pale border border-nw-hairline rounded-xl p-6 flex items-center gap-4">
+        <span class="text-nw-jade text-xl">&#9670;</span>
+        <div>
+          <h3 class="text-nw-ink font-semibold text-sm mb-1">Related: Nuwa Agent Safety Framework</h3>
+          <p class="text-nw-muted text-sm">AgentGuard implements runtime safety principles from the Nuwa Agent Safety Framework (NASF).</p>
+        </div>
+        <a href="/nuwa" class="ml-auto text-nw-jade text-sm font-medium hover:underline no-underline whitespace-nowrap">
+          Learn more &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

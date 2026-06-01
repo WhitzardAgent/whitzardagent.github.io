@@ -1,0 +1,295 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { links } from "../data/links";
+import { getCollection } from "astro:content";
+
+const briefs = await getCollection("briefs", ({ data }) => !data.draft && data.brand === "nuwa");
+const reports = await getCollection("reports", ({ data }) => !data.draft && data.brand === "nuwa");
+
+const recentBriefs = briefs
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const researchDirections = [
+  {
+    title: "Agent Behavior Safety",
+    description: "Studying safety risks in autonomous AI agent behavior, including deception, goal misalignment, and tool misuse.",
+    tag: "Agent Safety",
+  },
+  {
+    title: "Frontier AI Risk Evaluation",
+    description: "Developing evaluation methods and benchmarks for frontier AI capabilities and loss-of-control risks.",
+    tag: "Evaluation",
+  },
+  {
+    title: "AI Control and Loss-of-Control Risk",
+    description: "Investigating AI control methods and the conditions under which advanced AI systems may evade oversight.",
+    tag: "AI Control",
+  },
+  {
+    title: "Runtime Safety Infrastructure",
+    description: "Building runtime safety infrastructure for AI agent tool calls, including zero-trust access control.",
+    tag: "Runtime Safety",
+  },
+  {
+    title: "Risk Monitoring and Governance Evidence",
+    description: "Collecting and analyzing risk signals to support evidence-based AI governance and policy.",
+    tag: "Governance",
+  },
+];
+---
+
+<BaseLayout
+  title="Nuwa Frontier AI Safety Lab"
+  description="Nuwa Frontier AI Safety Lab studies frontier AI risks, agent safety, and controllable AI. Supported by Whitzard."
+  brand="nuwa"
+>
+  <!-- Hero -->
+  <section class="py-28 md:py-36 lg:py-44">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <div class="max-w-2xl">
+        <!-- Five-stone mark -->
+        <div class="flex items-center gap-1.5 mb-6">
+          <span style="color: var(--stone-jade);" class="text-lg">&#9670;</span>
+          <span style="color: var(--stone-vermilion);" class="text-lg">&#9670;</span>
+          <span style="color: var(--stone-ochre);" class="text-lg">&#9670;</span>
+          <span style="color: var(--stone-ivory);" class="text-lg">&#9670;</span>
+          <span style="color: var(--stone-ink);" class="text-lg">&#9670;</span>
+        </div>
+
+        <h1
+          class="text-nw-ink font-semibold tracking-tight mb-6"
+          style="font-size: var(--text-hero); line-height: 1.05;"
+        >
+          Nuwa Frontier AI Safety Lab
+        </h1>
+        <p class="text-nw-body text-lg md:text-xl leading-relaxed mb-4">
+          An Eastern-rooted AI safety lab studying frontier AI risks, agent safety, and controllable AI.
+        </p>
+        <p class="text-nw-muted text-base leading-relaxed mb-2 font-serif italic">
+          Inspired by N&uuml;wa repairing the sky, we study how to identify and repair safety gaps in advanced AI systems before they become systemic failures.
+        </p>
+        <p class="text-nw-jade text-sm font-medium mb-8">
+          Supported by Whitzard
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/research"
+            class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-3 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline"
+          >
+            Research Agenda
+          </a>
+          <a
+            href={links.substack}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-3 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline"
+          >
+            Subscribe to Nuwa Brief
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Nuwa -->
+  <section class="py-16 md:py-24 bg-nw-warm-paper">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <div class="max-w-2xl">
+        <h2
+          class="text-nw-ink font-semibold mb-6"
+          style="font-size: var(--text-h2);"
+        >
+          Why Nuwa
+        </h2>
+        <div class="space-y-4 text-nw-body leading-relaxed">
+          <p>
+            Frontier AI systems are advancing rapidly. As capabilities grow, so do the risks of loss of control, deceptive alignment, and autonomous misuse.
+          </p>
+          <p>
+            Nuwa is dedicated to studying these risks with rigor and depth, grounded in both technical evidence and an Eastern philosophical tradition of prudence and repair.
+          </p>
+        </div>
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="text-center p-4">
+            <div class="text-nw-jade text-2xl font-semibold mb-1">Repair</div>
+            <div class="text-nw-muted text-xs">Identify &amp; fix safety gaps</div>
+          </div>
+          <div class="text-center p-4">
+            <div class="text-nw-sky-blue text-2xl font-semibold mb-1">Boundary</div>
+            <div class="text-nw-muted text-xs">Meaningful control limits</div>
+          </div>
+          <div class="text-center p-4">
+            <div class="text-nw-deep-blue text-2xl font-semibold mb-1">Prudence</div>
+            <div class="text-nw-muted text-xs">Evidence &amp; restraint</div>
+          </div>
+          <div class="text-center p-4">
+            <div class="text-nw-ink text-2xl font-semibold mb-1">Guided</div>
+            <div class="text-nw-muted text-xs">Safe, reliable, controllable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Agenda -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <h2
+        class="text-nw-ink font-semibold mb-4"
+        style="font-size: var(--text-h2);"
+      >
+        Research Agenda
+      </h2>
+      <p class="text-nw-muted text-base mb-10 max-w-xl">
+        Five research directions guiding our work on frontier AI safety.
+      </p>
+      <div class="space-y-4">
+        {researchDirections.map((dir, i) => (
+          <div class="bg-nw-paper border border-nw-hairline rounded-lg p-6 flex items-start gap-4">
+            <span class="text-nw-jade font-mono text-sm mt-1">&#9670;</span>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-nw-ink font-semibold" style="font-size: var(--text-title);">{dir.title}</h3>
+                <span class="text-nw-jade text-xs font-medium bg-nw-jade-pale px-2 py-0.5 rounded-full">{dir.tag}</span>
+              </div>
+              <p class="text-nw-muted text-sm leading-relaxed">{dir.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- NASF Framework -->
+  <section class="py-16 md:py-24 bg-nw-mist">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <h2
+        class="text-nw-ink font-semibold mb-4"
+        style="font-size: var(--text-h2);"
+      >
+        Nuwa Agent Safety Framework
+      </h2>
+      <p class="text-nw-muted text-base mb-8 max-w-xl">
+        A structured framework for evaluating and ensuring AI agent safety.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {["Execution Chain", "HCA Principles", "Risk Domains", "Evaluation Protocol", "Evidence Standard", "Mitigation & Monitoring"].map((item, i) => (
+          <div class="bg-white border border-nw-hairline rounded-lg p-4 text-center">
+            <div class="text-nw-jade text-xs font-mono mb-2">&#9670;</div>
+            <div class="text-nw-ink text-sm font-medium">{item}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Briefs -->
+  {recentBriefs.length > 0 && (
+    <section class="py-16 md:py-24">
+      <div class="max-w-[1120px] mx-auto px-6">
+        <h2
+          class="text-nw-ink font-semibold mb-8"
+          style="font-size: var(--text-h2);"
+        >
+          Latest Briefs
+        </h2>
+        <div class="space-y-4">
+          {recentBriefs.map((brief) => (
+            <article class="bg-nw-paper border border-nw-hairline rounded-lg p-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-nw-jade text-xs font-medium uppercase">Brief</span>
+                <span class="text-nw-subtle text-xs">
+                  {brief.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                </span>
+              </div>
+              <h3 class="text-nw-ink font-semibold mb-1">{brief.data.title}</h3>
+              {brief.data.summary && (
+                <p class="text-nw-muted text-sm leading-relaxed">{brief.data.summary}</p>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Links -->
+  <section class="py-16 md:py-24 bg-nw-warm-paper">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <h2
+        class="text-nw-ink font-semibold mb-8"
+        style="font-size: var(--text-h2);"
+      >
+        Follow Nuwa
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a
+          href={links.x}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white border border-nw-hairline rounded-lg p-6 hover:border-nw-jade transition-colors no-underline group"
+        >
+          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">X (Twitter)</span>
+          <p class="text-nw-ink font-semibold mt-2 text-sm group-hover:text-nw-jade transition-colors">
+            Follow on X &rarr;
+          </p>
+        </a>
+        <a
+          href={links.substack}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white border border-nw-hairline rounded-lg p-6 hover:border-nw-jade transition-colors no-underline group"
+        >
+          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Substack</span>
+          <p class="text-nw-ink font-semibold mt-2 text-sm group-hover:text-nw-jade transition-colors">
+            Nuwa Brief &rarr;
+          </p>
+        </a>
+        <a
+          href={links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white border border-nw-hairline rounded-lg p-6 hover:border-nw-jade transition-colors no-underline group"
+        >
+          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">GitHub</span>
+          <p class="text-nw-ink font-semibold mt-2 text-sm group-hover:text-nw-jade transition-colors">
+            Open-source ecosystem &rarr;
+          </p>
+        </a>
+        <a
+          href={links.huggingface}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white border border-nw-hairline rounded-lg p-6 hover:border-nw-jade transition-colors no-underline group"
+        >
+          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Hugging Face</span>
+          <p class="text-nw-ink font-semibold mt-2 text-sm group-hover:text-nw-jade transition-colors">
+            Datasets &amp; benchmarks &rarr;
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collaboration CTA -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-[1120px] mx-auto px-6 text-center">
+      <h2
+        class="text-nw-ink font-semibold mb-4"
+        style="font-size: var(--text-h2);"
+      >
+        Collaborate With Nuwa
+      </h2>
+      <p class="text-nw-muted text-base max-w-lg mx-auto mb-8">
+        We welcome collaboration on frontier AI safety research, evaluation, and governance.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center bg-nw-ink text-white rounded-full px-6 py-3 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline"
+      >
+        Get in Touch
+      </a>
+    </div>
+  </section>
+</BaseLayout>

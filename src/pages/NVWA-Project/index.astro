@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="NVWA Project"
+  description="The NVWA Project page has moved to Nuwa Frontier AI Safety Lab."
+  brand="nuwa"
+>
+  <section class="py-32 md:py-44">
+    <div class="max-w-[760px] mx-auto px-6 text-center">
+      <div class="flex justify-center gap-1.5 mb-6">
+        <span style="color: var(--stone-jade);" class="text-lg">&#9670;</span>
+        <span style="color: var(--stone-vermilion);" class="text-lg">&#9670;</span>
+        <span style="color: var(--stone-ochre);" class="text-lg">&#9670;</span>
+        <span style="color: var(--stone-ivory);" class="text-lg">&#9670;</span>
+        <span style="color: var(--stone-ink);" class="text-lg">&#9670;</span>
+      </div>
+      <h1
+        class="text-nw-ink font-semibold mb-4"
+        style="font-size: var(--text-h1);"
+      >
+        This page has moved
+      </h1>
+      <p class="text-nw-body text-lg leading-relaxed mb-8">
+        The NVWA Project has been renamed to <strong>Nuwa Frontier AI Safety Lab</strong>.
+        You can find the new page at:
+      </p>
+      <a
+        href="/nuwa"
+        class="inline-flex items-center bg-nw-ink text-white rounded-full px-6 py-3 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline"
+      >
+        Visit Nuwa Frontier AI Safety Lab &rarr;
+      </a>
+      <meta http-equiv="refresh" content="5;url=/nuwa" />
+    </div>
+  </section>
+</BaseLayout>

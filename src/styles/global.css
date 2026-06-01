@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Whitzard Design Tokens ===== */
+:root {
+  /* Whitzard Colors */
+  --wz-ink: #07152F;
+  --wz-navy: #0B1F4D;
+  --wz-blue: #164A8B;
+  --wz-blue-active: #0F3670;
+  --wz-azure: #2C7DD2;
+  --wz-teal: #2F7F7A;
+  --wz-teal-soft: #DDEEEE;
+  --wz-mist: #F4F8FB;
+  --wz-canvas: #FFFFFF;
+  --wz-body: #253044;
+  --wz-muted: #667085;
+  --wz-subtle: #98A2B3;
+  --wz-hairline: #E5EAF0;
+  --wz-border-strong: #CBD5E1;
+  --wz-panel: #F7FAFC;
+  --wz-panel-blue: #EEF5FC;
+  --wz-panel-ink: #08172F;
+
+  /* Nuwa Colors */
+  --nw-ink: #07152F;
+  --nw-deep-blue: #0B1F4D;
+  --nw-sky-blue: #1E5D93;
+  --nw-jade: #2F7F7A;
+  --nw-jade-soft: #DDEEEE;
+  --nw-jade-pale: #EFF8F6;
+  --nw-canvas: #FFFFFF;
+  --nw-paper: #FAFBFC;
+  --nw-warm-paper: #FBF8F1;
+  --nw-mist: #F4F8FA;
+  --nw-hairline: #E3E9EF;
+  --nw-body: #273244;
+  --nw-muted: #667085;
+  --nw-subtle: #98A2B3;
+
+  /* Five-stone Accents */
+  --stone-ink: #1B2430;
+  --stone-jade: #5CA89B;
+  --stone-vermilion: #B35A4A;
+  --stone-ochre: #C7A46A;
+  --stone-ivory: #E8E2D3;
+
+  /* Status Colors */
+  --status-research: #164A8B;
+  --status-open-source: #2F7F7A;
+  --status-risk: #A9473A;
+  --status-monitoring: #6C7A89;
+  --status-report: #8A6F3D;
+
+  /* Typography */
+  --font-sans: Inter, "Noto Sans SC", "Source Han Sans SC", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+  /* Type Scale */
+  --text-hero: clamp(48px, 7vw, 84px);
+  --text-display: clamp(40px, 5vw, 64px);
+  --text-h1: clamp(36px, 4vw, 52px);
+  --text-h2: clamp(28px, 3vw, 40px);
+  --text-h3: 24px;
+  --text-title: 20px;
+  --text-body-lg: 18px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --text-caption: 12px;
+
+  /* Layout */
+  --container: 1180px;
+  --container-wide: 1360px;
+  --container-article: 760px;
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgba(7, 21, 47, 0.06);
+  --shadow-card: 0 1px 2px rgba(7, 21, 47, 0.04);
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--wz-body);
+  background-color: var(--wz-canvas);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--wz-azure);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

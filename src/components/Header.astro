@@ -1,0 +1,131 @@
+---
+import { links } from "../data/links";
+
+interface Props {
+  brand?: "whitzard" | "nuwa";
+}
+
+const { brand = "whitzard" } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-wz-hairline"
+  style="height: 72px;"
+>
+  <div class="max-w-[1180px] mx-auto px-6 h-full flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 text-wz-ink font-semibold text-lg tracking-tight no-underline">
+      {brand === "nuwa" ? (
+        <span class="flex items-center gap-2">
+          <span class="text-nw-jade text-xl">&#9670;</span>
+          <span>Nuwa</span>
+        </span>
+      ) : (
+        <span>Whitzard</span>
+      )}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-wz-muted">
+      <a
+        href="/nuwa"
+        class:list={[
+          "hover:text-wz-ink transition-colors no-underline",
+          currentPath === "/nuwa" && "text-wz-ink",
+        ]}
+      >
+        Nuwa
+      </a>
+      <a
+        href="/research"
+        class:list={[
+          "hover:text-wz-ink transition-colors no-underline",
+          currentPath === "/research" && "text-wz-ink",
+        ]}
+      >
+        Research
+      </a>
+      <a
+        href="/blog"
+        class:list={[
+          "hover:text-wz-ink transition-colors no-underline",
+          currentPath === "/blog" && "text-wz-ink",
+        ]}
+      >
+        Blog
+      </a>
+      <a
+        href="/open-source"
+        class:list={[
+          "hover:text-wz-ink transition-colors no-underline",
+          currentPath === "/open-source" && "text-wz-ink",
+        ]}
+      >
+        Open Source
+      </a>
+      <a
+        href="/agentguard"
+        class:list={[
+          "hover:text-wz-ink transition-colors no-underline",
+          currentPath === "/agentguard" && "text-wz-ink",
+        ]}
+      >
+        AgentGuard
+      </a>
+      <a
+        href="/contact"
+        class:list={[
+          "inline-flex items-center bg-wz-ink text-white rounded-full px-4 py-2 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline",
+        ]}
+      >
+        Contact
+      </a>
+      <a
+        href={links.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-wz-muted hover:text-wz-ink transition-colors no-underline"
+      >
+        GitHub
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden p-2 text-wz-ink"
+      aria-label="Toggle navigation menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <nav
+    id="mobile-menu"
+    class="hidden md:hidden bg-white border-b border-wz-hairline px-6 py-4"
+  >
+    <div class="flex flex-col gap-3 text-sm font-medium text-wz-muted">
+      <a href="/nuwa" class="hover:text-wz-ink no-underline">Nuwa</a>
+      <a href="/research" class="hover:text-wz-ink no-underline">Research</a>
+      <a href="/blog" class="hover:text-wz-ink no-underline">Blog</a>
+      <a href="/open-source" class="hover:text-wz-ink no-underline">Open Source</a>
+      <a href="/agentguard" class="hover:text-wz-ink no-underline">AgentGuard</a>
+      <a href="/contact" class="hover:text-wz-ink no-underline">Contact</a>
+      <a href={links.github} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink no-underline">GitHub</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  toggle?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+</script>
