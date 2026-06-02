@@ -7,6 +7,9 @@ authors: ["Nuwa Lab"]
 summary: "An overview of the current agent safety landscape, identifying key risk areas and open research questions."
 tags: ["Agent Safety", "Frontier AI Risk"]
 draft: false
+featured: false
+homepage: false
+research_area: "Agent Safety"
 substack_url: "https://nuwasafety.substack.com/"
 ---
 

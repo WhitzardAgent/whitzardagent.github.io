@@ -9,14 +9,14 @@ const { brand = "whitzard" } = Astro.props;
 ---
 
 <footer class="border-t border-wz-hairline bg-wz-panel mt-24">
-  <div class="max-w-[1180px] mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+  <div class="max-w-[1180px] mx-auto px-6 py-10">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
       <!-- Brand -->
-      <div class="md:col-span-1">
-        <p class="text-wz-ink font-semibold text-lg mb-2">
+      <div class="col-span-2 md:col-span-1">
+        <p class="text-wz-ink font-semibold text-base mb-2">
           {brand === "nuwa" ? "Nuwa 女娲" : "Whitzard 白泽"}
         </p>
-        <p class="text-wz-muted text-sm leading-relaxed">
+        <p class="text-wz-muted text-xs leading-relaxed">
           {brand === "nuwa"
             ? "Frontier AI Safety Lab studying frontier AI risks, agent safety, and controllable AI."
             : "Building safety infrastructure for frontier AI and agentic systems."}
@@ -25,70 +25,50 @@ const { brand = "whitzard" } = Astro.props;
 
       <!-- Navigation -->
       <div>
-        <p class="text-wz-ink font-medium text-sm mb-3">Navigation</p>
-        <div class="flex flex-col gap-2 text-sm text-wz-muted">
+        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Pages</p>
+        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
           <a href="/" class="hover:text-wz-ink transition-colors no-underline">Whitzard</a>
           <a href="/nuwa" class="hover:text-wz-ink transition-colors no-underline">Nuwa</a>
           <a href="/research" class="hover:text-wz-ink transition-colors no-underline">Research</a>
           <a href="/blog" class="hover:text-wz-ink transition-colors no-underline">Blog</a>
+          <a href="/about" class="hover:text-wz-ink transition-colors no-underline">About</a>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div>
+        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Research</p>
+        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
+          <a href="/nuwa" class="hover:text-wz-ink transition-colors no-underline">Nuwa Lab</a>
+          <a href="/research" class="hover:text-wz-ink transition-colors no-underline">Publications</a>
           <a href="/open-source" class="hover:text-wz-ink transition-colors no-underline">Open Source</a>
-          <a href="/contact" class="hover:text-wz-ink transition-colors no-underline">Contact</a>
-        </div>
-      </div>
-
-      <!-- Projects -->
-      <div>
-        <p class="text-wz-ink font-medium text-sm mb-3">Projects</p>
-        <div class="flex flex-col gap-2 text-sm text-wz-muted">
           <a href="/agentguard" class="hover:text-wz-ink transition-colors no-underline">AgentGuard</a>
-          <a href="/open-source" class="hover:text-wz-ink transition-colors no-underline">Snowl</a>
-          <a href="/open-source" class="hover:text-wz-ink transition-colors no-underline">Qise</a>
-          <a href="/open-source" class="hover:text-wz-ink transition-colors no-underline">QitOS</a>
         </div>
       </div>
 
-      <!-- External Links -->
+      <!-- Channels -->
       <div>
-        <p class="text-wz-ink font-medium text-sm mb-3">Channels</p>
-        <div class="flex flex-col gap-2 text-sm text-wz-muted">
-          <a
-            href={links.x}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-wz-ink transition-colors no-underline"
-          >
-            X (Twitter)
-          </a>
-          <a
-            href={links.substack}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-wz-ink transition-colors no-underline"
-          >
-            Substack
-          </a>
-          <a
-            href={links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-wz-ink transition-colors no-underline"
-          >
-            GitHub
-          </a>
-          <a
-            href={links.huggingface}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-wz-ink transition-colors no-underline"
-          >
-            Hugging Face
-          </a>
+        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Channels</p>
+        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
+          <a href={links.x} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">X (Twitter)</a>
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Substack</a>
+          <a href={links.github} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">GitHub</a>
+          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Hugging Face</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Contact</p>
+        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
+          <a href="/contact" class="hover:text-wz-ink transition-colors no-underline">Collaboration</a>
+          <a href={`mailto:${links.email}`} class="hover:text-wz-ink transition-colors no-underline">{links.email}</a>
         </div>
       </div>
     </div>
 
     <!-- Bottom Bar -->
-    <div class="mt-10 pt-6 border-t border-wz-hairline flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="mt-8 pt-4 border-t border-wz-hairline flex flex-col md:flex-row justify-between items-center gap-3">
       <p class="text-wz-subtle text-xs">
         &copy; {new Date().getFullYear()} Whitzard. All rights reserved.
       </p>

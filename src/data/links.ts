@@ -8,4 +8,5 @@ export const links = {
   whitzard: "https://www.whitzard.tech/",
   nuwa: "/nuwa",
   agentguard: "https://github.com/WhitzardAgent/AgentGuard",
+  email: "contact@whitzard.tech",
 };

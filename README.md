@@ -1,6 +1,6 @@
 # Whitzard Website
 
-The official website for [Whitzard](https://www.whitzard.tech/) and [Nuwa Frontier AI Safety Lab](https://www.whitzard.tech/nuwa).
+The official information hub for [Whitzard](https://www.whitzard.tech/) and [Nuwa Frontier AI Safety Lab](https://www.whitzard.tech/nuwa).
 
 **Repository:** <https://github.com/WhitzardAgent/whitzardagent.github.io>
 **Domain:** [www.whitzard.tech](https://www.whitzard.tech)
@@ -36,46 +36,56 @@ Output goes to `./dist`.
 |---|---|
 | `/` | Whitzard main entrance |
 | `/nuwa` | Nuwa Frontier AI Safety Lab |
-| `/research` | Research and reports index |
+| `/research` | Research and publications |
 | `/blog` | Posts, briefs, notes, updates |
+| `/about` | Team and organization |
+| `/contact` | Collaboration and contact |
 | `/open-source` | WhitzardAgent open-source ecosystem |
 | `/agentguard` | AgentGuard project page |
-| `/contact` | Collaboration and contact |
 | `/NVWA-Project/` | Legacy redirect to `/nuwa` |
+| `/rss.xml` | RSS feed |
 
 ## Add New Content
 
-Use the built-in scripts:
+### Blog post
 
 ```bash
-npm run new:post    # Create a new blog post
-npm run new:brief   # Create a new Nuwa Brief
-npm run new:note    # Create a new technical note
-npm run new:report  # Create a new report
-npm run new:update  # Create a new update
+npm run new:post
+# Edit src/content/posts/YYYY-MM-DD-new-post.md
+# Set draft: false when ready
 ```
 
-Each script creates a Markdown file with frontmatter and `draft: true`.
+### Research note
 
-### Publish a Nuwa Brief
+```bash
+npm run new:note
+# Edit src/content/notes/YYYY-MM-DD-new-note.md
+# Set brand: nuwa, draft: false
+```
 
-1. Run `npm run new:brief`
-2. Edit the generated file in `src/content/briefs/`
-3. Set `brand: nuwa` in the frontmatter
-4. Change `draft: false` when ready
-5. Commit and push — GitHub Actions deploys automatically
+### Nuwa Brief
+
+```bash
+npm run new:brief
+# Edit src/content/briefs/YYYY-MM-DD-new-brief.md
+# Set brand: nuwa, draft: false
+# Optionally add substack_url for cross-posting
+```
 
 ### Frontmatter Schema
 
 ```yaml
-title: "Your Title"
+title: "Title"
 date: 2026-01-01
-type: brief
+type: post | brief | note | report | framework | update
 brand: whitzard | nuwa | whitzardagent
 authors: []
-summary: "A short summary."
+summary: "Short summary."
 tags: []
 draft: true
+featured: false
+homepage: false
+research_area: ""
 external_url:
 substack_url:
 github_url:
@@ -84,14 +94,37 @@ doi_url:
 project:
 ```
 
-**Draft content (`draft: true`) does not appear in public lists.**
+- `draft: true` content does not appear publicly
+- `featured: true` content appears in Featured sections on Research and Nuwa pages
+- `homepage: true` content appears on the homepage Latest Research section
+- `research_area` tags content for research area filtering
 
-### Content Visibility
+## Update Team Members
 
-- Reports appear in `/research`
-- Briefs appear in `/blog` and `/nuwa`
-- Projects appear in `/open-source`
-- All non-draft content appears in `/blog`
+Edit `src/data/team.ts`:
+
+```ts
+{
+  name: "Name",
+  role: "Role",
+  affiliation: "whitzard" | "nuwa",
+  category: "founding" | "research" | "engineering" | "advisor",
+  bio: "Bio text.",
+  links: [{ label: "Website", url: "https://..." }],
+  photo: "/assets/team/name.jpg",
+}
+```
+
+## Update Official Links
+
+Edit `src/data/links.ts`.
+
+## Publish to Substack from MDX
+
+1. Write the content as a Nuwa Brief in `src/content/briefs/`
+2. Build and verify locally
+3. Copy the markdown body to Substack editor
+4. Add `substack_url` to the frontmatter for cross-linking
 
 ## GitHub Pages Deployment
 
@@ -101,17 +134,17 @@ Workflow: `.github/workflows/deploy.yml`
 
 Steps:
 1. Checkout code
-2. Install Node 20
+2. Install Node 22
 3. `npm ci`
 4. `npm run build`
 5. Upload `./dist` as artifact
 6. Deploy to GitHub Pages
 
+**Important**: GitHub Pages source must be set to "GitHub Actions" in repo Settings > Pages.
+
 ## DNS / CNAME
 
-The `CNAME` file contains the custom domain for GitHub Pages.
-
-Current CNAME: `www.whitzard.tech`
+CNAME file contains: `www.whitzard.tech`
 
 DNS configuration:
 
@@ -132,9 +165,9 @@ No paid server or HTTPS certificate is required. GitHub Pages issues HTTPS autom
 
 ### Manual DNS Check
 
-- Verify that `www.whitzard.tech` resolves to GitHub Pages.
-- Verify HTTPS certificate is active.
-- If switching canonical domain from `www.whitzard.tech` to `whitzard.tech`, update both the `CNAME` file and GitHub Pages settings.
+- Verify `www.whitzard.tech` resolves to GitHub Pages
+- Verify HTTPS certificate is active
+- If switching canonical domain, update both CNAME file and GitHub Pages settings
 
 ## Official Links
 
@@ -144,8 +177,13 @@ No paid server or HTTPS certificate is required. GitHub Pages issues HTTPS autom
 | Substack | <https://nuwasafety.substack.com/> |
 | GitHub | <https://github.com/WhitzardAgent> |
 | Hugging Face | <https://huggingface.co/WhitzardAgent> |
+| Email | <mailto:contact@whitzard.tech> |
 
 All links are centralized in `src/data/links.ts`.
+
+## Contact Email
+
+The contact page uses `contact@whitzard.tech`. Verify this mailbox is configured and receiving mail. If not yet configured, update `src/data/links.ts` with the correct email address.
 
 ## Legacy Content
 

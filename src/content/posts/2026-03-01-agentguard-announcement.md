@@ -1,7 +1,7 @@
 ---
 title: "AgentGuard: Zero-Trust Access Control for AI Agent Tool Calls"
 date: 2026-03-01
-type: project_release
+type: update
 brand: whitzardagent
 authors: ["WhitzardAgent"]
 summary: "Announcing AgentGuard, our flagship open-source project for zero-trust access control in AI agent tool calls."

@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const allContent = await Promise.all([
+    getCollection("reports"),
+    getCollection("briefs"),
+    getCollection("notes"),
+  ]);
+
+  const items = allContent.flat();
+
+  return items.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<BaseLayout
+  title={item.data.title}
+  description={item.data.summary || item.data.title}
+  brand={item.data.brand === "nuwa" ? "nuwa" : "whitzard"}
+>
+  <article class="py-16 md:py-24">
+    <div class="max-w-[760px] mx-auto px-6">
+      <!-- Meta -->
+      <div class="mb-8">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type || item.collection}</span>
+          <span class="text-nw-subtle text-xs">
+            {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          </span>
+          {item.data.research_area && (
+            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-nw-jade-pale text-nw-jade">{item.data.research_area}</span>
+          )}
+        </div>
+
+        <h1 class="text-nw-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1); line-height: 1.15;">
+          {item.data.title}
+        </h1>
+
+        {item.data.summary && (
+          <p class="text-nw-muted text-lg leading-relaxed mb-4">{item.data.summary}</p>
+        )}
+
+        {item.data.authors && item.data.authors.length > 0 && (
+          <p class="text-nw-subtle text-sm">{item.data.authors.join(", ")}</p>
+        )}
+
+        {item.data.tags && item.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-1 mt-3">
+            {item.data.tags.map((tag: string) => (
+              <span class="text-xs text-nw-subtle bg-nw-mist px-2 py-0.5 rounded-full">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Body -->
+      <div class="prose prose-lg max-w-none
+        prose-headings:text-nw-ink prose-headings:font-semibold
+        prose-p:text-nw-body prose-p:leading-relaxed
+        prose-a:text-nw-jade prose-a:no-underline hover:prose-a:underline
+        prose-code:text-nw-sky-blue prose-code:bg-nw-mist prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+        prose-strong:text-nw-ink">
+        <Content />
+      </div>
+
+      <!-- Links -->
+      {(item.data.substack_url || item.data.github_url || item.data.pdf_url || item.data.doi_url) && (
+        <div class="mt-10 pt-6 border-t border-nw-hairline">
+          <p class="text-nw-muted text-xs uppercase tracking-wide mb-3 font-medium">Links</p>
+          <div class="flex flex-wrap gap-4">
+            {item.data.substack_url && (
+              <a href={item.data.substack_url} target="_blank" rel="noopener noreferrer" class="text-nw-jade text-sm hover:underline no-underline">Read on Substack</a>
+            )}
+            {item.data.github_url && (
+              <a href={item.data.github_url} target="_blank" rel="noopener noreferrer" class="text-nw-jade text-sm hover:underline no-underline">View on GitHub</a>
+            )}
+            {item.data.pdf_url && (
+              <a href={item.data.pdf_url} target="_blank" rel="noopener noreferrer" class="text-nw-jade text-sm hover:underline no-underline">Download PDF</a>
+            )}
+            {item.data.doi_url && (
+              <a href={item.data.doi_url} target="_blank" rel="noopener noreferrer" class="text-nw-jade text-sm hover:underline no-underline">DOI</a>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+</BaseLayout>
