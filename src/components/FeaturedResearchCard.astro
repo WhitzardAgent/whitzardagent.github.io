@@ -1,0 +1,70 @@
+---
+interface Props {
+  title: string;
+  type: string;
+  status?: string;
+  venue?: string;
+  year?: string;
+  authors?: string;
+  summary: string;
+  url: string;
+  secondaryUrl?: string;
+  topic: string[];
+}
+
+const { title, type, status, venue, year, authors, summary, url, secondaryUrl, topic } = Astro.props;
+
+const typeLabel: Record<string, string> = {
+  paper: "Paper",
+  report: "Report",
+  "position-paper": "Position Paper",
+  "technical-note": "Technical Note",
+  framework: "Framework",
+  brief: "Brief",
+  note: "Note",
+};
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="block bg-white border-2 border-nw-jade/25 rounded-lg p-6 hover:border-nw-jade/50 transition-colors no-underline group"
+>
+  <!-- Accent bar -->
+  <div class="flex items-center gap-2 mb-3">
+    <span class="text-nw-jade font-mono text-sm">&#9670;</span>
+    <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">{typeLabel[type] || type}</span>
+    {status && (
+      <span class="text-xs text-wz-muted bg-wz-panel px-1.5 py-0.5 rounded">{status}</span>
+    )}
+    {venue && (
+      <span class="text-xs text-nw-jade bg-nw-jade-pale px-1.5 py-0.5 rounded">{venue}</span>
+    )}
+    {year && year !== "To be verified" && (
+      <span class="text-xs text-wz-subtle">{year}</span>
+    )}
+  </div>
+
+  <h3 class="text-wz-ink font-semibold text-base mb-2 leading-snug group-hover:text-wz-blue transition-colors">{title}</h3>
+
+  <p class="text-wz-muted text-sm leading-relaxed mb-4">{summary}</p>
+
+  {topic.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mb-4">
+      {topic.map((t) => (
+        <span class="text-xs text-nw-jade bg-nw-jade-pale px-2 py-0.5 rounded-full">{t}</span>
+      ))}
+    </div>
+  )}
+
+  <div class="flex items-center gap-4">
+    <span class="text-wz-blue text-xs font-medium inline-flex items-center gap-1">
+      {type === "technical-note" || type === "brief" ? "Read article" : "Read paper"}
+      <span class="text-wz-subtle group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+    </span>
+    {secondaryUrl && (
+      <span class="text-wz-muted text-xs">arXiv abstract</span>
+    )}
+  </div>
+</a>

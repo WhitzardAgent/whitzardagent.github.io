@@ -2,26 +2,28 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { projects } from "../data/projects";
+import ProjectCard from "../components/ProjectCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
 
 const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent Framework", "Risk Monitoring"] as const;
 ---
 
 <BaseLayout
-  title="Open Source"
+  title="Open Source — Whitzard"
   description="WhitzardAgent open-source ecosystem for AI agent safety evaluation, defense, and monitoring."
 >
-  <section class="py-24 md:py-32">
-    <div class="max-w-[1180px] mx-auto px-6">
-      <h1
-        class="text-wz-ink font-semibold tracking-tight mb-4"
-        style="font-size: var(--text-h1);"
-      >
-        Open-Source Ecosystem
-      </h1>
-      <p class="text-wz-body text-lg leading-relaxed max-w-2xl mb-4">
-        WhitzardAgent open-source tools for AI agent safety evaluation, defense, and monitoring.
-      </p>
-      <div class="flex flex-wrap gap-3 mb-12">
+  <section class="py-20 md:py-28">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <div class="max-w-2xl mb-8">
+        <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
+          Open-Source Ecosystem
+        </h1>
+        <p class="text-wz-body text-lg leading-relaxed">
+          WhitzardAgent open-source tools for AI agent safety evaluation, defense, and monitoring.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3 mb-14">
         <a
           href={links.github}
           target="_blank"
@@ -41,7 +43,7 @@ const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent 
       </div>
 
       <!-- Flagship: AgentGuard -->
-      <div class="bg-wz-panel-blue border border-wz-hairline rounded-xl p-8 mb-12">
+      <div class="bg-wz-panel-blue/30 border border-wz-hairline rounded-xl p-7 mb-14">
         <div class="flex items-center gap-2 mb-3">
           <span class="bg-wz-teal-soft text-wz-teal text-xs font-medium px-2 py-0.5 rounded-full">Flagship</span>
           <span class="text-wz-blue text-xs font-mono uppercase">Runtime Security</span>
@@ -69,64 +71,50 @@ const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent 
       </div>
 
       <!-- Project Matrix -->
-      <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">Project Matrix</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {projects.filter((p) => p.status !== "Flagship").map((project) => (
-          <div class="bg-white border border-wz-hairline rounded-xl p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-wz-blue text-xs font-mono uppercase">{project.category}</span>
-              <span class:list={[
-                "text-xs font-medium px-2 py-0.5 rounded-full",
-                project.status === "Core" && "bg-wz-panel-blue text-wz-blue",
-                project.status === "Supporting" && "bg-wz-panel text-wz-muted",
-              ]}>
-                {project.status}
-              </span>
-            </div>
-            <h3 class="text-wz-ink font-semibold mb-2">{project.name}</h3>
-            <p class="text-wz-muted text-sm leading-relaxed mb-4">{project.description}</p>
-            {project.github ? (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-wz-blue text-sm font-medium hover:underline no-underline"
-              >
-                GitHub &rarr;
-              </a>
-            ) : (
-              <span class="text-wz-subtle text-sm">Coming soon</span>
-            )}
-          </div>
-        ))}
+      <div class="mb-14">
+        <SectionHeader title="Project Matrix" />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {projects.filter((p) => p.status !== "Flagship").map((project) => (
+            <ProjectCard
+              name={project.name}
+              category={project.category}
+              description={project.description}
+              url={project.github}
+              status={project.status}
+            />
+          ))}
+        </div>
       </div>
 
       <!-- Categories -->
-      <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">Capability Categories</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {categories.map((cat) => {
-          const catProjects = projects.filter((p) => p.category === cat);
-          return (
-            <div class="bg-wz-panel border border-wz-hairline rounded-lg p-4">
-              <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">{cat}</span>
-              <div class="mt-2">
-                {catProjects.length > 0 ? catProjects.map((p) => (
-                  <p class="text-wz-ink text-sm font-medium">{p.name}</p>
-                )) : (
-                  <p class="text-wz-subtle text-sm">Coming</p>
-                )}
+      <div class="mb-14">
+        <SectionHeader title="Capability Categories" />
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          {categories.map((cat) => {
+            const catProjects = projects.filter((p) => p.category === cat);
+            return (
+              <div class="bg-wz-panel border border-wz-hairline rounded-lg p-4">
+                <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">{cat}</span>
+                <div class="mt-2">
+                  {catProjects.length > 0 ? catProjects.map((p) => (
+                    <p class="text-wz-ink text-sm font-medium">{p.name}</p>
+                  )) : (
+                    <p class="text-wz-subtle text-sm">Coming</p>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       <!-- Contribution CTA -->
-      <div class="mt-16 bg-wz-panel-ink rounded-xl p-8 text-center">
-        <h3 class="text-white font-semibold mb-2" style="font-size: var(--text-h3);">Contribute to Open Source</h3>
-        <p class="text-wz-subtle text-sm mb-6 max-w-md mx-auto">
-          We welcome contributions to our open-source safety infrastructure. Check our repositories on GitHub.
-        </p>
+      <CalloutPanel
+        variant="dark"
+        align="center"
+        title="Contribute to Open Source"
+        description="We welcome contributions to our open-source safety infrastructure. Check our repositories on GitHub."
+      >
         <a
           href={links.github}
           target="_blank"
@@ -135,7 +123,7 @@ const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent 
         >
           Explore on GitHub
         </a>
-      </div>
+      </CalloutPanel>
     </div>
   </section>
 </BaseLayout>

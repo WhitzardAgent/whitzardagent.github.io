@@ -2,6 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchPapers } from "../data/researchPapers";
+import ExternalArticleCard from "../components/ExternalArticleCard.astro";
+import BriefCard from "../components/BriefCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
 
 const substackArticles = researchPapers.filter((p) => p.type === "technical-note");
 ---
@@ -10,8 +14,8 @@ const substackArticles = researchPapers.filter((p) => p.type === "technical-note
   title="Blog — Whitzard & Nuwa"
   description="Updates, essays, and technical notes from Whitzard and Nuwa Frontier AI Safety Lab on frontier AI safety, agent safety, and controllable AI."
 >
-  <section class="py-24 md:py-32">
-    <div class="max-w-[1180px] mx-auto px-6">
+  <section class="py-20 md:py-28">
+    <div class="max-w-[1120px] mx-auto px-6">
       <div class="max-w-2xl mb-12">
         <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
           Blog
@@ -24,26 +28,47 @@ const substackArticles = researchPapers.filter((p) => p.type === "technical-note
       <!-- External Articles -->
       {substackArticles.length > 0 && (
         <div class="mb-16">
-          <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">External Articles</h2>
+          <SectionHeader title="External Articles" subtitle="Essays and notes published on external platforms." />
           <div class="space-y-3">
             {substackArticles.map((article) => (
-              <a href={article.url} target="_blank" rel="noopener noreferrer" class="block bg-white border border-wz-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-wz-teal text-xs font-medium uppercase">{article.type === "technical-note" ? "Technical Note" : article.type}</span>
-                  <span class="text-wz-muted text-xs font-medium px-2 py-0.5 rounded-full bg-wz-panel">External &middot; Substack</span>
-                  {article.year && <span class="text-wz-subtle text-xs">{article.year}</span>}
-                </div>
-                <h3 class="text-wz-ink font-semibold text-sm">{article.title}</h3>
-                {article.summary && <p class="text-wz-muted text-xs leading-relaxed mt-1">{article.summary}</p>}
-              </a>
+              <ExternalArticleCard
+                title={article.title}
+                type={article.type}
+                year={article.year}
+                summary={article.summary}
+                url={article.url}
+                source="Substack"
+              />
             ))}
           </div>
         </div>
       )}
 
+      <!-- Nuwa Brief -->
+      <div class="mb-16">
+        <SectionHeader title="Nuwa Brief" subtitle="Weekly research updates from Nuwa Frontier AI Safety Lab, published on Substack." />
+        <BriefCard
+          title="Nuwa Brief on Substack"
+          url={links.substack}
+          summary="Research updates, analysis, and commentary on frontier AI safety, agent safety, and controllable AI."
+          external={true}
+        />
+      </div>
+
+      <!-- Updates / Announcements -->
+      <div class="mb-16">
+        <SectionHeader title="Updates & Announcements" subtitle="Project announcements and organizational updates from Whitzard." />
+        <div class="bg-wz-panel border border-wz-hairline rounded-lg p-8 text-center">
+          <p class="text-wz-muted text-sm">Updates will be published here as they become available.</p>
+        </div>
+      </div>
+
       <!-- Subscribe CTA -->
-      <div class="bg-wz-panel border border-wz-hairline rounded-lg p-8 text-center">
-        <p class="text-wz-body text-sm mb-3">Get research updates from Nuwa Frontier AI Safety Lab.</p>
+      <CalloutPanel
+        variant="default"
+        align="center"
+        description="Get research updates from Nuwa Frontier AI Safety Lab delivered to your inbox."
+      >
         <a
           href={links.substack}
           target="_blank"
@@ -52,7 +77,7 @@ const substackArticles = researchPapers.filter((p) => p.type === "technical-note
         >
           Subscribe to Nuwa Brief
         </a>
-      </div>
+      </CalloutPanel>
     </div>
   </section>
 </BaseLayout>

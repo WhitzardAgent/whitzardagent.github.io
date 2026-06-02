@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  date?: string;
+  url: string;
+  summary?: string;
+  external?: boolean;
+}
+
+const { title, date, url, summary, external } = Astro.props;
+---
+
+<a
+  href={url}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  class="block bg-nw-jade-pale/50 border border-nw-hairline rounded-lg px-5 py-4 hover:border-nw-jade/30 transition-colors no-underline group"
+>
+  <div class="flex items-center gap-2 mb-1">
+    <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Nuwa Brief</span>
+    {external && (
+      <span class="text-wz-muted text-xs font-medium px-1.5 py-0.5 rounded bg-white/60">External</span>
+    )}
+    {date && (
+      <span class="text-nw-subtle text-xs">{date}</span>
+    )}
+  </div>
+  <h3 class="text-nw-ink font-semibold text-sm group-hover:text-nw-jade transition-colors">{title}</h3>
+  {summary && (
+    <p class="text-wz-muted text-xs leading-relaxed mt-1">{summary}</p>
+  )}
+</a>

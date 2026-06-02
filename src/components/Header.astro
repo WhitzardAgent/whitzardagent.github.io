@@ -7,22 +7,26 @@ interface Props {
 
 const { brand = "whitzard" } = Astro.props;
 const currentPath = Astro.url.pathname;
+const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || currentPath.startsWith("/research");
 ---
 
 <header
   class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-wz-hairline"
-  style="height: 72px;"
+  style="height: 64px;"
 >
   <div class="max-w-[1180px] mx-auto px-6 h-full flex items-center justify-between">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 text-wz-ink font-semibold text-lg tracking-tight no-underline">
-      {brand === "nuwa" ? (
+    <a href="/" class="flex items-center gap-2 text-wz-ink font-semibold tracking-tight no-underline">
+      {isNuwaBrand ? (
         <span class="flex items-center gap-2">
-          <span class="text-nw-jade text-xl">&#9670;</span>
-          <span>Nuwa <span class="text-nw-muted font-normal text-base">女娲</span></span>
+          <img src="/assets/logo/nvwa_logo.png" alt="" class="w-6 h-6 rounded" />
+          <span class="text-base">Nuwa <span class="text-nw-muted font-normal text-sm">女娲</span></span>
         </span>
       ) : (
-        <span>Whitzard <span class="text-wz-muted font-normal text-base">白泽</span></span>
+        <span class="flex items-center gap-2">
+          <img src="/assets/logo/whitzard_logo.png" alt="" class="w-6 h-6 rounded" />
+          <span class="text-base">Whitzard <span class="text-wz-muted font-normal text-sm">白泽</span></span>
+        </span>
       )}
     </a>
 
@@ -31,7 +35,7 @@ const currentPath = Astro.url.pathname;
       <a href="/nuwa" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath.startsWith("/nuwa") && "text-wz-ink"]}>
         Nuwa
       </a>
-      <a href="/research" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath.startsWith("/research") && "text-wz-ink"]}>
+      <a href="/research" class:list={["hover:text-wz-ink transition-colors no-underline", (currentPath.startsWith("/research") || currentPath.startsWith("/publications")) && "text-wz-ink"]}>
         Research
       </a>
       <a href="/blog" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath.startsWith("/blog") && "text-wz-ink"]}>
@@ -42,7 +46,7 @@ const currentPath = Astro.url.pathname;
       </a>
       <a
         href="/contact"
-        class="inline-flex items-center bg-wz-ink text-white rounded-full px-4 py-2 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
+        class="inline-flex items-center bg-wz-ink text-white rounded-full px-4 py-1.5 text-xs font-semibold hover:bg-wz-navy transition-colors no-underline"
       >
         Contact
       </a>

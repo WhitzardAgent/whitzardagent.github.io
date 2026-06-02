@@ -2,11 +2,24 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchPapers } from "../data/researchPapers";
-import ResearchCard from "../components/ResearchCard.astro";
+import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+import ResearchAreaCard from "../components/ResearchAreaCard.astro";
+import BriefCard from "../components/BriefCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
 
-const featuredPapers = researchPapers.filter((p) => p.featured).slice(0, 4);
+const featuredPapers = researchPapers.filter((p) =>
+  [
+    "science-of-frontier-ai-risk-evaluation",
+    "deceptive-ai-developers-position-paper",
+    "self-replication-frontier-ai",
+  ].includes(p.id)
+);
 
 const otherPapers = researchPapers.filter((p) => !p.featured).slice(0, 4);
+
+const substackNote = researchPapers.find((p) => p.type === "technical-note");
 
 const researchDirections = [
   { title: "Agent Behavior Safety", description: "Studying safety risks in autonomous AI agent behavior, including deception, goal misalignment, and tool misuse.", tag: "Agent Safety" },
@@ -16,11 +29,11 @@ const researchDirections = [
   { title: "Risk Monitoring and Governance Evidence", description: "Collecting and analyzing risk signals to support evidence-based AI governance and policy.", tag: "Governance" },
 ];
 
-const researchFlow = [
-  { label: "Risk Signals" },
-  { label: "Behavioral Evidence" },
-  { label: "Safety Infrastructure" },
-  { label: "Controllable AI" },
+const approachSteps = [
+  { label: "Observe", desc: "Identify risk signals in frontier AI systems" },
+  { label: "Evaluate", desc: "Assess capabilities, behaviors, and control thresholds" },
+  { label: "Repair", desc: "Identify and close safety gaps before systemic failure" },
+  { label: "Control", desc: "Build infrastructure for safe and controllable AI" },
 ];
 ---
 
@@ -30,26 +43,19 @@ const researchFlow = [
   brand="nuwa"
 >
   <!-- Hero -->
-  <section class="py-28 md:py-40">
+  <section class="py-24 md:py-32">
     <div class="max-w-[1120px] mx-auto px-6">
       <div class="max-w-2xl">
-        <div class="mb-8 flex items-center gap-3">
-          <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 20 Q32 -8 60 20" stroke="var(--nw-jade)" stroke-width="1.5" fill="none" stroke-dasharray="4 2" />
-            <circle cx="20" cy="12" r="3" fill="var(--stone-jade)" />
-            <circle cx="32" cy="8" r="3" fill="var(--stone-vermilion)" />
-            <circle cx="44" cy="12" r="3" fill="var(--stone-ochre)" />
+        <div class="mb-6 flex items-center gap-3">
+          <svg width="48" height="20" viewBox="0 0 48 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 16 Q24 -4 46 16" stroke="var(--nw-jade)" stroke-width="1.5" fill="none" stroke-dasharray="3 2" />
+            <circle cx="14" cy="10" r="2.5" fill="var(--stone-jade)" />
+            <circle cx="24" cy="6" r="2.5" fill="var(--stone-vermilion)" />
+            <circle cx="34" cy="10" r="2.5" fill="var(--stone-ochre)" />
           </svg>
-          <div class="flex items-center gap-1">
-            <span style="color: var(--stone-jade);" class="text-sm">&#9670;</span>
-            <span style="color: var(--stone-vermilion);" class="text-sm">&#9670;</span>
-            <span style="color: var(--stone-ochre);" class="text-sm">&#9670;</span>
-            <span style="color: var(--stone-ivory);" class="text-sm">&#9670;</span>
-            <span style="color: var(--stone-ink);" class="text-sm">&#9670;</span>
-          </div>
         </div>
 
-        <h1 class="text-nw-ink font-semibold tracking-tight mb-6" style="font-size: var(--text-hero); line-height: 1.05;">
+        <h1 class="text-nw-ink font-semibold tracking-tight mb-5" style="font-size: var(--text-hero); line-height: 1.05;">
           Nuwa <span class="text-nw-muted font-normal" style="font-size: 0.4em;">女娲</span><br />
           <span style="font-size: 0.45em;">Frontier AI Safety Lab</span>
         </h1>
@@ -59,26 +65,7 @@ const researchFlow = [
         <p class="text-nw-muted text-base leading-relaxed mb-3 font-serif italic max-w-xl">
           Inspired by N&uuml;wa repairing the sky, we study how to identify and repair safety gaps in advanced AI systems before they become systemic failures.
         </p>
-        <p class="text-nw-jade text-sm font-medium mb-8">Supported by Whitzard</p>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-          <div class="text-center p-3 border border-nw-hairline rounded-lg bg-nw-paper">
-            <div class="text-nw-jade text-lg font-semibold mb-0.5">Repair</div>
-            <div class="text-nw-muted text-xs">Fix safety gaps</div>
-          </div>
-          <div class="text-center p-3 border border-nw-hairline rounded-lg bg-nw-paper">
-            <div class="text-nw-sky-blue text-lg font-semibold mb-0.5">Boundary</div>
-            <div class="text-nw-muted text-xs">Control limits</div>
-          </div>
-          <div class="text-center p-3 border border-nw-hairline rounded-lg bg-nw-paper">
-            <div class="text-nw-deep-blue text-lg font-semibold mb-0.5">Prudence</div>
-            <div class="text-nw-muted text-xs">Evidence &amp; restraint</div>
-          </div>
-          <div class="text-center p-3 border border-nw-hairline rounded-lg bg-nw-paper">
-            <div class="text-nw-ink text-lg font-semibold mb-0.5">Guided</div>
-            <div class="text-nw-muted text-xs">Safe &amp; controllable</div>
-          </div>
-        </div>
+        <p class="text-nw-jade text-sm font-medium mb-7">Supported by Whitzard</p>
 
         <div class="flex flex-wrap gap-3">
           <a href="/research" class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline">
@@ -92,60 +79,46 @@ const researchFlow = [
     </div>
   </section>
 
-  <!-- Why Nuwa -->
-  <section class="py-16 md:py-20 bg-nw-warm-paper">
+  <!-- Research Approach -->
+  <section class="py-14 md:py-18 bg-nw-warm-paper">
     <div class="max-w-[1120px] mx-auto px-6">
-      <div class="max-w-2xl">
-        <h2 class="text-nw-ink font-semibold mb-4" style="font-size: var(--text-h2);">Why Nuwa</h2>
-        <p class="text-nw-body leading-relaxed mb-4">
-          Frontier AI systems are advancing rapidly. As capabilities grow, so do the risks of loss of control, deceptive alignment, and autonomous misuse.
-        </p>
-        <p class="text-nw-body leading-relaxed">
-          Nuwa is dedicated to studying these risks with rigor and depth, grounded in both technical evidence and an Eastern philosophical tradition of prudence and repair.
-        </p>
+      <SectionHeader title="Research Approach" subtitle="Our methodology for studying and improving frontier AI safety." />
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {approachSteps.map((step, i) => (
+          <div class="bg-white border border-nw-hairline rounded-lg p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-nw-jade font-mono text-xs">{String(i + 1).padStart(2, '0')}</span>
+              {i < approachSteps.length - 1 && (
+                <span class="text-nw-subtle text-xs hidden md:inline">&rarr;</span>
+              )}
+            </div>
+            <h3 class="text-nw-ink font-semibold text-sm mb-1">{step.label}</h3>
+            <p class="text-nw-muted text-xs leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- Research Agenda -->
-  <section class="py-16 md:py-24">
+  <section class="py-14 md:py-20">
     <div class="max-w-[1120px] mx-auto px-6">
-      <h2 class="text-nw-ink font-semibold mb-4" style="font-size: var(--text-h2);">Research Agenda</h2>
-      <p class="text-nw-muted text-sm mb-6 max-w-xl">Five research directions guiding our work on frontier AI safety.</p>
-
-      <div class="flex items-center gap-2 mb-10 overflow-x-auto">
-        {researchFlow.map((step, i) => (
-          <div class="flex items-center gap-2">
-            <div class="bg-nw-jade-pale border border-nw-hairline rounded-full px-3 py-1 text-nw-ink text-xs font-medium whitespace-nowrap">{step.label}</div>
-            {i < researchFlow.length - 1 && <span class="text-nw-subtle text-xs">&rarr;</span>}
-          </div>
-        ))}
-      </div>
-
-      <div class="space-y-3">
+      <SectionHeader title="Research Agenda" subtitle="Five research directions guiding our work on frontier AI safety." />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {researchDirections.map((dir) => (
-          <div class="bg-nw-paper border border-nw-hairline rounded-lg p-5 flex items-start gap-3">
-            <span class="text-nw-jade font-mono text-sm mt-0.5">&#9670;</span>
-            <div>
-              <div class="flex items-center gap-2 mb-1">
-                <h3 class="text-nw-ink font-semibold" style="font-size: var(--text-title);">{dir.title}</h3>
-                <span class="text-nw-jade text-xs font-medium bg-nw-jade-pale px-2 py-0.5 rounded-full">{dir.tag}</span>
-              </div>
-              <p class="text-nw-muted text-sm leading-relaxed">{dir.description}</p>
-            </div>
-          </div>
+          <ResearchAreaCard title={dir.title} tag={dir.tag} description={dir.description} />
         ))}
       </div>
     </div>
   </section>
 
   <!-- Featured Research -->
-  <section class="py-16 md:py-20 bg-nw-mist">
+  <section class="py-14 md:py-18 bg-nw-mist">
     <div class="max-w-[1120px] mx-auto px-6">
-      <h2 class="text-nw-ink font-semibold mb-8" style="font-size: var(--text-h2);">Featured Research</h2>
+      <SectionHeader title="Featured Research" />
       <div class="space-y-4">
         {featuredPapers.map((paper) => (
-          <ResearchCard
+          <FeaturedResearchCard
             title={paper.title}
             type={paper.type}
             status={paper.status}
@@ -156,23 +129,38 @@ const researchFlow = [
             url={paper.url}
             secondaryUrl={paper.secondaryUrl}
             topic={paper.topic}
-            featured={paper.featured}
           />
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Publications and Papers -->
-  <section class="py-16 md:py-20">
+  <!-- Latest Nuwa Brief -->
+  {substackNote && (
+    <section class="py-14 md:py-18">
+      <div class="max-w-[1120px] mx-auto px-6">
+        <SectionHeader title="Latest Nuwa Brief" />
+        <BriefCard
+          title={substackNote.title}
+          date={substackNote.year}
+          url={substackNote.url}
+          summary={substackNote.summary}
+          external={true}
+        />
+      </div>
+    </section>
+  )}
+
+  <!-- Publications & Papers -->
+  <section class="py-14 md:py-18 bg-nw-mist">
     <div class="max-w-[1120px] mx-auto px-6">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-nw-ink font-semibold" style="font-size: var(--text-h2);">Publications &amp; Papers</h2>
-        <a href="/research" class="text-nw-jade text-sm font-medium hover:underline no-underline">View all research &rarr;</a>
+        <a href="/research" class="text-nw-jade text-sm font-medium hover:underline no-underline">View all &rarr;</a>
       </div>
-      <div class="space-y-4">
+      <div class="space-y-3">
         {otherPapers.map((paper) => (
-          <ResearchCard
+          <PublicationCard
             title={paper.title}
             type={paper.type}
             status={paper.status}
@@ -183,38 +171,37 @@ const researchFlow = [
             url={paper.url}
             secondaryUrl={paper.secondaryUrl}
             topic={paper.topic}
-            featured={paper.featured}
           />
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Follow Nuwa -->
-  <section class="py-16 md:py-20">
+  <!-- Follow / Collaborate -->
+  <section class="py-14 md:py-18">
     <div class="max-w-[1120px] mx-auto px-6">
-      <h2 class="text-nw-ink font-semibold mb-8" style="font-size: var(--text-h2);">Follow Nuwa</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <a href={links.x} target="_blank" rel="noopener noreferrer"
-          class="bg-white border border-nw-hairline rounded-lg p-5 hover:border-nw-jade transition-colors no-underline group">
-          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">X (Twitter)</span>
-          <p class="text-nw-ink font-semibold mt-2 text-sm group-hover:text-nw-jade transition-colors">Follow on X &rarr;</p>
-        </a>
-        <a href={links.substack} target="_blank" rel="noopener noreferrer"
-          class="bg-white border border-nw-hairline rounded-lg p-5 hover:border-nw-jade transition-colors no-underline group">
-          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Substack</span>
-          <p class="text-nw-ink font-semibold mt-2 text-sm group-hover:text-nw-jade transition-colors">Nuwa Brief &rarr;</p>
-        </a>
-        <a href={links.github} target="_blank" rel="noopener noreferrer"
-          class="bg-white border border-nw-hairline rounded-lg p-5 hover:border-nw-jade transition-colors no-underline group">
-          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">GitHub</span>
-          <p class="text-nw-ink font-semibold mt-2 text-sm group-hover:text-nw-jade transition-colors">Open-source ecosystem &rarr;</p>
-        </a>
-        <a href="/contact"
-          class="bg-white border border-nw-hairline rounded-lg p-5 hover:border-nw-jade transition-colors no-underline group">
-          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Collaborate</span>
-          <p class="text-nw-ink font-semibold mt-2 text-sm group-hover:text-nw-jade transition-colors">Contact us &rarr;</p>
-        </a>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CalloutPanel variant="nuwa" align="left" description="Follow Nuwa's research updates on frontier AI risk, agent safety, and controllable AI.">
+          <div class="flex flex-wrap gap-3">
+            <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-nw-ink text-white rounded-full px-4 py-2 text-xs font-semibold hover:bg-nw-deep-blue transition-colors no-underline">
+              Subscribe to Nuwa Brief
+            </a>
+            <a href={links.x} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-4 py-2 text-xs font-semibold hover:border-nw-subtle transition-colors no-underline">
+              Follow on X
+            </a>
+          </div>
+        </CalloutPanel>
+
+        <CalloutPanel variant="default" align="left" description="We collaborate on frontier AI safety evaluation, agent safety research, and runtime defense.">
+          <div class="flex flex-wrap gap-3">
+            <a href="/contact" class="inline-flex items-center bg-wz-ink text-white rounded-full px-4 py-2 text-xs font-semibold hover:bg-wz-navy transition-colors no-underline">
+              Contact Us
+            </a>
+            <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-4 py-2 text-xs font-semibold hover:border-wz-border-strong transition-colors no-underline">
+              GitHub
+            </a>
+          </div>
+        </CalloutPanel>
       </div>
     </div>
   </section>

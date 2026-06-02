@@ -1,0 +1,29 @@
+---
+interface Props {
+  name: string;
+  category: string;
+  description: string;
+  url?: string;
+  status?: string;
+}
+
+const { name, category, description, url, status } = Astro.props;
+---
+
+<div class="bg-wz-panel border border-wz-hairline rounded-lg p-5">
+  <div class="flex items-center justify-between mb-2">
+    <span class="text-wz-blue text-xs font-mono uppercase tracking-wide">{category}</span>
+    {status && (
+      <span class="text-xs text-wz-muted">{status}</span>
+    )}
+  </div>
+  <h3 class="text-wz-ink font-semibold text-sm mb-1.5">{name}</h3>
+  <p class="text-wz-muted text-xs leading-relaxed mb-3">{description}</p>
+  {url ? (
+    <a href={url} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs font-medium hover:underline no-underline">
+      View project &rarr;
+    </a>
+  ) : (
+    <span class="text-wz-subtle text-xs">Coming soon</span>
+  )}
+</div>

@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { team } from "../data/team";
+import SectionHeader from "../components/SectionHeader.astro";
 
 const founding = team.filter((m) => m.category === "founding");
 const research = team.filter((m) => m.category === "research");
@@ -10,18 +11,15 @@ const advisors = team.filter((m) => m.category === "advisor");
 ---
 
 <BaseLayout
-  title="About"
+  title="About — Whitzard & Nuwa"
   description="About Whitzard and Nuwa Frontier AI Safety Lab — team, mission, and organization."
 >
-  <section class="py-24 md:py-32">
-    <div class="max-w-[1180px] mx-auto px-6">
+  <section class="py-20 md:py-28">
+    <div class="max-w-[1120px] mx-auto px-6">
 
       <!-- Mission -->
-      <div class="max-w-2xl mb-20">
-        <h1
-          class="text-wz-ink font-semibold tracking-tight mb-6"
-          style="font-size: var(--text-h1);"
-        >
+      <div class="max-w-2xl mb-16">
+        <h1 class="text-wz-ink font-semibold tracking-tight mb-5" style="font-size: var(--text-h1);">
           About Whitzard and Nuwa
         </h1>
         <p class="text-wz-body text-lg leading-relaxed mb-4">
@@ -33,76 +31,75 @@ const advisors = team.filter((m) => m.category === "advisor");
       </div>
 
       <!-- Organization Relationship -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-        <div class="bg-wz-panel-blue border border-wz-hairline rounded-xl p-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div class="bg-wz-panel-blue/40 border border-wz-hairline rounded-xl p-7">
           <div class="flex items-center gap-2 mb-4">
-            <span class="text-wz-ink font-semibold text-lg">Whitzard</span>
+            <img src="/assets/logo/whitzard_logo.png" alt="" class="w-6 h-6 rounded" />
+            <span class="text-wz-ink font-semibold text-base">Whitzard</span>
             <span class="text-wz-muted font-normal text-sm">白泽</span>
           </div>
-          <ul class="space-y-2 text-wz-body text-sm leading-relaxed">
+          <ul class="space-y-2.5 text-wz-body text-sm leading-relaxed">
             <li class="flex items-start gap-2">
-              <span class="text-wz-blue mt-1">&#8226;</span>
+              <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
               <span>Company and product brand</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-wz-blue mt-1">&#8226;</span>
+              <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
               <span>Safety infrastructure engineering</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-wz-blue mt-1">&#8226;</span>
+              <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
               <span>Evaluation, runtime defense, and monitoring systems</span>
             </li>
           </ul>
         </div>
 
-        <div class="bg-nw-jade-pale border border-nw-hairline rounded-xl p-8">
+        <div class="bg-nw-jade-pale/40 border border-nw-hairline rounded-xl p-7">
           <div class="flex items-center gap-2 mb-4">
-            <span class="text-nw-jade text-xl">&#9670;</span>
-            <span class="text-nw-ink font-semibold text-lg">Nuwa</span>
+            <img src="/assets/logo/nvwa_logo.png" alt="" class="w-6 h-6 rounded" />
+            <span class="text-nw-jade text-sm">&#9670;</span>
+            <span class="text-nw-ink font-semibold text-base">Nuwa</span>
             <span class="text-nw-muted font-normal text-sm">女娲</span>
           </div>
-          <ul class="space-y-2 text-nw-body text-sm leading-relaxed">
+          <ul class="space-y-2.5 text-nw-body text-sm leading-relaxed">
             <li class="flex items-start gap-2">
-              <span class="text-nw-jade mt-1">&#8226;</span>
+              <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
               <span>Research lab supported by Whitzard</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-nw-jade mt-1">&#8226;</span>
+              <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
               <span>Research agenda, reports, briefs, frameworks</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-nw-jade mt-1">&#8226;</span>
+              <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
               <span>Frontier AI risk evaluation and agent safety research</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="max-w-2xl mb-20">
+      <div class="max-w-2xl mb-16">
         <p class="text-wz-body text-base leading-relaxed">
           Nuwa develops the research agenda and evaluation methodology. Whitzard builds the safety infrastructure that turns these ideas into usable systems.
         </p>
       </div>
 
       <!-- Team -->
-      <div class="mb-20">
-        <h2 class="text-wz-ink font-semibold mb-8" style="font-size: var(--text-h2);">Team</h2>
+      <div class="mb-16">
+        <SectionHeader title="Team" subtitle="Founding members of Whitzard and Nuwa." />
 
-        <div class="space-y-12">
+        <div class="space-y-10">
           {founding.length > 0 && (
             <div>
               <p class="text-wz-muted text-xs uppercase tracking-wide mb-4 font-medium">Founding Team</p>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {founding.map((member) => (
                   <div class="bg-white border border-wz-hairline rounded-lg p-5">
-                    <div class="w-10 h-10 rounded-full bg-wz-mist border border-wz-hairline mb-3 flex items-center justify-center text-wz-muted text-sm font-medium">
-                      {member.name.charAt(0)}
-                    </div>
                     <p class="text-wz-ink font-semibold text-sm">{member.name}</p>
-                    <p class="text-wz-muted text-xs mt-0.5">{member.role}</p>
+                    <p class="text-wz-muted text-xs mt-0.5">{member.role}{member.affiliation === "nuwa" ? " · Nuwa" : ""}</p>
                     <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>
                     {member.links && member.links.length > 0 && (
-                      <div class="flex flex-wrap gap-2 mt-3">
+                      <div class="flex flex-wrap gap-3 mt-3">
                         {member.links.map((link) => (
                           <a href={link.url} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline">{link.label}</a>
                         ))}
@@ -120,12 +117,9 @@ const advisors = team.filter((m) => m.category === "advisor");
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {research.map((member) => (
                   <div class="bg-white border border-wz-hairline rounded-lg p-5">
-                    <div class="w-10 h-10 rounded-full bg-nw-jade-pale border border-nw-hairline mb-3 flex items-center justify-center text-nw-jade text-sm font-medium">
-                      {member.name.charAt(0)}
-                    </div>
                     <p class="text-wz-ink font-semibold text-sm">{member.name}</p>
                     <p class="text-wz-muted text-xs mt-0.5">{member.role}</p>
-                    <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>
+                    {member.bio && <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>}
                   </div>
                 ))}
               </div>
@@ -138,12 +132,9 @@ const advisors = team.filter((m) => m.category === "advisor");
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {engineering.map((member) => (
                   <div class="bg-white border border-wz-hairline rounded-lg p-5">
-                    <div class="w-10 h-10 rounded-full bg-wz-panel-blue border border-wz-hairline mb-3 flex items-center justify-center text-wz-blue text-sm font-medium">
-                      {member.name.charAt(0)}
-                    </div>
                     <p class="text-wz-ink font-semibold text-sm">{member.name}</p>
                     <p class="text-wz-muted text-xs mt-0.5">{member.role}</p>
-                    <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>
+                    {member.bio && <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>}
                   </div>
                 ))}
               </div>
@@ -156,12 +147,9 @@ const advisors = team.filter((m) => m.category === "advisor");
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {advisors.map((member) => (
                   <div class="bg-white border border-wz-hairline rounded-lg p-5">
-                    <div class="w-10 h-10 rounded-full bg-wz-mist border border-wz-hairline mb-3 flex items-center justify-center text-wz-muted text-sm font-medium">
-                      {member.name.charAt(0)}
-                    </div>
                     <p class="text-wz-ink font-semibold text-sm">{member.name}</p>
                     <p class="text-wz-muted text-xs mt-0.5">{member.role}</p>
-                    <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>
+                    {member.bio && <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>}
                   </div>
                 ))}
               </div>
@@ -172,17 +160,17 @@ const advisors = team.filter((m) => m.category === "advisor");
 
       <!-- Research Roots -->
       <div class="max-w-2xl mb-16">
-        <h2 class="text-wz-ink font-semibold mb-4" style="font-size: var(--text-h2);">Research Roots</h2>
-        <p class="text-wz-body text-base leading-relaxed mb-4">
+        <SectionHeader title="Research Roots" />
+        <p class="text-wz-body text-base leading-relaxed">
           Our team has research roots in frontier AI safety, agent safety, evaluation, and AI system security. We collaborate with researchers, institutions, and builders working on safe and controllable AI.
         </p>
       </div>
 
       <!-- Research and Collaboration -->
       <div class="max-w-2xl mb-16">
-        <h2 class="text-wz-ink font-semibold mb-4" style="font-size: var(--text-h2);">Research and Collaboration</h2>
+        <SectionHeader title="Research and Collaboration" />
         <p class="text-wz-body text-base leading-relaxed mb-4">
-          Nuwa actively collaborates with the global AI safety research community. We welcome research collaborations on frontier AI risk evaluation, agent safety, AI control, and runtime safety infrastructure.
+          Nuwa's research work is grounded in frontier AI risk evaluation, agent safety, AI control, and AI system security. We use this site to maintain a public record of research outputs, technical notes, and collaboration directions.
         </p>
         <div class="flex flex-wrap gap-3">
           <a href="/research" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
@@ -192,16 +180,6 @@ const advisors = team.filter((m) => m.category === "advisor");
             Collaborate With Us
           </a>
         </div>
-      </div>
-
-      <!-- Contact CTA -->
-      <div class="text-center">
-        <a
-          href="/contact"
-          class="inline-flex items-center bg-wz-ink text-white rounded-full px-6 py-3 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
-        >
-          Contact Us
-        </a>
       </div>
 
     </div>

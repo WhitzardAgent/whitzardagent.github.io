@@ -2,17 +2,24 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchPapers } from "../data/researchPapers";
-import ResearchCard from "../components/ResearchCard.astro";
+import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+import ResearchAreaCard from "../components/ResearchAreaCard.astro";
+import BriefCard from "../components/BriefCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
 
 const featuredPapers = researchPapers.filter((p) => p.featured);
 const otherPapers = researchPapers.filter((p) => !p.featured);
+
+const technicalNotes = researchPapers.filter((p) => p.type === "technical-note");
 
 const researchAreas = [
   { title: "Agent Behavior Safety", tag: "Agent Safety", description: "Deception, goal misalignment, tool misuse, and autonomous risk in AI agents." },
   { title: "Frontier AI Risk Evaluation", tag: "Evaluation", description: "Evaluation methods, benchmarks, and risk thresholds for frontier AI systems." },
   { title: "AI Control and Loss-of-Control Risk", tag: "AI Control", description: "Control methods, oversight evasion, and conditions for loss of control." },
   { title: "Runtime Safety Infrastructure", tag: "Runtime Safety", description: "Zero-trust access control, execution chain safety, and policy enforcement." },
-  { title: "Risk Monitoring and Governance", tag: "Governance", description: "Risk signal tracking, governance evidence, and evidence-based policy." },
+  { title: "Risk Monitoring and Governance Evidence", tag: "Governance", description: "Risk signal tracking, governance evidence, and evidence-based policy." },
 ];
 ---
 
@@ -21,43 +28,39 @@ const researchAreas = [
   description="Publications, papers, reports, and technical notes from Nuwa Frontier AI Safety Lab covering frontier AI risk evaluation, agent safety, AI control, and runtime safety."
   brand="nuwa"
 >
-  <section class="py-24 md:py-32">
+  <section class="py-20 md:py-28">
     <div class="max-w-[1120px] mx-auto px-6">
 
-      <!-- Header -->
+      <!-- Hero -->
       <div class="max-w-2xl mb-16">
         <div class="flex items-center gap-2 mb-3">
           <span style="color: var(--stone-jade);" class="text-base">&#9670;</span>
           <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Nuwa Research</span>
         </div>
-        <h1 class="text-nw-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
+        <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
           Research
         </h1>
-        <p class="text-nw-body text-lg leading-relaxed">
+        <p class="text-wz-body text-lg leading-relaxed">
           Publications, research papers, reports, frameworks, and technical notes from Nuwa Frontier AI Safety Lab.
         </p>
       </div>
 
       <!-- Research Areas -->
       <div class="mb-20">
-        <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Research Areas</h2>
+        <SectionHeader title="Research Areas" subtitle="Five directions guiding our work on frontier AI safety." />
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {researchAreas.map((area) => (
-            <div class="bg-nw-paper border border-nw-hairline rounded-lg p-5">
-              <span class="text-nw-jade text-xs font-medium bg-nw-jade-pale px-2 py-0.5 rounded-full">{area.tag}</span>
-              <h3 class="text-nw-ink font-semibold mt-2 mb-1 text-sm">{area.title}</h3>
-              <p class="text-nw-muted text-xs leading-relaxed">{area.description}</p>
-            </div>
+            <ResearchAreaCard title={area.title} tag={area.tag} description={area.description} />
           ))}
         </div>
       </div>
 
       <!-- Featured Research -->
       <div class="mb-20">
-        <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Featured Research</h2>
+        <SectionHeader title="Featured Research" />
         <div class="space-y-4">
           {featuredPapers.map((paper) => (
-            <ResearchCard
+            <FeaturedResearchCard
               title={paper.title}
               type={paper.type}
               status={paper.status}
@@ -68,19 +71,18 @@ const researchAreas = [
               url={paper.url}
               secondaryUrl={paper.secondaryUrl}
               topic={paper.topic}
-              featured={paper.featured}
             />
           ))}
         </div>
       </div>
 
-      <!-- Publications and Papers -->
+      <!-- Publications -->
       {otherPapers.length > 0 && (
         <div class="mb-20">
-          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Publications</h2>
-          <div class="space-y-4">
+          <SectionHeader title="Publications" subtitle="All research papers and reports from the lab." />
+          <div class="space-y-3">
             {otherPapers.map((paper) => (
-              <ResearchCard
+              <PublicationCard
                 title={paper.title}
                 type={paper.type}
                 status={paper.status}
@@ -98,9 +100,30 @@ const researchAreas = [
         </div>
       )}
 
+      <!-- Technical Notes / Briefs -->
+      {technicalNotes.length > 0 && (
+        <div class="mb-20">
+          <SectionHeader title="Technical Notes &amp; Briefs" subtitle="Essays and notes on frontier AI safety methodology and practice." />
+          <div class="space-y-3">
+            {technicalNotes.map((note) => (
+              <BriefCard
+                title={note.title}
+                date={note.year}
+                url={note.url}
+                summary={note.summary}
+                external={true}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       <!-- Subscribe CTA -->
-      <div class="bg-nw-warm-paper border border-nw-hairline rounded-xl p-8 text-center">
-        <p class="text-nw-body text-base mb-4">Follow Nuwa's research updates</p>
+      <CalloutPanel
+        variant="nuwa"
+        align="center"
+        description="Follow Nuwa's research updates on frontier AI risk, agent safety, and controllable AI."
+      >
         <div class="flex justify-center gap-3">
           <a
             href={links.substack}
@@ -119,7 +142,7 @@ const researchAreas = [
             Follow on X
           </a>
         </div>
-      </div>
+      </CalloutPanel>
 
     </div>
   </section>

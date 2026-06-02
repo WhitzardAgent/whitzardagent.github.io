@@ -1,0 +1,37 @@
+---
+interface Props {
+  title?: string;
+  description: string;
+  variant?: "default" | "nuwa" | "dark";
+  align?: "left" | "center";
+}
+
+const { title, description, variant = "default", align = "center" } = Astro.props;
+---
+
+<div class:list={[
+  "border rounded-xl p-8",
+  variant === "default" && "bg-wz-panel border-wz-hairline",
+  variant === "nuwa" && "bg-nw-warm-paper border-nw-hairline",
+  variant === "dark" && "bg-wz-panel-ink border-wz-panel-ink",
+  align === "center" && "text-center",
+]}>
+  {title && (
+    <h3 class:list={[
+      "font-semibold mb-2",
+      variant === "dark" ? "text-white" : "text-wz-ink",
+    ]} style="font-size: var(--text-h3);">
+      {title}
+    </h3>
+  )}
+  <p class:list={[
+    "text-base mb-6 max-w-lg",
+    align === "center" && "mx-auto",
+    variant === "dark" ? "text-wz-subtle" : "text-wz-body",
+  ]}>
+    <Fragment set:html={description} />
+  </p>
+  <div class:list={[align === "center" && "flex justify-center"]}>
+    <slot />
+  </div>
+</div>

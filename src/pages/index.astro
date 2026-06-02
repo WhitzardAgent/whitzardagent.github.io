@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
-import { projects } from "../data/projects";
 import { researchPapers } from "../data/researchPapers";
-import ResearchCard from "../components/ResearchCard.astro";
+import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
 
-const homepagePapers = researchPapers.filter((p) =>
+const featuredPapers = researchPapers.filter((p) =>
   [
     "science-of-frontier-ai-risk-evaluation",
     "deceptive-ai-developers-position-paper",
@@ -13,27 +16,20 @@ const homepagePapers = researchPapers.filter((p) =>
   ].includes(p.id)
 );
 
-const focusAreas = [
-  {
-    label: "Evaluation",
-    title: "Frontier AI Risk Evaluation",
-    description: "Systematic evaluation of frontier AI capabilities and risk thresholds before deployment.",
-  },
-  {
-    label: "Safety",
-    title: "Agent Safety",
-    description: "Safety mechanisms for autonomous and semi-autonomous AI agent systems.",
-  },
-  {
-    label: "Infrastructure",
-    title: "Runtime Safety Infrastructure",
-    description: "Runtime policy enforcement and access control for AI agent tool calls.",
-  },
-  {
-    label: "Governance",
-    title: "Risk Monitoring & Governance",
-    description: "Continuous risk signal monitoring and governance evidence collection.",
-  },
+const nasfPaper = researchPapers.find((p) => p.id === "self-proliferation");
+
+const safetyFlow = [
+  { label: "Risk Signals", desc: "Identify frontier AI risk signals" },
+  { label: "Frontier AI Risk Evaluation", desc: "Systematic capability and risk assessment" },
+  { label: "Agent Behavior Safety", desc: "Deception, misalignment, tool misuse" },
+  { label: "Runtime Safety Infrastructure", desc: "Zero-trust access control & policy enforcement" },
+  { label: "Governance Evidence", desc: "Risk monitoring & evidence-based governance" },
+];
+
+const products = [
+  { name: "AgentGuard", category: "Runtime Security", description: "Zero-trust access control for AI agent tool calls. Policy enforcement, tracing, and audit.", url: "/agentguard" },
+  { name: "Snowl", category: "Evaluation", description: "AI safety evaluation and benchmark infrastructure for frontier AI systems.", url: undefined },
+  { name: "Risk Monitoring", category: "Risk Monitoring", description: "Frontier AI risk signal tracking and governance evidence collection.", url: undefined },
 ];
 ---
 
@@ -42,84 +38,89 @@ const focusAreas = [
   description="Whitzard builds safety infrastructure for frontier AI and agentic systems, supporting evaluation, runtime defense, risk monitoring, and controllable AI."
 >
   <!-- Hero -->
-  <section class="py-24 md:py-36">
+  <section class="py-20 md:py-28">
     <div class="max-w-[1180px] mx-auto px-6">
-      <div class="max-w-3xl">
-        <h1
-          class="text-wz-ink font-semibold tracking-tight mb-6"
-          style="font-size: var(--text-hero); line-height: 1.05;"
-        >
-          Whitzard <span class="text-wz-muted font-normal" style="font-size: 0.45em;">白泽</span>
-        </h1>
-        <p class="text-wz-body text-xl md:text-2xl leading-relaxed mb-3 max-w-xl">
-          Building safety infrastructure for frontier AI and agentic systems.
-        </p>
-        <p class="text-wz-muted text-lg leading-relaxed mb-8 max-w-xl">
-          Our vision is to build safe and controllable AGI systems.
-        </p>
-        <p class="text-wz-body text-base leading-relaxed mb-8 max-w-xl">
-          Whitzard is an AI safety startup in China building evaluation, runtime safety, and risk-monitoring infrastructure for advanced AI systems. Nuwa Frontier AI Safety Lab is the research lab supported by Whitzard.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a
-            href="/nuwa"
-            class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-3 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
+        <!-- Left: Copy -->
+        <div class="md:col-span-6">
+          <h1
+            class="text-wz-ink font-semibold tracking-tight mb-5"
+            style="font-size: var(--text-hero); line-height: 1.05;"
           >
-            Explore Nuwa
-          </a>
-          <a
-            href="/research"
-            class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-3 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
-          >
-            Read Research
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- What Whitzard Does -->
-  <section class="py-16 md:py-20 bg-wz-mist">
-    <div class="max-w-[1180px] mx-auto px-6">
-      <h2
-        class="text-wz-ink font-semibold mb-10"
-        style="font-size: var(--text-h2);"
-      >
-        What Whitzard Does
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {focusAreas.map((area) => (
-          <div class="bg-white border border-wz-hairline rounded-xl p-6 hover:shadow-md transition-shadow">
-            <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">{area.label}</span>
-            <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">{area.title}</h3>
-            <p class="text-wz-muted text-sm leading-relaxed">{area.description}</p>
+            Whitzard <span class="text-wz-muted font-normal" style="font-size: 0.45em;">白泽</span>
+          </h1>
+          <p class="text-wz-body text-xl md:text-2xl leading-relaxed mb-3 max-w-lg">
+            Building safety infrastructure for frontier AI and agentic systems.
+          </p>
+          <p class="text-wz-muted text-lg leading-relaxed mb-6 max-w-lg">
+            Our vision is to build safe and controllable AGI systems.
+          </p>
+          <p class="text-wz-body text-base leading-relaxed mb-8 max-w-lg">
+            Whitzard is an AI safety startup in China building evaluation, runtime safety, and risk-monitoring infrastructure for advanced AI systems. Nuwa Frontier AI Safety Lab is the research lab supported by Whitzard.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="/research"
+              class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
+            >
+              Read Research
+            </a>
+            <a
+              href="/nuwa"
+              class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
+            >
+              Explore Nuwa
+            </a>
           </div>
-        ))}
+        </div>
+
+        <!-- Right: Safety Infrastructure Map -->
+        <div class="md:col-span-6 hidden md:block">
+          <div class="bg-white border border-wz-hairline rounded-xl p-6">
+            <p class="text-wz-ink text-xs font-medium uppercase tracking-wide mb-5">Safety Infrastructure Map</p>
+            <div class="space-y-0">
+              {safetyFlow.map((step, i) => (
+                <div class="flex items-start gap-3">
+                  <div class="flex flex-col items-center">
+                    <div class:list={[
+                      "w-2.5 h-2.5 rounded-full border-2 mt-1.5",
+                      i === 0 ? "bg-nw-jade border-nw-jade" : "border-nw-jade bg-white",
+                    ]} />
+                    {i < safetyFlow.length - 1 && (
+                      <div class="w-px h-8 bg-wz-border-strong" />
+                    )}
+                  </div>
+                  <div class="pb-4">
+                    <p class="text-wz-ink text-sm font-semibold leading-tight">{step.label}</p>
+                    <p class="text-wz-muted text-xs leading-relaxed mt-0.5">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Nuwa Lab Feature -->
-  <section class="py-16 md:py-24">
+  <section class="py-14 md:py-18">
     <div class="max-w-[1180px] mx-auto px-6">
-      <div class="bg-nw-warm-paper border border-nw-hairline rounded-xl p-8 md:p-12">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-nw-jade text-xl">&#9670;</span>
+      <div class="bg-nw-warm-paper border border-nw-hairline rounded-xl p-7 md:p-10">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-nw-jade text-lg">&#9670;</span>
           <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Research Lab</span>
         </div>
-        <h2
-          class="text-nw-ink font-semibold mb-4"
-          style="font-size: var(--text-h2);"
-        >
-          Nuwa Frontier AI Safety Lab <span class="text-nw-muted font-normal" style="font-size: 0.6em;">女娲</span>
+        <h2 class="text-nw-ink font-semibold mb-3" style="font-size: var(--text-h2);">
+          Nuwa Frontier AI Safety Lab <span class="text-nw-muted font-normal" style="font-size: 0.55em;">女娲</span>
         </h2>
         <p class="text-nw-body text-base leading-relaxed mb-2 max-w-2xl">
           An Eastern-rooted AI safety lab studying frontier AI risks, agent safety, and controllable AI.
         </p>
-        <p class="text-nw-muted text-sm leading-relaxed mb-2 max-w-2xl font-serif italic">
+        <p class="text-nw-muted text-sm leading-relaxed mb-5 max-w-2xl font-serif italic">
           Inspired by N&uuml;wa repairing the sky, we study how to identify and repair safety gaps in advanced AI systems before they become systemic failures.
         </p>
-        <p class="text-nw-jade text-sm font-medium mb-6">
+        <p class="text-nw-jade text-sm font-medium mb-5">
           Supported by Whitzard
         </p>
         <div class="flex flex-wrap gap-3">
@@ -142,18 +143,13 @@ const focusAreas = [
     </div>
   </section>
 
-  <!-- Latest Research and Briefs -->
-  <section class="py-16 md:py-20 bg-wz-mist">
+  <!-- Latest Research -->
+  <section class="py-14 md:py-18 bg-wz-mist">
     <div class="max-w-[1180px] mx-auto px-6">
-      <h2
-        class="text-wz-ink font-semibold mb-8"
-        style="font-size: var(--text-h2);"
-      >
-        Latest Research &amp; Briefs
-      </h2>
+      <SectionHeader title="Latest Research" subtitle="Recent publications from Nuwa Frontier AI Safety Lab." />
       <div class="space-y-4">
-        {homepagePapers.map((paper) => (
-          <ResearchCard
+        {featuredPapers.map((paper) => (
+          <FeaturedResearchCard
             title={paper.title}
             type={paper.type}
             status={paper.status}
@@ -164,86 +160,70 @@ const focusAreas = [
             url={paper.url}
             secondaryUrl={paper.secondaryUrl}
             topic={paper.topic}
-            featured={paper.featured}
           />
         ))}
+        {nasfPaper && (
+          <PublicationCard
+            title={nasfPaper.title}
+            type={nasfPaper.type}
+            status={nasfPaper.status}
+            venue={nasfPaper.venue}
+            year={nasfPaper.year}
+            authors={nasfPaper.authors}
+            summary={nasfPaper.summary}
+            url={nasfPaper.url}
+            secondaryUrl={nasfPaper.secondaryUrl}
+            topic={nasfPaper.topic}
+          />
+        )}
       </div>
       <div class="mt-6">
         <a href="/research" class="text-wz-blue text-sm font-medium hover:underline no-underline">
-          View all research &rarr;
+          View all publications &rarr;
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Products and Capabilities -->
-  <section class="py-16 md:py-20">
+  <!-- Products & Capabilities -->
+  <section class="py-14 md:py-18">
     <div class="max-w-[1180px] mx-auto px-6">
-      <h2
-        class="text-wz-ink font-semibold mb-4"
-        style="font-size: var(--text-h2);"
-      >
-        Products &amp; Capabilities
-      </h2>
-      <p class="text-wz-muted text-sm mb-8 max-w-lg">
-        Safety infrastructure built by Whitzard for frontier AI and agentic systems.
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white border border-wz-hairline rounded-xl p-6">
-          <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">Runtime Security</span>
-          <h3 class="text-wz-ink font-semibold mt-2 mb-2">AgentGuard</h3>
-          <p class="text-wz-muted text-sm leading-relaxed mb-3">
-            Zero-trust access control for AI agent tool calls. Policy enforcement, tracing, and audit.
-          </p>
-          <a href="/agentguard" class="text-wz-blue text-xs font-medium hover:underline no-underline">Learn more &rarr;</a>
-        </div>
-        <div class="bg-white border border-wz-hairline rounded-xl p-6">
-          <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">Evaluation</span>
-          <h3 class="text-wz-ink font-semibold mt-2 mb-2">Snowl</h3>
-          <p class="text-wz-muted text-sm leading-relaxed mb-3">
-            AI safety evaluation and benchmark infrastructure for frontier AI systems.
-          </p>
-          <span class="text-wz-subtle text-xs">Coming soon</span>
-        </div>
-        <div class="bg-white border border-wz-hairline rounded-xl p-6">
-          <span class="text-wz-navy text-xs font-medium uppercase tracking-wide">Risk Monitoring</span>
-          <h3 class="text-wz-ink font-semibold mt-2 mb-2">Risk Monitoring</h3>
-          <p class="text-wz-muted text-sm leading-relaxed mb-3">
-            Frontier AI risk signal tracking and governance evidence collection.
-          </p>
-          <span class="text-wz-subtle text-xs">Coming soon</span>
-        </div>
+      <SectionHeader title="Products & Capabilities" subtitle="Safety infrastructure built by Whitzard for frontier AI and agentic systems." />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {products.map((product) => (
+          <ProjectCard
+            name={product.name}
+            category={product.category}
+            description={product.description}
+            url={product.url}
+            status={!product.url ? "In development" : undefined}
+          />
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- About CTA -->
-  <section class="py-12 md:py-16 bg-wz-panel-ink">
-    <div class="max-w-[1180px] mx-auto px-6 text-center">
-      <p class="text-white text-base mb-4">
-        Learn about the team behind Whitzard and Nuwa.
-      </p>
-      <a
-        href="/about"
-        class="inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline"
-      >
-        About Us
-      </a>
-    </div>
-  </section>
-
-  <!-- Contact CTA -->
-  <section class="py-12 md:py-16">
-    <div class="max-w-[1180px] mx-auto px-6 text-center">
-      <p class="text-wz-muted text-sm mb-4">
-        We collaborate on frontier AI safety evaluation, agent safety, and runtime defense.
-      </p>
-      <a
-        href="/contact"
-        class="text-wz-blue text-sm font-medium hover:underline no-underline"
-      >
-        Get in Touch &rarr;
-      </a>
+  <!-- Combined CTA -->
+  <section class="py-10 md:py-14 bg-wz-panel-ink">
+    <div class="max-w-[1180px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="text-center md:text-left">
+        <p class="text-white text-base font-medium mb-1">Learn about the team behind Whitzard and Nuwa.</p>
+        <p class="text-wz-subtle text-sm">We collaborate on frontier AI safety evaluation, agent safety, and runtime defense.</p>
+      </div>
+      <div class="flex gap-3">
+        <a
+          href="/about"
+          class="inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline"
+        >
+          About Us
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center bg-transparent text-white border border-white/20 rounded-full px-5 py-2.5 text-sm font-semibold hover:border-white/40 transition-colors no-underline"
+        >
+          Get in Touch
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  tag?: string;
+}
+
+const { title, subtitle, tag } = Astro.props;
+---
+
+<div class="mb-8">
+  {tag && (
+    <span class="text-xs font-medium uppercase tracking-wide text-wz-teal mb-2 block">{tag}</span>
+  )}
+  <h2 class="text-wz-ink font-semibold" style="font-size: var(--text-h2); line-height: 1.15;">{title}</h2>
+  {subtitle && (
+    <p class="text-wz-muted text-sm mt-2 max-w-xl leading-relaxed">{subtitle}</p>
+  )}
+</div>
