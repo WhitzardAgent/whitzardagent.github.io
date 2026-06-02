@@ -7,7 +7,6 @@ export async function getStaticPaths() {
     getCollection("posts"),
     getCollection("briefs"),
     getCollection("notes"),
-    getCollection("updates"),
   ]);
 
   const items = allContent.flat();

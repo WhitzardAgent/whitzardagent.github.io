@@ -2,18 +2,21 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { projects } from "../data/projects";
+import { researchPapers } from "../data/researchPapers";
+import ResearchCard from "../components/ResearchCard.astro";
 import { getCollection } from "astro:content";
 
-const allBriefs = await getCollection("briefs", ({ data }) => !data.draft);
-const allUpdates = await getCollection("updates", ({ data }) => !data.draft);
 const allReports = await getCollection("reports", ({ data }) => !data.draft);
-const allPosts = await getCollection("posts", ({ data }) => !data.draft);
-const allNotes = await getCollection("notes", ({ data }) => !data.draft);
 
-const latestResearch = [...allBriefs, ...allReports, ...allNotes, ...allUpdates, ...allPosts]
-  .filter((item) => item.data.brand === "nuwa" || item.data.homepage)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 4);
+const homepagePapers = researchPapers.filter((p) =>
+  [
+    "science-of-frontier-ai-risk-evaluation",
+    "deceptive-ai-developers-position-paper",
+    "self-replication-frontier-ai",
+  ].includes(p.id)
+);
+
+const nasfReport = allReports.find((r) => r.id.includes("nasf"));
 
 const focusAreas = [
   {
@@ -145,48 +148,50 @@ const focusAreas = [
   </section>
 
   <!-- Latest Research and Briefs -->
-  {latestResearch.length > 0 && (
-    <section class="py-16 md:py-20 bg-wz-mist">
-      <div class="max-w-[1180px] mx-auto px-6">
-        <h2
-          class="text-wz-ink font-semibold mb-8"
-          style="font-size: var(--text-h2);"
-        >
-          Latest Research &amp; Briefs
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {latestResearch.map((item) => (
-            <article class="bg-white border border-wz-hairline rounded-lg p-6 hover:shadow-md transition-shadow">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="text-wz-teal text-xs font-medium uppercase">{item.data.type || item.collection}</span>
-                <span class="text-wz-subtle text-xs">
-                  {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                </span>
-                {item.data.brand && (
-                  <span class:list={[
-                    "text-xs font-medium px-2 py-0.5 rounded-full",
-                    item.data.brand === "nuwa" && "bg-nw-jade-pale text-nw-jade",
-                    item.data.brand === "whitzard" && "bg-wz-panel-blue text-wz-blue",
-                  ]}>
-                    {item.data.brand}
-                  </span>
-                )}
-              </div>
-              <h3 class="text-wz-ink font-semibold mb-1">{item.data.title}</h3>
-              {item.data.summary && (
-                <p class="text-wz-muted text-sm leading-relaxed">{item.data.summary}</p>
-              )}
-            </article>
-          ))}
-        </div>
-        <div class="mt-6">
-          <a href="/research" class="text-wz-blue text-sm font-medium hover:underline no-underline">
-            View all research &rarr;
+  <section class="py-16 md:py-20 bg-wz-mist">
+    <div class="max-w-[1180px] mx-auto px-6">
+      <h2
+        class="text-wz-ink font-semibold mb-8"
+        style="font-size: var(--text-h2);"
+      >
+        Latest Research &amp; Briefs
+      </h2>
+      <div class="space-y-4">
+        {homepagePapers.map((paper) => (
+          <ResearchCard
+            title={paper.title}
+            type={paper.type}
+            status={paper.status}
+            venue={paper.venue}
+            year={paper.year}
+            authors={paper.authors}
+            summary={paper.summary}
+            url={paper.url}
+            secondaryUrl={paper.secondaryUrl}
+            topic={paper.topic}
+            featured={paper.featured}
+          />
+        ))}
+        {nasfReport && (
+          <a href={`/research/${nasfReport.id}`} class="block bg-white border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-nw-jade text-xs font-medium uppercase">{nasfReport.data.type}</span>
+              <span class="text-wz-subtle text-xs">
+                {nasfReport.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+              </span>
+            </div>
+            <h3 class="text-wz-ink font-semibold mb-1">{nasfReport.data.title}</h3>
+            {nasfReport.data.summary && <p class="text-wz-muted text-sm leading-relaxed">{nasfReport.data.summary}</p>}
           </a>
-        </div>
+        )}
       </div>
-    </section>
-  )}
+      <div class="mt-6">
+        <a href="/research" class="text-wz-blue text-sm font-medium hover:underline no-underline">
+          View all research &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- Products and Capabilities -->
   <section class="py-16 md:py-20">

@@ -15,14 +15,14 @@ export const team: TeamMember[] = [
     role: "Founder",
     affiliation: "whitzard",
     category: "founding",
-    bio: "Team profile coming soon.",
+    bio: "Profile to be updated.",
   },
   {
     name: "Team Member",
     role: "Co-Founder",
     affiliation: "nuwa",
     category: "founding",
-    bio: "Team profile coming soon.",
+    bio: "Profile to be updated.",
   },
   // Research
   {
@@ -30,14 +30,14 @@ export const team: TeamMember[] = [
     role: "Research Lead",
     affiliation: "nuwa",
     category: "research",
-    bio: "Team profile coming soon.",
+    bio: "Profile to be updated.",
   },
   {
     name: "Researcher",
     role: "AI Safety Researcher",
     affiliation: "nuwa",
     category: "research",
-    bio: "Team profile coming soon.",
+    bio: "Profile to be updated.",
   },
   // Engineering
   {
@@ -45,7 +45,7 @@ export const team: TeamMember[] = [
     role: "Engineering Lead",
     affiliation: "whitzard",
     category: "engineering",
-    bio: "Team profile coming soon.",
+    bio: "Profile to be updated.",
   },
   // Advisors
   {
@@ -53,6 +53,6 @@ export const team: TeamMember[] = [
     role: "Scientific Advisor",
     affiliation: "nuwa",
     category: "advisor",
-    bio: "Team profile coming soon.",
+    bio: "Profile to be updated.",
   },
 ];

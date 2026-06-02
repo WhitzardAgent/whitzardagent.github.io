@@ -2,9 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { projects } from "../data/projects";
-import { getCollection } from "astro:content";
-
-const projectContent = await getCollection("projects", ({ data }) => !data.draft);
 
 const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent Framework", "Risk Monitoring"] as const;
 ---
@@ -24,9 +21,24 @@ const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent 
       <p class="text-wz-body text-lg leading-relaxed max-w-2xl mb-4">
         WhitzardAgent open-source tools for AI agent safety evaluation, defense, and monitoring.
       </p>
-      <p class="text-wz-muted text-sm mb-12">
-        All projects are open source and available on <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline no-underline">GitHub</a>.
-      </p>
+      <div class="flex flex-wrap gap-3 mb-12">
+        <a
+          href={links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
+        >
+          GitHub Organization &rarr;
+        </a>
+        <a
+          href={links.huggingface}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
+        >
+          Hugging Face Organization &rarr;
+        </a>
+      </div>
 
       <!-- Flagship: AgentGuard -->
       <div class="bg-wz-panel-blue border border-wz-hairline rounded-xl p-8 mb-12">

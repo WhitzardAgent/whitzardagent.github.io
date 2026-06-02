@@ -1,19 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
+import { researchPapers } from "../data/researchPapers";
+import ResearchCard from "../components/ResearchCard.astro";
 import { getCollection } from "astro:content";
 
 const reports = await getCollection("reports", ({ data }) => !data.draft);
 const briefs = await getCollection("briefs", ({ data }) => !data.draft && data.brand === "nuwa");
 const notes = await getCollection("notes", ({ data }) => !data.draft);
 
-const featured = [...reports, ...notes]
-  .filter((item) => item.data.featured)
+const featuredPapers = researchPapers.filter((p) => p.featured);
+const otherPapers = researchPapers.filter((p) => !p.featured);
+
+const localFrameworks = reports
+  .filter((r) => r.data.type === "framework")
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const allReports = reports.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const allBriefs = briefs.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const allNotes = notes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const localReports = reports
+  .filter((r) => r.data.type !== "framework")
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const researchAreas = [
   { title: "Agent Behavior Safety", tag: "Agent Safety", description: "Deception, goal misalignment, tool misuse, and autonomous risk in AI agents." },
@@ -25,26 +30,24 @@ const researchAreas = [
 ---
 
 <BaseLayout
-  title="Research"
-  description="Research, reports, frameworks, and technical notes from Nuwa Frontier AI Safety Lab."
+  title="Research — Nuwa Frontier AI Safety Lab"
+  description="Publications, papers, reports, and technical notes from Nuwa Frontier AI Safety Lab covering frontier AI risk evaluation, agent safety, AI control, and runtime safety."
   brand="nuwa"
 >
   <section class="py-24 md:py-32">
     <div class="max-w-[1120px] mx-auto px-6">
+
       <!-- Header -->
       <div class="max-w-2xl mb-16">
         <div class="flex items-center gap-2 mb-3">
           <span style="color: var(--stone-jade);" class="text-base">&#9670;</span>
           <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Nuwa Research</span>
         </div>
-        <h1
-          class="text-nw-ink font-semibold tracking-tight mb-4"
-          style="font-size: var(--text-h1);"
-        >
+        <h1 class="text-nw-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
           Research
         </h1>
         <p class="text-nw-body text-lg leading-relaxed">
-          Research, reports, frameworks, and technical notes from Nuwa Frontier AI Safety Lab.
+          Publications, research papers, reports, frameworks, and technical notes from Nuwa Frontier AI Safety Lab.
         </p>
       </div>
 
@@ -62,133 +65,132 @@ const researchAreas = [
         </div>
       </div>
 
-      <!-- Featured Publications -->
-      {featured.length > 0 && (
+      <!-- Featured Research -->
+      <div class="mb-20">
+        <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Featured Research</h2>
+        <div class="space-y-4">
+          {featuredPapers.map((paper) => (
+            <ResearchCard
+              title={paper.title}
+              type={paper.type}
+              status={paper.status}
+              venue={paper.venue}
+              year={paper.year}
+              authors={paper.authors}
+              summary={paper.summary}
+              url={paper.url}
+              secondaryUrl={paper.secondaryUrl}
+              topic={paper.topic}
+              featured={paper.featured}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- Publications and Papers -->
+      {otherPapers.length > 0 && (
         <div class="mb-20">
-          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Featured Publications</h2>
-          <div class="space-y-3">
-            {featured.map((item) => (
-              <article class="bg-white border border-nw-hairline rounded-lg p-6 hover:shadow-md transition-shadow">
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type || "Report"}</span>
-                  <span class="text-nw-subtle text-xs">
-                    {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                  </span>
-                  {item.data.research_area && (
-                    <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-nw-jade-pale text-nw-jade">{item.data.research_area}</span>
-                  )}
-                </div>
-                <h3 class="text-nw-ink font-semibold mb-1">{item.data.title}</h3>
-                {item.data.summary && (
-                  <p class="text-nw-muted text-sm leading-relaxed">{item.data.summary}</p>
-                )}
-              </article>
+          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Publications</h2>
+          <div class="space-y-4">
+            {otherPapers.map((paper) => (
+              <ResearchCard
+                title={paper.title}
+                type={paper.type}
+                status={paper.status}
+                venue={paper.venue}
+                year={paper.year}
+                authors={paper.authors}
+                summary={paper.summary}
+                url={paper.url}
+                secondaryUrl={paper.secondaryUrl}
+                topic={paper.topic}
+                featured={paper.featured}
+              />
             ))}
           </div>
         </div>
       )}
 
-      <!-- Technical Notes -->
-      {allNotes.length > 0 && (
+      <!-- Nuwa Frameworks and Reports -->
+      {(localFrameworks.length > 0 || localReports.length > 0) && (
         <div class="mb-20">
-          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Technical Notes</h2>
-          <div class="space-y-3">
-            {allNotes.map((note) => (
-              <article class="bg-nw-paper border border-nw-hairline rounded-lg p-5">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-nw-jade text-xs font-medium uppercase">Technical Note</span>
+          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Frameworks &amp; Reports</h2>
+          <div class="space-y-4">
+            {localFrameworks.map((item) => (
+              <a href={`/research/${item.id}`} class="block bg-white border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type}</span>
                   <span class="text-nw-subtle text-xs">
-                    {note.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                    {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                   </span>
                 </div>
-                <h3 class="text-nw-ink font-semibold text-sm">{note.data.title}</h3>
-                {note.data.summary && (
-                  <p class="text-nw-muted text-xs leading-relaxed mt-1">{note.data.summary}</p>
+                <h3 class="text-nw-ink font-semibold text-sm mb-1">{item.data.title}</h3>
+                {item.data.summary && (
+                  <p class="text-nw-muted text-xs leading-relaxed">{item.data.summary}</p>
                 )}
-              </article>
+              </a>
+            ))}
+            {localReports.map((item) => (
+              <a href={`/research/${item.id}`} class="block bg-white border border-wz-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type}</span>
+                  <span class="text-nw-subtle text-xs">
+                    {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                  </span>
+                </div>
+                <h3 class="text-nw-ink font-semibold text-sm mb-1">{item.data.title}</h3>
+                {item.data.summary && (
+                  <p class="text-nw-muted text-xs leading-relaxed">{item.data.summary}</p>
+                )}
+              </a>
             ))}
           </div>
         </div>
       )}
 
       <!-- Nuwa Briefs -->
-      <div class="mb-20">
-        <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Nuwa Briefs</h2>
-        {allBriefs.length > 0 ? (
+      {briefs.length > 0 && (
+        <div class="mb-20">
+          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Nuwa Briefs</h2>
           <div class="space-y-3">
-            {allBriefs.map((brief) => (
-              <article class="bg-nw-paper border border-nw-hairline rounded-lg p-5">
+            {briefs.map((brief) => (
+              <a href={`/research/${brief.id}`} class="block bg-nw-jade-pale border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
                 <div class="flex items-center gap-2 mb-1">
-                  <span class="text-nw-jade text-xs font-medium uppercase">Brief</span>
+                  <span class="text-nw-jade text-xs font-medium uppercase">Nuwa Brief</span>
                   <span class="text-nw-subtle text-xs">
                     {brief.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                   </span>
                 </div>
                 <h3 class="text-nw-ink font-semibold text-sm">{brief.data.title}</h3>
-                {brief.data.summary && (
-                  <p class="text-nw-muted text-xs leading-relaxed mt-1">{brief.data.summary}</p>
-                )}
-              </article>
-            ))}
-          </div>
-        ) : (
-          <div class="bg-nw-paper border border-nw-hairline rounded-lg p-8 text-center">
-            <p class="text-nw-muted text-sm">
-              No briefs published yet.
-              <a href={links.substack} target="_blank" rel="noopener noreferrer" class="text-nw-jade hover:underline no-underline">Subscribe to Nuwa Brief on Substack</a>.
-            </p>
-          </div>
-        )}
-      </div>
-
-      <!-- Reports List -->
-      {allReports.length > 0 && (
-        <div class="mb-16">
-          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">All Reports</h2>
-          <div class="space-y-3">
-            {allReports.map((report) => (
-              <article class="bg-white border border-nw-hairline rounded-lg p-5">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-nw-jade text-xs font-medium uppercase">{report.data.type || "Report"}</span>
-                  <span class="text-nw-subtle text-xs">
-                    {report.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                  </span>
-                  {report.data.brand && (
-                    <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-nw-mist text-nw-muted">{report.data.brand}</span>
-                  )}
-                </div>
-                <h3 class="text-nw-ink font-semibold text-sm">{report.data.title}</h3>
-                {report.data.summary && (
-                  <p class="text-nw-muted text-xs leading-relaxed mt-1">{report.data.summary}</p>
-                )}
-                <div class="flex gap-3 mt-2">
-                  {report.data.pdf_url && (
-                    <a href={report.data.pdf_url} target="_blank" rel="noopener noreferrer" class="text-nw-jade text-xs font-medium hover:underline no-underline">PDF</a>
-                  )}
-                  {report.data.github_url && (
-                    <a href={report.data.github_url} target="_blank" rel="noopener noreferrer" class="text-nw-jade text-xs font-medium hover:underline no-underline">GitHub</a>
-                  )}
-                  {report.data.doi_url && (
-                    <a href={report.data.doi_url} target="_blank" rel="noopener noreferrer" class="text-nw-jade text-xs font-medium hover:underline no-underline">DOI</a>
-                  )}
-                </div>
-              </article>
+              </a>
             ))}
           </div>
         </div>
       )}
 
-      <!-- Nuwa link block -->
-      <div class="bg-nw-jade-pale border border-nw-hairline rounded-lg p-6 flex items-center gap-4">
-        <span class="text-nw-jade text-xl">&#9670;</span>
-        <div>
-          <p class="text-nw-ink font-medium text-sm">Nuwa Frontier AI Safety Lab</p>
-          <p class="text-nw-muted text-sm">Our research lab studying frontier AI risks and agent safety.</p>
+      <!-- Subscribe CTA -->
+      <div class="bg-nw-warm-paper border border-nw-hairline rounded-xl p-8 text-center">
+        <p class="text-nw-body text-base mb-4">Follow Nuwa's research updates</p>
+        <div class="flex justify-center gap-3">
+          <a
+            href={links.substack}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline"
+          >
+            Subscribe to Nuwa Brief
+          </a>
+          <a
+            href={links.x}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline"
+          >
+            Follow on X
+          </a>
         </div>
-        <a href="/nuwa" class="ml-auto text-nw-jade text-sm font-medium hover:underline no-underline whitespace-nowrap">
-          Visit Nuwa &rarr;
-        </a>
       </div>
+
     </div>
   </section>
 </BaseLayout>

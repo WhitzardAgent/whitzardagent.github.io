@@ -8,7 +8,6 @@ export async function GET(context: APIContext) {
     getCollection("briefs", ({ data }) => !data.draft),
     getCollection("notes", ({ data }) => !data.draft),
     getCollection("reports", ({ data }) => !data.draft),
-    getCollection("updates", ({ data }) => !data.draft),
   ]);
 
   const items = allContent

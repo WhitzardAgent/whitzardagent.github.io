@@ -1,12 +1,17 @@
 export const links = {
   x: "https://x.com/NuwaAISafety",
   substack: "https://nuwasafety.substack.com/",
+  substackFrontierRiskEvaluation: "https://nuwasafety.substack.com/p/science-of-frontier-ai-risk-evaluation",
   github: "https://github.com/WhitzardAgent",
   huggingface: "https://huggingface.co/WhitzardAgent",
   repository: "https://github.com/WhitzardAgent/whitzardagent.github.io",
   currentNuwaProject: "https://www.whitzard.tech/NVWA-Project/",
   whitzard: "https://www.whitzard.tech/",
   nuwa: "/nuwa",
+  research: "/research",
+  blog: "/blog",
+  about: "/about",
+  contact: "/contact",
   agentguard: "https://github.com/WhitzardAgent/AgentGuard",
   email: "contact@whitzard.tech",
 };

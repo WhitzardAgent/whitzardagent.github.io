@@ -1,13 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
+import { researchPapers } from "../data/researchPapers";
 import { getCollection } from "astro:content";
 
 const allContent = await Promise.all([
   getCollection("posts", ({ data }) => !data.draft),
   getCollection("briefs", ({ data }) => !data.draft),
   getCollection("notes", ({ data }) => !data.draft),
-  getCollection("updates", ({ data }) => !data.draft),
 ]);
 
 const items = allContent
@@ -16,11 +16,12 @@ const items = allContent
 
 const nuwaBriefs = items.filter((i) => i.data.brand === "nuwa" && i.data.type === "brief");
 
+const substackArticles = researchPapers.filter((p) => p.type === "technical-note");
+
 const typeLabel: Record<string, string> = {
   posts: "Post",
   briefs: "Brief",
   notes: "Note",
-  updates: "Update",
 };
 
 function getLink(item: any): string {
@@ -33,8 +34,8 @@ function getLink(item: any): string {
 ---
 
 <BaseLayout
-  title="Blog"
-  description="Updates, essays, and notes from Whitzard and Nuwa Frontier AI Safety Lab."
+  title="Blog — Whitzard & Nuwa"
+  description="Updates, essays, and technical notes from Whitzard and Nuwa Frontier AI Safety Lab on frontier AI safety, agent safety, and controllable AI."
 >
   <section class="py-24 md:py-32">
     <div class="max-w-[1180px] mx-auto px-6">
@@ -80,6 +81,26 @@ function getLink(item: any): string {
       ) : (
         <div class="bg-wz-panel border border-wz-hairline rounded-lg p-12 text-center">
           <p class="text-wz-muted text-sm">No content published yet.</p>
+        </div>
+      )}
+
+      <!-- External Articles -->
+      {substackArticles.length > 0 && (
+        <div class="mb-16">
+          <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">External Articles</h2>
+          <div class="space-y-3">
+            {substackArticles.map((article) => (
+              <a href={article.url} target="_blank" rel="noopener noreferrer" class="block bg-white border border-wz-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-wz-teal text-xs font-medium uppercase">{article.type === "technical-note" ? "Technical Note" : article.type}</span>
+                  <span class="text-wz-muted text-xs font-medium px-2 py-0.5 rounded-full bg-wz-panel">External &middot; Substack</span>
+                  {article.year && <span class="text-wz-subtle text-xs">{article.year}</span>}
+                </div>
+                <h3 class="text-wz-ink font-semibold text-sm">{article.title}</h3>
+                {article.summary && <p class="text-wz-muted text-xs leading-relaxed mt-1">{article.summary}</p>}
+              </a>
+            ))}
+          </div>
         </div>
       )}
 

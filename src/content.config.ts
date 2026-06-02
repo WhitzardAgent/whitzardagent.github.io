@@ -41,14 +41,4 @@ const reports = defineCollection({
   schema: commonSchema,
 });
 
-const updates = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/updates" }),
-  schema: commonSchema,
-});
-
-const projects = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
-  schema: commonSchema,
-});
-
-export const collections = { posts, briefs, notes, reports, updates, projects };
+export const collections = { posts, briefs, notes, reports };

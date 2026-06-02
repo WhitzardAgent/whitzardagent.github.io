@@ -1,13 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
+import { researchPapers } from "../data/researchPapers";
+import ResearchCard from "../components/ResearchCard.astro";
 import { getCollection } from "astro:content";
 
 const briefs = await getCollection("briefs", ({ data }) => !data.draft && data.brand === "nuwa");
 const reports = await getCollection("reports", ({ data }) => !data.draft && data.brand === "nuwa");
 const notes = await getCollection("notes", ({ data }) => !data.draft && data.brand === "nuwa");
 
-const featured = [...reports, ...notes]
+const featuredPapers = researchPapers.filter((p) => p.featured).slice(0, 4);
+
+const localFeatured = [...reports, ...notes]
   .filter((item) => item.data.featured)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
@@ -15,55 +19,31 @@ const recentBriefs = briefs
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
-const allResearch = [...reports, ...notes, ...briefs]
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
 const researchDirections = [
-  {
-    title: "Agent Behavior Safety",
-    description: "Studying safety risks in autonomous AI agent behavior, including deception, goal misalignment, and tool misuse.",
-    tag: "Agent Safety",
-  },
-  {
-    title: "Frontier AI Risk Evaluation",
-    description: "Developing evaluation methods and benchmarks for frontier AI capabilities and loss-of-control risks.",
-    tag: "Evaluation",
-  },
-  {
-    title: "AI Control and Loss-of-Control Risk",
-    description: "Investigating AI control methods and the conditions under which advanced AI systems may evade oversight.",
-    tag: "AI Control",
-  },
-  {
-    title: "Runtime Safety Infrastructure",
-    description: "Building runtime safety infrastructure for AI agent tool calls, including zero-trust access control.",
-    tag: "Runtime Safety",
-  },
-  {
-    title: "Risk Monitoring and Governance Evidence",
-    description: "Collecting and analyzing risk signals to support evidence-based AI governance and policy.",
-    tag: "Governance",
-  },
+  { title: "Agent Behavior Safety", description: "Studying safety risks in autonomous AI agent behavior, including deception, goal misalignment, and tool misuse.", tag: "Agent Safety" },
+  { title: "Frontier AI Risk Evaluation", description: "Developing evaluation methods and benchmarks for frontier AI capabilities and loss-of-control risks.", tag: "Evaluation" },
+  { title: "AI Control and Loss-of-Control Risk", description: "Investigating AI control methods and the conditions under which advanced AI systems may evade oversight.", tag: "AI Control" },
+  { title: "Runtime Safety Infrastructure", description: "Building runtime safety infrastructure for AI agent tool calls, including zero-trust access control.", tag: "Runtime Safety" },
+  { title: "Risk Monitoring and Governance Evidence", description: "Collecting and analyzing risk signals to support evidence-based AI governance and policy.", tag: "Governance" },
 ];
 
 const researchFlow = [
-  { label: "Risk Signals", icon: "&#9679;" },
-  { label: "Behavioral Evidence", icon: "&#9679;" },
-  { label: "Safety Infrastructure", icon: "&#9679;" },
-  { label: "Controllable AI", icon: "&#9679;" },
+  { label: "Risk Signals" },
+  { label: "Behavioral Evidence" },
+  { label: "Safety Infrastructure" },
+  { label: "Controllable AI" },
 ];
 ---
 
 <BaseLayout
   title="Nuwa Frontier AI Safety Lab"
-  description="Nuwa Frontier AI Safety Lab studies frontier AI risks, agent safety, and controllable AI. Supported by Whitzard."
+  description="Nuwa Frontier AI Safety Lab studies frontier AI risks, agent safety, and controllable AI. Research, publications, and frameworks from an Eastern-rooted AI safety lab."
   brand="nuwa"
 >
   <!-- Hero -->
   <section class="py-28 md:py-40">
     <div class="max-w-[1120px] mx-auto px-6">
       <div class="max-w-2xl">
-        <!-- Five-stone + Arc visual -->
         <div class="mb-8 flex items-center gap-3">
           <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 20 Q32 -8 60 20" stroke="var(--nw-jade)" stroke-width="1.5" fill="none" stroke-dasharray="4 2" />
@@ -80,10 +60,7 @@ const researchFlow = [
           </div>
         </div>
 
-        <h1
-          class="text-nw-ink font-semibold tracking-tight mb-6"
-          style="font-size: var(--text-hero); line-height: 1.05;"
-        >
+        <h1 class="text-nw-ink font-semibold tracking-tight mb-6" style="font-size: var(--text-hero); line-height: 1.05;">
           Nuwa <span class="text-nw-muted font-normal" style="font-size: 0.4em;">女娲</span><br />
           <span style="font-size: 0.45em;">Frontier AI Safety Lab</span>
         </h1>
@@ -93,11 +70,8 @@ const researchFlow = [
         <p class="text-nw-muted text-base leading-relaxed mb-3 font-serif italic max-w-xl">
           Inspired by N&uuml;wa repairing the sky, we study how to identify and repair safety gaps in advanced AI systems before they become systemic failures.
         </p>
-        <p class="text-nw-jade text-sm font-medium mb-8">
-          Supported by Whitzard
-        </p>
+        <p class="text-nw-jade text-sm font-medium mb-8">Supported by Whitzard</p>
 
-        <!-- Four Concepts -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
           <div class="text-center p-3 border border-nw-hairline rounded-lg bg-nw-paper">
             <div class="text-nw-jade text-lg font-semibold mb-0.5">Repair</div>
@@ -118,18 +92,10 @@ const researchFlow = [
         </div>
 
         <div class="flex flex-wrap gap-3">
-          <a
-            href="/research"
-            class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline"
-          >
+          <a href="/research" class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline">
             Read Research
           </a>
-          <a
-            href={links.substack}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline"
-          >
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline">
             Subscribe to Nuwa Brief
           </a>
         </div>
@@ -146,7 +112,7 @@ const researchFlow = [
           Frontier AI systems are advancing rapidly. As capabilities grow, so do the risks of loss of control, deceptive alignment, and autonomous misuse.
         </p>
         <p class="text-nw-body leading-relaxed">
-          Nuwa is dedicated to studying these risks with rigor and depth, grounded in both technical evidence and an Eastern philosophical tradition of prudence and repair. We believe that frontier AI safety requires both understanding the risks and building the infrastructure to manage them.
+          Nuwa is dedicated to studying these risks with rigor and depth, grounded in both technical evidence and an Eastern philosophical tradition of prudence and repair.
         </p>
       </div>
     </div>
@@ -156,20 +122,13 @@ const researchFlow = [
   <section class="py-16 md:py-24">
     <div class="max-w-[1120px] mx-auto px-6">
       <h2 class="text-nw-ink font-semibold mb-4" style="font-size: var(--text-h2);">Research Agenda</h2>
-      <p class="text-nw-muted text-sm mb-6 max-w-xl">
-        Five research directions guiding our work on frontier AI safety.
-      </p>
+      <p class="text-nw-muted text-sm mb-6 max-w-xl">Five research directions guiding our work on frontier AI safety.</p>
 
-      <!-- Research Flow -->
       <div class="flex items-center gap-2 mb-10 overflow-x-auto">
         {researchFlow.map((step, i) => (
           <div class="flex items-center gap-2">
-            <div class="bg-nw-jade-pale border border-nw-hairline rounded-full px-3 py-1 text-nw-ink text-xs font-medium whitespace-nowrap">
-              {step.label}
-            </div>
-            {i < researchFlow.length - 1 && (
-              <span class="text-nw-subtle text-xs">&rarr;</span>
-            )}
+            <div class="bg-nw-jade-pale border border-nw-hairline rounded-full px-3 py-1 text-nw-ink text-xs font-medium whitespace-nowrap">{step.label}</div>
+            {i < researchFlow.length - 1 && <span class="text-nw-subtle text-xs">&rarr;</span>}
           </div>
         ))}
       </div>
@@ -192,78 +151,91 @@ const researchFlow = [
   </section>
 
   <!-- Featured Research -->
-  {featured.length > 0 && (
-    <section class="py-16 md:py-20 bg-nw-mist">
-      <div class="max-w-[1120px] mx-auto px-6">
-        <h2 class="text-nw-ink font-semibold mb-8" style="font-size: var(--text-h2);">Featured Research</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {featured.slice(0, 3).map((item) => (
-            <article class="bg-white border border-nw-hairline rounded-lg p-6">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type || item.collection}</span>
-                <span class="text-nw-subtle text-xs">
-                  {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                </span>
-              </div>
-              <h3 class="text-nw-ink font-semibold mb-2">{item.data.title}</h3>
-              {item.data.summary && (
-                <p class="text-nw-muted text-sm leading-relaxed">{item.data.summary}</p>
-              )}
-            </article>
-          ))}
-        </div>
+  <section class="py-16 md:py-20 bg-nw-mist">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <h2 class="text-nw-ink font-semibold mb-8" style="font-size: var(--text-h2);">Featured Research</h2>
+      <div class="space-y-4">
+        {featuredPapers.map((paper) => (
+          <ResearchCard
+            title={paper.title}
+            type={paper.type}
+            status={paper.status}
+            venue={paper.venue}
+            year={paper.year}
+            authors={paper.authors}
+            summary={paper.summary}
+            url={paper.url}
+            secondaryUrl={paper.secondaryUrl}
+            topic={paper.topic}
+            featured={paper.featured}
+          />
+        ))}
+        {localFeatured.slice(0, 2).map((item) => (
+          <a href={`/research/${item.id}`} class="block bg-white border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type || item.collection}</span>
+              <span class="text-nw-subtle text-xs">
+                {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+              </span>
+            </div>
+            <h3 class="text-nw-ink font-semibold mb-1">{item.data.title}</h3>
+            {item.data.summary && <p class="text-nw-muted text-sm leading-relaxed">{item.data.summary}</p>}
+          </a>
+        ))}
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
-  <!-- Latest Briefs -->
+  <!-- Publications and Papers -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-nw-ink font-semibold" style="font-size: var(--text-h2);">Publications &amp; Papers</h2>
+        <a href="/research" class="text-nw-jade text-sm font-medium hover:underline no-underline">View all research &rarr;</a>
+      </div>
+      <div class="space-y-4">
+        {researchPapers.filter((p) => !p.featured).slice(0, 4).map((paper) => (
+          <ResearchCard
+            title={paper.title}
+            type={paper.type}
+            status={paper.status}
+            venue={paper.venue}
+            year={paper.year}
+            authors={paper.authors}
+            summary={paper.summary}
+            url={paper.url}
+            secondaryUrl={paper.secondaryUrl}
+            topic={paper.topic}
+            featured={paper.featured}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Nuwa Briefs -->
   {recentBriefs.length > 0 && (
-    <section class="py-16 md:py-20">
+    <section class="py-16 md:py-20 bg-nw-mist">
       <div class="max-w-[1120px] mx-auto px-6">
         <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Latest Nuwa Briefs</h2>
         <div class="space-y-3">
           {recentBriefs.map((brief) => (
-            <article class="bg-nw-paper border border-nw-hairline rounded-lg p-5">
+            <a href={`/research/${brief.id}`} class="block bg-nw-jade-pale border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
               <div class="flex items-center gap-2 mb-1">
-                <span class="text-nw-jade text-xs font-medium uppercase">Brief</span>
+                <span class="text-nw-jade text-xs font-medium uppercase">Nuwa Brief</span>
                 <span class="text-nw-subtle text-xs">
                   {brief.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                 </span>
               </div>
               <h3 class="text-nw-ink font-semibold text-sm">{brief.data.title}</h3>
-            </article>
+            </a>
           ))}
         </div>
       </div>
     </section>
   )}
 
-  <!-- Reports and Technical Notes -->
-  {allResearch.length > 0 && (
-    <section class="py-16 md:py-20 bg-nw-mist">
-      <div class="max-w-[1120px] mx-auto px-6">
-        <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Reports &amp; Technical Notes</h2>
-        <div class="space-y-3">
-          {allResearch.map((item) => (
-            <article class="bg-white border border-nw-hairline rounded-lg p-5">
-              <div class="flex items-center gap-2 mb-1">
-                <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type || item.collection}</span>
-                <span class="text-nw-subtle text-xs">
-                  {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                </span>
-              </div>
-              <h3 class="text-nw-ink font-semibold text-sm">{item.data.title}</h3>
-              {item.data.summary && (
-                <p class="text-nw-muted text-xs leading-relaxed mt-1">{item.data.summary}</p>
-              )}
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Subscribe and Follow -->
+  <!-- Follow Nuwa -->
   <section class="py-16 md:py-20">
     <div class="max-w-[1120px] mx-auto px-6">
       <h2 class="text-nw-ink font-semibold mb-8" style="font-size: var(--text-h2);">Follow Nuwa</h2>
