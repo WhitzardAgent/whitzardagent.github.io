@@ -2,35 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchPapers } from "../data/researchPapers";
-import { getCollection } from "astro:content";
-
-const allContent = await Promise.all([
-  getCollection("posts", ({ data }) => !data.draft),
-  getCollection("briefs", ({ data }) => !data.draft),
-  getCollection("notes", ({ data }) => !data.draft),
-]);
-
-const items = allContent
-  .flat()
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const nuwaBriefs = items.filter((i) => i.data.brand === "nuwa" && i.data.type === "brief");
 
 const substackArticles = researchPapers.filter((p) => p.type === "technical-note");
-
-const typeLabel: Record<string, string> = {
-  posts: "Post",
-  briefs: "Brief",
-  notes: "Note",
-};
-
-function getLink(item: any): string {
-  const slug = item.id;
-  if (["reports", "briefs", "notes"].includes(item.collection)) {
-    return `/research/${slug}`;
-  }
-  return `/blog/${slug}`;
-}
 ---
 
 <BaseLayout
@@ -47,42 +20,6 @@ function getLink(item: any): string {
           Updates, essays, and notes from Whitzard and Nuwa.
         </p>
       </div>
-
-      {items.length > 0 ? (
-        <div class="mb-16">
-          <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">Latest Posts</h2>
-          <div class="space-y-3">
-            {items.map((item) => (
-              <a href={getLink(item)} class="block bg-white border border-wz-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-wz-teal text-xs font-medium uppercase">{typeLabel[item.collection] || item.data.type || item.collection}</span>
-                  <span class="text-wz-subtle text-xs">
-                    {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                  </span>
-                  {item.data.brand && (
-                    <span class:list={[
-                      "text-xs font-medium px-2 py-0.5 rounded-full",
-                      item.data.brand === "nuwa" && "bg-nw-jade-pale text-nw-jade",
-                      item.data.brand === "whitzard" && "bg-wz-panel-blue text-wz-blue",
-                      item.data.brand === "whitzardagent" && "bg-wz-teal-soft text-wz-teal",
-                    ]}>
-                      {item.data.brand}
-                    </span>
-                  )}
-                </div>
-                <h3 class="text-wz-ink font-semibold text-sm mb-1">{item.data.title}</h3>
-                {item.data.summary && (
-                  <p class="text-wz-muted text-xs leading-relaxed">{item.data.summary}</p>
-                )}
-              </a>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div class="bg-wz-panel border border-wz-hairline rounded-lg p-12 text-center">
-          <p class="text-wz-muted text-sm">No content published yet.</p>
-        </div>
-      )}
 
       <!-- External Articles -->
       {substackArticles.length > 0 && (
@@ -104,29 +41,9 @@ function getLink(item: any): string {
         </div>
       )}
 
-      <!-- Nuwa Brief section -->
-      {nuwaBriefs.length > 0 && (
-        <div class="mb-16">
-          <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">Nuwa Brief</h2>
-          <div class="space-y-3">
-            {nuwaBriefs.map((brief) => (
-              <a href={getLink(brief)} class="block bg-nw-jade-pale border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-nw-jade text-xs font-medium uppercase">Nuwa Brief</span>
-                  <span class="text-nw-subtle text-xs">
-                    {brief.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                  </span>
-                </div>
-                <h3 class="text-nw-ink font-semibold text-sm">{brief.data.title}</h3>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
       <!-- Subscribe CTA -->
       <div class="bg-wz-panel border border-wz-hairline rounded-lg p-8 text-center">
-        <p class="text-wz-body text-sm mb-3">Get weekly research updates from Nuwa Frontier AI Safety Lab.</p>
+        <p class="text-wz-body text-sm mb-3">Get research updates from Nuwa Frontier AI Safety Lab.</p>
         <a
           href={links.substack}
           target="_blank"

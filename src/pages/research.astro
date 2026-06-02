@@ -3,22 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchPapers } from "../data/researchPapers";
 import ResearchCard from "../components/ResearchCard.astro";
-import { getCollection } from "astro:content";
-
-const reports = await getCollection("reports", ({ data }) => !data.draft);
-const briefs = await getCollection("briefs", ({ data }) => !data.draft && data.brand === "nuwa");
-const notes = await getCollection("notes", ({ data }) => !data.draft);
 
 const featuredPapers = researchPapers.filter((p) => p.featured);
 const otherPapers = researchPapers.filter((p) => !p.featured);
-
-const localFrameworks = reports
-  .filter((r) => r.data.type === "framework")
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const localReports = reports
-  .filter((r) => r.data.type !== "framework")
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const researchAreas = [
   { title: "Agent Behavior Safety", tag: "Agent Safety", description: "Deception, goal misalignment, tool misuse, and autonomous risk in AI agents." },
@@ -106,63 +93,6 @@ const researchAreas = [
                 topic={paper.topic}
                 featured={paper.featured}
               />
-            ))}
-          </div>
-        </div>
-      )}
-
-      <!-- Nuwa Frameworks and Reports -->
-      {(localFrameworks.length > 0 || localReports.length > 0) && (
-        <div class="mb-20">
-          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Frameworks &amp; Reports</h2>
-          <div class="space-y-4">
-            {localFrameworks.map((item) => (
-              <a href={`/research/${item.id}`} class="block bg-white border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type}</span>
-                  <span class="text-nw-subtle text-xs">
-                    {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                  </span>
-                </div>
-                <h3 class="text-nw-ink font-semibold text-sm mb-1">{item.data.title}</h3>
-                {item.data.summary && (
-                  <p class="text-nw-muted text-xs leading-relaxed">{item.data.summary}</p>
-                )}
-              </a>
-            ))}
-            {localReports.map((item) => (
-              <a href={`/research/${item.id}`} class="block bg-white border border-wz-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type}</span>
-                  <span class="text-nw-subtle text-xs">
-                    {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                  </span>
-                </div>
-                <h3 class="text-nw-ink font-semibold text-sm mb-1">{item.data.title}</h3>
-                {item.data.summary && (
-                  <p class="text-nw-muted text-xs leading-relaxed">{item.data.summary}</p>
-                )}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <!-- Nuwa Briefs -->
-      {briefs.length > 0 && (
-        <div class="mb-20">
-          <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Nuwa Briefs</h2>
-          <div class="space-y-3">
-            {briefs.map((brief) => (
-              <a href={`/research/${brief.id}`} class="block bg-nw-jade-pale border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-nw-jade text-xs font-medium uppercase">Nuwa Brief</span>
-                  <span class="text-nw-subtle text-xs">
-                    {brief.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                  </span>
-                </div>
-                <h3 class="text-nw-ink font-semibold text-sm">{brief.data.title}</h3>
-              </a>
             ))}
           </div>
         </div>

@@ -4,9 +4,6 @@ import { links } from "../data/links";
 import { projects } from "../data/projects";
 import { researchPapers } from "../data/researchPapers";
 import ResearchCard from "../components/ResearchCard.astro";
-import { getCollection } from "astro:content";
-
-const allReports = await getCollection("reports", ({ data }) => !data.draft);
 
 const homepagePapers = researchPapers.filter((p) =>
   [
@@ -15,8 +12,6 @@ const homepagePapers = researchPapers.filter((p) =>
     "self-replication-frontier-ai",
   ].includes(p.id)
 );
-
-const nasfReport = allReports.find((r) => r.id.includes("nasf"));
 
 const focusAreas = [
   {
@@ -172,18 +167,6 @@ const focusAreas = [
             featured={paper.featured}
           />
         ))}
-        {nasfReport && (
-          <a href={`/research/${nasfReport.id}`} class="block bg-white border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-nw-jade text-xs font-medium uppercase">{nasfReport.data.type}</span>
-              <span class="text-wz-subtle text-xs">
-                {nasfReport.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-              </span>
-            </div>
-            <h3 class="text-wz-ink font-semibold mb-1">{nasfReport.data.title}</h3>
-            {nasfReport.data.summary && <p class="text-wz-muted text-sm leading-relaxed">{nasfReport.data.summary}</p>}
-          </a>
-        )}
       </div>
       <div class="mt-6">
         <a href="/research" class="text-wz-blue text-sm font-medium hover:underline no-underline">

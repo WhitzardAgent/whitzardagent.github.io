@@ -3,21 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchPapers } from "../data/researchPapers";
 import ResearchCard from "../components/ResearchCard.astro";
-import { getCollection } from "astro:content";
-
-const briefs = await getCollection("briefs", ({ data }) => !data.draft && data.brand === "nuwa");
-const reports = await getCollection("reports", ({ data }) => !data.draft && data.brand === "nuwa");
-const notes = await getCollection("notes", ({ data }) => !data.draft && data.brand === "nuwa");
 
 const featuredPapers = researchPapers.filter((p) => p.featured).slice(0, 4);
 
-const localFeatured = [...reports, ...notes]
-  .filter((item) => item.data.featured)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const recentBriefs = briefs
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const otherPapers = researchPapers.filter((p) => !p.featured).slice(0, 4);
 
 const researchDirections = [
   { title: "Agent Behavior Safety", description: "Studying safety risks in autonomous AI agent behavior, including deception, goal misalignment, and tool misuse.", tag: "Agent Safety" },
@@ -170,18 +159,6 @@ const researchFlow = [
             featured={paper.featured}
           />
         ))}
-        {localFeatured.slice(0, 2).map((item) => (
-          <a href={`/research/${item.id}`} class="block bg-white border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-nw-jade text-xs font-medium uppercase">{item.data.type || item.collection}</span>
-              <span class="text-nw-subtle text-xs">
-                {item.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-              </span>
-            </div>
-            <h3 class="text-nw-ink font-semibold mb-1">{item.data.title}</h3>
-            {item.data.summary && <p class="text-nw-muted text-sm leading-relaxed">{item.data.summary}</p>}
-          </a>
-        ))}
       </div>
     </div>
   </section>
@@ -194,7 +171,7 @@ const researchFlow = [
         <a href="/research" class="text-nw-jade text-sm font-medium hover:underline no-underline">View all research &rarr;</a>
       </div>
       <div class="space-y-4">
-        {researchPapers.filter((p) => !p.featured).slice(0, 4).map((paper) => (
+        {otherPapers.map((paper) => (
           <ResearchCard
             title={paper.title}
             type={paper.type}
@@ -212,28 +189,6 @@ const researchFlow = [
       </div>
     </div>
   </section>
-
-  <!-- Latest Nuwa Briefs -->
-  {recentBriefs.length > 0 && (
-    <section class="py-16 md:py-20 bg-nw-mist">
-      <div class="max-w-[1120px] mx-auto px-6">
-        <h2 class="text-nw-ink font-semibold mb-6" style="font-size: var(--text-h2);">Latest Nuwa Briefs</h2>
-        <div class="space-y-3">
-          {recentBriefs.map((brief) => (
-            <a href={`/research/${brief.id}`} class="block bg-nw-jade-pale border border-nw-hairline rounded-lg p-5 hover:shadow-md transition-shadow no-underline">
-              <div class="flex items-center gap-2 mb-1">
-                <span class="text-nw-jade text-xs font-medium uppercase">Nuwa Brief</span>
-                <span class="text-nw-subtle text-xs">
-                  {brief.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                </span>
-              </div>
-              <h3 class="text-nw-ink font-semibold text-sm">{brief.data.title}</h3>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- Follow Nuwa -->
   <section class="py-16 md:py-20">

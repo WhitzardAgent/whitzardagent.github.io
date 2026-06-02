@@ -9,50 +9,27 @@ export interface TeamMember {
 }
 
 export const team: TeamMember[] = [
-  // Founding Team
   {
-    name: "Team Member",
-    role: "Founder",
+    name: "Jiarun Dai",
+    role: "CEO",
     affiliation: "whitzard",
     category: "founding",
-    bio: "Profile to be updated.",
+    bio: "Assistant Professor, School of Computer Science, Fudan University. Co-founder of the Fudan-Whitzard CTF team. Research in vulnerability detection, firmware fuzzing, web security, and LLM agent security.",
+    links: [
+      { label: "Homepage", url: "https://djrrr.github.io/" },
+      { label: "Google Scholar", url: "https://scholar.google.com/citations?user=YH1Y454AAAAJ" },
+    ],
   },
   {
-    name: "Team Member",
-    role: "Co-Founder",
-    affiliation: "nuwa",
-    category: "founding",
-    bio: "Profile to be updated.",
-  },
-  // Research
-  {
-    name: "Researcher",
-    role: "Research Lead",
-    affiliation: "nuwa",
-    category: "research",
-    bio: "Profile to be updated.",
-  },
-  {
-    name: "Researcher",
-    role: "AI Safety Researcher",
-    affiliation: "nuwa",
-    category: "research",
-    bio: "Profile to be updated.",
-  },
-  // Engineering
-  {
-    name: "Engineer",
-    role: "Engineering Lead",
+    name: "Xudong Pan",
+    role: "CTO",
     affiliation: "whitzard",
-    category: "engineering",
-    bio: "Profile to be updated.",
-  },
-  // Advisors
-  {
-    name: "Advisor",
-    role: "Scientific Advisor",
-    affiliation: "nuwa",
-    category: "advisor",
-    bio: "Profile to be updated.",
+    category: "founding",
+    bio: "Assistant Professor, School of Computer Science, Fudan University & PhD Advisor, Shanghai Innovation Institute. Research in frontier AI risk, agentic AI safety, and AI governance. Making AI progress safer for human society via technological innovation.",
+    links: [
+      { label: "Homepage", url: "https://ravensanstete.github.io/" },
+      { label: "Google Scholar", url: "https://scholar.google.com/citations?user=Unl69CYAAAAJ" },
+      { label: "GitHub", url: "https://github.com/ravenSanstete" },
+    ],
   },
 ];
