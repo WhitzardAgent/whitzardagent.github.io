@@ -28,7 +28,42 @@ Open <http://localhost:4321> in your browser.
 npm run build
 ```
 
-Output goes to `./dist`.
+This automatically runs `npm run ingest:info` (via `prebuild`) before building. Output goes to `./dist`.
+
+### Manual data ingestion
+
+```bash
+npm run ingest:info
+```
+
+Reads JSONL metadata from `public/assets/info/` and generates TypeScript data files under `src/data/generated/`.
+
+## Data Sources
+
+### Research metadata
+
+File: `public/assets/info/ai_safety_research_assets_metadata.jsonl`
+
+Each line is a JSON object with fields: Title, Authors, Year, Venue / Status, URL, PDF URL, Topic, One-line summary, Featured or not.
+
+Running `npm run ingest:info` generates `src/data/generated/researchAssets.ts` with typed `ResearchAsset` objects.
+
+### Open-source project metadata
+
+File: `public/assets/info/whitzardagent_open_assets_metadata.jsonl`
+
+Each line is a JSON object with fields: Name, Status, One-line description, GitHub / HF / website link, Visible or hidden.
+
+Running `npm run ingest:info` generates `src/data/generated/openSourceAssets.ts` with typed `OpenSourceAsset` objects. Only projects with `Visible or hidden: "visible"` are included.
+
+### OG images
+
+Directory: `public/assets/og/`
+
+- `whitzard-og.png` — used for Whitzard-branded pages (home, about, contact, open source, agentguard)
+- `nuwa-og.png` — used for Nuwa-branded pages (nuwa, research, blog)
+
+To add new OG images, place them in `public/assets/og/` and update the `ogImage` prop on the relevant page.
 
 ## Routes
 
@@ -37,6 +72,7 @@ Output goes to `./dist`.
 | `/` | Whitzard main entrance |
 | `/nuwa` | Nuwa Frontier AI Safety Lab |
 | `/research` | Research and publications |
+| `/publications` | Alias redirect to `/research` |
 | `/blog` | Posts, briefs, notes, updates |
 | `/about` | Team and organization |
 | `/contact` | Collaboration and contact |

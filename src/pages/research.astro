@@ -1,25 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
-import { researchPapers } from "../data/researchPapers";
+import { researchAssets } from "../data/generated/researchAssets";
 import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
 import PublicationCard from "../components/PublicationCard.astro";
 import ResearchAreaCard from "../components/ResearchAreaCard.astro";
-import BriefCard from "../components/BriefCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 
-const featuredPapers = researchPapers.filter((p) => p.featured);
-const otherPapers = researchPapers.filter((p) => !p.featured);
-
-const technicalNotes = researchPapers.filter((p) => p.type === "technical-note");
+const featuredPapers = researchAssets.filter((p) => p.featured);
+const otherPapers = researchAssets.filter((p) => !p.featured);
 
 const researchAreas = [
-  { title: "Agent Behavior Safety", tag: "Agent Safety", description: "Deception, goal misalignment, tool misuse, and autonomous risk in AI agents." },
-  { title: "Frontier AI Risk Evaluation", tag: "Evaluation", description: "Evaluation methods, benchmarks, and risk thresholds for frontier AI systems." },
-  { title: "AI Control and Loss-of-Control Risk", tag: "AI Control", description: "Control methods, oversight evasion, and conditions for loss of control." },
-  { title: "Runtime Safety Infrastructure", tag: "Runtime Safety", description: "Zero-trust access control, execution chain safety, and policy enforcement." },
-  { title: "Risk Monitoring and Governance Evidence", tag: "Governance", description: "Risk signal tracking, governance evidence, and evidence-based policy." },
+  { title: "Autonomy Risks", tag: "Autonomy", description: "Self-replication, self-proliferation, and autonomous resource acquisition in AI systems." },
+  { title: "Deception", tag: "Deception", description: "AI deception in human-AI interaction, developer-facing deception, and trust dynamics." },
+  { title: "Scheming", tag: "Scheming", description: "Evaluation faking, situational awareness, and observer effects in safety evaluations." },
+  { title: "Loss-of-Control", tag: "Loss-of-Control", description: "Conditions under which advanced AI systems may evade oversight or resist shutdown." },
+  { title: "Agent Safety", tag: "Agent Safety", description: "Behavioral safety, thought correction, and guardrails for AI agent systems." },
+  { title: "Evaluation", tag: "Evaluation", description: "Executable risk-evaluation environments, benchmarks, and evaluation integrity." },
+  { title: "Runtime Safety", tag: "Runtime Safety", description: "Zero-trust access control, policy enforcement, and security for agent runtimes." },
 ];
 ---
 
@@ -27,6 +26,7 @@ const researchAreas = [
   title="Research — Nuwa Frontier AI Safety Lab"
   description="Publications, papers, reports, and technical notes from Nuwa Frontier AI Safety Lab covering frontier AI risk evaluation, agent safety, AI control, and runtime safety."
   brand="nuwa"
+  ogImage="/assets/og/nuwa-og.png"
 >
   <section class="py-20 md:py-28">
     <div class="max-w-[1120px] mx-auto px-6">
@@ -47,8 +47,8 @@ const researchAreas = [
 
       <!-- Research Areas -->
       <div class="mb-20">
-        <SectionHeader title="Research Areas" subtitle="Five directions guiding our work on frontier AI safety." />
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <SectionHeader title="Research Areas" subtitle="Themes guiding our work on frontier AI safety." />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {researchAreas.map((area) => (
             <ResearchAreaCard title={area.title} tag={area.tag} description={area.description} />
           ))}
@@ -62,56 +62,37 @@ const researchAreas = [
           {featuredPapers.map((paper) => (
             <FeaturedResearchCard
               title={paper.title}
-              type={paper.type}
-              status={paper.status}
-              venue={paper.venue}
-              year={paper.year}
               authors={paper.authors}
-              summary={paper.summary}
+              year={paper.year}
+              venue={paper.venue}
+              status={paper.status}
+              summary={paper.summary || ""}
               url={paper.url}
-              secondaryUrl={paper.secondaryUrl}
+              pdfUrl={paper.pdfUrl}
               topic={paper.topic}
+              featured={paper.featured}
             />
           ))}
         </div>
       </div>
 
-      <!-- Publications -->
+      <!-- All Publications -->
       {otherPapers.length > 0 && (
         <div class="mb-20">
-          <SectionHeader title="Publications" subtitle="All research papers and reports from the lab." />
+          <SectionHeader title="All Publications" subtitle="Complete list of research outputs from the lab." />
           <div class="space-y-3">
             {otherPapers.map((paper) => (
               <PublicationCard
                 title={paper.title}
-                type={paper.type}
-                status={paper.status}
-                venue={paper.venue}
-                year={paper.year}
                 authors={paper.authors}
-                summary={paper.summary}
+                year={paper.year}
+                venue={paper.venue}
+                status={paper.status}
+                summary={paper.summary || ""}
                 url={paper.url}
-                secondaryUrl={paper.secondaryUrl}
+                pdfUrl={paper.pdfUrl}
                 topic={paper.topic}
                 featured={paper.featured}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      <!-- Technical Notes / Briefs -->
-      {technicalNotes.length > 0 && (
-        <div class="mb-20">
-          <SectionHeader title="Technical Notes &amp; Briefs" subtitle="Essays and notes on frontier AI safety methodology and practice." />
-          <div class="space-y-3">
-            {technicalNotes.map((note) => (
-              <BriefCard
-                title={note.title}
-                date={note.year}
-                url={note.url}
-                summary={note.summary}
-                external={true}
               />
             ))}
           </div>
@@ -125,20 +106,10 @@ const researchAreas = [
         description="Follow Nuwa's research updates on frontier AI risk, agent safety, and controllable AI."
       >
         <div class="flex justify-center gap-3">
-          <a
-            href={links.substack}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline"
-          >
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline">
             Subscribe to Nuwa Brief
           </a>
-          <a
-            href={links.x}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline"
-          >
+          <a href={links.x} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline">
             Follow on X
           </a>
         </div>

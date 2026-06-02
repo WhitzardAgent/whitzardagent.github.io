@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "ingest:info": "node scripts/ingest-info-jsonl.mjs",
+    "prebuild": "npm run ingest:info",
     "build": "astro build",
     "preview": "astro preview",
     "new:post": "node scripts/new-content.mjs post",

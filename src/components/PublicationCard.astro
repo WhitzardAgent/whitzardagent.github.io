@@ -1,50 +1,39 @@
 ---
 interface Props {
   title: string;
-  type: string;
-  status?: string;
-  venue?: string;
-  year?: string;
   authors?: string;
+  year?: string;
+  venue?: string;
+  status?: string;
   summary: string;
-  url: string;
-  secondaryUrl?: string;
-  topic: string[];
+  url?: string;
+  pdfUrl?: string;
+  topic?: string[];
   featured?: boolean;
 }
 
-const { title, type, status, venue, year, authors, summary, url, secondaryUrl, topic, featured } = Astro.props;
-
-const typeLabel: Record<string, string> = {
-  paper: "Paper",
-  report: "Report",
-  "position-paper": "Position Paper",
-  "technical-note": "Technical Note",
-  framework: "Framework",
-  brief: "Brief",
-  note: "Note",
-};
+const { title, authors, year, venue, status, summary, url, pdfUrl, topic, featured } = Astro.props;
 ---
 
 <a
-  href={url}
-  target="_blank"
-  rel="noopener noreferrer"
+  href={url || "#"}
+  target={url ? "_blank" : undefined}
+  rel={url ? "noopener noreferrer" : undefined}
   class:list={[
     "block bg-white border rounded-lg p-5 transition-colors no-underline group",
     featured ? "border-nw-jade/30 hover:border-nw-jade/60" : "border-wz-hairline hover:border-wz-border-strong",
+    !url && "pointer-events-none",
   ]}
 >
   <!-- Meta line -->
   <div class="flex flex-wrap items-center gap-2 mb-2">
-    <span class="text-wz-teal text-xs font-medium uppercase">{typeLabel[type] || type}</span>
     {status && (
       <span class="text-xs text-wz-muted bg-wz-panel px-1.5 py-0.5 rounded">{status}</span>
     )}
     {venue && (
       <span class="text-xs text-nw-jade bg-nw-jade-pale px-1.5 py-0.5 rounded">{venue}</span>
     )}
-    {year && year !== "To be verified" && (
+    {year && (
       <span class="text-xs text-wz-subtle">{year}</span>
     )}
   </div>
@@ -52,11 +41,15 @@ const typeLabel: Record<string, string> = {
   <!-- Title -->
   <h3 class="text-wz-ink font-semibold text-sm mb-1.5 leading-snug group-hover:text-wz-blue transition-colors">{title}</h3>
 
+  {authors && (
+    <p class="text-wz-subtle text-xs mb-1.5">{authors}</p>
+  )}
+
   <!-- Summary -->
   <p class="text-wz-muted text-xs leading-relaxed mb-3">{summary}</p>
 
   <!-- Topic chips -->
-  {topic.length > 0 && (
+  {topic && topic.length > 0 && (
     <div class="flex flex-wrap gap-1 mb-3">
       {topic.map((t) => (
         <span class="text-xs text-wz-subtle bg-wz-mist px-1.5 py-0.5 rounded">{t}</span>
@@ -65,12 +58,15 @@ const typeLabel: Record<string, string> = {
   )}
 
   <!-- Link indicator -->
-  <div class="flex items-center gap-1 text-wz-blue text-xs font-medium">
-    {type === "technical-note" || type === "brief" ? "Read article" : "Read paper"}
-    <span class="text-wz-subtle group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+  <div class="flex items-center gap-4">
+    {url && (
+      <span class="text-wz-blue text-xs font-medium inline-flex items-center gap-1">
+        Read paper
+        <span class="text-wz-subtle group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+      </span>
+    )}
+    {pdfUrl && (
+      <a href={pdfUrl} target="_blank" rel="noopener noreferrer" class="text-wz-muted text-xs hover:underline no-underline" onclick="event.stopPropagation()">PDF</a>
+    )}
   </div>
-
-  {secondaryUrl && (
-    <span class="text-wz-muted text-xs ml-4 hover:underline">arXiv abstract</span>
-  )}
 </a>

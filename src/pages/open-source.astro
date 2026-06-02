@@ -1,17 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
-import { projects } from "../data/projects";
+import { openSourceAssets } from "../data/generated/openSourceAssets";
 import ProjectCard from "../components/ProjectCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 
-const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent Framework", "Risk Monitoring"] as const;
+const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent Framework", "Risk Monitoring", "Dataset", "Model", "Security"];
+
+// Flagship project
+const agentGuard = openSourceAssets.find((p) => p.name === "AgentGuard");
+
+// Group remaining visible projects by status
+const activeProjects = openSourceAssets.filter((p) => p.name !== "AgentGuard" && (p.status === "active" || p.status === "open-source"));
 ---
 
 <BaseLayout
   title="Open Source — Whitzard"
   description="WhitzardAgent open-source ecosystem for AI agent safety evaluation, defense, and monitoring."
+  ogImage="/assets/og/whitzard-og.png"
 >
   <section class="py-20 md:py-28">
     <div class="max-w-[1120px] mx-auto px-6">
@@ -24,87 +31,52 @@ const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent 
         </p>
       </div>
       <div class="flex flex-wrap gap-3 mb-14">
-        <a
-          href={links.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
-        >
+        <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
           GitHub Organization &rarr;
         </a>
-        <a
-          href={links.huggingface}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
-        >
+        <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
           Hugging Face Organization &rarr;
         </a>
       </div>
 
       <!-- Flagship: AgentGuard -->
-      <div class="bg-wz-panel-blue/30 border border-wz-hairline rounded-xl p-7 mb-14">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="bg-wz-teal-soft text-wz-teal text-xs font-medium px-2 py-0.5 rounded-full">Flagship</span>
-          <span class="text-wz-blue text-xs font-mono uppercase">Runtime Security</span>
+      {agentGuard && (
+        <div class="bg-wz-panel-blue/30 border border-wz-hairline rounded-xl p-7 mb-14">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-wz-teal-soft text-wz-teal text-xs font-medium px-2 py-0.5 rounded-full">Flagship</span>
+            <span class="text-wz-blue text-xs font-mono uppercase">Runtime Security</span>
+          </div>
+          <h2 class="text-wz-ink font-semibold mb-2" style="font-size: var(--text-h2);">AgentGuard</h2>
+          <p class="text-wz-body text-base leading-relaxed mb-4 max-w-xl">
+            {agentGuard.description}
+          </p>
+          <div class="flex gap-3">
+            {agentGuard.githubUrl && (
+              <a href={agentGuard.githubUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
+                View on GitHub
+              </a>
+            )}
+            <a href="/agentguard" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
+              Learn More
+            </a>
+          </div>
         </div>
-        <h2 class="text-wz-ink font-semibold mb-2" style="font-size: var(--text-h2);">AgentGuard</h2>
-        <p class="text-wz-body text-base leading-relaxed mb-4 max-w-xl">
-          Zero-trust access control for AI agent tool calls. Policy enforcement, tracing, approval, and audit for AI agent runtime safety.
-        </p>
-        <div class="flex gap-3">
-          <a
-            href={links.agentguard}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
-          >
-            View on GitHub
-          </a>
-          <a
-            href="/agentguard"
-            class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
-          >
-            Learn More
-          </a>
-        </div>
-      </div>
+      )}
 
       <!-- Project Matrix -->
       <div class="mb-14">
-        <SectionHeader title="Project Matrix" />
+        <SectionHeader title="Project Matrix" subtitle="All visible open-source projects from WhitzardAgent." />
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projects.filter((p) => p.status !== "Flagship").map((project) => (
+          {activeProjects.map((project) => (
             <ProjectCard
               name={project.name}
-              category={project.category}
-              description={project.description}
-              url={project.github}
               status={project.status}
+              description={project.description}
+              githubUrl={project.githubUrl}
+              hfUrl={project.hfUrl}
+              websiteUrl={project.websiteUrl}
             />
           ))}
-        </div>
-      </div>
-
-      <!-- Categories -->
-      <div class="mb-14">
-        <SectionHeader title="Capability Categories" />
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
-          {categories.map((cat) => {
-            const catProjects = projects.filter((p) => p.category === cat);
-            return (
-              <div class="bg-wz-panel border border-wz-hairline rounded-lg p-4">
-                <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">{cat}</span>
-                <div class="mt-2">
-                  {catProjects.length > 0 ? catProjects.map((p) => (
-                    <p class="text-wz-ink text-sm font-medium">{p.name}</p>
-                  )) : (
-                    <p class="text-wz-subtle text-sm">Coming</p>
-                  )}
-                </div>
-              </div>
-            );
-          })}
         </div>
       </div>
 
@@ -115,12 +87,7 @@ const categories = ["Runtime Security", "Evaluation", "Runtime Defense", "Agent 
         title="Contribute to Open Source"
         description="We welcome contributions to our open-source safety infrastructure. Check our repositories on GitHub."
       >
-        <a
-          href={links.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline"
-        >
+        <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline">
           Explore on GitHub
         </a>
       </CalloutPanel>

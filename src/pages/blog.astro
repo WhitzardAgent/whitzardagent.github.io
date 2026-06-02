@@ -1,18 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
-import { researchPapers } from "../data/researchPapers";
+import { externalArticles } from "../data/externalArticles";
 import ExternalArticleCard from "../components/ExternalArticleCard.astro";
 import BriefCard from "../components/BriefCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
-
-const substackArticles = researchPapers.filter((p) => p.type === "technical-note");
 ---
 
 <BaseLayout
   title="Blog — Whitzard & Nuwa"
   description="Updates, essays, and technical notes from Whitzard and Nuwa Frontier AI Safety Lab on frontier AI safety, agent safety, and controllable AI."
+  ogImage="/assets/og/nuwa-og.png"
 >
   <section class="py-20 md:py-28">
     <div class="max-w-[1120px] mx-auto px-6">
@@ -26,18 +25,18 @@ const substackArticles = researchPapers.filter((p) => p.type === "technical-note
       </div>
 
       <!-- External Articles -->
-      {substackArticles.length > 0 && (
+      {externalArticles.length > 0 && (
         <div class="mb-16">
           <SectionHeader title="External Articles" subtitle="Essays and notes published on external platforms." />
           <div class="space-y-3">
-            {substackArticles.map((article) => (
+            {externalArticles.map((article) => (
               <ExternalArticleCard
                 title={article.title}
                 type={article.type}
                 year={article.year}
-                summary={article.summary}
+                summary={article.summary || ""}
                 url={article.url}
-                source="Substack"
+                source={article.source}
               />
             ))}
           </div>
@@ -69,12 +68,7 @@ const substackArticles = researchPapers.filter((p) => p.type === "technical-note
         align="center"
         description="Get research updates from Nuwa Frontier AI Safety Lab delivered to your inbox."
       >
-        <a
-          href={links.substack}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
-        >
+        <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
           Subscribe to Nuwa Brief
         </a>
       </CalloutPanel>

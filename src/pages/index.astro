@@ -1,22 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
-import { researchPapers } from "../data/researchPapers";
+import { researchAssets } from "../data/generated/researchAssets";
+import { openSourceAssets } from "../data/generated/openSourceAssets";
 import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
 import PublicationCard from "../components/PublicationCard.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
+import ExternalArticleCard from "../components/ExternalArticleCard.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 
-const featuredPapers = researchPapers.filter((p) =>
-  [
-    "science-of-frontier-ai-risk-evaluation",
-    "deceptive-ai-developers-position-paper",
-    "self-replication-frontier-ai",
-  ].includes(p.id)
-);
-
-const nasfPaper = researchPapers.find((p) => p.id === "self-proliferation");
+const featuredPapers = researchAssets.filter((p) => p.featured).slice(0, 3);
 
 const safetyFlow = [
   { label: "Risk Signals", desc: "Identify frontier AI risk signals" },
@@ -26,16 +20,25 @@ const safetyFlow = [
   { label: "Governance Evidence", desc: "Risk monitoring & evidence-based governance" },
 ];
 
-const products = [
-  { name: "AgentGuard", category: "Runtime Security", description: "Zero-trust access control for AI agent tool calls. Policy enforcement, tracing, and audit.", url: "/agentguard" },
-  { name: "Snowl", category: "Evaluation", description: "AI safety evaluation and benchmark infrastructure for frontier AI systems.", url: undefined },
-  { name: "Risk Monitoring", category: "Risk Monitoring", description: "Frontier AI risk signal tracking and governance evidence collection.", url: undefined },
-];
+const flagshipProjects = openSourceAssets.filter((p) =>
+  ["AgentGuard", "qise", "snowl"].includes(p.name)
+);
+
+const externalArticle = {
+  title: "The Science of Frontier AI Risk Evaluation",
+  source: "Nuwa Substack",
+  url: "https://nuwasafety.substack.com/p/science-of-frontier-ai-risk-evaluation",
+  type: "technical-note",
+  year: "2026",
+  summary: "Nuwa essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
+  tags: ["Frontier AI Risk", "Evaluation", "Methodology"],
+};
 ---
 
 <BaseLayout
   title="Whitzard — AI Safety Infrastructure"
   description="Whitzard builds safety infrastructure for frontier AI and agentic systems, supporting evaluation, runtime defense, risk monitoring, and controllable AI."
+  ogImage="/assets/og/whitzard-og.png"
 >
   <!-- Hero -->
   <section class="py-20 md:py-28">
@@ -120,22 +123,12 @@ const products = [
         <p class="text-nw-muted text-sm leading-relaxed mb-5 max-w-2xl font-serif italic">
           Inspired by N&uuml;wa repairing the sky, we study how to identify and repair safety gaps in advanced AI systems before they become systemic failures.
         </p>
-        <p class="text-nw-jade text-sm font-medium mb-5">
-          Supported by Whitzard
-        </p>
+        <p class="text-nw-jade text-sm font-medium mb-5">Supported by Whitzard</p>
         <div class="flex flex-wrap gap-3">
-          <a
-            href="/nuwa"
-            class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline"
-          >
+          <a href="/nuwa" class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline">
             Visit Nuwa
           </a>
-          <a
-            href={links.substack}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline"
-          >
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline">
             Subscribe to Nuwa Brief
           </a>
         </div>
@@ -151,31 +144,17 @@ const products = [
         {featuredPapers.map((paper) => (
           <FeaturedResearchCard
             title={paper.title}
-            type={paper.type}
-            status={paper.status}
-            venue={paper.venue}
-            year={paper.year}
             authors={paper.authors}
-            summary={paper.summary}
+            year={paper.year}
+            venue={paper.venue}
+            status={paper.status}
+            summary={paper.summary || ""}
             url={paper.url}
-            secondaryUrl={paper.secondaryUrl}
+            pdfUrl={paper.pdfUrl}
             topic={paper.topic}
+            featured={paper.featured}
           />
         ))}
-        {nasfPaper && (
-          <PublicationCard
-            title={nasfPaper.title}
-            type={nasfPaper.type}
-            status={nasfPaper.status}
-            venue={nasfPaper.venue}
-            year={nasfPaper.year}
-            authors={nasfPaper.authors}
-            summary={nasfPaper.summary}
-            url={nasfPaper.url}
-            secondaryUrl={nasfPaper.secondaryUrl}
-            topic={nasfPaper.topic}
-          />
-        )}
       </div>
       <div class="mt-6">
         <a href="/research" class="text-wz-blue text-sm font-medium hover:underline no-underline">
@@ -190,13 +169,14 @@ const products = [
     <div class="max-w-[1180px] mx-auto px-6">
       <SectionHeader title="Products & Capabilities" subtitle="Safety infrastructure built by Whitzard for frontier AI and agentic systems." />
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {products.map((product) => (
+        {flagshipProjects.map((project) => (
           <ProjectCard
-            name={product.name}
-            category={product.category}
-            description={product.description}
-            url={product.url}
-            status={!product.url ? "In development" : undefined}
+            name={project.name}
+            status={project.status}
+            description={project.description}
+            githubUrl={project.githubUrl}
+            hfUrl={project.hfUrl}
+            websiteUrl={project.websiteUrl}
           />
         ))}
       </div>
@@ -211,16 +191,10 @@ const products = [
         <p class="text-wz-subtle text-sm">We collaborate on frontier AI safety evaluation, agent safety, and runtime defense.</p>
       </div>
       <div class="flex gap-3">
-        <a
-          href="/about"
-          class="inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline"
-        >
+        <a href="/about" class="inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline">
           About Us
         </a>
-        <a
-          href="/contact"
-          class="inline-flex items-center bg-transparent text-white border border-white/20 rounded-full px-5 py-2.5 text-sm font-semibold hover:border-white/40 transition-colors no-underline"
-        >
+        <a href="/contact" class="inline-flex items-center bg-transparent text-white border border-white/20 rounded-full px-5 py-2.5 text-sm font-semibold hover:border-white/40 transition-colors no-underline">
           Get in Touch
         </a>
       </div>

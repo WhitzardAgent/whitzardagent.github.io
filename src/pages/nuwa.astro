@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
-import { researchPapers } from "../data/researchPapers";
+import { researchAssets } from "../data/generated/researchAssets";
 import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
 import PublicationCard from "../components/PublicationCard.astro";
 import ResearchAreaCard from "../components/ResearchAreaCard.astro";
@@ -9,24 +9,16 @@ import BriefCard from "../components/BriefCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 
-const featuredPapers = researchPapers.filter((p) =>
-  [
-    "science-of-frontier-ai-risk-evaluation",
-    "deceptive-ai-developers-position-paper",
-    "self-replication-frontier-ai",
-  ].includes(p.id)
-);
+const featuredPapers = researchAssets.filter((p) => p.featured).slice(0, 4);
+const recentPapers = researchAssets.slice(0, 5);
 
-const otherPapers = researchPapers.filter((p) => !p.featured).slice(0, 4);
-
-const substackNote = researchPapers.find((p) => p.type === "technical-note");
-
-const researchDirections = [
-  { title: "Agent Behavior Safety", description: "Studying safety risks in autonomous AI agent behavior, including deception, goal misalignment, and tool misuse.", tag: "Agent Safety" },
-  { title: "Frontier AI Risk Evaluation", description: "Developing evaluation methods and benchmarks for frontier AI capabilities and loss-of-control risks.", tag: "Evaluation" },
-  { title: "AI Control and Loss-of-Control Risk", description: "Investigating AI control methods and the conditions under which advanced AI systems may evade oversight.", tag: "AI Control" },
-  { title: "Runtime Safety Infrastructure", description: "Building runtime safety infrastructure for AI agent tool calls, including zero-trust access control.", tag: "Runtime Safety" },
-  { title: "Risk Monitoring and Governance Evidence", description: "Collecting and analyzing risk signals to support evidence-based AI governance and policy.", tag: "Governance" },
+const researchThemes = [
+  { title: "Autonomy Risks", tag: "Autonomy", description: "Self-replication, self-proliferation, and autonomous resource acquisition in frontier AI." },
+  { title: "Deception", tag: "Deception", description: "AI deception in human-AI interaction, developer-facing deception, and trust dynamics." },
+  { title: "Scheming", tag: "Scheming", description: "Evaluation faking, situational awareness, and observer effects in safety evaluations." },
+  { title: "Loss-of-Control", tag: "Loss-of-Control", description: "Conditions under which AI systems may evade oversight or resist shutdown." },
+  { title: "Evaluation", tag: "Evaluation", description: "Executable risk-evaluation environments, benchmarks, and evaluation integrity." },
+  { title: "Agent Safety", tag: "Agent Safety", description: "Behavioral safety, thought correction, and guardrails for AI agent systems." },
 ];
 
 const approachSteps = [
@@ -41,6 +33,7 @@ const approachSteps = [
   title="Nuwa Frontier AI Safety Lab"
   description="Nuwa Frontier AI Safety Lab studies frontier AI risks, agent safety, and controllable AI. Research, publications, and frameworks from an Eastern-rooted AI safety lab."
   brand="nuwa"
+  ogImage="/assets/og/nuwa-og.png"
 >
   <!-- Hero -->
   <section class="py-24 md:py-32">
@@ -100,13 +93,13 @@ const approachSteps = [
     </div>
   </section>
 
-  <!-- Research Agenda -->
+  <!-- Research Themes -->
   <section class="py-14 md:py-20">
     <div class="max-w-[1120px] mx-auto px-6">
-      <SectionHeader title="Research Agenda" subtitle="Five research directions guiding our work on frontier AI safety." />
+      <SectionHeader title="Research Themes" subtitle="Core themes driving our frontier AI safety research." />
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {researchDirections.map((dir) => (
-          <ResearchAreaCard title={dir.title} tag={dir.tag} description={dir.description} />
+        {researchThemes.map((theme) => (
+          <ResearchAreaCard title={theme.title} tag={theme.tag} description={theme.description} />
         ))}
       </div>
     </div>
@@ -120,15 +113,15 @@ const approachSteps = [
         {featuredPapers.map((paper) => (
           <FeaturedResearchCard
             title={paper.title}
-            type={paper.type}
-            status={paper.status}
-            venue={paper.venue}
-            year={paper.year}
             authors={paper.authors}
-            summary={paper.summary}
+            year={paper.year}
+            venue={paper.venue}
+            status={paper.status}
+            summary={paper.summary || ""}
             url={paper.url}
-            secondaryUrl={paper.secondaryUrl}
+            pdfUrl={paper.pdfUrl}
             topic={paper.topic}
+            featured={paper.featured}
           />
         ))}
       </div>
@@ -136,22 +129,20 @@ const approachSteps = [
   </section>
 
   <!-- Latest Nuwa Brief -->
-  {substackNote && (
-    <section class="py-14 md:py-18">
-      <div class="max-w-[1120px] mx-auto px-6">
-        <SectionHeader title="Latest Nuwa Brief" />
-        <BriefCard
-          title={substackNote.title}
-          date={substackNote.year}
-          url={substackNote.url}
-          summary={substackNote.summary}
-          external={true}
-        />
-      </div>
-    </section>
-  )}
+  <section class="py-14 md:py-18">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <SectionHeader title="Latest Nuwa Brief" />
+      <BriefCard
+        title="The Science of Frontier AI Risk Evaluation"
+        date="2026"
+        url="https://nuwasafety.substack.com/p/science-of-frontier-ai-risk-evaluation"
+        summary="Nuwa essay on making frontier AI risk evaluation more scientific, evidence-based, and operational."
+        external={true}
+      />
+    </div>
+  </section>
 
-  <!-- Publications & Papers -->
+  <!-- Publications Preview -->
   <section class="py-14 md:py-18 bg-nw-mist">
     <div class="max-w-[1120px] mx-auto px-6">
       <div class="flex items-center justify-between mb-6">
@@ -159,18 +150,18 @@ const approachSteps = [
         <a href="/research" class="text-nw-jade text-sm font-medium hover:underline no-underline">View all &rarr;</a>
       </div>
       <div class="space-y-3">
-        {otherPapers.map((paper) => (
+        {recentPapers.map((paper) => (
           <PublicationCard
             title={paper.title}
-            type={paper.type}
-            status={paper.status}
-            venue={paper.venue}
-            year={paper.year}
             authors={paper.authors}
-            summary={paper.summary}
+            year={paper.year}
+            venue={paper.venue}
+            status={paper.status}
+            summary={paper.summary || ""}
             url={paper.url}
-            secondaryUrl={paper.secondaryUrl}
+            pdfUrl={paper.pdfUrl}
             topic={paper.topic}
+            featured={paper.featured}
           />
         ))}
       </div>

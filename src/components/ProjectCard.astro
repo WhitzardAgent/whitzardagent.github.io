@@ -1,29 +1,61 @@
 ---
 interface Props {
   name: string;
-  category: string;
-  description: string;
-  url?: string;
   status?: string;
+  description?: string;
+  githubUrl?: string;
+  hfUrl?: string | string[];
+  websiteUrl?: string;
 }
 
-const { name, category, description, url, status } = Astro.props;
+const { name, status, description, githubUrl, hfUrl, websiteUrl } = Astro.props;
+
+const statusLabel: Record<string, string> = {
+  "open-source": "Open Source",
+  active: "Active",
+  "coming soon": "Coming Soon",
+  internal: "Internal",
+};
+
+const statusStyle: Record<string, string> = {
+  "open-source": "bg-nw-jade-pale text-nw-jade",
+  active: "bg-wz-panel-blue text-wz-blue",
+  "coming soon": "bg-wz-panel text-wz-muted",
+  internal: "bg-wz-panel text-wz-muted",
+};
+
+// Normalize HF URLs
+const hfUrls = hfUrl
+  ? Array.isArray(hfUrl)
+    ? hfUrl
+    : [hfUrl]
+  : [];
 ---
 
-<div class="bg-wz-panel border border-wz-hairline rounded-lg p-5">
+<div class="bg-white border border-wz-hairline rounded-lg p-5">
   <div class="flex items-center justify-between mb-2">
-    <span class="text-wz-blue text-xs font-mono uppercase tracking-wide">{category}</span>
+    <h3 class="text-wz-ink font-semibold text-sm">{name}</h3>
     {status && (
-      <span class="text-xs text-wz-muted">{status}</span>
+      <span class:list={["text-xs font-medium px-2 py-0.5 rounded-full", statusStyle[status] || "bg-wz-panel text-wz-muted"]}>
+        {statusLabel[status] || status}
+      </span>
     )}
   </div>
-  <h3 class="text-wz-ink font-semibold text-sm mb-1.5">{name}</h3>
-  <p class="text-wz-muted text-xs leading-relaxed mb-3">{description}</p>
-  {url ? (
-    <a href={url} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs font-medium hover:underline no-underline">
-      View project &rarr;
-    </a>
-  ) : (
-    <span class="text-wz-subtle text-xs">Coming soon</span>
+  {description && (
+    <p class="text-wz-muted text-xs leading-relaxed mb-3">{description}</p>
   )}
+  <div class="flex flex-wrap gap-3">
+    {githubUrl && (
+      <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs font-medium hover:underline no-underline">GitHub</a>
+    )}
+    {hfUrls.map((url) => (
+      <a href={url} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs font-medium hover:underline no-underline">Hugging Face</a>
+    ))}
+    {websiteUrl && (
+      <a href={websiteUrl} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs font-medium hover:underline no-underline">Website</a>
+    )}
+    {!githubUrl && hfUrls.length === 0 && !websiteUrl && (
+      <span class="text-wz-subtle text-xs">Links coming soon</span>
+    )}
+  </div>
 </div>

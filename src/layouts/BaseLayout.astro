@@ -8,17 +8,27 @@ interface Props {
   title: string;
   description?: string;
   brand?: "whitzard" | "nuwa";
+  ogImage?: string;
 }
 
 const {
   title,
   description = "Whitzard builds safety infrastructure for frontier AI and agentic systems.",
   brand = "whitzard",
+  ogImage,
 } = Astro.props;
 
-const siteTitle = brand === "nuwa"
-  ? `${title} — Nuwa Frontier AI Safety Lab`
-  : `${title} — Whitzard`;
+const siteTitle = title.includes("Whitzard") || title.includes("Nuwa")
+  ? title
+  : brand === "nuwa"
+    ? `${title} — Nuwa`
+    : `${title} — Whitzard`;
+
+const siteUrl = "https://www.whitzard.tech";
+const defaultOgImage = brand === "nuwa"
+  ? `${siteUrl}/assets/og/nuwa-og.png`
+  : `${siteUrl}/assets/og/whitzard-og.png`;
+const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 ---
 
 <!DOCTYPE html>
@@ -35,11 +45,13 @@ const siteTitle = brand === "nuwa"
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={ogImageUrl} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={siteTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="canonical" href={Astro.url.href} />
 
