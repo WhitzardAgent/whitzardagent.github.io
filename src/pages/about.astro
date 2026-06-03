@@ -5,14 +5,12 @@ import { team } from "../data/team";
 import SectionHeader from "../components/SectionHeader.astro";
 
 const founding = team.filter((m) => m.category === "founding");
-const research = team.filter((m) => m.category === "research");
-const engineering = team.filter((m) => m.category === "engineering");
-const advisors = team.filter((m) => m.category === "advisor");
+const partners = team.filter((m) => m.category === "partner");
 ---
 
 <BaseLayout
   title="About — Whitzard & Nuwa"
-  description="About Whitzard and Nuwa Frontier AI Safety Lab — team, mission, and organization."
+  description="Learn about Whitzard, Nuwa Frontier AI Safety Lab, their Eastern-rooted naming, research roots, and core team."
   ogImage="/assets/og/whitzard-og.png"
 >
   <section class="py-20 md:py-28">
@@ -24,147 +22,192 @@ const advisors = team.filter((m) => m.category === "advisor");
           About Whitzard and Nuwa
         </h1>
         <p class="text-wz-body text-lg leading-relaxed mb-4">
-          Whitzard is an AI safety startup building safety infrastructure for frontier AI and agentic systems. Nuwa Frontier AI Safety Lab is the research lab supported by Whitzard, focused on frontier AI risks, agent safety, and controllable AI.
+          Whitzard builds generalized, intelligent safety modules for frontier AI and agentic systems, designed for real-world vertical scenarios and public safety. Nuwa Frontier AI Safety Lab is the research lab supported by Whitzard, focused on transparent, third-party, open evaluation and governance evidence for frontier AI safety.
         </p>
         <p class="text-wz-muted text-base leading-relaxed">
-          Our vision is to build safe and controllable AGI systems. We believe this requires both rigorous research into frontier AI risks and practical safety infrastructure that can be deployed in real AI systems.
+          Together, Whitzard and Nuwa represent two complementary layers: Whitzard builds deployable safety infrastructure; Nuwa develops transparent research, open evaluation frameworks, and governance evidence.
         </p>
+      </div>
+
+      <!-- Names and Eastern Roots -->
+      <div class="mb-16">
+        <SectionHeader title="Names and Eastern Roots" subtitle="The mythology behind Whitzard and Nuwa." />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-wz-panel-blue/30 border border-wz-hairline rounded-xl p-7">
+            <div class="flex items-center gap-3 mb-4">
+              <img src="/assets/logo/whitzard_logo.png" alt="" class="w-8 h-8 rounded" />
+              <div>
+                <p class="text-wz-ink font-semibold text-lg">Whitzard</p>
+                <p class="text-wz-muted font-normal text-sm">白泽 Baize</p>
+              </div>
+            </div>
+            <p class="text-wz-body text-sm leading-relaxed">
+              In Chinese mythology, Baize is a wise creature known for recognizing hidden threats and understanding the forms of unseen dangers. The name Whitzard carries this idea into AI safety: detect hidden risks, understand complex systems, and protect society before harm occurs.
+            </p>
+          </div>
+
+          <div class="bg-nw-jade-pale/40 border border-nw-hairline rounded-xl p-7">
+            <div class="flex items-center gap-3 mb-4">
+              <img src="/assets/logo/nvwa_logo.png" alt="" class="w-8 h-8 rounded" />
+              <div>
+                <p class="text-nw-ink font-semibold text-lg">Nuwa</p>
+                <p class="text-nw-muted font-normal text-sm">女娲 Nüwa</p>
+              </div>
+            </div>
+            <p class="text-nw-body text-sm leading-relaxed">
+              Nüwa is known for repairing the sky. For Nuwa Frontier AI Safety Lab, this metaphor points to a research mission: identify safety gaps in advanced AI systems, repair fragile boundaries, and build evidence for controllable AI before failures become systemic.
+            </p>
+          </div>
+        </div>
       </div>
 
       <!-- Organization Relationship -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-        <div class="bg-wz-panel-blue/40 border border-wz-hairline rounded-xl p-7">
-          <div class="flex items-center gap-2 mb-4">
-            <img src="/assets/logo/whitzard_logo.png" alt="" class="w-6 h-6 rounded" />
-            <span class="text-wz-ink font-semibold text-base">Whitzard</span>
-            <span class="text-wz-muted font-normal text-sm">白泽</span>
-          </div>
-          <ul class="space-y-2.5 text-wz-body text-sm leading-relaxed">
-            <li class="flex items-start gap-2">
-              <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
-              <span>Company and product brand</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
-              <span>Safety infrastructure engineering</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
-              <span>Evaluation, runtime defense, and monitoring systems</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="bg-nw-jade-pale/40 border border-nw-hairline rounded-xl p-7">
-          <div class="flex items-center gap-2 mb-4">
-            <img src="/assets/logo/nvwa_logo.png" alt="" class="w-6 h-6 rounded" />
-            <span class="text-nw-jade text-sm">&#9670;</span>
-            <span class="text-nw-ink font-semibold text-base">Nuwa</span>
-            <span class="text-nw-muted font-normal text-sm">女娲</span>
-          </div>
-          <ul class="space-y-2.5 text-nw-body text-sm leading-relaxed">
-            <li class="flex items-start gap-2">
-              <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
-              <span>Research lab supported by Whitzard</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
-              <span>Research agenda, reports, briefs, frameworks</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
-              <span>Frontier AI risk evaluation and agent safety research</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="max-w-2xl mb-16">
-        <p class="text-wz-body text-base leading-relaxed">
-          Nuwa develops the research agenda and evaluation methodology. Whitzard builds the safety infrastructure that turns these ideas into usable systems.
-        </p>
-      </div>
-
-      <!-- Team -->
       <div class="mb-16">
-        <SectionHeader title="Team" subtitle="Founding members of Whitzard and Nuwa." />
+        <SectionHeader title="Organization" subtitle="How Whitzard and Nuwa work together." />
 
-        <div class="space-y-10">
-          {founding.length > 0 && (
-            <div>
-              <p class="text-wz-muted text-xs uppercase tracking-wide mb-4 font-medium">Founding Team</p>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {founding.map((member) => (
-                  <div class="bg-white border border-wz-hairline rounded-lg p-5">
-                    <p class="text-wz-ink font-semibold text-sm">{member.name}</p>
-                    <p class="text-wz-muted text-xs mt-0.5">{member.role}{member.affiliation === "nuwa" ? " · Nuwa" : ""}</p>
-                    <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>
-                    {member.links && member.links.length > 0 && (
-                      <div class="flex flex-wrap gap-3 mt-3">
-                        {member.links.map((link) => (
-                          <a href={link.url} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline">{link.label}</a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-wz-panel-blue/40 border border-wz-hairline rounded-xl p-7">
+            <div class="flex items-center gap-2 mb-4">
+              <img src="/assets/logo/whitzard_logo.png" alt="" class="w-6 h-6 rounded" />
+              <span class="text-wz-ink font-semibold text-base">Whitzard</span>
+              <span class="text-wz-muted font-normal text-sm">白泽</span>
             </div>
-          )}
+            <ul class="space-y-2.5 text-wz-body text-sm leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
+                <span>Company and product brand</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
+                <span>Generalized intelligent safety modules</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
+                <span>Evaluation, runtime defense, monitoring systems</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
+                <span>Real vertical-domain safety solutions</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-wz-blue mt-0.5 text-xs">&#9670;</span>
+                <span>Public safety orientation</span>
+              </li>
+            </ul>
+          </div>
 
-          {research.length > 0 && (
-            <div>
-              <p class="text-wz-muted text-xs uppercase tracking-wide mb-4 font-medium">Research</p>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {research.map((member) => (
-                  <div class="bg-white border border-wz-hairline rounded-lg p-5">
-                    <p class="text-wz-ink font-semibold text-sm">{member.name}</p>
-                    <p class="text-wz-muted text-xs mt-0.5">{member.role}</p>
-                    {member.bio && <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>}
-                  </div>
-                ))}
-              </div>
+          <div class="bg-nw-jade-pale/40 border border-nw-hairline rounded-xl p-7">
+            <div class="flex items-center gap-2 mb-4">
+              <img src="/assets/logo/nvwa_logo.png" alt="" class="w-6 h-6 rounded" />
+              <span class="text-nw-jade text-sm">&#9670;</span>
+              <span class="text-nw-ink font-semibold text-base">Nuwa</span>
+              <span class="text-nw-muted font-normal text-sm">女娲</span>
             </div>
-          )}
+            <ul class="space-y-2.5 text-nw-body text-sm leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
+                <span>Research lab supported by Whitzard</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
+                <span>Transparent third-party evaluation</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
+                <span>Open infrastructure and benchmarks</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
+                <span>Frontier AI safety evaluation and governance</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-nw-jade mt-0.5 text-xs">&#9670;</span>
+                <span>Research on autonomy risks, deception, scheming, and loss-of-control</span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-          {engineering.length > 0 && (
-            <div>
-              <p class="text-wz-muted text-xs uppercase tracking-wide mb-4 font-medium">Engineering</p>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {engineering.map((member) => (
-                  <div class="bg-white border border-wz-hairline rounded-lg p-5">
-                    <p class="text-wz-ink font-semibold text-sm">{member.name}</p>
-                    <p class="text-wz-muted text-xs mt-0.5">{member.role}</p>
-                    {member.bio && <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {advisors.length > 0 && (
-            <div>
-              <p class="text-wz-muted text-xs uppercase tracking-wide mb-4 font-medium">Advisors</p>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {advisors.map((member) => (
-                  <div class="bg-white border border-wz-hairline rounded-lg p-5">
-                    <p class="text-wz-ink font-semibold text-sm">{member.name}</p>
-                    <p class="text-wz-muted text-xs mt-0.5">{member.role}</p>
-                    {member.bio && <p class="text-wz-subtle text-xs mt-2 leading-relaxed">{member.bio}</p>}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+        <div class="max-w-2xl mt-6">
+          <p class="text-wz-body text-base leading-relaxed">
+            Nuwa develops the research agenda, evaluation methodology, benchmarks, and governance evidence. Whitzard builds the deployable safety infrastructure that brings these ideas into real systems and public safety scenarios.
+          </p>
         </div>
       </div>
 
-      <!-- Research Roots -->
-      <div class="max-w-2xl mb-16">
-        <SectionHeader title="Research Roots" />
-        <p class="text-wz-body text-base leading-relaxed">
-          Our team has research roots in frontier AI safety, agent safety, evaluation, and AI system security. We collaborate with researchers, institutions, and builders working on safe and controllable AI.
-        </p>
+      <!-- The Triangle Team -->
+      <div class="mb-16">
+        <SectionHeader title="The Triangle Team" subtitle="Core members driving Whitzard and Nuwa." />
+
+        <div class="space-y-4">
+          {founding.map((member) => (
+            <div class="bg-white border border-wz-hairline rounded-xl p-6 md:p-7">
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <p class="text-wz-ink font-semibold text-base">{member.name}</p>
+                    <span class="text-wz-blue text-xs font-medium bg-wz-panel-blue/40 px-2 py-0.5 rounded-full">{member.role}</span>
+                  </div>
+                  <p class="text-wz-body text-sm leading-relaxed max-w-xl">{member.bio}</p>
+                </div>
+                {member.links && member.links.length > 0 && (
+                  <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                    {member.links.map((link) => (
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">
+                        {link.label} &rarr;
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+
+          {partners.map((member) => (
+            <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 md:p-7">
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <p class="text-wz-ink font-semibold text-base">{member.name}</p>
+                    <span class="text-wz-teal text-xs font-medium bg-wz-teal-soft px-2 py-0.5 rounded-full">{member.role}</span>
+                  </div>
+                  <p class="text-wz-body text-sm leading-relaxed max-w-xl">{member.bio}</p>
+                </div>
+                {member.links && member.links.length > 0 && (
+                  <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                    {member.links.map((link) => (
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">
+                        {link.label} &rarr;
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Research Roots and Strategic Bridge -->
+      <div class="mb-16">
+        <SectionHeader title="Research Roots and Strategic Bridge" subtitle="Our connection to the Fudan security and AI safety research community." />
+        <div class="max-w-2xl">
+          <p class="text-wz-body text-base leading-relaxed mb-4">
+            Whitzard and Nuwa have strong research roots in the Fudan security and AI safety research community. Dr. Geng Hong serves as a strategic bridge connecting in-the-wild security research, cybercrime studies, penetration testing experience, and the broader Fudan security ecosystem.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href={links.fudanSecurityLab} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
+              Fudan Security Lab
+            </a>
+            <a href={links.gengHong} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
+              Dr. Geng Hong
+            </a>
+            <a href={links.minYang} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
+              Prof. Min Yang
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- Research and Collaboration -->

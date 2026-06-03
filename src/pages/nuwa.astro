@@ -2,10 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchAssets } from "../data/generated/researchAssets";
+import { newsItems } from "../data/news";
 import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
 import PublicationCard from "../components/PublicationCard.astro";
 import ResearchAreaCard from "../components/ResearchAreaCard.astro";
 import BriefCard from "../components/BriefCard.astro";
+import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 
@@ -17,21 +19,39 @@ const researchThemes = [
   { title: "Deception", tag: "Deception", description: "AI deception in human-AI interaction, developer-facing deception, and trust dynamics." },
   { title: "Scheming", tag: "Scheming", description: "Evaluation faking, situational awareness, and observer effects in safety evaluations." },
   { title: "Loss-of-Control", tag: "Loss-of-Control", description: "Conditions under which AI systems may evade oversight or resist shutdown." },
-  { title: "Evaluation", tag: "Evaluation", description: "Executable risk-evaluation environments, benchmarks, and evaluation integrity." },
   { title: "Agent Safety", tag: "Agent Safety", description: "Behavioral safety, thought correction, and guardrails for AI agent systems." },
+  { title: "Evaluation", tag: "Evaluation", description: "Executable risk-evaluation environments, benchmarks, and evaluation integrity." },
+  { title: "Governance Evidence", tag: "Governance", description: "Technical evidence supporting responsible AI governance and public accountability." },
 ];
 
-const approachSteps = [
-  { label: "Observe", desc: "Identify risk signals in frontier AI systems" },
-  { label: "Evaluate", desc: "Assess capabilities, behaviors, and control thresholds" },
-  { label: "Repair", desc: "Identify and close safety gaps before systemic failure" },
-  { label: "Control", desc: "Build infrastructure for safe and controllable AI" },
+const transparentCards = [
+  {
+    title: "Transparent",
+    desc: "Public research notes, open evaluation assumptions, and clear evidence standards.",
+  },
+  {
+    title: "Third-Party",
+    desc: "Independent safety evaluation and governance evidence for frontier AI systems.",
+  },
+  {
+    title: "Open Infrastructure",
+    desc: "Benchmarks, tools, datasets, and frameworks that support broader AI safety research.",
+  },
+  {
+    title: "Governance-Oriented",
+    desc: "Technical evidence that can support responsible AI governance and public accountability.",
+  },
 ];
+
+// Research-related news
+const nuwaNews = newsItems.filter(
+  (n) => n.type === "Research" || n.type === "Event" || n.type === "Update"
+);
 ---
 
 <BaseLayout
   title="Nuwa Frontier AI Safety Lab"
-  description="Nuwa Frontier AI Safety Lab studies frontier AI risks, agent safety, and controllable AI. Research, publications, and frameworks from an Eastern-rooted AI safety lab."
+  description="Nuwa builds transparent, third-party, open infrastructure and benchmarks for frontier AI safety evaluation and governance."
   brand="nuwa"
   ogImage="/assets/og/nuwa-og.png"
 >
@@ -53,10 +73,10 @@ const approachSteps = [
           <span style="font-size: 0.45em;">Frontier AI Safety Lab</span>
         </h1>
         <p class="text-nw-body text-lg md:text-xl leading-relaxed mb-3">
-          An Eastern-rooted AI safety lab studying frontier AI risks, agent safety, and controllable AI.
+          Transparent, third-party, open infrastructure for frontier AI safety evaluation and governance.
         </p>
-        <p class="text-nw-muted text-base leading-relaxed mb-3 font-serif italic max-w-xl">
-          Inspired by N&uuml;wa repairing the sky, we study how to identify and repair safety gaps in advanced AI systems before they become systemic failures.
+        <p class="text-nw-muted text-base leading-relaxed mb-3 max-w-xl">
+          Nuwa studies frontier AI risks, agent safety, autonomy risks, deception, scheming, and loss-of-control. Supported by Whitzard, Nuwa develops open evaluation frameworks, benchmarks, technical notes, and governance evidence for safe and controllable AI.
         </p>
         <p class="text-nw-jade text-sm font-medium mb-7">Supported by Whitzard</p>
 
@@ -72,21 +92,15 @@ const approachSteps = [
     </div>
   </section>
 
-  <!-- Research Approach -->
+  <!-- Transparent Third-Party Evaluation -->
   <section class="py-14 md:py-18 bg-nw-warm-paper">
     <div class="max-w-[1120px] mx-auto px-6">
-      <SectionHeader title="Research Approach" subtitle="Our methodology for studying and improving frontier AI safety." />
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {approachSteps.map((step, i) => (
+      <SectionHeader title="Transparent Third-Party Evaluation" subtitle="Nuwa's approach to independent frontier AI safety evaluation and governance evidence." />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {transparentCards.map((card) => (
           <div class="bg-white border border-nw-hairline rounded-lg p-5">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-nw-jade font-mono text-xs">{String(i + 1).padStart(2, '0')}</span>
-              {i < approachSteps.length - 1 && (
-                <span class="text-nw-subtle text-xs hidden md:inline">&rarr;</span>
-              )}
-            </div>
-            <h3 class="text-nw-ink font-semibold text-sm mb-1">{step.label}</h3>
-            <p class="text-nw-muted text-xs leading-relaxed">{step.desc}</p>
+            <h3 class="text-nw-ink font-semibold text-sm mb-2">{card.title}</h3>
+            <p class="text-nw-muted text-sm leading-relaxed">{card.desc}</p>
           </div>
         ))}
       </div>
@@ -127,6 +141,33 @@ const approachSteps = [
       </div>
     </div>
   </section>
+
+  <!-- News -->
+  {nuwaNews.length > 0 && (
+    <section class="py-14 md:py-18">
+      <div class="max-w-[1120px] mx-auto px-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-nw-ink font-semibold" style="font-size: var(--text-h2);">News</h2>
+          <a href="/news" class="text-nw-jade text-sm font-medium hover:underline no-underline">
+            View all &rarr;
+          </a>
+        </div>
+        <div class="space-y-4">
+          {nuwaNews.map((item) => (
+            <NewsCard
+              title={item.title}
+              date={item.date}
+              type={item.type}
+              summary={item.summary}
+              url={item.url}
+              source={item.source}
+              featured={item.featured}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- Latest Nuwa Brief -->
   <section class="py-14 md:py-18">

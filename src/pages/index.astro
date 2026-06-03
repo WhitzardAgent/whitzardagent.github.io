@@ -3,105 +3,124 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchAssets } from "../data/generated/researchAssets";
 import { openSourceAssets } from "../data/generated/openSourceAssets";
+import { newsItems } from "../data/news";
 import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
 import PublicationCard from "../components/PublicationCard.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
-import ExternalArticleCard from "../components/ExternalArticleCard.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 
 const featuredPapers = researchAssets.filter((p) => p.featured).slice(0, 3);
 
-const safetyFlow = [
-  { label: "Risk Signals", desc: "Identify frontier AI risk signals" },
-  { label: "Frontier AI Risk Evaluation", desc: "Systematic capability and risk assessment" },
-  { label: "Agent Behavior Safety", desc: "Deception, misalignment, tool misuse" },
-  { label: "Runtime Safety Infrastructure", desc: "Zero-trust access control & policy enforcement" },
-  { label: "Governance Evidence", desc: "Risk monitoring & evidence-based governance" },
+const philosophyCards = [
+  {
+    title: "Generalized Safety Modules",
+    desc: "Reusable safety capabilities across models, agents, tools, and deployment environments.",
+  },
+  {
+    title: "Intelligent Runtime Protection",
+    desc: "Policy, tracing, approval, monitoring, and intervention for agentic systems in action.",
+  },
+  {
+    title: "Vertical Scenario Adaptation",
+    desc: "Safety infrastructure designed for real-world sectors, workflows, and operational constraints.",
+  },
+  {
+    title: "Public Safety Orientation",
+    desc: "Practical AI safety products that can support broader access, governance, and social trust.",
+  },
 ];
 
 const flagshipProjects = openSourceAssets.filter((p) =>
   ["AgentGuard", "qise", "snowl"].includes(p.name)
 );
 
-const externalArticle = {
-  title: "The Science of Frontier AI Risk Evaluation",
-  source: "Nuwa Substack",
-  url: "https://nuwasafety.substack.com/p/science-of-frontier-ai-risk-evaluation",
-  type: "technical-note",
-  year: "2026",
-  summary: "Nuwa essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
-  tags: ["Frontier AI Risk", "Evaluation", "Methodology"],
-};
+const latestNews = newsItems.slice(0, 3);
 ---
 
 <BaseLayout
-  title="Whitzard — AI Safety Infrastructure"
-  description="Whitzard builds safety infrastructure for frontier AI and agentic systems, supporting evaluation, runtime defense, risk monitoring, and controllable AI."
+  title="Whitzard — Generalized AI Safety Infrastructure"
+  description="Whitzard builds generalized, intelligent safety modules for frontier AI and agentic systems, supporting real-world vertical scenarios and public safety."
   ogImage="/assets/og/whitzard-og.png"
 >
   <!-- Hero -->
   <section class="py-20 md:py-28">
     <div class="max-w-[1180px] mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
-        <!-- Left: Copy -->
-        <div class="md:col-span-6">
-          <h1
-            class="text-wz-ink font-semibold tracking-tight mb-5"
-            style="font-size: var(--text-hero); line-height: 1.05;"
+      <div class="max-w-2xl">
+        <h1
+          class="text-wz-ink font-semibold tracking-tight mb-5"
+          style="font-size: var(--text-hero); line-height: 1.05;"
+        >
+          Whitzard <span class="text-wz-muted font-normal" style="font-size: 0.45em;">白泽</span>
+        </h1>
+        <p class="text-wz-body text-xl md:text-2xl leading-relaxed mb-4 max-w-lg">
+          Building generalized safety infrastructure for frontier AI and agentic systems.
+        </p>
+        <p class="text-wz-body text-base leading-relaxed mb-8 max-w-lg">
+          Whitzard develops intelligent safety modules that can be deployed across real-world vertical scenarios: agent runtime protection, risk evaluation, security monitoring, and governance evidence. Our goal is to make advanced AI safety more practical, accessible, and useful for public safety.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/research"
+            class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
           >
-            Whitzard <span class="text-wz-muted font-normal" style="font-size: 0.45em;">白泽</span>
-          </h1>
-          <p class="text-wz-body text-xl md:text-2xl leading-relaxed mb-3 max-w-lg">
-            Building safety infrastructure for frontier AI and agentic systems.
-          </p>
-          <p class="text-wz-muted text-lg leading-relaxed mb-6 max-w-lg">
-            Our vision is to build safe and controllable AGI systems.
-          </p>
-          <p class="text-wz-body text-base leading-relaxed mb-8 max-w-lg">
-            Whitzard is an AI safety startup in China building evaluation, runtime safety, and risk-monitoring infrastructure for advanced AI systems. Nuwa Frontier AI Safety Lab is the research lab supported by Whitzard.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <a
-              href="/research"
-              class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
-            >
-              Read Research
-            </a>
-            <a
-              href="/nuwa"
-              class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
-            >
-              Explore Nuwa
-            </a>
-          </div>
+            Read Research
+          </a>
+          <a
+            href="/nuwa"
+            class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
+          >
+            Explore Nuwa
+          </a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Right: Safety Infrastructure Map -->
-        <div class="md:col-span-6 hidden md:block">
-          <div class="bg-white border border-wz-hairline rounded-xl p-6">
-            <p class="text-wz-ink text-xs font-medium uppercase tracking-wide mb-5">Safety Infrastructure Map</p>
-            <div class="space-y-0">
-              {safetyFlow.map((step, i) => (
-                <div class="flex items-start gap-3">
-                  <div class="flex flex-col items-center">
-                    <div class:list={[
-                      "w-2.5 h-2.5 rounded-full border-2 mt-1.5",
-                      i === 0 ? "bg-nw-jade border-nw-jade" : "border-nw-jade bg-white",
-                    ]} />
-                    {i < safetyFlow.length - 1 && (
-                      <div class="w-px h-8 bg-wz-border-strong" />
-                    )}
-                  </div>
-                  <div class="pb-4">
-                    <p class="text-wz-ink text-sm font-semibold leading-tight">{step.label}</p>
-                    <p class="text-wz-muted text-xs leading-relaxed mt-0.5">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+  <!-- A Practical Path to Safe AI -->
+  <section class="py-14 md:py-18 bg-wz-mist">
+    <div class="max-w-[1180px] mx-auto px-6">
+      <div class="max-w-2xl mb-8">
+        <h2 class="text-wz-ink font-semibold mb-3" style="font-size: var(--text-h2);">
+          A Practical Path to Safe AI
+        </h2>
+        <p class="text-wz-body text-base leading-relaxed">
+          Many frontier AI safety approaches rely heavily on centralized post-training and alignment pipelines. Whitzard focuses on another complementary path: generalized safety modules that can be integrated into real systems, adapted to vertical scenarios, and continuously improved through evaluation, monitoring, and runtime protection.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {philosophyCards.map((card) => (
+          <div class="bg-white border border-wz-hairline rounded-lg p-5">
+            <h3 class="text-wz-ink font-semibold text-sm mb-2">{card.title}</h3>
+            <p class="text-wz-muted text-sm leading-relaxed">{card.desc}</p>
           </div>
-        </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- News -->
+  <section class="py-14 md:py-18">
+    <div class="max-w-[1180px] mx-auto px-6">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-wz-ink font-semibold" style="font-size: var(--text-h2);">News</h2>
+        <a href="/news" class="text-wz-blue text-sm font-medium hover:underline no-underline">
+          View all &rarr;
+        </a>
+      </div>
+      <div class="space-y-4">
+        {latestNews.map((item) => (
+          <NewsCard
+            title={item.title}
+            date={item.date}
+            type={item.type}
+            summary={item.summary}
+            url={item.url}
+            source={item.source}
+            featured={item.featured}
+          />
+        ))}
       </div>
     </div>
   </section>
@@ -118,12 +137,11 @@ const externalArticle = {
           Nuwa Frontier AI Safety Lab <span class="text-nw-muted font-normal" style="font-size: 0.55em;">女娲</span>
         </h2>
         <p class="text-nw-body text-base leading-relaxed mb-2 max-w-2xl">
-          An Eastern-rooted AI safety lab studying frontier AI risks, agent safety, and controllable AI.
+          Transparent, third-party, open infrastructure for frontier AI safety evaluation and governance.
         </p>
-        <p class="text-nw-muted text-sm leading-relaxed mb-5 max-w-2xl font-serif italic">
-          Inspired by N&uuml;wa repairing the sky, we study how to identify and repair safety gaps in advanced AI systems before they become systemic failures.
+        <p class="text-nw-muted text-sm leading-relaxed mb-5 max-w-2xl">
+          Supported by Whitzard, Nuwa develops open evaluation frameworks, benchmarks, technical notes, and governance evidence for safe and controllable AI.
         </p>
-        <p class="text-nw-jade text-sm font-medium mb-5">Supported by Whitzard</p>
         <div class="flex flex-wrap gap-3">
           <a href="/nuwa" class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline">
             Visit Nuwa
@@ -179,6 +197,35 @@ const externalArticle = {
             websiteUrl={project.websiteUrl}
           />
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Ecosystem CTA -->
+  <section class="py-14 md:py-18 bg-wz-mist">
+    <div class="max-w-[1180px] mx-auto px-6">
+      <div class="bg-white border border-wz-hairline rounded-xl p-7 md:p-10">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-wz-teal text-lg">&#9670;</span>
+          <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">Open Source</span>
+        </div>
+        <h2 class="text-wz-ink font-semibold mb-3" style="font-size: var(--text-h2);">
+          Open Ecosystem
+        </h2>
+        <p class="text-wz-body text-base leading-relaxed mb-6 max-w-xl">
+          Explore WhitzardAgent open tools, datasets, and infrastructure for AI safety evaluation and agent safety.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
+            GitHub
+          </a>
+          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
+            Hugging Face
+          </a>
+          <a href="/open-ecosystem" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
+            Open Ecosystem &rarr;
+          </a>
+        </div>
       </div>
     </div>
   </section>

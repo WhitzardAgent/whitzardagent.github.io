@@ -31,15 +31,18 @@ const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || curre
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-wz-muted">
+    <nav class="hidden lg:flex items-center gap-5 text-sm font-medium text-wz-muted">
       <a href="/nuwa" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath.startsWith("/nuwa") && "text-wz-ink"]}>
         Nuwa
       </a>
       <a href="/research" class:list={["hover:text-wz-ink transition-colors no-underline", (currentPath.startsWith("/research") || currentPath.startsWith("/publications")) && "text-wz-ink"]}>
         Research
       </a>
-      <a href="/blog" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath.startsWith("/blog") && "text-wz-ink"]}>
-        Blog
+      <a href="/news" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath.startsWith("/news") && "text-wz-ink"]}>
+        News
+      </a>
+      <a href="/open-ecosystem" class:list={["hover:text-wz-ink transition-colors no-underline", (currentPath.startsWith("/open-ecosystem") || currentPath.startsWith("/open-source")) && "text-wz-ink"]}>
+        Open Ecosystem
       </a>
       <a href="/about" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath === "/about" && "text-wz-ink"]}>
         About
@@ -63,7 +66,7 @@ const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || curre
     <!-- Mobile Menu Toggle -->
     <button
       id="mobile-menu-toggle"
-      class="md:hidden p-2 text-wz-ink"
+      class="lg:hidden p-2 text-wz-ink"
       aria-label="Toggle navigation menu"
     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -77,12 +80,13 @@ const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || curre
   <!-- Mobile Navigation -->
   <nav
     id="mobile-menu"
-    class="hidden md:hidden bg-white border-b border-wz-hairline px-6 py-4"
+    class="hidden lg:hidden bg-white border-b border-wz-hairline px-6 py-4"
   >
     <div class="flex flex-col gap-3 text-sm font-medium text-wz-muted">
       <a href="/nuwa" class="hover:text-wz-ink no-underline">Nuwa</a>
       <a href="/research" class="hover:text-wz-ink no-underline">Research</a>
-      <a href="/blog" class="hover:text-wz-ink no-underline">Blog</a>
+      <a href="/news" class="hover:text-wz-ink no-underline">News</a>
+      <a href="/open-ecosystem" class="hover:text-wz-ink no-underline">Open Ecosystem</a>
       <a href="/about" class="hover:text-wz-ink no-underline">About</a>
       <a href="/contact" class="hover:text-wz-ink no-underline">Contact</a>
       <a href={links.github} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink no-underline">GitHub</a>

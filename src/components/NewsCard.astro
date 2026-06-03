@@ -1,0 +1,58 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  type: string;
+  summary?: string;
+  url?: string;
+  source?: string;
+  featured?: boolean;
+}
+
+const { title, date, type, summary, url, source, featured = false } = Astro.props;
+
+const typeColors: Record<string, string> = {
+  Research: "bg-nw-jade-pale text-nw-jade",
+  Company: "bg-wz-panel-blue/50 text-wz-blue",
+  Ecosystem: "bg-wz-teal-soft text-wz-teal",
+  Event: "bg-amber-50 text-amber-700",
+  Media: "bg-purple-50 text-purple-700",
+  Update: "bg-stone-100 text-stone-600",
+};
+
+const badgeColor = typeColors[type] || "bg-stone-100 text-stone-600";
+
+const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<div class:list={[
+  "border rounded-lg p-5 transition-colors",
+  featured ? "bg-wz-panel-blue/20 border-wz-hairline" : "bg-white border-wz-hairline hover:border-wz-border-strong",
+]}>
+  <div class="flex items-center gap-2 mb-2">
+    <span class:list={["text-xs font-medium px-2 py-0.5 rounded-full", badgeColor]}>
+      {type}
+    </span>
+    <span class="text-wz-muted text-xs">{formattedDate}</span>
+    {featured && (
+      <span class="text-wz-blue text-xs font-medium">Featured</span>
+    )}
+  </div>
+  {url ? (
+    <a href={url} target="_blank" rel="noopener noreferrer" class="text-wz-ink font-semibold text-sm hover:text-wz-blue transition-colors no-underline block mb-1">
+      {title}
+    </a>
+  ) : (
+    <p class="text-wz-ink font-semibold text-sm mb-1">{title}</p>
+  )}
+  {summary && (
+    <p class="text-wz-muted text-sm leading-relaxed">{summary}</p>
+  )}
+  {source && (
+    <p class="text-wz-subtle text-xs mt-2">Source: {source}</p>
+  )}
+</div>

@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { links } from "../data/links";
+import { newsItems } from "../data/news";
+import NewsCard from "../components/NewsCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
+
+const featuredNews = newsItems.filter((n) => n.featured);
+const latestNews = newsItems.filter((n) => !n.featured);
+---
+
+<BaseLayout
+  title="News — Whitzard & Nuwa"
+  description="Research updates, company news, ecosystem progress, and public notes from Whitzard and Nuwa."
+  ogImage="/assets/og/whitzard-og.png"
+>
+  <section class="py-20 md:py-28">
+    <div class="max-w-[1120px] mx-auto px-6">
+      <div class="max-w-2xl mb-12">
+        <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
+          News
+        </h1>
+        <p class="text-wz-body text-lg leading-relaxed">
+          Research updates, company news, ecosystem progress, and public notes from Whitzard and Nuwa.
+        </p>
+      </div>
+
+      <!-- Featured News -->
+      {featuredNews.length > 0 && (
+        <div class="mb-16">
+          <SectionHeader title="Featured" subtitle="Highlighted updates from Whitzard and Nuwa." />
+          <div class="space-y-4">
+            {featuredNews.map((item) => (
+              <NewsCard
+                title={item.title}
+                date={item.date}
+                type={item.type}
+                summary={item.summary}
+                url={item.url}
+                source={item.source}
+                featured={item.featured}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Latest News -->
+      {latestNews.length > 0 && (
+        <div class="mb-16">
+          <SectionHeader title="Latest" subtitle="Recent updates and announcements." />
+          <div class="space-y-4">
+            {latestNews.map((item) => (
+              <NewsCard
+                title={item.title}
+                date={item.date}
+                type={item.type}
+                summary={item.summary}
+                url={item.url}
+                source={item.source}
+                featured={item.featured}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Subscribe CTA -->
+      <CalloutPanel
+        variant="default"
+        align="center"
+        description="Get research updates from Nuwa Frontier AI Safety Lab delivered to your inbox."
+      >
+        <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
+          Subscribe to Nuwa Brief
+        </a>
+      </CalloutPanel>
+    </div>
+  </section>
+</BaseLayout>
