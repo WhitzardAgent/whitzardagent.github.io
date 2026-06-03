@@ -2,11 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchAssets } from "../data/generated/researchAssets";
-import { openSourceAssets } from "../data/generated/openSourceAssets";
-import { newsItems } from "../data/news";
+import { newsItems, getNewsLink } from "../data/news";
 import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
-import PublicationCard from "../components/PublicationCard.astro";
-import ProjectCard from "../components/ProjectCard.astro";
 import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
@@ -31,10 +28,6 @@ const philosophyCards = [
     desc: "Practical AI safety products that can support broader access, governance, and social trust.",
   },
 ];
-
-const flagshipProjects = openSourceAssets.filter((p) =>
-  ["AgentGuard", "qise", "snowl"].includes(p.name)
-);
 
 const latestNews = newsItems.slice(0, 3);
 ---
@@ -62,10 +55,10 @@ const latestNews = newsItems.slice(0, 3);
         </p>
         <div class="flex flex-wrap gap-3">
           <a
-            href="/research"
+            href="/agentguard"
             class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
           >
-            Read Research
+            AgentGuard
           </a>
           <a
             href="/nuwa"
@@ -116,7 +109,7 @@ const latestNews = newsItems.slice(0, 3);
             date={item.date}
             type={item.type}
             summary={item.summary}
-            url={item.url}
+            href={getNewsLink(item)}
             source={item.source}
             featured={item.featured}
           />
@@ -182,27 +175,8 @@ const latestNews = newsItems.slice(0, 3);
     </div>
   </section>
 
-  <!-- Products & Capabilities -->
-  <section class="py-14 md:py-18">
-    <div class="max-w-[1180px] mx-auto px-6">
-      <SectionHeader title="Products & Capabilities" subtitle="Safety infrastructure built by Whitzard for frontier AI and agentic systems." />
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {flagshipProjects.map((project) => (
-          <ProjectCard
-            name={project.name}
-            status={project.status}
-            description={project.description}
-            githubUrl={project.githubUrl}
-            hfUrl={project.hfUrl}
-            websiteUrl={project.websiteUrl}
-          />
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- Open Ecosystem CTA -->
-  <section class="py-14 md:py-18 bg-wz-mist">
+  <section class="py-14 md:py-18">
     <div class="max-w-[1180px] mx-auto px-6">
       <div class="bg-white border border-wz-hairline rounded-xl p-7 md:p-10">
         <div class="flex items-center gap-2 mb-3">

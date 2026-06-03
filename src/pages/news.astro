@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
-import { newsItems } from "../data/news";
+import { newsItems, getNewsLink } from "../data/news";
 import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
@@ -37,7 +37,7 @@ const latestNews = newsItems.filter((n) => !n.featured);
                 date={item.date}
                 type={item.type}
                 summary={item.summary}
-                url={item.url}
+                href={getNewsLink(item)}
                 source={item.source}
                 featured={item.featured}
               />
@@ -57,7 +57,7 @@ const latestNews = newsItems.filter((n) => !n.featured);
                 date={item.date}
                 type={item.type}
                 summary={item.summary}
-                url={item.url}
+                href={getNewsLink(item)}
                 source={item.source}
                 featured={item.featured}
               />

@@ -10,9 +10,9 @@ const { brand = "whitzard" } = Astro.props;
 
 <footer class="border-t border-wz-hairline bg-wz-panel mt-24">
   <div class="max-w-[1180px] mx-auto px-6 py-10">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
       <!-- Brand -->
-      <div class="col-span-2 md:col-span-1">
+      <div>
         <div class="flex items-center gap-2 mb-2">
           <img src={brand === "nuwa" ? "/assets/logo/nvwa_logo.png" : "/assets/logo/whitzard_logo.png"} alt="" class="w-5 h-5 rounded" />
           <p class="text-wz-ink font-semibold text-base">
@@ -26,26 +26,16 @@ const { brand = "whitzard" } = Astro.props;
         </p>
       </div>
 
-      <!-- Navigation -->
+      <!-- Site -->
       <div>
-        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Pages</p>
+        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Site</p>
         <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
-          <a href="/" class="hover:text-wz-ink transition-colors no-underline">Whitzard</a>
-          <a href="/nuwa" class="hover:text-wz-ink transition-colors no-underline">Nuwa</a>
+          <a href="/agentguard" class="hover:text-wz-ink transition-colors no-underline">Products</a>
           <a href="/research" class="hover:text-wz-ink transition-colors no-underline">Research</a>
           <a href="/news" class="hover:text-wz-ink transition-colors no-underline">News</a>
-          <a href="/about" class="hover:text-wz-ink transition-colors no-underline">About</a>
-        </div>
-      </div>
-
-      <!-- Research -->
-      <div>
-        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Research</p>
-        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
+          <a href="/open-ecosystem" class="hover:text-wz-ink transition-colors no-underline">Ecosystem</a>
           <a href="/nuwa" class="hover:text-wz-ink transition-colors no-underline">Nuwa Lab</a>
-          <a href="/research" class="hover:text-wz-ink transition-colors no-underline">Publications</a>
-          <a href="/open-ecosystem" class="hover:text-wz-ink transition-colors no-underline">Open Ecosystem</a>
-          <a href="/agentguard" class="hover:text-wz-ink transition-colors no-underline">AgentGuard</a>
+          <a href="/about" class="hover:text-wz-ink transition-colors no-underline">About</a>
         </div>
       </div>
 

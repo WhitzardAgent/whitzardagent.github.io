@@ -4,12 +4,12 @@ interface Props {
   date: string;
   type: string;
   summary?: string;
-  url?: string;
+  href?: string;
   source?: string;
   featured?: boolean;
 }
 
-const { title, date, type, summary, url, source, featured = false } = Astro.props;
+const { title, date, type, summary, href, source, featured = false } = Astro.props;
 
 const typeColors: Record<string, string> = {
   Research: "bg-nw-jade-pale text-nw-jade",
@@ -27,32 +27,44 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
   month: "short",
   day: "numeric",
 });
+
+const isExternal = href && href.startsWith("http");
+
+const Tag = href ? "a" : "div";
+const linkProps = href
+  ? {
+      href,
+      target: isExternal ? "_blank" : undefined,
+      rel: isExternal ? "noopener noreferrer" : undefined,
+      class: "block no-underline",
+    }
+  : {};
 ---
 
-<div class:list={[
-  "border rounded-lg p-5 transition-colors",
-  featured ? "bg-wz-panel-blue/20 border-wz-hairline" : "bg-white border-wz-hairline hover:border-wz-border-strong",
-]}>
-  <div class="flex items-center gap-2 mb-2">
-    <span class:list={["text-xs font-medium px-2 py-0.5 rounded-full", badgeColor]}>
-      {type}
-    </span>
-    <span class="text-wz-muted text-xs">{formattedDate}</span>
-    {featured && (
-      <span class="text-wz-blue text-xs font-medium">Featured</span>
+<Tag {...linkProps}>
+  <div class:list={[
+    "border rounded-lg p-5 transition-colors",
+    featured ? "bg-wz-panel-blue/20 border-wz-hairline" : "bg-white border-wz-hairline",
+    href ? "hover:border-wz-border-strong cursor-pointer" : "",
+  ]}>
+    <div class="flex items-center gap-2 mb-2">
+      <span class:list={["text-xs font-medium px-2 py-0.5 rounded-full", badgeColor]}>
+        {type}
+      </span>
+      <span class="text-wz-muted text-xs">{formattedDate}</span>
+      {featured && (
+        <span class="text-wz-blue text-xs font-medium">Featured</span>
+      )}
+      {isExternal && (
+        <span class="text-wz-subtle text-xs">&#8599;</span>
+      )}
+    </div>
+    <p class="text-wz-ink font-semibold text-sm mb-1">{title}</p>
+    {summary && (
+      <p class="text-wz-muted text-sm leading-relaxed">{summary}</p>
+    )}
+    {source && (
+      <p class="text-wz-subtle text-xs mt-2">Source: {source}</p>
     )}
   </div>
-  {url ? (
-    <a href={url} target="_blank" rel="noopener noreferrer" class="text-wz-ink font-semibold text-sm hover:text-wz-blue transition-colors no-underline block mb-1">
-      {title}
-    </a>
-  ) : (
-    <p class="text-wz-ink font-semibold text-sm mb-1">{title}</p>
-  )}
-  {summary && (
-    <p class="text-wz-muted text-sm leading-relaxed">{summary}</p>
-  )}
-  {source && (
-    <p class="text-wz-subtle text-xs mt-2">Source: {source}</p>
-  )}
-</div>
+</Tag>

@@ -1,0 +1,86 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { newsItems, getNewsLink } from "../../data/news";
+import SectionHeader from "../../components/SectionHeader.astro";
+
+export function getStaticPaths() {
+  return newsItems
+    .filter((item) => item.slug)
+    .map((item) => ({
+      params: { slug: item.slug },
+      props: { item },
+    }));
+}
+
+const { item } = Astro.props;
+
+const formattedDate = new Date(item.date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const typeColors: Record<string, string> = {
+  Research: "bg-nw-jade-pale text-nw-jade",
+  Company: "bg-wz-panel-blue/50 text-wz-blue",
+  Ecosystem: "bg-wz-teal-soft text-wz-teal",
+  Event: "bg-amber-50 text-amber-700",
+  Media: "bg-purple-50 text-purple-700",
+  Update: "bg-stone-100 text-stone-600",
+};
+
+const badgeColor = typeColors[item.type] || "bg-stone-100 text-stone-600";
+---
+
+<BaseLayout
+  title={`${item.title} — News`}
+  description={item.summary || ""}
+  ogImage="/assets/og/whitzard-og.png"
+>
+  <section class="py-20 md:py-28">
+    <div class="max-w-[720px] mx-auto px-6">
+      <!-- Back link -->
+      <a href="/news" class="text-wz-muted text-sm hover:text-wz-ink transition-colors no-underline mb-6 inline-block">
+        &larr; Back to News
+      </a>
+
+      <!-- Header -->
+      <div class="flex items-center gap-2 mb-4">
+        <span class:list={["text-xs font-medium px-2 py-0.5 rounded-full", badgeColor]}>
+          {item.type}
+        </span>
+        <span class="text-wz-muted text-xs">{formattedDate}</span>
+      </div>
+
+      <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
+        {item.title}
+      </h1>
+
+      {item.source && (
+        <p class="text-wz-subtle text-sm mb-6">Source: {item.source}</p>
+      )}
+
+      <!-- Body -->
+      {item.body && (
+        <div class="text-wz-body text-base leading-relaxed space-y-4">
+          {item.body.split("\n\n").map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      )}
+
+      {!item.body && item.summary && (
+        <p class="text-wz-body text-base leading-relaxed">{item.summary}</p>
+      )}
+
+      <!-- External link if present -->
+      {item.url && (
+        <div class="mt-8">
+          <a href={item.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
+            Read More &rarr;
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

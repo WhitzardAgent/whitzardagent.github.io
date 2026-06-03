@@ -17,6 +17,7 @@ export const links = {
   agentguard: "https://github.com/WhitzardAgent/AgentGuard",
   email: "contact@whitzard.tech",
   fudanSecurityLab: "https://security.fudan.edu.cn/",
+  fudanUniversity: "https://www.fudan.edu.cn/",
   minYang: "https://min-yang-fudan.github.io/",
   gengHong: "https://ghong.site/",
 };

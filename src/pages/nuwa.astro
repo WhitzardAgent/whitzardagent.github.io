@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchAssets } from "../data/generated/researchAssets";
-import { newsItems } from "../data/news";
+import { newsItems, getNewsLink } from "../data/news";
 import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
 import PublicationCard from "../components/PublicationCard.astro";
 import ResearchAreaCard from "../components/ResearchAreaCard.astro";
@@ -159,7 +159,7 @@ const nuwaNews = newsItems.filter(
               date={item.date}
               type={item.type}
               summary={item.summary}
-              url={item.url}
+              href={getNewsLink(item)}
               source={item.source}
               featured={item.featured}
             />
