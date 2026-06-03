@@ -10,6 +10,7 @@ import BriefCard from "../components/BriefCard.astro";
 import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
+import NuwaHero from "../components/NuwaHero";
 
 const featuredPapers = researchAssets.filter((p) => p.featured).slice(0, 4);
 const recentPapers = researchAssets.slice(0, 5);
@@ -55,42 +56,8 @@ const nuwaNews = newsItems.filter(
   brand="nuwa"
   ogImage="/assets/og/nuwa-og.png"
 >
-  <!-- Hero -->
-  <section class="py-24 md:py-32">
-    <div class="max-w-[1120px] mx-auto px-6">
-      <div class="max-w-2xl">
-        <div class="mb-6 flex items-center gap-3">
-          <svg width="48" height="20" viewBox="0 0 48 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 16 Q24 -4 46 16" stroke="var(--nw-jade)" stroke-width="1.5" fill="none" stroke-dasharray="3 2" />
-            <circle cx="14" cy="10" r="2.5" fill="var(--stone-jade)" />
-            <circle cx="24" cy="6" r="2.5" fill="var(--stone-vermilion)" />
-            <circle cx="34" cy="10" r="2.5" fill="var(--stone-ochre)" />
-          </svg>
-        </div>
-
-        <h1 class="text-nw-ink font-semibold tracking-tight mb-5" style="font-size: var(--text-hero); line-height: 1.05;">
-          Nuwa <span class="text-nw-muted font-normal" style="font-size: 0.4em;">女娲</span><br />
-          <span style="font-size: 0.45em;">Frontier AI Safety Lab</span>
-        </h1>
-        <p class="text-nw-body text-lg md:text-xl leading-relaxed mb-3">
-          Transparent, third-party, open infrastructure for frontier AI safety evaluation and governance.
-        </p>
-        <p class="text-nw-muted text-base leading-relaxed mb-3 max-w-xl">
-          Nuwa studies frontier AI risks, agent safety, autonomy risks, deception, scheming, and loss-of-control. Supported by Whitzard, Nuwa develops open evaluation frameworks, benchmarks, technical notes, and governance evidence for safe and controllable AI.
-        </p>
-        <p class="text-nw-jade text-sm font-medium mb-7">Supported by Whitzard</p>
-
-        <div class="flex flex-wrap gap-3">
-          <a href="/research" class="inline-flex items-center bg-nw-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-nw-deep-blue transition-colors no-underline">
-            Read Research
-          </a>
-          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-nw-subtle transition-colors no-underline">
-            Subscribe to Nuwa Brief
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Animated Hero -->
+  <NuwaHero client:load />
 
   <!-- Transparent Third-Party Evaluation -->
   <section class="py-14 md:py-18 bg-nw-warm-paper">

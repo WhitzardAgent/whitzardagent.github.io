@@ -8,6 +8,7 @@ import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 import SocialIcon from "../components/SocialIcon.astro";
+import WhitzardHero from "../components/WhitzardHero";
 
 const featuredPapers = researchAssets.filter((p) => p.featured).slice(0, 3);
 
@@ -38,39 +39,8 @@ const latestNews = newsItems.slice(0, 3);
   description="Whitzard builds generalized, intelligent safety modules for frontier AI and agentic systems, supporting real-world vertical scenarios and public safety."
   ogImage="/assets/og/whitzard-og.png"
 >
-  <!-- Hero -->
-  <section class="py-20 md:py-28">
-    <div class="max-w-[1180px] mx-auto px-6">
-      <div class="max-w-2xl">
-        <h1
-          class="text-wz-ink font-semibold tracking-tight mb-5"
-          style="font-size: var(--text-hero); line-height: 1.05;"
-        >
-          Whitzard <span class="text-wz-muted font-normal" style="font-size: 0.45em;">白泽</span>
-        </h1>
-        <p class="text-wz-body text-xl md:text-2xl leading-relaxed mb-4 max-w-lg">
-          Building generalized safety infrastructure for frontier AI and agentic systems.
-        </p>
-        <p class="text-wz-body text-base leading-relaxed mb-8 max-w-lg">
-          Whitzard develops intelligent safety modules that can be deployed across real-world vertical scenarios: agent runtime protection, risk evaluation, security monitoring, and governance evidence. Our goal is to make advanced AI safety more practical, accessible, and useful for public safety.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a
-            href="/agentguard"
-            class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
-          >
-            AgentGuard
-          </a>
-          <a
-            href="/nuwa"
-            class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
-          >
-            Explore Nuwa
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Animated Hero -->
+  <WhitzardHero client:load />
 
   <!-- A Practical Path to Safe AI -->
   <section class="py-14 md:py-18 bg-wz-mist">
