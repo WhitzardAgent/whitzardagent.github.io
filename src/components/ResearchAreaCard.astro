@@ -8,8 +8,7 @@ interface Props {
 const { title, tag, description } = Astro.props;
 ---
 
-<div class="bg-nw-paper border border-nw-hairline rounded-lg p-5">
-  <span class="text-nw-jade text-xs font-medium bg-nw-jade-pale px-2 py-0.5 rounded-full">{tag}</span>
-  <h3 class="text-wz-ink font-semibold mt-3 mb-1 text-sm leading-snug">{title}</h3>
+<div class="card card--editorial hover-lift">
+  <h3 class="text-wz-ink font-semibold text-sm leading-snug mb-1.5">{title}</h3>
   <p class="text-wz-muted text-xs leading-relaxed">{description}</p>
 </div>
