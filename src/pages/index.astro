@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchAssets } from "../data/generated/researchAssets";
 import { newsItems, getNewsLink } from "../data/news";
-import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
+import UnifiedResearchCard from "../components/UnifiedResearchCard.astro";
 import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
@@ -124,17 +124,18 @@ const latestNews = newsItems.slice(0, 3);
       <SectionHeader title="Latest Research" subtitle="Recent publications from Nuwa Frontier AI Safety Lab." />
       <div class="space-y-4">
         {featuredPapers.map((paper) => (
-          <FeaturedResearchCard
+          <UnifiedResearchCard
             title={paper.title}
             authors={paper.authors}
             year={paper.year}
             venue={paper.venue}
             status={paper.status}
-            summary={paper.summary || ""}
+            summary={paper.summary}
             url={paper.url}
             pdfUrl={paper.pdfUrl}
             topic={paper.topic}
             featured={paper.featured}
+            brand="whitzard"
           />
         ))}
       </div>

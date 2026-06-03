@@ -1,0 +1,146 @@
+---
+interface Props {
+  title: string;
+  authors?: string;
+  year?: string;
+  venue?: string;
+  status?: string;
+  summary?: string;
+  url?: string;
+  pdfUrl?: string;
+  topic?: string[];
+  featured?: boolean;
+  /** "nuwa" for jade accents, "whitzard" (default) for teal accents */
+  brand?: "nuwa" | "whitzard";
+}
+
+const {
+  title,
+  authors,
+  year,
+  venue,
+  status,
+  summary,
+  url,
+  pdfUrl,
+  topic,
+  featured = false,
+  brand = "whitzard",
+} = Astro.props;
+
+// Build meta parts
+const metaParts: string[] = [];
+if (venue) metaParts.push(venue);
+else if (status) metaParts.push(status);
+if (year) metaParts.push(year);
+
+const metaLine = metaParts.join(" \u00B7 ");
+
+// Detect arXiv link
+const isArxiv = url && /arxiv\.org/.test(url);
+const arxivUrl = isArxiv ? url : undefined;
+
+// Show PDF only if it's different from the main URL
+const showPdf = pdfUrl && pdfUrl !== url;
+
+// Topic tags: cap at 5
+const displayTopics = (topic || []).slice(0, 5);
+
+// Brand-aware accent tokens
+const accent = brand === "nuwa"
+  ? { tag: "bg-nw-jade-pale text-nw-jade", border: "border-nw-jade/20 hover:border-nw-jade/40", btn: "bg-nw-ink hover:bg-nw-deep-blue text-white" }
+  : { tag: "bg-wz-mist text-wz-teal", border: "border-wz-hairline hover:border-wz-border-strong", btn: "bg-wz-ink hover:bg-wz-navy text-white" };
+---
+
+<div
+  class:list={[
+    "group bg-white border rounded-2xl transition-all duration-200",
+    featured ? accent.border : "border-wz-hairline hover:border-wz-border-strong",
+    "hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:-translate-y-0.5",
+  ]}
+  style="padding: 24px;"
+>
+  <!-- Meta row -->
+  {metaLine && (
+    <p class="text-wz-muted text-[13px] leading-snug mb-2.5 uppercase tracking-wide">
+      {metaLine}
+    </p>
+  )}
+
+  <!-- Title -->
+  <h3 class="text-wz-ink font-semibold text-lg leading-snug mb-2 line-clamp-2">
+    {url ? (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-wz-blue transition-colors no-underline text-inherit"
+      >
+        {title}
+      </a>
+    ) : (
+      title
+    )}
+  </h3>
+
+  <!-- Authors -->
+  {authors && (
+    <p class="text-wz-subtle text-sm leading-snug mb-2.5">{authors}</p>
+  )}
+
+  <!-- Summary -->
+  {summary && (
+    <p class="text-wz-body text-[15px] leading-relaxed mb-4">{summary}</p>
+  )}
+
+  <!-- Topic tags -->
+  {displayTopics.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mb-5">
+      {displayTopics.map((t) => (
+        <span class:list={[accent.tag, "text-xs font-medium px-2.5 py-1 rounded-full"]}>
+          {t}
+        </span>
+      ))}
+    </div>
+  )}
+
+  <!-- Action row -->
+  <div class="flex flex-wrap items-center gap-3">
+    {url && (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={[
+          accent.btn,
+          "inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition-colors no-underline",
+        ]}
+      >
+        Read paper
+        <span class="text-white/60 group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+      </a>
+    )}
+    {showPdf && (
+      <a
+        href={pdfUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-wz-subtle text-sm font-medium hover:text-wz-ink transition-colors no-underline inline-flex items-center gap-1"
+      >
+        PDF
+        <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7" /></svg>
+      </a>
+    )}
+    {arxivUrl && (
+      <a
+        href={arxivUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-wz-subtle text-sm font-medium hover:text-wz-ink transition-colors no-underline inline-flex items-center gap-1"
+      >
+        arXiv
+        <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7" /></svg>
+      </a>
+    )}
+  </div>
+</div>

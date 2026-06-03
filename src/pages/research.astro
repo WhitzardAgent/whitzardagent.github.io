@@ -2,8 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { researchAssets } from "../data/generated/researchAssets";
-import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
-import PublicationCard from "../components/PublicationCard.astro";
+import UnifiedResearchCard from "../components/UnifiedResearchCard.astro";
 import ResearchAreaCard from "../components/ResearchAreaCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
@@ -60,17 +59,18 @@ const researchAreas = [
         <SectionHeader title="Featured Research" />
         <div class="space-y-4">
           {featuredPapers.map((paper) => (
-            <FeaturedResearchCard
+            <UnifiedResearchCard
               title={paper.title}
               authors={paper.authors}
               year={paper.year}
               venue={paper.venue}
               status={paper.status}
-              summary={paper.summary || ""}
+              summary={paper.summary}
               url={paper.url}
               pdfUrl={paper.pdfUrl}
               topic={paper.topic}
               featured={paper.featured}
+              brand="nuwa"
             />
           ))}
         </div>
@@ -82,17 +82,18 @@ const researchAreas = [
           <SectionHeader title="All Publications" subtitle="Complete list of research outputs from the lab." />
           <div class="space-y-3">
             {otherPapers.map((paper) => (
-              <PublicationCard
+              <UnifiedResearchCard
                 title={paper.title}
                 authors={paper.authors}
                 year={paper.year}
                 venue={paper.venue}
                 status={paper.status}
-                summary={paper.summary || ""}
+                summary={paper.summary}
                 url={paper.url}
                 pdfUrl={paper.pdfUrl}
                 topic={paper.topic}
                 featured={paper.featured}
+                brand="nuwa"
               />
             ))}
           </div>
