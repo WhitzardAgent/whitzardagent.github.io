@@ -6,6 +6,7 @@ import ProjectCard from "../components/ProjectCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 import SocialIcon from "../components/SocialIcon.astro";
+import FiveStoneMotif from "../components/visuals/FiveStoneMotif.astro";
 
 // Flagship project
 const agentGuard = openSourceAssets.find((p) => p.name === "AgentGuard");
@@ -40,6 +41,11 @@ function isDatasetOrModel(p: { name: string; description?: string }): boolean {
 const otherProjects = openSourceAssets.filter(
   (p) => p.name !== "AgentGuard" && !toolProjects.includes(p) && !datasetProjects.includes(p)
 );
+
+// Summary metrics
+const totalVisible = openSourceAssets.filter((p) => p.visible).length;
+const toolCount = toolProjects.length;
+const datasetCount = datasetProjects.length;
 ---
 
 <BaseLayout
@@ -47,7 +53,7 @@ const otherProjects = openSourceAssets.filter(
   description="Open tools, datasets, benchmarks, and infrastructure for AI safety evaluation and agent safety."
   ogImage="/assets/og/whitzard-og.png"
 >
-  <section class="py-20 md:py-28">
+  <section class="py-16 md:py-24">
     <div class="max-w-[1120px] mx-auto px-6">
       <div class="max-w-2xl mb-8">
         <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
@@ -58,17 +64,35 @@ const otherProjects = openSourceAssets.filter(
         </p>
       </div>
       <div class="flex flex-wrap gap-3 mb-14">
-        <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
+        <a href={links.github} target="_blank" rel="noopener noreferrer" class="btn btn--primary inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold no-underline">
           <SocialIcon platform="github" size={14} class="mr-1.5" /> GitHub Organization &rarr;
         </a>
-        <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
+        <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="btn btn--secondary inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
           <SocialIcon platform="huggingface" size={14} class="mr-1.5" /> Hugging Face Organization &rarr;
         </a>
       </div>
 
+      <FiveStoneMotif layout="row" size={4} gap={8} class="mb-12" />
+
+      <!-- Summary Metrics Band -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
+        <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 text-center">
+          <div class="text-wz-ink font-semibold" style="font-size: 2.5rem; line-height: 1;">{totalVisible}</div>
+          <div class="text-wz-body text-sm mt-1">Open Projects</div>
+        </div>
+        <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 text-center">
+          <div class="text-wz-ink font-semibold" style="font-size: 2.5rem; line-height: 1;">{toolCount}</div>
+          <div class="text-wz-body text-sm mt-1">Tools & Infrastructure</div>
+        </div>
+        <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 text-center">
+          <div class="text-wz-ink font-semibold" style="font-size: 2.5rem; line-height: 1;">{datasetCount}</div>
+          <div class="text-wz-body text-sm mt-1">Datasets & Benchmarks</div>
+        </div>
+      </div>
+
       <!-- Flagship: AgentGuard -->
       {agentGuard && (
-        <div class="bg-wz-panel-blue/30 border border-wz-hairline rounded-xl p-7 mb-14">
+        <div class="bg-wz-panel-blue/40 border border-wz-hairline rounded-3xl p-8 md:p-12 mb-14">
           <div class="flex items-center gap-2 mb-3">
             <span class="bg-wz-teal-soft text-wz-teal text-xs font-medium px-2 py-0.5 rounded-full">Flagship</span>
             <span class="text-wz-blue text-xs font-mono uppercase">Runtime Security</span>
@@ -77,13 +101,34 @@ const otherProjects = openSourceAssets.filter(
           <p class="text-wz-body text-base leading-relaxed mb-4 max-w-xl">
             {agentGuard.description}
           </p>
+          <!-- Policy → Trace → Approval → Audit flow -->
+          <div class="flex items-center gap-2 mb-6 flex-wrap">
+            <svg width="100%" height="40" viewBox="0 0 400 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="max-w-md" aria-hidden="true">
+              <rect x="0" y="8" width="72" height="24" rx="6" fill="var(--wz-teal)" fill-opacity="0.15" stroke="var(--wz-teal)" stroke-opacity="0.4" stroke-width="1"/>
+              <text x="36" y="24" text-anchor="middle" fill="var(--wz-ink)" font-size="11" font-weight="500" font-family="system-ui, sans-serif">Policy</text>
+              <line x1="76" y1="20" x2="100" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <rect x="104" y="8" width="64" height="24" rx="6" fill="var(--wz-teal)" fill-opacity="0.15" stroke="var(--wz-teal)" stroke-opacity="0.4" stroke-width="1"/>
+              <text x="136" y="24" text-anchor="middle" fill="var(--wz-ink)" font-size="11" font-weight="500" font-family="system-ui, sans-serif">Trace</text>
+              <line x1="172" y1="20" x2="196" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <rect x="200" y="8" width="80" height="24" rx="6" fill="var(--wz-teal)" fill-opacity="0.15" stroke="var(--wz-teal)" stroke-opacity="0.4" stroke-width="1"/>
+              <text x="240" y="24" text-anchor="middle" fill="var(--wz-ink)" font-size="11" font-weight="500" font-family="system-ui, sans-serif">Approval</text>
+              <line x1="284" y1="20" x2="308" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <rect x="312" y="8" width="64" height="24" rx="6" fill="var(--wz-teal)" fill-opacity="0.15" stroke="var(--wz-teal)" stroke-opacity="0.4" stroke-width="1"/>
+              <text x="344" y="24" text-anchor="middle" fill="var(--wz-ink)" font-size="11" font-weight="500" font-family="system-ui, sans-serif">Audit</text>
+              <defs>
+                <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+                  <polygon points="0 0, 6 2, 0 4" fill="var(--wz-border-strong)"/>
+                </marker>
+              </defs>
+            </svg>
+          </div>
           <div class="flex gap-3">
             {agentGuard.githubUrl && (
-              <a href={agentGuard.githubUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
+              <a href={agentGuard.githubUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold no-underline">
                 View on GitHub
               </a>
             )}
-            <a href="/agentguard" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
+            <a href="/agentguard" class="btn btn--secondary inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
               Learn More
             </a>
           </div>
@@ -96,14 +141,16 @@ const otherProjects = openSourceAssets.filter(
           <SectionHeader title="Tools and Infrastructure" subtitle="Open-source safety tools, frameworks, and runtime infrastructure." />
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {toolProjects.map((project) => (
-              <ProjectCard
-                name={project.name}
-                status={project.status}
-                description={project.description}
-                githubUrl={project.githubUrl}
-                hfUrl={project.hfUrl}
-                websiteUrl={project.websiteUrl}
-              />
+              <div class="card card--system hover-lift">
+                <ProjectCard
+                  name={project.name}
+                  status={project.status}
+                  description={project.description}
+                  githubUrl={project.githubUrl}
+                  hfUrl={project.hfUrl}
+                  websiteUrl={project.websiteUrl}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -115,14 +162,16 @@ const otherProjects = openSourceAssets.filter(
           <SectionHeader title="Datasets and Benchmarks" subtitle="Open datasets, benchmarks, and evaluation resources." />
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {datasetProjects.map((project) => (
-              <ProjectCard
-                name={project.name}
-                status={project.status}
-                description={project.description}
-                githubUrl={project.githubUrl}
-                hfUrl={project.hfUrl}
-                websiteUrl={project.websiteUrl}
-              />
+              <div class="card card--system hover-lift">
+                <ProjectCard
+                  name={project.name}
+                  status={project.status}
+                  description={project.description}
+                  githubUrl={project.githubUrl}
+                  hfUrl={project.hfUrl}
+                  websiteUrl={project.websiteUrl}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -134,14 +183,16 @@ const otherProjects = openSourceAssets.filter(
           <SectionHeader title="More Projects" subtitle="Additional open-source projects from WhitzardAgent." />
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {otherProjects.map((project) => (
-              <ProjectCard
-                name={project.name}
-                status={project.status}
-                description={project.description}
-                githubUrl={project.githubUrl}
-                hfUrl={project.hfUrl}
-                websiteUrl={project.websiteUrl}
-              />
+              <div class="card card--system hover-lift">
+                <ProjectCard
+                  name={project.name}
+                  status={project.status}
+                  description={project.description}
+                  githubUrl={project.githubUrl}
+                  hfUrl={project.hfUrl}
+                  websiteUrl={project.websiteUrl}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -153,12 +204,14 @@ const otherProjects = openSourceAssets.filter(
         align="center"
         title="Contribute to Open Ecosystem"
         description="We welcome contributions to our open-source safety infrastructure. Check our repositories on GitHub and models on Hugging Face."
+        rounded="rounded-3xl"
+        padding="p-8 md:p-12"
       >
         <div class="flex flex-wrap gap-3 justify-center">
-          <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline">
+          <a href={links.github} target="_blank" rel="noopener noreferrer" class="btn btn--primary inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline">
             <SocialIcon platform="github" size={14} class="mr-1.5" /> Explore on GitHub
           </a>
-          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-transparent text-white border border-white/20 rounded-full px-5 py-2.5 text-sm font-semibold hover:border-white/40 transition-colors no-underline">
+          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="btn btn--secondary inline-flex items-center bg-transparent text-white border border-white/20 rounded-full px-5 py-2.5 text-sm font-semibold hover:border-white/40 transition-colors no-underline">
             <SocialIcon platform="huggingface" size={14} class="mr-1.5" />
             Hugging Face
           </a>

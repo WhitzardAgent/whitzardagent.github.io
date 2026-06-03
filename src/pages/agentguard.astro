@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
+import SignalNodeField from "../components/visuals/SignalNodeField.astro";
 ---
 
 <BaseLayout
@@ -8,43 +9,74 @@ import { links } from "../data/links";
   description="AgentGuard provides zero-trust access control for AI agent tool calls, with policy enforcement, tracing, and audit."
   ogImage="/assets/og/whitzard-og.png"
 >
-  <section class="py-20 md:py-28">
+  <section class="py-16 md:py-24">
     <div class="max-w-[1120px] mx-auto px-6">
-      <!-- Hero -->
-      <div class="max-w-2xl mb-16">
-        <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">Flagship Project</span>
-        <h1
-          class="text-wz-ink font-semibold tracking-tight mt-2 mb-4"
-          style="font-size: var(--text-hero); line-height: 1.05;"
-        >
-          AgentGuard
-        </h1>
-        <p class="text-wz-body text-xl leading-relaxed mb-8">
-          Zero-trust access control for AI agent tool calls.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a
-            href={links.agentguard}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-3 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline"
+
+      <!-- Hero: two-column with system diagram -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center mb-20">
+        <div class="md:col-span-6">
+          <span class="badge badge--active">Flagship Project</span>
+          <h1
+            class="text-wz-ink font-semibold tracking-tight mt-3 mb-4"
+            style="font-size: var(--text-hero); line-height: 1.05;"
           >
-            View on GitHub
-          </a>
-          <a
-            href={links.agentguard}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-3 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline"
-          >
-            Quickstart
-          </a>
+            AgentGuard
+          </h1>
+          <p class="text-wz-body text-xl leading-relaxed mb-8">
+            Zero-trust access control for AI agent tool calls.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href={links.agentguard} target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+              View on GitHub
+            </a>
+            <a href={links.agentguard} target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
+              Quickstart
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Abstract system diagram -->
+        <div class="md:col-span-6 hidden md:block" aria-hidden="true">
+          <div class="bg-wz-mist/50 border border-wz-hairline rounded-3xl p-6">
+            <svg viewBox="0 0 480 200" fill="none" class="w-full h-auto" preserveAspectRatio="xMidYMid meet">
+              <!-- Flow: Policy → Trace → Approval → Audit -->
+              <text x="60" y="100" fill="#2F7F7A" font-size="11" font-family="var(--font-mono)" font-weight="500" text-anchor="middle" opacity="0.8">Policy</text>
+              <rect x="20" y="110" width="80" height="40" rx="8" stroke="#2F7F7A" stroke-opacity="0.3" stroke-width="1" fill="#2F7F7A" fill-opacity="0.05" />
+              <line x1="100" y1="130" x2="140" y2="130" stroke="#2F7F7A" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arrowhead)" />
+
+              <text x="180" y="100" fill="#2F7F7A" font-size="11" font-family="var(--font-mono)" font-weight="500" text-anchor="middle" opacity="0.8">Trace</text>
+              <rect x="140" y="110" width="80" height="40" rx="8" stroke="#2F7F7A" stroke-opacity="0.3" stroke-width="1" fill="#2F7F7A" fill-opacity="0.05" />
+              <line x1="220" y1="130" x2="260" y2="130" stroke="#2F7F7A" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arrowhead)" />
+
+              <text x="300" y="100" fill="#2F7F7A" font-size="11" font-family="var(--font-mono)" font-weight="500" text-anchor="middle" opacity="0.8">Approval</text>
+              <rect x="260" y="110" width="80" height="40" rx="8" stroke="#2F7F7A" stroke-opacity="0.3" stroke-width="1" fill="#2F7F7A" fill-opacity="0.05" />
+              <line x1="340" y1="130" x2="380" y2="130" stroke="#2F7F7A" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arrowhead)" />
+
+              <text x="420" y="100" fill="#2F7F7A" font-size="11" font-family="var(--font-mono)" font-weight="500" text-anchor="middle" opacity="0.8">Audit</text>
+              <rect x="380" y="110" width="80" height="40" rx="8" stroke="#2F7F7A" stroke-opacity="0.3" stroke-width="1" fill="#2F7F7A" fill-opacity="0.05" />
+
+              <!-- Decorative signal nodes -->
+              <circle cx="60" cy="50" r="3" fill="#2F7F7A" opacity="0.25" class="slow-pulse" />
+              <circle cx="180" cy="40" r="4" fill="#164A8B" opacity="0.2" class="slow-pulse" style="animation-delay: 1.5s;" />
+              <circle cx="300" cy="45" r="3" fill="#2F7F7A" opacity="0.2" class="slow-pulse" style="animation-delay: 3s;" />
+              <circle cx="420" cy="50" r="3.5" fill="#164A8B" opacity="0.2" class="slow-pulse" style="animation-delay: 4.5s;" />
+
+              <!-- Faint arc -->
+              <path d="M 40 170 Q 240 140 440 170" stroke="#2F7F7A" stroke-opacity="0.08" stroke-width="0.8" fill="none" stroke-dasharray="4 4" />
+
+              <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L8,3 L0,6" fill="#2F7F7A" fill-opacity="0.3" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
         </div>
       </div>
 
       <!-- Problem -->
       <section class="mb-16">
-        <h2 class="text-wz-ink font-semibold mb-4" style="font-size: var(--text-h2);">The Problem</h2>
+        <h2 class="text-wz-ink font-semibold mb-5" style="font-size: var(--text-h2);">The Problem</h2>
         <p class="text-wz-body text-base leading-relaxed max-w-2xl mb-4">
           AI agents with tool-use capabilities create runtime risks. When an LLM-powered agent can execute code, access files, or make API calls, a single prompt injection or misalignment can lead to unauthorized actions.
         </p>
@@ -55,18 +87,21 @@ import { links } from "../data/links";
 
       <!-- How It Works -->
       <section class="mb-16">
-        <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">How It Works</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <h2 class="text-wz-ink font-semibold mb-8" style="font-size: var(--text-h2);">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
-            { title: "Policy", desc: "Define fine-grained access control policies for every tool call an agent can make." },
-            { title: "Trace", desc: "Full traceability of agent actions with structured audit logs." },
-            { title: "Approval", desc: "Human-in-the-loop approval gates for high-risk operations." },
-            { title: "Audit", desc: "Comprehensive audit trail for compliance and incident investigation." },
-          ].map((step) => (
-            <div class="bg-wz-panel border border-wz-hairline rounded-lg p-5">
-              <div class="text-wz-teal text-xs font-mono mb-2">&#9679;</div>
-              <h3 class="text-wz-ink font-semibold mb-2">{step.title}</h3>
-              <p class="text-wz-muted text-sm leading-relaxed">{step.desc}</p>
+            { title: "Policy", desc: "Define fine-grained access control policies for every tool call an agent can make.", step: "01" },
+            { title: "Trace", desc: "Full traceability of agent actions with structured audit logs.", step: "02" },
+            { title: "Approval", desc: "Human-in-the-loop approval gates for high-risk operations.", step: "03" },
+            { title: "Audit", desc: "Comprehensive audit trail for compliance and incident investigation.", step: "04" },
+          ].map((s) => (
+            <div class="card card--system hover-lift">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-wz-teal text-[10px] font-mono font-medium">{s.step}</span>
+                <span class="w-2 h-2 rounded-full bg-wz-teal/30"></span>
+              </div>
+              <h3 class="text-wz-ink font-semibold mb-2">{s.title}</h3>
+              <p class="text-wz-muted text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -74,15 +109,15 @@ import { links } from "../data/links";
 
       <!-- Use Cases -->
       <section class="mb-16">
-        <h2 class="text-wz-ink font-semibold mb-6" style="font-size: var(--text-h2);">Use Cases</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h2 class="text-wz-ink font-semibold mb-8" style="font-size: var(--text-h2);">Use Cases</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           {[
             { title: "Code Execution Agents", desc: "Control what code AI agents can execute and what resources they can access." },
             { title: "Browser Automation", desc: "Restrict browser agents from accessing unauthorized URLs or submitting forms." },
             { title: "API-Connected Agents", desc: "Enforce policies on which APIs agents can call and what data they can send." },
             { title: "Multi-Agent Systems", desc: "Coordinate access control across multiple collaborating AI agents." },
           ].map((uc) => (
-            <div class="bg-white border border-wz-hairline rounded-lg p-5">
+            <div class="card card--editorial hover-lift">
               <h3 class="text-wz-ink font-semibold text-sm mb-2">{uc.title}</h3>
               <p class="text-wz-muted text-sm leading-relaxed">{uc.desc}</p>
             </div>
@@ -91,14 +126,14 @@ import { links } from "../data/links";
       </section>
 
       <!-- Nuwa Framework Link -->
-      <div class="bg-nw-jade-pale border border-nw-hairline rounded-xl p-6 flex items-center gap-4">
+      <div class="bg-nw-jade-pale border border-nw-hairline rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-4">
         <span class="text-nw-jade text-xl">&#9670;</span>
-        <div>
+        <div class="flex-1">
           <h3 class="text-nw-ink font-semibold text-sm mb-1">Related: Nuwa Agent Safety Framework</h3>
           <p class="text-nw-muted text-sm">AgentGuard implements runtime safety principles from the Nuwa Agent Safety Framework (NASF).</p>
         </div>
-        <a href="/nuwa" class="ml-auto text-nw-jade text-sm font-medium hover:underline no-underline whitespace-nowrap">
-          Learn more &rarr;
+        <a href="/nuwa" class="text-link text-sm font-medium whitespace-nowrap" style="color: var(--nw-jade);">
+          Learn more <span class="arrow">&rarr;</span>
         </a>
       </div>
     </div>

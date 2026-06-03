@@ -1,0 +1,94 @@
+---
+/**
+ * NuwaHeroVisual — five-stone repair constellation.
+ * Inline SVG + CSS only. No external assets.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: cls = "" } = Astro.props;
+
+const stones = [
+  { cx: 130, cy: 180, color: "var(--stone-jade)", label: "Jade" },
+  { cx: 210, cy: 110, color: "var(--stone-vermilion)", label: "Vermilion" },
+  { cx: 280, cy: 90, color: "var(--stone-ochre)", label: "Ochre" },
+  { cx: 350, cy: 110, color: "var(--stone-ivory)", label: "Ivory" },
+  { cx: 420, cy: 180, color: "var(--stone-ink)", label: "Ink" },
+];
+
+const researchCards = [
+  { x: "8%", y: "15%", title: "Autonomy Risks" },
+  { x: "70%", y: "10%", title: "Deception" },
+  { x: "5%", y: "65%", title: "Scheming" },
+  { x: "75%", y: "70%", title: "Evaluation" },
+];
+---
+
+<div
+  class:list={["relative bg-nw-warm-paper/60 border border-nw-hairline rounded-3xl overflow-hidden p-6", cls]}
+  aria-hidden="true"
+>
+  <svg viewBox="0 0 560 360" fill="none" class="w-full h-auto" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="nw-repair-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#2F7F7A" stop-opacity="0.05" />
+        <stop offset="50%" stop-color="#2F7F7A" stop-opacity="0.3" />
+        <stop offset="100%" stop-color="#2F7F7A" stop-opacity="0.05" />
+      </linearGradient>
+    </defs>
+
+    <!-- Faint point grid -->
+    {Array.from({ length: 20 }).map((_, i) => (
+      <circle
+        cx={40 + (i % 5) * 120}
+        cy={40 + Math.floor(i / 5) * 80}
+        r="1"
+        fill="#2F7F7A"
+        opacity="0.06"
+      />
+    ))}
+
+    <!-- Concentric broken arcs (repairing the sky) -->
+    <path d="M 80 240 Q 280 40 480 240" stroke="#2F7F7A" stroke-opacity="0.1" stroke-width="0.6" fill="none" stroke-dasharray="6 4" class="slow-pulse" />
+    <path d="M 60 260 Q 280 20 500 260" stroke="#2F7F7A" stroke-opacity="0.07" stroke-width="0.5" fill="none" stroke-dasharray="8 6" class="slow-pulse" style="animation-delay: 2s;" />
+    <path d="M 40 280 Q 280 0 520 280" stroke="#2F7F7A" stroke-opacity="0.04" stroke-width="0.4" fill="none" stroke-dasharray="4 8" class="slow-pulse" style="animation-delay: 4s;" />
+
+    <!-- Jade repair curve -->
+    <path d="M 80 220 Q 180 80 280 100 Q 380 120 460 200" stroke="url(#nw-repair-grad)" stroke-width="1.8" fill="none" stroke-linecap="round" />
+
+    <!-- Five stones along the arc -->
+    {stones.map((s, i) => (
+      <g>
+        <circle cx={s.cx} cy={s.cy} r="12" fill={s.color} opacity="0.08" class="slow-pulse" style={`animation-delay: ${i * 1.2}s;`} />
+        <rect
+          x={s.cx - 5}
+          y={s.cy - 5}
+          width="10"
+          height="10"
+          rx="1.5"
+          fill={s.color}
+          opacity="0.7"
+          transform={`rotate(45 ${s.cx} ${s.cy})`}
+          class="slow-pulse"
+          style={`animation-delay: ${i * 1.2}s;`}
+        />
+      </g>
+    ))}
+
+    <!-- Evidence nodes -->
+    <circle cx="160" cy="260" r="2.5" fill="#2F7F7A" opacity="0.3" class="slow-pulse" style="animation-delay: 1s;" />
+    <circle cx="350" cy="280" r="2" fill="#2F7F7A" opacity="0.25" class="slow-pulse" style="animation-delay: 3s;" />
+    <circle cx="440" cy="260" r="3" fill="#2F7F7A" opacity="0.2" class="slow-pulse" style="animation-delay: 5s;" />
+  </svg>
+
+  <!-- Floating research theme cards -->
+  {researchCards.map((card, i) => (
+    <div
+      class="absolute bg-white/80 text-nw-ink text-[10px] font-medium px-2.5 py-1.5 rounded-lg border border-nw-hairline backdrop-blur-sm slow-float hidden md:block"
+      style={`left: ${card.x}; top: ${card.y}; animation-delay: ${i * 2.5}s;`}
+    >
+      {card.title}
+    </div>
+  ))}
+</div>

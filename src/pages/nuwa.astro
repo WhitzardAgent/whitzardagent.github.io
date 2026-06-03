@@ -10,6 +10,7 @@ import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 import NuwaHero from "../components/NuwaHero";
+import FiveStoneMotif from "../components/visuals/FiveStoneMotif.astro";
 
 const featuredPapers = researchAssets.filter((p) => p.featured).slice(0, 4);
 const recentPapers = researchAssets.slice(0, 5);
@@ -58,13 +59,16 @@ const nuwaNews = newsItems.filter(
   <!-- Animated Hero -->
   <NuwaHero client:load />
 
+  <!-- Separator -->
+  <FiveStoneMotif layout="row" size={5} gap={10} />
+
   <!-- Transparent Third-Party Evaluation -->
-  <section class="py-14 md:py-18 bg-nw-warm-paper">
+  <section class="py-16 md:py-24 bg-nw-warm-paper">
     <div class="max-w-[1120px] mx-auto px-6">
       <SectionHeader title="Transparent Third-Party Evaluation" subtitle="Nuwa's approach to independent frontier AI safety evaluation and governance evidence." />
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {transparentCards.map((card) => (
-          <div class="bg-white border border-nw-hairline rounded-lg p-5">
+          <div class="card card--editorial hover-lift">
             <h3 class="text-nw-ink font-semibold text-sm mb-2">{card.title}</h3>
             <p class="text-nw-muted text-sm leading-relaxed">{card.desc}</p>
           </div>
@@ -74,7 +78,7 @@ const nuwaNews = newsItems.filter(
   </section>
 
   <!-- Research Themes -->
-  <section class="py-14 md:py-20">
+  <section class="py-16 md:py-24">
     <div class="max-w-[1120px] mx-auto px-6">
       <SectionHeader title="Research Themes" subtitle="Core themes driving our frontier AI safety research." />
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -86,10 +90,10 @@ const nuwaNews = newsItems.filter(
   </section>
 
   <!-- Featured Research -->
-  <section class="py-14 md:py-18 bg-nw-mist">
+  <section class="py-16 md:py-24 bg-nw-mist">
     <div class="max-w-[1120px] mx-auto px-6">
       <SectionHeader title="Featured Research" />
-      <div class="space-y-4">
+      <div class="space-y-5">
         {featuredPapers.map((paper) => (
           <UnifiedResearchCard
             title={paper.title}
@@ -111,12 +115,12 @@ const nuwaNews = newsItems.filter(
 
   <!-- News -->
   {nuwaNews.length > 0 && (
-    <section class="py-14 md:py-18">
+    <section class="py-16 md:py-24">
       <div class="max-w-[1120px] mx-auto px-6">
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center justify-between mb-8">
           <h2 class="text-nw-ink font-semibold" style="font-size: var(--text-h2);">News</h2>
-          <a href="/news" class="text-nw-jade text-sm font-medium hover:underline no-underline">
-            View all &rarr;
+          <a href="/news" class="text-link text-sm font-medium" style="color: var(--nw-jade);">
+            View all <span class="arrow">&rarr;</span>
           </a>
         </div>
         <div class="space-y-4">
@@ -137,7 +141,7 @@ const nuwaNews = newsItems.filter(
   )}
 
   <!-- Latest Nuwa Brief -->
-  <section class="py-14 md:py-18">
+  <section class="py-16 md:py-24 bg-nw-warm-paper">
     <div class="max-w-[1120px] mx-auto px-6">
       <SectionHeader title="Latest Nuwa Brief" />
       <BriefCard
@@ -151,13 +155,15 @@ const nuwaNews = newsItems.filter(
   </section>
 
   <!-- Publications Preview -->
-  <section class="py-14 md:py-18 bg-nw-mist">
+  <section class="py-16 md:py-24 bg-nw-mist">
     <div class="max-w-[1120px] mx-auto px-6">
-      <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center justify-between mb-8">
         <h2 class="text-nw-ink font-semibold" style="font-size: var(--text-h2);">Publications &amp; Papers</h2>
-        <a href="/research" class="text-nw-jade text-sm font-medium hover:underline no-underline">View all &rarr;</a>
+        <a href="/research" class="text-link text-sm font-medium" style="color: var(--nw-jade);">
+          View all <span class="arrow">&rarr;</span>
+        </a>
       </div>
-      <div class="space-y-3">
+      <div class="space-y-4">
         {recentPapers.map((paper) => (
           <UnifiedResearchCard
             title={paper.title}
@@ -178,28 +184,20 @@ const nuwaNews = newsItems.filter(
   </section>
 
   <!-- Follow / Collaborate -->
-  <section class="py-14 md:py-18">
+  <section class="py-16 md:py-24">
     <div class="max-w-[1120px] mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <CalloutPanel variant="nuwa" align="left" description="Follow Nuwa's research updates on frontier AI risk, agent safety, and controllable AI.">
           <div class="flex flex-wrap gap-3">
-            <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-nw-ink text-white rounded-full px-4 py-2 text-xs font-semibold hover:bg-nw-deep-blue transition-colors no-underline">
-              Subscribe to Nuwa Brief
-            </a>
-            <a href={links.x} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-nw-ink border border-nw-hairline rounded-full px-4 py-2 text-xs font-semibold hover:border-nw-subtle transition-colors no-underline">
-              Follow on X
-            </a>
+            <a href={links.substack} target="_blank" rel="noopener noreferrer" class="btn btn--primary">Subscribe to Nuwa Brief</a>
+            <a href={links.x} target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Follow on X</a>
           </div>
         </CalloutPanel>
 
         <CalloutPanel variant="default" align="left" description="We collaborate on frontier AI safety evaluation, agent safety research, and runtime defense.">
           <div class="flex flex-wrap gap-3">
-            <a href="/contact" class="inline-flex items-center bg-wz-ink text-white rounded-full px-4 py-2 text-xs font-semibold hover:bg-wz-navy transition-colors no-underline">
-              Contact Us
-            </a>
-            <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-4 py-2 text-xs font-semibold hover:border-wz-border-strong transition-colors no-underline">
-              GitHub
-            </a>
+            <a href="/contact" class="btn btn--primary">Contact Us</a>
+            <a href={links.github} target="_blank" rel="noopener noreferrer" class="btn btn--secondary">GitHub</a>
           </div>
         </CalloutPanel>
       </div>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
+import ArcField from "../components/visuals/ArcField.astro";
 ---
 
 <BaseLayout
@@ -8,10 +9,15 @@ import { links } from "../data/links";
   description="Collaborate with Whitzard and Nuwa Frontier AI Safety Lab on frontier AI safety evaluation, agent safety, and runtime defense."
   ogImage="/assets/og/whitzard-og.png"
 >
-  <section class="py-20 md:py-28">
-    <div class="max-w-[1120px] mx-auto px-6">
+  <section class="py-16 md:py-24 relative overflow-hidden">
+    <!-- Subtle background motif -->
+    <div class="absolute top-0 right-0 w-[400px] h-[300px] opacity-30 pointer-events-none" aria-hidden="true">
+      <ArcField accent="blue" />
+    </div>
+
+    <div class="max-w-[1120px] mx-auto px-6 relative">
       <div class="max-w-2xl mb-16">
-        <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
+        <h1 class="text-wz-ink font-semibold tracking-tight mb-5" style="font-size: var(--text-h1);">
           Contact &amp; Collaboration
         </h1>
         <p class="text-wz-body text-lg leading-relaxed">
@@ -20,38 +26,38 @@ import { links } from "../data/links";
       </div>
 
       <!-- Contact Categories -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        <div class="bg-white border border-wz-hairline rounded-xl p-6">
-          <span class="text-nw-jade text-xs font-medium uppercase tracking-wide">Research</span>
-          <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">Research Collaboration</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+        <div class="card card--profile hover-lift">
+          <span class="badge" style="background: var(--nw-jade-pale); color: var(--nw-jade);">Research</span>
+          <h3 class="text-wz-ink font-semibold mt-3 mb-2" style="font-size: var(--text-title);">Research Collaboration</h3>
           <p class="text-wz-muted text-sm leading-relaxed">
             Joint research on frontier AI safety, agent behavior, and evaluation methodologies.
           </p>
         </div>
-        <div class="bg-white border border-wz-hairline rounded-xl p-6">
-          <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">Evaluation</span>
-          <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">Frontier AI Risk Evaluation</h3>
+        <div class="card card--profile hover-lift">
+          <span class="badge badge--open-source">Evaluation</span>
+          <h3 class="text-wz-ink font-semibold mt-3 mb-2" style="font-size: var(--text-title);">Frontier AI Risk Evaluation</h3>
           <p class="text-wz-muted text-sm leading-relaxed">
             Collaboration on frontier AI risk evaluation and benchmark development.
           </p>
         </div>
-        <div class="bg-white border border-wz-hairline rounded-xl p-6">
-          <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">Safety</span>
-          <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">Agent Safety / Runtime Safety</h3>
+        <div class="card card--profile hover-lift">
+          <span class="badge badge--active">Safety</span>
+          <h3 class="text-wz-ink font-semibold mt-3 mb-2" style="font-size: var(--text-title);">Agent Safety / Runtime Safety</h3>
           <p class="text-wz-muted text-sm leading-relaxed">
             Deploying or integrating runtime safety infrastructure for AI agent systems.
           </p>
         </div>
-        <div class="bg-white border border-wz-hairline rounded-xl p-6">
-          <span class="text-wz-navy text-xs font-medium uppercase tracking-wide">Media</span>
-          <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">Media &amp; Speaking</h3>
+        <div class="card card--profile hover-lift">
+          <span class="badge" style="background: #EDEDF4; color: var(--wz-navy);">Media</span>
+          <h3 class="text-wz-ink font-semibold mt-3 mb-2" style="font-size: var(--text-title);">Media &amp; Speaking</h3>
           <p class="text-wz-muted text-sm leading-relaxed">
             Press inquiries, interview requests, and speaking invitations.
           </p>
         </div>
-        <div class="bg-white border border-wz-hairline rounded-xl p-6">
-          <span class="text-wz-muted text-xs font-medium uppercase tracking-wide">General</span>
-          <h3 class="text-wz-ink font-semibold mt-2 mb-2" style="font-size: var(--text-title);">General Contact</h3>
+        <div class="card card--profile hover-lift">
+          <span class="badge" style="background: var(--wz-mist); color: var(--wz-muted);">General</span>
+          <h3 class="text-wz-ink font-semibold mt-3 mb-2" style="font-size: var(--text-title);">General Contact</h3>
           <p class="text-wz-muted text-sm leading-relaxed">
             General inquiries, feedback, and questions about Whitzard and Nuwa.
           </p>
@@ -59,39 +65,38 @@ import { links } from "../data/links";
       </div>
 
       <!-- Email -->
-      <div class="bg-wz-panel border border-wz-hairline rounded-xl p-8 mb-16 text-center">
-        <h2 class="text-wz-ink font-semibold mb-2" style="font-size: var(--text-h3);">Email Us</h2>
-        <p class="text-wz-muted text-sm mb-4">For collaboration and inquiries:</p>
+      <div class="bg-wz-panel-blue/30 border border-wz-hairline rounded-3xl p-8 md:p-12 mb-16 text-center">
+        <h2 class="text-wz-ink font-semibold mb-3" style="font-size: var(--text-h3);">Email Us</h2>
+        <p class="text-wz-muted text-sm mb-5">For collaboration and inquiries:</p>
         <a
           href={`mailto:${links.email}`}
-          class="text-wz-blue text-lg font-medium hover:underline no-underline"
+          class="text-wz-blue text-xl font-medium hover:underline no-underline"
         >
           {links.email}
         </a>
-        <!-- TODO: Verify contact@whitzard.tech mailbox is configured -->
       </div>
 
       <!-- Links -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <a href={links.x} target="_blank" rel="noopener noreferrer"
-          class="bg-white border border-wz-hairline rounded-lg p-6 hover:border-wz-blue transition-colors no-underline group">
+          class="card hover-lift no-underline group">
           <span class="text-wz-blue text-xs font-medium uppercase tracking-wide">X (Twitter)</span>
-          <p class="text-wz-ink font-semibold mt-2 text-sm group-hover:text-wz-blue transition-colors">@NuwaAISafety &rarr;</p>
+          <p class="text-wz-ink font-semibold mt-3 text-sm group-hover:text-wz-blue transition-colors">@NuwaAISafety <span class="arrow">&rarr;</span></p>
         </a>
         <a href={links.substack} target="_blank" rel="noopener noreferrer"
-          class="bg-white border border-wz-hairline rounded-lg p-6 hover:border-wz-teal transition-colors no-underline group">
+          class="card hover-lift no-underline group">
           <span class="text-wz-teal text-xs font-medium uppercase tracking-wide">Substack</span>
-          <p class="text-wz-ink font-semibold mt-2 text-sm group-hover:text-wz-teal transition-colors">Nuwa Brief &rarr;</p>
+          <p class="text-wz-ink font-semibold mt-3 text-sm group-hover:text-wz-teal transition-colors">Nuwa Brief <span class="arrow">&rarr;</span></p>
         </a>
         <a href={links.github} target="_blank" rel="noopener noreferrer"
-          class="bg-white border border-wz-hairline rounded-lg p-6 hover:border-wz-ink transition-colors no-underline group">
+          class="card hover-lift no-underline group">
           <span class="text-wz-ink text-xs font-medium uppercase tracking-wide">GitHub</span>
-          <p class="text-wz-ink font-semibold mt-2 text-sm group-hover:text-wz-blue transition-colors">WhitzardAgent &rarr;</p>
+          <p class="text-wz-ink font-semibold mt-3 text-sm group-hover:text-wz-blue transition-colors">WhitzardAgent <span class="arrow">&rarr;</span></p>
         </a>
         <a href={links.huggingface} target="_blank" rel="noopener noreferrer"
-          class="bg-white border border-wz-hairline rounded-lg p-6 hover:border-wz-azure transition-colors no-underline group">
+          class="card hover-lift no-underline group">
           <span class="text-wz-azure text-xs font-medium uppercase tracking-wide">Hugging Face</span>
-          <p class="text-wz-ink font-semibold mt-2 text-sm group-hover:text-wz-azure transition-colors">Datasets &amp; Benchmarks &rarr;</p>
+          <p class="text-wz-ink font-semibold mt-3 text-sm group-hover:text-wz-azure transition-colors">Datasets &amp; Benchmarks <span class="arrow">&rarr;</span></p>
         </a>
       </div>
     </div>

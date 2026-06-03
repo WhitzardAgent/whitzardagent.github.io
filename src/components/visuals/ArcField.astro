@@ -1,0 +1,47 @@
+---
+/** Abstract arc field visual. 3 curved paths + signal nodes. Pure CSS/SVG. */
+interface Props {
+  accent?: "jade" | "blue";
+  class?: string;
+}
+
+const { accent = "jade", class: cls = "" } = Astro.props;
+const strokeColor = accent === "jade" ? "var(--nw-jade)" : "var(--wz-blue)";
+---
+
+<div class:list={["relative w-full", cls]} aria-hidden="true">
+  <svg viewBox="0 0 500 320" fill="none" class="w-full h-auto" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id={`arc-grad-${accent}`} x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color={strokeColor} stop-opacity="0.08" />
+        <stop offset="100%" stop-color={strokeColor} stop-opacity="0.2" />
+      </linearGradient>
+    </defs>
+
+    <!-- Faint boundary circle -->
+    <circle cx="250" cy="170" r="140" stroke={strokeColor} stroke-opacity="0.06" stroke-width="0.8" fill="none" />
+
+    <!-- Arc curves -->
+    <path d="M 60 240 Q 180 60 300 180 Q 380 260 450 200" stroke={strokeColor} stroke-opacity="0.18" stroke-width="1.2" fill="none" stroke-dasharray="6 4" class="slow-pulse" />
+    <path d="M 80 260 Q 200 80 320 160 Q 400 220 460 180" stroke={strokeColor} stroke-opacity="0.12" stroke-width="0.8" fill="none" stroke-dasharray="8 6" class="slow-pulse" style="animation-delay: 2s;" />
+    <path d="M 100 280 Q 220 100 340 140 Q 420 180 470 160" stroke={strokeColor} stroke-opacity="0.08" stroke-width="0.6" fill="none" stroke-dasharray="4 8" class="slow-pulse" style="animation-delay: 4s;" />
+
+    <!-- Signal nodes -->
+    <circle cx="180" cy="120" r="3" fill={strokeColor} opacity="0.5" class="slow-pulse" />
+    <circle cx="300" cy="170" r="4" fill={strokeColor} opacity="0.6" class="slow-pulse" style="animation-delay: 1.5s;" />
+    <circle cx="250" cy="100" r="2.5" fill={strokeColor} opacity="0.4" class="slow-pulse" style="animation-delay: 3s;" />
+    <circle cx="370" cy="140" r="3" fill={strokeColor} opacity="0.35" class="slow-pulse" style="animation-delay: 4.5s;" />
+    <circle cx="200" cy="200" r="2" fill={strokeColor} opacity="0.3" class="slow-pulse" style="animation-delay: 2.5s;" />
+
+    <!-- Point grid -->
+    {Array.from({ length: 12 }).map((_, i) => (
+      <circle
+        cx={60 + (i % 4) * 130}
+        cy={60 + Math.floor(i / 4) * 100}
+        r="1"
+        fill={strokeColor}
+        opacity="0.06"
+      />
+    ))}
+  </svg>
+</div>

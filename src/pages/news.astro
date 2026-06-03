@@ -5,9 +5,15 @@ import { newsItems, getNewsLink } from "../data/news";
 import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
+import FiveStoneMotif from "../components/visuals/FiveStoneMotif.astro";
 
 const featuredNews = newsItems.filter((n) => n.featured);
 const latestNews = newsItems.filter((n) => !n.featured);
+
+function formatShortDate(date: string): string {
+  const d = new Date(date);
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
 ---
 
 <BaseLayout
@@ -15,7 +21,7 @@ const latestNews = newsItems.filter((n) => !n.featured);
   description="Research updates, company news, ecosystem progress, and public notes from Whitzard and Nuwa."
   ogImage="/assets/og/whitzard-og.png"
 >
-  <section class="py-20 md:py-28">
+  <section class="py-16 md:py-24">
     <div class="max-w-[1120px] mx-auto px-6">
       <div class="max-w-2xl mb-12">
         <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
@@ -26,21 +32,49 @@ const latestNews = newsItems.filter((n) => !n.featured);
         </p>
       </div>
 
+      <FiveStoneMotif class="mb-12" />
+
       <!-- Featured News -->
       {featuredNews.length > 0 && (
         <div class="mb-16">
           <SectionHeader title="Featured" subtitle="Highlighted updates from Whitzard and Nuwa." />
           <div class="space-y-4">
-            {featuredNews.map((item) => (
-              <NewsCard
-                title={item.title}
-                date={item.date}
-                type={item.type}
-                summary={item.summary}
-                href={getNewsLink(item)}
-                source={item.source}
-                featured={item.featured}
-              />
+            {featuredNews.map((item, i) => (
+              i === 0 ? (
+                <div class="rounded-2xl p-6 md:p-8 border-l-4 border-nw-jade bg-white">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-nw-jade-pale text-nw-jade">
+                      {item.type}
+                    </span>
+                    <span class="text-wz-muted text-xs">
+                      {new Date(item.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                    </span>
+                    {item.featured && (
+                      <span class="text-wz-blue text-xs font-medium">Featured</span>
+                    )}
+                    {item.url && (
+                      <span class="text-wz-subtle text-xs">&#8599;</span>
+                    )}
+                  </div>
+                  <p class="text-wz-ink font-semibold text-base md:text-lg mb-2">{item.title}</p>
+                  {item.summary && (
+                    <p class="text-wz-muted text-sm leading-relaxed">{item.summary}</p>
+                  )}
+                  {item.source && (
+                    <p class="text-wz-subtle text-xs mt-2">Source: {item.source}</p>
+                  )}
+                </div>
+              ) : (
+                <NewsCard
+                  title={item.title}
+                  date={item.date}
+                  type={item.type}
+                  summary={item.summary}
+                  href={getNewsLink(item)}
+                  source={item.source}
+                  featured={item.featured}
+                />
+              )
             ))}
           </div>
         </div>
@@ -52,15 +86,24 @@ const latestNews = newsItems.filter((n) => !n.featured);
           <SectionHeader title="Latest" subtitle="Recent updates and announcements." />
           <div class="space-y-4">
             {latestNews.map((item) => (
-              <NewsCard
-                title={item.title}
-                date={item.date}
-                type={item.type}
-                summary={item.summary}
-                href={getNewsLink(item)}
-                source={item.source}
-                featured={item.featured}
-              />
+              <div class="flex gap-4">
+                <div class="hidden md:flex flex-col items-center pt-5">
+                  <span class="text-wz-muted text-xs font-mono whitespace-nowrap">{formatShortDate(item.date)}</span>
+                  <span class="w-2 h-2 rounded-full bg-nw-jade mt-2"></span>
+                  <div class="w-px flex-1 bg-nw-hairline mt-1"></div>
+                </div>
+                <div class="flex-1">
+                  <NewsCard
+                    title={item.title}
+                    date={item.date}
+                    type={item.type}
+                    summary={item.summary}
+                    href={getNewsLink(item)}
+                    source={item.source}
+                    featured={item.featured}
+                  />
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -72,9 +115,14 @@ const latestNews = newsItems.filter((n) => !n.featured);
         align="center"
         description="Get research updates from Nuwa Frontier AI Safety Lab delivered to your inbox."
       >
-        <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
-          Subscribe to Nuwa Brief
-        </a>
+        <div class="flex items-center gap-3">
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="btn btn--primary no-underline">
+            Subscribe to Nuwa Brief
+          </a>
+          <a href="/" class="btn btn--secondary no-underline">
+            Back to Home
+          </a>
+        </div>
       </CalloutPanel>
     </div>
   </section>

@@ -9,37 +9,37 @@ interface Props {
 const { brand = "whitzard" } = Astro.props;
 ---
 
-<footer class="border-t border-wz-hairline bg-wz-panel mt-24">
-  <div class="max-w-[1180px] mx-auto px-6 py-10">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<footer class="border-t border-wz-hairline bg-wz-panel">
+  <div class="max-w-[1180px] mx-auto px-6 pt-14 pb-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
       <!-- Brand -->
       <div>
-        <div class="flex items-center gap-2 mb-2">
-          <img src={brand === "nuwa" ? "/assets/logo/nvwa_logo.png" : "/assets/logo/whitzard_logo.png"} alt="" class="w-5 h-5 rounded" />
+        <div class="flex items-center gap-2.5 mb-3">
+          <img src={brand === "nuwa" ? "/assets/logo/nvwa_logo.png" : "/assets/logo/whitzard_logo.png"} alt="" class="w-6 h-6 rounded" />
           <p class="text-wz-ink font-semibold text-base">
             {brand === "nuwa" ? "Nuwa 女娲" : "Whitzard 白泽"}
           </p>
         </div>
-        <p class="text-wz-muted text-xs leading-relaxed mb-4">
+        <p class="text-wz-muted text-xs leading-relaxed mb-5 max-w-[220px]">
           {brand === "nuwa"
             ? "Transparent, third-party, open infrastructure for frontier AI safety evaluation and governance."
             : "Building generalized safety infrastructure for frontier AI and agentic systems."}
         </p>
         <!-- Social icons row -->
-        <div class="flex items-center gap-3">
-          <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="GitHub">
+        <div class="flex items-center gap-3.5">
+          <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="GitHub">
             <SocialIcon platform="github" size={16} />
           </a>
-          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="Hugging Face">
+          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="Hugging Face">
             <SocialIcon platform="huggingface" size={16} />
           </a>
-          <a href={links.x} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="X">
+          <a href={links.x} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="X">
             <SocialIcon platform="x" size={16} />
           </a>
-          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="Substack">
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="Substack">
             <SocialIcon platform="substack" size={16} />
           </a>
-          <a href={`mailto:${links.email}`} class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="Email">
+          <a href={`mailto:${links.email}`} class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="Email">
             <SocialIcon platform="email" size={16} />
           </a>
         </div>
@@ -47,8 +47,8 @@ const { brand = "whitzard" } = Astro.props;
 
       <!-- Site -->
       <div>
-        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Site</p>
-        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
+        <p class="text-wz-ink font-medium text-[11px] uppercase tracking-widest mb-4">Site</p>
+        <div class="flex flex-col gap-2.5 text-[13px] text-wz-muted">
           <a href="/agentguard" class="hover:text-wz-ink transition-colors no-underline">Products</a>
           <a href="/research" class="hover:text-wz-ink transition-colors no-underline">Research</a>
           <a href="/news" class="hover:text-wz-ink transition-colors no-underline">News</a>
@@ -60,18 +60,18 @@ const { brand = "whitzard" } = Astro.props;
 
       <!-- Channels -->
       <div>
-        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Channels</p>
-        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
-          <a href={links.x} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+        <p class="text-wz-ink font-medium text-[11px] uppercase tracking-widest mb-4">Channels</p>
+        <div class="flex flex-col gap-2.5 text-[13px] text-wz-muted">
+          <a href={links.x} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
             <SocialIcon platform="x" size={12} /> X (Twitter)
           </a>
-          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
             <SocialIcon platform="substack" size={12} /> Substack
           </a>
-          <a href={links.github} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+          <a href={links.github} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
             <SocialIcon platform="github" size={12} /> GitHub
           </a>
-          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
             <SocialIcon platform="huggingface" size={12} /> Hugging Face
           </a>
         </div>
@@ -79,15 +79,15 @@ const { brand = "whitzard" } = Astro.props;
 
       <!-- Contact & Roots -->
       <div>
-        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Contact</p>
-        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
+        <p class="text-wz-ink font-medium text-[11px] uppercase tracking-widest mb-4">Contact</p>
+        <div class="flex flex-col gap-2.5 text-[13px] text-wz-muted">
           <a href="/contact" class="hover:text-wz-ink transition-colors no-underline">Collaboration</a>
-          <a href={`mailto:${links.email}`} class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+          <a href={`mailto:${links.email}`} class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
             <SocialIcon platform="email" size={12} /> {links.email}
           </a>
         </div>
-        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3 mt-5">Research Roots</p>
-        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
+        <p class="text-wz-ink font-medium text-[11px] uppercase tracking-widest mb-4 mt-6">Research Roots</p>
+        <div class="flex flex-col gap-2.5 text-[13px] text-wz-muted">
           <a href={links.fudanSecurityLab} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">System Software &amp; Security Lab</a>
           <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Fudan University</a>
           <a href={links.minYang} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Prof. Min Yang</a>
@@ -96,16 +96,16 @@ const { brand = "whitzard" } = Astro.props;
     </div>
 
     <!-- Bottom Bar -->
-    <div class="mt-8 pt-4 border-t border-wz-hairline flex flex-col md:flex-row justify-between items-center gap-3">
+    <div class="mt-12 pt-5 border-t border-wz-hairline flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-wz-subtle text-xs">
         &copy; {new Date().getFullYear()} Whitzard. All rights reserved.
       </p>
-      <div class="flex items-center gap-1 text-wz-subtle text-xs">
-        <span style="color: var(--stone-jade);">&#9670;</span>
-        <span style="color: var(--stone-vermilion);">&#9670;</span>
-        <span style="color: var(--stone-ochre);">&#9670;</span>
-        <span style="color: var(--stone-ivory);">&#9670;</span>
-        <span style="color: var(--stone-ink);">&#9670;</span>
+      <div class="flex items-center gap-1.5" aria-hidden="true">
+        <span style="color: var(--stone-jade); font-size: 8px;">&#9670;</span>
+        <span style="color: var(--stone-vermilion); font-size: 8px;">&#9670;</span>
+        <span style="color: var(--stone-ochre); font-size: 8px;">&#9670;</span>
+        <span style="color: var(--stone-ivory); font-size: 8px;">&#9670;</span>
+        <span style="color: var(--stone-ink); font-size: 8px;">&#9670;</span>
       </div>
     </div>
   </div>

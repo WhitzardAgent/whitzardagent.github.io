@@ -1,0 +1,35 @@
+---
+/** Five-stone decorative motif. Renders 5 colored diamond shapes. */
+interface Props {
+  /** "row" = horizontal, "column" = vertical */
+  layout?: "row" | "column";
+  /** Pixel size of each stone */
+  size?: number;
+  /** Gap between stones in px */
+  gap?: number;
+  /** CSS class */
+  class?: string;
+}
+
+const { layout = "row", size = 6, gap = 8, class: cls = "" } = Astro.props;
+const stones = [
+  { color: "var(--stone-jade)" },
+  { color: "var(--stone-vermilion)" },
+  { color: "var(--stone-ochre)" },
+  { color: "var(--stone-ivory)" },
+  { color: "var(--stone-ink)" },
+];
+---
+
+<div
+  class:list={["stone-sequence flex items-center justify-center", cls]}
+  style={layout === "row" ? `gap: ${gap}px;` : `flex-direction: column; gap: ${gap}px;`}
+  aria-hidden="true"
+>
+  {stones.map((s) => (
+    <span
+      class="stone-gem"
+      style={`width: ${size}px; height: ${size}px; background: ${s.color}; border-radius: 2px; transform: rotate(45deg); flex-shrink: 0;`}
+    />
+  ))}
+</div>

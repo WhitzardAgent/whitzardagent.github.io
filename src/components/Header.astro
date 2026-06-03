@@ -9,62 +9,68 @@ interface Props {
 const { brand = "whitzard" } = Astro.props;
 const currentPath = Astro.url.pathname;
 const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || currentPath.startsWith("/research");
+
+const navItems = [
+  { href: "/agentguard", label: "Products", match: (p: string) => p === "/agentguard" },
+  { href: "/research", label: "Research", match: (p: string) => p.startsWith("/research") || p.startsWith("/publications") },
+  { href: "/news", label: "News", match: (p: string) => p.startsWith("/news") },
+  { href: "/open-ecosystem", label: "Ecosystem", match: (p: string) => p.startsWith("/open-ecosystem") || p.startsWith("/open-source") },
+  { href: "/nuwa", label: "Nuwa Lab", match: (p: string) => p.startsWith("/nuwa") },
+  { href: "/about", label: "About", match: (p: string) => p === "/about" },
+];
 ---
 
 <header
-  class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-wz-hairline"
-  style="height: 64px;"
+  class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-wz-hairline/80 transition-colors duration-200"
+  style="height: 56px;"
 >
   <div class="max-w-[1180px] mx-auto px-6 h-full flex items-center justify-between">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 text-wz-ink font-semibold tracking-tight no-underline">
+    <a href="/" class="flex items-center gap-2 text-wz-ink font-semibold tracking-tight no-underline hover:opacity-80 transition-opacity">
       {isNuwaBrand ? (
         <span class="flex items-center gap-2">
-          <img src="/assets/logo/nvwa_logo.png" alt="" class="w-6 h-6 rounded" />
-          <span class="text-base">Nuwa <span class="text-nw-muted font-normal text-sm">女娲</span></span>
+          <img src="/assets/logo/nvwa_logo.png" alt="" class="w-5 h-5 rounded" />
+          <span class="text-sm">Nuwa <span class="text-nw-muted font-normal text-xs">女娲</span></span>
         </span>
       ) : (
         <span class="flex items-center gap-2">
-          <img src="/assets/logo/whitzard_logo.png" alt="" class="w-6 h-6 rounded" />
-          <span class="text-base">Whitzard <span class="text-wz-muted font-normal text-sm">白泽</span></span>
+          <img src="/assets/logo/whitzard_logo.png" alt="" class="w-5 h-5 rounded" />
+          <span class="text-sm">Whitzard <span class="text-wz-muted font-normal text-xs">白泽</span></span>
         </span>
       )}
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden lg:flex items-center gap-5 text-sm font-medium text-wz-muted">
-      <a href="/agentguard" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath === "/agentguard" && "text-wz-ink"]}>
-        Products
-      </a>
-      <a href="/research" class:list={["hover:text-wz-ink transition-colors no-underline", (currentPath.startsWith("/research") || currentPath.startsWith("/publications")) && "text-wz-ink"]}>
-        Research
-      </a>
-      <a href="/news" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath.startsWith("/news") && "text-wz-ink"]}>
-        News
-      </a>
-      <a href="/open-ecosystem" class:list={["hover:text-wz-ink transition-colors no-underline", (currentPath.startsWith("/open-ecosystem") || currentPath.startsWith("/open-source")) && "text-wz-ink"]}>
-        Ecosystem
-      </a>
-      <a href="/nuwa" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath.startsWith("/nuwa") && "text-wz-ink"]}>
-        Nuwa Lab
-      </a>
-      <a href="/about" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath === "/about" && "text-wz-ink"]}>
-        About
-      </a>
-      <span class="w-px h-4 bg-wz-hairline mx-1"></span>
-      <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5" aria-label="GitHub">
-        <SocialIcon platform="github" size={16} />
-        <span class="text-xs">GitHub</span>
+    <nav class="hidden lg:flex items-center gap-1 text-[13px] font-medium text-wz-muted">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "px-3 py-1.5 rounded-md transition-colors no-underline relative",
+            item.match(currentPath)
+              ? "text-wz-ink"
+              : "hover:text-wz-ink hover:bg-wz-mist/50",
+          ]}
+        >
+          {item.label}
+          {item.match(currentPath) && (
+            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-wz-teal" />
+          )}
+        </a>
+      ))}
+      <span class="w-px h-4 bg-wz-hairline mx-2"></span>
+      <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors no-underline flex items-center gap-1" aria-label="GitHub">
+        <SocialIcon platform="github" size={15} />
       </a>
     </nav>
 
     <!-- Mobile Menu Toggle -->
     <button
       id="mobile-menu-toggle"
-      class="lg:hidden p-2 text-wz-ink"
+      class="lg:hidden p-2 text-wz-ink hover:bg-wz-mist/50 rounded-md transition-colors"
       aria-label="Toggle navigation menu"
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="3" y1="6" x2="21" y2="6" />
         <line x1="3" y1="12" x2="21" y2="12" />
         <line x1="3" y1="18" x2="21" y2="18" />
@@ -75,16 +81,23 @@ const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || curre
   <!-- Mobile Navigation -->
   <nav
     id="mobile-menu"
-    class="hidden lg:hidden bg-white border-b border-wz-hairline px-6 py-4"
+    class="hidden lg:hidden bg-white/95 backdrop-blur-md border-b border-wz-hairline px-6 py-4"
   >
-    <div class="flex flex-col gap-3 text-sm font-medium text-wz-muted">
-      <a href="/agentguard" class="hover:text-wz-ink no-underline">Products</a>
-      <a href="/research" class="hover:text-wz-ink no-underline">Research</a>
-      <a href="/news" class="hover:text-wz-ink no-underline">News</a>
-      <a href="/open-ecosystem" class="hover:text-wz-ink no-underline">Ecosystem</a>
-      <a href="/nuwa" class="hover:text-wz-ink no-underline">Nuwa Lab</a>
-      <a href="/about" class="hover:text-wz-ink no-underline">About</a>
-      <div class="border-t border-wz-hairline pt-3 mt-1 flex items-center gap-4">
+    <div class="flex flex-col gap-1 text-sm font-medium text-wz-muted">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "px-3 py-2 rounded-lg no-underline transition-colors",
+            item.match(currentPath)
+              ? "text-wz-ink bg-wz-mist/50"
+              : "hover:text-wz-ink hover:bg-wz-mist/30",
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="border-t border-wz-hairline pt-3 mt-2 flex items-center gap-4">
         <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink no-underline flex items-center gap-1.5">
           <SocialIcon platform="github" size={16} /> <span class="text-xs">GitHub</span>
         </a>

@@ -4,13 +4,17 @@ interface Props {
   description: string;
   variant?: "default" | "nuwa" | "dark";
   align?: "left" | "center";
+  rounded?: string;
+  padding?: string;
 }
 
-const { title, description, variant = "default", align = "center" } = Astro.props;
+const { title, description, variant = "default", align = "center", rounded, padding } = Astro.props;
 ---
 
 <div class:list={[
-  "border rounded-xl p-8",
+  "border",
+  rounded ?? "rounded-xl",
+  padding ?? "p-8",
   variant === "default" && "bg-wz-panel border-wz-hairline",
   variant === "nuwa" && "bg-nw-warm-paper border-nw-hairline",
   variant === "dark" && "bg-wz-panel-ink border-wz-panel-ink",

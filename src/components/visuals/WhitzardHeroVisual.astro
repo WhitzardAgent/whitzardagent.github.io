@@ -1,0 +1,85 @@
+---
+/**
+ * WhitzardHeroVisual — abstract AI safety monitoring field.
+ * Inline SVG + CSS only. No external assets.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: cls = "" } = Astro.props;
+---
+
+<div
+  class:list={["relative bg-wz-mist/50 border border-wz-hairline rounded-3xl overflow-hidden p-6", cls]}
+  aria-hidden="true"
+>
+  <svg viewBox="0 0 560 360" fill="none" class="w-full h-auto" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="wz-jade-line" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#2F7F7A" stop-opacity="0.05" />
+        <stop offset="50%" stop-color="#2F7F7A" stop-opacity="0.2" />
+        <stop offset="100%" stop-color="#2F7F7A" stop-opacity="0.05" />
+      </linearGradient>
+      <linearGradient id="wz-scan" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#2F7F7A" stop-opacity="0" />
+        <stop offset="50%" stop-color="#2F7F7A" stop-opacity="0.08" />
+        <stop offset="100%" stop-color="#2F7F7A" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+
+    <!-- Faint circular boundary -->
+    <circle cx="280" cy="180" r="150" stroke="#2F7F7A" stroke-opacity="0.06" stroke-width="1" fill="none" />
+    <circle cx="280" cy="180" r="110" stroke="#2F7F7A" stroke-opacity="0.04" stroke-width="0.5" fill="none" />
+
+    <!-- Arc curves -->
+    <path d="M 80 240 Q 180 60 300 160 Q 400 240 480 180" stroke="#2F7F7A" stroke-opacity="0.18" stroke-width="1.2" fill="none" stroke-dasharray="6 4" class="slow-pulse" />
+    <path d="M 100 270 Q 200 90 320 140 Q 420 200 500 150" stroke="#164A8B" stroke-opacity="0.12" stroke-width="0.8" fill="none" stroke-dasharray="8 6" class="slow-pulse" style="animation-delay: 2s;" />
+    <path d="M 120 290 Q 220 120 340 120 Q 440 160 520 120" stroke="#2F7F7A" stroke-opacity="0.08" stroke-width="0.6" fill="none" stroke-dasharray="4 8" class="slow-pulse" style="animation-delay: 4s;" />
+
+    <!-- Signal flow line (main) -->
+    <path d="M 100 200 Q 200 80 300 140 Q 400 200 460 160" stroke="url(#wz-jade-line)" stroke-width="1.5" fill="none" stroke-linecap="round" />
+
+    <!-- Abstract sensing eye — arcs + circle, not literal -->
+    <ellipse cx="280" cy="160" rx="40" ry="20" stroke="#2F7F7A" stroke-opacity="0.15" stroke-width="0.8" fill="none" />
+    <circle cx="280" cy="160" r="6" fill="#2F7F7A" opacity="0.25" class="slow-pulse" />
+    <circle cx="280" cy="160" r="2.5" fill="#2F7F7A" opacity="0.6" />
+    <path d="M 230 160 Q 280 130 330 160" stroke="#2F7F7A" stroke-opacity="0.1" stroke-width="0.6" fill="none" />
+    <path d="M 235 160 Q 280 190 325 160" stroke="#2F7F7A" stroke-opacity="0.1" stroke-width="0.6" fill="none" />
+
+    <!-- Signal nodes -->
+    <circle cx="150" cy="120" r="3.5" fill="#2F7F7A" opacity="0.4" class="slow-pulse" />
+    <circle cx="400" cy="100" r="4" fill="#164A8B" opacity="0.35" class="slow-pulse" style="animation-delay: 1.5s;" />
+    <circle cx="380" cy="260" r="3" fill="#2F7F7A" opacity="0.3" class="slow-pulse" style="animation-delay: 3s;" />
+    <circle cx="180" cy="260" r="2.5" fill="#164A8B" opacity="0.25" class="slow-pulse" style="animation-delay: 4.5s;" />
+    <circle cx="460" cy="200" r="2" fill="#2F7F7A" opacity="0.2" class="slow-pulse" style="animation-delay: 2s;" />
+
+    <!-- Point grid -->
+    {Array.from({ length: 16 }).map((_, i) => (
+      <circle
+        cx={80 + (i % 4) * 140}
+        cy={60 + Math.floor(i / 4) * 100}
+        r="1"
+        fill="#2F7F7A"
+        opacity="0.05"
+      />
+    ))}
+
+    <!-- Scan line -->
+    <rect x="0" y="0" width="560" height="3" fill="url(#wz-scan)" opacity="0.1" class="scan-line" />
+  </svg>
+
+  <!-- Floating labels -->
+  <div class="absolute top-[14%] right-[8%] bg-white/90 text-wz-teal text-[10px] font-medium px-2 py-1 rounded-full border border-wz-hairline backdrop-blur-sm slow-float">
+    Risk Signals
+  </div>
+  <div class="absolute top-[48%] right-[5%] bg-white/90 text-wz-blue text-[10px] font-medium px-2 py-1 rounded-full border border-wz-hairline backdrop-blur-sm slow-float" style="animation-delay: 3s;">
+    Evaluation
+  </div>
+  <div class="absolute bottom-[28%] right-[12%] bg-white/90 text-wz-teal text-[10px] font-medium px-2 py-1 rounded-full border border-wz-hairline backdrop-blur-sm slow-float" style="animation-delay: 5s;">
+    Runtime Protection
+  </div>
+  <div class="absolute bottom-[12%] left-[15%] bg-white/90 text-wz-ink text-[10px] font-medium px-2 py-1 rounded-full border border-wz-hairline backdrop-blur-sm slow-float" style="animation-delay: 2s;">
+    Governance Evidence
+  </div>
+</div>
