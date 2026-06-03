@@ -7,6 +7,7 @@ import FeaturedResearchCard from "../components/FeaturedResearchCard.astro";
 import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
+import SocialIcon from "../components/SocialIcon.astro";
 
 const featuredPapers = researchAssets.filter((p) => p.featured).slice(0, 3);
 
@@ -191,10 +192,10 @@ const latestNews = newsItems.slice(0, 3);
         </p>
         <div class="flex flex-wrap gap-3">
           <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
-            GitHub
+            <SocialIcon platform="github" size={14} class="mr-1.5" /> GitHub
           </a>
           <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
-            Hugging Face
+            <SocialIcon platform="huggingface" size={14} class="mr-1.5" /> Hugging Face
           </a>
           <a href="/open-ecosystem" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
             Open Ecosystem &rarr;

@@ -5,6 +5,7 @@ import { openSourceAssets } from "../data/generated/openSourceAssets";
 import ProjectCard from "../components/ProjectCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
+import SocialIcon from "../components/SocialIcon.astro";
 
 // Flagship project
 const agentGuard = openSourceAssets.find((p) => p.name === "AgentGuard");
@@ -58,10 +59,10 @@ const otherProjects = openSourceAssets.filter(
       </div>
       <div class="flex flex-wrap gap-3 mb-14">
         <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
-          GitHub Organization &rarr;
+          <SocialIcon platform="github" size={14} class="mr-1.5" /> GitHub Organization &rarr;
         </a>
         <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
-          Hugging Face Organization &rarr;
+          <SocialIcon platform="huggingface" size={14} class="mr-1.5" /> Hugging Face Organization &rarr;
         </a>
       </div>
 
@@ -155,9 +156,10 @@ const otherProjects = openSourceAssets.filter(
       >
         <div class="flex flex-wrap gap-3 justify-center">
           <a href={links.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline">
-            Explore on GitHub
+            <SocialIcon platform="github" size={14} class="mr-1.5" /> Explore on GitHub
           </a>
           <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-transparent text-white border border-white/20 rounded-full px-5 py-2.5 text-sm font-semibold hover:border-white/40 transition-colors no-underline">
+            <SocialIcon platform="huggingface" size={14} class="mr-1.5" />
             Hugging Face
           </a>
         </div>

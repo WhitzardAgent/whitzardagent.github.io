@@ -1,5 +1,6 @@
 ---
 import { links } from "../data/links";
+import SocialIcon from "./SocialIcon.astro";
 
 interface Props {
   brand?: "whitzard" | "nuwa";
@@ -19,11 +20,29 @@ const { brand = "whitzard" } = Astro.props;
             {brand === "nuwa" ? "Nuwa 女娲" : "Whitzard 白泽"}
           </p>
         </div>
-        <p class="text-wz-muted text-xs leading-relaxed">
+        <p class="text-wz-muted text-xs leading-relaxed mb-4">
           {brand === "nuwa"
             ? "Transparent, third-party, open infrastructure for frontier AI safety evaluation and governance."
             : "Building generalized safety infrastructure for frontier AI and agentic systems."}
         </p>
+        <!-- Social icons row -->
+        <div class="flex items-center gap-3">
+          <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="GitHub">
+            <SocialIcon platform="github" size={16} />
+          </a>
+          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="Hugging Face">
+            <SocialIcon platform="huggingface" size={16} />
+          </a>
+          <a href={links.x} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="X">
+            <SocialIcon platform="x" size={16} />
+          </a>
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="Substack">
+            <SocialIcon platform="substack" size={16} />
+          </a>
+          <a href={`mailto:${links.email}`} class="text-wz-muted hover:text-wz-ink transition-colors" aria-label="Email">
+            <SocialIcon platform="email" size={16} />
+          </a>
+        </div>
       </div>
 
       <!-- Site -->
@@ -43,10 +62,18 @@ const { brand = "whitzard" } = Astro.props;
       <div>
         <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Channels</p>
         <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
-          <a href={links.x} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">X (Twitter)</a>
-          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Substack</a>
-          <a href={links.github} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">GitHub</a>
-          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Hugging Face</a>
+          <a href={links.x} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+            <SocialIcon platform="x" size={12} /> X (Twitter)
+          </a>
+          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+            <SocialIcon platform="substack" size={12} /> Substack
+          </a>
+          <a href={links.github} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+            <SocialIcon platform="github" size={12} /> GitHub
+          </a>
+          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+            <SocialIcon platform="huggingface" size={12} /> Hugging Face
+          </a>
         </div>
       </div>
 
@@ -55,7 +82,9 @@ const { brand = "whitzard" } = Astro.props;
         <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Contact</p>
         <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
           <a href="/contact" class="hover:text-wz-ink transition-colors no-underline">Collaboration</a>
-          <a href={`mailto:${links.email}`} class="hover:text-wz-ink transition-colors no-underline">{links.email}</a>
+          <a href={`mailto:${links.email}`} class="hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5">
+            <SocialIcon platform="email" size={12} /> {links.email}
+          </a>
         </div>
         <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3 mt-5">Research Roots</p>
         <div class="flex flex-col gap-1.5 text-xs text-wz-muted">

@@ -1,5 +1,6 @@
 ---
 import { links } from "../data/links";
+import SocialIcon from "./SocialIcon.astro";
 
 interface Props {
   brand?: "whitzard" | "nuwa";
@@ -50,6 +51,11 @@ const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || curre
       <a href="/about" class:list={["hover:text-wz-ink transition-colors no-underline", currentPath === "/about" && "text-wz-ink"]}>
         About
       </a>
+      <span class="w-px h-4 bg-wz-hairline mx-1"></span>
+      <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink transition-colors no-underline flex items-center gap-1.5" aria-label="GitHub">
+        <SocialIcon platform="github" size={16} />
+        <span class="text-xs">GitHub</span>
+      </a>
     </nav>
 
     <!-- Mobile Menu Toggle -->
@@ -78,6 +84,11 @@ const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || curre
       <a href="/open-ecosystem" class="hover:text-wz-ink no-underline">Ecosystem</a>
       <a href="/nuwa" class="hover:text-wz-ink no-underline">Nuwa Lab</a>
       <a href="/about" class="hover:text-wz-ink no-underline">About</a>
+      <div class="border-t border-wz-hairline pt-3 mt-1 flex items-center gap-4">
+        <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink no-underline flex items-center gap-1.5">
+          <SocialIcon platform="github" size={16} /> <span class="text-xs">GitHub</span>
+        </a>
+      </div>
     </div>
   </nav>
 </header>

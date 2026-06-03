@@ -132,64 +132,74 @@ import SectionHeader from "../components/SectionHeader.astro";
         </div>
       </div>
 
-      <!-- The Triangle Team -->
+      <!-- Core Members -->
       <div class="mb-16">
-        <SectionHeader title="The Triangle Team" subtitle="Core members driving Whitzard and Nuwa." />
+        <SectionHeader title="Core Members" subtitle="The people driving Whitzard and Nuwa." />
 
-        <div class="space-y-4">
-          <!-- Dr. Jiarun Dai -->
-          <div class="bg-white border border-wz-hairline rounded-xl p-6 md:p-7">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-2">
-                  <p class="text-wz-ink font-semibold text-base">Dr. Jiarun Dai</p>
-                  <span class="text-wz-blue text-xs font-medium bg-wz-panel-blue/40 px-2 py-0.5 rounded-full">CEO</span>
+        <!-- Co-Founders -->
+        <div class="mb-6">
+          <p class="text-wz-muted text-xs uppercase tracking-wide mb-4 font-medium">Co-Founders</p>
+          <div class="space-y-4">
+            <!-- Dr. Jiarun Dai -->
+            <div class="bg-white border border-wz-hairline rounded-xl p-6 md:p-7">
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <p class="text-wz-ink font-semibold text-base">Dr. Jiarun Dai</p>
+                    <span class="text-wz-blue text-xs font-medium bg-wz-panel-blue/40 px-2 py-0.5 rounded-full">CEO</span>
+                  </div>
+                  <p class="text-wz-body text-sm leading-relaxed max-w-xl">
+                    Dr. Jiarun Dai is the CEO of Whitzard and an Assistant Professor at <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a>. He is a cybersecurity expert and former captain of the Fudan Baize CTF team, with deep experience in binary analysis, vulnerability discovery, and exploitation. He received both his Ph.D. and B.Sc. from <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a> under the supervision of <a href={links.minYang} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Prof. Min Yang</a>, at the <a href={links.fudanSecurityLab} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">System Software and Security Lab</a> where Prof. Min Yang is the leading professor.
+                  </p>
                 </div>
-                <p class="text-wz-body text-sm leading-relaxed max-w-xl">
-                  Dr. Jiarun Dai is the CEO of Whitzard and an Assistant Professor at <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a>. He is a cybersecurity expert and former captain of the Fudan Baize CTF team, with deep experience in binary analysis, vulnerability discovery, and exploitation. He received both his Ph.D. and B.Sc. from <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a> under the supervision of <a href={links.minYang} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Prof. Min Yang</a>, at the <a href={links.fudanSecurityLab} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">System Software and Security Lab</a> where Prof. Min Yang is the leading professor.
-                </p>
+                <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                  <a href="https://djrrr.github.io/" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Homepage &rarr;</a>
+                  <a href="https://scholar.google.com/citations?user=YH1Y454AAAAJ" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Google Scholar &rarr;</a>
+                </div>
               </div>
-              <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
-                <a href="https://djrrr.github.io/" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Homepage &rarr;</a>
-                <a href="https://scholar.google.com/citations?user=YH1Y454AAAAJ" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Google Scholar &rarr;</a>
+            </div>
+
+            <!-- Dr. Xudong Pan -->
+            <div class="bg-white border border-wz-hairline rounded-xl p-6 md:p-7">
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <p class="text-wz-ink font-semibold text-base">Dr. Xudong Pan</p>
+                    <span class="text-wz-blue text-xs font-medium bg-wz-panel-blue/40 px-2 py-0.5 rounded-full">CTO</span>
+                  </div>
+                  <p class="text-wz-body text-sm leading-relaxed max-w-xl">
+                    Dr. Xudong Pan is the CTO of Whitzard and an Assistant Professor (Xuemin Fellow) at <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a>, as well as a PhD Advisor at the Shanghai Innovation Institute. His work focuses on AI safety, model safety, AI system security, and frontier AI risk evaluation. He received both his Ph.D. and B.Sc. from <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a> under the supervision of <a href={links.minYang} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Prof. Min Yang</a>, at the <a href={links.fudanSecurityLab} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">System Software and Security Lab</a> where Prof. Min Yang is the leading professor.
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                  <a href="https://ravensanstete.github.io/" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Homepage &rarr;</a>
+                  <a href="https://scholar.google.com/citations?user=Unl69CYAAAAJ" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Google Scholar &rarr;</a>
+                  <a href="https://github.com/ravenSanstete" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">GitHub &rarr;</a>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Dr. Xudong Pan -->
-          <div class="bg-white border border-wz-hairline rounded-xl p-6 md:p-7">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-2">
-                  <p class="text-wz-ink font-semibold text-base">Dr. Xudong Pan</p>
-                  <span class="text-wz-blue text-xs font-medium bg-wz-panel-blue/40 px-2 py-0.5 rounded-full">CTO</span>
+        <!-- Strategic Partners -->
+        <div>
+          <p class="text-wz-muted text-xs uppercase tracking-wide mb-4 font-medium">Strategic Partners</p>
+          <div class="space-y-4">
+            <!-- Dr. Geng Hong -->
+            <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 md:p-7">
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <p class="text-wz-ink font-semibold text-base">Dr. Geng Hong</p>
+                    <span class="text-wz-teal text-xs font-medium bg-wz-teal-soft px-2 py-0.5 rounded-full">Strategic Partner</span>
+                  </div>
+                  <p class="text-wz-body text-sm leading-relaxed max-w-xl">
+                    Dr. Geng Hong is an Assistant Professor at <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a> and a strategic partner for Whitzard and Nuwa. His work spans cybercrime, penetration testing, cybersecurity ecosystem research, and in-the-wild security studies, bringing practical security insight into AI safety evaluation and governance.
+                  </p>
                 </div>
-                <p class="text-wz-body text-sm leading-relaxed max-w-xl">
-                  Dr. Xudong Pan is the CTO of Whitzard and an Assistant Professor (Xuemin Fellow) at <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a>, as well as a PhD Advisor at the Shanghai Innovation Institute. His work focuses on AI safety, model safety, AI system security, and frontier AI risk evaluation. He received both his Ph.D. and B.Sc. from <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a> under the supervision of <a href={links.minYang} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Prof. Min Yang</a>, at the <a href={links.fudanSecurityLab} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">System Software and Security Lab</a> where Prof. Min Yang is the leading professor.
-                </p>
-              </div>
-              <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
-                <a href="https://ravensanstete.github.io/" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Homepage &rarr;</a>
-                <a href="https://scholar.google.com/citations?user=Unl69CYAAAAJ" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Google Scholar &rarr;</a>
-                <a href="https://github.com/ravenSanstete" target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">GitHub &rarr;</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dr. Geng Hong -->
-          <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 md:p-7">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-2">
-                  <p class="text-wz-ink font-semibold text-base">Dr. Geng Hong</p>
-                  <span class="text-wz-teal text-xs font-medium bg-wz-teal-soft px-2 py-0.5 rounded-full">Strategic Bridge / Research Partner</span>
+                <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                  <a href={links.gengHong} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Homepage &rarr;</a>
                 </div>
-                <p class="text-wz-body text-sm leading-relaxed max-w-xl">
-                  Dr. Geng Hong is an Assistant Professor at <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="text-wz-blue hover:underline">Fudan University</a> and a strategic bridge and research partner for Whitzard and Nuwa. His work spans cybercrime, penetration testing, cybersecurity ecosystem research, and in-the-wild security studies, bringing practical security insight into AI safety evaluation and governance.
-                </p>
-              </div>
-              <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
-                <a href={links.gengHong} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs hover:underline no-underline whitespace-nowrap">Homepage &rarr;</a>
               </div>
             </div>
           </div>
