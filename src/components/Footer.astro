@@ -50,12 +50,18 @@ const { brand = "whitzard" } = Astro.props;
         </div>
       </div>
 
-      <!-- Contact -->
+      <!-- Contact & Roots -->
       <div>
         <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3">Contact</p>
         <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
           <a href="/contact" class="hover:text-wz-ink transition-colors no-underline">Collaboration</a>
           <a href={`mailto:${links.email}`} class="hover:text-wz-ink transition-colors no-underline">{links.email}</a>
+        </div>
+        <p class="text-wz-ink font-medium text-xs uppercase tracking-wide mb-3 mt-5">Research Roots</p>
+        <div class="flex flex-col gap-1.5 text-xs text-wz-muted">
+          <a href={links.fudanSecurityLab} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">System Software &amp; Security Lab</a>
+          <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Fudan University</a>
+          <a href={links.minYang} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Prof. Min Yang</a>
         </div>
       </div>
     </div>
