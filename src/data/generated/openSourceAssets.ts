@@ -38,6 +38,14 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "agentguard"
   },
   {
+    "name": "LLMPentest",
+    "status": "active",
+    "description": "Measurement and evaluation codebase for LLM-based penetration testing capability and behavior.",
+    "githubUrl": "https://github.com/WhitzardAgent/LLMPentest",
+    "visible": true,
+    "slug": "llmpentest"
+  },
+  {
     "name": "Thought-Aligner",
     "status": "open-source",
     "description": "Plug-and-play thought-level correction module for improving behavioral safety of tool-use agents before risky actions are executed.",
@@ -98,6 +106,14 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "mirrorguard"
   },
   {
+    "name": "YOGA",
+    "status": "open-source",
+    "description": "Yet Another General-purpose Agent: an extensible and modular generalist agent framework.",
+    "githubUrl": "https://github.com/WhitzardAgent/YOGA",
+    "visible": true,
+    "slug": "yoga"
+  },
+  {
     "name": "NVWA Project",
     "status": "active",
     "description": "Frontier AI safety research project focused on autonomy risk, silicon-based life emergence, proliferation, and control technologies.",
@@ -113,6 +129,14 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "githubUrl": "https://github.com/WhitzardAgent/Mirror-GUI",
     "visible": true,
     "slug": "mirror-gui"
+  },
+  {
+    "name": "XuanwuBox",
+    "status": "coming soon",
+    "description": "Secure execution layer for agentic runtime environments, positioned as an AI security advisor inside Docker-style agent sandboxes.",
+    "githubUrl": "https://github.com/WhitzardAgent/XuanwuBox",
+    "visible": true,
+    "slug": "xuanwubox"
   },
   {
     "name": "ReasoningShield",

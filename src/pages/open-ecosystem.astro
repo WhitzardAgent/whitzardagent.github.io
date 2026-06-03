@@ -2,201 +2,251 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { links } from "../data/links";
 import { openSourceAssets } from "../data/generated/openSourceAssets";
+import { researchAssets } from "../data/generated/researchAssets";
 import ProjectCard from "../components/ProjectCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 import SocialIcon from "../components/SocialIcon.astro";
 import FiveStoneMotif from "../components/visuals/FiveStoneMotif.astro";
 
-// Flagship project
-const agentGuard = openSourceAssets.find((p) => p.name === "AgentGuard");
+// Build arxiv URL lookup from research assets
+const arxivLookup: Record<string, string> = {};
+for (const paper of researchAssets) {
+  if (paper.url && /arxiv\.org/.test(paper.url)) {
+    // Map by keyword in title to project name
+    const t = paper.title.toLowerCase();
+    if (t.includes("thought") || t.includes("thought-aligner")) arxivLookup["Thought-Aligner"] = paper.url;
+    if (t.includes("mirrorguard") || t.includes("mirror guard")) arxivLookup["MirrorGuard"] = paper.url;
+    if (t.includes("reasoningshield") || t.includes("reasoning shield")) arxivLookup["ReasoningShield"] = paper.url;
+    if (t.includes("intentnet") || t.includes("intention")) arxivLookup["IntentNet"] = paper.url;
+    if (t.includes("trustnet") || t.includes("trust")) arxivLookup["TrustNet"] = paper.url;
+  }
+}
 
-// Tools & Infrastructure
-const toolKeywords = ["Runtime Security", "Runtime Defense", "Agent Framework", "Security", "Risk Monitoring"];
-const toolProjects = openSourceAssets.filter(
-  (p) => p.name !== "AgentGuard" && (p.status === "active" || p.status === "open-source") && !isDatasetOrModel(p)
-);
-
-// Datasets & Benchmarks
-const datasetProjects = openSourceAssets.filter(
-  (p) => isDatasetOrModel(p)
-);
-
-function isDatasetOrModel(p: { name: string; description?: string }): boolean {
-  const nameLower = p.name.toLowerCase();
-  const descLower = (p.description || "").toLowerCase();
-  return (
-    nameLower.includes("dataset") ||
-    nameLower.includes("eval") ||
-    nameLower.includes("benchmark") ||
-    nameLower.includes("model") ||
-    descLower.includes("dataset") ||
-    descLower.includes("benchmark") ||
-    nameLower.includes("cybersecurity-") ||
-    nameLower.includes("cyberrepo") ||
-    nameLower.includes("cybertrainer")
+// Find asset by name (case-insensitive)
+function findAsset(name: string) {
+  return openSourceAssets.find(
+    (a) => a.name.toLowerCase() === name.toLowerCase()
   );
 }
 
-const otherProjects = openSourceAssets.filter(
-  (p) => p.name !== "AgentGuard" && !toolProjects.includes(p) && !datasetProjects.includes(p)
-);
+// --- Category 1: Agent Runtime Safety ---
+const runtimeSafetyNames = ["AgentGuard", "qise", "Thought-Aligner", "MirrorGuard", "ReasoningShield", "XuanwuBox"];
+const runtimeSafetyAssets = runtimeSafetyNames
+  .map((n) => findAsset(n))
+  .filter(Boolean);
 
-// Summary metrics
-const totalVisible = openSourceAssets.filter((p) => p.visible).length;
-const toolCount = toolProjects.length;
-const datasetCount = datasetProjects.length;
+// --- Category 2: Guardrail & Safety Models ---
+const safetyModelNames = ["Thought-Aligner", "MirrorGuard", "IntentNet", "TrustNet", "ReasoningShield"];
+const safetyModelAssets = safetyModelNames
+  .map((n) => findAsset(n))
+  .filter(Boolean);
+
+// --- Category 3: Agent Infrastructure ---
+const infraNames = ["qitos", "YOGA", "Mirror-GUI", "agentir"];
+const infraAssets = infraNames
+  .map((n) => findAsset(n))
+  .filter(Boolean);
+
+// --- Category 4: Evaluation & Benchmarks ---
+const evalNames = ["snowl", "snowl-evals", "LLMPentest", "NVWA Project"];
+const evalAssets = evalNames
+  .map((n) => findAsset(n))
+  .filter(Boolean);
+
+// --- Category 5: Cybersecurity Data ---
+const cyberNames = ["cyberhunter", "CyberSecurity-100B", "CyberSecurity-1M", "CyberRepo-10K", "CyberTrainer collection"];
+const cyberAssets = cyberNames
+  .map((n) => findAsset(n))
+  .filter(Boolean);
+
+// Flagship
+const agentGuard = findAsset("AgentGuard");
+
+// Category counts for metrics
+const categoryMetrics = [
+  { label: "Runtime Safety", count: runtimeSafetyAssets.length },
+  { label: "Safety Models", count: safetyModelAssets.length },
+  { label: "Agent Infrastructure", count: infraAssets.length },
+  { label: "Evaluation", count: evalAssets.length },
+  { label: "Cyber Data", count: cyberAssets.length },
+];
+
+// Helper to get arxiv URL for a project
+function getArxivUrl(name: string): string | undefined {
+  return arxivLookup[name];
+}
 ---
 
 <BaseLayout
   title="Open Ecosystem — WhitzardAgent"
-  description="Open tools, datasets, benchmarks, and infrastructure for AI safety evaluation and agent safety."
+  description="Open tools, models, datasets, benchmarks, and infrastructure for AI safety evaluation and agent safety."
   ogImage="/assets/og/whitzard-og.png"
 >
   <section class="py-16 md:py-24">
     <div class="max-w-[1120px] mx-auto px-6">
+
+      <!-- Hero -->
       <div class="max-w-2xl mb-8">
         <h1 class="text-wz-ink font-semibold tracking-tight mb-4" style="font-size: var(--text-h1);">
           Open Ecosystem
         </h1>
         <p class="text-wz-body text-lg leading-relaxed">
-          Open tools, datasets, benchmarks, and infrastructure for AI safety evaluation and agent safety.
+          Open tools, models, datasets, benchmarks, and infrastructure for AI safety evaluation and agent safety.
         </p>
       </div>
-      <div class="flex flex-wrap gap-3 mb-14">
-        <a href={links.github} target="_blank" rel="noopener noreferrer" class="btn btn--primary inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold no-underline">
-          <SocialIcon platform="github" size={14} class="mr-1.5" /> GitHub Organization &rarr;
+      <div class="flex flex-wrap gap-3 mb-12">
+        <a href={links.github} target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+          <SocialIcon platform="github" size={14} class="mr-1.5" /> GitHub Organization
         </a>
-        <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="btn btn--secondary inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
-          <SocialIcon platform="huggingface" size={14} class="mr-1.5" /> Hugging Face Organization &rarr;
+        <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
+          <SocialIcon platform="huggingface" size={14} class="mr-1.5" /> Hugging Face Organization
         </a>
       </div>
 
-      <FiveStoneMotif layout="row" size={4} gap={8} class="mb-12" />
+      <FiveStoneMotif layout="row" size={4} gap={8} class="mb-10" />
 
-      <!-- Summary Metrics Band -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
-        <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 text-center">
-          <div class="text-wz-ink font-semibold" style="font-size: 2.5rem; line-height: 1;">{totalVisible}</div>
-          <div class="text-wz-body text-sm mt-1">Open Projects</div>
-        </div>
-        <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 text-center">
-          <div class="text-wz-ink font-semibold" style="font-size: 2.5rem; line-height: 1;">{toolCount}</div>
-          <div class="text-wz-body text-sm mt-1">Tools & Infrastructure</div>
-        </div>
-        <div class="bg-wz-panel border border-wz-hairline rounded-xl p-6 text-center">
-          <div class="text-wz-ink font-semibold" style="font-size: 2.5rem; line-height: 1;">{datasetCount}</div>
-          <div class="text-wz-body text-sm mt-1">Datasets & Benchmarks</div>
-        </div>
+      <!-- Category Metrics -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-16">
+        {categoryMetrics.map((m) => (
+          <div class="bg-wz-panel border border-wz-hairline rounded-xl p-4 text-center">
+            <div class="text-wz-ink font-semibold" style="font-size: 1.75rem; line-height: 1;">{m.count}</div>
+            <div class="text-wz-muted text-xs mt-1">{m.label}</div>
+          </div>
+        ))}
       </div>
 
-      <!-- Flagship: AgentGuard -->
+      <!-- ====== Flagship: AgentGuard ====== -->
       {agentGuard && (
-        <div class="bg-wz-panel-blue/40 border border-wz-hairline rounded-3xl p-8 md:p-12 mb-14">
+        <div class="bg-wz-panel-blue/40 border border-wz-hairline rounded-3xl p-8 md:p-12 mb-16">
           <div class="flex items-center gap-2 mb-3">
-            <span class="bg-wz-teal-soft text-wz-teal text-xs font-medium px-2 py-0.5 rounded-full">Flagship</span>
+            <span class="badge badge--active">Core</span>
             <span class="text-wz-blue text-xs font-mono uppercase">Runtime Security</span>
           </div>
-          <h2 class="text-wz-ink font-semibold mb-2" style="font-size: var(--text-h2);">AgentGuard</h2>
-          <p class="text-wz-body text-base leading-relaxed mb-4 max-w-xl">
+          <h2 class="text-wz-ink font-semibold mb-3" style="font-size: var(--text-h2);">AgentGuard</h2>
+          <p class="text-wz-body text-base leading-relaxed mb-5 max-w-xl">
             {agentGuard.description}
           </p>
           <!-- Policy → Trace → Approval → Audit flow -->
           <div class="flex items-center gap-2 mb-6 flex-wrap">
-            <svg width="100%" height="40" viewBox="0 0 400 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="max-w-md" aria-hidden="true">
+            <svg width="100%" height="40" viewBox="0 0 400 40" fill="none" class="max-w-md" aria-hidden="true">
               <rect x="0" y="8" width="72" height="24" rx="6" fill="var(--wz-teal)" fill-opacity="0.15" stroke="var(--wz-teal)" stroke-opacity="0.4" stroke-width="1"/>
               <text x="36" y="24" text-anchor="middle" fill="var(--wz-ink)" font-size="11" font-weight="500" font-family="system-ui, sans-serif">Policy</text>
-              <line x1="76" y1="20" x2="100" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <line x1="76" y1="20" x2="100" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#ec-arrow)"/>
               <rect x="104" y="8" width="64" height="24" rx="6" fill="var(--wz-teal)" fill-opacity="0.15" stroke="var(--wz-teal)" stroke-opacity="0.4" stroke-width="1"/>
               <text x="136" y="24" text-anchor="middle" fill="var(--wz-ink)" font-size="11" font-weight="500" font-family="system-ui, sans-serif">Trace</text>
-              <line x1="172" y1="20" x2="196" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <line x1="172" y1="20" x2="196" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#ec-arrow)"/>
               <rect x="200" y="8" width="80" height="24" rx="6" fill="var(--wz-teal)" fill-opacity="0.15" stroke="var(--wz-teal)" stroke-opacity="0.4" stroke-width="1"/>
               <text x="240" y="24" text-anchor="middle" fill="var(--wz-ink)" font-size="11" font-weight="500" font-family="system-ui, sans-serif">Approval</text>
-              <line x1="284" y1="20" x2="308" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <line x1="284" y1="20" x2="308" y2="20" stroke="var(--wz-border-strong)" stroke-width="1.5" marker-end="url(#ec-arrow)"/>
               <rect x="312" y="8" width="64" height="24" rx="6" fill="var(--wz-teal)" fill-opacity="0.15" stroke="var(--wz-teal)" stroke-opacity="0.4" stroke-width="1"/>
               <text x="344" y="24" text-anchor="middle" fill="var(--wz-ink)" font-size="11" font-weight="500" font-family="system-ui, sans-serif">Audit</text>
               <defs>
-                <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+                <marker id="ec-arrow" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
                   <polygon points="0 0, 6 2, 0 4" fill="var(--wz-border-strong)"/>
                 </marker>
               </defs>
             </svg>
           </div>
-          <div class="flex gap-3">
+          <div class="flex flex-wrap gap-3">
             {agentGuard.githubUrl && (
-              <a href={agentGuard.githubUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold no-underline">
+              <a href={agentGuard.githubUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">
                 View on GitHub
               </a>
             )}
-            <a href="/agentguard" class="btn btn--secondary inline-flex items-center bg-white text-wz-ink border border-wz-hairline rounded-full px-5 py-2.5 text-sm font-semibold hover:border-wz-border-strong transition-colors no-underline">
+            <a href="/agentguard" class="btn btn--secondary">
               Learn More
             </a>
           </div>
         </div>
       )}
 
-      <!-- Tools and Infrastructure -->
-      {toolProjects.length > 0 && (
-        <div class="mb-14">
-          <SectionHeader title="Tools and Infrastructure" subtitle="Open-source safety tools, frameworks, and runtime infrastructure." />
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {toolProjects.map((project) => (
-              <div class="card card--system hover-lift">
-                <ProjectCard
-                  name={project.name}
-                  status={project.status}
-                  description={project.description}
-                  githubUrl={project.githubUrl}
-                  hfUrl={project.hfUrl}
-                  websiteUrl={project.websiteUrl}
-                />
-              </div>
-            ))}
-          </div>
+      <!-- ====== 1. Agent Runtime Safety ====== -->
+      <div class="mb-16">
+        <SectionHeader title="Agent Runtime Safety" subtitle="Runtime safety tools that monitor, correct, authorize, and contain AI agent behavior before unsafe actions occur." />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {runtimeSafetyAssets.map((project) => (
+            <ProjectCard
+              name={project!.name}
+              status={project!.name === "AgentGuard" ? "core" : project!.status}
+              description={project!.description}
+              githubUrl={project!.githubUrl}
+              hfUrl={project!.hfUrl}
+              websiteUrl={project!.websiteUrl}
+              arxivUrl={getArxivUrl(project!.name)}
+            />
+          ))}
         </div>
-      )}
+      </div>
 
-      <!-- Datasets and Benchmarks -->
-      {datasetProjects.length > 0 && (
-        <div class="mb-14">
-          <SectionHeader title="Datasets and Benchmarks" subtitle="Open datasets, benchmarks, and evaluation resources." />
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {datasetProjects.map((project) => (
-              <div class="card card--system hover-lift">
-                <ProjectCard
-                  name={project.name}
-                  status={project.status}
-                  description={project.description}
-                  githubUrl={project.githubUrl}
-                  hfUrl={project.hfUrl}
-                  websiteUrl={project.websiteUrl}
-                />
-              </div>
-            ))}
-          </div>
+      <!-- ====== 2. Guardrail & Safety Models ====== -->
+      <div class="mb-16 bg-nw-jade-pale/30 rounded-3xl p-6 md:p-8">
+        <SectionHeader title="Guardrail & Safety Models" subtitle="Lightweight safety models for thought correction, GUI-agent safety, intent modeling, trust estimation, and reasoning safety." />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {safetyModelAssets.map((project) => (
+            <ProjectCard
+              name={project!.name}
+              status={project!.status}
+              description={project!.description}
+              githubUrl={project!.githubUrl}
+              hfUrl={project!.hfUrl}
+              websiteUrl={project!.websiteUrl}
+              arxivUrl={getArxivUrl(project!.name)}
+            />
+          ))}
         </div>
-      )}
+      </div>
 
-      <!-- Other Projects -->
-      {otherProjects.length > 0 && (
-        <div class="mb-14">
-          <SectionHeader title="More Projects" subtitle="Additional open-source projects from WhitzardAgent." />
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {otherProjects.map((project) => (
-              <div class="card card--system hover-lift">
-                <ProjectCard
-                  name={project.name}
-                  status={project.status}
-                  description={project.description}
-                  githubUrl={project.githubUrl}
-                  hfUrl={project.hfUrl}
-                  websiteUrl={project.websiteUrl}
-                />
-              </div>
-            ))}
-          </div>
+      <!-- ====== 3. Agent Infrastructure ====== -->
+      <div class="mb-16">
+        <SectionHeader title="Agent Infrastructure" subtitle="Frameworks, simulators, intermediate representations, and trajectory datasets for building and evaluating agentic systems." />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {infraAssets.map((project) => (
+            <ProjectCard
+              name={project!.name}
+              status={project!.status}
+              description={project!.description}
+              githubUrl={project!.githubUrl}
+              hfUrl={project!.hfUrl}
+              websiteUrl={project!.websiteUrl}
+            />
+          ))}
         </div>
-      )}
+      </div>
+
+      <!-- ====== 4. Evaluation & Benchmarks ====== -->
+      <div class="mb-16 bg-wz-mist rounded-3xl p-6 md:p-8">
+        <SectionHeader title="Evaluation & Benchmarks" subtitle="Frameworks for evaluation of frontier AI and agent safety." />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {evalAssets.map((project) => (
+            <ProjectCard
+              name={project!.name}
+              status={project!.status}
+              description={project!.description}
+              githubUrl={project!.githubUrl}
+              hfUrl={project!.hfUrl}
+              websiteUrl={project!.websiteUrl}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- ====== 5. Cybersecurity Data ====== -->
+      <div class="mb-16">
+        <SectionHeader title="Cybersecurity Data" subtitle="Large-scale cybersecurity datasets and pipelines for cyber agent training." />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {cyberAssets.map((project) => (
+            <ProjectCard
+              name={project!.name}
+              status={project!.status}
+              description={project!.description}
+              githubUrl={project!.githubUrl}
+              hfUrl={project!.hfUrl}
+              websiteUrl={project!.websiteUrl}
+            />
+          ))}
+        </div>
+      </div>
 
       <!-- Contribution CTA -->
       <CalloutPanel
@@ -208,15 +258,15 @@ const datasetCount = datasetProjects.length;
         padding="p-8 md:p-12"
       >
         <div class="flex flex-wrap gap-3 justify-center">
-          <a href={links.github} target="_blank" rel="noopener noreferrer" class="btn btn--primary inline-flex items-center bg-white text-wz-ink rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-mist transition-colors no-underline">
+          <a href={links.github} target="_blank" rel="noopener noreferrer" class="btn" style="background: white; color: var(--wz-ink);">
             <SocialIcon platform="github" size={14} class="mr-1.5" /> Explore on GitHub
           </a>
-          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="btn btn--secondary inline-flex items-center bg-transparent text-white border border-white/20 rounded-full px-5 py-2.5 text-sm font-semibold hover:border-white/40 transition-colors no-underline">
-            <SocialIcon platform="huggingface" size={14} class="mr-1.5" />
-            Hugging Face
+          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="btn" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2);">
+            <SocialIcon platform="huggingface" size={14} class="mr-1.5" /> Hugging Face
           </a>
         </div>
       </CalloutPanel>
+
     </div>
   </section>
 </BaseLayout>

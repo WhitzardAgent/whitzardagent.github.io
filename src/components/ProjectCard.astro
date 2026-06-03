@@ -6,22 +6,25 @@ interface Props {
   githubUrl?: string;
   hfUrl?: string | string[];
   websiteUrl?: string;
+  arxivUrl?: string;
 }
 
-const { name, status, description, githubUrl, hfUrl, websiteUrl } = Astro.props;
+const { name, status, description, githubUrl, hfUrl, websiteUrl, arxivUrl } = Astro.props;
 
 const statusLabel: Record<string, string> = {
   "open-source": "Open Source",
   active: "Active",
   "coming soon": "Coming Soon",
   internal: "Internal",
+  core: "Core",
 };
 
 const statusStyle: Record<string, string> = {
   "open-source": "bg-nw-jade-pale text-nw-jade",
   active: "bg-wz-panel-blue text-wz-blue",
-  "coming soon": "bg-wz-panel text-wz-muted",
+  "coming soon": "bg-amber-50 text-amber-700",
   internal: "bg-wz-panel text-wz-muted",
+  core: "bg-wz-teal-soft text-wz-teal",
 };
 
 // Normalize HF URLs
@@ -32,29 +35,44 @@ const hfUrls = hfUrl
   : [];
 ---
 
-<div class="bg-white border border-wz-hairline rounded-lg p-5">
+<div class="bg-white border border-wz-hairline rounded-2xl p-5 h-full flex flex-col transition-all duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 hover:border-wz-border-strong">
   <div class="flex items-center justify-between mb-2">
     <h3 class="text-wz-ink font-semibold text-sm">{name}</h3>
     {status && (
-      <span class:list={["text-xs font-medium px-2 py-0.5 rounded-full", statusStyle[status] || "bg-wz-panel text-wz-muted"]}>
+      <span class:list={["text-[10px] font-medium px-2 py-0.5 rounded-full uppercase tracking-wide", statusStyle[status] || "bg-wz-panel text-wz-muted"]}>
         {statusLabel[status] || status}
       </span>
     )}
   </div>
   {description && (
-    <p class="text-wz-muted text-xs leading-relaxed mb-3">{description}</p>
+    <p class="text-wz-muted text-xs leading-relaxed mb-3 flex-1">{description}</p>
   )}
-  <div class="flex flex-wrap gap-3">
+  <div class="flex flex-wrap items-center gap-3 pt-2 border-t border-wz-hairline/60 mt-auto">
     {githubUrl && (
-      <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs font-medium hover:underline no-underline">GitHub</a>
+      <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="text-wz-subtle text-xs font-medium hover:text-wz-ink transition-colors no-underline inline-flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
     )}
-    {hfUrls.map((url) => (
-      <a href={url} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs font-medium hover:underline no-underline">Hugging Face</a>
-    ))}
+    {hfUrls.length > 0 && (
+      <a href={hfUrls[0]} target="_blank" rel="noopener noreferrer" class="text-wz-subtle text-xs font-medium hover:text-wz-ink transition-colors no-underline inline-flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M12 0C9.79 0 8 1.79 8 4c0 1.1.45 2.1 1.17 2.83L8 8l-1.17-1.17A3.99 3.99 0 008 4c0-2.21-1.79-4-4-4S0 1.79 0 4s1.79 4 4 4c.73 0 1.41-.2 2-.55V12a4 4 0 008 0V7.45c.59.35 1.27.55 2 .55 2.21 0 4-1.79 4-4s-1.79-4-4-4zM4 6C2.9 6 2 5.1 2 4s.9-2 2-2 2 .9 2 2-.9 2-2 2zm8 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+        {hfUrls.length > 1 ? `HF (${hfUrls.length})` : "HF"}
+      </a>
+    )}
     {websiteUrl && (
-      <a href={websiteUrl} target="_blank" rel="noopener noreferrer" class="text-wz-blue text-xs font-medium hover:underline no-underline">Website</a>
+      <a href={websiteUrl} target="_blank" rel="noopener noreferrer" class="text-wz-subtle text-xs font-medium hover:text-wz-ink transition-colors no-underline inline-flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7" /></svg>
+        Website
+      </a>
     )}
-    {!githubUrl && hfUrls.length === 0 && !websiteUrl && (
+    {arxivUrl && (
+      <a href={arxivUrl} target="_blank" rel="noopener noreferrer" class="text-wz-subtle text-xs font-medium hover:text-wz-ink transition-colors no-underline inline-flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7" /></svg>
+        arXiv
+      </a>
+    )}
+    {!githubUrl && hfUrls.length === 0 && !websiteUrl && !arxivUrl && (
       <span class="text-wz-subtle text-xs">Links coming soon</span>
     )}
   </div>
