@@ -1,4 +1,4 @@
 ---
-import LocalizedPlaceholder from "../../components/LocalizedPlaceholder.astro";
+import CompanyPage from"../../components/enterprise/CompanyPage.astro";import{companyCopy}from"../../i18n/pages/company";
 ---
-<LocalizedPlaceholder eyebrow="公司" title="关于 Whitzard" description="Whitzard 构建面向企业智能体的安全基础设施，NVWA Lab 提供前沿研究引擎，WhitzardAgent 连接开放生态。" />
+<CompanyPage locale="zh" copy={companyCopy.zh.company}/>

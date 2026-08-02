@@ -1,4 +1,4 @@
 ---
-import LocalizedPlaceholder from "../../components/LocalizedPlaceholder.astro";
+import ContactPage from"../../components/enterprise/ContactPage.astro";import{companyCopy}from"../../i18n/pages/company";
 ---
-<LocalizedPlaceholder eyebrow="预约演示" title="一起建立可信的智能体运行边界" description="了解 AgentGuard 如何接入你的智能体架构，并支持私有化部署、持续评测与安全运营。" />
+<ContactPage locale="zh" copy={companyCopy.zh.contact}/>

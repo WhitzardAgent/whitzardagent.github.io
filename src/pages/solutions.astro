@@ -1,6 +1,4 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import SolutionsPage from"../components/enterprise/SolutionsPage.astro";import{companyCopy}from"../i18n/pages/company";
 ---
-<BaseLayout title="Solutions — Whitzard" description="Secure enterprise AI agent deployment across development, operations, data access, and high-impact workflows.">
-  <section class="section"><div class="site-container section-copy"><p class="eyebrow">Enterprise solutions</p><h1 class="display-title mt-5">Secure agents in the workflows that matter.</h1><p class="mt-7 text-lg">Solution architecture and deployment guidance are being migrated into the Whitzard V2 experience.</p></div></section>
-</BaseLayout>
+<SolutionsPage locale="en" copy={companyCopy.en.solutions}/>
