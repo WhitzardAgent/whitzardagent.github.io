@@ -1,4 +1,5 @@
 ---
-import LocalizedPlaceholder from "../../components/LocalizedPlaceholder.astro";
+import AgentGuardPage from "../../components/agentguard/AgentGuardPage.astro";
+import {agentguardCopy} from "../../i18n/pages/agentguard";
 ---
-<LocalizedPlaceholder eyebrow="AGENTGUARD" title="覆盖智能体完整运行过程的统一安全控制层" description="从模型推理、工具调用到身份权限与数据流转，在智能体运行过程中持续理解、判断与处置风险。" />
+<AgentGuardPage locale="zh" copy={agentguardCopy.zh}/>
