@@ -8,7 +8,7 @@ const target = locale === "en" ? "zh" : "en";
 const href = localeSwitchPath(pathname, target);
 ---
 
-<a class="language-switch" href={href} aria-label={`${label}: ${target === "zh" ? "中文" : "English"}`} data-language-switch data-locale={target}>
+<a class="language-switch" href={href} aria-label={`EN / 中文 · ${label}: ${target === "zh" ? "中文" : "English"}`} data-language-switch data-locale={target}>
   <span class:list={[locale === "en" && "is-active"]}>EN</span>
   <span aria-hidden="true">/</span>
   <span class:list={[locale === "zh" && "is-active"]}>中文</span>
