@@ -1,0 +1,35 @@
+{
+  "repository": "WhitzardAgent/whitzardagent.github.io",
+  "keep": [
+    "Astro static build",
+    "React islands",
+    "Tailwind CSS",
+    "MDX content",
+    "JSONL ingestion",
+    "GitHub Pages deployment",
+    "research and open-source datasets"
+  ],
+  "modify": {
+    "src/pages/index.astro": "Replace with company-first V2 homepage composition",
+    "src/pages/agentguard.astro": "Replace generic policy/trace narrative with runtime security product story",
+    "src/layouts/BaseLayout.astro": "Add locale, hreflang, ClientRouter, JSON-LD and localized metadata",
+    "src/components/Header.astro": "Replace with bilingual product-first navigation and CTA",
+    "src/components/WhitzardHero.tsx": "Refactor into HomeHero and RuntimeTrace",
+    "src/components/HeroBackdropWhitzard.tsx": "Retire after RuntimeTrace replacement",
+    "src/styles/global.css": "Split tokens, typography and components while preserving compatibility aliases",
+    "src/styles/motion.css": "Add motion scale and reduced-motion fallbacks",
+    "astro.config.mjs": "Enable i18n with English default and /zh Chinese routes",
+    "package.json": "Add gsap, lenis, clsx and tailwind-merge"
+  },
+  "new_components": [
+    "HomeHero.tsx",
+    "RuntimeTrace.tsx",
+    "PlatformStack.tsx",
+    "ThreeChainScrolly.tsx",
+    "ResearchProductLoop.tsx",
+    "AgentRuntimeDemo.tsx",
+    "DeploymentArchitecture.tsx",
+    "LanguageSwitch.astro",
+    "MotionProvider.tsx"
+  ]
+}

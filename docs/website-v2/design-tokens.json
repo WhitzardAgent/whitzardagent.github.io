@@ -1,0 +1,44 @@
+{
+  "brand": {
+    "xuan": "#102B5C",
+    "indigo": "#174AA6",
+    "brightBlue": "#2864FF",
+    "moon": "#F6F7F3",
+    "frost": "#EEF3F5",
+    "ink": "#182234",
+    "muted": "#667080",
+    "hairline": "#DCE2E8",
+    "cinnabar": "#D8563A",
+    "jade": "#76A9A4",
+    "deepJade": "#2F7F7A"
+  },
+  "radius": {
+    "sm": "10px",
+    "md": "16px",
+    "lg": "24px",
+    "pill": "999px"
+  },
+  "space": {
+    "sectionDesktop": "clamp(7.5rem, 10vw, 10rem)",
+    "sectionMobile": "clamp(4.5rem, 16vw, 6rem)",
+    "contentMax": "1240px",
+    "copyMax": "680px"
+  },
+  "motion": {
+    "micro": "160ms",
+    "enter": "560ms",
+    "slow": "900ms",
+    "easeOut": [
+      0.22,
+      1,
+      0.36,
+      1
+    ],
+    "stamp": [
+      0.2,
+      0.8,
+      0.2,
+      1
+    ]
+  }
+}
