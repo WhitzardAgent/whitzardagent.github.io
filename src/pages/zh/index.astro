@@ -1,4 +1,5 @@
 ---
-import LocalizedPlaceholder from "../../components/LocalizedPlaceholder.astro";
+import HomePage from "../../components/home/HomePage.astro";
+import { homeCopy } from "../../i18n/pages/home";
 ---
-<LocalizedPlaceholder eyebrow="智能体安全基础设施" title="守其边界，行其智能" description="Whitzard 为企业智能体提供上线前评测、运行时控制与安全运营能力，让智能体在安全边界内自主行动。" />
+<HomePage locale="zh" copy={homeCopy.zh} />
