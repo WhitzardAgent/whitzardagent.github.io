@@ -1,74 +1,80 @@
 ---
 import "../styles/global.css";
 import "../styles/motion.css";
+import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { links } from "../data/links";
+import type { Locale } from "../i18n/config";
+import { localizedPath, ogLocale, stripLocale } from "../i18n/config";
+import { ui } from "../i18n/ui";
 
 interface Props {
   title: string;
   description?: string;
+  locale?: Locale;
   brand?: "whitzard" | "nuwa";
   ogImage?: string;
+  ogImageAlt?: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 const {
   title,
-  description = "Whitzard builds safety infrastructure for frontier AI and agentic systems.",
+  description = "Whitzard builds security infrastructure for enterprise AI agents across evaluation, runtime control, and security operations.",
+  locale = "en",
   brand = "whitzard",
   ogImage,
+  ogImageAlt = locale === "zh" ? "Whitzard 智能体安全基础设施" : "Whitzard AI agent security infrastructure",
+  canonicalPath,
+  noindex = false,
+  schema,
 } = Astro.props;
 
-const siteTitle = title.includes("Whitzard") || title.includes("Nuwa")
-  ? title
-  : brand === "nuwa"
-    ? `${title} — Nuwa`
-    : `${title} — Whitzard`;
-
-const siteUrl = "https://www.whitzard.tech";
-const defaultOgImage = brand === "nuwa"
-  ? `${siteUrl}/assets/og/nuwa-og.png`
-  : `${siteUrl}/assets/og/whitzard-og.png`;
-const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
+const origin = "https://www.whitzard.tech";
+const siteTitle = title.includes("Whitzard") || title.includes("NVWA") || title.includes("Nuwa") ? title : `${title} — ${brand === "nuwa" ? "NVWA Lab" : "Whitzard"}`;
+const basePath = stripLocale(canonicalPath ?? Astro.url.pathname);
+const canonicalUrl = new URL(localizedPath(basePath, locale), origin).href;
+const englishUrl = new URL(localizedPath(basePath, "en"), origin).href;
+const chineseUrl = new URL(localizedPath(basePath, "zh"), origin).href;
+const defaultOgImage = brand === "nuwa" ? "/assets/og/nuwa-og.png" : "/assets/og/whitzard-og.png";
+const ogImageUrl = new URL(ogImage ?? defaultOgImage, origin).href;
+const organizationSchema = {
+  "@context": "https://schema.org", "@type": "Organization", name: "Whitzard", url: origin,
+  logo: `${origin}/assets/logo/whitzard_logo.png`,
+  description: locale === "zh" ? "Whitzard 构建面向企业智能体的安全基础设施。" : "Whitzard builds security infrastructure for enterprise AI agents.",
+  sameAs: ["https://github.com/WhitzardAgent", "https://huggingface.co/WhitzardAgent"],
+};
+const schemas = [organizationSchema, ...(Array.isArray(schema) ? schema : schema ? [schema] : [])];
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang={locale === "zh" ? "zh-CN" : "en"} data-brand={brand}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{siteTitle}</title>
-    <meta name="description" content={description} />
-    <meta name="generator" content={Astro.generator} />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content={siteTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url.href} />
-    <meta property="og:image" content={ogImageUrl} />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={siteTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImageUrl} />
-
-    <link rel="canonical" href={Astro.url.href} />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content={brand === "nuwa" ? "#F4F2EC" : "#F6F7F3"} />
+    <title>{siteTitle}</title><meta name="description" content={description} /><meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={englishUrl} />
+    <link rel="alternate" hreflang="zh-CN" href={chineseUrl} />
+    <link rel="alternate" hreflang="x-default" href={englishUrl} />
+    <meta property="og:title" content={siteTitle} /><meta property="og:description" content={description} />
+    <meta property="og:type" content="website" /><meta property="og:url" content={canonicalUrl} /><meta property="og:site_name" content="Whitzard" />
+    <meta property="og:locale" content={ogLocale(locale)} /><meta property="og:locale:alternate" content={ogLocale(locale === "en" ? "zh" : "en")} />
+    <meta property="og:image" content={ogImageUrl} /><meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={siteTitle} /><meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} /><meta name="twitter:image:alt" content={ogImageAlt} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600&family=Source+Serif+4:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
+    {schemas.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
+    <ClientRouter />
   </head>
-  <body class={brand === "nuwa" ? "nuwa-brand" : "whitzard-brand"}>
-    <Header brand={brand} />
-    <main>
-      <slot />
-    </main>
-    <Footer brand={brand} />
+  <body class:list={[brand === "nuwa" ? "nuwa-brand" : "whitzard-brand", locale === "zh" && "locale-zh"]}>
+    <a class="skip-link" href="#main-content">{ui[locale].skip}</a>
+    <Header brand={brand} locale={locale} />
+    <main id="main-content" tabindex="-1"><slot /></main>
+    <Footer brand={brand} locale={locale} />
   </body>
 </html>

@@ -1,112 +1,45 @@
 ---
+import type { Locale } from "../i18n/config";
+import { localizedPath } from "../i18n/config";
+import { ui } from "../i18n/ui";
 import { links } from "../data/links";
-import SocialIcon from "./SocialIcon.astro";
 
-interface Props {
-  brand?: "whitzard" | "nuwa";
-}
-
-const { brand = "whitzard" } = Astro.props;
+interface Props { brand?: "whitzard" | "nuwa"; locale: Locale; }
+const { locale } = Astro.props;
+const copy = ui[locale];
 ---
 
-<footer class="border-t border-wz-hairline bg-wz-panel">
-  <div class="max-w-[1180px] mx-auto px-6 pt-14 pb-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
-      <!-- Brand -->
-      <div>
-        <div class="flex items-center gap-2.5 mb-3">
-          <img src={brand === "nuwa" ? "/assets/logo/nvwa_logo.png" : "/assets/logo/whitzard_logo.png"} alt="" class="w-6 h-6 rounded" />
-          <p class="text-wz-ink font-semibold text-base">
-            {brand === "nuwa" ? "Nuwa 女娲" : "Whitzard 白泽"}
-          </p>
-        </div>
-        <p class="text-wz-muted text-xs leading-relaxed mb-5 max-w-[220px]">
-          {brand === "nuwa"
-            ? "Transparent, third-party, open infrastructure for frontier AI safety evaluation and governance."
-            : "Building generalized safety infrastructure for frontier AI and agentic systems."}
-        </p>
-        <!-- Social icons row -->
-        <div class="flex items-center gap-3.5">
-          <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="GitHub">
-            <SocialIcon platform="github" size={16} />
-          </a>
-          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="Hugging Face">
-            <SocialIcon platform="huggingface" size={16} />
-          </a>
-          <a href={links.x} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="X">
-            <SocialIcon platform="x" size={16} />
-          </a>
-          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="Substack">
-            <SocialIcon platform="substack" size={16} />
-          </a>
-          <a href={`mailto:${links.email}`} class="text-wz-subtle hover:text-wz-ink transition-colors" aria-label="Email">
-            <SocialIcon platform="email" size={16} />
-          </a>
-        </div>
-      </div>
-
-      <!-- Site -->
-      <div>
-        <p class="text-wz-ink font-medium text-[11px] uppercase tracking-widest mb-4">Site</p>
-        <div class="flex flex-col gap-2.5 text-[13px] text-wz-muted">
-          <a href="/agentguard" class="hover:text-wz-ink transition-colors no-underline">Products</a>
-          <a href="/research" class="hover:text-wz-ink transition-colors no-underline">Research</a>
-          <a href="/news" class="hover:text-wz-ink transition-colors no-underline">News</a>
-          <a href="/open-ecosystem" class="hover:text-wz-ink transition-colors no-underline">Ecosystem</a>
-          <a href="/nuwa" class="hover:text-wz-ink transition-colors no-underline">Nuwa Lab</a>
-          <a href="/about" class="hover:text-wz-ink transition-colors no-underline">About</a>
-        </div>
-      </div>
-
-      <!-- Channels -->
-      <div>
-        <p class="text-wz-ink font-medium text-[11px] uppercase tracking-widest mb-4">Channels</p>
-        <div class="flex flex-col gap-2.5 text-[13px] text-wz-muted">
-          <a href={links.x} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
-            <SocialIcon platform="x" size={12} /> X (Twitter)
-          </a>
-          <a href={links.substack} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
-            <SocialIcon platform="substack" size={12} /> Substack
-          </a>
-          <a href={links.github} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
-            <SocialIcon platform="github" size={12} /> GitHub
-          </a>
-          <a href={links.huggingface} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
-            <SocialIcon platform="huggingface" size={12} /> Hugging Face
-          </a>
-        </div>
-      </div>
-
-      <!-- Contact & Roots -->
-      <div>
-        <p class="text-wz-ink font-medium text-[11px] uppercase tracking-widest mb-4">Contact</p>
-        <div class="flex flex-col gap-2.5 text-[13px] text-wz-muted">
-          <a href="/contact" class="hover:text-wz-ink transition-colors no-underline">Collaboration</a>
-          <a href={`mailto:${links.email}`} class="hover:text-wz-ink transition-colors no-underline flex items-center gap-2">
-            <SocialIcon platform="email" size={12} /> {links.email}
-          </a>
-        </div>
-        <p class="text-wz-ink font-medium text-[11px] uppercase tracking-widest mb-4 mt-6">Research Roots</p>
-        <div class="flex flex-col gap-2.5 text-[13px] text-wz-muted">
-          <a href={links.fudanSecurityLab} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">System Software &amp; Security Lab</a>
-          <a href={links.fudanUniversity} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Fudan University</a>
-          <a href={links.minYang} target="_blank" rel="noopener noreferrer" class="hover:text-wz-ink transition-colors no-underline">Prof. Min Yang</a>
-        </div>
-      </div>
+<footer class="site-footer">
+  <div class="site-container site-footer__top">
+    <div class="site-footer__brand">
+      <a href={localizedPath("/", locale)} class="wordmark wordmark--light" aria-label="Whitzard">
+        <span class="wordmark__mark" aria-hidden="true"><span></span><span></span></span>
+        <span class="wordmark__text">Whitzard</span><span class="wordmark__han">白泽</span>
+      </a>
+      <p>{copy.footer.positioning}</p>
+      <p class="site-footer__research">{copy.footer.researchLine}</p>
     </div>
-
-    <!-- Bottom Bar -->
-    <div class="mt-12 pt-5 border-t border-wz-hairline flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-wz-subtle text-xs">
-        &copy; {new Date().getFullYear()} Whitzard. All rights reserved.
-      </p>
-      <div class="flex items-center gap-1.5" aria-hidden="true">
-        <span style="color: var(--stone-jade); font-size: 8px;">&#9670;</span>
-        <span style="color: var(--stone-vermilion); font-size: 8px;">&#9670;</span>
-        <span style="color: var(--stone-ochre); font-size: 8px;">&#9670;</span>
-        <span style="color: var(--stone-ivory); font-size: 8px;">&#9670;</span>
-        <span style="color: var(--stone-ink); font-size: 8px;">&#9670;</span>
-      </div>
+    <div class="site-footer__column">
+      <p class="site-footer__label">{copy.footer.platform}</p>
+      <a href={localizedPath("/agentguard", locale)}>AgentGuard</a>
+      <a href={localizedPath("/solutions", locale)}>{locale === "zh" ? "解决方案" : "Solutions"}</a>
+      <a href={localizedPath("/contact", locale)}>{locale === "zh" ? "预约演示" : "Book a Demo"}</a>
     </div>
+    <div class="site-footer__column">
+      <p class="site-footer__label">{copy.footer.resources}</p>
+      <a href={localizedPath("/nuwa", locale)}>NVWA Lab</a>
+      <a href={localizedPath("/research", locale)}>{locale === "zh" ? "研究成果" : "Research"}</a>
+      <a href={localizedPath("/open-ecosystem", locale)}>WhitzardAgent</a>
+    </div>
+    <div class="site-footer__column">
+      <p class="site-footer__label">{copy.footer.company}</p>
+      <a href={localizedPath("/about", locale)}>{locale === "zh" ? "关于我们" : "About"}</a>
+      <a href={`mailto:${links.email}`}>{links.email}</a>
+      <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href={links.huggingface} target="_blank" rel="noreferrer">Hugging Face ↗</a>
+    </div>
+  </div>
+  <div class="site-container site-footer__bottom">
+    <p>© {new Date().getFullYear()} Whitzard</p><p>{copy.footer.legalLine}</p>
   </div>
 </footer>

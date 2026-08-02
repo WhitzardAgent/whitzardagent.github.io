@@ -1,115 +1,85 @@
 ---
-import { links } from "../data/links";
-import SocialIcon from "./SocialIcon.astro";
+import type { Locale } from "../i18n/config";
+import { localizedPath, stripLocale } from "../i18n/config";
+import { ui } from "../i18n/ui";
+import LanguageSwitch from "./LanguageSwitch.astro";
 
-interface Props {
-  brand?: "whitzard" | "nuwa";
-}
-
-const { brand = "whitzard" } = Astro.props;
+interface Props { brand?: "whitzard" | "nuwa"; locale: Locale; }
+const { brand = "whitzard", locale } = Astro.props;
+const copy = ui[locale];
 const currentPath = Astro.url.pathname;
-const isNuwaBrand = brand === "nuwa" || currentPath.startsWith("/nuwa") || currentPath.startsWith("/research");
-
-const navItems = [
-  { href: "/agentguard", label: "Products", match: (p: string) => p === "/agentguard" },
-  { href: "/research", label: "Research", match: (p: string) => p.startsWith("/research") || p.startsWith("/publications") },
-  { href: "/news", label: "News", match: (p: string) => p.startsWith("/news") },
-  { href: "/open-ecosystem", label: "Ecosystem", match: (p: string) => p.startsWith("/open-ecosystem") || p.startsWith("/open-source") },
-  { href: "/nuwa", label: "Nuwa Lab", match: (p: string) => p.startsWith("/nuwa") },
-  { href: "/about", label: "About", match: (p: string) => p === "/about" },
-];
+const basePath = stripLocale(currentPath);
+const homePath = localizedPath("/", locale);
+const demoPath = localizedPath("/contact", locale);
+function isActive(href: string) {
+  if (href === "/research") return basePath.startsWith("/research") || basePath.startsWith("/nuwa");
+  return basePath === href || basePath.startsWith(`${href}/`);
+}
 ---
 
-<header
-  class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-wz-hairline/80 transition-colors duration-200"
-  style="height: 56px;"
->
-  <div class="max-w-[1180px] mx-auto px-6 h-full flex items-center justify-between">
-    <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 text-wz-ink font-semibold tracking-tight no-underline hover:opacity-80 transition-opacity">
-      {isNuwaBrand ? (
-        <span class="flex items-center gap-2">
-          <img src="/assets/logo/nvwa_logo.png" alt="" class="w-5 h-5 rounded" />
-          <span class="text-sm">Nuwa <span class="text-nw-muted font-normal text-xs">女娲</span></span>
-        </span>
-      ) : (
-        <span class="flex items-center gap-2">
-          <img src="/assets/logo/whitzard_logo.png" alt="" class="w-5 h-5 rounded" />
-          <span class="text-sm">Whitzard <span class="text-wz-muted font-normal text-xs">白泽</span></span>
-        </span>
-      )}
-    </a>
-
-    <!-- Desktop Navigation -->
-    <nav class="hidden lg:flex items-center gap-1 text-[13px] font-medium text-wz-muted">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class:list={[
-            "px-3 py-1.5 rounded-md transition-colors no-underline relative",
-            item.match(currentPath)
-              ? "text-wz-ink"
-              : "hover:text-wz-ink hover:bg-wz-mist/50",
-          ]}
-        >
-          {item.label}
-          {item.match(currentPath) && (
-            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-wz-teal" />
-          )}
-        </a>
-      ))}
-      <span class="w-px h-4 bg-wz-hairline mx-2"></span>
-      <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-subtle hover:text-wz-ink transition-colors no-underline flex items-center gap-1" aria-label="GitHub">
-        <SocialIcon platform="github" size={15} />
+<site-menu>
+  <header class:list={["site-header", brand === "nuwa" && "site-header--nuwa"]} data-site-header>
+    <div class="site-container site-header__inner">
+      <a href={homePath} class="wordmark" aria-label={locale === "zh" ? "Whitzard 白泽首页" : "Whitzard home"}>
+        <span class="wordmark__mark" aria-hidden="true"><span></span><span></span></span>
+        <span class="wordmark__text">Whitzard</span><span class="wordmark__han">白泽</span>
       </a>
-    </nav>
-
-    <!-- Mobile Menu Toggle -->
-    <button
-      id="mobile-menu-toggle"
-      class="lg:hidden p-2 text-wz-ink hover:bg-wz-mist/50 rounded-md transition-colors"
-      aria-label="Toggle navigation menu"
-    >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <line x1="3" y1="12" x2="21" y2="12" />
-        <line x1="3" y1="18" x2="21" y2="18" />
-      </svg>
-    </button>
-  </div>
-
-  <!-- Mobile Navigation -->
-  <nav
-    id="mobile-menu"
-    class="hidden lg:hidden bg-white/95 backdrop-blur-md border-b border-wz-hairline px-6 py-4"
-  >
-    <div class="flex flex-col gap-1 text-sm font-medium text-wz-muted">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class:list={[
-            "px-3 py-2 rounded-lg no-underline transition-colors",
-            item.match(currentPath)
-              ? "text-wz-ink bg-wz-mist/50"
-              : "hover:text-wz-ink hover:bg-wz-mist/30",
-          ]}
-        >
-          {item.label}
-        </a>
-      ))}
-      <div class="border-t border-wz-hairline pt-3 mt-2 flex items-center gap-4">
-        <a href={links.github} target="_blank" rel="noopener noreferrer" class="text-wz-muted hover:text-wz-ink no-underline flex items-center gap-1.5">
-          <SocialIcon platform="github" size={16} /> <span class="text-xs">GitHub</span>
-        </a>
+      <nav class="site-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
+        {copy.nav.map((item) => (
+          <a href={localizedPath(item.href, locale)} class:list={["site-nav__link", isActive(item.href) && "is-active"]} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
+        ))}
+      </nav>
+      <div class="site-header__actions">
+        <LanguageSwitch locale={locale} pathname={currentPath} label={copy.languageLabel} />
+        <a href={demoPath} class="button button--small button--primary site-header__cta">{copy.demo}</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label={copy.menuOpen} data-open-label={copy.menuOpen} data-close-label={copy.menuClose}>
+          <span></span><span></span>
+        </button>
       </div>
     </div>
-  </nav>
-</header>
+    <div id="mobile-navigation" class="mobile-navigation" hidden>
+      <nav class="site-container mobile-navigation__inner" aria-label={locale === "zh" ? "移动端主导航" : "Mobile navigation"}>
+        {copy.nav.map((item, index) => (
+          <a href={localizedPath(item.href, locale)} class:list={["mobile-navigation__link", isActive(item.href) && "is-active"]} data-mobile-first={index === 0 ? "true" : undefined}>
+            <span>{String(index + 1).padStart(2, "0")}</span>{item.label}
+          </a>
+        ))}
+        <a href={demoPath} class="button button--primary mobile-navigation__cta">{copy.demo}</a>
+      </nav>
+    </div>
+  </header>
+</site-menu>
 
 <script>
-  const toggle = document.getElementById("mobile-menu-toggle");
-  const menu = document.getElementById("mobile-menu");
-  toggle?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
-  });
+  class SiteMenu extends HTMLElement {
+    private button: HTMLButtonElement | null = null;
+    private panel: HTMLElement | null = null;
+    private aborter = new AbortController();
+    connectedCallback() {
+      this.button = this.querySelector(".menu-toggle");
+      this.panel = this.querySelector(".mobile-navigation");
+      this.button?.addEventListener("click", () => this.toggle(), { signal: this.aborter.signal });
+      this.addEventListener("keydown", (event) => { if (event.key === "Escape") this.close(true); }, { signal: this.aborter.signal });
+      this.querySelectorAll(".mobile-navigation a").forEach((link) => link.addEventListener("click", () => this.close(false), { signal: this.aborter.signal }));
+    }
+    disconnectedCallback() { this.aborter.abort(); }
+    private toggle() { this.button?.getAttribute("aria-expanded") === "true" ? this.close(true) : this.open(); }
+    private open() {
+      if (!this.button || !this.panel) return;
+      this.panel.hidden = false;
+      this.button.setAttribute("aria-expanded", "true");
+      this.button.setAttribute("aria-label", this.button.dataset.closeLabel ?? "Close navigation");
+      document.documentElement.classList.add("menu-open");
+      requestAnimationFrame(() => this.querySelector<HTMLAnchorElement>("[data-mobile-first]")?.focus());
+    }
+    private close(restoreFocus: boolean) {
+      if (!this.button || !this.panel) return;
+      this.panel.hidden = true;
+      this.button.setAttribute("aria-expanded", "false");
+      this.button.setAttribute("aria-label", this.button.dataset.openLabel ?? "Open navigation");
+      document.documentElement.classList.remove("menu-open");
+      if (restoreFocus) this.button.focus();
+    }
+  }
+  if (!customElements.get("site-menu")) customElements.define("site-menu", SiteMenu);
 </script>

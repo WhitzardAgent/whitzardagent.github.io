@@ -1,0 +1,65 @@
+import type { Locale } from "./config";
+
+export type UiCopy = {
+  nav: Array<{ href: string; label: string }>;
+  demo: string;
+  menuOpen: string;
+  menuClose: string;
+  languageLabel: string;
+  skip: string;
+  footer: {
+    positioning: string;
+    platform: string;
+    company: string;
+    resources: string;
+    legalLine: string;
+    researchLine: string;
+  };
+};
+
+export const ui: Record<Locale, UiCopy> = {
+  en: {
+    nav: [
+      { href: "/agentguard", label: "Platform" },
+      { href: "/solutions", label: "Solutions" },
+      { href: "/research", label: "Research" },
+      { href: "/open-ecosystem", label: "Open Source" },
+      { href: "/about", label: "Company" },
+    ],
+    demo: "Book a Demo",
+    menuOpen: "Open navigation",
+    menuClose: "Close navigation",
+    languageLabel: "Switch language",
+    skip: "Skip to content",
+    footer: {
+      positioning: "AI agent security infrastructure for secure autonomy.",
+      platform: "Platform",
+      company: "Company",
+      resources: "Research & open source",
+      legalLine: "Secure autonomy, by design.",
+      researchLine: "NVWA Lab is the frontier safety research engine behind Whitzard.",
+    },
+  },
+  zh: {
+    nav: [
+      { href: "/agentguard", label: "产品" },
+      { href: "/solutions", label: "解决方案" },
+      { href: "/research", label: "研究" },
+      { href: "/open-ecosystem", label: "开源生态" },
+      { href: "/about", label: "关于我们" },
+    ],
+    demo: "预约演示",
+    menuOpen: "打开导航",
+    menuClose: "关闭导航",
+    languageLabel: "切换语言",
+    skip: "跳至正文",
+    footer: {
+      positioning: "面向企业智能体的安全基础设施，让自主性在可信边界内释放。",
+      platform: "产品",
+      company: "公司",
+      resources: "研究与开源",
+      legalLine: "守其边界，行其智能。",
+      researchLine: "NVWA Lab 是 Whitzard 背后的前沿安全研究引擎。",
+    },
+  },
+};

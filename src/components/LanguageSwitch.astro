@@ -1,0 +1,22 @@
+---
+import type { Locale } from "../i18n/config";
+import { localeSwitchPath } from "../i18n/routes";
+
+interface Props { locale: Locale; pathname: string; label: string; }
+const { locale, pathname, label } = Astro.props;
+const target = locale === "en" ? "zh" : "en";
+const href = localeSwitchPath(pathname, target);
+---
+
+<a class="language-switch" href={href} aria-label={`${label}: ${target === "zh" ? "中文" : "English"}`} data-language-switch data-locale={target}>
+  <span class:list={[locale === "en" && "is-active"]}>EN</span>
+  <span aria-hidden="true">/</span>
+  <span class:list={[locale === "zh" && "is-active"]}>中文</span>
+</a>
+
+<script>
+  document.addEventListener("click", (event) => {
+    const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("[data-language-switch]");
+    if (link?.dataset.locale) localStorage.setItem("wz-locale", link.dataset.locale);
+  });
+</script>

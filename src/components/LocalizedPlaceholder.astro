@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Props { title: string; description: string; eyebrow: string; }
+const { title, description, eyebrow } = Astro.props;
+---
+
+<BaseLayout title={`${title} — Whitzard`} description={description} locale="zh">
+  <section class="section">
+    <div class="site-container section-copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 class="display-title mt-5">{title}</h1>
+      <p class="mt-7 text-lg leading-relaxed">{description}</p>
+      <p class="mt-5 text-wz-muted">完整中文内容正在按 Whitzard Website V2 规范迁移。</p>
+    </div>
+  </section>
+</BaseLayout>

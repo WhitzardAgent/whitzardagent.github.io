@@ -4,6 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        "wz-xuan": "var(--wz-xuan)",
+        "wz-indigo": "var(--wz-indigo)",
+        "wz-bright-blue": "var(--wz-bright-blue)",
+        "wz-moon": "var(--wz-moon)",
+        "wz-frost": "var(--wz-frost)",
+        "wz-cinnabar": "var(--wz-cinnabar)",
+        "wz-success": "var(--wz-success)",
         // Whitzard
         "wz-ink": "var(--wz-ink)",
         "wz-navy": "var(--wz-navy)",

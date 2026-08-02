@@ -6,6 +6,14 @@ import react from "@astrojs/react";
 export default defineConfig({
   site: "https://www.whitzard.tech",
   integrations: [mdx(), sitemap(), react()],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "zh"],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
   build: {
     assets: "assets",
   },
