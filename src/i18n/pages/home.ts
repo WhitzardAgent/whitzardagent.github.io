@@ -266,10 +266,10 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       primary: "预约产品演示",
       secondary: "查看 AgentGuard 真实演示",
     },
-    manifesto: "自主性在可信边界内释放。",
+    manifesto: "自主性在可信边界内释放",
     risk: {
       eyebrow: "新型安全控制面",
-      title: "智能体让模型输出成为真实行动。",
+      title: "智能体让模型输出成为真实行动",
       intro:
         "单次输入输出检测无法理解跨计划、权限、工具和数据逐步形成的运行时风险。",
       cards: [

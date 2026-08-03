@@ -102,6 +102,7 @@ for (const route of coreRoutes) {
     const text = decodeText(raw);
     const limit = tag.toLowerCase() === "h1" ? 16 : 14;
     if (chineseBudget(text) > limit) violations.push(`${file}: ${tag.toUpperCase()} exceeds Chinese copy budget (${chineseBudget(text)}/${limit}): ${text}`);
+    if (text.endsWith("。")) violations.push(`${file}: ${tag.toUpperCase()} must not end with a Chinese full stop: ${text}`);
   }
 }
 
