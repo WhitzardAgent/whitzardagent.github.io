@@ -1,13 +1,27 @@
 # 09｜中英文核心文案 V3.1
 
+## V3.4 首页锚点文案
+
+| 区域 | 中文 | English |
+|---|---|---|
+| 品牌宣言 | 在安全边界内释放自主智能价值 | Unlock autonomous intelligence within secure boundaries |
+| 风险认知 | 智能体时代带来全新安全挑战 | The agent era creates a new security frontier |
+| 产品界面 | 智能体安全运营中台 | Agent security operations center |
+| 平台能力 | AgentGuard 智能体安全引擎 | AgentGuard Security Engine |
+| 接入部署 | 低侵入适配各类主流智能体架构 | Integrate with leading agent frameworks |
+| 研究转化 | 研究驱动产品持续演进 | Research drives continuous product evolution |
+| 开放生态 | 白泽开放生态 | Whitzard Open Ecosystem |
+
+中文标题不以句号结尾。运行时演示优先表达业务任务、风险、AgentGuard 处置与业务结果，技术标识保持次级。
+
 | 页面 | 中文 H1 | English H1 |
 |---|---|---|
 | 首页 | 守其边界，行其智能 | Secure autonomy, by design. |
 | AgentGuard | 智能体运行时安全控制层 | Control the full agent runtime. |
-| 解决方案 | 高影响智能体的安全落地 | Secure high-impact agent workflows. |
+| 应用场景 | 让企业智能体安全自主执行 | Secure high-impact agent workflows. |
 | NUWA | 研究前沿风险，构建可控智能 | Research frontier risk. Build control. |
-| Research | 前沿 AI 安全研究 | Frontier AI safety research. |
-| 开源生态 | 开放安全技术生态 | Open security technology. |
+| Research | 以研究定义风险，以证据构建安全 | Define risk. Build safety with evidence. |
+| 开源生态 | 白泽开放生态 | Whitzard Open Ecosystem |
 | 关于我们 | 构建智能体安全基础设施 | Building agent security infrastructure. |
 | 联系 | 预约 AgentGuard 演示 | Book an AgentGuard demo. |
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ResearchAsset } from "../../data/generated/researchAssets";
 
 type Locale = "en" | "zh";
@@ -8,8 +8,10 @@ type Copy = {
     searchPlaceholder: string;
     topicLabel: string;
     yearLabel: string;
+    memberLabel: string;
     allTopics: string;
     allYears: string;
+    allMembers: string;
     reset: string;
     noResults: string;
   };
@@ -17,41 +19,37 @@ type Copy = {
   source: string;
 };
 type Theme = { key: string; title: string };
+type Member = { key: string; title: string };
 
-type FilterState = { q: string; topic: string; year: string };
-const emptyFilters: FilterState = { q: "", topic: "", year: "" };
+type FilterState = { q: string; topic: string; year: string; member: string };
+const emptyFilters: FilterState = { q: "", topic: "", year: "", member: "" };
 
 function readFilters(): FilterState {
   if (typeof window === "undefined") return emptyFilters;
   const params = new URLSearchParams(window.location.search);
-  return { q: params.get("q") ?? "", topic: params.get("topic") ?? "", year: params.get("year") ?? "" };
+  return { q: params.get("q") ?? "", topic: params.get("topic") ?? "", year: params.get("year") ?? "", member: params.get("member") ?? "" };
 }
 
-export default function ResearchExplorer({ assets, locale, copy, themes }: { assets: ResearchAsset[]; locale: Locale; copy: Copy; themes: Theme[] }) {
+export default function ResearchExplorer({ assets, locale, copy, themes, members }: { assets: ResearchAsset[]; locale: Locale; copy: Copy; themes: Theme[]; members: Member[] }) {
   const [filters, setFilters] = useState<FilterState>(emptyFilters);
-  const mounted = useRef(false);
 
   useEffect(() => {
     setFilters(readFilters());
     const onPopState = () => setFilters(readFilters());
     window.addEventListener("popstate", onPopState);
-    mounted.current = true;
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
-  useEffect(() => {
-    if (!mounted.current) return;
-    const url = new URL(window.location.href);
-    for (const [key, value] of Object.entries(filters)) value ? url.searchParams.set(key, value) : url.searchParams.delete(key);
-    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
-  }, [filters]);
-
   const years = useMemo(() => [...new Set(assets.map((item) => item.year))].sort((a, b) => b - a), [assets]);
+  const typeLabel: Record<ResearchAsset["publicationType"], string> = locale === "zh"
+    ? { conference: "会议论文", journal: "期刊论文", preprint: "预印本", report: "报告", position: "立场论文" }
+    : { conference: "Conference", journal: "Journal", preprint: "Preprint", report: "Report", position: "Position paper" };
   const filtered = useMemo(() => {
     const query = filters.q.trim().toLocaleLowerCase(locale === "zh" ? "zh-CN" : "en");
     return assets.filter((item) => {
       if (filters.topic && item.category !== filters.topic) return false;
       if (filters.year && item.year !== Number(filters.year)) return false;
+      if (filters.member && !item.memberSlugs.includes(filters.member as ResearchAsset["memberSlugs"][number])) return false;
       if (!query) return true;
       const haystack = [item.title, ...item.authors, item.venue, ...item.topics[locale], item.summary[locale]].join(" ").toLocaleLowerCase(locale === "zh" ? "zh-CN" : "en");
       return haystack.includes(query);
@@ -64,14 +62,20 @@ export default function ResearchExplorer({ assets, locale, copy, themes }: { ass
     return [...grouped.entries()].sort(([a], [b]) => b - a);
   }, [filtered]);
 
-  const set = (key: keyof FilterState, value: string) => setFilters((current) => ({ ...current, [key]: value }));
+  const commit = (next: FilterState, mode: "push" | "replace" = "push") => {
+    setFilters(next);
+    const url = new URL(window.location.href);
+    for (const [key, value] of Object.entries(next)) value ? url.searchParams.set(key, value) : url.searchParams.delete(key);
+    window.history[mode === "push" ? "pushState" : "replaceState"]({}, "", `${url.pathname}${url.search}${url.hash}`);
+  };
+  const set = (key: keyof FilterState, value: string, mode: "push" | "replace" = "push") => commit({ ...filters, [key]: value }, mode);
 
   return (
     <div className="research-explorer">
       <form className="research-filters" role="search" onSubmit={(event) => event.preventDefault()}>
         <label className="research-filters__search">
           <span>{copy.filters.searchLabel}</span>
-          <input type="search" value={filters.q} placeholder={copy.filters.searchPlaceholder} onChange={(event) => set("q", event.target.value)} />
+          <input type="search" value={filters.q} placeholder={copy.filters.searchPlaceholder} onChange={(event) => set("q", event.target.value, "replace")} />
         </label>
         <label>
           <span>{copy.filters.topicLabel}</span>
@@ -87,7 +91,14 @@ export default function ResearchExplorer({ assets, locale, copy, themes }: { ass
             {years.map((year) => <option key={year} value={year}>{year}</option>)}
           </select>
         </label>
-        <button type="button" onClick={() => setFilters(emptyFilters)} disabled={!filters.q && !filters.topic && !filters.year}>{copy.filters.reset}</button>
+        <label>
+          <span>{copy.filters.memberLabel}</span>
+          <select value={filters.member} onChange={(event) => set("member", event.target.value)}>
+            <option value="">{copy.filters.allMembers}</option>
+            {members.map((member) => <option key={member.key} value={member.key}>{member.title}</option>)}
+          </select>
+        </label>
+        <button type="button" onClick={() => commit(emptyFilters)} disabled={!filters.q && !filters.topic && !filters.year && !filters.member}>{copy.filters.reset}</button>
       </form>
 
       <p className="research-count" aria-live="polite">{filtered.length} {locale === "zh" ? "项成果" : filtered.length === 1 ? "result" : "results"}</p>
@@ -97,13 +108,13 @@ export default function ResearchExplorer({ assets, locale, copy, themes }: { ass
           <div>
             {items.map((item) => (
               <article className="research-entry" id={item.slug} key={item.slug}>
-                <div className="research-entry__meta"><span>{item.venue}</span><span>{item.publicationType}</span></div>
+                <div className="research-entry__meta"><span>{item.venue}</span>{item.pages && <span>{item.pages}</span>}<span>{typeLabel[item.publicationType]}</span></div>
                 <h4>{item.title}</h4>
                 <p className="research-entry__authors">{item.authors.join(" · ")}</p>
                 <p>{item.summary[locale]}</p>
                 <div className="research-entry__footer">
                   <ul aria-label={locale === "zh" ? "研究主题" : "Research topics"}>{item.topics[locale].map((topic) => <li key={topic}>{topic}</li>)}</ul>
-                  <div>{item.links.map((link) => <a key={`${link.kind}-${link.url}`} href={link.url} target="_blank" rel="noreferrer">{copy.linkLabels[link.kind]} ↗</a>)}<a href={item.sourceUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></div>
+                  <div>{item.links.map((link) => <a key={`${link.kind}-${link.url}`} href={link.url} target="_blank" rel="noreferrer">{copy.linkLabels[link.kind]} ↗</a>)}<a href={item.sourceUrls[0]} target="_blank" rel="noreferrer">{copy.source} ↗</a></div>
                 </div>
               </article>
             ))}

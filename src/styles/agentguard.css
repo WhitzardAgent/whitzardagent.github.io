@@ -57,3 +57,4 @@
 .ag-surface-viewer__caption li{display:grid;grid-template-columns:28px 1fr;color:var(--wz-muted);font-size:.62rem}
 .ag-surface-viewer__caption li span{color:var(--nw-deep-jade);font:.48rem var(--font-mono)}
 @media(max-width:760px){.ag-surface-viewer{margin-top:2rem}.ag-surface-viewer__visual{min-height:250px;padding:.75rem}.ag-surface-viewer__caption{grid-template-columns:1fr;padding:1rem}.ag-surface-viewer__caption ol{grid-template-columns:1fr}.ag-surface-viewer__visual.is-audit a{max-height:none}.ag-surface-viewer__visual.is-audit img{width:130%;transform:translate(-15%,0)}}
+.ag-adapter-strip small{display:inline-flex;align-items:center;gap:.3rem}.ag-adapter-strip small img{width:1.2rem;height:1.2rem;border-radius:.25rem;object-fit:contain}

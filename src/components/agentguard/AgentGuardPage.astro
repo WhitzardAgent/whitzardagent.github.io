@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
 import type { AgentGuardCopy } from "../../i18n/pages/agentguard";
-import { runtimeConsoleCopy } from "../../i18n/pages/runtime-console";
+import { supportedFrameworks } from "../../data/supportedFrameworks";
 import { enterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
 import AgentGuardEnterpriseScenarioLab from "./AgentGuardEnterpriseScenarioLab";
 import AgentGuardShowcase from "./AgentGuardShowcase.astro";
@@ -13,7 +13,6 @@ import "../../styles/enterprise-scenario-lab.css";
 
 interface Props { locale: Locale; copy: AgentGuardCopy }
 const { locale, copy } = Astro.props;
-const runtimeCopy = runtimeConsoleCopy[locale];
 const softwareSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -50,7 +49,7 @@ const softwareSchema = {
           <a class="button button--primary" href={localizedPath("/contact", locale)}>{copy.hero.primary}</a>
           <a class="button button--secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.hero.secondary} ↗</a>
         </div>
-        <div class="ag-adapter-strip"><span>{runtimeCopy.supportedLabel}</span><div>{runtimeCopy.frameworks.map((framework) => <small>{framework}</small>)}</div></div>
+        <div class="ag-adapter-strip"><span>{locale === "zh" ? "支持的智能体架构" : "SUPPORTED FRAMEWORKS"}</span><div>{supportedFrameworks.map((framework) => <small><img src={framework.logoPath} width="24" height="24" alt="" />{framework.productLabel}</small>)}</div></div>
       </div>
       <figure class="ag-hero__product">
         <img src="/assets/agentguard/dashboard.png" width="2505" height="1229" alt={copy.hero.imageAlt} loading="eager" decoding="sync" fetchpriority="high" />

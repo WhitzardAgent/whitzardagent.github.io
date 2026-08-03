@@ -13,14 +13,14 @@ AgentGuard 只回答产品是什么、如何判断、如何处置、如何接入
 - 使用公开 Dashboard 局部界面作为真实产品证据。
 - 首屏列出已公开支持的七个 Agent 框架。
 
-### 2. Runtime Console
+### 2. Enterprise Scenario Lab
 
-与首页共用 `AgentGuardRuntimeConsole` 数据和状态机，使用完整密度：
+产品页使用独立的 `AgentGuardEnterpriseScenarioLab`，首页只保留业务可读的边界演示：
 
-- 三类真实场景与公开策略 ID；
+- 客户续约分析、生产事故响应、供应商付款核验三类企业场景；
 - 完整轨迹与节点检查；
 - DSL 与安全模型协同研判；
-- `ALLOW · SANITIZE · ALIGN · DEGRADE · APPROVE · DENY`；
+- `ALLOW · AUDIT · REDACT · DEGRADE · HUMAN_CHECK · LLM_CHECK · DENY`；
 - `HUMAN_CHECK` 的批准一次与拒绝分支；
 - 键盘场景切换、节点检查与重放；
 - SSR 输出完整默认状态，减少动画模式直接显示最终状态。
@@ -31,7 +31,7 @@ AgentGuard 只回答产品是什么、如何判断、如何处置、如何接入
 - 可视化策略配置
 - 策略生成
 - 官方点击播放 Demo
-- `retrieve_doc → send_email_to` Allow / Deny 规则
+- 单一主图与可键盘切换的界面标签，不保留旧两节点 Allow / Deny 卡片
 
 ### 4. 核心机制
 

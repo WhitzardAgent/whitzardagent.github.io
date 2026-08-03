@@ -3,17 +3,44 @@ export type LocalizedText = { en: string; zh: string };
 export type ResearchRecognition = {
   year: number;
   title: LocalizedText;
-  attribution: LocalizedText;
-  relatedResearchSlug?: string;
+  venueNote?: LocalizedText;
   sourceUrl: string;
 };
 
 export const researchRecognitions: ResearchRecognition[] = [
-  { year: 2026, title: { en: "Xuemin Scholar", zh: "徐敏学者" }, attribution: { en: "Awarded to Xudong Pan", zh: "潘旭东个人荣誉" }, sourceUrl: "https://ravensanstete.github.io/en/" },
-  { year: 2026, title: { en: "NDSS Best Paper Award", zh: "NDSS 最佳论文奖" }, attribution: { en: "One Email, Many Faces — research team recognition", zh: "《One Email, Many Faces》研究团队荣誉" }, relatedResearchSlug: "one-email-many-faces-a-deep-dive-into-identity-confusion-in-email-aliases", sourceUrl: "https://ghong.site/" },
-  { year: 2024, title: { en: "Shanghai Chenguang Program", zh: "上海市晨光计划" }, attribution: { en: "Awarded to Xudong Pan", zh: "潘旭东个人荣誉" }, sourceUrl: "https://ravensanstete.github.io/en/" },
-  { year: 2024, title: { en: "Shanghai Technical Invention Award — First Prize", zh: "上海市技术发明奖一等奖" }, attribution: { en: "Research team recognition; Geng Hong and Jiarun Dai named as contributors", zh: "研究团队荣誉，洪赓、戴嘉润为完成人" }, sourceUrl: "https://newsroom.fudan.edu.cn/_s3/2025/0826/c234a146480/page.psp" },
-  { year: 2023, title: { en: "WAIC Yunfan Award", zh: "世界人工智能大会云帆奖" }, attribution: { en: "Awarded to Xudong Pan", zh: "潘旭东个人荣誉" }, sourceUrl: "https://ravensanstete.github.io/en/" },
-  { year: 2023, title: { en: "ACM SIGSAC China Distinguished Doctoral Dissertation Award", zh: "ACM SIGSAC 中国优秀博士论文奖" }, attribution: { en: "Awarded to Xudong Pan", zh: "潘旭东个人荣誉" }, sourceUrl: "https://ravensanstete.github.io/en/" },
-  { year: 2020, title: { en: "WAIC Youth Outstanding Paper Nomination", zh: "世界人工智能大会青年优秀论文提名" }, attribution: { en: "Privacy Risks of General-Purpose Language Models — paper recognition", zh: "《Privacy Risks of General-Purpose Language Models》论文荣誉" }, relatedResearchSlug: "privacy-risks-of-general-purpose-language-models", sourceUrl: "https://ravensanstete.github.io/en/publications/" },
+  {
+    year: 2026,
+    title: { en: "Best Paper Award · NDSS", zh: "NDSS 最佳论文奖" },
+    venueNote: { en: "Top-tier cybersecurity conference", zh: "顶级网络安全会议" },
+    sourceUrl: "https://www.ndss-symposium.org/ndss-program/symposium-2026/",
+  },
+  {
+    year: 2025,
+    title: { en: "Falling Walls Science Breakthroughs Shortlist", zh: "德国跨界创新科学突破提名奖" },
+    venueNote: { en: "International interdisciplinary science breakthrough selection", zh: "国际跨学科科学突破评选" },
+    sourceUrl: "https://falling-walls.com/science-summit/shortlist-2025",
+  },
+  {
+    year: 2025,
+    title: { en: "Distinguished Paper Award · NDSS", zh: "NDSS 最佳论文奖" },
+    venueNote: { en: "Top-tier cybersecurity conference", zh: "顶级网络安全会议" },
+    sourceUrl: "https://www.ndss-symposium.org/ndss2025/",
+  },
+  {
+    year: 2024,
+    title: { en: "Distinguished Paper Award · ACM SIGSOFT", zh: "ACM SIGSOFT 杰出论文奖" },
+    venueNote: { en: "Top-tier software-engineering conference", zh: "顶级软件工程会议" },
+    sourceUrl: "https://cs.fudan.edu.cn/7b/9f/c24256a687007/page.htm",
+  },
+  {
+    year: 2023,
+    title: { en: "WAIC Yunfan Prize", zh: "世界人工智能大会云帆奖" },
+    sourceUrl: "https://ravensanstete.github.io/en/",
+  },
+  {
+    year: 2023,
+    title: { en: "Distinguished Paper Award · USENIX Security Symposium", zh: "USENIX Security Symposium 杰出论文奖" },
+    venueNote: { en: "Top-tier cybersecurity conference", zh: "顶级网络安全会议" },
+    sourceUrl: "https://www.usenix.org/conference/usenixsecurity23/technical-sessions",
+  },
 ];

@@ -30,7 +30,7 @@ export type ResearchCopy = {
     featuredLead: string;
     all: string;
     source: string;
-    filters: { searchLabel: string; searchPlaceholder: string; topicLabel: string; yearLabel: string; allTopics: string; allYears: string; reset: string; noResults: string };
+    filters: { searchLabel: string; searchPlaceholder: string; topicLabel: string; yearLabel: string; memberLabel: string; allTopics: string; allYears: string; allMembers: string; reset: string; noResults: string };
     linkLabels: { paper: string; pdf: string; code: string; project: string };
     recognitionEyebrow: string;
     recognitionTitle: string;
@@ -50,6 +50,10 @@ export type ResearchCopy = {
     lead: string;
     github: string;
     hf: string;
+    coreEyebrow: string;
+    coreTitle: string;
+    coreLead: string;
+    directoryTitle: string;
     categories: Array<{ key: string; title: string; body: string }>;
     status: string;
   };
@@ -113,12 +117,14 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
         { key: "agent-model-safety", title: "Agent & model safety", body: "Protect reasoning, behavior, generative models, and human–AI trust.", cta: "View this theme" },
         { key: "software-system-security", title: "Software, systems & agent security", body: "Find vulnerabilities across agents, software, firmware, and cloud systems.", cta: "View this theme" },
         { key: "cybersecurity-privacy", title: "Cybersecurity, privacy & real-world risk", body: "Study cybercrime, privacy leakage, abuse ecosystems, and emerging threats.", cta: "View this theme" },
+        { key: "trustworthy-ml", title: "Trustworthy ML & model security", body: "Study robustness, backdoors, watermarks, poisoning, and model trust.", cta: "View this theme" },
+        { key: "ai-systems-methods", title: "AI systems & learning methods", body: "Complete the publication record across learning systems and methods.", cta: "View this theme" },
       ],
       featured: "Featured research",
       featuredLead: "Five research programs defining frontier risk and practical control.",
       all: "Research index",
       source: "Original source",
-      filters: { searchLabel: "Search", searchPlaceholder: "Search title, author, or topic", topicLabel: "Theme", yearLabel: "Year", allTopics: "All themes", allYears: "All years", reset: "Reset", noResults: "No research matches these filters." },
+      filters: { searchLabel: "Search", searchPlaceholder: "Search title, author, or topic", topicLabel: "Theme", yearLabel: "Year", memberLabel: "Member", allTopics: "All themes", allYears: "All years", allMembers: "All members", reset: "Reset", noResults: "No research matches these filters." },
       linkLabels: { paper: "Paper", pdf: "PDF", code: "Code", project: "Project" },
       recognitionEyebrow: "RECOGNITION",
       recognitionTitle: "Honours and recognition",
@@ -133,15 +139,19 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
     },
     ecosystem: {
       meta: {
-        title: "Open Ecosystem — WhitzardAgent",
+        title: "Whitzard Open Ecosystem — WhitzardAgent",
         description:
           "Open models, tools, data, and evaluation infrastructure from WhitzardAgent.",
       },
       eyebrow: "WHITZARDAGENT",
-      title: "Open security technology.",
+      title: "Whitzard Open Ecosystem",
       lead: "Open models, tools, data, and evaluation infrastructure.",
       github: "GitHub organization",
       hf: "Hugging Face",
+      coreEyebrow: "CORE CAPABILITIES",
+      coreTitle: "Four open foundations",
+      coreLead: "Agent development, safety evaluation, thought correction, and behavior-chain auditing.",
+      directoryTitle: "Complete project directory",
       status: "Open project",
       categories: [
         {
@@ -229,12 +239,14 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
         { key: "agent-model-safety", title: "智能体与模型安全", body: "保护推理、行为、生成模型与人机信任。", cta: "查看主题研究" },
         { key: "software-system-security", title: "软件、系统与智能体安全", body: "发现智能体、软件、固件与云系统漏洞。", cta: "查看主题研究" },
         { key: "cybersecurity-privacy", title: "网络安全、隐私与真实风险", body: "研究网络犯罪、隐私泄露、滥用生态与新型威胁。", cta: "查看主题研究" },
+        { key: "trustworthy-ml", title: "可信机器学习与模型安全", body: "研究鲁棒性、后门、水印、投毒与模型可信。", cta: "查看主题研究" },
+        { key: "ai-systems-methods", title: "AI 系统与学习方法", body: "完整呈现学习系统与方法方向的公开成果。", cta: "查看主题研究" },
       ],
       featured: "旗舰成果",
       featuredLead: "五项代表性工作，连接前沿风险、智能体防护与系统安全。",
       all: "成果索引",
       source: "原文",
-      filters: { searchLabel: "搜索", searchPlaceholder: "搜索标题、作者或主题", topicLabel: "主题", yearLabel: "年份", allTopics: "全部主题", allYears: "全部年份", reset: "重置", noResults: "没有符合条件的研究成果" },
+      filters: { searchLabel: "搜索", searchPlaceholder: "搜索标题、作者或主题", topicLabel: "主题", yearLabel: "年份", memberLabel: "成员", allTopics: "全部主题", allYears: "全部年份", allMembers: "全部成员", reset: "重置", noResults: "没有符合条件的研究成果" },
       linkLabels: { paper: "论文", pdf: "PDF", code: "代码", project: "项目" },
       recognitionEyebrow: "荣誉与认可",
       recognitionTitle: "经公开来源核验的荣誉",
@@ -249,14 +261,18 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
     },
     ecosystem: {
       meta: {
-        title: "开放生态 — WhitzardAgent",
+        title: "白泽开放生态 — WhitzardAgent",
         description: "WhitzardAgent 开放模型、工具、数据和评测基础设施。",
       },
       eyebrow: "WHITZARDAGENT",
-      title: "开放安全技术生态",
-      lead: "开放模型、工具、数据与评测基础设施。",
+      title: "白泽开放生态",
+      lead: "开放智能体框架、安全评测、模型与数据基础设施。",
       github: "GitHub 组织",
       hf: "Hugging Face",
+      coreEyebrow: "核心能力",
+      coreTitle: "四项开放技术基础",
+      coreLead: "覆盖智能体开发、安全评测、思维矫正与行为链审计。",
+      directoryTitle: "完整项目目录",
       status: "开放项目",
       categories: [
         {

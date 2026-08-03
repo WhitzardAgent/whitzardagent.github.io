@@ -1,5 +1,11 @@
 # 06｜NUWA Lab 与开放生态
 
+## V3.4 白泽开放生态
+
+中文访客名称统一为“白泽开放生态”，英文为 `Whitzard Open Ecosystem`。首页和完整生态页均以四项核心能力开场：WhitzardOS、WhitzardEval、Thought-Aligner、MATE。
+
+`qitos`、`QitOS`、`snowl` 与 `snowl-evals` 仅作为内部别名或上游仓库路径。完整生态页按稳定 ID 分组，保留全部公开目录；GitHub 与 Hugging Face 分别展示，AgentGuard 公开仓库继续明确标注社区版。
+
 ## NUWA Lab 的角色
 
 首页只需要一句：

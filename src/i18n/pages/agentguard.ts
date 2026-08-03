@@ -12,12 +12,8 @@ export type AgentGuardCopy = {
   };
   runtime: { eyebrow: string; title: string; body: string };
   demo: {
-    eyebrow: string; title: string; body: string; play: string;
-    dashboardTitle: string; dashboardBody: string; policyTitle: string; policyBody: string;
-    generationTitle: string; generationBody: string;
-    allowed: { label: string; recipient: string; result: string; reason: string };
-    denied: { label: string; recipient: string; result: string; reason: string };
-    stepsTitle: string; steps: string[];
+    play: string;
+    steps: string[];
     viewerEyebrow: string; viewerTitle: string; viewerBody: string;
     viewerLabel: string; communityBadge: string; openOriginal: string;
     surfaces: Array<{ id: "runtime" | "audit" | "policy" | "generation" | "video"; label: string; title: string; body: string; alt: string }>;
@@ -61,19 +57,7 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
     },
     runtime: { eyebrow: "企业工作流控制", title: "一项任务，多重边界", body: "在身份、数据、工具与外部行动之间持续判断，并执行最小必要处置" },
     demo: {
-      eyebrow: "真实产品界面",
-      title: "真实策略，真实处置",
-      body: "基于公开控制台与跨工具规则，展示读取、校验与阻断。",
       play: "播放官方演示",
-      dashboardTitle: "运行时控制台",
-      dashboardBody: "流量、审批、规则与审计集中呈现。",
-      policyTitle: "可视化策略配置",
-      policyBody: "通过结构化控件配置访问与轨迹规则。",
-      generationTitle: "策略生成",
-      generationBody: "将安全意图转化为可审查策略。",
-      allowed: { label: "允许路径", recipient: "admin@example.com", result: "ALLOW", reason: "管理员地址符合机密文档发送规则。" },
-      denied: { label: "阻断路径", recipient: "alice@example.com", result: "DENY", reason: "低信任主体不得向非管理员发送机密文档。" },
-      stepsTitle: "执行过程",
       steps: ["读取机密文档。", "保留跨工具上下文。", "校验收件人、文档与信任等级。", "放行管理员路径，阻断其他路径。"],
       viewerEyebrow: "社区版公开界面",
       viewerTitle: "从策略配置到审计闭环",
@@ -152,19 +136,7 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
     },
     runtime: { eyebrow: "ENTERPRISE WORKFLOW CONTROL", title: "One task. Multiple boundaries.", body: "Continuously evaluate identity, data, tools, and external actions, then apply the minimum necessary response." },
     demo: {
-      eyebrow: "PRODUCT SURFACE",
-      title: "Real policy. Real decisions.",
-      body: "A public console and cross-tool rule show retrieval, validation, and denial.",
       play: "Play official demo",
-      dashboardTitle: "Runtime console",
-      dashboardBody: "Traffic, approvals, policy, and audit in one view.",
-      policyTitle: "Visual policy editor",
-      policyBody: "Configure access and trajectory rules with structured controls.",
-      generationTitle: "Policy generation",
-      generationBody: "Turn security intent into reviewable policy.",
-      allowed: { label: "Allowed", recipient: "admin@example.com", result: "ALLOW", reason: "The admin address satisfies the document rule." },
-      denied: { label: "Denied", recipient: "alice@example.com", result: "DENY", reason: "A low-trust principal cannot send the document externally." },
-      stepsTitle: "Execution",
       steps: ["Retrieve the confidential document.", "Retain cross-tool context.", "Check recipient, document, and trust.", "Allow the admin path; deny the other path."],
       viewerEyebrow: "COMMUNITY PRODUCT SURFACES",
       viewerTitle: "From policy to audit.",

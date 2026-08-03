@@ -2,7 +2,10 @@
 // DO NOT EDIT MANUALLY — re-run npm run ingest:info to update
 
 export type OpenSourceAsset = {
+  id: string;
   name: string;
+  aliases: string[];
+  capability?: LocalizedText;
   status?: string;
   description: LocalizedText;
   githubUrl?: string;
@@ -16,7 +19,9 @@ export type LocalizedText = { en: string; zh: string };
 
 export const openSourceAssets: OpenSourceAsset[] = [
   {
+    "id": "qise",
     "name": "qise",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "AI-first runtime security framework for AI agents, centered on multi-layer guards, SLM/LLM/rule checks, and fail-closed execution protection.",
@@ -27,18 +32,28 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "qise"
   },
   {
-    "name": "snowl",
+    "id": "whitzard-eval",
+    "name": "WhitzardEval",
+    "aliases": [
+      "snowl"
+    ],
+    "capability": {
+      "en": "Safety evaluation infrastructure",
+      "zh": "安全评测基础设施"
+    },
     "status": "open-source",
     "description": {
-      "en": "A safety evaluation framework for AI agents, designed to support agent safety benchmarks and risk evaluation workflows.",
-      "zh": "智能体安全评测框架，用于组织基准、风险测试与评测流程。"
+      "en": "Unified infrastructure for safety benchmarks, risk tests, and evaluation workflows.",
+      "zh": "统一组织安全基准、风险测试与评测流程。"
     },
     "githubUrl": "https://github.com/WhitzardAgent/snowl",
     "visible": true,
-    "slug": "snowl"
+    "slug": "whitzardeval"
   },
   {
+    "id": "agentguard",
     "name": "AgentGuard",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Attribute-based access control framework for tool-use LLM agents, with policy specification, runtime inspection, and auditing support.",
@@ -49,7 +64,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "agentguard"
   },
   {
+    "id": "llmpentest",
     "name": "LLMPentest",
+    "aliases": [],
     "status": "active",
     "description": {
       "en": "Measurement and evaluation codebase for LLM-based penetration testing capability and behavior.",
@@ -60,11 +77,17 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "llmpentest"
   },
   {
+    "id": "thought-aligner",
     "name": "Thought-Aligner",
+    "aliases": [],
+    "capability": {
+      "en": "Thought-chain correction model",
+      "zh": "思维链矫正模型"
+    },
     "status": "open-source",
     "description": {
-      "en": "Plug-and-play thought-level correction module for improving behavioral safety of tool-use agents before risky actions are executed.",
-      "zh": "在风险行动前校准工具型智能体推理。"
+      "en": "Identify and correct unsafe reasoning before risky actions execute.",
+      "zh": "在风险行动前识别并校准不安全推理。"
     },
     "githubUrl": "https://github.com/WhitzardAgent/Thought-Aligner",
     "hfUrl": "https://huggingface.co/WhitzardAgent/Thought-Aligner-7B",
@@ -72,18 +95,29 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "thought-aligner"
   },
   {
-    "name": "qitos",
+    "id": "whitzard-os",
+    "name": "WhitzardOS",
+    "aliases": [
+      "qitos",
+      "QitOS"
+    ],
+    "capability": {
+      "en": "Agent development framework",
+      "zh": "智能体开发框架"
+    },
     "status": "open-source",
     "description": {
-      "en": "Torch-like, agent-native framework for researchers building reproducible LLM agents, harnesses, trajectories, and evaluation workflows.",
-      "zh": "面向研究者的智能体框架，用于复现实验、轨迹与评测。"
+      "en": "Build, reproduce, and observe long-horizon agent tasks.",
+      "zh": "构建、复现与观测长程智能体任务。"
     },
     "githubUrl": "https://github.com/WhitzardAgent/qitos",
     "visible": true,
-    "slug": "qitos"
+    "slug": "whitzardos"
   },
   {
+    "id": "cyberhunter",
     "name": "cyberhunter",
+    "aliases": [],
     "status": "active",
     "description": {
       "en": "Cybersecurity corpus mining and filtering pipeline for extracting high-quality cyber training data from large web corpora.",
@@ -99,18 +133,24 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "cyberhunter"
   },
   {
-    "name": "snowl-evals",
+    "id": "whitzard-eval-evals",
+    "name": "WhitzardEval Evals",
+    "aliases": [
+      "snowl-evals"
+    ],
     "status": "open-source",
     "description": {
-      "en": "Benchmark integration layer for snowl, connecting third-party agent safety and frontier-risk evaluations into a common workflow.",
+      "en": "Benchmark integration layer for third-party agent safety and frontier-risk evaluations.",
       "zh": "统一接入第三方智能体安全与前沿风险评测。"
     },
     "githubUrl": "https://github.com/WhitzardAgent/snowl-evals",
     "visible": true,
-    "slug": "snowl-evals"
+    "slug": "whitzardeval-evals"
   },
   {
+    "id": "agentir",
     "name": "agentir",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Compiler infrastructure for agentic trajectories, designed as an LLVM-style intermediate representation and conversion toolkit for agent traces.",
@@ -125,7 +165,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "agentir"
   },
   {
+    "id": "mirrorguard",
     "name": "MirrorGuard",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Simulation-to-real reasoning-correction framework and VLM for safer computer-use agents operating over GUI environments.",
@@ -138,7 +180,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "mirrorguard"
   },
   {
+    "id": "yoga",
     "name": "YOGA",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Yet Another General-purpose Agent: an extensible and modular generalist agent framework.",
@@ -149,7 +193,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "yoga"
   },
   {
+    "id": "nvwa-project",
     "name": "NVWA Project",
+    "aliases": [],
     "status": "active",
     "description": {
       "en": "Frontier AI safety research project focused on autonomy risk, silicon-based life emergence, proliferation, and control technologies.",
@@ -161,7 +207,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "nvwa-project"
   },
   {
+    "id": "mirror-gui",
     "name": "Mirror-GUI",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "LLM-based GUI simulator for synthesizing and evaluating agentic desktop interaction trajectories.",
@@ -172,7 +220,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "mirror-gui"
   },
   {
+    "id": "xuanwubox",
     "name": "XuanwuBox",
+    "aliases": [],
     "status": "coming soon",
     "description": {
       "en": "Secure execution layer for agentic runtime environments, positioned as an AI security advisor inside Docker-style agent sandboxes.",
@@ -183,7 +233,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "xuanwubox"
   },
   {
+    "id": "reasoningshield",
     "name": "ReasoningShield",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Content-safety detection system for monitoring reasoning traces of large reasoning models.",
@@ -194,7 +246,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "reasoningshield"
   },
   {
+    "id": "intentnet",
     "name": "IntentNet",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Fine-tuned model for evaluating whether an AI agent's reasoning contains deceptive, manipulative, or malicious intent in multi-turn interactions.",
@@ -205,7 +259,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "intentnet"
   },
   {
+    "id": "trustnet",
     "name": "TrustNet",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Fine-tuned model for scoring a user's degree of trust in AI responses during multi-turn human-AI interactions.",
@@ -216,7 +272,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "trustnet"
   },
   {
+    "id": "cybersecurity-100b",
     "name": "CyberSecurity-100B",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Large quality-filtered bilingual cybersecurity corpus for continual pre-training, with cyber relevance scoring, topic labels, code-aware splits, and structured metadata.",
@@ -228,7 +286,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "cybersecurity-100b"
   },
   {
+    "id": "cybersecurity-1m",
     "name": "CyberSecurity-1M",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Curated 1.19M-record cybersecurity knowledge dataset covering vulnerabilities, threat intelligence, incident response, security tools, CTF, frameworks, and Chinese security content.",
@@ -240,7 +300,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "cybersecurity-1m"
   },
   {
+    "id": "cyberrepo-10k",
     "name": "CyberRepo-10K",
+    "aliases": [],
     "status": "open-source",
     "description": {
       "en": "Dataset of 7,670 real-world vulnerability audit tasks with verified GitHub repositories, fix commits, patch diffs, and vulnerable code checkouts.",
@@ -252,7 +314,9 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "slug": "cyberrepo-10k"
   },
   {
+    "id": "cybertrainer-collection",
     "name": "CyberTrainer collection",
+    "aliases": [],
     "status": "active",
     "description": {
       "en": "Hugging Face collection grouping CyberSecurity-1M, CyberSecurity-100B, and CyberRepo-10K as the data foundation for cyber model training.",
@@ -261,5 +325,23 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "hfUrl": "https://huggingface.co/collections/WhitzardAgent/cybertrainer",
     "visible": true,
     "slug": "cybertrainer-collection"
+  },
+  {
+    "id": "mate",
+    "name": "MATE",
+    "aliases": [],
+    "capability": {
+      "en": "Behavior-chain audit model",
+      "zh": "行为链审计模型"
+    },
+    "status": "open-source",
+    "description": {
+      "en": "Policy-aware trajectory auditing model for mobile agents.",
+      "zh": "面向移动智能体的策略感知行为轨迹审计模型。"
+    },
+    "githubUrl": "https://github.com/jiangchangyue/MATE",
+    "hfUrl": "https://huggingface.co/fgdrg/MATE-3B",
+    "visible": true,
+    "slug": "mate"
   }
 ] as const;

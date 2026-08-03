@@ -1,10 +1,10 @@
 import type { HomeCopy } from "../../i18n/pages/home";
-import type { RuntimeConsoleCopy } from "../../i18n/pages/runtime-console";
-import AgentGuardRuntimeConsole from "../agentguard/AgentGuardRuntimeConsole";
+import { supportedFrameworks } from "../../data/supportedFrameworks";
+import AgentGuardBoundaryDemo from "./AgentGuardBoundaryDemo";
 
-type Props = { copy: HomeCopy["hero"]; consoleCopy: RuntimeConsoleCopy; locale: "en" | "zh" };
+type Props = { copy: HomeCopy["hero"]; demoCopy: HomeCopy["boundaryDemo"]; locale: "en" | "zh" };
 
-export default function HomeHero({ copy, consoleCopy, locale }: Props) {
+export default function HomeHero({ copy, demoCopy, locale }: Props) {
   return (
     <section className="home-hero">
       <div className="site-container home-hero__grid">
@@ -16,12 +16,12 @@ export default function HomeHero({ copy, consoleCopy, locale }: Props) {
             <a className="button button--primary" href={locale === "zh" ? "/contact" : "/en/contact"}>{copy.primary}</a>
             <a className="button button--secondary" href={locale === "zh" ? "/agentguard#enterprise" : "/en/agentguard#enterprise"}>{copy.secondary}<span aria-hidden="true">↗</span></a>
           </div>
-          <div className="home-hero__adapters" aria-label={consoleCopy.supportedLabel}>
-            <span>{consoleCopy.supportedLabel}</span>
-            <div>{consoleCopy.frameworks.map((framework) => <small key={framework}>{framework}</small>)}</div>
+          <div className="home-hero__adapters" aria-label={locale === "zh" ? "支持的智能体架构" : "Supported agent frameworks"}>
+            <span>{locale === "zh" ? "支持的智能体架构" : "SUPPORTED FRAMEWORKS"}</span>
+            <div>{supportedFrameworks.map((framework) => <span className="framework-mark" key={framework.id}><img src={framework.logoPath} alt="" width="28" height="28" /><small>{framework.productLabel}</small></span>)}</div>
           </div>
         </div>
-        <AgentGuardRuntimeConsole copy={consoleCopy} density="compact" />
+        <AgentGuardBoundaryDemo copy={demoCopy} />
       </div>
     </section>
   );

@@ -1,5 +1,13 @@
 # Whitzard Website V3.1 release report
 
+## V3.4 — 2026-08-03
+
+- 首页以业务可读的 AgentGuard 边界演示替换技术型轨迹控制台，并新增智能体安全运营中台。
+- 新增七项框架的共享数据和自托管来源说明。
+- 白泽开放生态以 WhitzardOS、WhitzardEval、Thought-Aligner、MATE 建立四项核心能力，同时保留完整目录。
+- 研究目录由 32 条扩展至 86 条跨主页去重记录，增加六类主题与成员筛选，固定五项旗舰成果，并只保留六项已确认荣誉。
+- 已在 1440、1024、390 三档验证页面；场景键盘切换、URL 筛选、浏览器前进后退与横向溢出检查均通过。
+
 Release candidate date: 2026-08-03
 Delivery architecture: Astro static output, React Islands, Tailwind CSS, MDX/Content Collections, JSONL ingestion, GitHub Pages
 
@@ -18,14 +26,14 @@ V3.1 presents Whitzard as a ToB AI-agent security company, AgentGuard as the com
 
 ## Product and research implementation
 
-- The homepage and AgentGuard page share one deterministic runtime console. Its three scenarios cover derived-data egress, untrusted-content-to-shell behavior, and low-trust database writes requiring human approval.
-- The console exposes the canonical `ALLOW · SANITIZE · ALIGN · DEGRADE · APPROVE · DENY` spectrum, policy hits, trace nodes, replay, and approve-once/reject interactions. Keyboard tabs and reduced-motion output were verified.
+- The homepage now uses a business-first boundary demo; the AgentGuard product page retains the detailed deterministic enterprise scenario lab.
+- The product lab exposes public DSL decisions, policy hits, trace nodes, replay, and approve-once/reject interactions. Keyboard tabs and reduced-motion output were verified.
 - The Chinese homepage leads with “企业级智能体安全基础设施”, real supported-adapter evidence, and the compact console before moving to product, deployment, research, and open evidence.
-- AgentGuard uses the public project's real dashboard, policy editor, policy-generation screenshot, and official click-to-play demo video. The interactive example uses the documented `retrieve_doc → send_email_to` allow/deny rule.
+- AgentGuard uses the public project's real dashboard, policy editor, policy-generation screenshot, and official click-to-play demo video. The obsolete two-node recipient demo has been removed.
 - The video is not fetched on initial page load (`preload="none"`) and is accompanied by a complete text walkthrough.
 - The solutions page is now organized around four enterprise workflows—data and knowledge, development and operations, external actions, and multi-agent platforms—without repeating the product architecture.
 - NUWA is formally named “女娲实验室 / NUWA Lab”. Its existing logo is the hero's primary visual, with a cool moon-white, graphite, and jade Neo Lab system.
-- All 21 ecosystem records now have Chinese descriptions. All 18 research records have localized summaries and topics, and team roles, biographies, and link labels are localized.
+- All visible ecosystem records have Chinese descriptions. The research index contains 86 deduplicated records with localized summaries and topics; team roles, biographies, and link labels are localized.
 - Research remains generated from the repository's JSONL evidence and foregrounds the research question, type, year, source, and original link without exposing ingestion or repository-process language.
 - Contact intent is split into enterprise demo, research collaboration, and open-source/technical exchange. All routes use the centralized `whitzardindex@fudan.edu.cn` address.
 

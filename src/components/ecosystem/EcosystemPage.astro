@@ -9,13 +9,15 @@ import "../../styles/ecosystem.css";
 interface Props { locale: Locale; copy: ResearchCopy["ecosystem"] }
 const { locale, copy } = Astro.props;
 const groups: Record<string, string[]> = {
-  runtime: ["AgentGuard", "qise", "XuanwuBox"],
-  models: ["Thought-Aligner", "MirrorGuard", "ReasoningShield", "IntentNet", "TrustNet"],
-  evaluation: ["snowl", "snowl-evals", "LLMPentest", "NVWA Project"],
-  infrastructure: ["qitos", "YOGA", "Mirror-GUI", "agentir"],
-  cyber: ["cyberhunter", "CyberSecurity-100B", "CyberSecurity-1M", "CyberRepo-10K", "CyberTrainer collection"],
+  runtime: ["agentguard", "qise", "xuanwubox"],
+  models: ["thought-aligner", "mate", "mirrorguard", "reasoningshield", "intentnet", "trustnet"],
+  evaluation: ["whitzard-eval", "whitzard-eval-evals", "llmpentest", "nvwa-project"],
+  infrastructure: ["whitzard-os", "yoga", "mirror-gui", "agentir"],
+  cyber: ["cyberhunter", "cybersecurity-100b", "cybersecurity-1m", "cyberrepo-10k", "cybertrainer-collection"],
 };
-const find = (name: string) => openSourceAssets.find(item => item.name.toLowerCase() === name.toLowerCase());
+const find = (id: string) => openSourceAssets.find(item => item.id === id);
+const coreIds = ["whitzard-os", "whitzard-eval", "thought-aligner", "mate"];
+const coreAssets = coreIds.map(find).filter(Boolean);
 const statusMap: Record<Locale, Record<string, string>> = {
   en: { "open-source": "Open source", active: "Maintained", "coming soon": "Coming soon" },
   zh: { "open-source": "开源", active: "持续维护", "coming soon": "即将开放" },
@@ -24,6 +26,8 @@ const statusMap: Record<Locale, Record<string, string>> = {
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/open-ecosystem">
   <section class="eco-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a class="button button--primary" href={links.github} target="_blank" rel="noreferrer">{copy.github} ↗</a><a class="button button--secondary" href={links.huggingface} target="_blank" rel="noreferrer">{copy.hf} ↗</a></div></div></section>
+  <section class="section eco-core"><div class="site-container eco-core__head"><p class="eyebrow">{copy.coreEyebrow}</p><h2>{copy.coreTitle}</h2><p>{copy.coreLead}</p></div><div class="site-container eco-core__grid">{coreAssets.map((project, index) => project && <article><span>0{index + 1}</span><small>{project.capability?.[locale]}</small><h3>{project.name}</h3><p>{project.description[locale]}</p><div>{project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>}{project.hfUrl && <a href={Array.isArray(project.hfUrl) ? project.hfUrl[0] : project.hfUrl} target="_blank" rel="noreferrer">Hugging Face ↗</a>}</div></article>)}</div></section>
+  <div class="site-container eco-directory-title"><p class="eyebrow">{locale === "zh" ? "开放项目" : "OPEN PROJECTS"}</p><h2>{copy.directoryTitle}</h2></div>
   <nav class="eco-index site-container" aria-label={locale === "zh" ? "项目分类" : "Project categories"}>{copy.categories.map((category, index) => <a href={`#${category.key}`}><span>0{index + 1}</span>{category.title}</a>)}</nav>
   {copy.categories.map((category, index) => <section id={category.key} class:list={["section eco-category", index % 2 === 1 && "eco-category--alt"]}><div class="site-container eco-category__head"><div><span>0{index + 1}</span><h2>{category.title}</h2></div><p>{category.body}</p></div><div class="site-container eco-grid">{groups[category.key].map(find).filter(Boolean).map(project => project && <article><div><span>{copy.status}</span><small>{project.name === "AgentGuard" ? (locale === "zh" ? "社区版" : "Community Edition") : statusMap[locale][project.status ?? ""] ?? project.status}</small></div><h3>{project.name}</h3><p>{project.description[locale]}</p><div>{project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer">{project.name === "AgentGuard" ? (locale === "zh" ? "查看社区版" : "Community Edition") : "GitHub"} ↗</a>}{project.hfUrl && <a href={Array.isArray(project.hfUrl) ? project.hfUrl[0] : project.hfUrl} target="_blank" rel="noreferrer">HF ↗</a>}{project.websiteUrl && <a href={project.websiteUrl} target="_blank" rel="noreferrer">{locale === "zh" ? "网站" : "Web"} ↗</a>}</div></article>)}</div></section>)}
 </BaseLayout>

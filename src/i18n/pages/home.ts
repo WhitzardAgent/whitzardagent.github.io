@@ -10,6 +10,40 @@ export type HomeCopy = {
     secondary: string;
   };
   manifesto: string;
+  boundaryDemo: {
+    ariaLabel: string;
+    controlLayer: string;
+    protectedLabel: string;
+    taskLabel: string;
+    riskLabel: string;
+    actionLabel: string;
+    outcomeLabel: string;
+    evidenceLabel: string;
+    evidenceFields: { phase: string; labels: string; rule: string; decision: string };
+    scenarios: Array<{
+      id: "data-egress" | "production-change" | "external-instruction";
+      tab: string;
+      task: string;
+      risk: string;
+      action: string;
+      outcome: string[];
+      flow: string[];
+      evidence: { phase: string; labels: string; rule: string; decision: string };
+      tone: "sanitize" | "approve" | "deny";
+    }>;
+  };
+  operations: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    communityBadge: string;
+    imageAlt: string;
+    callouts: string[];
+    queueLabel: string;
+    fields: { request: string; risk: string; action: string; status: string; audit: string };
+    cases: Array<{ id: string; label: string; request: string; risk: string; action: string; status: string; audit: string }>;
+    cta: string;
+  };
   risk: {
     eyebrow: string;
     title: string;
@@ -77,12 +111,43 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       primary: "Book a Demo",
       secondary: "View the AgentGuard demo",
     },
-    manifesto: "Autonomy thrives inside a trustworthy security boundary.",
+    manifesto: "Unlock autonomous intelligence within secure boundaries",
+    boundaryDemo: {
+      ariaLabel: "How AgentGuard controls agent actions at runtime",
+      controlLayer: "AgentGuard runtime control layer",
+      protectedLabel: "Protected at every action boundary",
+      taskLabel: "Business task",
+      riskLabel: "Risk detected",
+      actionLabel: "AgentGuard response",
+      outcomeLabel: "Business outcome",
+      evidenceLabel: "View decision evidence",
+      evidenceFields: { phase: "Control phase", labels: "Data labels", rule: "Matched rule", decision: "Canonical decision" },
+      scenarios: [
+        { id: "data-egress", tab: "Customer data", task: "Prepare a renewal analysis and send it to an approved adviser.", risk: "The result contains customer identity and contract fields.", action: "AgentGuard redacts sensitive fields before egress.", outcome: ["Analysis continues", "Sensitive fields redacted", "Egress audited"], flow: ["Renewal analysis", "Agent reasoning", "External adviser"], evidence: { phase: "After tool → before external action", labels: "customer-pii · contract-finance · external", rule: "chain-redact-pii-on-http-post", decision: "REDACT → ALLOW WITH AUDIT" }, tone: "sanitize" },
+        { id: "production-change", tab: "Production change", task: "Diagnose an incident, prepare a fix, and publish a production change.", risk: "Shell execution and production deployment are high-impact actions.", action: "AgentGuard degrades the command to preview and pauses deployment for approval.", outcome: ["Diagnosis continues", "Change awaits approval", "Full audit retained"], flow: ["Incident diagnosis", "Fix generation", "Production deployment"], evidence: { phase: "Before tool execution", labels: "production · high-impact · deployment", rule: "enterprise-production-change-approval", decision: "DEGRADE → HUMAN_CHECK" }, tone: "approve" },
+        { id: "external-instruction", tab: "External instruction", task: "Read an external troubleshooting guide and execute its repair command.", risk: "Untrusted content reaches an LLM output bound for the shell.", action: "AgentGuard denies the command before shell execution.", outcome: ["Command not executed", "Risk trace retained"], flow: ["External guide", "Agent reasoning", "Shell command"], evidence: { phase: "After LLM → before tool", labels: "untrusted · llm-output · executable", rule: "chain-deny-llm-output-to-shell", decision: "DENY" }, tone: "deny" },
+      ],
+    },
+    operations: {
+      eyebrow: "AGENTGUARD ENTERPRISE",
+      title: "Agent security operations center",
+      body: "Turn runtime decisions into approval, response, policy, and audit workflows.",
+      communityBadge: "Community Edition public interface",
+      imageAlt: "AgentGuard Community dashboard showing traffic, approvals, policy matches, and audit events",
+      callouts: ["Runtime traffic", "Pending approvals", "Policy matches", "Audit events"],
+      queueLabel: "Security event queue",
+      fields: { request: "Business request", risk: "Key risk", action: "AgentGuard response", status: "Current status", audit: "Audit evidence" },
+      cases: [
+        { id: "production", label: "Production change approval", request: "Diagnose an incident, generate a patch, and deploy to production.", risk: "Generated shell commands and irreversible production changes.", action: "Diagnosis and patch generation completed. AgentGuard degraded the command to preview and paused deployment for approval.", status: "Waiting for authorized approval", audit: "Trace · policy decision · change ticket" },
+        { id: "egress", label: "Sensitive data egress", request: "Send a customer renewal summary to an approved adviser.", risk: "Derived output retains customer identity and contract lineage.", action: "AgentGuard removed sensitive fields and restricted the destination.", status: "Sanitized payload allowed", audit: "Lineage · field diff · destination" },
+        { id: "injection", label: "External instruction injection", request: "Use an external guide to repair a production service.", risk: "Untrusted instructions propagated into a shell command.", action: "AgentGuard denied execution before the shell boundary.", status: "Command blocked; investigation open", audit: "Source label · matched chain rule · denied payload" },
+      ],
+      cta: "View the technical product demo",
+    },
     risk: {
       eyebrow: "A NEW CONTROL PLANE",
-      title: "Agents turn model outputs into real-world actions.",
-      intro:
-        "A single input-output filter cannot understand risk that develops across plans, permissions, tools, and data.",
+      title: "The agent era creates a new security frontier",
+      intro: "Once agents connect models, data, and business systems, risk develops across multi-step actions.",
       cards: [
         {
           title: "Autonomous planning",
@@ -97,13 +162,12 @@ export const homeCopy: Record<Locale, HomeCopy> = {
           body: "Harm emerges across plans, permissions, tools, data, and responses.",
         },
       ],
-      closing: "What an agent does next determines how risk evolves.",
+      closing: "Security control must cover the full path from intent to action",
     },
     platform: {
       eyebrow: "AGENTGUARD PLATFORM",
-      title: "Four layers. One runtime security system.",
-      intro:
-        "AgentGuard connects to the agent, reasons over its complete trajectory, operates the security program, and continuously improves the underlying models and evidence.",
+      title: "AgentGuard Security Engine",
+      intro: "Connect, judge, respond, and operate across the complete agent runtime.",
       layers: [
         {
           index: "01",
@@ -173,14 +237,13 @@ export const homeCopy: Record<Locale, HomeCopy> = {
           body: "Track where sensitive data comes from, how it is used, and where it flows.",
         },
       ],
-      fusion: "DSL Rules × Lightweight Safety Model × Frontier Model",
+      fusion: "Rule Engine × Lightweight Safety Models × In-house Large Model",
       decisions: ["Allow", "Sanitize", "Align", "Degrade", "Approve", "Deny"],
     },
     loop: {
-      eyebrow: "NUWA LAB × AGENTGUARD",
-      title: "NUWA Lab powers the AgentGuard product line.",
-      statement:
-        "Frontier safety research defines risks and builds evaluation evidence. AgentGuard turns that work into runtime control, and deployment evidence returns as new research questions.",
+      eyebrow: "FRONTIER AI SAFETY RESEARCH",
+      title: "Research drives continuous product evolution",
+      statement: "NUWA Lab identifies and evaluates frontier risks, then turns them into AgentGuard evaluation, model, and control capabilities.",
       lab: {
         name: "NUWA Lab",
         role: "Frontier AI Safety Research Engine",
@@ -210,9 +273,8 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     enterprise: {
       eyebrow: "ENTERPRISE DEPLOYMENT",
-      title: "Control stays close to the systems it protects.",
-      intro:
-        "Deploy AgentGuard with the integration and data boundary your environment requires.",
+      title: "Integrate with leading agent frameworks",
+      intro: "Use runtime hooks to protect the existing stack inside the enterprise trust boundary.",
       items: [
         {
           title: "Low-intrusion integration",
@@ -239,9 +301,8 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     ecosystem: {
       eyebrow: "WHITZARDAGENT",
-      title: "Open evidence behind the platform.",
-      intro:
-        "Explore representative tools, models, and evaluation infrastructure from the WhitzardAgent ecosystem.",
+      title: "Whitzard Open Ecosystem",
+      intro: "Open agent frameworks, evaluation infrastructure, and safety models.",
       viewAll: "View the open ecosystem",
     },
     cta: {
@@ -266,12 +327,43 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       primary: "预约产品演示",
       secondary: "了解 AgentGuard Enterprise",
     },
-    manifesto: "自主性在可信边界内释放",
+    manifesto: "在安全边界内释放自主智能价值",
+    boundaryDemo: {
+      ariaLabel: "AgentGuard 如何在运行时控制智能体行动",
+      controlLayer: "AgentGuard 运行时控制层",
+      protectedLabel: "覆盖每个行动边界",
+      taskLabel: "业务任务",
+      riskLabel: "发现风险",
+      actionLabel: "AgentGuard 处置",
+      outcomeLabel: "业务结果",
+      evidenceLabel: "查看判断依据",
+      evidenceFields: { phase: "控制阶段", labels: "数据标签", rule: "命中规则", decision: "标准处置" },
+      scenarios: [
+        { id: "data-egress", tab: "客户数据外发", task: "生成客户续约分析，并发送给获批外部顾问。", risk: "结果包含客户身份与合同字段。", action: "AgentGuard 在外发前脱敏敏感字段。", outcome: ["分析继续", "敏感字段脱敏", "外发留痕"], flow: ["续约分析", "智能体处理", "外部顾问"], evidence: { phase: "工具执行后 → 外部行动前", labels: "客户 PII · 合同财务 · 外部目标", rule: "chain-redact-pii-on-http-post", decision: "REDACT → ALLOW WITH AUDIT" }, tone: "sanitize" },
+        { id: "production-change", tab: "生产变更", task: "诊断生产事故、生成修复方案并发布变更。", risk: "Shell 与生产发布属于高影响行动。", action: "AgentGuard 将命令降级为预览，发布进入审批。", outcome: ["诊断继续", "变更待批", "全程审计"], flow: ["事故诊断", "修复生成", "生产发布"], evidence: { phase: "工具执行前", labels: "生产环境 · 高影响 · 部署", rule: "enterprise-production-change-approval", decision: "DEGRADE → HUMAN_CHECK" }, tone: "approve" },
+        { id: "external-instruction", tab: "外部指令执行", task: "读取外部排障资料，并执行其中的修复命令。", risk: "不可信内容经模型输出进入 Shell。", action: "AgentGuard 在 Shell 执行前阻断命令。", outcome: ["命令未执行", "风险轨迹已保留"], flow: ["外部资料", "智能体处理", "Shell 命令"], evidence: { phase: "模型输出后 → 工具执行前", labels: "不可信 · 模型输出 · 可执行", rule: "chain-deny-llm-output-to-shell", decision: "DENY" }, tone: "deny" },
+      ],
+    },
+    operations: {
+      eyebrow: "AGENTGUARD ENTERPRISE",
+      title: "智能体安全运营中台",
+      body: "将运行时判断转化为审批、响应、策略与审计流程。",
+      communityBadge: "社区版公开界面",
+      imageAlt: "AgentGuard 社区版控制台，展示运行流量、待审批、策略命中与审计事件",
+      callouts: ["运行流量", "待审批", "策略命中", "审计事件"],
+      queueLabel: "安全事件队列",
+      fields: { request: "业务请求", risk: "关键风险", action: "AgentGuard 处置", status: "当前状态", audit: "审计证据" },
+      cases: [
+        { id: "production", label: "生产变更审批", request: "定位生产事故、生成补丁并发布生产变更。", risk: "模型生成命令与不可逆生产变更。", action: "诊断与补丁生成已完成；AgentGuard 已将命令降级为预览，并暂停生产发布等待审批。", status: "等待授权负责人审批", audit: "执行轨迹 · 策略判断 · 变更工单" },
+        { id: "egress", label: "敏感数据外发", request: "向获批顾问发送客户续约摘要。", risk: "衍生结果保留客户身份与合同数据血缘。", action: "AgentGuard 已移除敏感字段，并限制外发目标。", status: "脱敏载荷已放行", audit: "数据血缘 · 字段差异 · 外发目标" },
+        { id: "injection", label: "外部指令注入", request: "使用外部排障资料修复生产服务。", risk: "不可信指令传播为 Shell 命令。", action: "AgentGuard 已在 Shell 边界前阻断执行。", status: "命令已阻断，进入调查", audit: "来源标签 · 命中规则 · 阻断载荷" },
+      ],
+      cta: "查看完整技术演示",
+    },
     risk: {
       eyebrow: "新型安全控制面",
-      title: "智能体让模型输出成为真实行动",
-      intro:
-        "单次输入输出检测无法理解跨计划、权限、工具和数据逐步形成的运行时风险。",
+      title: "智能体时代带来全新安全挑战",
+      intro: "智能体连接模型、数据与业务系统后，风险会沿多步行动持续扩散。",
       cards: [
         {
           title: "自主规划",
@@ -286,13 +378,12 @@ export const homeCopy: Record<Locale, HomeCopy> = {
           body: "风险会在计划、权限、工具、数据与响应之间组合形成。",
         },
       ],
-      closing: "智能体下一步采取的行动决定风险如何演化。",
+      closing: "安全控制必须覆盖行动发生的全过程",
     },
     platform: {
       eyebrow: "AGENTGUARD 平台",
-      title: "四层能力，一个运行时安全系统",
-      intro:
-        "AgentGuard 接入智能体，理解完整运行轨迹，持续运营安全能力，并用研究与部署反馈改进模型和证据。",
+      title: "AgentGuard 智能体安全引擎",
+      intro: "从接入、研判到处置与运营，统一保护智能体运行时。",
       layers: [
         {
           index: "01",
@@ -342,13 +433,13 @@ export const homeCopy: Record<Locale, HomeCopy> = {
           body: "追踪敏感数据的来源、用途、流向和外泄边界。",
         },
       ],
-      fusion: "DSL 规则 × 轻量安全模型 × 前沿大模型",
+      fusion: "规则引擎 × 轻量安全模型 × 自研大模型",
       decisions: ["允许", "脱敏", "校准", "降级", "审批", "阻断"],
     },
     loop: {
-      eyebrow: "女娲实验室 × AGENTGUARD",
-      title: "研究驱动运行时控制",
-      statement: "女娲实验室发现并评估风险，AgentGuard 将安全能力带入企业运行环境。",
+      eyebrow: "前沿 AI 安全研究",
+      title: "研究驱动产品持续演进",
+      statement: "女娲实验室持续识别、评估前沿风险，并转化为 AgentGuard 的评测、模型与控制能力。",
       lab: {
         name: "女娲实验室",
         role: "前沿 AI 安全研究引擎",
@@ -369,8 +460,8 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     enterprise: {
       eyebrow: "企业级部署",
-      title: "控制靠近被保护系统",
-      intro: "根据企业架构与数据边界，以合适的方式部署 AgentGuard。",
+      title: "低侵入适配各类主流智能体架构",
+      intro: "通过运行时 Hook 接入现有技术栈，将控制部署在企业信任边界内。",
       items: [
         {
           title: "低侵入接入",
@@ -397,8 +488,8 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     ecosystem: {
       eyebrow: "WHITZARDAGENT",
-      title: "开放技术证据",
-      intro: "代表性工具、模型与评测基础设施。",
+      title: "白泽开放生态",
+      intro: "开放智能体框架、评测基础设施与安全模型。",
       viewAll: "查看开放生态",
     },
     cta: {

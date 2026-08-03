@@ -1,47 +1,28 @@
 ---
 import type { Locale } from "../../i18n/config";
-import { localizedPath } from "../../i18n/config";
 import type { AgentGuardCopy } from "../../i18n/pages/agentguard";
 import "../../styles/agentguard.css";
 
 interface Props {
   locale: Locale;
   copy: AgentGuardCopy["demo"];
-  compact?: boolean;
 }
 
-const { locale, copy, compact = false } = Astro.props;
-const cases = [copy.allowed, copy.denied];
+const { copy } = Astro.props;
 const assetFor = (id: AgentGuardCopy["demo"]["surfaces"][number]["id"]) => id === "policy" ? "/assets/agentguard/policy-builder.png" : id === "generation" ? "/assets/agentguard/policy-generation.png" : "/assets/agentguard/dashboard.png";
 const videoUrl = "https://ik.imagekit.io/4vsnlaxpc/6dd7e279a6b8d9be652002280d026a46_raw.mp4";
 ---
 
-<section id={compact ? undefined : "demo"} class:list={["ag-showcase", compact && "ag-showcase--compact"]}>
+<section id="demo" class="ag-showcase">
   <div class="site-container ag-showcase__head">
     <div>
-      <p class="eyebrow">{compact ? copy.eyebrow : copy.viewerEyebrow}</p>
-      <h2 class="section-title">{compact ? copy.title : copy.viewerTitle}</h2>
+      <p class="eyebrow">{copy.viewerEyebrow}</p>
+      <h2 class="section-title">{copy.viewerTitle}</h2>
     </div>
-    <p>{compact ? copy.body : copy.viewerBody}</p>
+    <p>{copy.viewerBody}</p>
   </div>
 
-  {compact ? (
-    <>
-      <div class="site-container ag-showcase__primary">
-        <figure class="ag-product-shot">
-          <img src="/assets/agentguard/dashboard.png" width="2505" height="1229" loading="lazy" decoding="async" alt={copy.dashboardTitle} />
-          <figcaption><strong>{copy.dashboardTitle}</strong><span>{copy.dashboardBody}</span></figcaption>
-        </figure>
-        <agentguard-case class="ag-case" data-active="0">
-          <div class="ag-case__tabs" role="tablist" aria-label={locale === "zh" ? "策略结果" : "Policy outcomes"}>{cases.map((item, index) => <button type="button" role="tab" aria-selected={index === 0 ? "true" : "false"} tabindex={index === 0 ? 0 : -1} data-case={index}>{item.label}</button>)}</div>
-          <div class="ag-case__trace" aria-hidden="true"><span>retrieve_doc</span><i>→</i><span>send_email_to</span></div>
-          {cases.map((item, index) => <article role="tabpanel" hidden={index !== 0} data-panel={index}><div><span>RECIPIENT</span><strong>{item.recipient}</strong></div><b class:list={[item.result === "ALLOW" ? "is-allow" : "is-deny"]}>{item.result}</b><p>{item.reason}</p></article>)}
-        </agentguard-case>
-      </div>
-      <div class="site-container ag-showcase__more"><a class="button button--primary" href={`${localizedPath("/agentguard", locale)}#demo`}>{locale === "zh" ? "查看完整产品演示" : "View the full product demo"} →</a></div>
-    </>
-  ) : (
-    <agentguard-surface-viewer class="site-container ag-surface-viewer" data-video-src={videoUrl}>
+  <agentguard-surface-viewer class="site-container ag-surface-viewer" data-video-src={videoUrl}>
       <div class="ag-surface-viewer__tabs" role="tablist" aria-label={copy.viewerLabel}>
         {copy.surfaces.map((surface, index) => <button type="button" role="tab" id={`ag-surface-tab-${surface.id}`} aria-controls={`ag-surface-panel-${surface.id}`} aria-selected={index === 0 ? "true" : "false"} tabindex={index === 0 ? 0 : -1} data-surface={surface.id}><span>{String(index + 1).padStart(2, "0")}</span>{surface.label}</button>)}
       </div>
@@ -59,28 +40,10 @@ const videoUrl = "https://ik.imagekit.io/4vsnlaxpc/6dd7e279a6b8d9be652002280d026
           </section>
         ))}
       </div>
-    </agentguard-surface-viewer>
-  )}
+  </agentguard-surface-viewer>
 </section>
 
 <script>
-  class AgentGuardCase extends HTMLElement {
-    connectedCallback() {
-      const tabs = Array.from(this.querySelectorAll<HTMLButtonElement>("[role=tab]"));
-      const panels = Array.from(this.querySelectorAll<HTMLElement>("[role=tabpanel]"));
-      tabs.forEach((tab, index) => tab.addEventListener("click", () => {
-        tabs.forEach((item, itemIndex) => {
-          const selected = itemIndex === index;
-          item.setAttribute("aria-selected", String(selected));
-          item.tabIndex = selected ? 0 : -1;
-          panels[itemIndex].hidden = !selected;
-        });
-        this.dataset.active = String(index);
-      }));
-    }
-  }
-  if (!customElements.get("agentguard-case")) customElements.define("agentguard-case", AgentGuardCase);
-
   class AgentGuardSurfaceViewer extends HTMLElement {
     connectedCallback() {
       const tabs = Array.from(this.querySelectorAll<HTMLButtonElement>("[role=tab]"));

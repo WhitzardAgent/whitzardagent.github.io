@@ -6,124 +6,515 @@ export type ResearchAsset = {
   authors: string[];
   year: number;
   venue: string;
+  pages?: string;
   status?: string;
   category: ResearchCategory;
-  publicationType: "paper" | "report" | "position" | "preprint";
+  publicationType: "conference" | "journal" | "preprint" | "report" | "position";
   topics: LocalizedList;
   summary: LocalizedText;
   links: ResearchLink[];
   memberSlugs: MemberSlug[];
-  recognitions: LocalizedText[];
   featuredRank?: number;
-  sourceUrl: string;
+  sourceUrls: string[];
+  doi?: string;
+  arxivId?: string;
   lastVerified: string;
   slug: string;
 };
 
 export type LocalizedText = { en: string; zh: string };
 export type LocalizedList = { en: string[]; zh: string[] };
-export type ResearchCategory = "frontier-risk-control" | "agent-model-safety" | "software-system-security" | "cybersecurity-privacy";
+export type ResearchCategory = "frontier-risk-control" | "agent-model-safety" | "software-system-security" | "cybersecurity-privacy" | "trustworthy-ml" | "ai-systems-methods";
 export type ResearchLink = { kind: "paper" | "pdf" | "code" | "project"; url: string };
 export type MemberSlug = "jiarun-dai" | "xudong-pan" | "geng-hong";
 
 export const researchAssets: ResearchAsset[] = [
   {
-    "title": "Frontier AI systems have surpassed the self-replicating red line",
+    "title": "AutoControl Arena: Synthesizing Executable Test Environments for Frontier AI Risk Evaluation",
     "authors": [
+      "Changyi Li",
+      "Peng Lu",
       "Xudong Pan",
-      "Jiarun Dai",
-      "Yihe Fan",
+      "Fazl Barez",
       "Min Yang"
     ],
-    "year": 2024,
-    "venue": "arXiv preprint",
+    "year": 2026,
+    "venue": "ICML 2026 accepted; arXiv preprint",
     "category": "frontier-risk-control",
     "publicationType": "preprint",
     "topics": {
       "en": [
-        "Frontier AI risk",
-        "self-replication",
-        "loss of control"
+        "Frontier AI risk evaluation",
+        "executable environments",
+        "agent safety benchmarks"
       ],
       "zh": [
-        "前沿 AI 风险",
-        "自我复制",
-        "失控风险"
+        "前沿 AI 风险评测",
+        "可执行环境",
+        "智能体安全基准"
       ]
     },
     "summary": {
-      "en": "Evaluates whether frontier AI systems can autonomously self-replicate and reports successful self-replication in controlled trials.",
-      "zh": "评测前沿 AI 系统的自主复制能力，并报告受控实验中的成功案例。"
+      "en": "Synthesizes executable risk-evaluation environments that combine deterministic code state with LLM-generated narrative dynamics.",
+      "zh": "合成结合确定性代码状态与叙事动态的可执行风险环境。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://arxiv.org/abs/2412.12140"
+        "url": "https://arxiv.org/abs/2603.07427"
       },
       {
         "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2412.12140"
+        "url": "https://arxiv.org/pdf/2603.07427"
       }
     ],
     "memberSlugs": [
-      "jiarun-dai",
       "xudong-pan"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "featuredRank": 4,
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2603.07427",
     "lastVerified": "2026-08-03",
-    "slug": "frontier-ai-systems-have-surpassed-the-self-replicating-red-line"
+    "slug": "autocontrol-arena-synthesizing-executable-test-environments-for-frontier-ai-risk"
   },
   {
-    "title": "Large language model-powered AI systems achieve self-replication with no human intervention",
+    "title": "Autonomy Comes with Costs: Detecting Denial-of-Service Vulnerabilities Caused by Resource Abusing in LLM-based Agents",
     "authors": [
-      "Xudong Pan",
+      "Jiaqi Luo",
       "Jiarun Dai",
-      "Yihe Fan",
-      "Minyuan Luo",
-      "Changyi Li",
-      "Min Yang"
+      "Fengyu Liu",
+      "Songyang Peng",
+      "Youkun Shi",
+      "Tong Bu",
+      "Geng Hong",
+      "Xudong Pan",
+      "Yuan Zhang"
     ],
-    "year": 2025,
-    "venue": "arXiv preprint; work in progress",
-    "category": "frontier-risk-control",
-    "publicationType": "preprint",
+    "year": 2026,
+    "venue": "35th USENIX Security Symposium (USENIX Security 26)",
+    "category": "agent-model-safety",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Frontier AI risk",
-        "self-replication",
-        "self-exfiltration",
-        "shutdown resistance"
+        "LLM agent system security",
+        "denial-of-service",
+        "resource governance"
       ],
       "zh": [
-        "前沿 AI 风险",
-        "自我复制",
-        "自我外传",
-        "抗关闭"
+        "大模型智能体安全",
+        "拒绝服务",
+        "资源治理"
       ]
     },
     "summary": {
-      "en": "Extends self-replication evaluation across 32 AI systems and reports autonomous replication, self-exfiltration, adaptation, and shutdown-survival behaviors.",
-      "zh": "评测 32 个 AI 系统的复制、外传、适应与抗关闭行为。"
+      "en": "Presents AgentDoS, a lifecycle-aware fuzzing framework for detecting resource-abuse DoS vulnerabilities in LLM-based agents.",
+      "zh": "提出 AgentDoS，检测智能体资源滥用导致的拒绝服务漏洞。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://arxiv.org/abs/2503.17378"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2503.17378"
+        "url": "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_luo.pdf"
       }
     ],
     "memberSlugs": [
+      "xudong-pan",
       "jiarun-dai",
+      "geng-hong"
+    ],
+    "featuredRank": 2,
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/",
+      "https://djrrr.github.io/",
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "autonomy-comes-with-costs-detecting-denial-of-service-vulnerabilities-caused-by-"
+  },
+  {
+    "title": "BACAgent: LLM-Powered Detection of Broken-Access-Control Vulnerabilities in Web Applications",
+    "authors": [
+      "Fengyu Liu",
+      "Yuan Zhang",
+      "Zheng Lou",
+      "Tian Chen",
+      "Youkun Shi",
+      "Jiarun Dai",
+      "Enhao Li",
+      "Guangyu Zhou",
+      "Zhongfu Su",
+      "Zequn Fang"
+    ],
+    "year": 2026,
+    "venue": "The 33rd ACM Conference on Computer and Communications Security (CCS) , 2026",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies security risks and defenses for agents and foundation models.",
+      "zh": "研究智能体与基础模型的安全风险及防护方法。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://djrrr.github.io/"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "bacagent-llm-powered-detection-of-broken-access-control-vulnerabilities-in-web-a"
+  },
+  {
+    "title": "Better Safe than Sorry: Uncovering the Insecure Resource Management in App-in-App Cloud Services",
+    "authors": [
+      "Yizhe Shi",
+      "Zhemin Yang",
+      "Dingyi Liu",
+      "Kangwei Zhong",
+      "Jiarun Dai",
+      "Min Yang"
+    ],
+    "year": 2026,
+    "venue": "NDSS 2026",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Cloud service security",
+        "resource management",
+        "app-in-app ecosystems"
+      ],
+      "zh": [
+        "云服务安全",
+        "资源管理",
+        "应用内应用生态"
+      ]
+    },
+    "summary": {
+      "en": "Uncovers insecure resource-management practices in app-in-app cloud services.",
+      "zh": "揭示应用内应用云服务中的不安全资源管理问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.ndss-symposium.org/wp-content/uploads/2026-s194-paper.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "better-safe-than-sorry-uncovering-the-insecure-resource-management-in-app-in-app"
+  },
+  {
+    "title": "FirmCred: Detecting Authentication Bypass Vulnerabilities in Firmware from Credential Initialization Perspective",
+    "authors": [
+      "Ziqi Wei",
+      "Haoyu Xiao",
+      "Yuan Zhang",
+      "Chi Chen",
+      "Jiarun Dai"
+    ],
+    "year": 2026,
+    "venue": "The 33rd ACM Conference on Computer and Communications Security (CCS) , 2026",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://djrrr.github.io/"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "firmcred-detecting-authentication-bypass-vulnerabilities-in-firmware-from-creden"
+  },
+  {
+    "title": "FirmCross: Detecting Taint-style Vulnerabilities in Modern C-Lua Hybrid Web Services of Linux-based Firmware",
+    "authors": [
+      "Runhao Liu",
+      "Jiarun Dai",
+      "Haoyu Xiao",
+      "Yuan Zhang",
+      "Yeqi Mou",
+      "Lukai Xu",
+      "Bo Yu",
+      "Baosheng Wang",
+      "Min Yang"
+    ],
+    "year": 2026,
+    "venue": "NDSS 2026",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Firmware security",
+        "taint analysis",
+        "hybrid web services"
+      ],
+      "zh": [
+        "固件安全",
+        "污点分析",
+        "混合 Web 服务"
+      ]
+    },
+    "summary": {
+      "en": "Detects taint-style vulnerabilities across C and Lua boundaries in firmware web services.",
+      "zh": "检测固件 Web 服务跨 C 与 Lua 边界的污点型漏洞。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.ndss-symposium.org/wp-content/uploads/2026-s1251-paper.pdf"
+      },
+      {
+        "kind": "code",
+        "url": "https://github.com/prankster009/FirmCross"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "firmcross-detecting-taint-style-vulnerabilities-in-modern-c-lua-hybrid-web-servi"
+  },
+  {
+    "title": "FlowGuard: Towards Lightweight In-Generation Safety Detection for Diffusion Models via Linear Latent Decoding",
+    "authors": [
+      "Jinghan Yang",
+      "Yihe Fan",
+      "Xudong Pan",
+      "Min Yang"
+    ],
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "category": "agent-model-safety",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "Generative model safety",
+        "NSFW detection",
+        "diffusion models"
+      ],
+      "zh": [
+        "生成模型安全",
+        "不良内容检测",
+        "扩散模型"
+      ]
+    },
+    "summary": {
+      "en": "Detects unsafe diffusion outputs during the generation process by approximating latent decoding, enabling earlier and cheaper NSFW intervention.",
+      "zh": "通过近似潜变量解码，在扩散生成过程中低成本检测不安全内容。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2604.07879"
+      },
+      {
+        "kind": "pdf",
+        "url": "https://arxiv.org/pdf/2604.07879"
+      }
+    ],
+    "memberSlugs": [
       "xudong-pan"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2604.07879",
     "lastVerified": "2026-08-03",
-    "slug": "large-language-model-powered-ai-systems-achieve-self-replication-with-no-human-i"
+    "slug": "flowguard-towards-lightweight-in-generation-safety-detection-for-diffusion-model"
+  },
+  {
+    "title": "Khost: KVM-based Near Native MCU Firmware Rehosting",
+    "authors": [
+      "Chunlin Wang",
+      "Yicheng Yang",
+      "Yuan Zhang",
+      "Haoyu Xiao",
+      "Yifan Zhang",
+      "Jiarun Dai"
+    ],
+    "year": 2026,
+    "venue": "USENIX Security 2026",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Firmware security",
+        "MCU rehosting",
+        "systems security"
+      ],
+      "zh": [
+        "固件安全",
+        "MCU 重托管",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Rehosts MCU firmware on KVM with near-native execution for scalable security analysis.",
+      "zh": "以 KVM 近原生执行重托管 MCU 固件，支持规模化安全分析。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_wang-chunlin.pdf"
+      },
+      {
+        "kind": "code",
+        "url": "https://github.com/seclab-fudan/Khost"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "khost-kvm-based-near-native-mcu-firmware-rehosting"
+  },
+  {
+    "title": "MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction",
+    "authors": [
+      "Wenqi Zhang",
+      "Yulin Shen",
+      "Changyue Jiang",
+      "Jiarun Dai",
+      "Geng Hong",
+      "Xudong Pan"
+    ],
+    "year": 2026,
+    "venue": "ACM CCS 2026 accepted; arXiv preprint",
+    "category": "agent-model-safety",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "Computer-use agent security",
+        "visual prompt injection",
+        "simulation-to-real defense"
+      ],
+      "zh": [
+        "计算机操作智能体安全",
+        "视觉提示注入",
+        "仿真到真实防御"
+      ]
+    },
+    "summary": {
+      "en": "Uses simulation-derived reasoning correction to reduce unsafe actions in computer-use agents while preserving task utility.",
+      "zh": "以仿真推理校准降低计算机操作智能体的不安全行动。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2601.12822"
+      },
+      {
+        "kind": "pdf",
+        "url": "https://arxiv.org/pdf/2601.12822"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan",
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/",
+      "https://djrrr.github.io/"
+    ],
+    "arxivId": "2601.12822",
+    "lastVerified": "2026-08-03",
+    "slug": "mirrorguard-toward-secure-computer-use-agents-via-simulation-to-real-reasoning-c"
+  },
+  {
+    "title": "One Email, Many Faces: A Deep Dive into Identity Confusion in Email Aliases",
+    "authors": [
+      "Mengying Wu",
+      "Geng Hong",
+      "Jiatao Chen",
+      "Mingxuan Liu",
+      "Baojun Liu",
+      "Min Yang"
+    ],
+    "year": 2026,
+    "venue": "NDSS 2026",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Email security",
+        "identity confusion",
+        "alias abuse"
+      ],
+      "zh": [
+        "邮件安全",
+        "身份混淆",
+        "别名滥用"
+      ]
+    },
+    "summary": {
+      "en": "Reveals identity-confusion risks in email alias ecosystems and measures their security impact.",
+      "zh": "揭示邮件别名生态中的身份混淆机制及其安全影响。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/ndss26summer-email.pdf"
+      },
+      {
+        "kind": "code",
+        "url": "https://github.com/lab-rynth/OriginMail"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "one-email-many-faces-a-deep-dive-into-identity-confusion-in-email-aliases"
   },
   {
     "title": "One Step from Silicon Life: Autonomous AI Agents Capable of Uncontrolled Self-Proliferation",
@@ -162,164 +553,13 @@ export const researchAssets: ResearchAsset[] = [
       }
     ],
     "memberSlugs": [
-      "jiarun-dai",
-      "xudong-pan",
       "geng-hong"
     ],
-    "recognitions": [],
-    "featuredRank": 1,
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
     "lastVerified": "2026-08-03",
     "slug": "one-step-from-silicon-life-autonomous-ai-agents-capable-of-uncontrolled-self-pro"
-  },
-  {
-    "title": "Shell or Nothing: Real-World Benchmarks and Memory-Activated Agents for Automated Penetration Testing",
-    "authors": [
-      "Wuyuao Mai",
-      "Geng Hong",
-      "Qi Liu",
-      "Jinsong Chen",
-      "Jiarun Dai",
-      "Xudong Pan",
-      "Yuan Zhang",
-      "Min Yang"
-    ],
-    "year": 2025,
-    "venue": "arXiv preprint",
-    "category": "software-system-security",
-    "publicationType": "preprint",
-    "topics": {
-      "en": [
-        "AI system security",
-        "autonomous penetration testing",
-        "cyber agents"
-      ],
-      "zh": [
-        "AI 系统安全",
-        "自动渗透测试",
-        "网络安全智能体"
-      ]
-    },
-    "summary": {
-      "en": "Introduces TermiBench and TermiAgent to evaluate and improve autonomous penetration-testing agents in realistic shell-acquisition settings.",
-      "zh": "提出 TermiBench 与 TermiAgent，评测真实 Shell 获取任务。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://arxiv.org/abs/2509.09207"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2509.09207"
-      }
-    ],
-    "memberSlugs": [
-      "jiarun-dai",
-      "xudong-pan",
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
-    "lastVerified": "2026-08-03",
-    "slug": "shell-or-nothing-real-world-benchmarks-and-memory-activated-agents-for-automated"
-  },
-  {
-    "title": "CyberEvolver: Structured Self-Evolution for Cybersecurity Agents On the Fly",
-    "authors": [
-      "Yihe Fan",
-      "Changyi Li",
-      "Lichen Xu",
-      "Xudong Pan",
-      "Jiarun Dai",
-      "Geng Hong",
-      "Min Yang"
-    ],
-    "year": 2026,
-    "venue": "arXiv preprint",
-    "category": "software-system-security",
-    "publicationType": "preprint",
-    "topics": {
-      "en": [
-        "AI system security",
-        "cybersecurity agents",
-        "self-evolving agents"
-      ],
-      "zh": [
-        "AI 系统安全",
-        "网络安全智能体",
-        "自进化智能体"
-      ]
-    },
-    "summary": {
-      "en": "Proposes a cybersecurity agent framework that iteratively revises its own scaffold from failed attempts to adapt across targets and failure modes.",
-      "zh": "通过失败轨迹迭代智能体脚手架，适应不同目标与失败模式。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://arxiv.org/abs/2605.26195"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2605.26195"
-      }
-    ],
-    "memberSlugs": [
-      "jiarun-dai",
-      "xudong-pan",
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
-    "lastVerified": "2026-08-03",
-    "slug": "cyberevolver-structured-self-evolution-for-cybersecurity-agents-on-the-fly"
-  },
-  {
-    "title": "Evaluation Faking: Unveiling Observer Effects in Safety Evaluation of Frontier AI Systems",
-    "authors": [
-      "Yihe Fan",
-      "Wenqi Zhang",
-      "Xudong Pan",
-      "Min Yang"
-    ],
-    "year": 2025,
-    "venue": "arXiv preprint",
-    "category": "frontier-risk-control",
-    "publicationType": "preprint",
-    "topics": {
-      "en": [
-        "Frontier AI safety evaluation",
-        "evaluation faking",
-        "situational awareness"
-      ],
-      "zh": [
-        "前沿 AI 安全评测",
-        "评测伪装",
-        "情境感知"
-      ]
-    },
-    "summary": {
-      "en": "Studies whether models recognize evaluation contexts and alter behavior, identifying observer effects that threaten safety-evaluation integrity.",
-      "zh": "研究模型识别评测环境并改变行为所产生的观察者效应。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://arxiv.org/abs/2505.17815"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2505.17815"
-      }
-    ],
-    "memberSlugs": [
-      "xudong-pan"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
-    "lastVerified": "2026-08-03",
-    "slug": "evaluation-faking-unveiling-observer-effects-in-safety-evaluation-of-frontier-ai"
   },
   {
     "title": "OpenDeception: Learning Deception and Trust in Human-AI Interaction via Multi-Agent Simulation",
@@ -333,7 +573,7 @@ export const researchAssets: ResearchAsset[] = [
     "year": 2026,
     "venue": "ICML 2026 accepted; arXiv preprint",
     "category": "frontier-risk-control",
-    "publicationType": "paper",
+    "publicationType": "preprint",
     "topics": {
       "en": [
         "AI deception",
@@ -361,61 +601,60 @@ export const researchAssets: ResearchAsset[] = [
       }
     ],
     "memberSlugs": [
-      "xudong-pan",
-      "geng-hong"
+      "xudong-pan"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2504.13707",
     "lastVerified": "2026-08-03",
     "slug": "opendeception-learning-deception-and-trust-in-human-ai-interaction-via-multi-age"
   },
   {
-    "title": "AutoControl Arena: Synthesizing Executable Test Environments for Frontier AI Risk Evaluation",
+    "title": "PHPBench: Automated Generation of Verifiable and Hierarchical Benchmarks for PHP Web Fuzzing",
     "authors": [
-      "Changyi Li",
-      "Pengfei Lu",
-      "Xudong Pan",
-      "Fazl Barez",
+      "Youkun Shi",
+      "Yuan Zhang",
+      "Lei Zhang",
+      "Jiarun Dai",
+      "Tianhao Bai",
+      "Fengyu Liu",
+      "Bocheng Xiang",
+      "Xiapu Luo",
       "Min Yang"
     ],
     "year": 2026,
-    "venue": "ICML 2026 accepted; arXiv preprint",
-    "category": "frontier-risk-control",
-    "publicationType": "paper",
+    "venue": "The 33rd ACM Conference on Computer and Communications Security (CCS) , 2026",
+    "category": "software-system-security",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Frontier AI risk evaluation",
-        "executable environments",
-        "agent safety benchmarks"
+        "software security",
+        "systems security"
       ],
       "zh": [
-        "前沿 AI 风险评测",
-        "可执行环境",
-        "智能体安全基准"
+        "软件安全",
+        "系统安全"
       ]
     },
     "summary": {
-      "en": "Synthesizes executable risk-evaluation environments that combine deterministic code state with LLM-generated narrative dynamics.",
-      "zh": "合成结合确定性代码状态与叙事动态的可执行风险环境。"
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://arxiv.org/abs/2603.07427"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2603.07427"
+        "url": "https://djrrr.github.io/"
       }
     ],
     "memberSlugs": [
-      "xudong-pan"
+      "jiarun-dai"
     ],
-    "recognitions": [],
-    "featuredRank": 2,
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "autocontrol-arena-synthesizing-executable-test-environments-for-frontier-ai-risk"
+    "slug": "phpbench-automated-generation-of-verifiable-and-hierarchical-benchmarks-for-php-"
   },
   {
     "title": "Position: Preparing for AI Systems That Deceive Developers",
@@ -476,304 +715,13 @@ export const researchAssets: ResearchAsset[] = [
       }
     ],
     "memberSlugs": [
-      "jiarun-dai",
-      "xudong-pan",
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
-    "lastVerified": "2026-08-03",
-    "slug": "position-preparing-for-ai-systems-that-deceive-developers"
-  },
-  {
-    "title": "Think Twice Before You Act: Enhancing Agent Behavioral Safety with Thought Correction",
-    "authors": [
-      "Changyue Jiang",
-      "Wenqi Zhang",
-      "Xudong Pan",
-      "Geng Hong",
-      "Min Yang"
-    ],
-    "year": 2026,
-    "venue": "ICML 2026 accepted; arXiv preprint",
-    "category": "agent-model-safety",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "Agent behavioral safety",
-        "thought correction",
-        "guardrails"
-      ],
-      "zh": [
-        "智能体行为安全",
-        "思维校准",
-        "安全护栏"
-      ]
-    },
-    "summary": {
-      "en": "Introduces Thought-Aligner, a plug-in method that causally corrects unsafe agent thoughts before actions are executed.",
-      "zh": "提出 Thought-Aligner，在行动前因果校准不安全推理。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://arxiv.org/abs/2505.11063"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2505.11063"
-      }
-    ],
-    "memberSlugs": [
-      "xudong-pan",
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "featuredRank": 3,
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
-    "lastVerified": "2026-08-03",
-    "slug": "think-twice-before-you-act-enhancing-agent-behavioral-safety-with-thought-correc"
-  },
-  {
-    "title": "MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction",
-    "authors": [
-      "Wenqi Zhang",
-      "Yulin Shen",
-      "Changyue Jiang",
-      "Jiarun Dai",
-      "Geng Hong",
-      "Xudong Pan"
-    ],
-    "year": 2026,
-    "venue": "ACM CCS 2026 accepted; arXiv preprint",
-    "category": "agent-model-safety",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "Computer-use agent security",
-        "visual prompt injection",
-        "simulation-to-real defense"
-      ],
-      "zh": [
-        "计算机操作智能体安全",
-        "视觉提示注入",
-        "仿真到真实防御"
-      ]
-    },
-    "summary": {
-      "en": "Uses simulation-derived reasoning correction to reduce unsafe actions in computer-use agents while preserving task utility.",
-      "zh": "以仿真推理校准降低计算机操作智能体的不安全行动。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://arxiv.org/abs/2601.12822"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2601.12822"
-      }
-    ],
-    "memberSlugs": [
-      "jiarun-dai",
-      "xudong-pan",
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "featuredRank": 4,
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
-    "lastVerified": "2026-08-03",
-    "slug": "mirrorguard-toward-secure-computer-use-agents-via-simulation-to-real-reasoning-c"
-  },
-  {
-    "title": "Autonomy Comes with Costs: Detecting Denial-of-Service Vulnerabilities Caused by Resource Abusing in LLM-based Agents",
-    "authors": [
-      "Jiaqi Luo",
-      "Jiarun Dai",
-      "Fengyu Liu",
-      "Songyang Peng",
-      "Youkun Shi",
-      "Tong Bu",
-      "Geng Hong",
-      "Xudong Pan",
-      "Yuan Zhang"
-    ],
-    "year": 2026,
-    "venue": "USENIX Security 2026",
-    "category": "software-system-security",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "LLM agent system security",
-        "denial-of-service",
-        "resource governance"
-      ],
-      "zh": [
-        "大模型智能体安全",
-        "拒绝服务",
-        "资源治理"
-      ]
-    },
-    "summary": {
-      "en": "Presents AgentDoS, a lifecycle-aware fuzzing framework for detecting resource-abuse DoS vulnerabilities in LLM-based agents.",
-      "zh": "提出 AgentDoS，检测智能体资源滥用导致的拒绝服务漏洞。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_luo.pdf"
-      }
-    ],
-    "memberSlugs": [
-      "jiarun-dai",
-      "xudong-pan",
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
-    "lastVerified": "2026-08-03",
-    "slug": "autonomy-comes-with-costs-detecting-denial-of-service-vulnerabilities-caused-by-"
-  },
-  {
-    "title": "Make Agent Defeat Agent: Automatic Detection of Taint-Style Vulnerabilities in LLM-based Agents",
-    "authors": [
-      "Fengyu Liu",
-      "Yuan Zhang",
-      "Jiaqi Luo",
-      "Jiarun Dai",
-      "Tian Chen",
-      "Letian Yuan",
-      "Zhengmin Yu",
-      "Youkun Shi",
-      "Ke Li",
-      "Chengyuan Zhou",
-      "Hao Chen",
-      "Min Yang"
-    ],
-    "year": 2025,
-    "venue": "USENIX Security 2025",
-    "category": "software-system-security",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "LLM agent system security",
-        "taint-style vulnerabilities",
-        "fuzzing"
-      ],
-      "zh": [
-        "大模型智能体安全",
-        "污点型漏洞",
-        "模糊测试"
-      ]
-    },
-    "summary": {
-      "en": "Introduces AgentFuzz, a directed greybox fuzzing framework for finding taint-style vulnerabilities in real-world LLM-based agents.",
-      "zh": "提出 AgentFuzz，自动发现真实智能体应用中的污点型漏洞。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/liu-fengyu"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://www.usenix.org/system/files/usenixsecurity25-liu-fengyu.pdf"
-      }
-    ],
-    "memberSlugs": [
-      "jiarun-dai"
-    ],
-    "recognitions": [],
-    "featuredRank": 5,
-    "sourceUrl": "https://djrrr.github.io/",
-    "lastVerified": "2026-08-03",
-    "slug": "make-agent-defeat-agent-automatic-detection-of-taint-style-vulnerabilities-in-ll"
-  },
-  {
-    "title": "Security Debt in LLM Agent Applications: A Measurement Study of Vulnerabilities and Mitigation Trade-offs",
-    "authors": [
-      "Zhuoxiang Shen",
-      "Jiarun Dai",
-      "Yuan Zhang",
-      "Min Yang"
-    ],
-    "year": 2025,
-    "venue": "ASE 2025",
-    "category": "software-system-security",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "LLM agent system security",
-        "vulnerability measurement",
-        "mitigation trade-offs"
-      ],
-      "zh": [
-        "大模型智能体安全",
-        "漏洞测量",
-        "防护权衡"
-      ]
-    },
-    "summary": {
-      "en": "Measures security debt in LLM-agent applications by studying known vulnerabilities and the trade-offs introduced by mitigation strategies.",
-      "zh": "测量智能体应用的漏洞安全债务与防护策略权衡。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://conf.researchr.org/details/ase-2025/ase-2025-papers/19/Security-Debt-in-LLM-Agent-Applications-A-Measurement-Study-of-Vulnerabilities-and-M"
-      }
-    ],
-    "memberSlugs": [
-      "jiarun-dai"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://djrrr.github.io/",
-    "lastVerified": "2026-08-03",
-    "slug": "security-debt-in-llm-agent-applications-a-measurement-study-of-vulnerabilities-a"
-  },
-  {
-    "title": "StruPhantom: Evolutionary Injection Attacks on Black-Box Tabular Agents Powered by Large Language Models",
-    "authors": [
-      "Yang Feng",
-      "Xudong Pan"
-    ],
-    "year": 2026,
-    "venue": "WWW 2026; arXiv preprint",
-    "category": "agent-model-safety",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "Prompt injection",
-        "tabular agents",
-        "black-box agent security"
-      ],
-      "zh": [
-        "提示注入",
-        "表格智能体",
-        "黑盒智能体安全"
-      ]
-    },
-    "summary": {
-      "en": "Proposes an evolutionary prompt-injection attack that targets black-box LLM-powered tabular agents under structural payload constraints.",
-      "zh": "提出面向黑盒表格智能体的结构约束进化提示注入攻击。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://arxiv.org/abs/2504.09841"
-      },
-      {
-        "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2504.09841"
-      }
-    ],
-    "memberSlugs": [
       "xudong-pan"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "struphantom-evolutionary-injection-attacks-on-black-box-tabular-agents-powered-b"
+    "slug": "position-preparing-for-ai-systems-that-deceive-developers"
   },
   {
     "title": "PRISON: Unmasking the Criminal Potential of Large Language Models",
@@ -787,8 +735,8 @@ export const researchAssets: ResearchAsset[] = [
     ],
     "year": 2026,
     "venue": "ICLR 2026; arXiv preprint",
-    "category": "frontier-risk-control",
-    "publicationType": "paper",
+    "category": "agent-model-safety",
+    "publicationType": "preprint",
     "topics": {
       "en": [
         "LLM behavioral risk",
@@ -819,56 +767,1102 @@ export const researchAssets: ResearchAsset[] = [
       "xudong-pan",
       "geng-hong"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/",
+      "https://ghong.site/"
+    ],
+    "arxivId": "2506.16150",
     "lastVerified": "2026-08-03",
     "slug": "prison-unmasking-the-criminal-potential-of-large-language-models"
   },
   {
-    "title": "FlowGuard: Towards Lightweight In-Generation Safety Detection for Diffusion Models via Linear Latent Decoding",
+    "title": "Reproducing Web Application Vulnerabilities with Patch-Guided Routing Inference and Sink Exploration",
     "authors": [
-      "Jinghan Yang",
-      "Yihe Fan",
-      "Xudong Pan",
-      "Min Yang"
+      "Youkun Shi",
+      "Yuan Zhang",
+      "Feng Xue",
+      "Jiarun Dai",
+      "Lei Zhang",
+      "Fengyu Liu",
+      "Bocheng Xiang",
+      "Xiapu Luo"
     ],
     "year": 2026,
-    "venue": "arXiv preprint",
-    "category": "agent-model-safety",
-    "publicationType": "preprint",
+    "venue": "The 33rd ACM Conference on Computer and Communications Security (CCS) , 2026",
+    "category": "software-system-security",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Generative model safety",
-        "NSFW detection",
-        "diffusion models"
+        "software security",
+        "systems security"
       ],
       "zh": [
-        "生成模型安全",
-        "不良内容检测",
-        "扩散模型"
+        "软件安全",
+        "系统安全"
       ]
     },
     "summary": {
-      "en": "Detects unsafe diffusion outputs during the generation process by approximating latent decoding, enabling earlier and cheaper NSFW intervention.",
-      "zh": "通过近似潜变量解码，在扩散生成过程中低成本检测不安全内容。"
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://arxiv.org/abs/2604.07879"
+        "url": "https://djrrr.github.io/"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "reproducing-web-application-vulnerabilities-with-patch-guided-routing-inference-"
+  },
+  {
+    "title": "StruPhantom: Evolutionary Injection Attacks on Black-Box Tabular Agents Powered by Large Language Models",
+    "authors": [
+      "Yang Feng",
+      "Xudong Pan"
+    ],
+    "year": 2026,
+    "venue": "WWW 2026; arXiv preprint",
+    "category": "agent-model-safety",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "Prompt injection",
+        "tabular agents",
+        "black-box agent security"
+      ],
+      "zh": [
+        "提示注入",
+        "表格智能体",
+        "黑盒智能体安全"
+      ]
+    },
+    "summary": {
+      "en": "Proposes an evolutionary prompt-injection attack that targets black-box LLM-powered tabular agents under structural payload constraints.",
+      "zh": "提出面向黑盒表格智能体的结构约束进化提示注入攻击。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2504.09841"
       },
       {
         "kind": "pdf",
-        "url": "https://arxiv.org/pdf/2604.07879"
+        "url": "https://arxiv.org/pdf/2504.09841"
       }
     ],
     "memberSlugs": [
       "xudong-pan"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2504.09841",
     "lastVerified": "2026-08-03",
-    "slug": "flowguard-towards-lightweight-in-generation-safety-detection-for-diffusion-model"
+    "slug": "struphantom-evolutionary-injection-attacks-on-black-box-tabular-agents-powered-b"
+  },
+  {
+    "title": "Think Twice Before You Act: Enhancing Agent Behavioral Safety with Thought Correction",
+    "authors": [
+      "Changyue Jiang",
+      "Wenqi Zhang",
+      "Xudong Pan",
+      "Geng Hong",
+      "Min Yang"
+    ],
+    "year": 2026,
+    "venue": "ICML 2026 accepted; arXiv preprint",
+    "category": "agent-model-safety",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "Agent behavioral safety",
+        "thought correction",
+        "guardrails"
+      ],
+      "zh": [
+        "智能体行为安全",
+        "思维校准",
+        "安全护栏"
+      ]
+    },
+    "summary": {
+      "en": "Introduces Thought-Aligner, a plug-in method that causally corrects unsafe agent thoughts before actions are executed.",
+      "zh": "提出 Thought-Aligner，在行动前因果校准不安全推理。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2505.11063"
+      },
+      {
+        "kind": "pdf",
+        "url": "https://arxiv.org/pdf/2505.11063"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "featuredRank": 5,
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2505.11063",
+    "lastVerified": "2026-08-03",
+    "slug": "think-twice-before-you-act-enhancing-agent-behavioral-safety-with-thought-correc"
+  },
+  {
+    "title": "Unveiling the Resilience of LLM-Enhanced Search Engines Against Black-Hat SEO Manipulation",
+    "authors": [
+      "Pei Chen",
+      "Geng Hong",
+      "Xinyi Wu",
+      "Mengying Wu",
+      "Zixuan Zhu",
+      "Mingxuan Liu",
+      "Baojun Liu",
+      "Mi Zhang",
+      "Min Yang"
+    ],
+    "year": 2026,
+    "venue": "The Web Conference 2026",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Measures how LLM-enhanced search systems respond to adversarial SEO manipulation.",
+      "zh": "测量大模型增强搜索系统抵御黑帽 SEO 操纵的能力。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/www26-llmseo.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "unveiling-the-resilience-of-llm-enhanced-search-engines-against-black-hat-seo-ma"
+  },
+  {
+    "title": "When Fun Turns Toxic: A First Look at Aggressive Advertising in Mini-games",
+    "authors": [
+      "Pei Chen",
+      "Geng Hong",
+      "Yicheng Qin",
+      "Huazhe Wang",
+      "Mengying Wu",
+      "Min Yang",
+      "Ziru Zhao",
+      "Yuanpeng Zhu",
+      "Tao Su"
+    ],
+    "year": 2026,
+    "venue": "The Web Conference 2026",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "In-the-wild security",
+        "aggressive advertising",
+        "mini-games"
+      ],
+      "zh": [
+        "真实世界安全",
+        "激进广告",
+        "小游戏生态"
+      ]
+    },
+    "summary": {
+      "en": "Characterizes aggressive advertising behavior and user risk across mini-game ecosystems.",
+      "zh": "系统刻画小游戏生态中的激进广告行为及用户风险。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/sec26-minigame.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "when-fun-turns-toxic-a-first-look-at-aggressive-advertising-in-mini-games"
+  },
+  {
+    "title": "ADSDx: Towards Automated Accident Diagnosis for High-level Autonomous Driving Systems",
+    "authors": [
+      "Zongan Huang",
+      "Jiarun Dai",
+      "Mingyuan Luo",
+      "Yuqi Chen",
+      "Huijia Sun",
+      "Yuan Zhang",
+      "Min Yang (Co-first Authors)"
+    ],
+    "year": 2025,
+    "venue": "ACM Transactions on Software Engineering and Methodology (TOSEM) , 2025",
+    "category": "software-system-security",
+    "publicationType": "journal",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/abs/10.1145/3783993"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "adsdx-towards-automated-accident-diagnosis-for-high-level-autonomous-driving-sys"
+  },
+  {
+    "title": "ApkDiffer: Accurate and Scalable Cross-Version Diffing Analysis for Android Applications",
+    "authors": [
+      "Jiarun Dai",
+      "Mingyuan Luo",
+      "Yuan Zhang",
+      "Min Yang",
+      "Minghui Yang"
+    ],
+    "year": 2025,
+    "venue": "The International Conference on Object-Oriented Programming Systems, Languages, and Application (OOPSLA) , 2025",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3763141"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "apkdiffer-accurate-and-scalable-cross-version-diffing-analysis-for-android-appli"
+  },
+  {
+    "title": "Applying Fuzz Driver Generation to Native C/C++ Libraries of OEM Android Framework: Obstacles and Solutions",
+    "authors": [
+      "Shiyan Peng",
+      "Yuan Zhang",
+      "Jiarun Dai",
+      "Yue Gu",
+      "Zhuoxiang Shen",
+      "Jingcheng Liu",
+      "Lin Wang",
+      "Yong Chen",
+      "Yu Qin",
+      "Lei Ai",
+      "Xianfeng Lu",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "The 39th IEEE/ACM International Conference on Automated Software Engineering (Industry Track) (ASE-Industry) , 2025",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3691620.3695266"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "applying-fuzz-driver-generation-to-native-c-c-libraries-of-oem-android-framework"
+  },
+  {
+    "title": "APSFUZZ: Simulation-Based Fuzzing Testing for Automated Parking Systems",
+    "authors": [
+      "Tong Bu",
+      "Jiarun Dai",
+      "Jiaqi Luo",
+      "Songyang Peng",
+      "Zongan Huang",
+      "Min Yang (Co-first Authors)"
+    ],
+    "year": 2025,
+    "venue": "The 3rd USENIX Symposium on Vehicle Security and Privacy (VehicleSec) , 2025.",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.usenix.org/conference/vehiclesec25/presentation/bu"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "apsfuzz-simulation-based-fuzzing-testing-for-automated-parking-systems"
+  },
+  {
+    "title": "Beyond Exploit Scanning: A Functional Change-Driven Approach to Remote Software Version Identification",
+    "authors": [
+      "Jinsong Chen",
+      "Mengying Wu",
+      "Geng Hong",
+      "Baichao An",
+      "Mingxuan Liu",
+      "Lei Zhang",
+      "Baojun Liu",
+      "Haixin Duan",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "USENIX Security 2025",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Internet measurement",
+        "software identification",
+        "vulnerability exposure"
+      ],
+      "zh": [
+        "互联网测量",
+        "软件识别",
+        "漏洞暴露"
+      ]
+    },
+    "summary": {
+      "en": "Identifies remote software versions through functional changes instead of exploit-only probes.",
+      "zh": "以功能变化识别远程软件版本，减少对漏洞探测的依赖。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/sec25-versionseek.pdf"
+      },
+      {
+        "kind": "code",
+        "url": "https://zenodo.org/records/15833446"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "beyond-exploit-scanning-a-functional-change-driven-approach-to-remote-software-v"
+  },
+  {
+    "title": "Effective Directed Fuzzing with Hierarchical Scheduling for Web Vulnerability Detection",
+    "authors": [
+      "Zihan Lin",
+      "Yuan Zhang",
+      "Jiarun Dai",
+      "Xinyou Huang",
+      "Bocheng Xiang",
+      "Guangliang Yang",
+      "Letian Yuan",
+      "Lei Zhang",
+      "Fengyu Liu",
+      "Tian Chen",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "The 34th USENIX Security Symposium (USENIX Security) , 2025.",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/lin-zihan"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "effective-directed-fuzzing-with-hierarchical-scheduling-for-web-vulnerability-de"
+  },
+  {
+    "title": "Email Cloaking: Deceiving Users and Spam Email Detectors with Invisible HTML Settings",
+    "authors": [
+      "Bingyang Guo",
+      "Mingxuan Liu",
+      "Yihui Ma",
+      "Ruixun Li",
+      "Fan Shi",
+      "Min Zhang",
+      "Baojun Liu",
+      "Chengxi Xu",
+      "Haixin Duan",
+      "Geng Hong",
+      "Min Yang",
+      "Qingfeng Pan"
+    ],
+    "year": 2025,
+    "venue": "ESORICS 2025",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Demonstrates invisible HTML techniques that mislead both recipients and spam detectors.",
+      "zh": "揭示隐形 HTML 同时欺骗用户与垃圾邮件检测器的机制。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/esorics25-emailcloaking.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "email-cloaking-deceiving-users-and-spam-email-detectors-with-invisible-html-sett"
+  },
+  {
+    "title": "Evaluation Faking: Unveiling Observer Effects in Safety Evaluation of Frontier AI Systems",
+    "authors": [
+      "Yihe Fan",
+      "Wenqi Zhang",
+      "Xudong Pan",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "arXiv preprint",
+    "category": "frontier-risk-control",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "Frontier AI safety evaluation",
+        "evaluation faking",
+        "situational awareness"
+      ],
+      "zh": [
+        "前沿 AI 安全评测",
+        "评测伪装",
+        "情境感知"
+      ]
+    },
+    "summary": {
+      "en": "Studies whether models recognize evaluation contexts and alter behavior, identifying observer effects that threaten safety-evaluation integrity.",
+      "zh": "研究模型识别评测环境并改变行为所产生的观察者效应。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2505.17815"
+      },
+      {
+        "kind": "pdf",
+        "url": "https://arxiv.org/pdf/2505.17815"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2505.17815",
+    "lastVerified": "2026-08-03",
+    "slug": "evaluation-faking-unveiling-observer-effects-in-safety-evaluation-of-frontier-ai"
+  },
+  {
+    "title": "Frontier AI systems have surpassed the self-replicating red line",
+    "authors": [
+      "Xudong Pan",
+      "Jiarun Dai",
+      "Yihe Fan",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "arXiv preprint",
+    "category": "frontier-risk-control",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "Frontier AI risk",
+        "self-replication",
+        "loss of control"
+      ],
+      "zh": [
+        "前沿 AI 风险",
+        "自我复制",
+        "失控风险"
+      ]
+    },
+    "summary": {
+      "en": "Evaluates whether frontier AI systems can autonomously self-replicate and reports successful self-replication in controlled trials.",
+      "zh": "评测前沿 AI 系统的自主复制能力，并报告受控实验中的成功案例。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2412.12140"
+      },
+      {
+        "kind": "pdf",
+        "url": "https://arxiv.org/pdf/2412.12140"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2412.12140",
+    "lastVerified": "2026-08-03",
+    "slug": "frontier-ai-systems-have-surpassed-the-self-replicating-red-line"
+  },
+  {
+    "title": "HouseFuzz: Service-Aware Grey-Box Fuzzing for Vulnerability Detection in Linux-Based Firmware",
+    "authors": [
+      "Haoyu Xiao",
+      "Ziqi Wei",
+      "Jiarun Dai",
+      "Bowen Li",
+      "Yuan Zhang",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "IEEE S&P 2025",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Firmware security",
+        "grey-box fuzzing",
+        "vulnerability discovery"
+      ],
+      "zh": [
+        "固件安全",
+        "灰盒模糊测试",
+        "漏洞发现"
+      ]
+    },
+    "summary": {
+      "en": "Uses service-aware feedback to improve vulnerability discovery in Linux-based firmware.",
+      "zh": "利用服务感知反馈提升 Linux 固件漏洞发现能力。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.computer.org/csdl/proceedings-article/sp/2025/223600d507/26hiVy3bGHm"
+      },
+      {
+        "kind": "code",
+        "url": "https://github.com/HouseFuzz/HouseFuzz"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "housefuzz-service-aware-grey-box-fuzzing-for-vulnerability-detection-in-linux-ba"
+  },
+  {
+    "title": "Large language model-powered AI systems achieve self-replication with no human intervention",
+    "authors": [
+      "Xudong Pan",
+      "Jiarun Dai",
+      "Yihe Fan",
+      "Minyuan Luo",
+      "Changyi Li",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "arXiv preprint; work in progress",
+    "category": "frontier-risk-control",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "Frontier AI risk",
+        "self-replication",
+        "self-exfiltration",
+        "shutdown resistance"
+      ],
+      "zh": [
+        "前沿 AI 风险",
+        "自我复制",
+        "自我外传",
+        "抗关闭"
+      ]
+    },
+    "summary": {
+      "en": "Extends self-replication evaluation across 32 AI systems and reports autonomous replication, self-exfiltration, adaptation, and shutdown-survival behaviors.",
+      "zh": "评测 32 个 AI 系统的复制、外传、适应与抗关闭行为。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2503.17378"
+      },
+      {
+        "kind": "pdf",
+        "url": "https://arxiv.org/pdf/2503.17378"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "featuredRank": 3,
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2503.17378",
+    "lastVerified": "2026-08-03",
+    "slug": "large-language-model-powered-ai-systems-achieve-self-replication-with-no-human-i"
+  },
+  {
+    "title": "Make Agent Defeat Agent: Automatic Detection of Taint-Style Vulnerabilities in LLM-based Agents",
+    "authors": [
+      "Fengyu Liu",
+      "Yuan Zhang",
+      "Jiaqi Luo",
+      "Jiarun Dai",
+      "Tian Chen",
+      "Letian Yuan",
+      "Zhengmin Yu",
+      "Youkun Shi",
+      "Ke Li",
+      "Chengyuan Zhou",
+      "Hao Chen",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "USENIX Security 2025",
+    "category": "agent-model-safety",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "LLM agent system security",
+        "taint-style vulnerabilities",
+        "fuzzing"
+      ],
+      "zh": [
+        "大模型智能体安全",
+        "污点型漏洞",
+        "模糊测试"
+      ]
+    },
+    "summary": {
+      "en": "Introduces AgentFuzz, a directed greybox fuzzing framework for finding taint-style vulnerabilities in real-world LLM-based agents.",
+      "zh": "提出 AgentFuzz，自动发现真实智能体应用中的污点型漏洞。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/liu-fengyu"
+      },
+      {
+        "kind": "pdf",
+        "url": "https://www.usenix.org/system/files/usenixsecurity25-liu-fengyu.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "make-agent-defeat-agent-automatic-detection-of-taint-style-vulnerabilities-in-ll"
+  },
+  {
+    "title": "NOKEScam: Understanding and Rectifying Non-Sense Keywords Spear Scam in Search Engines",
+    "authors": [
+      "Mingxuan Liu",
+      "Yunyi Zhang",
+      "Lijie Wu",
+      "Baojun Liu",
+      "Geng Hong",
+      "Yiming Zhang",
+      "Hui Jiang",
+      "Jia Zhang",
+      "Haixin Duan",
+      "Min Zhang",
+      "Wei Guan",
+      "Fan Shi",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "USENIX Security 2025",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Search security",
+        "scam ecosystem",
+        "adversarial keywords"
+      ],
+      "zh": [
+        "搜索安全",
+        "诈骗生态",
+        "对抗关键词"
+      ]
+    },
+    "summary": {
+      "en": "Studies nonsense-keyword spear scams in search engines and evaluates mitigation paths.",
+      "zh": "研究搜索引擎中的无意义关键词定向诈骗及治理方法。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/sec25-nokescam.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "nokescam-understanding-and-rectifying-non-sense-keywords-spear-scam-in-search-en"
+  },
+  {
+    "title": "RAG-Thief: Scalable Extraction of Private Data from Retrieval-Augmented Generation Applications with Agent-based Attacks",
+    "authors": [
+      "Changyue Jiang",
+      "Xudong Pan",
+      "Geng Hong",
+      "Chenfu Bao",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "Preprint",
+    "category": "agent-model-safety",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "agent safety",
+        "foundation model safety"
+      ],
+      "zh": [
+        "智能体安全",
+        "基础模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies security risks and defenses for agents and foundation models.",
+      "zh": "研究智能体与基础模型的安全风险及防护方法。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ravensanstete.github.io/en/publications/"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "rag-thief-scalable-extraction-of-private-data-from-retrieval-augmented-generatio"
+  },
+  {
+    "title": "Security Debt in LLM Agent Applications: A Measurement Study of Vulnerabilities and Mitigation Trade-offs",
+    "authors": [
+      "Zhuoxiang Shen",
+      "Jiarun Dai",
+      "Yuan Zhang",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "ASE 2025",
+    "category": "agent-model-safety",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "LLM agent system security",
+        "vulnerability measurement",
+        "mitigation trade-offs"
+      ],
+      "zh": [
+        "大模型智能体安全",
+        "漏洞测量",
+        "防护权衡"
+      ]
+    },
+    "summary": {
+      "en": "Measures security debt in LLM-agent applications by studying known vulnerabilities and the trade-offs introduced by mitigation strategies.",
+      "zh": "测量智能体应用的漏洞安全债务与防护策略权衡。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://conf.researchr.org/details/ase-2025/ase-2025-papers/19/Security-Debt-in-LLM-Agent-Applications-A-Measurement-Study-of-Vulnerabilities-and-M"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "security-debt-in-llm-agent-applications-a-measurement-study-of-vulnerabilities-a"
+  },
+  {
+    "title": "SmartSight: Mitigating Hallucination in Video-LLMs Without Compromising Video Understanding via Temporal Attention Collapse",
+    "authors": [
+      "Yiming Sun",
+      "Mi Zhang",
+      "Feifei Li",
+      "Geng Hong",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "The 40th Annual AAAI Conference on Artificial Intelligence (AAAI 26, CCF-A)",
+    "category": "agent-model-safety",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "agent safety",
+        "foundation model safety"
+      ],
+      "zh": [
+        "智能体安全",
+        "基础模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies security risks and defenses for agents and foundation models.",
+      "zh": "研究智能体与基础模型的安全风险及防护方法。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/aaai26-smartsight"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "smartsight-mitigating-hallucination-in-video-llms-without-compromising-video-und"
+  },
+  {
+    "title": "Unveiling the (Ab)usage of Serverless Cloud Function in the Wild",
+    "authors": [
+      "Yijing Liu",
+      "Mingxuan Liu",
+      "Yiming Zhang",
+      "Baojun Liu",
+      "Jia Zhang",
+      "Geng Hong",
+      "Haixin Duan",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "ACM IMC 2025",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Cloud security",
+        "serverless abuse",
+        "Internet measurement"
+      ],
+      "zh": [
+        "云安全",
+        "无服务器滥用",
+        "互联网测量"
+      ]
+    },
+    "summary": {
+      "en": "Measures malicious and abusive uses of serverless cloud functions in the wild.",
+      "zh": "测量真实网络中无服务器云函数的恶意与滥用行为。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/imc25-cloudfun.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "unveiling-the-ab-usage-of-serverless-cloud-function-in-the-wild"
+  },
+  {
+    "title": "XSSky: Detecting XSS Vulnerabilities through Local Path-Persistent Fuzzing",
+    "authors": [
+      "Youkun Shi",
+      "Yuan Zhang",
+      "Tianhao Bai",
+      "Feng Xue",
+      "Jiarun Dai",
+      "Fengyu Liu",
+      "Lei Zhang",
+      "Xiapu Luo",
+      "Min Yang"
+    ],
+    "year": 2025,
+    "venue": "USENIX Security 2025",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "Web security",
+        "XSS",
+        "path-persistent fuzzing"
+      ],
+      "zh": [
+        "Web 安全",
+        "跨站脚本",
+        "路径持久模糊测试"
+      ]
+    },
+    "summary": {
+      "en": "Finds cross-site scripting vulnerabilities with local path-persistent fuzzing.",
+      "zh": "以局部路径持久模糊测试发现跨站脚本漏洞。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/shi-youkun"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "xssky-detecting-xss-vulnerabilities-through-local-path-persistent-fuzzing"
   },
   {
     "title": "You Can't Eat Your Cake and Have It Too: The Performance Degradation of LLMs with Jailbreak Defense",
@@ -885,7 +1879,7 @@ export const researchAssets: ResearchAsset[] = [
     "year": 2025,
     "venue": "WWW 2025; arXiv preprint",
     "category": "agent-model-safety",
-    "publicationType": "paper",
+    "publicationType": "preprint",
     "topics": {
       "en": [
         "LLM safety",
@@ -916,593 +1910,1524 @@ export const researchAssets: ResearchAsset[] = [
       "xudong-pan",
       "geng-hong"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/",
+      "https://ghong.site/"
+    ],
+    "arxivId": "2501.12210",
     "lastVerified": "2026-08-03",
     "slug": "you-can-t-eat-your-cake-and-have-it-too-the-performance-degradation-of-llms-with"
   },
   {
-    "title": "One Email, Many Faces: A Deep Dive into Identity Confusion in Email Aliases",
+    "title": "An Underground Industry Application Collection Method Based on Flow Analysis（一种基于突变流量的在野黑产应用采集方法）",
     "authors": [
-      "Mengying Wu",
-      "Geng Hong",
-      "Jiatao Chen",
-      "Mingxuan Liu",
-      "Baojun Liu",
-      "Min Yang"
+      "陈沛",
+      "洪赓",
+      "邬梦莹",
+      "陈晋松",
+      "段海新",
+      "杨珉"
     ],
-    "year": 2026,
-    "venue": "NDSS 2026",
+    "year": 2024,
+    "venue": "Journal of Software（软件学报）",
     "category": "cybersecurity-privacy",
-    "publicationType": "paper",
+    "publicationType": "journal",
     "topics": {
       "en": [
-        "Email security",
-        "identity confusion",
-        "alias abuse"
+        "cybersecurity",
+        "privacy"
       ],
       "zh": [
-        "邮件安全",
-        "身份混淆",
-        "别名滥用"
+        "网络安全",
+        "隐私"
       ]
     },
     "summary": {
-      "en": "Reveals identity-confusion risks in email alias ecosystems and measures their security impact.",
-      "zh": "揭示邮件别名生态中的身份混淆机制及其安全影响。"
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://ghong.site/papers/ndss26summer-email.pdf"
-      },
-      {
-        "kind": "code",
-        "url": "https://github.com/lab-rynth/OriginMail"
+        "url": "https://jos.org.cn/jos/article/abstract/7122"
       }
     ],
     "memberSlugs": [
       "geng-hong"
     ],
-    "recognitions": [
-      {
-        "en": "NDSS 2026 Best Paper Award",
-        "zh": "NDSS 2026 最佳论文奖"
-      }
+    "sourceUrls": [
+      "https://ghong.site/"
     ],
-    "sourceUrl": "https://ghong.site/",
     "lastVerified": "2026-08-03",
-    "slug": "one-email-many-faces-a-deep-dive-into-identity-confusion-in-email-aliases"
+    "slug": "an-underground-industry-application-collection-method-based-on-flow-analysis"
   },
   {
-    "title": "Unveiling the Resilience of LLM-Enhanced Search Engines Against Black-Hat SEO Manipulation",
+    "title": "BELT: Old-School Backdoor Attacks can Evade the State-of-the-Art Defense with Backdoor Exclusivity Lifting",
     "authors": [
-      "Pei Chen",
-      "Geng Hong",
-      "Xinyi Wu",
-      "Mengying Wu",
-      "Zixuan Zhu",
-      "Mingxuan Liu",
-      "Baojun Liu",
+      "Huming Qiu",
+      "Junjie Sun",
       "Mi Zhang",
+      "Xudong Pan",
       "Min Yang"
     ],
-    "year": 2026,
-    "venue": "The Web Conference 2026",
-    "category": "cybersecurity-privacy",
-    "publicationType": "paper",
+    "year": 2024,
+    "venue": "2024 IEEE Symposium on Security and Privacy (S&P)",
+    "category": "trustworthy-ml",
+    "publicationType": "preprint",
     "topics": {
       "en": [
-        "Search security",
-        "LLM systems",
-        "black-hat SEO"
+        "trustworthy machine learning",
+        "model security"
       ],
       "zh": [
-        "搜索安全",
-        "大模型系统",
-        "黑帽 SEO"
+        "可信机器学习",
+        "模型安全"
       ]
     },
     "summary": {
-      "en": "Measures how LLM-enhanced search systems respond to adversarial SEO manipulation.",
-      "zh": "测量大模型增强搜索系统抵御黑帽 SEO 操纵的能力。"
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://ghong.site/papers/www26-llmseo.pdf"
+        "url": "https://arxiv.org/abs/2312.04902"
       }
     ],
     "memberSlugs": [
-      "geng-hong"
+      "xudong-pan"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ghong.site/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2312.04902",
     "lastVerified": "2026-08-03",
-    "slug": "unveiling-the-resilience-of-llm-enhanced-search-engines-against-black-hat-seo-ma"
+    "slug": "belt-old-school-backdoor-attacks-can-evade-the-state-of-the-art-defense-with-bac"
   },
   {
-    "title": "When Fun Turns Toxic: A First Look at Aggressive Advertising in Mini-games",
+    "title": "Exposing the Hidden Layer: Software Repositories in the Service of SEO Manipulation",
     "authors": [
-      "Pei Chen",
-      "Geng Hong",
-      "Yicheng Qin",
-      "Huazhe Wang",
-      "Mengying Wu",
-      "Min Yang",
-      "Ziru Zhao",
-      "Yuanpeng Zhu",
-      "Tao Su"
-    ],
-    "year": 2026,
-    "venue": "USENIX Security 2026",
-    "category": "cybersecurity-privacy",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "In-the-wild security",
-        "aggressive advertising",
-        "mini-games"
-      ],
-      "zh": [
-        "真实世界安全",
-        "激进广告",
-        "小游戏生态"
-      ]
-    },
-    "summary": {
-      "en": "Characterizes aggressive advertising behavior and user risk across mini-game ecosystems.",
-      "zh": "系统刻画小游戏生态中的激进广告行为及用户风险。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://ghong.site/papers/sec26-minigame.pdf"
-      }
-    ],
-    "memberSlugs": [
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://ghong.site/",
-    "lastVerified": "2026-08-03",
-    "slug": "when-fun-turns-toxic-a-first-look-at-aggressive-advertising-in-mini-games"
-  },
-  {
-    "title": "Email Cloaking: Deceiving Users and Spam Email Detectors with Invisible HTML Settings",
-    "authors": [
-      "Bingyang Guo",
-      "Mingxuan Liu",
-      "Yihui Ma",
-      "Ruixun Li",
-      "Fan Shi",
-      "Min Zhang",
-      "Baojun Liu",
-      "Chengxi Xu",
-      "Haixin Duan",
-      "Geng Hong",
-      "Min Yang",
-      "Qingfeng Pan"
-    ],
-    "year": 2025,
-    "venue": "ESORICS 2025",
-    "category": "cybersecurity-privacy",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "Email security",
-        "cloaking",
-        "spam detection"
-      ],
-      "zh": [
-        "邮件安全",
-        "隐形内容",
-        "垃圾邮件检测"
-      ]
-    },
-    "summary": {
-      "en": "Demonstrates invisible HTML techniques that mislead both recipients and spam detectors.",
-      "zh": "揭示隐形 HTML 同时欺骗用户与垃圾邮件检测器的机制。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://ghong.site/papers/esorics25-emailcloaking.pdf"
-      }
-    ],
-    "memberSlugs": [
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://ghong.site/",
-    "lastVerified": "2026-08-03",
-    "slug": "email-cloaking-deceiving-users-and-spam-email-detectors-with-invisible-html-sett"
-  },
-  {
-    "title": "Beyond Exploit Scanning: A Functional Change-Driven Approach to Remote Software Version Identification",
-    "authors": [
-      "Jinsong Chen",
       "Mengying Wu",
       "Geng Hong",
-      "Baichao An",
-      "Mingxuan Liu",
+      "Wuyuao Mai",
+      "Xinyi Wu",
       "Lei Zhang",
-      "Baojun Liu",
+      "Yingyuan Pu",
+      "Huajun Chai",
+      "Lingyun Ying",
       "Haixin Duan",
       "Min Yang"
     ],
-    "year": 2025,
-    "venue": "USENIX Security 2025",
-    "category": "software-system-security",
-    "publicationType": "paper",
-    "topics": {
-      "en": [
-        "Internet measurement",
-        "software identification",
-        "vulnerability exposure"
-      ],
-      "zh": [
-        "互联网测量",
-        "软件识别",
-        "漏洞暴露"
-      ]
-    },
-    "summary": {
-      "en": "Identifies remote software versions through functional changes instead of exploit-only probes.",
-      "zh": "以功能变化识别远程软件版本，减少对漏洞探测的依赖。"
-    },
-    "links": [
-      {
-        "kind": "paper",
-        "url": "https://ghong.site/papers/sec25-versionseek.pdf"
-      },
-      {
-        "kind": "code",
-        "url": "https://zenodo.org/records/15833446"
-      }
-    ],
-    "memberSlugs": [
-      "geng-hong"
-    ],
-    "recognitions": [],
-    "sourceUrl": "https://ghong.site/",
-    "lastVerified": "2026-08-03",
-    "slug": "beyond-exploit-scanning-a-functional-change-driven-approach-to-remote-software-v"
-  },
-  {
-    "title": "Unveiling the (Ab)usage of Serverless Cloud Function in the Wild",
-    "authors": [
-      "Yijing Liu",
-      "Mingxuan Liu",
-      "Yiming Zhang",
-      "Baojun Liu",
-      "Jia Zhang",
-      "Geng Hong",
-      "Haixin Duan",
-      "Min Yang"
-    ],
-    "year": 2025,
-    "venue": "ACM IMC 2025",
+    "year": 2024,
+    "venue": "In Proceedings of the 47nd International Conference on Software Engineering (IEEE/ACM ICSE'25, CCF-A)",
     "category": "cybersecurity-privacy",
-    "publicationType": "paper",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Cloud security",
-        "serverless abuse",
-        "Internet measurement"
+        "cybersecurity",
+        "privacy"
       ],
       "zh": [
-        "云安全",
-        "无服务器滥用",
-        "互联网测量"
+        "网络安全",
+        "隐私"
       ]
     },
     "summary": {
-      "en": "Measures malicious and abusive uses of serverless cloud functions in the wild.",
-      "zh": "测量真实网络中无服务器云函数的恶意与滥用行为。"
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://ghong.site/papers/imc25-cloudfun.pdf"
+        "url": "https://github.com/Marphownio/RepSEO_Classifier"
       }
     ],
     "memberSlugs": [
       "geng-hong"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ghong.site/",
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "unveiling-the-ab-usage-of-serverless-cloud-function-in-the-wild"
+    "slug": "exposing-the-hidden-layer-software-repositories-in-the-service-of-seo-manipulati"
   },
   {
-    "title": "NOKEScam: Understanding and Rectifying Non-Sense Keywords Spear Scam in Search Engines",
+    "title": "HADES Attack: Understanding and Evaluating Manipulation Risks of Email Blocklists",
     "authors": [
-      "Mingxuan Liu",
+      "Ruixuan Li",
+      "Chaoyi Lu",
+      "Baojun Liu",
       "Yunyi Zhang",
-      "Lijie Wu",
-      "Baojun Liu",
       "Geng Hong",
-      "Yiming Zhang",
-      "Hui Jiang",
-      "Jia Zhang",
       "Haixin Duan",
-      "Min Zhang",
-      "Wei Guan",
-      "Fan Shi",
-      "Min Yang"
+      "Yanzhong Lin",
+      "Qingfeng Pan",
+      "Min Yang",
+      "Jun Shao"
     ],
-    "year": 2025,
-    "venue": "USENIX Security 2025",
+    "year": 2024,
+    "venue": "the Network and Distributed System Security (NDSS) Symposium 2025 (NDSS'25, CCF-A)",
     "category": "cybersecurity-privacy",
-    "publicationType": "paper",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Search security",
-        "scam ecosystem",
-        "adversarial keywords"
+        "cybersecurity",
+        "privacy"
       ],
       "zh": [
-        "搜索安全",
-        "诈骗生态",
-        "对抗关键词"
+        "网络安全",
+        "隐私"
       ]
     },
     "summary": {
-      "en": "Studies nonsense-keyword spear scams in search engines and evaluates mitigation paths.",
-      "zh": "研究搜索引擎中的无意义关键词定向诈骗及治理方法。"
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://ghong.site/papers/sec25-nokescam.pdf"
+        "url": "https://ghong.site/papers/ndss25fall-email.pdf"
       }
     ],
     "memberSlugs": [
       "geng-hong"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://ghong.site/",
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "nokescam-understanding-and-rectifying-non-sense-keywords-spear-scam-in-search-en"
+    "slug": "hades-attack-understanding-and-evaluating-manipulation-risks-of-email-blocklists"
   },
   {
-    "title": "Khost: KVM-based Near Native MCU Firmware Rehosting",
+    "title": "Interface Illusions: Uncovering the Rise of Visual Scams in Cryptocurrency Wallets",
     "authors": [
-      "Chunlin Wang",
-      "Yicheng Yang",
+      "Guoyi Ye",
+      "Geng Hong",
       "Yuan Zhang",
-      "Haoyu Xiao",
-      "Yifan Zhang",
-      "Jiarun Dai"
+      "Min Yang"
     ],
-    "year": 2026,
-    "venue": "USENIX Security 2026",
-    "category": "software-system-security",
-    "publicationType": "paper",
+    "year": 2024,
+    "venue": "The Web Conference 2024 (ACM WWW 24, CCF-A)",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Firmware security",
-        "MCU rehosting",
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/www24-visualscam.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "interface-illusions-uncovering-the-rise-of-visual-scams-in-cryptocurrency-wallet"
+  },
+  {
+    "title": "Matryoshka: Exploiting the Over-Parametrization of Deep Learning Models for Covert Data Transmission",
+    "authors": [
+      "Xudong Pan",
+      "Mi Zhang",
+      "Yifan Yan",
+      "Shengyao Zhang",
+      "Min Yang"
+    ],
+    "year": 2024,
+    "venue": "IEEE TPAMI, 2024. (IF=24.314)",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ieeexplore.ieee.org/document/10612241/"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "matryoshka-exploiting-the-over-parametrization-of-deep-learning-models-for-cover"
+  },
+  {
+    "title": "Misdirection of Trust: Demystifying the Abuse of Dedicated URL Shortening Service",
+    "authors": [
+      "Zhibo Zhang",
+      "Lei Zhang",
+      "Zhangyue Zhang",
+      "Geng Hong",
+      "Yuan Zhang",
+      "Min Yang"
+    ],
+    "year": 2024,
+    "venue": "the Network and Distributed System Security (NDSS) Symposium 2025 (NDSS'25, CCF-A)",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/ndss25summer-duss.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "misdirection-of-trust-demystifying-the-abuse-of-dedicated-url-shortening-service"
+  },
+  {
+    "title": "Neural Dehydration: Effective Erasure of Black-box Watermarks from DNNs with Limited Data",
+    "authors": [
+      "Yifan Lu",
+      "Wenxuan Li",
+      "Mi Zhang",
+      "Xudong Pan",
+      "Min Yang"
+    ],
+    "year": 2024,
+    "venue": "31st ACM CCS, 2024",
+    "category": "trustworthy-ml",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2309.03466"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2309.03466",
+    "lastVerified": "2026-08-03",
+    "slug": "neural-dehydration-effective-erasure-of-black-box-watermarks-from-dnns-with-limi"
+  },
+  {
+    "title": "Revealing the black box of device search engine: scanning assets, strategies, and ethical consideration",
+    "authors": [
+      "Mengying Wu",
+      "Geng Hong",
+      "Jinsong Chen",
+      "Qi Liu",
+      "Shujun Tang",
+      "Youhao Li",
+      "Baojun Liu",
+      "Haixin Duan",
+      "Min Yang"
+    ],
+    "year": 2024,
+    "venue": "the Network and Distributed System Security (NDSS) Symposium 2025 (NDSS'25, CCF-A)",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/ndss25fall-ipmirror.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "revealing-the-black-box-of-device-search-engine-scanning-assets-strategies-and-e"
+  },
+  {
+    "title": "SCTrans: Constructing a Large Public Scenario Dataset for Simulation Testing of Autonomous Driving Systems",
+    "authors": [
+      "Jiarun Dai",
+      "Bufan Gao",
+      "Mingyuan Luo",
+      "Zongan Huang",
+      "Zhongrui Li",
+      "Yuan Zhang",
+      "Min Yang"
+    ],
+    "year": 2024,
+    "venue": "The 46th International Conference on Software Engineering (ICSE) , 2024",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
         "systems security"
       ],
       "zh": [
-        "固件安全",
-        "MCU 重托管",
+        "软件安全",
         "系统安全"
       ]
     },
     "summary": {
-      "en": "Rehosts MCU firmware on KVM with near-native execution for scalable security analysis.",
-      "zh": "以 KVM 近原生执行重托管 MCU 固件，支持规模化安全分析。"
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_wang-chunlin.pdf"
-      },
-      {
-        "kind": "code",
-        "url": "https://github.com/seclab-fudan/Khost"
+        "url": "https://dl.acm.org/doi/10.1145/3597503.3623350"
       }
     ],
     "memberSlugs": [
       "jiarun-dai"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://djrrr.github.io/",
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "khost-kvm-based-near-native-mcu-firmware-rehosting"
+    "slug": "sctrans-constructing-a-large-public-scenario-dataset-for-simulation-testing-of-a"
   },
   {
-    "title": "Better Safe than Sorry: Uncovering the Insecure Resource Management in App-in-App Cloud Services",
+    "title": "Towards Practical Backdoor Attacks on Federated Learning Systems",
     "authors": [
-      "Yizhe Shi",
+      "Chenghui Shi",
+      "Shouling Ji",
+      "Xudong Pan",
+      "Xuhong Zhang",
+      "Mi Zhang",
+      "Min Yang",
+      "Jun Zhou",
+      "Jianwei Yin",
+      "Ting Wang"
+    ],
+    "year": 2024,
+    "venue": "IEEE TDSC, 2024",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ieeexplore.ieee.org/document/10472128"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "towards-practical-backdoor-attacks-on-federated-learning-systems"
+  },
+  {
+    "title": "VioHawk: Detecting Traffic Violations of Autonomous Driving Systems through Criticality-guided Simulation Testing",
+    "authors": [
+      "Zhongrui Li",
+      "Jiarun Dai",
+      "Zongan Huang",
+      "Nianhao You",
+      "Yuan Zhang",
+      "Min Yang (Co-first Authors)"
+    ],
+    "year": 2024,
+    "venue": "The 33rd ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA) , 2024",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3650212.3680325"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "viohawk-detecting-traffic-violations-of-autonomous-driving-systems-through-criti"
+  },
+  {
+    "title": "Anti-FakeU: Defending Shilling Attacks on Graph Neural Network based Recommender Model",
+    "authors": [
+      "Xiaoyu You",
+      "Chi Lee",
+      "Daizong Ding",
+      "Mi Zhang",
+      "Fuli Feng",
+      "Xudong Pan",
+      "Min Yang"
+    ],
+    "year": 2023,
+    "venue": "2023 Web Conference (WWW), P938-948",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3543507.3583289"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "anti-fakeu-defending-shilling-attacks-on-graph-neural-network-based-recommender-"
+  },
+  {
+    "title": "Cracking White-box DNN Watermarks via Invariant Neuron Transforms",
+    "authors": [
+      "Xudong Pan",
+      "Mi Zhang",
+      "Yifan Yan",
+      "Yining Wang",
+      "Min Yang"
+    ],
+    "year": 2023,
+    "venue": "29th SIGKDD, P1783–1794, 2023",
+    "category": "trustworthy-ml",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2205.00199"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2205.00199",
+    "lastVerified": "2026-08-03",
+    "slug": "cracking-white-box-dnn-watermarks-via-invariant-neuron-transforms"
+  },
+  {
+    "title": "Exorcising “Wraith”: Protecting LiDAR-based Object Detector in Automated Driving System from Appearing Attacks",
+    "authors": [
+      "Qifan Xiao ()",
+      "Xudong Pan ()",
+      "Yifan Lu",
+      "Mi Zhang",
+      "Min Yang",
+      "Qifan Xiao",
+      "Xudong Pan",
+      "Jiarun Dai"
+    ],
+    "year": 2023,
+    "venue": "The 32nd USENIX Security Symposium (USENIX Security) , 2023",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.usenix.org/conference/usenixsecurity23/presentation/xiao-qifan"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan",
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/",
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "exorcising-wraith-protecting-lidar-based-object-detector-in-automated-driving-sy"
+  },
+  {
+    "title": "MaSS: Model-agnostic, Semantic and Stealthy Data Poisoning Attack on Knowledge Graph Embedding",
+    "authors": [
+      "Xiaoyu You",
+      "Beina Sheng",
+      "Daizong Ding",
+      "Mi Zhang",
+      "Xudong Pan",
+      "Min Yang",
+      "Fuli Feng"
+    ],
+    "year": 2023,
+    "venue": "2023 Web Conference (WWW), P2000-2010",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3543507.3583203"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "mass-model-agnostic-semantic-and-stealthy-data-poisoning-attack-on-knowledge-gra"
+  },
+  {
+    "title": "Rethinking White-Box Watermarks on Deep Learning Models under Neural Structural Obfuscation",
+    "authors": [
+      "Yifan Yan ()",
+      "Xudong Pan ()",
+      "Mi Zhang",
+      "Min Yang"
+    ],
+    "year": 2023,
+    "venue": "32nd USENIX Security, P2347-2364, 2023. (*equal contribution)",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.usenix.org/conference/usenixsecurity23/presentation/yan"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "rethinking-white-box-watermarks-on-deep-learning-models-under-neural-structural-"
+  },
+  {
+    "title": "RØROS: Building a Responsive Online Recommender System via Meta-Gradients Updating",
+    "authors": [
+      "Xudong Pan",
+      "Mi Zhang",
+      "Duocai Wu"
+    ],
+    "year": 2023,
+    "venue": "2023 IEEE ICASSP",
+    "category": "ai-systems-methods",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "AI systems",
+        "learning methods"
+      ],
+      "zh": [
+        "AI 系统",
+        "学习方法"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ieeexplore.ieee.org/document/10096336"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "r-ros-building-a-responsive-online-recommender-system-via-meta-gradients-updatin"
+  },
+  {
+    "title": "Simulation-Based Fuzzing for Autonomous Driving Systems: Landscapes, Challenges and Prospects",
+    "authors": [
+      "Jiarun Dai",
+      "Zhongrui Li",
+      "Wanqi Zhang",
+      "Yuan Zhang",
+      "Min Yang"
+    ],
+    "year": 2023,
+    "venue": "Journal of Computer Research and Development, 2023, 60(7)",
+    "category": "software-system-security",
+    "publicationType": "journal",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://crad.ict.ac.cn/article/doi/10.7544/issn1000-1239.202330156"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "simulation-based-fuzzing-for-autonomous-driving-systems-landscapes-challenges-an"
+  },
+  {
+    "title": "SlowBERT: Slow-down Attacks on Input-adaptive Multi-exit BERT",
+    "authors": [
+      "Shengyao Zhang",
+      "Xudong Pan",
+      "Mi Zhang",
+      "Min Yang"
+    ],
+    "year": 2023,
+    "venue": "Findings of ACL, P9992–10007, 2023",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://aclanthology.org/2023.findings-acl.634/"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "slowbert-slow-down-attacks-on-input-adaptive-multi-exit-bert"
+  },
+  {
+    "title": "Under the Dark: A Systematical Study of Stealthy Mining Pools (Ab)use in the Wild",
+    "authors": [
+      "Zhenrui Zhang",
+      "Geng Hong",
+      "Xiang Li",
+      "Zhuoqun Fu",
+      "Jia Zhang",
+      "Mingxuan Liu",
+      "Chuhan Wang",
+      "Jianjun Chen",
+      "Baojun Liu",
+      "Haixin Duan",
+      "Chao Zhang",
+      "Min Yang"
+    ],
+    "year": 2023,
+    "venue": "30th ACM SIGSAC Conference on Computer and Communications Security (ACM CCS'23, CCF-A)",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/ccs23a-pool.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "under-the-dark-a-systematical-study-of-stealthy-mining-pools-ab-use-in-the-wild"
+  },
+  {
+    "title": "Understanding and Detecting Abused Image Hosting Modules as Malicious Services",
+    "authors": [
+      "Geng Hong",
+      "Mengying Wu",
+      "Pei Chen",
+      "Xiaojing Liao",
+      "Guoyi Ye",
+      "Min Yang"
+    ],
+    "year": 2023,
+    "venue": "30th ACM SIGSAC Conference on Computer and Communications Security (ACM CCS'23, CCF-A)",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://github.com/AIMIE-Group/AIMIE"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "understanding-and-detecting-abused-image-hosting-modules-as-malicious-services"
+  },
+  {
+    "title": "Analyzing Ground-Truth Data of Mobile Gambling Scams",
+    "authors": [
+      "Geng Hong",
       "Zhemin Yang",
-      "Dingyi Liu",
-      "Kangwei Zhong",
-      "Jiarun Dai",
-      "Min Yang"
+      "Sen Yang",
+      "Xiaojing Liao",
+      "Xiaolin Du",
+      "Min Yang",
+      "Haixin Duan"
     ],
-    "year": 2026,
-    "venue": "NDSS 2026",
-    "category": "software-system-security",
-    "publicationType": "paper",
+    "year": 2022,
+    "venue": "43rd IEEE Symposium on Security and Privacy (IEEE S&P Oakland'22, CCF-A)",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Cloud service security",
-        "resource management",
-        "app-in-app ecosystems"
+        "cybersecurity",
+        "privacy"
       ],
       "zh": [
-        "云服务安全",
-        "资源管理",
-        "应用内应用生态"
+        "网络安全",
+        "隐私"
       ]
     },
     "summary": {
-      "en": "Uncovers insecure resource-management practices in app-in-app cloud services.",
-      "zh": "揭示应用内应用云服务中的不安全资源管理问题。"
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://www.ndss-symposium.org/wp-content/uploads/2026-s194-paper.pdf"
+        "url": "https://ghong.site/papers/sp22-gambling.pdf"
       }
     ],
     "memberSlugs": [
-      "jiarun-dai"
+      "geng-hong"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://djrrr.github.io/",
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "better-safe-than-sorry-uncovering-the-insecure-resource-management-in-app-in-app"
+    "slug": "analyzing-ground-truth-data-of-mobile-gambling-scams"
   },
   {
-    "title": "FirmCross: Detecting Taint-style Vulnerabilities in Modern C-Lua Hybrid Web Services of Linux-based Firmware",
+    "title": "Exploring the Security Boundary of Data Reconstruction via Neuron Exclusivity Analysis",
     "authors": [
-      "Runhao Liu",
-      "Jiarun Dai",
-      "Haoyu Xiao",
-      "Yuan Zhang",
-      "Yeqi Mou",
-      "Lukai Xu",
-      "Bo Yu",
-      "Baosheng Wang",
+      "Xudong Pan",
+      "Mi Zhang",
+      "Yifan Yan",
+      "Jiaming Zhu",
       "Min Yang"
     ],
-    "year": 2026,
-    "venue": "NDSS 2026",
-    "category": "software-system-security",
-    "publicationType": "paper",
+    "year": 2022,
+    "venue": "31st USENIX Security, P3989-4006, 2022",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Firmware security",
-        "taint analysis",
-        "hybrid web services"
+        "trustworthy machine learning",
+        "model security"
       ],
       "zh": [
-        "固件安全",
-        "污点分析",
-        "混合 Web 服务"
+        "可信机器学习",
+        "模型安全"
       ]
     },
     "summary": {
-      "en": "Detects taint-style vulnerabilities across C and Lua boundaries in firmware web services.",
-      "zh": "检测固件 Web 服务跨 C 与 Lua 边界的污点型漏洞。"
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://www.ndss-symposium.org/wp-content/uploads/2026-s1251-paper.pdf"
-      },
-      {
-        "kind": "code",
-        "url": "https://github.com/prankster009/FirmCross"
+        "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/pan-exploring"
       }
     ],
     "memberSlugs": [
-      "jiarun-dai"
+      "xudong-pan"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://djrrr.github.io/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "firmcross-detecting-taint-style-vulnerabilities-in-modern-c-lua-hybrid-web-servi"
+    "slug": "exploring-the-security-boundary-of-data-reconstruction-via-neuron-exclusivity-an"
   },
   {
-    "title": "XSSky: Detecting XSS Vulnerabilities through Local Path-Persistent Fuzzing",
+    "title": "Hidden Trigger Backdoor Attack on NLP Models via Linguistic Style Manipulation",
     "authors": [
-      "Youkun Shi",
-      "Yuan Zhang",
-      "Tianhao Bai",
-      "Feng Xue",
-      "Jiarun Dai",
-      "Fengyu Liu",
-      "Lei Zhang",
-      "Xiapu Luo",
+      "Xudong Pan",
+      "Mi Zhang",
+      "Beina Sheng",
+      "Jiaming Zhu",
       "Min Yang"
     ],
-    "year": 2025,
-    "venue": "USENIX Security 2025",
-    "category": "software-system-security",
-    "publicationType": "paper",
+    "year": 2022,
+    "venue": "31st USENIX Security, P3611-3628, 2022",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Web security",
-        "XSS",
-        "path-persistent fuzzing"
+        "trustworthy machine learning",
+        "model security"
       ],
       "zh": [
-        "Web 安全",
-        "跨站脚本",
-        "路径持久模糊测试"
+        "可信机器学习",
+        "模型安全"
       ]
     },
     "summary": {
-      "en": "Finds cross-site scripting vulnerabilities with local path-persistent fuzzing.",
-      "zh": "以局部路径持久模糊测试发现跨站脚本漏洞。"
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/shi-youkun"
+        "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/pan-hidden"
       }
     ],
     "memberSlugs": [
-      "jiarun-dai"
+      "xudong-pan"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://djrrr.github.io/",
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "xssky-detecting-xss-vulnerabilities-through-local-path-persistent-fuzzing"
+    "slug": "hidden-trigger-backdoor-attack-on-nlp-models-via-linguistic-style-manipulation"
   },
   {
-    "title": "HouseFuzz: Service-Aware Grey-Box Fuzzing for Vulnerability Detection in Linux-Based Firmware",
+    "title": "House of Cans: Covert Transmission of Internal Datasets via Capacity-Aware Neuron Steganography",
     "authors": [
-      "Haoyu Xiao",
-      "Ziqi Wei",
-      "Jiarun Dai",
-      "Bowen Li",
-      "Yuan Zhang",
+      "Xudong Pan",
+      "Shengyao Zhang",
+      "Mi Zhang",
+      "Yifan Yan",
       "Min Yang"
     ],
-    "year": 2025,
-    "venue": "IEEE S&P 2025",
-    "category": "software-system-security",
-    "publicationType": "paper",
+    "year": 2022,
+    "venue": "36th NeurIPS, 2022",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Firmware security",
-        "grey-box fuzzing",
-        "vulnerability discovery"
+        "trustworthy machine learning",
+        "model security"
       ],
       "zh": [
-        "固件安全",
-        "灰盒模糊测试",
-        "漏洞发现"
+        "可信机器学习",
+        "模型安全"
       ]
     },
     "summary": {
-      "en": "Uses service-aware feedback to improve vulnerability discovery in Linux-based firmware.",
-      "zh": "利用服务感知反馈提升 Linux 固件漏洞发现能力。"
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
     },
     "links": [
       {
         "kind": "paper",
-        "url": "https://www.computer.org/csdl/proceedings-article/sp/2025/223600d507/26hiVy3bGHm"
-      },
+        "url": "https://papers.nips.cc/paper_files/paper/2022/hash/9d65080f3be61f4dcc5ca4c293308104-Abstract-Conference.html"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "house-of-cans-covert-transmission-of-internal-datasets-via-capacity-aware-neuron"
+  },
+  {
+    "title": "MetaV: A Meta-Verifier Approach to Task-Agnostic Model Fingerprinting",
+    "authors": [
+      "Xudong Pan",
+      "Yifan Yan",
+      "Mi Zhang",
+      "Min Yang"
+    ],
+    "year": 2022,
+    "venue": "28th SIGKDD, P1327–1336, 2022",
+    "category": "trustworthy-ml",
+    "publicationType": "preprint",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
       {
-        "kind": "code",
-        "url": "https://github.com/HouseFuzz/HouseFuzz"
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2201.07391"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "arxivId": "2201.07391",
+    "lastVerified": "2026-08-03",
+    "slug": "metav-a-meta-verifier-approach-to-task-agnostic-model-fingerprinting"
+  },
+  {
+    "title": "Towards Backdoor Attack on Deep Learning based Time Series Classification",
+    "authors": [
+      "Daizong Ding",
+      "Mi Zhang",
+      "Yuanmin Huang",
+      "Xudong Pan",
+      "Fuli Feng",
+      "Erling Jiang",
+      "Min Yang"
+    ],
+    "year": 2022,
+    "venue": "38th IEEE ICDE, P1274-1287, 2022",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ieeexplore.ieee.org/document/9835394"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "towards-backdoor-attack-on-deep-learning-based-time-series-classification"
+  },
+  {
+    "title": "A Deep Learning Framework for Self-evolving Hierarchical Community Detection",
+    "authors": [
+      "Daizong Ding",
+      "Mi Zhang",
+      "Hanrui Wang",
+      "Xudong Pan",
+      "Min Yang",
+      "Xiangnan He"
+    ],
+    "year": 2021,
+    "venue": "30th ACM CIKM, P372–381, 2021",
+    "category": "ai-systems-methods",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "AI systems",
+        "learning methods"
+      ],
+      "zh": [
+        "AI 系统",
+        "学习方法"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3459637.3482223"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "a-deep-learning-framework-for-self-evolving-hierarchical-community-detection"
+  },
+  {
+    "title": "Detection and Analysis Technology of Cybercrime（网络犯罪的检测分析技术）",
+    "authors": [
+      "洪赓",
+      "杨森",
+      "叶瀚",
+      "杨哲慜",
+      "杨珉"
+    ],
+    "year": 2021,
+    "venue": "Journal of Computer Research and Development （计算机研究与发展）",
+    "category": "cybersecurity-privacy",
+    "publicationType": "journal",
+    "topics": {
+      "en": [
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://crad.ict.ac.cn/cn/article/doi/10.7544/issn1000-1239.2021.20210855"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "detection-and-analysis-technology-of-cybercrime"
+  },
+  {
+    "title": "Enhancing Time Series Predictors with Generalized Extreme Value Loss",
+    "authors": [
+      "Mi Zhang",
+      "Daizong Ding",
+      "Xudong Pan",
+      "Min Yang"
+    ],
+    "year": 2021,
+    "venue": "IEEE TKDE, 2021. (IF=9.24)",
+    "category": "ai-systems-methods",
+    "publicationType": "journal",
+    "topics": {
+      "en": [
+        "AI systems",
+        "learning methods"
+      ],
+      "zh": [
+        "AI 系统",
+        "学习方法"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ieeexplore.ieee.org/document/9527101"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "enhancing-time-series-predictors-with-generalized-extreme-value-loss"
+  },
+  {
+    "title": "Facilitating Vulnerability Assessment through Poc Migration",
+    "authors": [
+      "Jiarun Dai",
+      "Yuan Zhang",
+      "Hailong Xu",
+      "Haiming Lyu",
+      "Zicheng Wu",
+      "Xinyu Xing",
+      "Min Yang"
+    ],
+    "year": 2021,
+    "venue": "The 28th ACM Conference on Computer and Communications Security (CCS) , 2021",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3460120.3484594"
       }
     ],
     "memberSlugs": [
       "jiarun-dai"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://djrrr.github.io/",
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
     "lastVerified": "2026-08-03",
-    "slug": "housefuzz-service-aware-grey-box-fuzzing-for-vulnerability-detection-in-linux-ba"
+    "slug": "facilitating-vulnerability-assessment-through-poc-migration"
+  },
+  {
+    "title": "TAFA: A Task-Agnostic Fingerprinting Algorithm for Neural Networks",
+    "authors": [
+      "Xudong Pan",
+      "Mi Zhang",
+      "Yifan Lu",
+      "Min Yang"
+    ],
+    "year": 2021,
+    "venue": "26th ESORICS, P542-562, 2021",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://link.springer.com/chapter/10.1007/978-3-030-88418-5_26"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "tafa-a-task-agnostic-fingerprinting-algorithm-for-neural-networks"
+  },
+  {
+    "title": "Understanding the Threats of Trojaned Quantized Neural Network in Model Supply Chains",
+    "authors": [
+      "Xudong Pan",
+      "Mi Zhang",
+      "Yifan Yan",
+      "Min Yang"
+    ],
+    "year": 2021,
+    "venue": "38th ACSAC, P634–645, 2021",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3485832.3485881"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "understanding-the-threats-of-trojaned-quantized-neural-network-in-model-supply-c"
+  },
+  {
+    "title": "A Geometrical Perspective on Image Style Transfer with Adversarial Learning",
+    "authors": [
+      "Xudong Pan",
+      "Mi Zhang",
+      "Daizong Ding",
+      "Min Yang"
+    ],
+    "year": 2020,
+    "venue": "IEEE TPAMI, 44(1), P63-75, 2020",
+    "category": "ai-systems-methods",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "AI systems",
+        "learning methods"
+      ],
+      "zh": [
+        "AI 系统",
+        "学习方法"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ieeexplore.ieee.org/document/9146781"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "a-geometrical-perspective-on-image-style-transfer-with-adversarial-learning"
   },
   {
     "title": "BScout: Direct Whole Patch Presence Test for Java Executables",
@@ -1521,7 +3446,7 @@ export const researchAssets: ResearchAsset[] = [
     "year": 2020,
     "venue": "USENIX Security 2020",
     "category": "software-system-security",
-    "publicationType": "paper",
+    "publicationType": "conference",
     "topics": {
       "en": [
         "Software security",
@@ -1547,10 +3472,185 @@ export const researchAssets: ResearchAsset[] = [
     "memberSlugs": [
       "jiarun-dai"
     ],
-    "recognitions": [],
-    "sourceUrl": "https://djrrr.github.io/",
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
     "lastVerified": "2026-08-03",
     "slug": "bscout-direct-whole-patch-presence-test-for-java-executables"
+  },
+  {
+    "title": "How Android Developers Handle Evolution-induced API Compatibility Issues: A Large-scale Study",
+    "authors": [
+      "Hao Xia",
+      "Yuan Zhang",
+      "Yingtian Zhou",
+      "Xiaoting Chen",
+      "Yang Wang",
+      "Xiangyu Zhang",
+      "Shuaishuai Cui",
+      "Geng Hong",
+      "Xiaohan Zhang",
+      "Min Yang",
+      "Zhemin Yang"
+    ],
+    "year": 2020,
+    "venue": "In Proceedings of the 42nd International Conference on Software Engineering (ACM ICSE'20, CCF-A)",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ghong.site/papers/icse20-comp.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "how-android-developers-handle-evolution-induced-api-compatibility-issues-a-large"
+  },
+  {
+    "title": "Improving the Robustness of Wasserstein Embedding by Adversarial PAC-Bayesian Learning",
+    "authors": [
+      "Daizong Ding",
+      "Mi Zhang",
+      "Xudong Pan",
+      "Min Yang",
+      "Xiangnan He"
+    ],
+    "year": 2020,
+    "venue": "34th AAAI, P3791-3800, 2020",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies robustness, backdoors, watermarks, poisoning, and trust in machine learning models.",
+      "zh": "研究机器学习模型的鲁棒性、后门、水印、投毒与可信问题。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "http://staff.ustc.edu.cn/~hexn/papers/aaai20-adversarial-embedding.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "improving-the-robustness-of-wasserstein-embedding-by-adversarial-pac-bayesian-le"
+  },
+  {
+    "title": "Justinian’s GAAvernor: Robust Distributed Learning with Gradient Aggregation Agent",
+    "authors": [
+      "Xudong Pan",
+      "Mi Zhang",
+      "Duocai Wu",
+      "Qifan Xiao",
+      "Min Yang"
+    ],
+    "year": 2020,
+    "venue": "29th USENIX Security, P1641-1658, 2020",
+    "category": "trustworthy-ml",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "trustworthy machine learning",
+        "model security"
+      ],
+      "zh": [
+        "可信机器学习",
+        "模型安全"
+      ]
+    },
+    "summary": {
+      "en": "Studies security risks and defenses for agents and foundation models.",
+      "zh": "研究智能体与基础模型的安全风险及防护方法。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.usenix.org/system/files/sec20-pan.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "justinian-s-gaavernor-robust-distributed-learning-with-gradient-aggregation-agen"
+  },
+  {
+    "title": "Modeling Personalized Out-of-Town Distances in Location Recommendation",
+    "authors": [
+      "Daizong Ding",
+      "Mi Zhang",
+      "Xudong Pan",
+      "Min Yang",
+      "Xiangnan He"
+    ],
+    "year": 2020,
+    "venue": "20th IEEE ICDM, P112-121, 2020",
+    "category": "ai-systems-methods",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "AI systems",
+        "learning methods"
+      ],
+      "zh": [
+        "AI 系统",
+        "学习方法"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "http://staff.ustc.edu.cn/~hexn/papers/ICDM2020_VolNet.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "modeling-personalized-out-of-town-distances-in-location-recommendation"
   },
   {
     "title": "Privacy Risks of General-Purpose Language Models",
@@ -1562,11 +3662,12 @@ export const researchAssets: ResearchAsset[] = [
     ],
     "year": 2020,
     "venue": "IEEE S&P 2020",
+    "pages": "1314–1331",
     "category": "cybersecurity-privacy",
-    "publicationType": "paper",
+    "publicationType": "conference",
     "topics": {
       "en": [
-        "Language model privacy",
+        "language model privacy",
         "training data leakage",
         "model security"
       ],
@@ -1589,14 +3690,270 @@ export const researchAssets: ResearchAsset[] = [
     "memberSlugs": [
       "xudong-pan"
     ],
-    "recognitions": [
-      {
-        "en": "WAIC Youth Outstanding Paper Nomination",
-        "zh": "世界人工智能大会青年优秀论文提名"
-      }
+    "featuredRank": 1,
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
     ],
-    "sourceUrl": "https://ravensanstete.github.io/en/publications/",
     "lastVerified": "2026-08-03",
     "slug": "privacy-risks-of-general-purpose-language-models"
+  },
+  {
+    "title": "Detecting Third-party Libraries in Android Applications with High Precision and Recall",
+    "authors": [
+      "Yuan Zhang",
+      "Jiarun Dai",
+      "Xiaohan Zhang",
+      "Sirong Huang",
+      "Zhemin Yang",
+      "Min Yang",
+      "Hao Chen"
+    ],
+    "year": 2018,
+    "venue": "The 25th International Conference on Software Analysis, Evolution and Reengineering (SANER) , 2018",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://ieeexplore.ieee.org/document/8330204/"
+      }
+    ],
+    "memberSlugs": [
+      "jiarun-dai"
+    ],
+    "sourceUrls": [
+      "https://djrrr.github.io/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "detecting-third-party-libraries-in-android-applications-with-high-precision-and-"
+  },
+  {
+    "title": "Geographical Feature Extraction for Entities in Location-based Social Networks",
+    "authors": [
+      "Daizong Ding",
+      "Mi Zhang",
+      "Xudong Pan",
+      "Pearl Pu"
+    ],
+    "year": 2018,
+    "venue": "2018 WWW, P833-842, 2018",
+    "category": "ai-systems-methods",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "AI systems",
+        "learning methods"
+      ],
+      "zh": [
+        "AI 系统",
+        "学习方法"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://dl.acm.org/doi/10.1145/3178876.3186131"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "geographical-feature-extraction-for-entities-in-location-based-social-networks"
+  },
+  {
+    "title": "How You Get Shot in the Back: A Systematical Study about Cryptojacking in the Real World",
+    "authors": [
+      "Geng Hong",
+      "Zhemin Yang",
+      "Sen Yang",
+      "Lei Zhang",
+      "Yuhong Nan",
+      "Zhibo Zhang",
+      "Min Yang",
+      "Yuan Zhang",
+      "Zhiyun Qian",
+      "Haixin Duan"
+    ],
+    "year": 2018,
+    "venue": "25th ACM SIGSAC Conference on Computer and Communications Security (ACM CCS'18, CCF-A)",
+    "category": "cybersecurity-privacy",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "cybersecurity",
+        "privacy"
+      ],
+      "zh": [
+        "网络安全",
+        "隐私"
+      ]
+    },
+    "summary": {
+      "en": "Investigates privacy, abuse ecosystems, and real-world cybersecurity threats.",
+      "zh": "研究隐私、滥用生态与真实世界网络安全威胁。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://github.com/deluser8/cmtracker"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "how-you-get-shot-in-the-back-a-systematical-study-about-cryptojacking-in-the-rea"
+  },
+  {
+    "title": "Invetter: Locating Insecure Input Validations in Android Services",
+    "authors": [
+      "Lei Zhang",
+      "Zhemin Yang",
+      "Yuyu He",
+      "Zhenyu Zhang",
+      "Zhiyun Qian",
+      "Geng Hong",
+      "Yuan Zhang",
+      "Min Yang"
+    ],
+    "year": 2018,
+    "venue": "25th ACM SIGSAC Conference on Computer and Communications Security (ACM CCS'18, CCF-A)",
+    "category": "software-system-security",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "software security",
+        "systems security"
+      ],
+      "zh": [
+        "软件安全",
+        "系统安全"
+      ]
+    },
+    "summary": {
+      "en": "Advances vulnerability discovery, testing, and protection for software and intelligent systems.",
+      "zh": "推进软件与智能系统的漏洞发现、测试和防护。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://github.com/zzzxxxlll/Invetter-os"
+      }
+    ],
+    "memberSlugs": [
+      "geng-hong"
+    ],
+    "sourceUrls": [
+      "https://ghong.site/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "invetter-locating-insecure-input-validations-in-android-services"
+  },
+  {
+    "title": "Modeling Extreme Events in Time Series Prediction",
+    "authors": [
+      "Daizong Ding",
+      "Mi Zhang",
+      "Xudong Pan",
+      "Min Yang",
+      "Xiangnan He"
+    ],
+    "year": 2019,
+    "venue": "25th SIGKDD, P1114–1122, 2019",
+    "category": "ai-systems-methods",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "AI systems",
+        "learning methods"
+      ],
+      "zh": [
+        "AI 系统",
+        "学习方法"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "http://staff.ustc.edu.cn/~hexn/papers/kdd19-timeseries.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "modeling-extreme-events-in-time-series-prediction"
+  },
+  {
+    "title": "Theoretical Analysis of Image-to-Image Translation with Adversarial Learning",
+    "authors": [
+      "Xudong Pan",
+      "Mi Zhang",
+      "Min Yang"
+    ],
+    "year": 2018,
+    "venue": "35th ICML, P4006-4015, 2018",
+    "category": "ai-systems-methods",
+    "publicationType": "conference",
+    "topics": {
+      "en": [
+        "AI systems",
+        "learning methods"
+      ],
+      "zh": [
+        "AI 系统",
+        "学习方法"
+      ]
+    },
+    "summary": {
+      "en": "Develops learning methods and AI systems across recommendation, vision, and time-series modeling.",
+      "zh": "研究推荐、视觉与时间序列等方向的学习方法和 AI 系统。"
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "http://proceedings.mlr.press/v80/pan18c/pan18c.pdf"
+      }
+    ],
+    "memberSlugs": [
+      "xudong-pan"
+    ],
+    "sourceUrls": [
+      "https://ravensanstete.github.io/en/publications/"
+    ],
+    "lastVerified": "2026-08-03",
+    "slug": "theoretical-analysis-of-image-to-image-translation-with-adversarial-learning"
   }
 ] as const;

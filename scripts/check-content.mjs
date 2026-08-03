@@ -71,15 +71,41 @@ for (const project of visibleProjects) {
 
 const researchHtml = await readFile("dist/research/index.html", "utf8");
 const researchRecords = await parseJsonl("public/assets/info/ai_safety_research_assets_metadata.jsonl");
+if (researchRecords.length !== 86) violations.push(`research: expected 86 deduplicated records, found ${researchRecords.length}`);
+const normalizedResearchTitles = new Set();
+const sourceMemberCounts = { "xudong-pan": 0, "jiarun-dai": 0, "geng-hong": 0 };
 for (const record of researchRecords) {
   if (!Array.isArray(record.Authors) || record.Authors.length === 0) violations.push(`research: ${record.Title} has no authors`);
   if (!Number.isInteger(record.Year)) violations.push(`research: ${record.Title} has no valid year`);
   if (!record["One-line summary zh"]) violations.push(`research: ${record.Title} has no Chinese summary`);
   if (!record["Topic zh"]) violations.push(`research: ${record.Title} has no Chinese topic`);
+  if (!record["Venue / Status"]) violations.push(`research: ${record.Title} has no venue or status`);
+  if (!Array.isArray(record["Source URLs"]) || record["Source URLs"].length === 0) violations.push(`research: ${record.Title} has no source profile`);
+  if (!Array.isArray(record["Member slugs"]) || record["Member slugs"].length === 0) violations.push(`research: ${record.Title} has no member attribution`);
+  if (!record.URL) violations.push(`research: ${record.Title} has no original research link`);
+  const normalizedTitle = String(record.Title).toLowerCase().replace(/[^a-z0-9]+/g, "");
+  if (normalizedResearchTitles.has(normalizedTitle)) violations.push(`research: duplicate normalized title ${record.Title}`);
+  normalizedResearchTitles.add(normalizedTitle);
+  if (record["ArXiv ID"] && !/^\d{4}\.\d{4,5}(?:v\d+)?$/i.test(record["ArXiv ID"])) violations.push(`research: malformed arXiv ID for ${record.Title}: ${record["ArXiv ID"]}`);
+  for (const slug of record["Member slugs"] ?? []) if (slug in sourceMemberCounts) sourceMemberCounts[slug] += 1;
   if (record["Featured or not"] && !researchHtml.includes(record["One-line summary zh"])) {
     violations.push(`dist/research/index.html: missing Chinese summary for ${record.Title}`);
   }
 }
+for (const [slug, expected] of Object.entries({ "xudong-pan": 42, "jiarun-dai": 25, "geng-hong": 25 })) {
+  if (sourceMemberCounts[slug] !== expected) violations.push(`research: expected ${expected} records for ${slug}, found ${sourceMemberCounts[slug]}`);
+}
+const expectedFeatured = [
+  "Privacy Risks of General-Purpose Language Models",
+  "Autonomy Comes with Costs: Detecting Denial-of-Service Vulnerabilities Caused by Resource Abusing in LLM-based Agents",
+  "Large language model-powered AI systems achieve self-replication with no human intervention",
+  "AutoControl Arena: Synthesizing Executable Test Environments for Frontier AI Risk Evaluation",
+  "Think Twice Before You Act: Enhancing Agent Behavioral Safety with Thought Correction",
+];
+const actualFeatured = researchRecords.filter((record) => record["Featured rank"]).sort((a, b) => a["Featured rank"] - b["Featured rank"]).map((record) => record.Title);
+if (JSON.stringify(actualFeatured) !== JSON.stringify(expectedFeatured)) violations.push(`research: featured order does not match V3.4 specification`);
+const privacyRecord = researchRecords.find((record) => record.Title === expectedFeatured[0]);
+if (privacyRecord?.Pages !== "1314–1331" || !researchHtml.includes("1314–1331")) violations.push("research: Privacy Risks page range must be 1314–1331");
 
 const aboutHtml = await readFile("dist/about/index.html", "utf8");
 for (const englishBioMarker of ["is the CEO of Whitzard", "is the CTO of Whitzard", "is an Assistant Professor at Fudan University"]) {
@@ -125,6 +151,39 @@ if (!navHtml.includes("应用场景") || navHtml.includes(">解决方案<")) vio
 const englishHomeHtml = withoutEmbeddedCode(await readFile("dist/en/index.html", "utf8"));
 const englishNavHtml = englishHomeHtml.match(/<nav class="site-nav"[\s\S]*?<\/nav>/i)?.[0] ?? "";
 if (!englishNavHtml.includes("Use Cases") || englishNavHtml.includes(">Solutions<")) violations.push("dist/en/index.html: English navigation must label /solutions as Use Cases");
+
+const homeRequirements = [
+  "在安全边界内释放自主智能价值",
+  "智能体时代带来全新安全挑战",
+  "智能体安全运营中台",
+  "AgentGuard 智能体安全引擎",
+  "低侵入适配各类主流智能体架构",
+  "研究驱动产品持续演进",
+  "白泽开放生态",
+  "AgentGuard 运行时控制层",
+  "AgentGuard 处置",
+  "业务结果",
+];
+for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.4 homepage marker: ${marker}`);
+for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
+  if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
+}
+for (const framework of ["LangChain", "Microsoft AutoGen", "OpenAI Agents SDK", "LangGraph", "LlamaIndex", "Dify", "OpenClaw"]) {
+  if (!homeHtml.includes(framework)) violations.push(`dist/index.html: missing supported framework: ${framework}`);
+}
+const homeEcosystem = homeHtml.match(/<section class="ecosystem-preview[\s\S]*?<section class="final-cta/)?.[0] ?? "";
+const homeEcosystemCards = homeEcosystem.match(/<article\b/g)?.length ?? 0;
+if (homeEcosystemCards !== 4) violations.push(`dist/index.html: homepage must show exactly four ecosystem capabilities, found ${homeEcosystemCards}`);
+for (const project of ["WhitzardOS", "WhitzardEval", "Thought-Aligner", "MATE"]) if (!homeEcosystem.includes(project)) violations.push(`dist/index.html: missing core ecosystem capability ${project}`);
+
+for (const [file, html] of [["dist/open-ecosystem/index.html", ecosystemHtml], ["dist/en/open-ecosystem/index.html", await readFile("dist/en/open-ecosystem/index.html", "utf8")]]) {
+  for (const project of ["WhitzardOS", "WhitzardEval", "Thought-Aligner", "MATE"]) if (!html.includes(project)) violations.push(`${file}: missing core ecosystem capability ${project}`);
+}
+
+const recognitionSection = researchHtml.match(/<section id="recognition"[\s\S]*?<section class="section research-team/)?.[0] ?? "";
+const recognitionCount = recognitionSection.match(/<article\b/g)?.length ?? 0;
+if (recognitionCount !== 6) violations.push(`dist/research/index.html: recognition must contain exactly six entries, found ${recognitionCount}`);
+for (const forbidden of ["潘旭东", "戴嘉润", "洪赓", "Awarded to", "个人荣誉", "研究团队荣誉"]) if (recognitionSection.includes(forbidden)) violations.push(`dist/research/index.html: recognition must not expose attribution: ${forbidden}`);
 
 for (const file of htmlFiles) {
   const content = withoutEmbeddedCode(await readFile(file, "utf8"));

@@ -237,7 +237,7 @@
 .research-themes li a { color: var(--nw-ink); font-size: 0.75rem; text-decoration: none; }
 
 .research-index { background: var(--nw-paper); }
-.research-filters { display: grid; grid-template-columns: minmax(260px, 1fr) 220px 150px auto; align-items: end; gap: 0.8rem; border: 1px solid #b7c8c2; padding: 1rem; background: rgba(255, 255, 255, 0.64); }
+.research-filters { display: grid; grid-template-columns: minmax(240px, 1fr) 190px 130px 150px auto; align-items: end; gap: 0.8rem; border: 1px solid #b7c8c2; padding: 1rem; background: rgba(255, 255, 255, 0.64); }
 .research-filters label { display: grid; gap: 0.42rem; color: var(--nw-muted); font: 0.58rem var(--font-mono); text-transform: uppercase; }
 .research-filters input,
 .research-filters select { width: 100%; min-height: 44px; border: 1px solid #b7c8c2; border-radius: 0; padding: 0 0.8rem; background: #fff; color: var(--nw-ink); font: 0.76rem var(--font-sans); }

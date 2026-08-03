@@ -47,13 +47,13 @@ const schema = {
     <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "代表成果" : "FEATURED WORK"}</p><h2>{copy.featured}</h2><p>{copy.featuredLead}</p></div>
     <div class="site-container research-featured__grid">
       {featuredPrimary && <article class="research-featured__primary">
-        <div class="research-meta"><span>01</span><span>{featuredPrimary.year}</span><span>{featuredPrimary.venue}</span></div>
+        <div class="research-meta"><span>01</span><span>{featuredPrimary.year}</span><span>{featuredPrimary.venue}</span>{featuredPrimary.pages && <span>{featuredPrimary.pages}</span>}</div>
         <h3>{featuredPrimary.title}</h3><p>{featuredPrimary.summary[locale]}</p><p class="research-authors">{featuredPrimary.authors.join(" · ")}</p>
         <a href={primaryLink(featuredPrimary)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
       </article>}
       <div class="research-featured__secondary">{featuredSecondary.map((item, index) => <article>
         <div class="research-meta"><span>0{index + 2}</span><span>{item.year}</span><span>{item.venue}</span></div>
-        <h3>{item.title}</h3><p>{item.summary[locale]}</p><a href={primaryLink(item)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
+        <h3>{item.title}</h3><p>{item.summary[locale]}</p><p class="research-authors">{item.authors.join(" · ")}</p><a href={primaryLink(item)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
       </article>)}</div>
     </div>
   </section>
@@ -68,17 +68,17 @@ const schema = {
 
   <section id="research-index" class="section research-index">
     <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "出版物" : "PUBLICATIONS"}</p><h2>{copy.all}</h2></div>
-    <div class="site-container"><ResearchExplorer assets={sorted} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} client:load /></div>
+    <div class="site-container"><ResearchExplorer assets={sorted} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} members={researchers.map(({ slug, name }) => ({ key: slug, title: name }))} client:load /></div>
   </section>
 
   <section id="recognition" class="section research-recognition">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.recognitionEyebrow}</p><h2>{copy.recognitionTitle}</h2></div>
-    <div class="site-container research-recognition__list">{researchRecognitions.map((item) => <article><span>{item.year}</span><div><h3>{item.title[locale]}</h3><p>{item.attribution[locale]}</p></div><a href={item.sourceUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></article>)}</div>
+    <div class="site-container research-recognition__list">{researchRecognitions.map((item) => <article><span>{item.year}</span><div><h3>{item.title[locale]}</h3>{item.venueNote && <p>{item.venueNote[locale]}</p>}</div><a href={item.sourceUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></article>)}</div>
   </section>
 
   <section class="section research-team">
     <div class="site-container research-team__head"><div><p class="eyebrow">{copy.teamEyebrow}</p><h2>{copy.teamTitle}</h2></div><p>{copy.teamLead}</p></div>
-    <div class="site-container research-team__grid">{researchers.map((person, index) => <article><span>0{index + 1}</span><h3>{person.name}</h3><strong>{person.role}</strong><p>{person.focus}</p><div><a href={person.url} target="_blank" rel="noreferrer">{copy.homepage} ↗</a><a href={`${localizedPath("/research", locale)}?q=${encodeURIComponent(locale === "zh" ? ({ "jiarun-dai": "Jiarun Dai", "xudong-pan": "Xudong Pan", "geng-hong": "Geng Hong" }[person.slug]) : person.name)}#research-index`}>{copy.viewResearch} →</a></div></article>)}</div>
+    <div class="site-container research-team__grid">{researchers.map((person, index) => <article><span>0{index + 1}</span><h3>{person.name}</h3><strong>{person.role}</strong><p>{person.focus}</p><div><a href={person.url} target="_blank" rel="noreferrer">{copy.homepage} ↗</a><a href={`${localizedPath("/research", locale)}?member=${person.slug}#research-index`}>{copy.viewResearch} →</a></div></article>)}</div>
   </section>
 
   <section class="section research-collaboration"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "研究合作" : "COLLABORATION"}</p><h2>{copy.collaborationTitle}</h2><p>{copy.collaborationBody}</p><a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "女娲实验室研究合作" : "NUWA Lab research collaboration")}`}>{copy.collaborationCta}</a></div></section>

@@ -22,6 +22,8 @@ const researchCategories = new Set([
   "agent-model-safety",
   "software-system-security",
   "cybersecurity-privacy",
+  "trustworthy-ml",
+  "ai-systems-methods",
 ]);
 
 const categoryByTitle = new Map([
@@ -33,11 +35,11 @@ const categoryByTitle = new Map([
 ]);
 
 const featuredRankByTitle = new Map([
-  ["One Step from Silicon Life: Autonomous AI Agents Capable of Uncontrolled Self-Proliferation", 1],
-  ["AutoControl Arena: Synthesizing Executable Test Environments for Frontier AI Risk Evaluation", 2],
-  ["Think Twice Before You Act: Enhancing Agent Behavioral Safety with Thought Correction", 3],
-  ["MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction", 4],
-  ["Make Agent Defeat Agent: Automatic Detection of Taint-Style Vulnerabilities in LLM-based Agents", 5],
+  ["Privacy Risks of General-Purpose Language Models", 1],
+  ["Autonomy Comes with Costs: Detecting Denial-of-Service Vulnerabilities Caused by Resource Abusing in LLM-based Agents", 2],
+  ["Large language model-powered AI systems achieve self-replication with no human intervention", 3],
+  ["AutoControl Arena: Synthesizing Executable Test Environments for Frontier AI Risk Evaluation", 4],
+  ["Think Twice Before You Act: Enhancing Agent Behavioral Safety with Thought Correction", 5],
 ]);
 
 const inferCategory = (title, topics) => {
@@ -82,7 +84,8 @@ const researchAssets = researchLines.map((line, idx) => {
   const summaryZh = raw["One-line summary zh"] || summaryEn;
 
   const category = raw.Category || inferCategory(title, [...topicEn, ...topicZh]);
-  const publicationType = raw["Publication type"] || (/position/i.test(venue) ? "position" : /report/i.test(venue) ? "report" : /preprint/i.test(venue) && !/accepted|security|www|ccs|icml|iclr|ase/i.test(venue) ? "preprint" : "paper");
+  const rawPublicationType = raw["Publication type"];
+  const publicationType = rawPublicationType === "paper" ? "conference" : rawPublicationType || (/position/i.test(venue) ? "position" : /report/i.test(venue) ? "report" : /preprint|arxiv/i.test(venue) ? "preprint" : "conference");
   const links = [
     ...(url ? [{ kind: "paper", url }] : []),
     ...(pdfUrl && pdfUrl !== url ? [{ kind: "pdf", url: pdfUrl }] : []),
@@ -94,9 +97,9 @@ const researchAssets = researchLines.map((line, idx) => {
     ...(authors.includes("Xudong Pan") ? ["xudong-pan"] : []),
     ...(authors.includes("Geng Hong") ? ["geng-hong"] : []),
   ];
-  const recognitions = raw.Recognition || raw["Recognition zh"] ? [{ en: raw.Recognition || "", zh: raw["Recognition zh"] || raw.Recognition || "" }] : [];
-  const featuredRank = raw["Featured rank"] || featuredRankByTitle.get(title);
-  const sourceUrl = raw["Source URL"] || sourceForAuthors(authors);
+  const featuredRank = featuredRankByTitle.get(title);
+  const sourceUrls = Array.isArray(raw["Source URLs"]) ? raw["Source URLs"].map(String) : [raw["Source URL"] || sourceForAuthors(authors)];
+  const sourceMemberSlugs = Array.isArray(raw["Member slugs"]) ? raw["Member slugs"].map(String) : [];
   const lastVerified = raw["Last verified"] || "2026-08-03";
 
   // Generate slug
@@ -111,22 +114,26 @@ const researchAssets = researchLines.map((line, idx) => {
     authors,
     year,
     venue,
+    pages: raw.Pages || undefined,
     status: raw.Status || undefined,
     category,
     publicationType,
     topics: { en: topicEn, zh: topicZh },
     summary: { en: summaryEn, zh: summaryZh },
     links,
-    memberSlugs,
-    recognitions,
+    memberSlugs: sourceMemberSlugs.length > 0 ? sourceMemberSlugs : memberSlugs,
     featuredRank,
-    sourceUrl,
+    sourceUrls,
+    doi: raw.DOI || undefined,
+    arxivId: raw["ArXiv ID"] || undefined,
     lastVerified,
     slug,
   };
 });
 
 const seenResearch = new Set();
+const seenResearchDoi = new Set();
+const seenResearchArxiv = new Set();
 for (const item of researchAssets) {
   const key = `${item.title.toLowerCase().replace(/[^a-z0-9]+/g, "")}:${item.year}`;
   if (seenResearch.has(key)) throw new Error(`Duplicate research record: ${item.title}`);
@@ -134,7 +141,17 @@ for (const item of researchAssets) {
   if (!item.title || item.authors.length === 0 || !Number.isInteger(item.year) || !item.venue) throw new Error(`Incomplete research record: ${item.title}`);
   if (!researchCategories.has(item.category)) throw new Error(`Invalid research category: ${item.title}`);
   if (!item.summary.en || !item.summary.zh || item.topics.en.length === 0 || item.topics.zh.length === 0) throw new Error(`Missing localized research copy: ${item.title}`);
-  if (item.links.length === 0 || !item.sourceUrl || !item.lastVerified) throw new Error(`Missing source for research record: ${item.title}`);
+  if (item.links.length === 0 || item.sourceUrls.length === 0 || item.memberSlugs.length === 0 || !item.lastVerified) throw new Error(`Missing source for research record: ${item.title}`);
+  if (item.doi) {
+    const doi = item.doi.toLowerCase();
+    if (seenResearchDoi.has(doi)) throw new Error(`Duplicate research DOI: ${item.doi}`);
+    seenResearchDoi.add(doi);
+  }
+  if (item.arxivId) {
+    const arxivId = item.arxivId.toLowerCase();
+    if (seenResearchArxiv.has(arxivId)) throw new Error(`Duplicate arXiv ID: ${item.arxivId}`);
+    seenResearchArxiv.add(arxivId);
+  }
 }
 const featuredRanks = researchAssets.map((item) => item.featuredRank).filter(Boolean);
 if (new Set(featuredRanks).size !== featuredRanks.length) throw new Error("Featured research ranks must be unique");
@@ -148,23 +165,25 @@ export type ResearchAsset = {
   authors: string[];
   year: number;
   venue: string;
+  pages?: string;
   status?: string;
   category: ResearchCategory;
-  publicationType: "paper" | "report" | "position" | "preprint";
+  publicationType: "conference" | "journal" | "preprint" | "report" | "position";
   topics: LocalizedList;
   summary: LocalizedText;
   links: ResearchLink[];
   memberSlugs: MemberSlug[];
-  recognitions: LocalizedText[];
   featuredRank?: number;
-  sourceUrl: string;
+  sourceUrls: string[];
+  doi?: string;
+  arxivId?: string;
   lastVerified: string;
   slug: string;
 };
 
 export type LocalizedText = { en: string; zh: string };
 export type LocalizedList = { en: string[]; zh: string[] };
-export type ResearchCategory = "frontier-risk-control" | "agent-model-safety" | "software-system-security" | "cybersecurity-privacy";
+export type ResearchCategory = "frontier-risk-control" | "agent-model-safety" | "software-system-security" | "cybersecurity-privacy" | "trustworthy-ml" | "ai-systems-methods";
 export type ResearchLink = { kind: "paper" | "pdf" | "code" | "project"; url: string };
 export type MemberSlug = "jiarun-dai" | "xudong-pan" | "geng-hong";
 
@@ -186,6 +205,10 @@ const openSourceAssets = osLines
     const raw = JSON.parse(line);
 
     const name = raw.Name || raw.name || `Project ${idx + 1}`;
+    const id = raw.ID || raw.id || name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const aliases = Array.isArray(raw.Aliases) ? raw.Aliases.map(String) : [];
+    const capabilityEn = raw.Capability || "";
+    const capabilityZh = raw["Capability zh"] || capabilityEn;
     const status = raw.Status || raw.status || undefined;
     const descriptionEn =
       raw["One-line description"] || raw.description || "";
@@ -225,7 +248,10 @@ const openSourceAssets = osLines
       .slice(0, 60);
 
     return {
+      id,
       name,
+      aliases,
+      capability: capabilityEn || capabilityZh ? { en: capabilityEn, zh: capabilityZh } : undefined,
       status,
       description: { en: descriptionEn, zh: descriptionZh },
       githubUrl,
@@ -241,7 +267,10 @@ const osTs = `// Auto-generated by scripts/ingest-info-jsonl.mjs
 // DO NOT EDIT MANUALLY — re-run npm run ingest:info to update
 
 export type OpenSourceAsset = {
+  id: string;
   name: string;
+  aliases: string[];
+  capability?: LocalizedText;
   status?: string;
   description: LocalizedText;
   githubUrl?: string;

@@ -1,25 +1,32 @@
 # 04｜首页 V3.1 逐屏设计
 
+## V3.4 产品显性化修订
+
+- 首屏按“业务目标 → 智能体执行 → AgentGuard 运行时控制层 → 企业系统与外部行动”讲解产品，覆盖客户数据外发、生产变更、外部指令执行三个确定性场景。
+- 默认只显示业务任务、风险、AgentGuard 处置和业务结果；Hook 阶段、数据标签、规则 ID 与标准处置按需展开。
+- 中段以“社区版公开控制台＋Enterprise 安全事件队列”呈现运营闭环，并明确版本边界。
+- 框架标识统一读取 `supportedFrameworks`；首页开放生态只展示 WhitzardOS、WhitzardEval、Thought-Aligner 与 MATE。
+
 ## 01 Hero：公司定位与真实运行时控制
 
 - H1：`守其边界，行其智能` / `Secure autonomy, by design.`
 - 中文导语：`评测、控制并审计智能体的推理、工具、权限与数据流。`
 - 主行动：预约演示；次行动：进入 AgentGuard 真实产品演示。
-- 右侧统一使用 `AgentGuardRuntimeConsole` 的紧凑版本，不再使用抽象折线或 `Correct` 示意图。
+- 右侧使用业务优先的 `AgentGuardBoundaryDemo`，明确标出 AgentGuard 运行时控制层。
 - 首屏直接列出已公开支持的 LangChain、AutoGen、OpenAI Agents、LangGraph、LlamaIndex、Dify 与 OpenClaw。
 
-控制台固定提供三个可交互场景：
+演示固定提供三个可交互场景：
 
-1. `database_query → report.generate → http.post`：`SANITIZE → ALLOW WITH AUDIT`；
-2. `browser.fetch → llm.respond → shell.exec`：`DENY`；
-3. `database_query → slack.post`：`HUMAN_CHECK`，允许批准一次或拒绝。
+1. 客户数据外发：外发前脱敏，并保留审计；
+2. 生产变更：命令降级为预览，发布进入审批；
+3. 外部指令执行：不可信内容进入 Shell 前阻断。
 
 ## 02 安全边界判断
 
 深玄青背景，只保留一句：
 
-- 中文：`自主性在可信边界内释放。`
-- English: `Autonomy thrives inside a trustworthy security boundary.`
+- 中文：`在安全边界内释放自主智能价值`
+- English: `Unlock autonomous intelligence within secure boundaries`
 
 ## 03 运行时风险
 
@@ -27,7 +34,7 @@
 
 ## 04 真实产品证据
 
-使用 AgentGuard 公开控制台与 `retrieve_doc → send_email_to` 规则，展示 Allow / Deny 两种路径并进入完整产品页。
+左侧展示 AgentGuard 社区版公开控制台，右侧展示 Enterprise 安全事件队列；技术轨迹进入完整产品页。
 
 ## 05 平台与三链机制
 
@@ -39,13 +46,13 @@
 
 展示低侵入接入、私有部署、分层智能与可解释运营，并用极简部署图说明控制层位置。
 
-## 07 NUWA Lab × AgentGuard
+## 07 女娲实验室 × AgentGuard
 
-核心关系压缩为：`NUWA 发现并评估风险，AgentGuard 将安全能力带入企业运行环境。`
+核心关系压缩为：`女娲实验室识别并评估风险，AgentGuard 将安全能力带入企业运行环境。`
 
 ## 08 开放技术证据
 
-首页只展示 AgentGuard、Thought-Aligner、snowl 与 cyberhunter，并始终按 locale 读取项目描述。
+首页只展示 WhitzardOS、WhitzardEval、Thought-Aligner 与 MATE，并始终按 locale 读取项目描述。
 
 ## 09 最终 CTA
 
