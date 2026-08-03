@@ -1,7 +1,7 @@
 export type LocalizedText = { en: string; zh: string };
 
 export interface TeamMember {
-  name: string;
+  name: LocalizedText;
   role: LocalizedText;
   affiliation: "whitzard" | "nuwa";
   category: "founding" | "research" | "engineering" | "advisor" | "partner";
@@ -18,7 +18,7 @@ const linkLabels = {
 
 export const team: TeamMember[] = [
   {
-    name: "Dr. Jiarun Dai",
+    name: { en: "Dr. Jiarun Dai", zh: "戴嘉润" },
     role: { en: "CEO", zh: "CEO" },
     affiliation: "whitzard",
     category: "founding",
@@ -32,7 +32,7 @@ export const team: TeamMember[] = [
     ],
   },
   {
-    name: "Dr. Xudong Pan",
+    name: { en: "Dr. Xudong Pan", zh: "潘旭东" },
     role: { en: "CTO", zh: "CTO" },
     affiliation: "whitzard",
     category: "founding",
@@ -47,13 +47,13 @@ export const team: TeamMember[] = [
     ],
   },
   {
-    name: "Dr. Geng Hong",
+    name: { en: "Dr. Geng Hong", zh: "洪赓" },
     role: { en: "Strategic & Research Partner", zh: "战略与研究合作" },
     affiliation: "whitzard",
     category: "partner",
     bio: {
       en: "Fudan University assistant professor researching cybercrime, penetration testing, security ecosystems, and in-the-wild security, collaborating with Whitzard and NUWA Lab.",
-      zh: "复旦大学青年研究员，研究网络犯罪、渗透测试、安全生态与真实世界安全，为 Whitzard 与 NUWA Lab 提供研究协作。",
+      zh: "复旦大学青年研究员，研究网络犯罪、隐私与真实世界安全，为 Whitzard 与女娲实验室提供研究协作。",
     },
     links: [{ label: linkLabels.homepage, url: "https://ghong.site/" }],
   },

@@ -22,12 +22,12 @@ const copy = ui[locale];
     <div class="site-footer__column">
       <p class="site-footer__label">{copy.footer.platform}</p>
       <a href={localizedPath("/agentguard", locale)}>AgentGuard</a>
-      <a href={localizedPath("/solutions", locale)}>{locale === "zh" ? "解决方案" : "Solutions"}</a>
+      <a href={localizedPath("/solutions", locale)}>{locale === "zh" ? "应用场景" : "Use Cases"}</a>
       <a href={localizedPath("/contact", locale)}>{locale === "zh" ? "预约演示" : "Book a Demo"}</a>
     </div>
     <div class="site-footer__column">
       <p class="site-footer__label">{copy.footer.resources}</p>
-      <a href={localizedPath("/nuwa", locale)}>NUWA Lab</a>
+      <a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "女娲实验室" : "NUWA Lab"}</a>
       <a href={localizedPath("/research", locale)}>{locale === "zh" ? "研究成果" : "Research"}</a>
       <a href={localizedPath("/open-ecosystem", locale)}>WhitzardAgent</a>
     </div>

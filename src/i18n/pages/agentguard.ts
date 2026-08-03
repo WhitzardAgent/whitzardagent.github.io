@@ -3,6 +3,13 @@ import type { Locale } from "../config";
 export type AgentGuardCopy = {
   meta: { title: string; description: string };
   hero: { eyebrow: string; title: string; body: string; primary: string; secondary: string; imageAlt: string; imageCaption: string };
+  editions: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    community: { name: string; label: string; body: string; features: string[]; cta: string };
+    enterprise: { name: string; label: string; body: string; features: string[]; cta: string };
+  };
   runtime: { eyebrow: string; title: string; body: string };
   demo: {
     eyebrow: string; title: string; body: string; play: string;
@@ -22,13 +29,32 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
   zh: {
     meta: { title: "AgentGuard — 智能体运行时安全控制", description: "AgentGuard 在 LLM、工具、身份与数据边界执行运行时安全策略。" },
     hero: {
-      eyebrow: "AGENTGUARD · 企业级智能体安全",
+      eyebrow: "AGENTGUARD ENTERPRISE",
       title: "智能体运行时安全控制层",
       body: "在 LLM 与工具执行前后识别风险，并执行脱敏、降级、审批或阻断。",
-      primary: "预约演示",
-      secondary: "查看源码",
+      primary: "预约企业版演示",
+      secondary: "查看社区版",
       imageAlt: "AgentGuard 运行时控制台，显示流量、审批与审计记录",
       imageCaption: "策略、审批与审计",
+    },
+    editions: {
+      eyebrow: "产品版本",
+      title: "同一技术基础，两种使用方式",
+      body: "社区版提供开放的运行时安全基础；企业版面向组织级部署与持续安全运营。",
+      community: {
+        name: "AgentGuard Community",
+        label: "开源社区版 · GPLv3",
+        body: "面向开发者与研究社区的自主管理版本。",
+        features: ["公开框架适配", "四类运行时 Hook", "DSL 策略规则", "可视化配置", "运行轨迹审计", "插件扩展"],
+        cta: "查看社区版",
+      },
+      enterprise: {
+        name: "AgentGuard Enterprise",
+        label: "企业交付",
+        body: "面向组织级部署、集成与持续安全运营。",
+        features: ["私有化部署支持", "集中策略与审计集成", "定制适配器", "定制安全策略与模型", "持续验证与技术支持"],
+        cta: "预约企业版演示",
+      },
     },
     runtime: { eyebrow: "运行时决策", title: "完整轨迹，精细处置", body: "关联身份、工具与数据流，在行动前执行策略。" },
     demo: {
@@ -71,23 +97,42 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
       eyebrow: "可核实证据",
       title: "代码、模型与研究",
       items: [
-        { title: "AgentGuard", body: "公开的智能体运行时安全项目。", label: "GitHub", href: "https://github.com/WhitzardAgent/AgentGuard" },
+        { title: "AgentGuard Community", body: "面向开发者和研究社区的开源运行时安全基础。", label: "社区版 · GitHub", href: "https://github.com/WhitzardAgent/AgentGuard" },
         { title: "安全模型", body: "思维校准、意图与推理安全模型。", label: "开源生态", href: "/open-ecosystem" },
-        { title: "NUWA 研究", body: "前沿风险、智能体安全与 AI 控制研究。", label: "研究成果", href: "/research" },
+        { title: "女娲实验室研究", body: "前沿风险、智能体安全与 AI 控制研究。", label: "研究成果", href: "/research" },
       ],
     },
-    cta: { title: "为智能体运行环境建立控制边界", body: "评估技术栈、关键权限与部署约束。", primary: "预约演示", github: "查看源码" },
+    cta: { title: "为智能体运行环境建立控制边界", body: "评估技术栈、关键权限与部署约束。", primary: "预约企业版演示", github: "查看社区版" },
   },
   en: {
     meta: { title: "AgentGuard — Runtime Security for AI Agents", description: "AgentGuard enforces runtime policy across LLM, tool, identity, and data boundaries." },
     hero: {
-      eyebrow: "AGENTGUARD · ENTERPRISE AGENT SECURITY",
+      eyebrow: "AGENTGUARD ENTERPRISE",
       title: "Control the full agent runtime.",
       body: "Control risk before and after LLM and tool execution with sanitization, degradation, approval, or denial.",
-      primary: "Book a Demo",
-      secondary: "View Source",
+      primary: "Book Enterprise Demo",
+      secondary: "View Community Edition",
       imageAlt: "AgentGuard runtime console showing traffic, approvals, and audit records",
       imageCaption: "Policy, approval, and audit",
+    },
+    editions: {
+      eyebrow: "EDITIONS",
+      title: "One foundation. Two ways to deploy.",
+      body: "Community provides the open runtime-security foundation. Enterprise supports organization-wide deployment and continuous security operations.",
+      community: {
+        name: "AgentGuard Community",
+        label: "Open source · GPLv3",
+        body: "A self-managed edition for developers and researchers.",
+        features: ["Public framework adapters", "Four runtime hooks", "DSL policy rules", "Visual configuration", "Runtime audit", "Plugin extensions"],
+        cta: "View Community Edition",
+      },
+      enterprise: {
+        name: "AgentGuard Enterprise",
+        label: "Enterprise delivery",
+        body: "For organization-wide deployment, integration, and continuous security operations.",
+        features: ["Private deployment support", "Central policy and audit integration", "Custom adapters", "Custom policies and safety models", "Continuous validation and technical support"],
+        cta: "Book Enterprise Demo",
+      },
     },
     runtime: { eyebrow: "RUNTIME DECISIONS", title: "Full trace. Precise control.", body: "Link identity, tools, and data flow before action executes." },
     demo: {
@@ -130,11 +175,11 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
       eyebrow: "VERIFIABLE EVIDENCE",
       title: "Code, models, research.",
       items: [
-        { title: "AgentGuard", body: "The public agent runtime security project.", label: "GitHub", href: "https://github.com/WhitzardAgent/AgentGuard" },
+        { title: "AgentGuard Community", body: "The open runtime-security foundation for developers and researchers.", label: "Community · GitHub", href: "https://github.com/WhitzardAgent/AgentGuard" },
         { title: "Safety models", body: "Thought, intent, and reasoning safety models.", label: "Ecosystem", href: "/en/open-ecosystem" },
         { title: "NUWA research", body: "Frontier risk, agent safety, and AI control.", label: "Research", href: "/en/research" },
       ],
     },
-    cta: { title: "Set a control boundary for agent runtime.", body: "Assess the stack, critical permissions, and deployment constraints.", primary: "Book a Demo", github: "View Source" },
+    cta: { title: "Set a control boundary for agent runtime.", body: "Assess the stack, critical permissions, and deployment constraints.", primary: "Book Enterprise Demo", github: "Community Edition" },
   },
 };

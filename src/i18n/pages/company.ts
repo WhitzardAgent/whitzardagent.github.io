@@ -8,11 +8,16 @@ export type CompanyCopy = {
     scenarios: Array<{
       index: string;
       title: string;
-      task: string;
-      risk: string;
-      controls: string[];
-      link: string;
+      objective: string;
+      boundary: string;
+      outcome: string;
     }>;
+    explorer: { objective: string; boundary: string; outcome: string; ariaLabel: string };
+    valueEyebrow: string;
+    valueTitle: string;
+    valueBody: string;
+    primary: string;
+    secondary: string;
     journeyTitle: string;
     journey: string[];
     cta: string;
@@ -50,50 +55,52 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
   en: {
     solutions: {
       meta: {
-        title: "Solutions — Whitzard",
+        title: "Use Cases — Whitzard",
         description:
           "Secure enterprise AI agent deployment across development, operations, data access, and high-impact workflows.",
       },
-      eyebrow: "ENTERPRISE SOLUTIONS",
-      title: "Secure high-impact agent workflows.",
-      lead: "Secure data access, system changes, external actions, and multi-agent operations.",
+      eyebrow: "ENTERPRISE AGENT USE CASES",
+      title: "Let enterprise agents act autonomously, safely.",
+      lead: "Set runtime boundaries for permissions, data, and external actions without sacrificing business value.",
+      explorer: { objective: "Business objective", boundary: "Critical boundary", outcome: "Controlled outcome", ariaLabel: "Enterprise agent use cases" },
+      valueEyebrow: "SECURE AUTONOMY",
+      valueTitle: "Autonomy creates value inside a clear boundary",
+      valueBody: "AgentGuard Enterprise turns workflow boundaries into enforceable runtime control.",
+      primary: "Assess a use case",
+      secondary: "Explore AgentGuard Enterprise",
       scenarios: [
         {
           index: "01",
           title: "Data and knowledge agents",
-          task: "Enterprise search, reporting, and customer data processing.",
-          risk: "Unauthorized access, sensitive egress, and lost lineage.",
-          controls: ["Data lineage", "Redaction", "Scope limits", "Private audit"],
-          link: "Data controls",
+          objective: "Enterprise search, reporting, and customer data processing.",
+          boundary: "Data provenance, access rights, derived content, and external destinations.",
+          outcome: "Keep automation efficient while controlling sensitive data by source and destination.",
         },
         {
           index: "02",
           title: "Development and operations agents",
-          task: "Code, shell, filesystem, and cloud operations.",
-          risk: "Prompt injection, unauthorized execution, and compound chains.",
-          controls: ["Dynamic permission", "Approval", "Sandbox", "Network boundary"],
-          link: "Runtime controls",
+          objective: "Code changes, shell commands, filesystem, and cloud operations.",
+          boundary: "Execution rights, network scope, change impact, and human approval.",
+          outcome: "Routine work proceeds autonomously; high-impact changes require approval.",
         },
         {
           index: "03",
           title: "External-action agents",
-          task: "Email, HTTP, browser, CRM, and notification tools.",
-          risk: "Wrong recipients, untrusted domains, and irreversible action.",
-          controls: ["Allowlists", "Delegated identity", "Approval", "Audit"],
-          link: "Action controls",
+          objective: "Email, HTTP, browser, CRM, and notification tools.",
+          boundary: "Delegated identity, recipients, destination domains, and irreversible actions.",
+          outcome: "External actions execute only within authorized identity and destination scope.",
         },
         {
           index: "04",
           title: "Multi-agent platforms",
-          task: "Agent collaboration, shared tools, and distributed runtime.",
-          risk: "Lateral authority, compound paths, and policy drift.",
-          controls: ["Control plane", "Dynamic identity", "Cross-agent trace", "Unified response"],
-          link: "Deployment",
+          objective: "Agent collaboration, shared tools, and distributed runtime.",
+          boundary: "Identity propagation, shared privileges, compound paths, and policy consistency.",
+          outcome: "Cross-agent behavior receives unified control and audit.",
         },
       ],
       journeyTitle: "Deployment path",
       journey: ["Select workflow", "Define boundary", "Connect AgentGuard", "Verify continuously"],
-      cta: "Assess your workflow",
+      cta: "Assess a use case",
     },
     company: {
       meta: {
@@ -195,60 +202,62 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
   zh: {
     solutions: {
       meta: {
-        title: "解决方案 — Whitzard",
+        title: "应用场景 — Whitzard",
         description:
-          "面向开发、运营、数据访问和高影响业务流程的企业智能体安全解决方案。",
+          "面向数据、开发、外部行动和多智能体协作的企业智能体应用场景。",
       },
-      eyebrow: "企业解决方案",
-      title: "高影响智能体的安全落地",
-      lead: "覆盖数据访问、系统变更、外部行动与多智能体协作。",
+      eyebrow: "企业智能体应用场景",
+      title: "让企业智能体安全自主执行",
+      lead: "以运行时边界控制权限、数据与外部行动，释放智能体的业务价值",
+      explorer: { objective: "业务目标", boundary: "关键边界", outcome: "受控结果", ariaLabel: "企业智能体应用场景" },
+      valueEyebrow: "安全自主",
+      valueTitle: "清晰边界释放自主价值",
+      valueBody: "AgentGuard Enterprise 将业务边界转化为可执行的运行时控制。",
+      primary: "评估应用场景",
+      secondary: "了解 AgentGuard Enterprise",
       scenarios: [
         {
           index: "01",
           title: "数据与知识智能体",
-          task: "企业检索、报告生成、客户数据处理",
-          risk: "越权访问、敏感外流、权限属性丢失",
-          controls: ["数据血缘", "脱敏", "范围限制", "私有审计"],
-          link: "数据控制",
+          objective: "企业检索、报告生成、客户数据处理",
+          boundary: "数据来源、访问权限、衍生内容与外发目标",
+          outcome: "保持自动化效率，敏感数据按来源和去向受控",
         },
         {
           index: "02",
           title: "开发与运维智能体",
-          task: "代码、Shell、文件系统、云资源操作",
-          risk: "提示注入、未授权执行、危险组合链",
-          controls: ["动态权限", "人工审批", "沙箱", "网络边界"],
-          link: "运行时控制",
+          objective: "代码修改、Shell、文件系统与云资源操作",
+          boundary: "执行权限、网络范围、变更影响与人工审批",
+          outcome: "常规任务自主执行，高影响变更进入审批",
         },
         {
           index: "03",
           title: "外部行动智能体",
-          task: "邮件、HTTP、浏览器、CRM、通知工具",
-          risk: "错误收件人、非允许域、不可逆行动",
-          controls: ["允许列表", "委托身份", "审批", "完整审计"],
-          link: "行动控制",
+          objective: "邮件、HTTP、浏览器、CRM 与通知工具",
+          boundary: "委托身份、收件人、目标域与不可逆操作",
+          outcome: "外部行动仅在授权身份与目标范围内执行",
         },
         {
           index: "04",
           title: "多智能体平台",
-          task: "智能体协作、共享工具、跨节点运行",
-          risk: "权限横向扩散、组合链路、策略漂移",
-          controls: ["集中控制面", "动态身份", "跨智能体轨迹", "统一响应"],
-          link: "部署方式",
+          objective: "智能体协作、共享工具与跨节点运行",
+          boundary: "身份传播、共享权限、组合链路与策略一致性",
+          outcome: "跨智能体行为获得统一控制与审计",
         },
       ],
       journeyTitle: "落地路径",
       journey: ["选择工作流", "建立边界", "接入 AgentGuard", "持续验证"],
-      cta: "评估你的工作流",
+      cta: "评估应用场景",
     },
     company: {
       meta: {
         title: "关于我们 — Whitzard",
         description:
-          "Whitzard 构建智能体安全基础设施，由 AgentGuard、NUWA Lab 研究引擎与 WhitzardAgent 开放生态共同支撑。",
+          "Whitzard 构建智能体安全基础设施，由 AgentGuard、女娲实验室研究引擎与 WhitzardAgent 开放生态共同支撑。",
       },
       eyebrow: "WHITZARD · 白泽",
       title: "构建智能体安全基础设施",
-      lead: "Whitzard 连接 AgentGuard、NUWA Lab 与开放技术生态。",
+      lead: "Whitzard 连接 AgentGuard、女娲实验室与开放技术生态。",
       architecture: [
         {
           name: "Whitzard",
@@ -263,7 +272,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           href: "/agentguard",
         },
         {
-          name: "NUWA Lab",
+          name: "女娲实验室",
           role: "前沿安全研究引擎",
           body: "定义风险、建设评测证据并推动安全模型的研究引擎。",
           href: "/nuwa",
@@ -316,9 +325,9 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           subject: "预约 AgentGuard 产品演示",
         },
         {
-          title: "NUWA 研究合作",
+          title: "女娲实验室研究合作",
           body: "围绕前沿风险评测、智能体安全、安全模型与公开证据展开合作。",
-          subject: "NUWA 研究合作",
+          subject: "女娲实验室研究合作",
         },
         {
           title: "开源与技术交流",

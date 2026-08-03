@@ -36,7 +36,8 @@ const {
 
 const origin = "https://whitzard.tech";
 const resolvedDescription = description ?? (locale === "zh" ? "Whitzard 构建面向企业智能体的安全基础设施，覆盖评测、运行时控制与安全运营。" : "Whitzard builds security infrastructure for enterprise AI agents across evaluation, runtime control, and security operations.");
-const siteTitle = title.includes("Whitzard") || title.includes("NUWA") || title.includes("Nuwa") ? title : `${title} — ${brand === "nuwa" ? "NUWA Lab" : "Whitzard"}`;
+const researchBrand = locale === "zh" ? "女娲实验室" : "NUWA Lab";
+const siteTitle = title.includes("Whitzard") || title.includes("NUWA") || title.includes("Nuwa") || title.includes("女娲实验室") ? title : `${title} — ${brand === "nuwa" ? researchBrand : "Whitzard"}`;
 const basePath = stripLocale(canonicalPath ?? Astro.url.pathname);
 const canonicalUrl = new URL(localizedPath(basePath, locale), origin).href;
 const englishUrl = new URL(localizedPath(basePath, "en"), origin).href;

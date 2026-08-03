@@ -264,7 +264,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       description:
         "评测、控制并审计智能体的推理、工具、权限与数据流。",
       primary: "预约产品演示",
-      secondary: "查看 AgentGuard 真实演示",
+      secondary: "了解 AgentGuard Enterprise",
     },
     manifesto: "自主性在可信边界内释放",
     risk: {
@@ -346,14 +346,14 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       decisions: ["允许", "脱敏", "校准", "降级", "审批", "阻断"],
     },
     loop: {
-      eyebrow: "NUWA LAB × AGENTGUARD",
+      eyebrow: "女娲实验室 × AGENTGUARD",
       title: "研究驱动运行时控制",
-      statement: "NUWA 发现并评估风险，AgentGuard 将安全能力带入企业运行环境。",
+      statement: "女娲实验室发现并评估风险，AgentGuard 将安全能力带入企业运行环境。",
       lab: {
-        name: "NUWA Lab",
+        name: "女娲实验室",
         role: "前沿 AI 安全研究引擎",
         items: ["前沿风险定义", "评测方法与证据", "安全模型研究"],
-        link: "了解 NUWA Lab",
+        link: "了解女娲实验室",
       },
       bridge: {
         down: "风险定义 → 评测证据 → 安全模型",
@@ -361,7 +361,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       },
       product: {
         name: "AgentGuard",
-        role: "企业级智能体安全产品线",
+        role: "企业级智能体安全解决方案",
         items: ["运行时安全控制", "私有化部署", "持续安全运营"],
         link: "了解 AgentGuard",
       },

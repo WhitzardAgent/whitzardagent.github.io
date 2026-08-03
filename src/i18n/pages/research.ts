@@ -24,10 +24,24 @@ export type ResearchCopy = {
     eyebrow: string;
     title: string;
     lead: string;
-    areas: Array<{ title: string; body: string }>;
+    nav: { themes: string; featured: string; index: string; recognition: string };
+    areas: Array<{ key: string; title: string; body: string; cta: string }>;
     featured: string;
+    featuredLead: string;
     all: string;
     source: string;
+    filters: { searchLabel: string; searchPlaceholder: string; topicLabel: string; yearLabel: string; allTopics: string; allYears: string; reset: string; noResults: string };
+    linkLabels: { paper: string; pdf: string; code: string; project: string };
+    recognitionEyebrow: string;
+    recognitionTitle: string;
+    teamEyebrow: string;
+    teamTitle: string;
+    teamLead: string;
+    homepage: string;
+    viewResearch: string;
+    collaborationTitle: string;
+    collaborationBody: string;
+    collaborationCta: string;
   };
   ecosystem: {
     meta: { title: string; description: string };
@@ -88,32 +102,34 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       meta: {
         title: "Research — NUWA Lab",
         description:
-          "Public research from NUWA Lab on frontier AI risk evaluation, agent safety, AI control, and runtime security.",
+          "NUWA Lab research on frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
       },
-      eyebrow: "NUWA RESEARCH",
-      title: "Frontier AI safety research.",
-      lead: "Research questions, methods, results, and source links.",
+      eyebrow: "NUWA LAB · RESEARCH",
+      title: "Define risk. Build safety with evidence.",
+      lead: "Frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
+      nav: { themes: "Research themes", featured: "Featured work", index: "All research", recognition: "Recognition" },
       areas: [
-        {
-          title: "Frontier risk",
-          body: "Autonomy, deception, scheming, self-replication, and loss-of-control.",
-        },
-        {
-          title: "Agent safety",
-          body: "Reasoning alignment, behavioral safety, guardrails, and runtime intervention.",
-        },
-        {
-          title: "Evaluation",
-          body: "Executable evidence, benchmarks, methodology, and evaluation integrity.",
-        },
-        {
-          title: "AI control",
-          body: "Oversight, controllability, governance evidence, and security boundaries.",
-        },
+        { key: "frontier-risk-control", title: "Frontier risk & AI control", body: "Measure autonomy, deception, proliferation, and control integrity.", cta: "View this theme" },
+        { key: "agent-model-safety", title: "Agent & model safety", body: "Protect reasoning, behavior, generative models, and human–AI trust.", cta: "View this theme" },
+        { key: "software-system-security", title: "Software, systems & agent security", body: "Find vulnerabilities across agents, software, firmware, and cloud systems.", cta: "View this theme" },
+        { key: "cybersecurity-privacy", title: "Cybersecurity, privacy & real-world risk", body: "Study cybercrime, privacy leakage, abuse ecosystems, and emerging threats.", cta: "View this theme" },
       ],
       featured: "Featured research",
-      all: "All research",
+      featuredLead: "Five research programs defining frontier risk and practical control.",
+      all: "Research index",
       source: "Original source",
+      filters: { searchLabel: "Search", searchPlaceholder: "Search title, author, or topic", topicLabel: "Theme", yearLabel: "Year", allTopics: "All themes", allYears: "All years", reset: "Reset", noResults: "No research matches these filters." },
+      linkLabels: { paper: "Paper", pdf: "PDF", code: "Code", project: "Project" },
+      recognitionEyebrow: "RECOGNITION",
+      recognitionTitle: "Honours and recognition",
+      teamEyebrow: "RESEARCH CAPABILITY",
+      teamTitle: "Research leadership",
+      teamLead: "Two founders and a strategic research partner spanning AI safety, systems security, cybercrime, and privacy.",
+      homepage: "Homepage",
+      viewResearch: "View research",
+      collaborationTitle: "Research collaboration",
+      collaborationBody: "Collaborate on frontier-risk evaluation, agent safety, systems security, cybersecurity, and privacy.",
+      collaborationCta: "Contact research",
     },
     ecosystem: {
       meta: {
@@ -159,11 +175,11 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
   zh: {
     nuwa: {
       meta: {
-        title: "NUWA Lab — Whitzard 背后的前沿安全研究引擎",
+        title: "女娲实验室 — Whitzard 前沿安全研究引擎",
         description:
-          "NUWA Lab 研究前沿 AI 风险、建设评测证据，并将研究转化为安全模型和产品能力。",
+          "女娲实验室研究前沿 AI 风险、建设评测证据，并将研究转化为安全模型和产品能力。",
       },
-      eyebrow: "NUWA LAB · 女娲实验室",
+      eyebrow: "女娲实验室",
       title: "研究前沿风险，构建可控智能",
       lead: "聚焦前沿风险评测、智能体安全、AI 控制与运行时安全。",
       statement: "研究定义风险，产品在真实世界中控制风险。",
@@ -191,31 +207,45 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       cta: "查看全部研究",
       evidenceEyebrow: "精选研究",
       translationTitle: "从风险证据到运行时控制",
-      translationBody: "NUWA Lab 建设风险定义、评测方法与安全智能，AgentGuard 将这些能力带入智能体使用工具、身份和数据的真实系统。",
+      translationBody: "女娲实验室建设风险定义、评测方法与安全智能，AgentGuard 将这些能力带入智能体运行环境。",
       translationCta: "了解 AgentGuard",
-      collaborationTitle: "与 NUWA Lab 合作",
+      collaborationTitle: "与女娲实验室合作",
       collaborationBody: "围绕前沿风险评测、智能体安全、AI 控制与开放技术证据开展交流与合作。",
       collaborationCta: "联系研究合作",
       teamCta: "认识团队",
     },
     research: {
       meta: {
-        title: "研究成果 — NUWA Lab",
+        title: "研究成果 — 女娲实验室",
         description:
-          "NUWA Lab 关于前沿 AI 风险评测、智能体安全、AI 控制与运行时安全的公开研究。",
+          "女娲实验室关于前沿 AI 风险、智能体安全、系统安全、网络安全与隐私的研究成果。",
       },
-      eyebrow: "NUWA 研究",
-      title: "前沿 AI 安全研究",
-      lead: "研究问题、方法、成果与原文入口。",
+      eyebrow: "女娲实验室 · 研究",
+      title: "以研究定义风险，以证据构建安全",
+      lead: "聚焦前沿 AI 风险、智能体安全、系统安全与网络安全",
+      nav: { themes: "研究主题", featured: "代表成果", index: "全部成果", recognition: "荣誉与认可" },
       areas: [
-        { title: "前沿风险", body: "自主性、欺骗、算计、自我复制与失控风险。" },
-        { title: "智能体安全", body: "推理校准、行为安全、护栏与运行时干预。" },
-        { title: "安全评测", body: "可执行证据、基准、方法论与评测完整性。" },
-        { title: "AI 控制", body: "监督、可控性、治理证据与安全边界。" },
+        { key: "frontier-risk-control", title: "前沿风险与 AI 控制", body: "评测自主性、欺骗、扩散与控制完整性。", cta: "查看主题研究" },
+        { key: "agent-model-safety", title: "智能体与模型安全", body: "保护推理、行为、生成模型与人机信任。", cta: "查看主题研究" },
+        { key: "software-system-security", title: "软件、系统与智能体安全", body: "发现智能体、软件、固件与云系统漏洞。", cta: "查看主题研究" },
+        { key: "cybersecurity-privacy", title: "网络安全、隐私与真实风险", body: "研究网络犯罪、隐私泄露、滥用生态与新型威胁。", cta: "查看主题研究" },
       ],
-      featured: "精选研究",
-      all: "全部研究",
-      source: "公开来源",
+      featured: "旗舰成果",
+      featuredLead: "五项代表性工作，连接前沿风险、智能体防护与系统安全。",
+      all: "成果索引",
+      source: "原文",
+      filters: { searchLabel: "搜索", searchPlaceholder: "搜索标题、作者或主题", topicLabel: "主题", yearLabel: "年份", allTopics: "全部主题", allYears: "全部年份", reset: "重置", noResults: "没有符合条件的研究成果" },
+      linkLabels: { paper: "论文", pdf: "PDF", code: "代码", project: "项目" },
+      recognitionEyebrow: "荣誉与认可",
+      recognitionTitle: "经公开来源核验的荣誉",
+      teamEyebrow: "研究力量",
+      teamTitle: "跨越 AI 与系统安全",
+      teamLead: "两位联合创始人与一位战略研究合作伙伴，覆盖前沿 AI、系统安全、网络犯罪与隐私。",
+      homepage: "个人主页",
+      viewResearch: "查看研究",
+      collaborationTitle: "研究合作",
+      collaborationBody: "围绕前沿风险评测、智能体安全、系统安全、网络安全与隐私开展合作。",
+      collaborationCta: "联系研究合作",
     },
     ecosystem: {
       meta: {

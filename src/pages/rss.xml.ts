@@ -12,8 +12,8 @@ export async function GET(context: APIContext) {
       title: paper.title,
       pubDate: paper.year ? new Date(`${paper.year}-01-01`) : new Date(),
       description: paper.summary.en,
-      link: paper.url || `https://whitzard.tech/research`,
-      categories: paper.topic.en,
+      link: paper.links[0]?.url || `https://whitzard.tech/research`,
+      categories: paper.topics.en,
     })),
     customData: "<language>en</language>",
   });

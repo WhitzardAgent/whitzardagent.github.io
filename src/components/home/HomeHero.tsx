@@ -14,7 +14,7 @@ export default function HomeHero({ copy, consoleCopy, locale }: Props) {
           <p className="home-hero__description">{copy.description}</p>
           <div className="home-hero__actions">
             <a className="button button--primary" href={locale === "zh" ? "/contact" : "/en/contact"}>{copy.primary}</a>
-            <a className="button button--secondary" href={locale === "zh" ? "/agentguard#demo" : "/en/agentguard#demo"}>{copy.secondary}<span aria-hidden="true">↗</span></a>
+            <a className="button button--secondary" href={locale === "zh" ? "/agentguard#enterprise" : "/en/agentguard#enterprise"}>{copy.secondary}<span aria-hidden="true">↗</span></a>
           </div>
           <div className="home-hero__adapters" aria-label={consoleCopy.supportedLabel}>
             <span>{consoleCopy.supportedLabel}</span>

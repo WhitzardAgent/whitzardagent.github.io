@@ -15,14 +15,26 @@ const { locale, copy } = Astro.props;
 const runtimeCopy = runtimeConsoleCopy[locale];
 const softwareSchema = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "AgentGuard",
-  applicationCategory: "SecurityApplication",
-  operatingSystem: "Enterprise AI agent runtimes",
-  url: `https://whitzard.tech${localizedPath("/agentguard", locale)}`,
-  isAccessibleForFree: true,
-  codeRepository: "https://github.com/WhitzardAgent/AgentGuard",
-  publisher: { "@type": "Organization", name: "Whitzard" },
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      name: "AgentGuard Community",
+      applicationCategory: "SecurityApplication",
+      operatingSystem: "AI agent runtimes",
+      url: "https://github.com/WhitzardAgent/AgentGuard",
+      isAccessibleForFree: true,
+      license: "https://www.gnu.org/licenses/gpl-3.0.html",
+      codeRepository: "https://github.com/WhitzardAgent/AgentGuard",
+      publisher: { "@type": "Organization", name: "Whitzard" },
+    },
+    {
+      "@type": "Product",
+      name: "AgentGuard Enterprise",
+      category: "Enterprise AI agent runtime security",
+      url: `https://whitzard.tech${localizedPath("/agentguard", locale)}`,
+      brand: { "@type": "Brand", name: "Whitzard" },
+    },
+  ],
 };
 ---
 
@@ -43,6 +55,25 @@ const softwareSchema = {
         <img src="/assets/agentguard/dashboard.png" width="2505" height="1229" alt={copy.hero.imageAlt} decoding="async" fetchpriority="high" />
         <figcaption><span>AgentGuard Console</span><strong>{copy.hero.imageCaption}</strong></figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section class="section ag-editions" id="enterprise">
+    <div class="site-container ag-section-head ag-section-head--split">
+      <div><p class="eyebrow">{copy.editions.eyebrow}</p><h2 class="section-title">{copy.editions.title}</h2></div>
+      <p>{copy.editions.body}</p>
+    </div>
+    <div class="site-container ag-editions__grid">
+      <article class="ag-edition ag-edition--community">
+        <span>{copy.editions.community.label}</span><h3>{copy.editions.community.name}</h3><p>{copy.editions.community.body}</p>
+        <ul>{copy.editions.community.features.map(item => <li>{item}</li>)}</ul>
+        <a class="button button--secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.editions.community.cta} ↗</a>
+      </article>
+      <article class="ag-edition ag-edition--enterprise">
+        <span>{copy.editions.enterprise.label}</span><h3>{copy.editions.enterprise.name}</h3><p>{copy.editions.enterprise.body}</p>
+        <ul>{copy.editions.enterprise.features.map(item => <li>{item}</li>)}</ul>
+        <a class="button button--primary" href={localizedPath("/contact", locale)}>{copy.editions.enterprise.cta}</a>
+      </article>
     </div>
   </section>
 

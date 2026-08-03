@@ -21,7 +21,7 @@ export const ui: Record<Locale, UiCopy> = {
   en: {
     nav: [
       { href: "/agentguard", label: "Platform" },
-      { href: "/solutions", label: "Solutions" },
+      { href: "/solutions", label: "Use Cases" },
       { href: "/research", label: "Research" },
       { href: "/open-ecosystem", label: "Open Source" },
       { href: "/about", label: "Company" },
@@ -43,7 +43,7 @@ export const ui: Record<Locale, UiCopy> = {
   zh: {
     nav: [
       { href: "/agentguard", label: "AgentGuard" },
-      { href: "/solutions", label: "解决方案" },
+      { href: "/solutions", label: "应用场景" },
       { href: "/research", label: "研究" },
       { href: "/open-ecosystem", label: "开源生态" },
       { href: "/about", label: "关于我们" },
@@ -59,7 +59,7 @@ export const ui: Record<Locale, UiCopy> = {
       company: "公司",
       resources: "研究与开源",
       legalLine: "守其边界，行其智能。",
-      researchLine: "NUWA Lab 是 Whitzard 背后的前沿安全研究引擎。",
+      researchLine: "女娲实验室是 Whitzard 背后的前沿安全研究引擎。",
     },
   },
 };

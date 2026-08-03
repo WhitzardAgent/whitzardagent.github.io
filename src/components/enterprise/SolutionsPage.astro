@@ -3,38 +3,34 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
 import type { CompanyCopy } from "../../i18n/pages/company";
+import UseCaseBoundaryExplorer from "./UseCaseBoundaryExplorer";
 import "../../styles/company.css";
 
 interface Props { locale: Locale; copy: CompanyCopy["solutions"] }
 const { locale, copy } = Astro.props;
 const agentGuardPath = localizedPath("/agentguard", locale);
-const labels = locale === "zh"
-  ? { task: "任务", risk: "风险", control: "控制", entry: "推荐入口" }
-  : { task: "Task", risk: "Risk", control: "Controls", entry: "Recommended entry" };
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/solutions">
-  <section class="commercial-hero">
-    <div class="site-container">
-      <p class="eyebrow">{copy.eyebrow}</p>
-      <h1>{copy.title}</h1>
-      <p>{copy.lead}</p>
+  <section class="commercial-hero commercial-hero--use-cases">
+    <div class="site-container use-case-hero__grid">
+      <div>
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p>{copy.lead}</p>
+        <div class="use-case-hero__actions">
+          <a class="button button--primary" href={localizedPath("/contact", locale)}>{copy.primary}</a>
+          <a class="button button--secondary" href={agentGuardPath}>{copy.secondary} →</a>
+        </div>
+      </div>
+      <UseCaseBoundaryExplorer scenarios={copy.scenarios} labels={copy.explorer} client:load />
     </div>
   </section>
 
-  <section class="section solution-workflows">
-    <div class="site-container">
-      {copy.scenarios.map((item, index) => (
-        <article>
-          <header><span>{item.index}</span><h2>{item.title}</h2></header>
-          <dl>
-            <div><dt>{labels.task}</dt><dd>{item.task}</dd></div>
-            <div><dt>{labels.risk}</dt><dd>{item.risk}</dd></div>
-            <div><dt>{labels.control}</dt><dd><ul>{item.controls.map(control => <li>{control}</li>)}</ul></dd></div>
-            <div><dt>{labels.entry}</dt><dd><a href={`${agentGuardPath}#${index === 3 ? "deployment" : "runtime"}`}>{item.link} →</a></dd></div>
-          </dl>
-        </article>
-      ))}
+  <section class="section use-case-value">
+    <div class="site-container use-case-value__grid">
+      <div><p class="eyebrow">{copy.valueEyebrow}</p><h2 class="section-title">{copy.valueTitle}</h2></div>
+      <div><p>{copy.valueBody}</p><a href={agentGuardPath}>{copy.secondary} →</a></div>
     </div>
   </section>
 

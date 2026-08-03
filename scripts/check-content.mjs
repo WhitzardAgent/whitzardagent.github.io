@@ -72,6 +72,8 @@ for (const project of visibleProjects) {
 const researchHtml = await readFile("dist/research/index.html", "utf8");
 const researchRecords = await parseJsonl("public/assets/info/ai_safety_research_assets_metadata.jsonl");
 for (const record of researchRecords) {
+  if (!Array.isArray(record.Authors) || record.Authors.length === 0) violations.push(`research: ${record.Title} has no authors`);
+  if (!Number.isInteger(record.Year)) violations.push(`research: ${record.Title} has no valid year`);
   if (!record["One-line summary zh"]) violations.push(`research: ${record.Title} has no Chinese summary`);
   if (!record["Topic zh"]) violations.push(`research: ${record.Title} has no Chinese topic`);
   if (record["Featured or not"] && !researchHtml.includes(record["One-line summary zh"])) {
@@ -104,6 +106,39 @@ for (const route of coreRoutes) {
     if (chineseBudget(text) > limit) violations.push(`${file}: ${tag.toUpperCase()} exceeds Chinese copy budget (${chineseBudget(text)}/${limit}): ${text}`);
     if (text.endsWith("。")) violations.push(`${file}: ${tag.toUpperCase()} must not end with a Chinese full stop: ${text}`);
   }
+}
+
+const withoutEmbeddedCode = (html) => html
+  .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
+  .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "");
+for (const route of coreRoutes) {
+  const file = join("dist", route, "index.html");
+  const visibleHtml = withoutEmbeddedCode(await readFile(file, "utf8"));
+  for (const label of ["NUWA Lab", "NUWA LAB", "NUWA 研究"]) {
+    if (visibleHtml.includes(label)) violations.push(`${file}: Chinese visitor-facing copy must use 女娲实验室 instead of ${label}`);
+  }
+}
+
+const homeHtml = withoutEmbeddedCode(await readFile("dist/index.html", "utf8"));
+const navHtml = homeHtml.match(/<nav class="site-nav"[\s\S]*?<\/nav>/i)?.[0] ?? "";
+if (!navHtml.includes("应用场景") || navHtml.includes(">解决方案<")) violations.push("dist/index.html: Chinese navigation must label /solutions as 应用场景");
+const englishHomeHtml = withoutEmbeddedCode(await readFile("dist/en/index.html", "utf8"));
+const englishNavHtml = englishHomeHtml.match(/<nav class="site-nav"[\s\S]*?<\/nav>/i)?.[0] ?? "";
+if (!englishNavHtml.includes("Use Cases") || englishNavHtml.includes(">Solutions<")) violations.push("dist/en/index.html: English navigation must label /solutions as Use Cases");
+
+for (const file of htmlFiles) {
+  const content = withoutEmbeddedCode(await readFile(file, "utf8"));
+  for (const match of content.matchAll(/<a\b[^>]*href="https:\/\/github\.com\/WhitzardAgent\/AgentGuard"[^>]*>([\s\S]*?)<\/a>/gi)) {
+    const label = decodeText(match[1]);
+    const marker = file.includes("/en/") ? /Community/i : /社区版/;
+    if (!marker.test(label)) violations.push(`${file}: AgentGuard GitHub link must be labelled as the ${file.includes("/en/") ? "Community Edition" : "社区版"}: ${label}`);
+  }
+}
+
+const agentGuardZh = withoutEmbeddedCode(await readFile("dist/agentguard/index.html", "utf8"));
+const agentGuardEn = withoutEmbeddedCode(await readFile("dist/en/agentguard/index.html", "utf8"));
+for (const [file, content] of [["dist/agentguard/index.html", agentGuardZh], ["dist/en/agentguard/index.html", agentGuardEn]]) {
+  if (!content.includes("AgentGuard Community") || !content.includes("AgentGuard Enterprise")) violations.push(`${file}: both AgentGuard editions must be present`);
 }
 
 for (const route of coreRoutes) {

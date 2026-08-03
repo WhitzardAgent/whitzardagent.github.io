@@ -1,19 +1,85 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
 import type { ResearchCopy } from "../../i18n/pages/research";
 import { researchAssets } from "../../data/generated/researchAssets";
+import { researchRecognitions } from "../../data/researchRecognitions";
+import { links } from "../../data/links";
+import ResearchExplorer from "./ResearchExplorer";
 import "../../styles/research.css";
 
 interface Props { locale: Locale; copy: ResearchCopy["research"] }
 const { locale, copy } = Astro.props;
-const featured = researchAssets.filter(item => item.featured);
-const rest = researchAssets.filter(item => !item.featured);
+const sorted = [...researchAssets].sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
+const featured = researchAssets.filter((item) => item.featuredRank).sort((a, b) => (a.featuredRank ?? 99) - (b.featuredRank ?? 99));
+const featuredPrimary = featured[0];
+const featuredSecondary = featured.slice(1);
+const primaryLink = (item: typeof researchAssets[number]) => item.links.find((link) => link.kind === "paper")?.url ?? item.links[0].url;
+const researcherNames = locale === "zh"
+  ? { "jiarun-dai": "戴嘉润", "xudong-pan": "潘旭东", "geng-hong": "洪赓" }
+  : { "jiarun-dai": "Jiarun Dai", "xudong-pan": "Xudong Pan", "geng-hong": "Geng Hong" };
+const researchers = [
+  { slug: "jiarun-dai", name: researcherNames["jiarun-dai"], role: locale === "zh" ? "联合创始人、CEO" : "Co-founder & CEO", focus: locale === "zh" ? "智能系统与软件系统安全" : "Intelligent systems and software security", url: "https://djrrr.github.io/" },
+  { slug: "xudong-pan", name: researcherNames["xudong-pan"], role: locale === "zh" ? "联合创始人、CTO" : "Co-founder & CTO", focus: locale === "zh" ? "前沿 AI 风险、模型与智能体安全" : "Frontier AI risk, model and agent safety", url: "https://ravensanstete.github.io/en/" },
+  { slug: "geng-hong", name: researcherNames["geng-hong"], role: locale === "zh" ? "战略与研究合作伙伴" : "Strategic & research partner", focus: locale === "zh" ? "网络犯罪、隐私与真实世界安全" : "Cybercrime, privacy, and in-the-wild security", url: "https://ghong.site/" },
+] as const;
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "ResearchOrganization", name: locale === "zh" ? "女娲实验室" : "NUWA Lab", alternateName: locale === "zh" ? ["NUWA Lab", "NVWA Lab", "Nuwa Frontier AI Safety Lab"] : ["女娲实验室", "NVWA Lab", "Nuwa Frontier AI Safety Lab"], url: `https://whitzard.tech${localizedPath("/nuwa", locale)}` },
+    ...featured.map((item) => ({ "@type": "ScholarlyArticle", headline: item.title, author: item.authors.map((name) => ({ "@type": "Person", name })), datePublished: String(item.year), url: primaryLink(item), about: item.topics[locale] })),
+  ],
+};
 ---
 
-<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/research">
-  <section class="research-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p></div></section>
-  <section class="research-areas"><div class="site-container">{copy.areas.map((item, index) => <article><span>0{index + 1}</span><h2>{item.title}</h2><p>{item.body}</p></article>)}</div></section>
-  <section class="section nw-research"><div class="site-container nw-section-head"><p class="eyebrow">{locale === "zh" ? "精选" : "SELECTED"}</p><h2 class="section-title">{copy.featured}</h2></div><div class="site-container research-list">{featured.map(item => <a href={item.url ?? item.pdfUrl} target="_blank" rel="noreferrer"><div><span>{item.year ?? item.status}</span><span>{item.venue ?? item.status}</span></div><h3>{item.title}</h3><p>{item.summary[locale]}</p><small>{item.topic[locale].join(" · ")} · {copy.source} ↗</small></a>)}</div></section>
-  {rest.length > 0 && <section class="section research-all"><div class="site-container nw-section-head"><p class="eyebrow">{locale === "zh" ? "研究索引" : "RESEARCH INDEX"}</p><h2 class="section-title">{copy.all}</h2></div><div class="site-container research-compact">{rest.map(item => <a href={item.url ?? item.pdfUrl} target="_blank" rel="noreferrer"><span>{item.year ?? "—"}</span><h3>{item.title}</h3><small>{item.venue ?? item.status ?? copy.source} ↗</small></a>)}</div></section>}
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/research" schema={schema}>
+  <section class="research-hero">
+    <div class="site-container research-hero__grid">
+      <div><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p></div>
+      <nav aria-label={locale === "zh" ? "研究页面导航" : "Research page navigation"}>
+        <a href="#themes">{copy.nav.themes}</a><a href="#featured">{copy.nav.featured}</a><a href="#research-index">{copy.nav.index}</a><a href="#recognition">{copy.nav.recognition}</a>
+      </nav>
+    </div>
+  </section>
+
+  <section id="featured" class="section research-featured">
+    <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "代表成果" : "FEATURED WORK"}</p><h2>{copy.featured}</h2><p>{copy.featuredLead}</p></div>
+    <div class="site-container research-featured__grid">
+      {featuredPrimary && <article class="research-featured__primary">
+        <div class="research-meta"><span>01</span><span>{featuredPrimary.year}</span><span>{featuredPrimary.venue}</span></div>
+        <h3>{featuredPrimary.title}</h3><p>{featuredPrimary.summary[locale]}</p><p class="research-authors">{featuredPrimary.authors.join(" · ")}</p>
+        <a href={primaryLink(featuredPrimary)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
+      </article>}
+      <div class="research-featured__secondary">{featuredSecondary.map((item, index) => <article>
+        <div class="research-meta"><span>0{index + 2}</span><span>{item.year}</span><span>{item.venue}</span></div>
+        <h3>{item.title}</h3><p>{item.summary[locale]}</p><a href={primaryLink(item)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
+      </article>)}</div>
+    </div>
+  </section>
+
+  <section id="themes" class="section research-themes">
+    <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "研究版图" : "RESEARCH THEMES"}</p><h2>{copy.nav.themes}</h2></div>
+    <div class="site-container research-themes__list">{copy.areas.map((area, index) => {
+      const examples = sorted.filter((item) => item.category === area.key).slice(0, 4);
+      return <article><div class="research-themes__intro"><span>0{index + 1}</span><h3>{area.title}</h3><p>{area.body}</p><a href={`${localizedPath("/research", locale)}?topic=${area.key}#research-index`}>{area.cta} →</a></div><ol>{examples.map((item) => <li><span>{item.year}</span><a href={primaryLink(item)} target="_blank" rel="noreferrer">{item.title}</a></li>)}</ol></article>;
+    })}</div>
+  </section>
+
+  <section id="research-index" class="section research-index">
+    <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "出版物" : "PUBLICATIONS"}</p><h2>{copy.all}</h2></div>
+    <div class="site-container"><ResearchExplorer assets={sorted} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} client:load /></div>
+  </section>
+
+  <section id="recognition" class="section research-recognition">
+    <div class="site-container research-section-head"><p class="eyebrow">{copy.recognitionEyebrow}</p><h2>{copy.recognitionTitle}</h2></div>
+    <div class="site-container research-recognition__list">{researchRecognitions.map((item) => <article><span>{item.year}</span><div><h3>{item.title[locale]}</h3><p>{item.attribution[locale]}</p></div><a href={item.sourceUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></article>)}</div>
+  </section>
+
+  <section class="section research-team">
+    <div class="site-container research-team__head"><div><p class="eyebrow">{copy.teamEyebrow}</p><h2>{copy.teamTitle}</h2></div><p>{copy.teamLead}</p></div>
+    <div class="site-container research-team__grid">{researchers.map((person, index) => <article><span>0{index + 1}</span><h3>{person.name}</h3><strong>{person.role}</strong><p>{person.focus}</p><div><a href={person.url} target="_blank" rel="noreferrer">{copy.homepage} ↗</a><a href={`${localizedPath("/research", locale)}?q=${encodeURIComponent(locale === "zh" ? ({ "jiarun-dai": "Jiarun Dai", "xudong-pan": "Xudong Pan", "geng-hong": "Geng Hong" }[person.slug]) : person.name)}#research-index`}>{copy.viewResearch} →</a></div></article>)}</div>
+  </section>
+
+  <section class="section research-collaboration"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "研究合作" : "COLLABORATION"}</p><h2>{copy.collaborationTitle}</h2><p>{copy.collaborationBody}</p><a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "女娲实验室研究合作" : "NUWA Lab research collaboration")}`}>{copy.collaborationCta}</a></div></section>
 </BaseLayout>
