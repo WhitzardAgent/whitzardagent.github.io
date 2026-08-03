@@ -19,9 +19,9 @@ function isActive(href: string) {
 <site-menu>
   <header class:list={["site-header", brand === "nuwa" && "site-header--nuwa"]} data-site-header>
     <div class="site-container site-header__inner">
-      <a href={homePath} class="wordmark" aria-label="Whitzard 白泽">
+      <a href={homePath} class="wordmark" aria-label={locale === "zh" ? "白泽（Whitzard）" : "Whitzard"}>
         <img class="wordmark__logo" src="/assets/logo/whitzard_logo.png" width="40" height="40" alt="" aria-hidden="true" decoding="async" />
-        <span class="wordmark__text">Whitzard</span><span class="wordmark__han">白泽</span>
+        {locale === "zh" ? <><span class="wordmark__text">白泽</span><span class="wordmark__han">（Whitzard）</span></> : <span class="wordmark__text">Whitzard</span>}
       </a>
       <nav class="site-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
         {copy.nav.map((item) => (

@@ -5,6 +5,7 @@ import { localizedPath } from "../../i18n/config";
 import type { HomeCopy } from "../../i18n/pages/home";
 import { openSourceAssets } from "../../data/generated/openSourceAssets";
 import { links } from "../../data/links";
+import { boundaryFlowCopy, enterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
 import HomeHero from "./HomeHero";
 import ThreeChainScrolly from "./ThreeChainScrolly";
 import ResearchProductLoop from "./ResearchProductLoop";
@@ -22,7 +23,7 @@ const statusMap: Record<Locale, Record<string, string>> = {
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/">
-  <HomeHero copy={copy.hero} demoCopy={copy.boundaryDemo} locale={locale} client:load />
+  <HomeHero copy={copy.hero} flowCopy={boundaryFlowCopy[locale]} scenarioCopy={enterpriseScenarioLabCopy[locale]} locale={locale} client:load />
 
   <section class="manifesto-band">
     <div class="manifesto-boundary" aria-hidden="true"></div>

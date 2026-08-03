@@ -1,10 +1,11 @@
 import type { HomeCopy } from "../../i18n/pages/home";
 import { supportedFrameworks } from "../../data/supportedFrameworks";
+import type { BoundaryFlowCopy, EnterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
 import AgentGuardBoundaryDemo from "./AgentGuardBoundaryDemo";
 
-type Props = { copy: HomeCopy["hero"]; demoCopy: HomeCopy["boundaryDemo"]; locale: "en" | "zh" };
+type Props = { copy: HomeCopy["hero"]; flowCopy: BoundaryFlowCopy; scenarioCopy: EnterpriseScenarioLabCopy; locale: "en" | "zh" };
 
-export default function HomeHero({ copy, demoCopy, locale }: Props) {
+export default function HomeHero({ copy, flowCopy, scenarioCopy, locale }: Props) {
   return (
     <section className="home-hero">
       <div className="site-container home-hero__grid">
@@ -21,7 +22,7 @@ export default function HomeHero({ copy, demoCopy, locale }: Props) {
             <div>{supportedFrameworks.map((framework) => <span className="framework-mark" key={framework.id}><img src={framework.logoPath} alt="" width="28" height="28" /><small>{framework.productLabel}</small></span>)}</div>
           </div>
         </div>
-        <AgentGuardBoundaryDemo copy={demoCopy} />
+        <AgentGuardBoundaryDemo copy={flowCopy} scenarioCopy={scenarioCopy} />
       </div>
     </section>
   );

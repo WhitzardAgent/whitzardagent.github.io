@@ -22,7 +22,7 @@
 | NUWA | 研究前沿风险，构建可控智能 | Research frontier risk. Build control. |
 | Research | 以研究定义风险，以证据构建安全 | Define risk. Build safety with evidence. |
 | 开源生态 | 白泽开放生态 | Whitzard Open Ecosystem |
-| 关于我们 | 构建智能体安全基础设施 | Building agent security infrastructure. |
+| 关于我们 | 打造AI智能体时代的安全基础设施 | Building security infrastructure for the agentic AI era |
 | 联系 | 预约 AgentGuard 演示 | Book an AgentGuard demo. |
 
 ## 文案预算
@@ -39,3 +39,13 @@
 - 中文使用 `line-break: strict` 与 `word-break: normal`。
 - 不以硬编码 `<br>` 修复换行；优先压缩文案、调整宽度和字号。
 - 产品名与技术标识保持原文，其余描述、状态、分类、职位与链接标签按 locale 输出。
+
+## V3.5 已确认文案
+
+| 页面 | 中文 | English |
+|---|---|---|
+| 关于 H1 | 打造AI智能体时代的安全基础设施 | Building security infrastructure for the agentic AI era |
+| 关于章节 | 团队愿景 | Team vision |
+| 公共方向 | 公共安全产品 | Public safety goods |
+| 女娲愿景 | 为全球AI治理分享风险实证与公共产品 | Shared Risk Evidence and Public Goods for the World |
+| AgentGuard 运行时 | AgentGuard 如何守住行动边界 | How AgentGuard protects action boundaries |

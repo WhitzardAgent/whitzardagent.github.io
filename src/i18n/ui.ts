@@ -59,7 +59,7 @@ export const ui: Record<Locale, UiCopy> = {
       company: "公司",
       resources: "研究与开源",
       legalLine: "守其边界，行其智能。",
-      researchLine: "女娲实验室是 Whitzard 背后的前沿安全研究引擎。",
+      researchLine: "女娲实验室是白泽（Whitzard）背后的前沿安全研究引擎。",
     },
   },
 };

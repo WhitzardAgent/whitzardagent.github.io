@@ -55,7 +55,7 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
         cta: "预约企业版演示",
       },
     },
-    runtime: { eyebrow: "企业工作流控制", title: "一项任务，多重边界", body: "在身份、数据、工具与外部行动之间持续判断，并执行最小必要处置" },
+    runtime: { eyebrow: "AGENTGUARD 交互边界运行时", title: "AgentGuard 如何守住行动边界", body: "持续追踪数据、授权与动作影响，在风险转化为真实后果前执行最小必要控制" },
     demo: {
       play: "播放官方演示",
       steps: ["读取机密文档。", "保留跨工具上下文。", "校验收件人、文档与信任等级。", "放行管理员路径，阻断其他路径。"],
@@ -134,7 +134,7 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
         cta: "Book Enterprise Demo",
       },
     },
-    runtime: { eyebrow: "ENTERPRISE WORKFLOW CONTROL", title: "One task. Multiple boundaries.", body: "Continuously evaluate identity, data, tools, and external actions, then apply the minimum necessary response." },
+    runtime: { eyebrow: "AGENTGUARD INTERACTION BOUNDARY RUNTIME", title: "How AgentGuard protects action boundaries", body: "Track data, authorization, and effect continuously, then apply the minimum necessary control before risk becomes real-world impact." },
     demo: {
       play: "Play official demo",
       steps: ["Retrieve the confidential document.", "Retain cross-tool context.", "Check recipient, document, and trust.", "Allow the admin path; deny the other path."],

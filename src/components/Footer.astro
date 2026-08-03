@@ -12,9 +12,9 @@ const copy = ui[locale];
 <footer class="site-footer">
   <div class="site-container site-footer__top">
     <div class="site-footer__brand">
-      <a href={localizedPath("/", locale)} class="wordmark wordmark--light" aria-label="Whitzard 白泽">
+      <a href={localizedPath("/", locale)} class="wordmark wordmark--light" aria-label={locale === "zh" ? "白泽（Whitzard）" : "Whitzard"}>
         <img class="wordmark__logo wordmark__logo--footer" src="/assets/logo/whitzard_logo.png" width="48" height="48" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-        <span class="wordmark__text">Whitzard</span><span class="wordmark__han">白泽</span>
+        {locale === "zh" ? <><span class="wordmark__text">白泽</span><span class="wordmark__han">（Whitzard）</span></> : <span class="wordmark__text">Whitzard</span>}
       </a>
       <p>{copy.footer.positioning}</p>
       <p class="site-footer__research">{copy.footer.researchLine}</p>
@@ -40,6 +40,6 @@ const copy = ui[locale];
     </div>
   </div>
   <div class="site-container site-footer__bottom">
-    <p>© {new Date().getFullYear()} Whitzard</p><p>{copy.footer.legalLine}</p>
+    <p>© {new Date().getFullYear()} {locale === "zh" ? "白泽（Whitzard）" : "Whitzard"}</p><p>{copy.footer.legalLine}</p>
   </div>
 </footer>

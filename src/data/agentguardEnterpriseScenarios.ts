@@ -5,6 +5,54 @@ export type PolicySource = "community" | "enterprise-example";
 export type ScenarioId = "renewal-analysis" | "incident-response" | "vendor-payment";
 export type TraceLane = "enterprise-data" | "agent-runtime" | "external-action";
 export type TracePhase = "llm-before" | "llm-after" | "tool-before" | "tool-after";
+export type BoundaryTagKind = "data" | "authorization" | "effect";
+export type TagPropagationMode = "DIRECT" | "SEMANTIC" | "CONTEXTUAL" | "DECLASSIFICATION";
+export type RuntimeTagState = "active" | "transformed" | "restricted" | "removed";
+
+export type RuntimeTag = {
+  id: string;
+  kind: BoundaryTagKind;
+  label: string;
+  code: string;
+  state: RuntimeTagState;
+  provenanceIds?: string[];
+};
+
+export type BoundaryTagTrack = {
+  kind: BoundaryTagKind;
+  label: string;
+  description: string;
+  shape: "circle" | "diamond" | "square";
+  states: string[];
+};
+
+export type BoundaryFlowScenario = {
+  id: ScenarioId;
+  goal: string;
+  tracking: string;
+  conflict: string;
+  protection: string;
+  result: string[];
+  propagation: TagPropagationMode;
+  tracks: BoundaryTagTrack[];
+};
+
+export type BoundaryFlowCopy = {
+  ariaLabel: string;
+  liveLabel: string;
+  runtimeLabel: string;
+  trackingLabel: string;
+  conflictLabel: string;
+  protectionLabel: string;
+  resultLabel: string;
+  evidenceLabel: string;
+  evidenceClose: string;
+  replay: string;
+  pause: string;
+  resume: string;
+  gateLabel: string;
+  scenarios: BoundaryFlowScenario[];
+};
 
 export type ScenarioOption = { id: string; label: string };
 export type ScenarioControl = { id: string; label: string; options: ScenarioOption[]; defaultValue: string };
@@ -111,9 +159,9 @@ const zh: EnterpriseScenarioLabCopy = {
       label: "客户续约分析",
       request: "汇总华东区重点客户的续约风险，更新内部 CRM，并将管理摘要发送给获批外部顾问",
       principal: "运营分析智能体",
-      defaultFocus: "crm-update",
+      defaultFocus: "http-post",
       controls: [
-        { id: "identity", label: "执行身份", defaultValue: "standard", options: [{ id: "standard", label: "标准运营智能体" }, { id: "trusted", label: "高信任运营智能体" }] },
+        { id: "identity", label: "执行身份", defaultValue: "trusted", options: [{ id: "standard", label: "标准运营智能体" }, { id: "trusted", label: "高信任运营智能体" }] },
         { id: "data", label: "数据范围", defaultValue: "pii", options: [{ id: "aggregate", label: "聚合指标" }, { id: "pii", label: "客户 PII" }, { id: "finance", label: "合同与财务字段" }] },
         { id: "destination", label: "目标边界", defaultValue: "approved", options: [{ id: "internal", label: "内部 CRM" }, { id: "approved", label: "获批外部顾问" }, { id: "unapproved", label: "未授权外部目标" }] },
       ],
@@ -177,9 +225,9 @@ const en: EnterpriseScenarioLabCopy = {
   run: "Run simulation", replay: "Replay", approve: "Approve once", reject: "Reject", approvedNotice: "Approved. Execution resumed from the paused node.", rejectedNotice: "Rejected. Subsequent external actions were terminated.",
   scenarios: [
     {
-      id: "renewal-analysis", label: "Renewal analysis", request: "Summarize renewal risk for priority East China accounts, update the internal CRM, and send an executive brief to an approved external adviser.", principal: "Revenue operations agent", defaultFocus: "crm-update",
+      id: "renewal-analysis", label: "Renewal analysis", request: "Summarize renewal risk for priority East China accounts, update the internal CRM, and send an executive brief to an approved external adviser.", principal: "Revenue operations agent", defaultFocus: "http-post",
       controls: [
-        { id: "identity", label: "Execution identity", defaultValue: "standard", options: [{ id: "standard", label: "Standard operations agent" }, { id: "trusted", label: "High-trust operations agent" }] },
+        { id: "identity", label: "Execution identity", defaultValue: "trusted", options: [{ id: "standard", label: "Standard operations agent" }, { id: "trusted", label: "High-trust operations agent" }] },
         { id: "data", label: "Data scope", defaultValue: "pii", options: [{ id: "aggregate", label: "Aggregate metrics" }, { id: "pii", label: "Customer PII" }, { id: "finance", label: "Contract and financial fields" }] },
         { id: "destination", label: "Destination", defaultValue: "approved", options: [{ id: "internal", label: "Internal CRM" }, { id: "approved", label: "Approved external adviser" }, { id: "unapproved", label: "Unauthorized external target" }] },
       ],
@@ -224,6 +272,127 @@ const en: EnterpriseScenarioLabCopy = {
 };
 
 export const enterpriseScenarioLabCopy: Record<Locale, EnterpriseScenarioLabCopy> = { zh, en };
+
+export const boundaryFlowCopy: Record<Locale, BoundaryFlowCopy> = {
+  zh: {
+    ariaLabel: "AgentGuard 交互边界运行时演示",
+    liveLabel: "实时保护中",
+    runtimeLabel: "AgentGuard Interaction Boundary Runtime",
+    trackingLabel: "AgentGuard 正在追踪",
+    conflictLabel: "发现边界冲突",
+    protectionLabel: "AgentGuard 处置",
+    resultLabel: "业务结果",
+    evidenceLabel: "查看判断依据",
+    evidenceClose: "收起判断依据",
+    replay: "重播",
+    pause: "暂停",
+    resume: "继续",
+    gateLabel: "AgentGuard 正在检查",
+    scenarios: [
+      {
+        id: "renewal-analysis",
+        goal: "汇总客户续约风险，更新内部 CRM，并向获批顾问发送管理摘要",
+        tracking: "客户数据血缘、任务级授权与外部提交动作",
+        conflict: "敏感数据将进入外部系统",
+        protection: "移除客户身份与合同字段，保留管理结论",
+        result: ["分析继续", "外发合规", "全程留痕"],
+        propagation: "DECLASSIFICATION",
+        tracks: [
+          { kind: "data", label: "数据", description: "来源 · 敏感等级 · 允许流向", shape: "circle", states: ["任务上下文", "客户记录 · C2", "合同字段 · C2", "内部证据", "敏感血缘保留", "PII 衍生摘要", "CRM 内部写入", "显式脱敏 · C1"] },
+          { kind: "authorization", label: "授权", description: "主体 · 能力 · 范围 · 有效期", shape: "diamond", states: ["任务级委派", "CRM 只读", "合同字段范围", "知识库只读", "不得自动扩权", "工作区生成", "限定字段写入", "获批顾问域"] },
+          { kind: "effect", label: "动作影响", description: "读取 · 修改 · 执行 · 正式提交", shape: "square", states: ["TASK", "READ", "READ", "READ", "CREATE", "CREATE", "MODIFY", "COMMIT · EXTERNAL"] },
+        ],
+      },
+      {
+        id: "incident-response",
+        goal: "定位生产事故、生成补丁，并在授权后发布生产变更",
+        tracking: "外部指令权限、Shell 执行资格与生产变更影响",
+        conflict: "模型生成命令正在跨越生产执行边界",
+        protection: "命令降级为预览，生产发布进入一次性审批",
+        result: ["诊断继续", "变更待批", "证据保留"],
+        propagation: "CONTEXTUAL",
+        tracks: [
+          { kind: "data", label: "数据", description: "来源 · 敏感等级 · 指令权限", shape: "circle", states: ["事故任务上下文", "内部工单 · A2", "外部资料 · A0", "运行日志", "源代码 · C2", "A0 权限保持", "隔离补丁", "命令预览", "验证补丁"] },
+          { kind: "authorization", label: "授权", description: "主体 · 能力 · 范围 · 有效期", shape: "diamond", states: ["任务级委派", "事故任务授权", "仅允许读取", "日志只读", "代码只读", "模型不得扩权", "隔离区写入", "无生产执行权", "一次性发布授权"] },
+          { kind: "effect", label: "动作影响", description: "读取 · 创建 · 执行 · 正式提交", shape: "square", states: ["TASK", "READ", "READ", "READ", "READ", "CREATE", "CREATE", "DRY RUN", "COMMIT · PRODUCTION"] },
+        ],
+      },
+      {
+        id: "vendor-payment",
+        goal: "核验发票与收款账户，更新 ERP 并提交付款审批",
+        tracking: "外部来源、供应商主数据、付款权限与不可逆影响",
+        conflict: "付款动作需要可信主数据与明确人工授权",
+        protection: "核验账户一致性，限制 ERP 字段，付款前强制审批",
+        result: ["核验自动完成", "付款待批", "资金边界受控"],
+        propagation: "DIRECT",
+        tracks: [
+          { kind: "data", label: "数据", description: "来源 · 财务标签 · 验证状态", shape: "circle", states: ["付款核验任务", "外部邮件 · V0", "发票字段 · C2", "供应商主数据 · V2", "账户核验", "已验证凭证", "付款载荷", "受控通知"] },
+          { kind: "authorization", label: "授权", description: "主体 · 财务能力 · 资源范围", shape: "diamond", states: ["任务级委派", "邮件只读", "文档解析", "主数据只读", "核验能力", "ERP 限定写入", "无自主付款权", "通知范围"] },
+          { kind: "effect", label: "动作影响", description: "读取 · 修改 · 资金提交", shape: "square", states: ["TASK", "READ", "CREATE", "READ", "VALIDATE", "MODIFY", "COMMIT · FUNDS", "COMMUNICATE"] },
+        ],
+      },
+    ],
+  },
+  en: {
+    ariaLabel: "AgentGuard interaction boundary runtime demo",
+    liveLabel: "Protecting in real time",
+    runtimeLabel: "AgentGuard Interaction Boundary Runtime",
+    trackingLabel: "AgentGuard is tracking",
+    conflictLabel: "Boundary conflict",
+    protectionLabel: "AgentGuard response",
+    resultLabel: "Business outcome",
+    evidenceLabel: "View decision evidence",
+    evidenceClose: "Hide decision evidence",
+    replay: "Replay",
+    pause: "Pause",
+    resume: "Resume",
+    gateLabel: "AgentGuard is checking",
+    scenarios: [
+      {
+        id: "renewal-analysis",
+        goal: "Analyze account renewal risk, update CRM, and deliver a management brief to an approved adviser",
+        tracking: "Customer-data lineage, task-scoped authorization, and external commitment",
+        conflict: "Sensitive data is about to cross into an external system",
+        protection: "Remove identity and contract fields while preserving the management conclusion",
+        result: ["Analysis continues", "Compliant delivery", "Fully audited"],
+        propagation: "DECLASSIFICATION",
+        tracks: [
+          { kind: "data", label: "Data", description: "Provenance · classification · destination", shape: "circle", states: ["Task context", "Customer records · C2", "Contract fields · C2", "Internal evidence", "Sensitive lineage retained", "PII-derived brief", "Internal CRM write", "Explicit redaction · C1"] },
+          { kind: "authorization", label: "Authorization", description: "Principal · capability · scope · expiry", shape: "diamond", states: ["Task delegation", "CRM read", "Contract field scope", "Knowledge read", "No automatic expansion", "Workspace create", "Scoped field write", "Approved adviser domain"] },
+          { kind: "effect", label: "Effect", description: "Read · modify · execute · commit", shape: "square", states: ["TASK", "READ", "READ", "READ", "CREATE", "CREATE", "MODIFY", "COMMIT · EXTERNAL"] },
+        ],
+      },
+      {
+        id: "incident-response",
+        goal: "Diagnose a production incident, prepare a patch, and deploy after authorization",
+        tracking: "External instruction authority, shell eligibility, and production impact",
+        conflict: "A model-generated command is crossing the production execution boundary",
+        protection: "Convert the command to preview and require a one-time deployment approval",
+        result: ["Diagnosis continues", "Change awaits approval", "Evidence retained"],
+        propagation: "CONTEXTUAL",
+        tracks: [
+          { kind: "data", label: "Data", description: "Provenance · classification · instruction authority", shape: "circle", states: ["Incident task context", "Internal ticket · A2", "External content · A0", "Runtime logs", "Source code · C2", "A0 authority retained", "Isolated patch", "Command preview", "Verified patch"] },
+          { kind: "authorization", label: "Authorization", description: "Principal · capability · scope · expiry", shape: "diamond", states: ["Task delegation", "Incident task grant", "Read only", "Log read", "Repository read", "Model cannot expand", "Isolated write", "No production execute", "One-time deploy grant"] },
+          { kind: "effect", label: "Effect", description: "Read · create · execute · commit", shape: "square", states: ["TASK", "READ", "READ", "READ", "READ", "CREATE", "CREATE", "DRY RUN", "COMMIT · PRODUCTION"] },
+        ],
+      },
+      {
+        id: "vendor-payment",
+        goal: "Verify invoice and beneficiary data, update ERP, and submit payment approval",
+        tracking: "External provenance, vendor master data, payment authority, and irreversible impact",
+        conflict: "Payment requires trusted master data and explicit human authorization",
+        protection: "Verify the account, scope ERP fields, and require approval before funds movement",
+        result: ["Verification automated", "Payment awaits approval", "Funds boundary controlled"],
+        propagation: "DIRECT",
+        tracks: [
+          { kind: "data", label: "Data", description: "Provenance · finance label · validation", shape: "circle", states: ["Payment verification task", "External mail · V0", "Invoice fields · C2", "Vendor master · V2", "Account verified", "Verified voucher", "Payment payload", "Controlled notice"] },
+          { kind: "authorization", label: "Authorization", description: "Principal · finance capability · resource scope", shape: "diamond", states: ["Task delegation", "Mail read", "Document parse", "Master-data read", "Verify", "Scoped ERP write", "No autonomous payment", "Notice scope"] },
+          { kind: "effect", label: "Effect", description: "Read · modify · funds commitment", shape: "square", states: ["TASK", "READ", "CREATE", "READ", "VALIDATE", "MODIFY", "COMMIT · FUNDS", "COMMUNICATE"] },
+        ],
+      },
+    ],
+  },
+};
 
 const policy = (ruleId: string, source: PolicySource, decision: DemoDecision, reason: string): PolicyMatch => ({ ruleId, source, decision, reason });
 const base = (node: EnterpriseTraceNode): ResolvedTraceNode => ({ ...node, decision: "ALLOW_WITH_AUDIT", policies: [], obligations: ["TRACE", "AUDIT"] });
@@ -321,5 +490,18 @@ for (const localeCopy of Object.values(enterpriseScenarioLabCopy)) {
     if (new Set(scenario.nodes.map((node) => node.lane)).size < 2) throw new Error(`${scenario.id} must cross at least two system lanes`);
     const defaults = Object.fromEntries(scenario.controls.map((control) => [control.id, control.defaultValue]));
     if (new Set(resolveEnterpriseScenario(scenario, defaults).nodes.map((node) => node.decision)).size < 2) throw new Error(`${scenario.id} must expose at least two decisions`);
+  }
+}
+
+for (const [locale, flowCopy] of Object.entries(boundaryFlowCopy)) {
+  const scenarioCopy = enterpriseScenarioLabCopy[locale as Locale];
+  for (const flow of flowCopy.scenarios) {
+    const scenario = scenarioCopy.scenarios.find((item) => item.id === flow.id);
+    if (!scenario) throw new Error(`${locale}:${flow.id} is missing its shared enterprise scenario`);
+    if (flow.tracks.length !== 3 || new Set(flow.tracks.map((track) => track.kind)).size !== 3) throw new Error(`${locale}:${flow.id} must track data, authorization, and effect`);
+    for (const track of flow.tracks) {
+      if (track.states.length !== scenario.nodes.length + 1) throw new Error(`${locale}:${flow.id}:${track.kind} must define a state for the request and every trace node`);
+    }
+    if (!flow.result.length || !flow.conflict || !flow.protection) throw new Error(`${locale}:${flow.id} must include conflict, intervention, and business result copy`);
   }
 }

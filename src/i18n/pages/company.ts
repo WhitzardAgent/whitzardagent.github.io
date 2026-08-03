@@ -109,7 +109,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           "Whitzard builds AI agent security infrastructure, powered by AgentGuard, NUWA Lab research, and the WhitzardAgent open ecosystem.",
       },
       eyebrow: "WHITZARD · 白泽",
-      title: "Building agent security infrastructure.",
+      title: "Building security infrastructure for the agentic AI era",
       lead: "Whitzard connects AgentGuard, NUWA Lab, and an open technical ecosystem.",
       architecture: [
         {
@@ -137,7 +137,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           href: "/en/open-ecosystem",
         },
       ],
-      principlesTitle: "How we work",
+      principlesTitle: "Team vision",
       principles: [
         {
           title: "Secure autonomy",
@@ -152,8 +152,8 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           body: "Translate risk understanding into precise interventions in real systems.",
         },
         {
-          title: "Open where useful",
-          body: "Make selected models, tools, datasets, and research inspectable and reusable.",
+          title: "Public safety goods",
+          body: "Build verifiable, reusable models, tools, data, and evaluation infrastructure.",
         },
       ],
       teamTitle: "Founding and research team",
@@ -202,7 +202,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
   zh: {
     solutions: {
       meta: {
-        title: "应用场景 — Whitzard",
+        title: "应用场景 — 白泽（Whitzard）",
         description:
           "面向数据、开发、外部行动和多智能体协作的企业智能体应用场景。",
       },
@@ -251,16 +251,16 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
     },
     company: {
       meta: {
-        title: "关于我们 — Whitzard",
+        title: "关于我们 — 白泽（Whitzard）",
         description:
-          "Whitzard 构建智能体安全基础设施，由 AgentGuard、女娲实验室研究引擎与 WhitzardAgent 开放生态共同支撑。",
+          "白泽（Whitzard）打造AI智能体时代的安全基础设施，由 AgentGuard、女娲实验室研究引擎与 WhitzardAgent 开放生态共同支撑。",
       },
-      eyebrow: "WHITZARD · 白泽",
-      title: "构建智能体安全基础设施",
-      lead: "Whitzard 连接 AgentGuard、女娲实验室与开放技术生态。",
+      eyebrow: "白泽（Whitzard）",
+      title: "打造AI智能体时代的安全基础设施",
+      lead: "白泽（Whitzard）连接 AgentGuard、女娲实验室与开放技术生态。",
       architecture: [
         {
-          name: "Whitzard",
+          name: "白泽（Whitzard）",
           role: "公司 · 智能体安全基础设施",
           body: "连接产品、研究、开放工程与企业部署的公司品牌。",
           href: "/",
@@ -284,7 +284,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           href: "/open-ecosystem",
         },
       ],
-      principlesTitle: "我们的工作原则",
+      principlesTitle: "团队愿景",
       principles: [
         {
           title: "保护自主性",
@@ -299,8 +299,8 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           body: "把风险理解转化为真实系统中的精准干预。",
         },
         {
-          title: "有选择地开放",
-          body: "让部分模型、工具、数据与研究可检查、可复用。",
+          title: "公共安全产品",
+          body: "持续建设可验证、可复用的模型、工具、数据与评测基础设施。",
         },
       ],
       teamTitle: "创始与研究团队",
@@ -309,14 +309,14 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
     },
     contact: {
       meta: {
-        title: "预约演示 — Whitzard",
+        title: "预约演示 — 白泽（Whitzard）",
         description:
-          "与 Whitzard 讨论 AgentGuard、企业智能体安全、私有化部署、研究或开源合作。",
+          "与白泽（Whitzard）讨论 AgentGuard、企业智能体安全、私有化部署、研究或开源合作。",
       },
       eyebrow: "预约产品演示",
       title: "预约 AgentGuard 演示",
       lead: "提交技术栈、关键权限与部署边界，获取针对性演示。",
-      primary: "邮件联系 Whitzard",
+      primary: "邮件联系白泽（Whitzard）",
       emailLabel: "商务与合作",
       paths: [
         {
@@ -342,7 +342,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
         "智能体能够执行的最高影响行动",
         "部署方式与数据驻留要求",
       ],
-      response: "邮件将由本地客户端直接发送至 Whitzard 联系邮箱。",
+      response: "邮件将由本地客户端直接发送至白泽（Whitzard）联系邮箱。",
     },
   },
 };

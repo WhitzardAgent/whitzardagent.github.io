@@ -5,6 +5,7 @@ export type ResearchCopy = {
     eyebrow: string;
     title: string;
     lead: string;
+    statementEyebrow: string;
     statement: string;
     roles: Array<{ title: string; body: string }>;
     researchTitle: string;
@@ -69,8 +70,8 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       eyebrow: "NUWA LAB · 女娲实验室",
       title: "Research frontier risk. Build control.",
       lead: "Study frontier-risk evaluation, agent safety, AI control, and runtime security.",
-      statement:
-        "Research discovers the risk. Product controls it in the real world.",
+      statementEyebrow: "LAB VISION",
+      statement: "Shared Risk Evidence and Public Goods for the World",
       roles: [
         {
           title: "Define frontier risk",
@@ -185,14 +186,15 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
   zh: {
     nuwa: {
       meta: {
-        title: "女娲实验室 — Whitzard 前沿安全研究引擎",
+        title: "女娲实验室 — 白泽（Whitzard）前沿安全研究引擎",
         description:
           "女娲实验室研究前沿 AI 风险、建设评测证据，并将研究转化为安全模型和产品能力。",
       },
       eyebrow: "女娲实验室",
       title: "研究前沿风险，构建可控智能",
       lead: "聚焦前沿风险评测、智能体安全、AI 控制与运行时安全。",
-      statement: "研究定义风险，产品在真实世界中控制风险。",
+      statementEyebrow: "实验室愿景",
+      statement: "为全球AI治理分享风险实证与公共产品",
       roles: [
         {
           title: "定义前沿风险",

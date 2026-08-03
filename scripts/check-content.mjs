@@ -111,6 +111,16 @@ const aboutHtml = await readFile("dist/about/index.html", "utf8");
 for (const englishBioMarker of ["is the CEO of Whitzard", "is the CTO of Whitzard", "is an Assistant Professor at Fudan University"]) {
   if (aboutHtml.includes(englishBioMarker)) violations.push(`dist/about/index.html: English team biography leaked into Chinese page`);
 }
+for (const marker of ["打造AI智能体时代的安全基础设施", "团队愿景", "公共安全产品", "持续建设可验证、可复用的模型、工具、数据与评测基础设施"]) {
+  if (!aboutHtml.includes(marker)) violations.push(`dist/about/index.html: missing V3.5 about marker: ${marker}`);
+}
+for (const legacy of ["构建智能体安全基础设施", "我们的工作原则", "有选择地开放", "复旦大学青年研究员"]) {
+  if (aboutHtml.includes(legacy)) violations.push(`dist/about/index.html: legacy company copy must not remain: ${legacy}`);
+}
+if ((aboutHtml.match(/复旦大学副研究员/g) ?? []).length !== 2) violations.push("dist/about/index.html: Dai and Pan must both be 复旦大学副研究员");
+if ((aboutHtml.match(/复旦大学助理研究员/g) ?? []).length !== 1) violations.push("dist/about/index.html: Hong must be 复旦大学助理研究员");
+if ((aboutHtml.match(/师从<a class="team-advisor-link" href="https:\/\/min-yang-fudan\.github\.io\/"/g) ?? []).length !== 3) violations.push("dist/about/index.html: all three biographies must link Prof. Min Yang inline");
+if (/<h3>杨珉教授<\/h3>/.test(aboutHtml)) violations.push("dist/about/index.html: Prof. Min Yang must not appear as a team member");
 
 const decodeText = (value) => value
   .replace(/<[^>]*>/g, " ")
@@ -160,9 +170,14 @@ const homeRequirements = [
   "低侵入适配各类主流智能体架构",
   "研究驱动产品持续演进",
   "白泽开放生态",
-  "AgentGuard 运行时控制层",
+  "AgentGuard Interaction Boundary Runtime",
+  "AgentGuard 正在追踪",
+  "边界冲突",
   "AgentGuard 处置",
   "业务结果",
+  "数据",
+  "授权",
+  "动作影响",
 ];
 for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.4 homepage marker: ${marker}`);
 for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
@@ -201,8 +216,8 @@ for (const [file, content] of [["dist/agentguard/index.html", agentGuardZh], ["d
 }
 
 const agentGuardRequirements = [
-  ["dist/agentguard/index.html", agentGuardZh, ["客户续约分析", "生产事故响应", "供应商付款核验", "公开规则", "企业策略示例", "从策略配置到审计闭环", "执行模拟"]],
-  ["dist/en/agentguard/index.html", agentGuardEn, ["Renewal analysis", "Production incident", "Vendor payment", "Community rule", "Enterprise policy example", "From policy to audit.", "Run simulation"]],
+  ["dist/agentguard/index.html", agentGuardZh, ["AGENTGUARD 交互边界运行时", "客户续约分析", "生产事故响应", "供应商付款核验", "AgentGuard 正在追踪", "数据", "授权", "动作影响", "边界冲突", "公开规则", "企业策略示例", "从策略配置到审计闭环", "执行模拟"]],
+  ["dist/en/agentguard/index.html", agentGuardEn, ["AGENTGUARD INTERACTION BOUNDARY RUNTIME", "How AgentGuard protects action boundaries", "Renewal analysis", "Production incident", "Vendor payment", "AgentGuard is tracking", "Data", "Authorization", "Effect", "Boundary conflict", "Community rule", "Enterprise policy example", "From policy to audit.", "Run simulation"]],
 ];
 for (const [file, content, required] of agentGuardRequirements) {
   for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard V3.3 marker: ${marker}`);
@@ -214,6 +229,10 @@ const enterpriseScenarioSource = await readFile("src/data/agentguardEnterpriseSc
 for (const rule of ["chain-redact-pii-on-http-post", "chain-deny-llm-output-to-shell", "trace-deny-unfiltered-to-exec", "ex4-human-check"]) {
   if (!enterpriseScenarioSource.includes(rule)) violations.push(`AgentGuard V3.3 scenario data: missing verified Community rule: ${rule}`);
 }
+const nuwaZh = withoutEmbeddedCode(await readFile("dist/nuwa/index.html", "utf8"));
+const nuwaEn = withoutEmbeddedCode(await readFile("dist/en/nuwa/index.html", "utf8"));
+if (!nuwaZh.includes("实验室愿景") || !nuwaZh.includes("为全球AI治理分享风险实证与公共产品")) violations.push("dist/nuwa/index.html: missing confirmed lab vision");
+if (!nuwaEn.includes("LAB VISION") || !nuwaEn.includes("Shared Risk Evidence and Public Goods for the World")) violations.push("dist/en/nuwa/index.html: missing confirmed lab vision");
 
 for (const route of coreRoutes) {
   const file = join("dist", "en", route, "index.html");

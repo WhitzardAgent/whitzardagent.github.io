@@ -10,28 +10,6 @@ export type HomeCopy = {
     secondary: string;
   };
   manifesto: string;
-  boundaryDemo: {
-    ariaLabel: string;
-    controlLayer: string;
-    protectedLabel: string;
-    taskLabel: string;
-    riskLabel: string;
-    actionLabel: string;
-    outcomeLabel: string;
-    evidenceLabel: string;
-    evidenceFields: { phase: string; labels: string; rule: string; decision: string };
-    scenarios: Array<{
-      id: "data-egress" | "production-change" | "external-instruction";
-      tab: string;
-      task: string;
-      risk: string;
-      action: string;
-      outcome: string[];
-      flow: string[];
-      evidence: { phase: string; labels: string; rule: string; decision: string };
-      tone: "sanitize" | "approve" | "deny";
-    }>;
-  };
   operations: {
     eyebrow: string;
     title: string;
@@ -112,22 +90,6 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       secondary: "View the AgentGuard demo",
     },
     manifesto: "Unlock autonomous intelligence within secure boundaries",
-    boundaryDemo: {
-      ariaLabel: "How AgentGuard controls agent actions at runtime",
-      controlLayer: "AgentGuard runtime control layer",
-      protectedLabel: "Protected at every action boundary",
-      taskLabel: "Business task",
-      riskLabel: "Risk detected",
-      actionLabel: "AgentGuard response",
-      outcomeLabel: "Business outcome",
-      evidenceLabel: "View decision evidence",
-      evidenceFields: { phase: "Control phase", labels: "Data labels", rule: "Matched rule", decision: "Canonical decision" },
-      scenarios: [
-        { id: "data-egress", tab: "Customer data", task: "Prepare a renewal analysis and send it to an approved adviser.", risk: "The result contains customer identity and contract fields.", action: "AgentGuard redacts sensitive fields before egress.", outcome: ["Analysis continues", "Sensitive fields redacted", "Egress audited"], flow: ["Renewal analysis", "Agent reasoning", "External adviser"], evidence: { phase: "After tool → before external action", labels: "customer-pii · contract-finance · external", rule: "chain-redact-pii-on-http-post", decision: "REDACT → ALLOW WITH AUDIT" }, tone: "sanitize" },
-        { id: "production-change", tab: "Production change", task: "Diagnose an incident, prepare a fix, and publish a production change.", risk: "Shell execution and production deployment are high-impact actions.", action: "AgentGuard degrades the command to preview and pauses deployment for approval.", outcome: ["Diagnosis continues", "Change awaits approval", "Full audit retained"], flow: ["Incident diagnosis", "Fix generation", "Production deployment"], evidence: { phase: "Before tool execution", labels: "production · high-impact · deployment", rule: "enterprise-production-change-approval", decision: "DEGRADE → HUMAN_CHECK" }, tone: "approve" },
-        { id: "external-instruction", tab: "External instruction", task: "Read an external troubleshooting guide and execute its repair command.", risk: "Untrusted content reaches an LLM output bound for the shell.", action: "AgentGuard denies the command before shell execution.", outcome: ["Command not executed", "Risk trace retained"], flow: ["External guide", "Agent reasoning", "Shell command"], evidence: { phase: "After LLM → before tool", labels: "untrusted · llm-output · executable", rule: "chain-deny-llm-output-to-shell", decision: "DENY" }, tone: "deny" },
-      ],
-    },
     operations: {
       eyebrow: "AGENTGUARD ENTERPRISE",
       title: "Agent security operations center",
@@ -315,9 +277,9 @@ export const homeCopy: Record<Locale, HomeCopy> = {
   },
   zh: {
     meta: {
-      title: "Whitzard 白泽 — 智能体安全基础设施",
+      title: "白泽（Whitzard）— 智能体安全基础设施",
       description:
-        "Whitzard 统一评测、理解并控制企业智能体的模型推理、工具调用、身份权限与数据流转。",
+        "白泽（Whitzard）统一评测、理解并控制企业智能体的模型推理、工具调用、身份权限与数据流转。",
     },
     hero: {
       eyebrow: "企业级智能体安全基础设施",
@@ -328,22 +290,6 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       secondary: "了解 AgentGuard Enterprise",
     },
     manifesto: "在安全边界内释放自主智能价值",
-    boundaryDemo: {
-      ariaLabel: "AgentGuard 如何在运行时控制智能体行动",
-      controlLayer: "AgentGuard 运行时控制层",
-      protectedLabel: "覆盖每个行动边界",
-      taskLabel: "业务任务",
-      riskLabel: "发现风险",
-      actionLabel: "AgentGuard 处置",
-      outcomeLabel: "业务结果",
-      evidenceLabel: "查看判断依据",
-      evidenceFields: { phase: "控制阶段", labels: "数据标签", rule: "命中规则", decision: "标准处置" },
-      scenarios: [
-        { id: "data-egress", tab: "客户数据外发", task: "生成客户续约分析，并发送给获批外部顾问。", risk: "结果包含客户身份与合同字段。", action: "AgentGuard 在外发前脱敏敏感字段。", outcome: ["分析继续", "敏感字段脱敏", "外发留痕"], flow: ["续约分析", "智能体处理", "外部顾问"], evidence: { phase: "工具执行后 → 外部行动前", labels: "客户 PII · 合同财务 · 外部目标", rule: "chain-redact-pii-on-http-post", decision: "REDACT → ALLOW WITH AUDIT" }, tone: "sanitize" },
-        { id: "production-change", tab: "生产变更", task: "诊断生产事故、生成修复方案并发布变更。", risk: "Shell 与生产发布属于高影响行动。", action: "AgentGuard 将命令降级为预览，发布进入审批。", outcome: ["诊断继续", "变更待批", "全程审计"], flow: ["事故诊断", "修复生成", "生产发布"], evidence: { phase: "工具执行前", labels: "生产环境 · 高影响 · 部署", rule: "enterprise-production-change-approval", decision: "DEGRADE → HUMAN_CHECK" }, tone: "approve" },
-        { id: "external-instruction", tab: "外部指令执行", task: "读取外部排障资料，并执行其中的修复命令。", risk: "不可信内容经模型输出进入 Shell。", action: "AgentGuard 在 Shell 执行前阻断命令。", outcome: ["命令未执行", "风险轨迹已保留"], flow: ["外部资料", "智能体处理", "Shell 命令"], evidence: { phase: "模型输出后 → 工具执行前", labels: "不可信 · 模型输出 · 可执行", rule: "chain-deny-llm-output-to-shell", decision: "DENY" }, tone: "deny" },
-      ],
-    },
     operations: {
       eyebrow: "AGENTGUARD ENTERPRISE",
       title: "智能体安全运营中台",
@@ -497,7 +443,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       title: "安全部署企业智能体",
       body: "以 AgentGuard 建立运行时控制边界。",
       primary: "预约产品演示",
-      secondary: "联系 Whitzard",
+      secondary: "联系白泽（Whitzard）",
     },
   },
 };

@@ -52,3 +52,10 @@ NUWA 页面承担完整研究叙事：
 - GitHub / Hugging Face / Paper
 
 不要在首页展示完整项目目录。
+
+## V3.5 实验室愿景
+
+- 中文：`为全球AI治理分享风险实证与公共产品`
+- English: `Shared Risk Evidence and Public Goods for the World`
+
+愿景位于女娲实验室首屏之后，不添加句号，不以产品转化关系替代实验室的全球公共使命。

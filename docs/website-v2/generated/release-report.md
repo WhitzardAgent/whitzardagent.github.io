@@ -52,15 +52,19 @@ V3.1 presents Whitzard as a ToB AI-agent security company, AgentGuard as the com
 | `npm run ingest:info` | Passed: 18 research and 21 visible ecosystem records |
 | `npm run check` | Passed: 0 errors, 0 warnings; 30 non-blocking existing hints |
 | `npm run build` | Passed: 26 Astro routes plus static compatibility output |
-| `npm run check:content` | Passed: 94 source files and 34 rendered pages; localization, copy budget, legacy email, route mapping, and serif checks |
+| `npm run check:content` | Passed: 99 source files and 34 rendered pages; localization, copy budget, team/advisor facts, shared runtime semantics, route mapping, and serif checks |
 | `npm run check:links` | Passed: no broken internal links |
 | Sitemap | Passed: only canonical Chinese and English public routes |
 | Browser QA | Passed at 1440px, 1024px, and 390px on eight Chinese core pages plus English homepage; no visible orphaned Chinese tails |
 | Accessibility interaction | Runtime tabs, node inspection, approval actions, replay, mobile menu focus return, and reduced-motion output verified |
 | Mobile Lighthouse, Chinese home | Performance 97, Accessibility 100, Best Practices 100, SEO 100 |
 | Core Web Vitals lab result | LCP 2.4 s, TBT 0 ms, CLS 0 |
-| JavaScript budget | All emitted JavaScript totals 158,730 bytes gzip, below the 180 KB budget |
+| JavaScript budget | All emitted JavaScript totals 174,365 bytes gzip, below the 180 KB budget; AgentGuard scenario island remains below 70 KB gzip |
 
 ## Human-owned follow-ups
 
 The site deliberately does not invent legal entity details, privacy/terms language, customer evidence, testimonials, production deployment figures, performance benchmarks, or CRM workflows. Those require approved company inputs before publication; they are not blockers for the current static release.
+
+## V3.5 implementation note
+
+V3.5 unifies the Chinese company brand as 白泽（Whitzard）, corrects the research-team roles and advisor references, installs the confirmed NUWA Lab vision, and replaces disconnected runtime diagrams with one shared deterministic interaction-boundary model. Home renders the business projection; AgentGuard renders the complete chronological trace, three tag streams, Gate intervention, approval state, payload change, and audit evidence.

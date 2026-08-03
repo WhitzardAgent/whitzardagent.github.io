@@ -1,4 +1,26 @@
 ---
-import BaseLayout from"../../layouts/BaseLayout.astro";import type{Locale}from"../../i18n/config";import type{CompanyCopy}from"../../i18n/pages/company";import{team}from"../../data/team";import"../../styles/company.css";interface Props{locale:Locale;copy:CompanyCopy["company"]}const{locale,copy}=Astro.props;
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import type { CompanyCopy } from "../../i18n/pages/company";
+import { team } from "../../data/team";
+import "../../styles/company.css";
+
+interface Props { locale: Locale; copy: CompanyCopy["company"] }
+const { locale, copy } = Astro.props;
 ---
-<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/about"><section class="commercial-hero company-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p></div></section><section class="section brand-architecture"><div class="site-container">{copy.architecture.map((item,index)=><a href={item.href}><span>0{index+1}</span><h2>{item.name}</h2><small>{item.role}</small><p>{item.body}</p></a>)}</div></section><section class="section company-principles"><div class="site-container"><h2 class="section-title">{copy.principlesTitle}</h2><div>{copy.principles.map((item,index)=><article><span>0{index+1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></div></section><section class="section company-team"><div class="site-container company-team__head"><h2 class="section-title">{copy.teamTitle}</h2><p>{copy.teamLead}</p></div><div class="site-container team-list">{team.map(member=><article><div><h3>{member.name[locale]}</h3><span>{member.role[locale]}</span></div><p>{member.bio[locale]}</p><div>{member.links?.map(link=><a href={link.url} target="_blank" rel="noreferrer">{link.label[locale]} ↗</a>)}</div></article>)}</div></section></BaseLayout>
+
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/about">
+  <section class="commercial-hero company-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{locale === "zh" ? <>打造<span class="nowrap">AI智能体</span>时代的安全基础设施</> : copy.title}</h1><p>{copy.lead}</p></div></section>
+  <section class="section brand-architecture"><div class="site-container">{copy.architecture.map((item, index) => <a href={item.href}><span>0{index + 1}</span><h2>{item.name}</h2><small>{item.role}</small><p>{item.body}</p></a>)}</div></section>
+  <section class="section company-principles"><div class="site-container"><h2 class="section-title">{copy.principlesTitle}</h2><div>{copy.principles.map((item, index) => <article><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></div></section>
+  <section class="section company-team">
+    <div class="site-container company-team__head"><h2 class="section-title">{copy.teamTitle}</h2><p>{copy.teamLead}</p></div>
+    <div class="site-container team-list">
+      {team.map((member) => <article>
+        <div><h3>{member.name[locale]}</h3><span>{member.role[locale]}</span></div>
+        <p>{member.bio[locale]}{member.advisor && <>{locale === "zh" ? "" : " "}{member.advisor.prefix[locale]}<a class="team-advisor-link" href={member.advisor.url} target="_blank" rel="noreferrer">{member.advisor.name[locale]}</a>{locale === "zh" ? "。" : "."}</>}</p>
+        <div>{member.links?.map((link) => <a href={link.url} target="_blank" rel="noreferrer">{link.label[locale]} ↗</a>)}</div>
+      </article>)}
+    </div>
+  </section>
+</BaseLayout>

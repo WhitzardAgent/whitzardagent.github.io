@@ -28,16 +28,17 @@ const {
   locale = "zh",
   brand = "whitzard",
   ogImage,
-  ogImageAlt = locale === "zh" ? "Whitzard 智能体安全基础设施" : "Whitzard AI agent security infrastructure",
+  ogImageAlt = locale === "zh" ? "白泽（Whitzard）智能体安全基础设施" : "Whitzard AI agent security infrastructure",
   canonicalPath,
   noindex = false,
   schema,
 } = Astro.props;
 
 const origin = "https://whitzard.tech";
-const resolvedDescription = description ?? (locale === "zh" ? "Whitzard 构建面向企业智能体的安全基础设施，覆盖评测、运行时控制与安全运营。" : "Whitzard builds security infrastructure for enterprise AI agents across evaluation, runtime control, and security operations.");
+const companyBrand = locale === "zh" ? "白泽（Whitzard）" : "Whitzard";
+const resolvedDescription = description ?? (locale === "zh" ? "白泽（Whitzard）打造AI智能体时代的安全基础设施，覆盖评测、运行时控制与安全运营。" : "Whitzard builds security infrastructure for enterprise AI agents across evaluation, runtime control, and security operations.");
 const researchBrand = locale === "zh" ? "女娲实验室" : "NUWA Lab";
-const siteTitle = title.includes("Whitzard") || title.includes("NUWA") || title.includes("Nuwa") || title.includes("女娲实验室") ? title : `${title} — ${brand === "nuwa" ? researchBrand : "Whitzard"}`;
+const siteTitle = title.includes("Whitzard") || title.includes("白泽") || title.includes("NUWA") || title.includes("Nuwa") || title.includes("女娲实验室") ? title : `${title} — ${brand === "nuwa" ? researchBrand : companyBrand}`;
 const basePath = stripLocale(canonicalPath ?? Astro.url.pathname);
 const canonicalUrl = new URL(localizedPath(basePath, locale), origin).href;
 const englishUrl = new URL(localizedPath(basePath, "en"), origin).href;
@@ -46,15 +47,15 @@ const hasPeer = hasLocalizedPeer(basePath);
 const defaultOgImage = brand === "nuwa" ? "/assets/og/nuwa-og.png" : "/assets/og/whitzard-og.png";
 const ogImageUrl = new URL(ogImage ?? defaultOgImage, origin).href;
 const organizationSchema = {
-  "@context": "https://schema.org", "@type": "Organization", name: "Whitzard", url: origin,
+  "@context": "https://schema.org", "@type": "Organization", name: companyBrand, alternateName: locale === "zh" ? ["Whitzard", "白泽"] : ["白泽"], url: origin,
   logo: `${origin}/assets/logo/whitzard_logo.png`,
-  description: locale === "zh" ? "Whitzard 构建面向企业智能体的安全基础设施。" : "Whitzard builds security infrastructure for enterprise AI agents.",
+  description: locale === "zh" ? "白泽（Whitzard）打造AI智能体时代的安全基础设施。" : "Whitzard builds security infrastructure for enterprise AI agents.",
   sameAs: ["https://github.com/WhitzardAgent", "https://huggingface.co/WhitzardAgent"],
 };
 const breadcrumbs = basePath === "/" ? null : {
   "@context": "https://schema.org", "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Whitzard", item: new URL(localizedPath("/", locale), origin).href },
+    { "@type": "ListItem", position: 1, name: companyBrand, item: new URL(localizedPath("/", locale), origin).href },
     { "@type": "ListItem", position: 2, name: title.replace(/\s+[—-].*$/, ""), item: canonicalUrl },
   ],
 };
@@ -75,7 +76,7 @@ const schemas = [organizationSchema, ...(breadcrumbs ? [breadcrumbs] : []), ...(
     {hasPeer && <link rel="alternate" hreflang="zh-CN" href={chineseUrl} />}
     <link rel="alternate" hreflang="x-default" href={chineseUrl} />
     <meta property="og:title" content={siteTitle} /><meta property="og:description" content={resolvedDescription} />
-    <meta property="og:type" content="website" /><meta property="og:url" content={canonicalUrl} /><meta property="og:site_name" content="Whitzard" />
+    <meta property="og:type" content="website" /><meta property="og:url" content={canonicalUrl} /><meta property="og:site_name" content={companyBrand} />
     <meta property="og:locale" content={ogLocale(locale)} /><meta property="og:locale:alternate" content={ogLocale(locale === "en" ? "zh" : "en")} />
     <meta property="og:image" content={ogImageUrl} /><meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={siteTitle} /><meta name="twitter:description" content={resolvedDescription} />

@@ -1,11 +1,18 @@
 export type LocalizedText = { en: string; zh: string };
 
+export type AcademicAdvisor = {
+  prefix: LocalizedText;
+  name: LocalizedText;
+  url: string;
+};
+
 export interface TeamMember {
   name: LocalizedText;
   role: LocalizedText;
   affiliation: "whitzard" | "nuwa";
   category: "founding" | "research" | "engineering" | "advisor" | "partner";
   bio: LocalizedText;
+  advisor?: AcademicAdvisor;
   links?: { label: LocalizedText; url: string }[];
   photo?: string;
 }
@@ -23,8 +30,13 @@ export const team: TeamMember[] = [
     affiliation: "whitzard",
     category: "founding",
     bio: {
-      en: "Whitzard CEO and Fudan University assistant professor, researching binary analysis, vulnerability discovery, and exploitation. Former captain of Fudan Baize CTF team.",
-      zh: "Whitzard CEO、复旦大学青年研究员，研究二进制分析、漏洞挖掘与利用。曾任复旦白泽战队队长。",
+      en: "Whitzard CEO and Associate Research Professor at Fudan University, researching binary analysis, vulnerability discovery, and exploitation. Former captain of the Fudan Baize CTF team.",
+      zh: "白泽（Whitzard）CEO、复旦大学副研究员，研究二进制分析、漏洞挖掘与利用。曾任复旦白泽战队队长。",
+    },
+    advisor: {
+      prefix: { en: "He received his PhD from Fudan University under the supervision of ", zh: "博士毕业于复旦大学，师从" },
+      name: { en: "Prof. Min Yang", zh: "杨珉教授" },
+      url: "https://min-yang-fudan.github.io/",
     },
     links: [
       { label: linkLabels.homepage, url: "https://djrrr.github.io/" },
@@ -37,8 +49,13 @@ export const team: TeamMember[] = [
     affiliation: "whitzard",
     category: "founding",
     bio: {
-      en: "Whitzard CTO, Fudan University assistant professor, and Shanghai Innovation Institute PhD advisor, researching AI safety, system security, and frontier-risk evaluation.",
-      zh: "Whitzard CTO、复旦大学青年研究员、上海创智学院博士生导师，研究 AI 安全、模型安全、系统安全与前沿风险评测。",
+      en: "Whitzard CTO, Associate Research Professor at Fudan University, and PhD advisor at the Shanghai Innovation Institute, researching AI safety, model safety, systems security, and frontier-risk evaluation.",
+      zh: "白泽（Whitzard）CTO、复旦大学副研究员、上海创智学院博士生导师，研究 AI 安全、模型安全、系统安全与前沿风险评测。",
+    },
+    advisor: {
+      prefix: { en: "He received his PhD from Fudan University under the supervision of ", zh: "博士毕业于复旦大学，师从" },
+      name: { en: "Prof. Min Yang", zh: "杨珉教授" },
+      url: "https://min-yang-fudan.github.io/",
     },
     links: [
       { label: linkLabels.homepage, url: "https://ravensanstete.github.io/" },
@@ -52,8 +69,13 @@ export const team: TeamMember[] = [
     affiliation: "whitzard",
     category: "partner",
     bio: {
-      en: "Fudan University assistant professor researching cybercrime, penetration testing, security ecosystems, and in-the-wild security, collaborating with Whitzard and NUWA Lab.",
-      zh: "复旦大学青年研究员，研究网络犯罪、隐私与真实世界安全，为 Whitzard 与女娲实验室提供研究协作。",
+      en: "Assistant Research Professor at Fudan University researching cybercrime, privacy, and in-the-wild security, collaborating with Whitzard and NUWA Lab.",
+      zh: "复旦大学助理研究员，研究网络犯罪、隐私与真实世界安全，为白泽（Whitzard）与女娲实验室提供研究协作。",
+    },
+    advisor: {
+      prefix: { en: "He received his PhD from Fudan University under the supervision of ", zh: "博士毕业于复旦大学，师从" },
+      name: { en: "Prof. Min Yang", zh: "杨珉教授" },
+      url: "https://min-yang-fudan.github.io/",
     },
     links: [{ label: linkLabels.homepage, url: "https://ghong.site/" }],
   },

@@ -4,7 +4,7 @@ import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
 import type { AgentGuardCopy } from "../../i18n/pages/agentguard";
 import { supportedFrameworks } from "../../data/supportedFrameworks";
-import { enterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
+import { boundaryFlowCopy, enterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
 import AgentGuardEnterpriseScenarioLab from "./AgentGuardEnterpriseScenarioLab";
 import AgentGuardShowcase from "./AgentGuardShowcase.astro";
 import DeploymentArchitecture from "./DeploymentArchitecture";
@@ -25,14 +25,14 @@ const softwareSchema = {
       isAccessibleForFree: true,
       license: "https://www.gnu.org/licenses/gpl-3.0.html",
       codeRepository: "https://github.com/WhitzardAgent/AgentGuard",
-      publisher: { "@type": "Organization", name: "Whitzard" },
+      publisher: { "@type": "Organization", name: locale === "zh" ? "白泽（Whitzard）" : "Whitzard", alternateName: locale === "zh" ? ["Whitzard", "白泽"] : ["白泽"] },
     },
     {
       "@type": "Product",
       name: "AgentGuard Enterprise",
       category: "Enterprise AI agent runtime security",
       url: `https://whitzard.tech${localizedPath("/agentguard", locale)}`,
-      brand: { "@type": "Brand", name: "Whitzard" },
+      brand: { "@type": "Brand", name: locale === "zh" ? "白泽（Whitzard）" : "Whitzard", alternateName: locale === "zh" ? ["Whitzard", "白泽"] : ["白泽"] },
     },
   ],
 };
@@ -79,10 +79,10 @@ const softwareSchema = {
 
   <section class="section ag-runtime-section" id="runtime">
     <div class="site-container ag-section-head ag-section-head--split">
-      <div><p class="eyebrow">{copy.runtime.eyebrow}</p><h2 class="section-title">{copy.runtime.title}</h2></div>
+      <div><p class="eyebrow">{copy.runtime.eyebrow}</p><h2 class="section-title">{locale === "zh" ? <><span class="nowrap">AgentGuard 如何</span>守住行动边界</> : copy.runtime.title}</h2></div>
       <p>{copy.runtime.body}</p>
     </div>
-    <div class="site-container"><AgentGuardEnterpriseScenarioLab copy={enterpriseScenarioLabCopy[locale]} client:visible /></div>
+    <div class="site-container"><AgentGuardEnterpriseScenarioLab copy={enterpriseScenarioLabCopy[locale]} flowCopy={boundaryFlowCopy[locale]} client:visible /></div>
   </section>
 
   <AgentGuardShowcase locale={locale} copy={copy.demo} />
