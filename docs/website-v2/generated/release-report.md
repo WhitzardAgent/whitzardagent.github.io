@@ -1,224 +1,53 @@
-# Whitzard Website V2 release report
+# Whitzard Website V3 release report
 
-Release candidate date: 2026-08-02  
-Repository baseline: `d7f98f5`  
-Delivery architecture: Astro static output, React Islands, Tailwind CSS, MDX/Content Collections, GitHub Pages
+Release candidate date: 2026-08-03
+Delivery architecture: Astro static output, React Islands, Tailwind CSS, MDX/Content Collections, JSONL ingestion, GitHub Pages
 
 ## Release outcome
 
-The site has been rebuilt as a bilingual corporate and product website for Whitzard. The information architecture now presents Whitzard as the company and AI Agent Security Infrastructure brand, AgentGuard as the enterprise runtime-security platform, NVWA Lab as the research engine behind Whitzard, and WhitzardAgent as the open evidence ecosystem.
+V3 presents Whitzard as a ToB AI-agent security company, AgentGuard as the commercial product, NUWA Lab / 女娲实验室 as the research engine, and the open ecosystem as verifiable technical evidence. The implementation preserves static output, the existing ingestion pipeline, public evidence routes, and valuable legacy URLs. It does not introduce invented customers, deployments, benchmarks, or research claims.
 
-The release candidate is buildable, locally previewable, compatible with the existing GitHub Pages workflow, and preserves the JSONL ingest pipeline and externally valuable legacy routes. No customer names, partner logos, deployment counts, performance claims, or research results were invented.
+## Information architecture and routes
 
-## Brand and product implementation
+- Chinese is the default language on unprefixed routes: `/`, `/agentguard`, `/solutions`, `/nuwa`, `/research`, `/open-ecosystem`, `/about`, and `/contact`.
+- English mirrors the eight core routes under `/en/*`.
+- `/zh/*` contains static `noindex` compatibility pages that point to the corresponding unprefixed Chinese route and are excluded from the sitemap.
+- `/open-source`, `/publications`, and `/NVWA-Project/` remain as compatibility entries to the English ecosystem, research, and NUWA pages.
+- English-only editorial content lives under `/en/blog`, `/en/news`, and `/en/news/[slug]`; the previous unprefixed URLs remain reachable but are excluded from the sitemap.
+- Canonical, `zh-CN`, `en`, and `x-default` metadata follow the new route contract. The language switch preserves page meaning and records the visitor's choice without browser-language redirects.
 
-- Core proposition: “Secure autonomy, by design.” / “守其边界，行其智能”.
-- The original repository Whitzard logo is used in the shared header, footer, and AgentGuard product-line panel; the original NVWA logo anchors the research-engine panel.
-- Visual system: moon-white space, xuan-indigo structure, jade research accents, cinnabar state changes, restrained borders and editorial rhythm.
-- Homepage: semantic Agent Runtime Trace (`Intent → Reasoning → Tool → Data → Action`), AgentGuard decisions, autonomy statement, a prominent NVWA Lab → AgentGuard research/product engine with deployment feedback, risk framing, four-layer platform, three-chain narrative, enterprise deployment, selected open evidence, and demo CTA.
-- AgentGuard: before/after LLM and tool controls, thought/behavior/data chains, DSL and model collaboration, framework and MCP integration, identity, sandbox, red-team/evaluation, private deployment, and evidence links.
-- NVWA and Research: “The research engine behind Whitzard”, paper-toned visual language, 18 ingested research records retained, and `ResearchOrganization` schema.
-- Open Ecosystem: 21 ingested visible records organized into Runtime Security, Safety Models, Evaluation, Agent Infrastructure, and Cybersecurity.
-- Commercial paths: outcome-oriented Solutions, brand-architecture Company page, and a direct Book a Demo path using the existing verified `contact@whitzard.tech` address.
+## Product and research implementation
 
-## Route map
+- The Chinese homepage leads with “企业级智能体安全基础设施” and a single Book a Demo conversion path, followed by runtime risk, real AgentGuard product evidence, platform/deployment context, NUWA research, and open evidence.
+- AgentGuard uses the public project's real dashboard, policy editor, policy-generation screenshot, and official click-to-play demo video. The interactive example uses the documented `retrieve_doc → send_email_to` allow/deny rule.
+- The video is not fetched on initial page load (`preload="none"`) and is accompanied by a complete text walkthrough.
+- NUWA is formally named “女娲实验室 / NUWA Lab”. Its existing logo is the hero's primary visual, with a cool moon-white, graphite, and jade Neo Lab system.
+- Research remains generated from the repository's JSONL evidence and foregrounds the research question, type, year, source, and original link without exposing ingestion or repository-process language.
+- Contact intent is split into enterprise demo, research collaboration, and open-source/technical exchange. All routes use the centralized `whitzardindex@fudan.edu.cn` address.
 
-English remains unprefixed. Chinese core pages use `/zh/*` and the language switch preserves page meaning when a localized peer exists.
+## Typography and visual system
 
-| Previous / public route | Release route and treatment |
-|---|---|
-| `/` | Rebuilt company homepage; Chinese peer `/zh/` |
-| `/agentguard` | Rebuilt enterprise product page; Chinese peer `/zh/agentguard` |
-| `/nuwa` | Repositioned NVWA Lab page; Chinese peer `/zh/nuwa` |
-| `/research` | Rebuilt data-driven research index; Chinese peer `/zh/research` |
-| `/open-ecosystem` | Rebuilt categorized ecosystem; Chinese peer `/zh/open-ecosystem` |
-| `/about` | Rebuilt company page; Chinese peer `/zh/about` |
-| `/contact` | Rebuilt demo/contact conversion page; Chinese peer `/zh/contact` |
-| `/solutions` | New enterprise solutions page; Chinese peer `/zh/solutions` |
-| `/blog` | Preserved English route and existing content behavior |
-| `/news` | Preserved English index and existing data |
-| `/news/nuwa-lab-launch` | Preserved and moved into the unified article system |
-| `/rss.xml` | Preserved and validated |
-| `/open-source` | Permanent `301` compatibility redirect to `/open-ecosystem` |
-| `/publications` | Permanent `301` compatibility redirect to `/research` |
-| `/NVWA-Project/` | Permanent `301` compatibility redirect to `/nuwa` |
-| unknown route | Dedicated branded `/404.html` recovery page |
+- Geist Sans Variable is self-hosted with its license, `font-display: swap`, and a preload for the first render.
+- Chinese uses PingFang SC, Source Han Sans SC, Noto Sans CJK SC, Microsoft YaHei, then system sans-serif fallbacks.
+- Visitor source no longer contains Songti, STSong, Noto Serif, Source Serif, Georgia, `font-serif`, `.serif`, or a global serif declaration.
+- Eastern character comes from moon-white space, xuan-indigo structure, jade research accents, fine dividers, asymmetric grids, and restrained state motion rather than traditional type or decorative mythology.
 
-## SEO and structured data
-
-- Canonical URL is generated from the production origin and semantic route, not the local request host.
-- `hreflang="en"`, `hreflang="zh-CN"`, and `x-default` are emitted only when valid; unlocalized content does not advertise a nonexistent Chinese peer.
-- OG locale, alternate locale, image alt, Twitter card, title, and description are present.
-- JSON-LD includes `Organization` globally, `BreadcrumbList` for interior pages, `SoftwareApplication` for AgentGuard, and `ResearchOrganization` for NVWA.
-- `robots.txt`, sitemap index, sitemap, and RSS are present. Both sitemap XML files and RSS pass `xmllint` parsing.
-- Sitemap output contains 22 public URLs, including 8 Chinese core routes.
-
-## Accessibility and interaction
-
-- Skip link, semantic landmarks, visible focus treatment, current-page state, and keyboard-operable navigation are implemented.
-- The mobile menu exposes `aria-expanded`/`aria-controls`, moves focus into the menu, closes on Escape, restores focus, and cleans up listeners.
-- Accessible names contain their visible wordmark/language-switch text.
-- Text-specific cinnabar, jade, muted, and subtle tokens meet AA contrast without changing the display/fill brand colors.
-- `prefers-reduced-motion` disables smooth scrolling and collapses animation durations; Framer Motion uses reduced-motion state, GSAP scenes use media queries/context cleanup, and mobile presentations become static sequences.
-- Lenis only loads for desktop fine-pointer environments without reduced-motion and is destroyed on Astro page swaps.
-
-## Performance and bundle results
-
-Baseline `dist` size was 7.6 MB. The release output is 3.4 MB, a reduction of approximately 55%, primarily from resizing the oversized logo, favicon, and OG PNG assets. External Google Font requests were removed from the render path in favor of high-quality system Chinese/Latin stacks.
-
-Final local Lighthouse runs against the production build:
-
-| Profile | Performance | Accessibility | Best Practices | SEO | FCP | LCP | TBT | CLS |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Desktop, English home | 83 | 100 | 100 | 100 | 1.4 s | 2.3 s | 0 ms | 0 |
-| Mobile, Chinese home | 97 | 100 | 100 | 100 | 1.4 s | 2.5 s | 0 ms | 0 |
-
-The desktop score is influenced by Lighthouse's throttled first-load cost for the explicitly required React/Framer Motion hero. Non-critical GSAP narratives use `client:visible`; no 3D, particle, Lottie, or other large decorative runtime was introduced.
-
-## Engineering validation
+## Validation
 
 | Check | Result |
 |---|---|
-| Clean dependency install | Passed: `npm ci` completed from the committed lockfile |
-| Dependency security audit | Passed: `npm audit` reports 0 vulnerabilities |
-| JSONL ingest | Passed: 18 research and 21 visible open-source records generated |
-| `npm run check` | Passed: 0 errors; 30 non-blocking hints, mainly existing content-schema deprecations and unused legacy props |
-| `npm run build` | Passed: 23 static pages generated |
-| `npm run check:links` | Passed: 23 HTML files, no broken internal links |
-| Sitemap and RSS XML parsing | Passed |
-| Legacy redirect output | Passed: permanent static redirect pages generated |
-| Browser console | Passed on tested home routes; no console errors |
-| Horizontal overflow | None on tested desktop and mobile profiles |
-| Hydrated islands | Home uses one load-time semantic hero and two visibility-triggered narratives |
-| Lint | No lint command exists in the repository; no result is claimed |
-| Unit/e2e tests | No test command or test runner exists in the repository; no result is claimed |
-| GitHub Pages workflow | Preserved: Node 22 → `npm ci` → `npm run build` → Pages artifact/deploy |
+| `npm run ingest:info` | Passed: 18 research and 21 visible ecosystem records |
+| `npm run check` | Passed: 0 errors, 0 warnings; 30 non-blocking existing hints |
+| `npm run build` | Passed: 26 Astro routes plus static compatibility output |
+| `npm run check:content` | Passed: forbidden internal copy, legacy email, and serif checks |
+| `npm run check:links` | Passed: no broken internal links |
+| Sitemap | Passed: only canonical Chinese and English public routes |
+| Browser QA | Passed at 1440px, 1024px, and 390px on core Chinese/English pages; no horizontal overflow or console errors |
+| Accessibility interaction | Skip link, focus states, keyboard mobile menu, alt text, and reduced-motion behavior verified |
+| Mobile Lighthouse, Chinese home | Performance 98, Accessibility 100, Best Practices 100, SEO 100 |
+| Core Web Vitals lab result | FCP 1.3 s, LCP 2.4 s, TBT 0 ms, CLS 0 |
+| JavaScript budget | All emitted JavaScript totals approximately 155 KB gzip, below the 180 KB budget |
 
-The four empty MDX collection directories are intentionally retained with `.gitkeep`. Astro reports informational “no files found” loader messages until editorial content is added; these do not affect the build.
+## Human-owned follow-ups
 
-## Added dependencies
-
-| Dependency | Reason and boundary |
-|---|---|
-| `gsap` | Only the three-chain and research/product-loop scroll narratives; context and listener cleanup included |
-| `lenis` | Optional desktop fine-pointer smooth scrolling; disabled for mobile and reduced motion |
-| `clsx` | Typed conditional class composition utility |
-| `tailwind-merge` | Safe merging for reusable class-based UI primitives |
-| `@astrojs/check` (dev) | Formal Astro/TypeScript diagnostics |
-| `typescript` (dev) | Explicit project typechecking toolchain |
-| `esbuild` (dev) | Pins the audited build binary at `0.28.1` for Astro/Vite's optional peer resolution |
-
-Framer Motion remains the hero and micro-interaction library. No prohibited large visual dependency was added.
-
-Before release, the framework toolchain was security-upgraded to Astro `7.1.6`, `@astrojs/mdx` `7.0.5`, and `@astrojs/react` `6.0.2`. The static route set, React islands, content ingest, and GitHub Pages build all passed after the major-version migration.
-
-## Complete implementation file inventory
-
-The baseline comparison contains 94 file entries. In addition to the implementation files below, the complete V2 source-of-truth package is now versioned at `docs/website-v2/`: `README.md`, `00-repository-audit.md`, `01-brand-strategy.md`, `02-design-system.md`, `03-information-architecture-i18n.md`, `04-homepage-blueprint.md`, `05-agentguard-page.md`, `06-nvwa-and-ecosystem.md`, `07-motion-system.md`, `08-component-and-code-plan.md`, `09-bilingual-copydeck.md`, `10-migration-plan.md`, `11-performance-accessibility-seo.md`, `12-acceptance-checklist.md`, `CODEX_MASTER_PROMPT.md`, `CODEX_PHASE_PROMPTS.md`, `COPY_TO_REPO.md`, `design-tokens.json`, `implementation-map.json`, and `package-recommendations.md`.
-
-### Governance, configuration, and validation
-
-- `AGENTS.md`
-- `astro.config.mjs`
-- `package.json`
-- `package-lock.json`
-- `tailwind.config.mjs`
-- `public/robots.txt`
-- `scripts/check-links.mjs`
-- `docs/website-v2/generated/current-site-audit.md`
-- `docs/website-v2/generated/release-report.md`
-
-### Layout, locale, metadata, and shared chrome
-
-- `src/layouts/BaseLayout.astro`
-- `src/components/Header.astro`
-- `src/components/Footer.astro`
-- `src/components/LanguageSwitch.astro`
-- `src/components/motion/SmoothScroll.astro`
-- `src/i18n/config.ts`
-- `src/i18n/routes.ts`
-- `src/i18n/ui.ts`
-
-### Localized product/content data
-
-- `src/i18n/pages/home.ts`
-- `src/i18n/pages/agentguard.ts`
-- `src/i18n/pages/research.ts`
-- `src/i18n/pages/company.ts`
-- `src/content/posts/.gitkeep`
-- `src/content/briefs/.gitkeep`
-- `src/content/notes/.gitkeep`
-- `src/content/reports/.gitkeep`
-
-### Home and product components
-
-- `src/components/home/HomePage.astro`
-- `src/components/home/HomeHero.tsx`
-- `src/components/home/ThreeChainScrolly.tsx`
-- `src/components/home/ResearchProductLoop.tsx`
-- `src/components/agentguard/AgentGuardPage.astro`
-- `src/components/agentguard/AgentRuntimeDemo.tsx`
-- `src/components/agentguard/DeploymentArchitecture.tsx`
-
-### Research, ecosystem, and commercial components
-
-- `src/components/research/NvwaPage.astro`
-- `src/components/research/ResearchIndex.astro`
-- `src/components/ecosystem/EcosystemPage.astro`
-- `src/components/enterprise/SolutionsPage.astro`
-- `src/components/enterprise/CompanyPage.astro`
-- `src/components/enterprise/ContactPage.astro`
-
-### Pages and compatibility routes
-
-- `src/pages/index.astro`
-- `src/pages/agentguard.astro`
-- `src/pages/nuwa.astro`
-- `src/pages/research.astro`
-- `src/pages/open-ecosystem.astro`
-- `src/pages/solutions.astro`
-- `src/pages/about.astro`
-- `src/pages/contact.astro`
-- `src/pages/news/[slug].astro`
-- `src/pages/open-source.astro`
-- `src/pages/publications.astro`
-- `src/pages/NVWA-Project/index.astro`
-- `src/pages/404.astro`
-- `src/pages/zh/index.astro`
-- `src/pages/zh/agentguard.astro`
-- `src/pages/zh/nuwa.astro`
-- `src/pages/zh/research.astro`
-- `src/pages/zh/open-ecosystem.astro`
-- `src/pages/zh/solutions.astro`
-- `src/pages/zh/about.astro`
-- `src/pages/zh/contact.astro`
-
-### Visual system and optimized assets
-
-- `src/styles/global.css`
-- `src/styles/motion.css`
-- `src/styles/home.css`
-- `src/styles/agentguard.css`
-- `src/styles/research.css`
-- `src/styles/ecosystem.css`
-- `src/styles/company.css`
-- `src/styles/content.css`
-- `src/components/WhitzardHero.tsx` (legacy type compatibility only; no longer composed)
-- `src/components/NuwaHero.tsx` (legacy type compatibility only; no longer composed)
-- `public/favicon.png`
-- `public/assets/logo/whitzard_logo.png`
-- `public/assets/logo/nvwa_logo.png`
-- `public/assets/og/whitzard-og.png`
-- `public/assets/og/nuwa-og.png`
-
-## Real content still requiring human ownership
-
-The release intentionally does not invent the following:
-
-1. Approved legal entity name, registered address, privacy policy, terms, and jurisdiction-specific compliance copy.
-2. A sales/CRM form provider, routing rules, consent text, and retention policy if the mailto conversion path is later replaced.
-3. Approved customer names, logos, testimonials, deployment counts, measured product latency, and benchmark claims.
-4. Final legal approval of all bilingual commercial copy and an editorial owner for Chinese updates to news/blog content.
-5. Final vector master logo/wordmark and formally art-directed social-card exports, if assets beyond the optimized existing PNG sources are desired.
-
-These items are content/operations dependencies, not build blockers. The current website is deployable without them using the verified email path and evidence already present in the repository.
+The site deliberately does not invent legal entity details, privacy/terms language, customer evidence, testimonials, production deployment figures, performance benchmarks, or CRM workflows. Those require approved company inputs before publication; they are not blockers for the current static release.

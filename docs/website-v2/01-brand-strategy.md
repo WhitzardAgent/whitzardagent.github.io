@@ -9,7 +9,7 @@ AI Agent Security Infrastructure
 **AgentGuard**  
 企业级智能体运行时安全平台
 
-**NVWA Lab**  
+**NUWA Lab / 女娲实验室**
 Whitzard 背后的前沿 AI 安全研究引擎
 
 **WhitzardAgent**  
@@ -50,7 +50,7 @@ Whitzard 背后的前沿 AI 安全研究引擎
 - 玉青用于研究和知识
 - 朱砂用于关键决策和 CTA
 - 横向轴线、层叠屏风、细线流动
-- 中文标题偶尔使用宋体
+- 使用现代无衬线字体，以网格、留白与节奏表达东方感
 - 动画像“流动、展开、落印”
 
 ### 不应使用

@@ -17,7 +17,7 @@
 | `--wz-cinnabar` | `#D8563A` | 朱砂：关键状态、CTA、落印 |
 | `--wz-success` | `#2F7F7A` | 允许、安全、通过 |
 
-### NVWA Lab
+### NUWA Lab
 
 | Token | 色值 | 用途 |
 |---|---|---|
@@ -30,19 +30,17 @@
 
 ### 中文
 
-- UI 与正文：`Noto Sans SC`, `HarmonyOS Sans SC`, system sans-serif
-- 品牌判断和研究引语：`Noto Serif SC` 或思源宋体
+- UI、正文、标题与研究引语统一使用现代黑体：`PingFang SC`, `Source Han Sans SC`, `Noto Sans CJK SC`, `Microsoft YaHei`, system sans-serif。
 
 ### 英文
 
-- UI 与正文：`Inter` 或 `Geist`
-- 研究和宣言：`Source Serif 4`
+- 自托管 `Geist Sans Variable`，数字和实验室元信息可使用系统等宽字体。
 
 ### 字体使用限制
 
-- 宋体/Serif 只用于 10% 左右的内容；
-- 不要所有标题都用超粗体；
-- Hero 标题字重 600，正文 400–500；
+- 全站不使用宋体或 Serif；
+- 东方感通过网格、留白、颜色与节奏表达；
+- Hero 标题字重 600–650，正文 400–500；
 - 中文正文行高 1.75，英文正文行高 1.6。
 
 ## 圆角与边框

@@ -46,14 +46,14 @@ export default function ResearchProductLoop({
     }, root);
     return () => ctx.revert();
   }, []);
-  const researchHref = locale === "zh" ? "/zh/nuwa" : "/nuwa";
-  const productHref = locale === "zh" ? "/zh/agentguard" : "/agentguard";
+  const researchHref = locale === "zh" ? "/nuwa" : "/en/nuwa";
+  const productHref = locale === "zh" ? "/agentguard" : "/en/agentguard";
   return (
     <section ref={root} className="research-loop section">
       <div className="site-container">
         <header className="loop-engine__head">
           <p className="eyebrow">{copy.eyebrow}</p>
-          <h2 className="section-title serif">{copy.title}</h2>
+          <h2 className="section-title">{copy.title}</h2>
           <p>{copy.statement}</p>
         </header>
         <div className="loop-engine">
@@ -97,7 +97,7 @@ export default function ResearchProductLoop({
               <p>{copy.bridge.down}</p>
             </div>
             <div className="loop-flow__core">
-              <strong>NVWA</strong>
+              <strong>NUWA</strong>
               <span>↕</span>
               <strong>AgentGuard</strong>
             </div>

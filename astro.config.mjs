@@ -5,10 +5,20 @@ import react from "@astrojs/react";
 
 export default defineConfig({
   site: "https://whitzard.tech",
-  integrations: [mdx(), sitemap(), react()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => {
+        const pathname = new URL(page).pathname;
+        const redirectOnly = ["/NVWA-Project/", "/open-source/", "/publications/"];
+        return !pathname.startsWith("/zh") && pathname !== "/blog/" && pathname !== "/news/" && !pathname.startsWith("/news/") && !redirectOnly.includes(pathname);
+      },
+    }),
+    react(),
+  ],
   i18n: {
-    defaultLocale: "en",
-    locales: ["en", "zh"],
+    defaultLocale: "zh",
+    locales: ["zh", "en"],
     routing: {
       prefixDefaultLocale: false,
       redirectToDefaultLocale: false,

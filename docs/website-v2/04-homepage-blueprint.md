@@ -150,7 +150,7 @@ English:
 
 闭环：
 
-`NVWA Lab → Evaluation & Evidence → Safety Models → AgentGuard → Deployment Feedback → NVWA Lab`
+`NUWA Lab → Evaluation & Evidence → Safety Models → AgentGuard → Deployment Feedback → NUWA Lab`
 
 禁止画成传统太极。使用不完全闭合圆环和细线。
 

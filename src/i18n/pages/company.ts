@@ -126,7 +126,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       meta: {
         title: "Company — Whitzard",
         description:
-          "Whitzard builds AI agent security infrastructure, powered by AgentGuard, NVWA Lab research, and the WhitzardAgent open ecosystem.",
+          "Whitzard builds AI agent security infrastructure, powered by AgentGuard, NUWA Lab research, and the WhitzardAgent open ecosystem.",
       },
       eyebrow: "WHITZARD · 白泽",
       title: "Security infrastructure for the age of autonomous software.",
@@ -136,25 +136,25 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           name: "Whitzard",
           role: "Company · AI Agent Security Infrastructure",
           body: "The company brand that connects product, research, open engineering, and enterprise deployment.",
-          href: "/",
+          href: "/en/",
         },
         {
           name: "AgentGuard",
           role: "Core enterprise product",
           body: "A unified security control layer across the full agent runtime.",
-          href: "/agentguard",
+          href: "/en/agentguard",
         },
         {
-          name: "NVWA Lab",
+          name: "NUWA Lab",
           role: "Frontier safety research engine",
           body: "Research that defines risk, builds evaluation evidence, and advances safety models.",
-          href: "/nuwa",
+          href: "/en/nuwa",
         },
         {
           name: "WhitzardAgent",
           role: "Open ecosystem",
           body: "Public models, tools, data, and evaluation infrastructure.",
-          href: "/open-ecosystem",
+          href: "/en/open-ecosystem",
         },
       ],
       principlesTitle: "How we work",
@@ -178,7 +178,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       ],
       teamTitle: "Founding and research team",
       teamLead:
-        "The current public team record is preserved from the repository. Academic affiliations and external profiles link to their sources.",
+        "Meet the people connecting agent security engineering, frontier safety research, and real-world cybersecurity expertise.",
     },
     contact: {
       meta: {
@@ -193,19 +193,19 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       emailLabel: "Business and collaboration",
       paths: [
         {
-          title: "Product demo",
-          body: "Map AgentGuard to an agent stack, runtime risks, and deployment architecture.",
+          title: "Enterprise product demo",
+          body: "Map AgentGuard to your agent stack, runtime risks, private deployment, and security operations.",
           subject: "AgentGuard product demo",
         },
         {
-          title: "Enterprise deployment",
-          body: "Discuss private deployment, control-plane requirements, and security operations.",
-          subject: "AgentGuard enterprise deployment",
+          title: "NUWA research collaboration",
+          body: "Connect on frontier risk evaluation, agent safety, safety models, or public evidence.",
+          subject: "NUWA research collaboration",
         },
         {
-          title: "Research collaboration",
-          body: "Connect on frontier risk evaluation, agent safety, safety models, or public evidence.",
-          subject: "NVWA research collaboration",
+          title: "Open source & technical exchange",
+          body: "Discuss AgentGuard, safety models, evaluation infrastructure, and contributions across the WhitzardAgent ecosystem.",
+          subject: "WhitzardAgent open-source collaboration",
         },
       ],
       prepareTitle: "Helpful context to include",
@@ -284,7 +284,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       meta: {
         title: "关于我们 — Whitzard",
         description:
-          "Whitzard 构建智能体安全基础设施，由 AgentGuard、NVWA Lab 研究引擎与 WhitzardAgent 开放生态共同支撑。",
+          "Whitzard 构建智能体安全基础设施，由 AgentGuard、NUWA Lab 研究引擎与 WhitzardAgent 开放生态共同支撑。",
       },
       eyebrow: "WHITZARD · 白泽",
       title: "面向自主软件时代的安全基础设施",
@@ -294,25 +294,25 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           name: "Whitzard",
           role: "公司 · 智能体安全基础设施",
           body: "连接产品、研究、开放工程与企业部署的公司品牌。",
-          href: "/zh/",
+          href: "/",
         },
         {
           name: "AgentGuard",
           role: "核心企业产品",
           body: "覆盖智能体完整运行过程的统一安全控制层。",
-          href: "/zh/agentguard",
+          href: "/agentguard",
         },
         {
-          name: "NVWA Lab",
+          name: "NUWA Lab",
           role: "前沿安全研究引擎",
           body: "定义风险、建设评测证据并推动安全模型的研究引擎。",
-          href: "/zh/nuwa",
+          href: "/nuwa",
         },
         {
           name: "WhitzardAgent",
           role: "开放生态",
           body: "开放模型、工具、数据与评测基础设施。",
-          href: "/zh/open-ecosystem",
+          href: "/open-ecosystem",
         },
       ],
       principlesTitle: "我们的工作原则",
@@ -336,7 +336,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       ],
       teamTitle: "创始与研究团队",
       teamLead:
-        "以下公开团队记录来自当前仓库，并保留学术机构与外部个人主页的来源链接。",
+        "认识连接智能体安全工程、前沿安全研究与真实网络安全实践的团队。",
     },
     contact: {
       meta: {
@@ -351,19 +351,19 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       emailLabel: "商务与合作",
       paths: [
         {
-          title: "产品演示",
-          body: "将 AgentGuard 映射到智能体技术栈、运行时风险与部署架构。",
+          title: "企业产品演示",
+          body: "将 AgentGuard 映射到智能体技术栈、运行时风险、私有化部署与安全运营。",
           subject: "预约 AgentGuard 产品演示",
         },
         {
-          title: "企业部署",
-          body: "讨论私有化部署、控制面要求与安全运营。",
-          subject: "AgentGuard 企业部署咨询",
+          title: "NUWA 研究合作",
+          body: "围绕前沿风险评测、智能体安全、安全模型与公开证据展开合作。",
+          subject: "NUWA 研究合作",
         },
         {
-          title: "研究合作",
-          body: "围绕前沿风险评测、智能体安全、安全模型与公开证据展开合作。",
-          subject: "NVWA 研究合作",
+          title: "开源与技术交流",
+          body: "围绕 AgentGuard、安全模型、评测基础设施与 WhitzardAgent 生态贡献展开交流。",
+          subject: "WhitzardAgent 开源合作",
         },
       ],
       prepareTitle: "建议在邮件中提供",

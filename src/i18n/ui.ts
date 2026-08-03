@@ -37,12 +37,12 @@ export const ui: Record<Locale, UiCopy> = {
       company: "Company",
       resources: "Research & open source",
       legalLine: "Secure autonomy, by design.",
-      researchLine: "NVWA Lab is the frontier safety research engine behind Whitzard.",
+      researchLine: "NUWA Lab is the frontier safety research engine behind Whitzard.",
     },
   },
   zh: {
     nav: [
-      { href: "/agentguard", label: "产品" },
+      { href: "/agentguard", label: "AgentGuard" },
       { href: "/solutions", label: "解决方案" },
       { href: "/research", label: "研究" },
       { href: "/open-ecosystem", label: "开源生态" },
@@ -59,7 +59,7 @@ export const ui: Record<Locale, UiCopy> = {
       company: "公司",
       resources: "研究与开源",
       legalLine: "守其边界，行其智能。",
-      researchLine: "NVWA Lab 是 Whitzard 背后的前沿安全研究引擎。",
+      researchLine: "NUWA Lab 是 Whitzard 背后的前沿安全研究引擎。",
     },
   },
 };

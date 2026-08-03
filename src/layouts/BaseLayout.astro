@@ -24,8 +24,8 @@ interface Props {
 
 const {
   title,
-  description = "Whitzard builds security infrastructure for enterprise AI agents across evaluation, runtime control, and security operations.",
-  locale = "en",
+  description,
+  locale = "zh",
   brand = "whitzard",
   ogImage,
   ogImageAlt = locale === "zh" ? "Whitzard 智能体安全基础设施" : "Whitzard AI agent security infrastructure",
@@ -35,7 +35,8 @@ const {
 } = Astro.props;
 
 const origin = "https://whitzard.tech";
-const siteTitle = title.includes("Whitzard") || title.includes("NVWA") || title.includes("Nuwa") ? title : `${title} — ${brand === "nuwa" ? "NVWA Lab" : "Whitzard"}`;
+const resolvedDescription = description ?? (locale === "zh" ? "Whitzard 构建面向企业智能体的安全基础设施，覆盖评测、运行时控制与安全运营。" : "Whitzard builds security infrastructure for enterprise AI agents across evaluation, runtime control, and security operations.");
+const siteTitle = title.includes("Whitzard") || title.includes("NUWA") || title.includes("Nuwa") ? title : `${title} — ${brand === "nuwa" ? "NUWA Lab" : "Whitzard"}`;
 const basePath = stripLocale(canonicalPath ?? Astro.url.pathname);
 const canonicalUrl = new URL(localizedPath(basePath, locale), origin).href;
 const englishUrl = new URL(localizedPath(basePath, "en"), origin).href;
@@ -63,19 +64,20 @@ const schemas = [organizationSchema, ...(breadcrumbs ? [breadcrumbs] : []), ...(
 <html lang={locale === "zh" ? "zh-CN" : "en"} data-brand={brand}>
   <head>
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content={brand === "nuwa" ? "#F4F2EC" : "#F6F7F3"} />
+    <meta name="theme-color" content={brand === "nuwa" ? "#F4F6F2" : "#F6F7F3"} />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>{siteTitle}</title><meta name="description" content={description} /><meta name="generator" content={Astro.generator} />
+    <link rel="preload" href="/assets/fonts/geist/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <title>{siteTitle}</title><meta name="description" content={resolvedDescription} /><meta name="generator" content={Astro.generator} />
     {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={englishUrl} />
     {hasPeer && <link rel="alternate" hreflang="zh-CN" href={chineseUrl} />}
-    <link rel="alternate" hreflang="x-default" href={englishUrl} />
-    <meta property="og:title" content={siteTitle} /><meta property="og:description" content={description} />
+    <link rel="alternate" hreflang="x-default" href={chineseUrl} />
+    <meta property="og:title" content={siteTitle} /><meta property="og:description" content={resolvedDescription} />
     <meta property="og:type" content="website" /><meta property="og:url" content={canonicalUrl} /><meta property="og:site_name" content="Whitzard" />
     <meta property="og:locale" content={ogLocale(locale)} /><meta property="og:locale:alternate" content={ogLocale(locale === "en" ? "zh" : "en")} />
     <meta property="og:image" content={ogImageUrl} /><meta property="og:image:alt" content={ogImageAlt} />
-    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={siteTitle} /><meta name="twitter:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={siteTitle} /><meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={ogImageUrl} /><meta name="twitter:image:alt" content={ogImageAlt} />
     {schemas.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
     <ClientRouter />

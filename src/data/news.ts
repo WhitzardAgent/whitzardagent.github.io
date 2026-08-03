@@ -19,20 +19,20 @@ export const newsItems: NewsItem[] = [
     date: "2026-01-15",
     type: "Research",
     url: "https://nuwasafety.substack.com/p/science-of-frontier-ai-risk-evaluation",
-    source: "Nuwa Substack",
+    source: "NUWA Substack",
     summary:
-      "Nuwa's first public research essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
+      "NUWA Lab's first public research essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
     featured: true,
   },
   {
-    title: "Nuwa Frontier AI Safety Lab Launch",
+    title: "NUWA Lab Launch",
     date: "2025-11-01",
     type: "Company",
     slug: "nuwa-lab-launch",
     summary:
-      "Nuwa Frontier AI Safety Lab is launched as the research lab supported by Whitzard.",
+      "NUWA Lab is launched as the frontier safety research lab supported by Whitzard.",
     body:
-      "Nuwa Frontier AI Safety Lab is officially launched as the research lab supported by Whitzard. Nuwa focuses on transparent, third-party, open infrastructure and benchmarks for frontier AI safety evaluation and governance.\n\nThe lab studies frontier AI risks including autonomy risks, deception, scheming, and loss-of-control, while developing open evaluation frameworks, benchmarks, technical notes, and governance evidence for safe and controllable AI.",
+      "NUWA Lab is officially launched as the research lab supported by Whitzard. NUWA focuses on transparent, third-party, open infrastructure and benchmarks for frontier AI safety evaluation and governance.\n\nThe lab studies frontier AI risks including autonomy risks, deception, scheming, and loss-of-control, while developing open evaluation frameworks, benchmarks, technical notes, and governance evidence for safe and controllable AI.",
     featured: true,
   },
   {

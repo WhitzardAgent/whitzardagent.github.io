@@ -1,4 +1,4 @@
 ---
-// /publications redirects to /research
-return Astro.redirect("/research", 301);
+// Preserve the historic English route after Chinese becomes the default locale.
+return Astro.redirect("/en/research", 301);
 ---

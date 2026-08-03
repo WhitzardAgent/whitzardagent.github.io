@@ -9,6 +9,22 @@ export type AgentGuardCopy = {
     primary: string;
     secondary: string;
   };
+  demo: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    play: string;
+    dashboardTitle: string;
+    dashboardBody: string;
+    policyTitle: string;
+    policyBody: string;
+    generationTitle: string;
+    generationBody: string;
+    allowed: { label: string; recipient: string; result: string; reason: string };
+    denied: { label: string; recipient: string; result: string; reason: string };
+    stepsTitle: string;
+    steps: string[];
+  };
   runtime: {
     eyebrow: string;
     title: string;
@@ -69,6 +85,22 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
       body: "Observe, reason, and intervene before model calls, after reasoning, around tool execution, and across the data and identity boundaries that agents traverse.",
       primary: "Book a Demo",
       secondary: "View on GitHub",
+    },
+    demo: {
+      eyebrow: "REAL PRODUCT SURFACE",
+      title: "See the policy decision, not just the promise.",
+      body: "This walkthrough uses AgentGuard's published dashboard and quick-start policy: retrieve a confidential document, then decide whether the agent may send it to the requested recipient.",
+      play: "Play the official AgentGuard demo",
+      dashboardTitle: "Runtime dashboard",
+      dashboardBody: "Inspect recent traffic, pending approvals, audit records, matched rules, risk scores, and the final decision.",
+      policyTitle: "Visual policy builder",
+      policyBody: "Configure access-control and cross-tool trajectory rules through structured controls.",
+      generationTitle: "Policy generation",
+      generationBody: "Translate a security intention into a reviewable policy before enforcement.",
+      allowed: { label: "Allowed path", recipient: "admin@example.com", result: "ALLOW", reason: "The approved recipient satisfies the rule for confidential document 0." },
+      denied: { label: "Denied path", recipient: "alice@example.com", result: "DENY", reason: "A low-trust principal cannot send confidential document 0 to a non-admin recipient." },
+      stepsTitle: "What happens in the demo",
+      steps: ["The agent calls retrieve_doc for document 0.", "AgentGuard retains the cross-tool context before send_email_to runs.", "The rule evaluates recipient, document, and principal trust level.", "AgentGuard allows the admin path and blocks the non-admin path before the tool action."],
     },
     runtime: {
       eyebrow: "RUNTIME CONTROL SURFACE",
@@ -220,25 +252,25 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
     evidence: {
       eyebrow: "VERIFIABLE EVIDENCE",
       title: "Built in the open where evidence is available.",
-      body: "These links point to current public repositories, models, and research records that provide verifiable evidence for current capabilities.",
+      body: "Explore the open-source project, safety models, and research that substantiate AgentGuard's technical direction.",
       items: [
         {
-          title: "AgentGuard repository",
+          title: "AgentGuard open source",
           body: "Public runtime security project in the WhitzardAgent organization.",
           label: "Open GitHub",
           href: "https://github.com/WhitzardAgent/AgentGuard",
         },
         {
           title: "Safety models",
-          body: "Thought-Aligner, MirrorGuard, ReasoningShield, IntentNet, and TrustNet appear in the public ecosystem metadata.",
+          body: "Explore Thought-Aligner, MirrorGuard, ReasoningShield, IntentNet, TrustNet, and related safety work.",
           label: "Browse ecosystem",
-          href: "/open-ecosystem",
+          href: "/en/open-ecosystem",
         },
         {
-          title: "Research record",
-          body: "NVWA research assets preserve public papers, evaluation work, and source links.",
+          title: "NUWA research",
+          body: "Read papers and evaluation work on frontier risk, agent safety, AI control, and runtime security.",
           label: "Read research",
-          href: "/research",
+          href: "/en/research",
         },
       ],
     },
@@ -261,6 +293,22 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
       body: "在模型调用前、推理生成后、工具执行前后，以及智能体跨越的数据和身份边界中，持续观察、判断并干预风险。",
       primary: "预约产品演示",
       secondary: "查看 GitHub",
+    },
+    demo: {
+      eyebrow: "真实产品界面",
+      title: "看见策略如何做出决定，而不只是听见产品承诺",
+      body: "这个演示使用 AgentGuard 已公开的控制台和快速开始策略：智能体读取一份机密文档，然后由策略判断是否允许发送给指定收件人。",
+      play: "播放 AgentGuard 官方演示",
+      dashboardTitle: "运行时控制台",
+      dashboardBody: "查看实时流量、待审批请求、审计记录、命中规则、风险评分和最终决策。",
+      policyTitle: "可视化策略配置",
+      policyBody: "通过结构化控件配置访问控制与跨工具轨迹规则。",
+      generationTitle: "策略生成",
+      generationBody: "将安全意图转化为可审查的策略，再进入执行阶段。",
+      allowed: { label: "允许路径", recipient: "admin@example.com", result: "ALLOW", reason: "管理员收件人满足机密文档 0 的发送规则。" },
+      denied: { label: "阻断路径", recipient: "alice@example.com", result: "DENY", reason: "低信任主体不能把机密文档 0 发送给非管理员收件人。" },
+      stepsTitle: "演示中发生了什么",
+      steps: ["智能体调用 retrieve_doc 读取文档 0。", "在 send_email_to 执行前，AgentGuard 保留跨工具上下文。", "策略同时判断收件人、文档与主体信任级别。", "AgentGuard 允许管理员路径，并在工具行动前阻断非管理员路径。"],
     },
     runtime: {
       eyebrow: "运行时控制面",
@@ -376,7 +424,7 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
     evidence: {
       eyebrow: "可核实证据",
       title: "在能够公开验证的地方保持开放",
-      body: "以下链接指向当前公开仓库、模型与研究记录，为现有能力提供可核实证据。",
+      body: "通过开源项目、安全模型与研究成果了解 AgentGuard 的技术基础。",
       items: [
         {
           title: "AgentGuard 开源仓库",
@@ -386,15 +434,15 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
         },
         {
           title: "安全模型",
-          body: "公开生态元数据包含 Thought-Aligner、MirrorGuard、ReasoningShield、IntentNet 与 TrustNet。",
+          body: "探索 Thought-Aligner、MirrorGuard、ReasoningShield、IntentNet、TrustNet 等安全工作。",
           label: "浏览开放生态",
-          href: "/zh/open-ecosystem",
+          href: "/open-ecosystem",
         },
         {
-          title: "研究记录",
-          body: "NVWA 研究数据保留论文、评测工作与公开来源链接。",
+          title: "NUWA 研究",
+          body: "阅读前沿风险、智能体安全、AI 控制与运行时安全相关论文和评测。",
           label: "查看研究",
-          href: "/zh/research",
+          href: "/research",
         },
       ],
     },

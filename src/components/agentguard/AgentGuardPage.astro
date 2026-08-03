@@ -4,14 +4,16 @@ import type {Locale} from "../../i18n/config";
 import {localizedPath} from "../../i18n/config";
 import type {AgentGuardCopy} from "../../i18n/pages/agentguard";
 import AgentRuntimeDemo from "./AgentRuntimeDemo";
+import AgentGuardShowcase from "./AgentGuardShowcase.astro";
 import DeploymentArchitecture from "./DeploymentArchitecture";
 import "../../styles/agentguard.css";
 interface Props{locale:Locale;copy:AgentGuardCopy}
 const{locale,copy}=Astro.props;
-const softwareSchema={"@context":"https://schema.org","@type":"SoftwareApplication",name:"AgentGuard",applicationCategory:"SecurityApplication",operatingSystem:"Enterprise AI agent runtimes",url:"https://whitzard.tech/agentguard",isAccessibleForFree:true,codeRepository:"https://github.com/WhitzardAgent/AgentGuard",publisher:{"@type":"Organization",name:"Whitzard"}};
+const softwareSchema={"@context":"https://schema.org","@type":"SoftwareApplication",name:"AgentGuard",applicationCategory:"SecurityApplication",operatingSystem:"Enterprise AI agent runtimes",url:`https://whitzard.tech${localizedPath("/agentguard",locale)}`,isAccessibleForFree:true,codeRepository:"https://github.com/WhitzardAgent/AgentGuard",publisher:{"@type":"Organization",name:"Whitzard"}};
 ---
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/agentguard" schema={softwareSchema}>
  <section class="ag-hero"><div class="site-container ag-hero__grid"><div><p class="eyebrow">{copy.hero.eyebrow}</p><h1>{copy.hero.title}</h1><p>{copy.hero.body}</p><div><a class="button button--primary" href={localizedPath("/contact",locale)}>{copy.hero.primary}</a><a class="button button--secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.hero.secondary} ↗</a></div></div><div class="ag-hero__surface" aria-hidden="true"><span>Before LLM</span><span>After LLM</span><b>AgentGuard</b><span>Before Tool</span><span>After Tool</span><i></i></div></div></section>
+ <AgentGuardShowcase locale={locale} copy={copy.demo} />
  <section class="section ag-runtime-section"><div class="site-container ag-section-head"><p class="eyebrow">{copy.runtime.eyebrow}</p><h2 class="section-title">{copy.runtime.title}</h2><p>{copy.runtime.body}</p></div><div class="site-container"><AgentRuntimeDemo copy={copy.runtime} client:visible /></div></section>
  <section class="section ag-chains"><div class="site-container ag-section-head"><p class="eyebrow">{copy.chains.eyebrow}</p><h2 class="section-title">{copy.chains.title}</h2><p>{copy.chains.body}</p></div><div class="site-container ag-chains__grid">{copy.chains.items.map((item,index)=><article><span>0{index+1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div><div class="site-container ag-fusion">{copy.chains.fusion}</div></section>
  <section class="section ag-capabilities"><div class="site-container ag-section-head"><p class="eyebrow">{copy.capabilities.eyebrow}</p><h2 class="section-title">{copy.capabilities.title}</h2></div><div class="site-container ag-capabilities__grid">{copy.capabilities.items.map((item,index)=><article><span>{String(index+1).padStart(2,"0")}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>

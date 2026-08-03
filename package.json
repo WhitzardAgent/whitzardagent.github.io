@@ -9,6 +9,7 @@
     "build": "astro build",
     "check": "astro check",
     "check:links": "node scripts/check-links.mjs",
+    "check:content": "node scripts/check-content.mjs",
     "preview": "astro preview",
     "new:post": "node scripts/new-content.mjs post",
     "new:brief": "node scripts/new-content.mjs brief",

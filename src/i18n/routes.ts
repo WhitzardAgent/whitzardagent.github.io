@@ -12,5 +12,5 @@ export function hasLocalizedPeer(pathname: string): boolean {
 }
 
 export function localeSwitchPath(pathname: string, target: Locale): string {
-  return hasLocalizedPeer(pathname) ? localizedPath(pathname, target) : target === "zh" ? "/zh/" : "/";
+  return hasLocalizedPeer(pathname) ? localizedPath(pathname, target) : target === "zh" ? "/" : "/en/";
 }

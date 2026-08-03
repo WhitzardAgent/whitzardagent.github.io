@@ -10,13 +10,13 @@ export default function HomeHero({ copy, locale }: Props) {
   return (
     <section className="home-hero">
       <div className="site-container home-hero__grid">
-        <motion.div className="home-hero__copy" initial={reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, ease: [.22, 1, .36, 1] }}>
+        <motion.div className="home-hero__copy" initial={false} animate={{ y: 0 }}>
           <p className="eyebrow">{copy.eyebrow}</p>
           <h1>{copy.title}</h1>
           <p className="home-hero__description">{copy.description}</p>
           <div className="home-hero__actions">
-            <a className="button button--primary" href={locale === "zh" ? "/zh/contact" : "/contact"}>{copy.primary}</a>
-            <a className="button button--secondary" href={locale === "zh" ? "/zh/agentguard" : "/agentguard"}>{copy.secondary}<span aria-hidden="true">↗</span></a>
+            <a className="button button--primary" href={locale === "zh" ? "/contact" : "/en/contact"}>{copy.primary}</a>
+            <a className="button button--secondary" href={locale === "zh" ? "/agentguard#demo" : "/en/agentguard#demo"}>{copy.secondary}<span aria-hidden="true">↗</span></a>
           </div>
         </motion.div>
         <motion.div className="runtime-trace" initial={reduce ? false : { opacity: 0, x: 22 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .16, ease: [.22, 1, .36, 1] }} aria-label={copy.visualLabel}>

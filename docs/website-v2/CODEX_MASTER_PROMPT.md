@@ -9,7 +9,7 @@
 1. 保留 Astro、React islands、Tailwind、MDX、JSONL ingest 和 GitHub Pages。
 2. 不迁移到 Next.js。
 3. 不删除现有研究、新闻、开源项目和 redirect。
-4. 英文现有 URL 保持兼容，中文新增 `/zh/*`。
+4. 中文使用无前缀默认路由，英文使用 `/en/*`，旧 `/zh/*` 与历史英文路由保持兼容。
 5. 使用现有 Framer Motion；GSAP 仅用于复杂滚动叙事；Lenis 必须可降级。
 6. 不使用 Three.js、React Flow、Lottie、粒子背景、3D 地球和图库盾牌。
 7. 所有动效支持 `prefers-reduced-motion`。

@@ -22,18 +22,18 @@ English:
 
 ## 推荐路由
 
-为保留现有外部链接，英文继续使用无前缀路由，中文新增 `/zh`：
+中文为默认语言并使用无前缀路由，英文使用 `/en`；旧 `/zh/*` 作为兼容入口：
 
-| English | 中文 |
+| 中文 | English |
 |---|---|
-| `/` | `/zh/` |
-| `/agentguard` | `/zh/agentguard` |
-| `/solutions` | `/zh/solutions` |
-| `/nuwa` | `/zh/nuwa` |
-| `/research` | `/zh/research` |
-| `/open-ecosystem` | `/zh/open-ecosystem` |
-| `/about` | `/zh/about` |
-| `/contact` | `/zh/contact` |
+| `/` | `/en/` |
+| `/agentguard` | `/en/agentguard` |
+| `/solutions` | `/en/solutions` |
+| `/nuwa` | `/en/nuwa` |
+| `/research` | `/en/research` |
+| `/open-ecosystem` | `/en/open-ecosystem` |
+| `/about` | `/en/about` |
+| `/contact` | `/en/contact` |
 
 保留兼容路由：
 
@@ -48,9 +48,10 @@ English:
 在 `astro.config.mjs` 中启用：
 
 - locales: `en`, `zh`
-- default locale: `en`
-- default locale 不加前缀
-- 中文使用 `/zh/*`
+- default locale: `zh`
+- 中文不加前缀
+- 英文使用 `/en/*`
+- 旧 `/zh/*` 输出 noindex 静态兼容跳转
 
 ### 文案组织
 

@@ -37,7 +37,7 @@ export const team: TeamMember[] = [
     role: "Strategic Bridge / Research Partner",
     affiliation: "whitzard",
     category: "partner",
-    bio: "Dr. Geng Hong is an Assistant Professor at Fudan University and a strategic bridge and research partner for Whitzard and Nuwa. His work spans cybercrime, penetration testing, cybersecurity ecosystem research, and in-the-wild security studies, bringing practical security insight into AI safety evaluation and governance.",
+    bio: "Dr. Geng Hong is an Assistant Professor at Fudan University and a strategic bridge and research partner for Whitzard and NUWA Lab. His work spans cybercrime, penetration testing, cybersecurity ecosystem research, and in-the-wild security studies, bringing practical security insight into AI safety evaluation and governance.",
     links: [
       { label: "Homepage", url: "https://ghong.site/" },
     ],

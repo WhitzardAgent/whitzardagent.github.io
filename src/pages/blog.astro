@@ -9,8 +9,10 @@ import CalloutPanel from "../components/CalloutPanel.astro";
 ---
 
 <BaseLayout
-  title="Blog — Whitzard & Nuwa"
-  description="Updates, essays, and technical notes from Whitzard and Nuwa Frontier AI Safety Lab on frontier AI safety, agent safety, and controllable AI."
+  locale="en"
+  canonicalPath="/blog"
+  title="Blog — Whitzard & NUWA Lab"
+  description="Updates, essays, and technical notes from Whitzard and NUWA Lab on frontier AI safety, agent safety, and controllable AI."
   ogImage="/assets/og/nuwa-og.png"
 >
   <section class="py-20 md:py-28">
@@ -20,7 +22,7 @@ import CalloutPanel from "../components/CalloutPanel.astro";
           Blog
         </h1>
         <p class="text-wz-body text-lg leading-relaxed">
-          Updates, essays, and notes from Whitzard and Nuwa.
+          Updates, essays, and notes from Whitzard and NUWA Lab.
         </p>
       </div>
 
@@ -43,11 +45,11 @@ import CalloutPanel from "../components/CalloutPanel.astro";
         </div>
       )}
 
-      <!-- Nuwa Brief -->
+      <!-- NUWA Brief -->
       <div class="mb-16">
-        <SectionHeader title="Nuwa Brief" subtitle="Weekly research updates from Nuwa Frontier AI Safety Lab, published on Substack." />
+        <SectionHeader title="NUWA Brief" subtitle="Research updates from NUWA Lab, published on Substack." />
         <BriefCard
-          title="Nuwa Brief on Substack"
+          title="NUWA Brief on Substack"
           url={links.substack}
           summary="Research updates, analysis, and commentary on frontier AI safety, agent safety, and controllable AI."
           external={true}
@@ -66,10 +68,10 @@ import CalloutPanel from "../components/CalloutPanel.astro";
       <CalloutPanel
         variant="default"
         align="center"
-        description="Get research updates from Nuwa Frontier AI Safety Lab delivered to your inbox."
+        description="Get research updates from NUWA Lab delivered to your inbox."
       >
         <a href={links.substack} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-wz-ink text-white rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-wz-navy transition-colors no-underline">
-          Subscribe to Nuwa Brief
+          Subscribe to NUWA Brief
         </a>
       </CalloutPanel>
     </div>

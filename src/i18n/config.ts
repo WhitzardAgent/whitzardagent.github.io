@@ -1,21 +1,22 @@
-export const locales = ["en", "zh"] as const;
+export const locales = ["zh", "en"] as const;
 export type Locale = (typeof locales)[number];
 
-export const defaultLocale: Locale = "en";
+export const defaultLocale: Locale = "zh";
 
 export function getLocaleFromPath(pathname: string): Locale {
-  return pathname === "/zh" || pathname.startsWith("/zh/") ? "zh" : "en";
+  return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "zh";
 }
 
 export function stripLocale(pathname: string): string {
-  if (pathname === "/zh" || pathname === "/zh/") return "/";
-  return pathname.startsWith("/zh/") ? pathname.slice(3) || "/" : pathname;
+  if (pathname === "/en" || pathname === "/en/" || pathname === "/zh" || pathname === "/zh/") return "/";
+  if (pathname.startsWith("/en/") || pathname.startsWith("/zh/")) return pathname.slice(3) || "/";
+  return pathname;
 }
 
 export function localizedPath(pathname: string, locale: Locale): string {
   const base = stripLocale(pathname);
-  if (locale === "en") return base || "/";
-  return base === "/" ? "/zh/" : `/zh${base}`;
+  if (locale === "zh") return base || "/";
+  return base === "/" ? "/en/" : `/en${base}`;
 }
 
 export function ogLocale(locale: Locale): string {

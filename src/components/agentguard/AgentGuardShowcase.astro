@@ -1,0 +1,83 @@
+---
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import type { AgentGuardCopy } from "../../i18n/pages/agentguard";
+import "../../styles/agentguard.css";
+
+interface Props {
+  locale: Locale;
+  copy: AgentGuardCopy["demo"];
+  compact?: boolean;
+}
+
+const { locale, copy, compact = false } = Astro.props;
+const cases = [copy.allowed, copy.denied];
+---
+
+<section id={compact ? undefined : "demo"} class:list={["ag-showcase", compact && "ag-showcase--compact"]}>
+  <div class="site-container ag-showcase__head">
+    <div>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h2 class="section-title">{copy.title}</h2>
+    </div>
+    <p>{copy.body}</p>
+  </div>
+
+  <div class="site-container ag-showcase__primary">
+    <figure class="ag-product-shot">
+      <img src="/assets/agentguard/dashboard.png" width="2505" height="1229" loading={compact ? "lazy" : "eager"} decoding="async" alt={copy.dashboardTitle} />
+      <figcaption><strong>{copy.dashboardTitle}</strong><span>{copy.dashboardBody}</span></figcaption>
+    </figure>
+
+    <agentguard-case class="ag-case" data-active="0">
+      <div class="ag-case__tabs" role="tablist" aria-label={locale === "zh" ? "策略结果" : "Policy outcomes"}>
+        {cases.map((item, index) => <button type="button" role="tab" aria-selected={index === 0 ? "true" : "false"} tabindex={index === 0 ? 0 : -1} data-case={index}>{item.label}</button>)}
+      </div>
+      <div class="ag-case__trace" aria-hidden="true"><span>retrieve_doc</span><i>→</i><span>send_email_to</span></div>
+      {cases.map((item, index) => (
+        <article role="tabpanel" hidden={index !== 0} data-panel={index}>
+          <div><span>RECIPIENT</span><strong>{item.recipient}</strong></div>
+          <b class:list={[item.result === "ALLOW" ? "is-allow" : "is-deny"]}>{item.result}</b>
+          <p>{item.reason}</p>
+        </article>
+      ))}
+    </agentguard-case>
+  </div>
+
+  {compact ? (
+    <div class="site-container ag-showcase__more"><a class="button button--primary" href={`${localizedPath("/agentguard", locale)}#demo`}>{locale === "zh" ? "查看完整产品演示" : "View the full product demo"} →</a></div>
+  ) : (
+    <>
+      <div class="site-container ag-showcase__media">
+        <div class="ag-video">
+          <video controls preload="none" playsinline poster="/assets/agentguard/dashboard.png" aria-label={copy.play}>
+            <source src="https://ik.imagekit.io/4vsnlaxpc/6dd7e279a6b8d9be652002280d026a46_raw.mp4" type="video/mp4" />
+          </video>
+          <p>{copy.play}</p>
+        </div>
+        <figure><img src="/assets/agentguard/policy-builder.png" width="2513" height="955" loading="lazy" decoding="async" alt={copy.policyTitle} /><figcaption><strong>{copy.policyTitle}</strong><span>{copy.policyBody}</span></figcaption></figure>
+        <figure><img src="/assets/agentguard/policy-generation.png" width="1210" height="637" loading="lazy" decoding="async" alt={copy.generationTitle} /><figcaption><strong>{copy.generationTitle}</strong><span>{copy.generationBody}</span></figcaption></figure>
+      </div>
+      <div class="site-container ag-showcase__steps"><p>{copy.stepsTitle}</p><ol>{copy.steps.map((step, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>)}</ol></div>
+    </>
+  )}
+</section>
+
+<script>
+  class AgentGuardCase extends HTMLElement {
+    connectedCallback() {
+      const tabs = Array.from(this.querySelectorAll<HTMLButtonElement>("[role=tab]"));
+      const panels = Array.from(this.querySelectorAll<HTMLElement>("[role=tabpanel]"));
+      tabs.forEach((tab, index) => tab.addEventListener("click", () => {
+        tabs.forEach((item, itemIndex) => {
+          const selected = itemIndex === index;
+          item.setAttribute("aria-selected", String(selected));
+          item.tabIndex = selected ? 0 : -1;
+          panels[itemIndex].hidden = !selected;
+        });
+        this.dataset.active = String(index);
+      }));
+    }
+  }
+  if (!customElements.get("agentguard-case")) customElements.define("agentguard-case", AgentGuardCase);
+</script>

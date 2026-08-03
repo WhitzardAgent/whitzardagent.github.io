@@ -14,11 +14,18 @@ function formatShortDate(date: string): string {
   const d = new Date(date);
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
+
+function localizedNewsLink(item: (typeof newsItems)[number]): string | undefined {
+  const href = getNewsLink(item);
+  return href?.startsWith("/news/") ? `/en${href}` : href;
+}
 ---
 
 <BaseLayout
-  title="News — Whitzard & Nuwa"
-  description="Research updates, company news, ecosystem progress, and public notes from Whitzard and Nuwa."
+  locale="en"
+  canonicalPath="/news"
+  title="News — Whitzard & NUWA Lab"
+  description="Research updates, company news, ecosystem progress, and public notes from Whitzard and NUWA Lab."
   ogImage="/assets/og/whitzard-og.png"
 >
   <section class="py-16 md:py-24">
@@ -28,7 +35,7 @@ function formatShortDate(date: string): string {
           News
         </h1>
         <p class="text-wz-body text-lg leading-relaxed">
-          Research updates, company news, ecosystem progress, and public notes from Whitzard and Nuwa.
+          Research updates, company news, ecosystem progress, and public notes from Whitzard and NUWA Lab.
         </p>
       </div>
 
@@ -37,7 +44,7 @@ function formatShortDate(date: string): string {
       <!-- Featured News -->
       {featuredNews.length > 0 && (
         <div class="mb-16">
-          <SectionHeader title="Featured" subtitle="Highlighted updates from Whitzard and Nuwa." />
+          <SectionHeader title="Featured" subtitle="Highlighted updates from Whitzard and NUWA Lab." />
           <div class="space-y-4">
             {featuredNews.map((item, i) => (
               i === 0 ? (
@@ -98,7 +105,7 @@ function formatShortDate(date: string): string {
                     date={item.date}
                     type={item.type}
                     summary={item.summary}
-                    href={getNewsLink(item)}
+                    href={localizedNewsLink(item)}
                     source={item.source}
                     featured={item.featured}
                   />
@@ -113,13 +120,13 @@ function formatShortDate(date: string): string {
       <CalloutPanel
         variant="default"
         align="center"
-        description="Get research updates from Nuwa Frontier AI Safety Lab delivered to your inbox."
+        description="Get research updates from NUWA Lab delivered to your inbox."
       >
         <div class="flex items-center gap-3">
           <a href={links.substack} target="_blank" rel="noopener noreferrer" class="btn btn--primary no-underline">
-            Subscribe to Nuwa Brief
+            Subscribe to NUWA Brief
           </a>
-          <a href="/" class="btn btn--secondary no-underline">
+          <a href="/en/" class="btn btn--secondary no-underline">
             Back to Home
           </a>
         </div>

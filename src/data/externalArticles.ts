@@ -11,12 +11,12 @@ export type ExternalArticle = {
 export const externalArticles: ExternalArticle[] = [
   {
     title: "The Science of Frontier AI Risk Evaluation",
-    source: "Nuwa Substack",
+    source: "NUWA Substack",
     url: "https://nuwasafety.substack.com/p/science-of-frontier-ai-risk-evaluation",
     type: "External · Substack",
     year: "2026",
     summary:
-      "Nuwa essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
+      "NUWA Lab essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
     tags: ["Frontier AI Risk", "Evaluation", "Methodology"],
   },
 ];

@@ -10,6 +10,14 @@ export type ResearchCopy = {
     researchTitle: string;
     researchBody: string;
     cta: string;
+    evidenceEyebrow: string;
+    translationTitle: string;
+    translationBody: string;
+    translationCta: string;
+    collaborationTitle: string;
+    collaborationBody: string;
+    collaborationCta: string;
+    teamCta: string;
   };
   research: {
     meta: { title: string; description: string };
@@ -36,13 +44,13 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
   en: {
     nuwa: {
       meta: {
-        title: "NVWA Lab — The Research Engine Behind Whitzard",
+        title: "NUWA Lab — The Research Engine Behind Whitzard",
         description:
-          "NVWA Lab studies frontier AI risk, builds evaluation evidence, and turns research into safety models and product capabilities.",
+          "NUWA Lab studies frontier AI risk, builds evaluation evidence, and turns research into safety models and product capabilities.",
       },
-      eyebrow: "NVWA LAB · 女娲",
+      eyebrow: "NUWA LAB · 女娲实验室",
       title: "The research engine behind Whitzard.",
-      lead: "NVWA defines frontier risks, builds evaluation and evidence, and translates research into safety models and product capabilities for controllable AI.",
+      lead: "NUWA defines frontier risks, builds evaluation and evidence, and translates research into safety models and product capabilities for controllable AI.",
       statement:
         "Research discovers the risk. Product controls it in the real world.",
       roles: [
@@ -65,18 +73,26 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       ],
       researchTitle: "Selected public research",
       researchBody:
-        "A curated view of the repository's generated research records. Every item links to its public source.",
+        "Selected papers, evaluations, and technical reports on frontier AI risk and controllable agent systems.",
       cta: "View all research",
+      evidenceEyebrow: "FEATURED RESEARCH",
+      translationTitle: "From frontier-risk evidence to runtime control.",
+      translationBody: "NUWA Lab develops risk definitions, evaluation methods, and safety intelligence. AgentGuard carries that work into the systems where agents use tools, identities, and data.",
+      translationCta: "Explore AgentGuard",
+      collaborationTitle: "Work with NUWA Lab",
+      collaborationBody: "Connect with us on frontier-risk evaluation, agent safety, AI control, and open technical evidence.",
+      collaborationCta: "Start a research conversation",
+      teamCta: "Meet the team",
     },
     research: {
       meta: {
-        title: "Research — NVWA Lab",
+        title: "Research — NUWA Lab",
         description:
-          "Public research from NVWA Lab on frontier AI risk evaluation, agent safety, AI control, and runtime security.",
+          "Public research from NUWA Lab on frontier AI risk evaluation, agent safety, AI control, and runtime security.",
       },
-      eyebrow: "NVWA RESEARCH",
+      eyebrow: "NUWA RESEARCH",
       title: "Evidence for safer, more controllable AI.",
-      lead: "Public papers, reports, position papers, and technical notes preserved from the current research data pipeline.",
+      lead: "Papers, evaluations, reports, and technical notes that turn frontier risk questions into inspectable evidence.",
       areas: [
         {
           title: "Frontier risk",
@@ -96,8 +112,8 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
         },
       ],
       featured: "Featured research",
-      all: "All research records",
-      source: "Open source",
+      all: "All research",
+      source: "Original source",
     },
     ecosystem: {
       meta: {
@@ -110,7 +126,7 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       lead: "The open ecosystem makes parts of Whitzard's security research and engineering inspectable, reusable, and extensible.",
       github: "GitHub organization",
       hf: "Hugging Face",
-      status: "Public metadata",
+      status: "Open project",
       categories: [
         {
           key: "runtime",
@@ -143,13 +159,13 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
   zh: {
     nuwa: {
       meta: {
-        title: "NVWA Lab — Whitzard 背后的前沿安全研究引擎",
+        title: "NUWA Lab — Whitzard 背后的前沿安全研究引擎",
         description:
-          "NVWA Lab 研究前沿 AI 风险、建设评测证据，并将研究转化为安全模型和产品能力。",
+          "NUWA Lab 研究前沿 AI 风险、建设评测证据，并将研究转化为安全模型和产品能力。",
       },
-      eyebrow: "NVWA LAB · 女娲",
+      eyebrow: "NUWA LAB · 女娲实验室",
       title: "Whitzard 背后的前沿安全研究引擎",
-      lead: "NVWA 定义前沿风险，建设评测与证据，并将研究转化为可控 AI 所需的安全模型和产品能力。",
+      lead: "NUWA 定义前沿风险，建设评测与证据，并将研究转化为可控 AI 所需的安全模型和产品能力。",
       statement: "研究定义风险，产品在真实世界中控制风险。",
       roles: [
         {
@@ -171,18 +187,26 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       ],
       researchTitle: "精选公开研究",
       researchBody:
-        "从仓库自动生成的研究记录中选择代表成果，每项均链接到公开来源。",
+        "聚焦前沿 AI 风险与可控智能体系统的精选论文、评测与技术报告。",
       cta: "查看全部研究",
+      evidenceEyebrow: "精选研究",
+      translationTitle: "从前沿风险证据走向真实运行时控制",
+      translationBody: "NUWA Lab 建设风险定义、评测方法与安全智能，AgentGuard 将这些能力带入智能体使用工具、身份和数据的真实系统。",
+      translationCta: "了解 AgentGuard",
+      collaborationTitle: "与 NUWA Lab 合作",
+      collaborationBody: "围绕前沿风险评测、智能体安全、AI 控制与开放技术证据开展交流与合作。",
+      collaborationCta: "联系研究合作",
+      teamCta: "认识团队",
     },
     research: {
       meta: {
-        title: "研究成果 — NVWA Lab",
+        title: "研究成果 — NUWA Lab",
         description:
-          "NVWA Lab 关于前沿 AI 风险评测、智能体安全、AI 控制与运行时安全的公开研究。",
+          "NUWA Lab 关于前沿 AI 风险评测、智能体安全、AI 控制与运行时安全的公开研究。",
       },
-      eyebrow: "NVWA 研究",
+      eyebrow: "NUWA 研究",
       title: "为更安全、更可控的 AI 建立证据",
-      lead: "保留现有研究数据管线中的公开论文、报告、立场论文与技术说明。",
+      lead: "以论文、评测、报告和技术文章，将前沿风险问题转化为可检查的研究证据。",
       areas: [
         { title: "前沿风险", body: "自主性、欺骗、算计、自我复制与失控风险。" },
         { title: "智能体安全", body: "推理校准、行为安全、护栏与运行时干预。" },
@@ -190,7 +214,7 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
         { title: "AI 控制", body: "监督、可控性、治理证据与安全边界。" },
       ],
       featured: "精选研究",
-      all: "全部研究记录",
+      all: "全部研究",
       source: "公开来源",
     },
     ecosystem: {
@@ -203,7 +227,7 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       lead: "开放生态让 Whitzard 的部分安全研究与工程能力可检查、可复用、可扩展。",
       github: "GitHub 组织",
       hf: "Hugging Face",
-      status: "公开元数据",
+      status: "开放项目",
       categories: [
         {
           key: "runtime",

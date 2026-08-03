@@ -79,8 +79,8 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       description:
         "Evaluate, govern, and protect AI agents across reasoning, tool use, identity, and data flow while preserving the autonomy that makes them valuable.",
       primary: "Book a Demo",
-      secondary: "Explore AgentGuard",
-      visualLabel: "LIVE RUNTIME TRACE",
+      secondary: "View the AgentGuard demo",
+      visualLabel: "RUNTIME DECISION TRACE",
       risk: "Sensitive data requested outside task scope",
       decision: "CORRECT",
       outcome: "ALLOWED WITH POLICY",
@@ -185,19 +185,19 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       decisions: ["Allow", "Correct", "Approve", "Redact", "Limit", "Block"],
     },
     loop: {
-      eyebrow: "NVWA LAB × AGENTGUARD",
-      title: "NVWA Lab powers the AgentGuard product line.",
+      eyebrow: "NUWA LAB × AGENTGUARD",
+      title: "NUWA Lab powers the AgentGuard product line.",
       statement:
         "Frontier safety research defines risks and builds evaluation evidence. AgentGuard turns that work into runtime control, and deployment evidence returns as new research questions.",
       lab: {
-        name: "NVWA Lab",
+        name: "NUWA Lab",
         role: "Frontier AI Safety Research Engine",
         items: [
           "Frontier risk definition",
           "Evaluation methods & evidence",
           "Safety model research",
         ],
-        link: "Explore NVWA Lab",
+        link: "Explore NUWA Lab",
       },
       bridge: {
         down: "Risk definition → Evaluation evidence → Safety models",
@@ -267,13 +267,13 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         "Whitzard 统一评测、理解并控制企业智能体的模型推理、工具调用、身份权限与数据流转。",
     },
     hero: {
-      eyebrow: "智能体安全基础设施",
+      eyebrow: "企业级智能体安全基础设施",
       title: "守其边界，行其智能",
       description:
         "让智能体在安全边界内自主行动。统一评测、理解并控制模型推理、工具调用、身份权限与数据流转。",
       primary: "预约产品演示",
-      secondary: "查看 AgentGuard",
-      visualLabel: "实时运行轨迹",
+      secondary: "查看 AgentGuard 真实演示",
+      visualLabel: "运行时决策轨迹",
       risk: "敏感数据请求超出当前任务范围",
       decision: "纠正",
       outcome: "在策略约束下允许",
@@ -358,15 +358,15 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       decisions: ["允许", "纠正", "审批", "脱敏", "限制", "阻断"],
     },
     loop: {
-      eyebrow: "NVWA LAB × AGENTGUARD",
-      title: "NVWA Lab 驱动 AgentGuard 智能体安全产品线",
+      eyebrow: "NUWA LAB × AGENTGUARD",
+      title: "NUWA Lab 驱动 AgentGuard 智能体安全产品线",
       statement:
         "前沿安全研究定义风险并建设评测证据，AgentGuard 将研究转化为运行时控制，企业部署证据持续形成新的研究问题。",
       lab: {
-        name: "NVWA Lab",
+        name: "NUWA Lab",
         role: "前沿 AI 安全研究引擎",
         items: ["前沿风险定义", "评测方法与证据", "安全模型研究"],
-        link: "了解 NVWA Lab",
+        link: "了解 NUWA Lab",
       },
       bridge: {
         down: "风险定义 → 评测证据 → 安全模型",
