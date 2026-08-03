@@ -4,11 +4,12 @@ import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
 import type { AgentGuardCopy } from "../../i18n/pages/agentguard";
 import { runtimeConsoleCopy } from "../../i18n/pages/runtime-console";
-import AgentGuardRuntimeConsole from "./AgentGuardRuntimeConsole";
+import { enterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
+import AgentGuardEnterpriseScenarioLab from "./AgentGuardEnterpriseScenarioLab";
 import AgentGuardShowcase from "./AgentGuardShowcase.astro";
 import DeploymentArchitecture from "./DeploymentArchitecture";
 import "../../styles/agentguard.css";
-import "../../styles/runtime-console.css";
+import "../../styles/enterprise-scenario-lab.css";
 
 interface Props { locale: Locale; copy: AgentGuardCopy }
 const { locale, copy } = Astro.props;
@@ -52,7 +53,7 @@ const softwareSchema = {
         <div class="ag-adapter-strip"><span>{runtimeCopy.supportedLabel}</span><div>{runtimeCopy.frameworks.map((framework) => <small>{framework}</small>)}</div></div>
       </div>
       <figure class="ag-hero__product">
-        <img src="/assets/agentguard/dashboard.png" width="2505" height="1229" alt={copy.hero.imageAlt} decoding="async" fetchpriority="high" />
+        <img src="/assets/agentguard/dashboard.png" width="2505" height="1229" alt={copy.hero.imageAlt} loading="eager" decoding="sync" fetchpriority="high" />
         <figcaption><span>AgentGuard Console</span><strong>{copy.hero.imageCaption}</strong></figcaption>
       </figure>
     </div>
@@ -82,7 +83,7 @@ const softwareSchema = {
       <div><p class="eyebrow">{copy.runtime.eyebrow}</p><h2 class="section-title">{copy.runtime.title}</h2></div>
       <p>{copy.runtime.body}</p>
     </div>
-    <div class="site-container"><AgentGuardRuntimeConsole copy={runtimeCopy} density="full" client:visible /></div>
+    <div class="site-container"><AgentGuardEnterpriseScenarioLab copy={enterpriseScenarioLabCopy[locale]} client:visible /></div>
   </section>
 
   <AgentGuardShowcase locale={locale} copy={copy.demo} />

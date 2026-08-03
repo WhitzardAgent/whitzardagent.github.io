@@ -141,6 +141,21 @@ for (const [file, content] of [["dist/agentguard/index.html", agentGuardZh], ["d
   if (!content.includes("AgentGuard Community") || !content.includes("AgentGuard Enterprise")) violations.push(`${file}: both AgentGuard editions must be present`);
 }
 
+const agentGuardRequirements = [
+  ["dist/agentguard/index.html", agentGuardZh, ["客户续约分析", "生产事故响应", "供应商付款核验", "公开规则", "企业策略示例", "从策略配置到审计闭环", "执行模拟"]],
+  ["dist/en/agentguard/index.html", agentGuardEn, ["Renewal analysis", "Production incident", "Vendor payment", "Community rule", "Enterprise policy example", "From policy to audit.", "Run simulation"]],
+];
+for (const [file, content, required] of agentGuardRequirements) {
+  for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard V3.3 marker: ${marker}`);
+  for (const legacy of ["retrieve_doc", "send_email_to", "admin@example.com", "alice@example.com"]) {
+    if (content.includes(legacy)) violations.push(`${file}: legacy two-node product demo must not remain: ${legacy}`);
+  }
+}
+const enterpriseScenarioSource = await readFile("src/data/agentguardEnterpriseScenarios.ts", "utf8");
+for (const rule of ["chain-redact-pii-on-http-post", "chain-deny-llm-output-to-shell", "trace-deny-unfiltered-to-exec", "ex4-human-check"]) {
+  if (!enterpriseScenarioSource.includes(rule)) violations.push(`AgentGuard V3.3 scenario data: missing verified Community rule: ${rule}`);
+}
+
 for (const route of coreRoutes) {
   const file = join("dist", "en", route, "index.html");
   const content = await readFile(file, "utf8");

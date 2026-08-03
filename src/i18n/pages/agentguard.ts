@@ -18,6 +18,9 @@ export type AgentGuardCopy = {
     allowed: { label: string; recipient: string; result: string; reason: string };
     denied: { label: string; recipient: string; result: string; reason: string };
     stepsTitle: string; steps: string[];
+    viewerEyebrow: string; viewerTitle: string; viewerBody: string;
+    viewerLabel: string; communityBadge: string; openOriginal: string;
+    surfaces: Array<{ id: "runtime" | "audit" | "policy" | "generation" | "video"; label: string; title: string; body: string; alt: string }>;
   };
   mechanisms: { eyebrow: string; title: string; items: Array<{ title: string; body: string; detail: string }> };
   deployment: { eyebrow: string; title: string; body: string; nodes: string[]; modes: Array<{ title: string; body: string }> };
@@ -56,7 +59,7 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
         cta: "预约企业版演示",
       },
     },
-    runtime: { eyebrow: "运行时决策", title: "完整轨迹，精细处置", body: "关联身份、工具与数据流，在行动前执行策略。" },
+    runtime: { eyebrow: "企业工作流控制", title: "一项任务，多重边界", body: "在身份、数据、工具与外部行动之间持续判断，并执行最小必要处置" },
     demo: {
       eyebrow: "真实产品界面",
       title: "真实策略，真实处置",
@@ -72,6 +75,19 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
       denied: { label: "阻断路径", recipient: "alice@example.com", result: "DENY", reason: "低信任主体不得向非管理员发送机密文档。" },
       stepsTitle: "执行过程",
       steps: ["读取机密文档。", "保留跨工具上下文。", "校验收件人、文档与信任等级。", "放行管理员路径，阻断其他路径。"],
+      viewerEyebrow: "社区版公开界面",
+      viewerTitle: "从策略配置到审计闭环",
+      viewerBody: "展示运行流量、策略配置、审批与审计；企业版在此基础上提供部署与集成支持",
+      viewerLabel: "AgentGuard 社区版公开界面",
+      communityBadge: "社区版公开界面",
+      openOriginal: "查看原图",
+      surfaces: [
+        { id: "runtime", label: "运行监控", title: "运行流量与决策", body: "按会话查看工具调用、处置结果与策略命中。", alt: "AgentGuard 社区版运行监控界面" },
+        { id: "audit", label: "审批与审计", title: "审批、规则与原始事件", body: "关联待审批任务、命中规则和可追溯事件详情。", alt: "AgentGuard 社区版审批与审计界面" },
+        { id: "policy", label: "策略配置", title: "结构化规则配置", body: "通过引导式控件配置条件，并同步预览 DSL。", alt: "AgentGuard 社区版可视化策略配置界面" },
+        { id: "generation", label: "策略生成", title: "从安全意图生成规则", body: "将自然语言安全意图转换为可审查、可发布的规则。", alt: "AgentGuard 社区版策略生成界面" },
+        { id: "video", label: "官方演示", title: "社区版完整操作流程", body: "查看运行监控、策略配置与审计流程。", alt: "AgentGuard 社区版官方演示" },
+      ],
     },
     mechanisms: {
       eyebrow: "核心机制",
@@ -134,7 +150,7 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
         cta: "Book Enterprise Demo",
       },
     },
-    runtime: { eyebrow: "RUNTIME DECISIONS", title: "Full trace. Precise control.", body: "Link identity, tools, and data flow before action executes." },
+    runtime: { eyebrow: "ENTERPRISE WORKFLOW CONTROL", title: "One task. Multiple boundaries.", body: "Continuously evaluate identity, data, tools, and external actions, then apply the minimum necessary response." },
     demo: {
       eyebrow: "PRODUCT SURFACE",
       title: "Real policy. Real decisions.",
@@ -150,6 +166,19 @@ export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
       denied: { label: "Denied", recipient: "alice@example.com", result: "DENY", reason: "A low-trust principal cannot send the document externally." },
       stepsTitle: "Execution",
       steps: ["Retrieve the confidential document.", "Retain cross-tool context.", "Check recipient, document, and trust.", "Allow the admin path; deny the other path."],
+      viewerEyebrow: "COMMUNITY PRODUCT SURFACES",
+      viewerTitle: "From policy to audit.",
+      viewerBody: "See runtime traffic, policy configuration, approval, and audit. Enterprise adds deployment and integration support.",
+      viewerLabel: "AgentGuard Community public product surfaces",
+      communityBadge: "Community Edition interface",
+      openOriginal: "View original",
+      surfaces: [
+        { id: "runtime", label: "Runtime", title: "Runtime traffic and decisions", body: "Inspect tool calls, policy matches, and decisions by session.", alt: "AgentGuard Community runtime monitoring interface" },
+        { id: "audit", label: "Approval & audit", title: "Approvals, rules, and raw events", body: "Connect pending approvals, matched rules, and traceable event details.", alt: "AgentGuard Community approval and audit interface" },
+        { id: "policy", label: "Policy editor", title: "Structured policy configuration", body: "Configure conditions through guided controls while previewing the DSL.", alt: "AgentGuard Community visual policy editor" },
+        { id: "generation", label: "Policy generation", title: "Generate policy from security intent", body: "Convert natural-language security intent into reviewable policy.", alt: "AgentGuard Community policy generation interface" },
+        { id: "video", label: "Official demo", title: "Complete Community workflow", body: "Follow runtime monitoring, policy configuration, and audit.", alt: "AgentGuard Community official demo" },
+      ],
     },
     mechanisms: {
       eyebrow: "CORE MECHANISM",
