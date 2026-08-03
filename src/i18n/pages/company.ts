@@ -1,18 +1,380 @@
-import type{Locale}from"../config";
-export type CompanyCopy={
- solutions:{meta:{title:string;description:string};eyebrow:string;title:string;lead:string;scenarios:Array<{index:string;title:string;problem:string;outcomes:string[]}>;methodTitle:string;method:Array<{title:string;body:string}>;cta:string};
- company:{meta:{title:string;description:string};eyebrow:string;title:string;lead:string;architecture:Array<{name:string;role:string;body:string;href:string}>;principlesTitle:string;principles:Array<{title:string;body:string}>;teamTitle:string;teamLead:string};
- contact:{meta:{title:string;description:string};eyebrow:string;title:string;lead:string;primary:string;emailLabel:string;paths:Array<{title:string;body:string;subject:string}>;prepareTitle:string;prepare:string[];response:string};
+import type { Locale } from "../config";
+export type CompanyCopy = {
+  solutions: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    lead: string;
+    scenarios: Array<{
+      index: string;
+      title: string;
+      problem: string;
+      outcomes: string[];
+    }>;
+    methodTitle: string;
+    method: Array<{ title: string; body: string }>;
+    cta: string;
+  };
+  company: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    lead: string;
+    architecture: Array<{
+      name: string;
+      role: string;
+      body: string;
+      href: string;
+    }>;
+    principlesTitle: string;
+    principles: Array<{ title: string; body: string }>;
+    teamTitle: string;
+    teamLead: string;
+  };
+  contact: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    lead: string;
+    primary: string;
+    emailLabel: string;
+    paths: Array<{ title: string; body: string; subject: string }>;
+    prepareTitle: string;
+    prepare: string[];
+    response: string;
+  };
 };
-export const companyCopy:Record<Locale,CompanyCopy>={
- en:{
-  solutions:{meta:{title:"Solutions — Whitzard",description:"Secure enterprise AI agent deployment across development, operations, data access, and high-impact workflows."},eyebrow:"ENTERPRISE SOLUTIONS",title:"Secure agents where autonomy meets real authority.",lead:"Whitzard helps teams establish a control boundary around the agent workflows that can change systems, use sensitive data, or act on behalf of people.",scenarios:[{index:"01",title:"Move from pilot to production",problem:"Agent prototypes gain broader tools, identities, and data access when they enter production.",outcomes:["Pre-deployment risk evaluation","Runtime controls aligned to the architecture","Continuous evidence after launch"]},{index:"02",title:"Govern high-impact tool use",problem:"Code execution, browsers, APIs, MCP servers, and operational tools can turn a model mistake into a real action.",outcomes:["Context-aware authorization","Approval for high-risk operations","Sandbox and network boundaries"]},{index:"03",title:"Protect sensitive data flow",problem:"Agents combine context from users, files, databases, tools, and external systems across multiple steps.",outcomes:["Data lineage across the trajectory","Redaction and scope limitation","Private evidence and audit"]},{index:"04",title:"Operate multi-agent systems",problem:"Risk compounds when authority and information move between agents and tools.",outcomes:["Cross-step behavior reasoning","Dynamic identity and permission","Central policy and response"]}],methodTitle:"A deployment path grounded in evidence",method:[{title:"Map the runtime",body:"Identify model, tool, identity, data, network, and sandbox boundaries."},{title:"Evaluate real workflows",body:"Test representative tasks and failure paths before policies reach production."},{title:"Enforce precise controls",body:"Choose deterministic rules and model intelligence based on risk and latency."},{title:"Improve continuously",body:"Use deployment evidence to refine evaluations, safety models, and controls."}],cta:"Discuss your agent architecture"},
-  company:{meta:{title:"Company — Whitzard",description:"Whitzard builds AI agent security infrastructure, powered by AgentGuard, NVWA Lab research, and the WhitzardAgent open ecosystem."},eyebrow:"WHITZARD · 白泽",title:"Security infrastructure for the age of autonomous software.",lead:"Whitzard is an AI agent security company. We combine deployable runtime controls, frontier safety research, and an open technical ecosystem so organizations can use agent autonomy with clear boundaries.",architecture:[{name:"Whitzard",role:"Company · AI Agent Security Infrastructure",body:"The company brand that connects product, research, open engineering, and enterprise deployment.",href:"/"},{name:"AgentGuard",role:"Core enterprise product",body:"A unified security control layer across the full agent runtime.",href:"/agentguard"},{name:"NVWA Lab",role:"Frontier safety research engine",body:"Research that defines risk, builds evaluation evidence, and advances safety models.",href:"/nuwa"},{name:"WhitzardAgent",role:"Open ecosystem",body:"Public models, tools, data, and evaluation infrastructure.",href:"/open-ecosystem"}],principlesTitle:"How we work",principles:[{title:"Secure autonomy",body:"Protect the value of agent autonomy by giving it a trustworthy operating boundary."},{title:"Evidence before claims",body:"Use public sources, evaluations, and deployment evidence instead of unsupported metrics."},{title:"Research into control",body:"Translate risk understanding into precise interventions in real systems."},{title:"Open where useful",body:"Make selected models, tools, datasets, and research inspectable and reusable."}],teamTitle:"Founding and research team",teamLead:"The current public team record is preserved from the repository. Academic affiliations and external profiles link to their sources."},
-  contact:{meta:{title:"Book a Demo — Whitzard",description:"Talk with Whitzard about AgentGuard, enterprise AI agent security, private deployment, research, or open-source collaboration."},eyebrow:"BOOK A DEMO",title:"Build a trustworthy boundary around your agents.",lead:"Tell us what your agents can access, which actions matter most, and where your data boundary lives. We will use that context to focus the conversation.",primary:"Email Whitzard",emailLabel:"Business and collaboration",paths:[{title:"Product demo",body:"Map AgentGuard to an agent stack, runtime risks, and deployment architecture.",subject:"AgentGuard product demo"},{title:"Enterprise deployment",body:"Discuss private deployment, control-plane requirements, and security operations.",subject:"AgentGuard enterprise deployment"},{title:"Research collaboration",body:"Connect on frontier risk evaluation, agent safety, safety models, or public evidence.",subject:"NVWA research collaboration"}],prepareTitle:"Helpful context to include",prepare:["Agent framework and model providers","Tools, APIs, MCP servers, and data sources","Highest-impact actions the agent can take","Deployment and data-residency constraints"],response:"No form data is sent from this website. Your email opens in your mail client and goes directly to the published Whitzard contact address."}
- },
- zh:{
-  solutions:{meta:{title:"解决方案 — Whitzard",description:"面向开发、运营、数据访问和高影响业务流程的企业智能体安全解决方案。"},eyebrow:"企业解决方案",title:"在自主性连接真实权限的地方保护智能体",lead:"Whitzard 帮助企业为能够修改系统、使用敏感数据或代表用户行动的智能体工作流建立安全控制边界。",scenarios:[{index:"01",title:"从试点走向生产",problem:"智能体原型进入生产后，会获得更多工具、身份和数据访问权限。",outcomes:["上线前风险评测","匹配架构的运行时控制","上线后的持续证据"]},{index:"02",title:"控制高影响工具调用",problem:"代码执行、浏览器、API、MCP 服务和运营工具会把模型错误变成真实行动。",outcomes:["上下文感知授权","高风险操作审批","沙箱与网络边界"]},{index:"03",title:"保护敏感数据流转",problem:"智能体会在多个步骤中组合用户、文件、数据库、工具和外部系统的信息。",outcomes:["完整轨迹的数据血缘","脱敏与范围限制","私有证据与审计"]},{index:"04",title:"运营多智能体系统",problem:"当权限和信息在多个智能体与工具之间移动时，组合风险会迅速增加。",outcomes:["跨步骤行为推理","动态身份与权限","统一策略与响应"]}],methodTitle:"以证据为基础的部署路径",method:[{title:"梳理运行时",body:"识别模型、工具、身份、数据、网络和沙箱边界。"},{title:"评测真实工作流",body:"在策略进入生产前测试代表性任务和失败路径。"},{title:"执行精准控制",body:"根据风险与延迟选择确定性规则和模型智能。"},{title:"持续优化",body:"用部署证据改进评测、安全模型与控制策略。"}],cta:"讨论你的智能体架构"},
-  company:{meta:{title:"关于我们 — Whitzard",description:"Whitzard 构建智能体安全基础设施，由 AgentGuard、NVWA Lab 研究引擎与 WhitzardAgent 开放生态共同支撑。"},eyebrow:"WHITZARD · 白泽",title:"面向自主软件时代的安全基础设施",lead:"Whitzard 是一家智能体安全公司。我们将可部署的运行时控制、前沿安全研究与开放技术生态结合起来，让组织在清晰边界内释放智能体自主性。",architecture:[{name:"Whitzard",role:"公司 · 智能体安全基础设施",body:"连接产品、研究、开放工程与企业部署的公司品牌。",href:"/zh/"},{name:"AgentGuard",role:"核心企业产品",body:"覆盖智能体完整运行过程的统一安全控制层。",href:"/zh/agentguard"},{name:"NVWA Lab",role:"前沿安全研究引擎",body:"定义风险、建设评测证据并推动安全模型的研究引擎。",href:"/zh/nuwa"},{name:"WhitzardAgent",role:"开放生态",body:"开放模型、工具、数据与评测基础设施。",href:"/zh/open-ecosystem"}],principlesTitle:"我们的工作原则",principles:[{title:"保护自主性",body:"通过可信运行边界保护智能体自主性所创造的价值。"},{title:"证据先于主张",body:"使用公开来源、评测与部署证据，不使用未经支持的指标。"},{title:"研究转化为控制",body:"把风险理解转化为真实系统中的精准干预。"},{title:"有选择地开放",body:"让部分模型、工具、数据与研究可检查、可复用。"}],teamTitle:"创始与研究团队",teamLead:"以下公开团队记录来自当前仓库，并保留学术机构与外部个人主页的来源链接。"},
-  contact:{meta:{title:"预约演示 — Whitzard",description:"与 Whitzard 讨论 AgentGuard、企业智能体安全、私有化部署、研究或开源合作。"},eyebrow:"预约产品演示",title:"为你的智能体建立可信运行边界",lead:"告诉我们智能体能够访问什么、哪些行动影响最大、数据边界在哪里，我们会据此聚焦讨论。",primary:"邮件联系 Whitzard",emailLabel:"商务与合作",paths:[{title:"产品演示",body:"将 AgentGuard 映射到智能体技术栈、运行时风险与部署架构。",subject:"预约 AgentGuard 产品演示"},{title:"企业部署",body:"讨论私有化部署、控制面要求与安全运营。",subject:"AgentGuard 企业部署咨询"},{title:"研究合作",body:"围绕前沿风险评测、智能体安全、安全模型与公开证据展开合作。",subject:"NVWA 研究合作"}],prepareTitle:"建议在邮件中提供",prepare:["智能体框架与模型提供商","工具、API、MCP 服务与数据源","智能体能够执行的最高影响行动","部署方式与数据驻留要求"],response:"网站不会提交任何表单数据。点击邮件按钮会打开你的邮件客户端，并直接发送到 Whitzard 已公开的联系邮箱。"}
- }
+export const companyCopy: Record<Locale, CompanyCopy> = {
+  en: {
+    solutions: {
+      meta: {
+        title: "Solutions — Whitzard",
+        description:
+          "Secure enterprise AI agent deployment across development, operations, data access, and high-impact workflows.",
+      },
+      eyebrow: "ENTERPRISE SOLUTIONS",
+      title: "Secure agents where autonomy meets real authority.",
+      lead: "Whitzard helps teams establish a control boundary around the agent workflows that can change systems, use sensitive data, or act on behalf of people.",
+      scenarios: [
+        {
+          index: "01",
+          title: "Move from pilot to production",
+          problem:
+            "Agent prototypes gain broader tools, identities, and data access when they enter production.",
+          outcomes: [
+            "Pre-deployment risk evaluation",
+            "Runtime controls aligned to the architecture",
+            "Continuous evidence after launch",
+          ],
+        },
+        {
+          index: "02",
+          title: "Govern high-impact tool use",
+          problem:
+            "Code execution, browsers, APIs, MCP servers, and operational tools can turn a model mistake into a real action.",
+          outcomes: [
+            "Context-aware authorization",
+            "Approval for high-risk operations",
+            "Sandbox and network boundaries",
+          ],
+        },
+        {
+          index: "03",
+          title: "Protect sensitive data flow",
+          problem:
+            "Agents combine context from users, files, databases, tools, and external systems across multiple steps.",
+          outcomes: [
+            "Data lineage across the trajectory",
+            "Redaction and scope limitation",
+            "Private evidence and audit",
+          ],
+        },
+        {
+          index: "04",
+          title: "Operate multi-agent systems",
+          problem:
+            "Risk compounds when authority and information move between agents and tools.",
+          outcomes: [
+            "Cross-step behavior reasoning",
+            "Dynamic identity and permission",
+            "Central policy and response",
+          ],
+        },
+      ],
+      methodTitle: "A deployment path grounded in evidence",
+      method: [
+        {
+          title: "Map the runtime",
+          body: "Identify model, tool, identity, data, network, and sandbox boundaries.",
+        },
+        {
+          title: "Evaluate real workflows",
+          body: "Test representative tasks and failure paths before policies reach production.",
+        },
+        {
+          title: "Enforce precise controls",
+          body: "Choose deterministic rules and model intelligence based on risk and latency.",
+        },
+        {
+          title: "Improve continuously",
+          body: "Use deployment evidence to refine evaluations, safety models, and controls.",
+        },
+      ],
+      cta: "Discuss your agent architecture",
+    },
+    company: {
+      meta: {
+        title: "Company — Whitzard",
+        description:
+          "Whitzard builds AI agent security infrastructure, powered by AgentGuard, NVWA Lab research, and the WhitzardAgent open ecosystem.",
+      },
+      eyebrow: "WHITZARD · 白泽",
+      title: "Security infrastructure for the age of autonomous software.",
+      lead: "Whitzard is an AI agent security company. We combine deployable runtime controls, frontier safety research, and an open technical ecosystem so organizations can use agent autonomy with clear boundaries.",
+      architecture: [
+        {
+          name: "Whitzard",
+          role: "Company · AI Agent Security Infrastructure",
+          body: "The company brand that connects product, research, open engineering, and enterprise deployment.",
+          href: "/",
+        },
+        {
+          name: "AgentGuard",
+          role: "Core enterprise product",
+          body: "A unified security control layer across the full agent runtime.",
+          href: "/agentguard",
+        },
+        {
+          name: "NVWA Lab",
+          role: "Frontier safety research engine",
+          body: "Research that defines risk, builds evaluation evidence, and advances safety models.",
+          href: "/nuwa",
+        },
+        {
+          name: "WhitzardAgent",
+          role: "Open ecosystem",
+          body: "Public models, tools, data, and evaluation infrastructure.",
+          href: "/open-ecosystem",
+        },
+      ],
+      principlesTitle: "How we work",
+      principles: [
+        {
+          title: "Secure autonomy",
+          body: "Protect the value of agent autonomy by giving it a trustworthy operating boundary.",
+        },
+        {
+          title: "Evidence before claims",
+          body: "Ground every claim in public sources, evaluations, and deployment evidence.",
+        },
+        {
+          title: "Research into control",
+          body: "Translate risk understanding into precise interventions in real systems.",
+        },
+        {
+          title: "Open where useful",
+          body: "Make selected models, tools, datasets, and research inspectable and reusable.",
+        },
+      ],
+      teamTitle: "Founding and research team",
+      teamLead:
+        "The current public team record is preserved from the repository. Academic affiliations and external profiles link to their sources.",
+    },
+    contact: {
+      meta: {
+        title: "Book a Demo — Whitzard",
+        description:
+          "Talk with Whitzard about AgentGuard, enterprise AI agent security, private deployment, research, or open-source collaboration.",
+      },
+      eyebrow: "BOOK A DEMO",
+      title: "Build a trustworthy boundary around your agents.",
+      lead: "Tell us what your agents can access, which actions matter most, and where your data boundary lives. We will use that context to focus the conversation.",
+      primary: "Email Whitzard",
+      emailLabel: "Business and collaboration",
+      paths: [
+        {
+          title: "Product demo",
+          body: "Map AgentGuard to an agent stack, runtime risks, and deployment architecture.",
+          subject: "AgentGuard product demo",
+        },
+        {
+          title: "Enterprise deployment",
+          body: "Discuss private deployment, control-plane requirements, and security operations.",
+          subject: "AgentGuard enterprise deployment",
+        },
+        {
+          title: "Research collaboration",
+          body: "Connect on frontier risk evaluation, agent safety, safety models, or public evidence.",
+          subject: "NVWA research collaboration",
+        },
+      ],
+      prepareTitle: "Helpful context to include",
+      prepare: [
+        "Agent framework and model providers",
+        "Tools, APIs, MCP servers, and data sources",
+        "Highest-impact actions the agent can take",
+        "Deployment and data-residency constraints",
+      ],
+      response:
+        "No form data is sent from this website. Your email opens in your mail client and goes directly to the published Whitzard contact address.",
+    },
+  },
+  zh: {
+    solutions: {
+      meta: {
+        title: "解决方案 — Whitzard",
+        description:
+          "面向开发、运营、数据访问和高影响业务流程的企业智能体安全解决方案。",
+      },
+      eyebrow: "企业解决方案",
+      title: "在自主性连接真实权限的地方保护智能体",
+      lead: "Whitzard 帮助企业为能够修改系统、使用敏感数据或代表用户行动的智能体工作流建立安全控制边界。",
+      scenarios: [
+        {
+          index: "01",
+          title: "从试点走向生产",
+          problem: "智能体原型进入生产后，会获得更多工具、身份和数据访问权限。",
+          outcomes: [
+            "上线前风险评测",
+            "匹配架构的运行时控制",
+            "上线后的持续证据",
+          ],
+        },
+        {
+          index: "02",
+          title: "控制高影响工具调用",
+          problem:
+            "代码执行、浏览器、API、MCP 服务和运营工具会把模型错误变成真实行动。",
+          outcomes: ["上下文感知授权", "高风险操作审批", "沙箱与网络边界"],
+        },
+        {
+          index: "03",
+          title: "保护敏感数据流转",
+          problem:
+            "智能体会在多个步骤中组合用户、文件、数据库、工具和外部系统的信息。",
+          outcomes: ["完整轨迹的数据血缘", "脱敏与范围限制", "私有证据与审计"],
+        },
+        {
+          index: "04",
+          title: "运营多智能体系统",
+          problem:
+            "当权限和信息在多个智能体与工具之间移动时，组合风险会迅速增加。",
+          outcomes: ["跨步骤行为推理", "动态身份与权限", "统一策略与响应"],
+        },
+      ],
+      methodTitle: "以证据为基础的部署路径",
+      method: [
+        {
+          title: "梳理运行时",
+          body: "识别模型、工具、身份、数据、网络和沙箱边界。",
+        },
+        {
+          title: "评测真实工作流",
+          body: "在策略进入生产前测试代表性任务和失败路径。",
+        },
+        {
+          title: "执行精准控制",
+          body: "根据风险与延迟选择确定性规则和模型智能。",
+        },
+        { title: "持续优化", body: "用部署证据改进评测、安全模型与控制策略。" },
+      ],
+      cta: "讨论你的智能体架构",
+    },
+    company: {
+      meta: {
+        title: "关于我们 — Whitzard",
+        description:
+          "Whitzard 构建智能体安全基础设施，由 AgentGuard、NVWA Lab 研究引擎与 WhitzardAgent 开放生态共同支撑。",
+      },
+      eyebrow: "WHITZARD · 白泽",
+      title: "面向自主软件时代的安全基础设施",
+      lead: "Whitzard 是一家智能体安全公司。我们将可部署的运行时控制、前沿安全研究与开放技术生态结合起来，让组织在清晰边界内释放智能体自主性。",
+      architecture: [
+        {
+          name: "Whitzard",
+          role: "公司 · 智能体安全基础设施",
+          body: "连接产品、研究、开放工程与企业部署的公司品牌。",
+          href: "/zh/",
+        },
+        {
+          name: "AgentGuard",
+          role: "核心企业产品",
+          body: "覆盖智能体完整运行过程的统一安全控制层。",
+          href: "/zh/agentguard",
+        },
+        {
+          name: "NVWA Lab",
+          role: "前沿安全研究引擎",
+          body: "定义风险、建设评测证据并推动安全模型的研究引擎。",
+          href: "/zh/nuwa",
+        },
+        {
+          name: "WhitzardAgent",
+          role: "开放生态",
+          body: "开放模型、工具、数据与评测基础设施。",
+          href: "/zh/open-ecosystem",
+        },
+      ],
+      principlesTitle: "我们的工作原则",
+      principles: [
+        {
+          title: "保护自主性",
+          body: "通过可信运行边界保护智能体自主性所创造的价值。",
+        },
+        {
+          title: "证据先于主张",
+          body: "以公开来源、评测与部署证据支撑每一项主张。",
+        },
+        {
+          title: "研究转化为控制",
+          body: "把风险理解转化为真实系统中的精准干预。",
+        },
+        {
+          title: "有选择地开放",
+          body: "让部分模型、工具、数据与研究可检查、可复用。",
+        },
+      ],
+      teamTitle: "创始与研究团队",
+      teamLead:
+        "以下公开团队记录来自当前仓库，并保留学术机构与外部个人主页的来源链接。",
+    },
+    contact: {
+      meta: {
+        title: "预约演示 — Whitzard",
+        description:
+          "与 Whitzard 讨论 AgentGuard、企业智能体安全、私有化部署、研究或开源合作。",
+      },
+      eyebrow: "预约产品演示",
+      title: "为你的智能体建立可信运行边界",
+      lead: "告诉我们智能体能够访问什么、哪些行动影响最大、数据边界在哪里，我们会据此聚焦讨论。",
+      primary: "邮件联系 Whitzard",
+      emailLabel: "商务与合作",
+      paths: [
+        {
+          title: "产品演示",
+          body: "将 AgentGuard 映射到智能体技术栈、运行时风险与部署架构。",
+          subject: "预约 AgentGuard 产品演示",
+        },
+        {
+          title: "企业部署",
+          body: "讨论私有化部署、控制面要求与安全运营。",
+          subject: "AgentGuard 企业部署咨询",
+        },
+        {
+          title: "研究合作",
+          body: "围绕前沿风险评测、智能体安全、安全模型与公开证据展开合作。",
+          subject: "NVWA 研究合作",
+        },
+      ],
+      prepareTitle: "建议在邮件中提供",
+      prepare: [
+        "智能体框架与模型提供商",
+        "工具、API、MCP 服务与数据源",
+        "智能体能够执行的最高影响行动",
+        "部署方式与数据驻留要求",
+      ],
+      response:
+        "网站不会提交任何表单数据。点击邮件按钮会打开你的邮件客户端，并直接发送到 Whitzard 已公开的联系邮箱。",
+    },
+  },
 };

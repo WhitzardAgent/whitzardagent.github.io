@@ -13,8 +13,9 @@ The release candidate is buildable, locally previewable, compatible with the exi
 ## Brand and product implementation
 
 - Core proposition: “Secure autonomy, by design.” / “守其边界，行其智能”.
+- The original repository Whitzard logo is used in the shared header, footer, and AgentGuard product-line panel; the original NVWA logo anchors the research-engine panel.
 - Visual system: moon-white space, xuan-indigo structure, jade research accents, cinnabar state changes, restrained borders and editorial rhythm.
-- Homepage: semantic Agent Runtime Trace (`Intent → Reasoning → Tool → Data → Action`), AgentGuard decisions, autonomy statement, risk framing, four-layer platform, three-chain narrative, research-to-deployment loop, enterprise deployment, selected open evidence, and demo CTA.
+- Homepage: semantic Agent Runtime Trace (`Intent → Reasoning → Tool → Data → Action`), AgentGuard decisions, autonomy statement, a prominent NVWA Lab → AgentGuard research/product engine with deployment feedback, risk framing, four-layer platform, three-chain narrative, enterprise deployment, selected open evidence, and demo CTA.
 - AgentGuard: before/after LLM and tool controls, thought/behavior/data chains, DSL and model collaboration, framework and MCP integration, identity, sandbox, red-team/evaluation, private deployment, and evidence links.
 - NVWA and Research: “The research engine behind Whitzard”, paper-toned visual language, 18 ingested research records retained, and `ResearchOrganization` schema.
 - Open Ecosystem: 21 ingested visible records organized into Runtime Security, Safety Models, Evaluation, Agent Infrastructure, and Cybersecurity.
@@ -69,8 +70,8 @@ Final local Lighthouse runs against the production build:
 
 | Profile | Performance | Accessibility | Best Practices | SEO | FCP | LCP | TBT | CLS |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Desktop, English home | 85 | 100 | 100 | 100 | 1.4 s | 2.0 s | 0 ms | 0 |
-| Mobile, Chinese home | 99 | 100 | 100 | 100 | 1.2 s | 2.1 s | 0 ms | 0 |
+| Desktop, English home | 83 | 100 | 100 | 100 | 1.4 s | 2.3 s | 0 ms | 0 |
+| Mobile, Chinese home | 97 | 100 | 100 | 100 | 1.4 s | 2.5 s | 0 ms | 0 |
 
 The desktop score is influenced by Lighthouse's throttled first-load cost for the explicitly required React/Framer Motion hero. Non-critical GSAP narratives use `client:visible`; no 3D, particle, Lottie, or other large decorative runtime was introduced.
 
@@ -79,8 +80,9 @@ The desktop score is influenced by Lighthouse's throttled first-load cost for th
 | Check | Result |
 |---|---|
 | Clean dependency install | Passed: `npm ci` completed from the committed lockfile |
+| Dependency security audit | Passed: `npm audit` reports 0 vulnerabilities |
 | JSONL ingest | Passed: 18 research and 21 visible open-source records generated |
-| `npm run check` | Passed: 0 errors; 30 non-blocking hints, mainly Astro 6 compatibility deprecations in the existing content schema |
+| `npm run check` | Passed: 0 errors; 30 non-blocking hints, mainly existing content-schema deprecations and unused legacy props |
 | `npm run build` | Passed: 23 static pages generated |
 | `npm run check:links` | Passed: 23 HTML files, no broken internal links |
 | Sitemap and RSS XML parsing | Passed |
@@ -104,8 +106,11 @@ The four empty MDX collection directories are intentionally retained with `.gitk
 | `tailwind-merge` | Safe merging for reusable class-based UI primitives |
 | `@astrojs/check` (dev) | Formal Astro/TypeScript diagnostics |
 | `typescript` (dev) | Explicit project typechecking toolchain |
+| `esbuild` (dev) | Pins the audited build binary at `0.28.1` for Astro/Vite's optional peer resolution |
 
 Framer Motion remains the hero and micro-interaction library. No prohibited large visual dependency was added.
+
+Before release, the framework toolchain was security-upgraded to Astro `7.1.6`, `@astrojs/mdx` `7.0.5`, and `@astrojs/react` `6.0.2`. The static route set, React islands, content ingest, and GitHub Pages build all passed after the major-version migration.
 
 ## Complete implementation file inventory
 

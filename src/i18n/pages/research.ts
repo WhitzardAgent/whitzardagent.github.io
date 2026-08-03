@@ -1,18 +1,236 @@
-import type {Locale} from "../config";
-export type ResearchCopy={
- nuwa:{meta:{title:string;description:string};eyebrow:string;title:string;lead:string;statement:string;roles:Array<{title:string;body:string}>;researchTitle:string;researchBody:string;cta:string};
- research:{meta:{title:string;description:string};eyebrow:string;title:string;lead:string;areas:Array<{title:string;body:string}>;featured:string;all:string;source:string};
- ecosystem:{meta:{title:string;description:string};eyebrow:string;title:string;lead:string;github:string;hf:string;categories:Array<{key:string;title:string;body:string}>;status:string};
+import type { Locale } from "../config";
+export type ResearchCopy = {
+  nuwa: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    lead: string;
+    statement: string;
+    roles: Array<{ title: string; body: string }>;
+    researchTitle: string;
+    researchBody: string;
+    cta: string;
+  };
+  research: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    lead: string;
+    areas: Array<{ title: string; body: string }>;
+    featured: string;
+    all: string;
+    source: string;
+  };
+  ecosystem: {
+    meta: { title: string; description: string };
+    eyebrow: string;
+    title: string;
+    lead: string;
+    github: string;
+    hf: string;
+    categories: Array<{ key: string; title: string; body: string }>;
+    status: string;
+  };
 };
-export const researchCopy:Record<Locale,ResearchCopy>={
- en:{
-  nuwa:{meta:{title:"NVWA Lab — The Research Engine Behind Whitzard",description:"NVWA Lab studies frontier AI risk, builds evaluation evidence, and turns research into safety models and product capabilities."},eyebrow:"NVWA LAB · 女娲",title:"The research engine behind Whitzard.",lead:"NVWA defines frontier risks, builds evaluation and evidence, and translates research into safety models and product capabilities for controllable AI.",statement:"Research discovers the risk. Product controls it in the real world.",roles:[{title:"Define frontier risk",body:"Study autonomy, deception, scheming, loss of control, and emerging agent behavior."},{title:"Build evaluation evidence",body:"Develop executable environments, benchmarks, methodologies, and public research records."},{title:"Advance safety models",body:"Turn risk understanding into lightweight models for reasoning, intent, trust, and runtime defense."},{title:"Inform real-world control",body:"Feed evidence into AgentGuard and learn from deployment feedback without blurring research independence."}],researchTitle:"Selected public research",researchBody:"A curated view of the repository's generated research records. Every item links to its public source.",cta:"View all research"},
-  research:{meta:{title:"Research — NVWA Lab",description:"Public research from NVWA Lab on frontier AI risk evaluation, agent safety, AI control, and runtime security."},eyebrow:"NVWA RESEARCH",title:"Evidence for safer, more controllable AI.",lead:"Public papers, reports, position papers, and technical notes preserved from the current research data pipeline.",areas:[{title:"Frontier risk",body:"Autonomy, deception, scheming, self-replication, and loss-of-control."},{title:"Agent safety",body:"Reasoning alignment, behavioral safety, guardrails, and runtime intervention."},{title:"Evaluation",body:"Executable evidence, benchmarks, methodology, and evaluation integrity."},{title:"AI control",body:"Oversight, controllability, governance evidence, and security boundaries."}],featured:"Featured research",all:"All research records",source:"Open source"},
-  ecosystem:{meta:{title:"Open Ecosystem — WhitzardAgent",description:"Open models, tools, data, and evaluation infrastructure from WhitzardAgent."},eyebrow:"WHITZARDAGENT",title:"Open models, tools, data, and evaluation.",lead:"The open ecosystem makes parts of Whitzard's security research and engineering inspectable, reusable, and extensible.",github:"GitHub organization",hf:"Hugging Face",status:"Public metadata",categories:[{key:"runtime",title:"Runtime Security",body:"Controls, defenses, and containment for agents in action."},{key:"models",title:"Safety Models",body:"Lightweight models for thought alignment, intent, trust, and reasoning safety."},{key:"evaluation",title:"Evaluation",body:"Evaluation frameworks, benchmarks, and penetration-testing infrastructure."},{key:"infrastructure",title:"Agent Infrastructure",body:"Frameworks, representations, simulators, and agent system building blocks."},{key:"cyber",title:"Cybersecurity",body:"Cyber agents, training pipelines, repositories, and datasets."}]}
- },
- zh:{
-  nuwa:{meta:{title:"NVWA Lab — Whitzard 背后的前沿安全研究引擎",description:"NVWA Lab 研究前沿 AI 风险、建设评测证据，并将研究转化为安全模型和产品能力。"},eyebrow:"NVWA LAB · 女娲",title:"Whitzard 背后的前沿安全研究引擎",lead:"NVWA 定义前沿风险，建设评测与证据，并将研究转化为可控 AI 所需的安全模型和产品能力。",statement:"研究定义风险，产品在真实世界中控制风险。",roles:[{title:"定义前沿风险",body:"研究自主性、欺骗、算计、失控与持续出现的智能体行为风险。"},{title:"建设评测证据",body:"开发可执行环境、基准、方法论与公开研究记录。"},{title:"推动安全模型",body:"将风险理解转化为推理、意图、信任与运行时防护的轻量安全模型。"},{title:"支持真实控制",body:"将证据输入 AgentGuard，并从部署反馈中学习，同时保持研究角色清晰。"}],researchTitle:"精选公开研究",researchBody:"从仓库自动生成的研究记录中选择代表成果，每项均链接到公开来源。",cta:"查看全部研究"},
-  research:{meta:{title:"研究成果 — NVWA Lab",description:"NVWA Lab 关于前沿 AI 风险评测、智能体安全、AI 控制与运行时安全的公开研究。"},eyebrow:"NVWA 研究",title:"为更安全、更可控的 AI 建立证据",lead:"保留现有研究数据管线中的公开论文、报告、立场论文与技术说明。",areas:[{title:"前沿风险",body:"自主性、欺骗、算计、自我复制与失控风险。"},{title:"智能体安全",body:"推理校准、行为安全、护栏与运行时干预。"},{title:"安全评测",body:"可执行证据、基准、方法论与评测完整性。"},{title:"AI 控制",body:"监督、可控性、治理证据与安全边界。"}],featured:"精选研究",all:"全部研究记录",source:"公开来源"},
-  ecosystem:{meta:{title:"开放生态 — WhitzardAgent",description:"WhitzardAgent 开放模型、工具、数据和评测基础设施。"},eyebrow:"WHITZARDAGENT",title:"开放模型、工具、数据与评测",lead:"开放生态让 Whitzard 的部分安全研究与工程能力可检查、可复用、可扩展。",github:"GitHub 组织",hf:"Hugging Face",status:"公开元数据",categories:[{key:"runtime",title:"运行时安全",body:"面向智能体真实行动过程的控制、防护与隔离能力。"},{key:"models",title:"安全模型",body:"用于思维校准、意图、信任与推理安全的轻量模型。"},{key:"evaluation",title:"安全评测",body:"评测框架、基准与渗透测试基础设施。"},{key:"infrastructure",title:"智能体基础设施",body:"框架、中间表示、模拟器与智能体系统基础组件。"},{key:"cyber",title:"网络安全",body:"网络安全智能体、训练流程、代码仓库与数据集。"}]}
- }
+export const researchCopy: Record<Locale, ResearchCopy> = {
+  en: {
+    nuwa: {
+      meta: {
+        title: "NVWA Lab — The Research Engine Behind Whitzard",
+        description:
+          "NVWA Lab studies frontier AI risk, builds evaluation evidence, and turns research into safety models and product capabilities.",
+      },
+      eyebrow: "NVWA LAB · 女娲",
+      title: "The research engine behind Whitzard.",
+      lead: "NVWA defines frontier risks, builds evaluation and evidence, and translates research into safety models and product capabilities for controllable AI.",
+      statement:
+        "Research discovers the risk. Product controls it in the real world.",
+      roles: [
+        {
+          title: "Define frontier risk",
+          body: "Study autonomy, deception, scheming, loss of control, and emerging agent behavior.",
+        },
+        {
+          title: "Build evaluation evidence",
+          body: "Develop executable environments, benchmarks, methodologies, and public research records.",
+        },
+        {
+          title: "Advance safety models",
+          body: "Turn risk understanding into lightweight models for reasoning, intent, trust, and runtime defense.",
+        },
+        {
+          title: "Inform real-world control",
+          body: "Feed evidence into AgentGuard and learn from deployment feedback while preserving research independence.",
+        },
+      ],
+      researchTitle: "Selected public research",
+      researchBody:
+        "A curated view of the repository's generated research records. Every item links to its public source.",
+      cta: "View all research",
+    },
+    research: {
+      meta: {
+        title: "Research — NVWA Lab",
+        description:
+          "Public research from NVWA Lab on frontier AI risk evaluation, agent safety, AI control, and runtime security.",
+      },
+      eyebrow: "NVWA RESEARCH",
+      title: "Evidence for safer, more controllable AI.",
+      lead: "Public papers, reports, position papers, and technical notes preserved from the current research data pipeline.",
+      areas: [
+        {
+          title: "Frontier risk",
+          body: "Autonomy, deception, scheming, self-replication, and loss-of-control.",
+        },
+        {
+          title: "Agent safety",
+          body: "Reasoning alignment, behavioral safety, guardrails, and runtime intervention.",
+        },
+        {
+          title: "Evaluation",
+          body: "Executable evidence, benchmarks, methodology, and evaluation integrity.",
+        },
+        {
+          title: "AI control",
+          body: "Oversight, controllability, governance evidence, and security boundaries.",
+        },
+      ],
+      featured: "Featured research",
+      all: "All research records",
+      source: "Open source",
+    },
+    ecosystem: {
+      meta: {
+        title: "Open Ecosystem — WhitzardAgent",
+        description:
+          "Open models, tools, data, and evaluation infrastructure from WhitzardAgent.",
+      },
+      eyebrow: "WHITZARDAGENT",
+      title: "Open models, tools, data, and evaluation.",
+      lead: "The open ecosystem makes parts of Whitzard's security research and engineering inspectable, reusable, and extensible.",
+      github: "GitHub organization",
+      hf: "Hugging Face",
+      status: "Public metadata",
+      categories: [
+        {
+          key: "runtime",
+          title: "Runtime Security",
+          body: "Controls, defenses, and containment for agents in action.",
+        },
+        {
+          key: "models",
+          title: "Safety Models",
+          body: "Lightweight models for thought alignment, intent, trust, and reasoning safety.",
+        },
+        {
+          key: "evaluation",
+          title: "Evaluation",
+          body: "Evaluation frameworks, benchmarks, and penetration-testing infrastructure.",
+        },
+        {
+          key: "infrastructure",
+          title: "Agent Infrastructure",
+          body: "Frameworks, representations, simulators, and agent system building blocks.",
+        },
+        {
+          key: "cyber",
+          title: "Cybersecurity",
+          body: "Cyber agents, training pipelines, repositories, and datasets.",
+        },
+      ],
+    },
+  },
+  zh: {
+    nuwa: {
+      meta: {
+        title: "NVWA Lab — Whitzard 背后的前沿安全研究引擎",
+        description:
+          "NVWA Lab 研究前沿 AI 风险、建设评测证据，并将研究转化为安全模型和产品能力。",
+      },
+      eyebrow: "NVWA LAB · 女娲",
+      title: "Whitzard 背后的前沿安全研究引擎",
+      lead: "NVWA 定义前沿风险，建设评测与证据，并将研究转化为可控 AI 所需的安全模型和产品能力。",
+      statement: "研究定义风险，产品在真实世界中控制风险。",
+      roles: [
+        {
+          title: "定义前沿风险",
+          body: "研究自主性、欺骗、算计、失控与持续出现的智能体行为风险。",
+        },
+        {
+          title: "建设评测证据",
+          body: "开发可执行环境、基准、方法论与公开研究记录。",
+        },
+        {
+          title: "推动安全模型",
+          body: "将风险理解转化为推理、意图、信任与运行时防护的轻量安全模型。",
+        },
+        {
+          title: "支持真实控制",
+          body: "将证据输入 AgentGuard，并从部署反馈中学习，同时保持研究角色清晰。",
+        },
+      ],
+      researchTitle: "精选公开研究",
+      researchBody:
+        "从仓库自动生成的研究记录中选择代表成果，每项均链接到公开来源。",
+      cta: "查看全部研究",
+    },
+    research: {
+      meta: {
+        title: "研究成果 — NVWA Lab",
+        description:
+          "NVWA Lab 关于前沿 AI 风险评测、智能体安全、AI 控制与运行时安全的公开研究。",
+      },
+      eyebrow: "NVWA 研究",
+      title: "为更安全、更可控的 AI 建立证据",
+      lead: "保留现有研究数据管线中的公开论文、报告、立场论文与技术说明。",
+      areas: [
+        { title: "前沿风险", body: "自主性、欺骗、算计、自我复制与失控风险。" },
+        { title: "智能体安全", body: "推理校准、行为安全、护栏与运行时干预。" },
+        { title: "安全评测", body: "可执行证据、基准、方法论与评测完整性。" },
+        { title: "AI 控制", body: "监督、可控性、治理证据与安全边界。" },
+      ],
+      featured: "精选研究",
+      all: "全部研究记录",
+      source: "公开来源",
+    },
+    ecosystem: {
+      meta: {
+        title: "开放生态 — WhitzardAgent",
+        description: "WhitzardAgent 开放模型、工具、数据和评测基础设施。",
+      },
+      eyebrow: "WHITZARDAGENT",
+      title: "开放模型、工具、数据与评测",
+      lead: "开放生态让 Whitzard 的部分安全研究与工程能力可检查、可复用、可扩展。",
+      github: "GitHub 组织",
+      hf: "Hugging Face",
+      status: "公开元数据",
+      categories: [
+        {
+          key: "runtime",
+          title: "运行时安全",
+          body: "面向智能体真实行动过程的控制、防护与隔离能力。",
+        },
+        {
+          key: "models",
+          title: "安全模型",
+          body: "用于思维校准、意图、信任与推理安全的轻量模型。",
+        },
+        {
+          key: "evaluation",
+          title: "安全评测",
+          body: "评测框架、基准与渗透测试基础设施。",
+        },
+        {
+          key: "infrastructure",
+          title: "智能体基础设施",
+          body: "框架、中间表示、模拟器与智能体系统基础组件。",
+        },
+        {
+          key: "cyber",
+          title: "网络安全",
+          body: "网络安全智能体、训练流程、代码仓库与数据集。",
+        },
+      ],
+    },
+  },
 };

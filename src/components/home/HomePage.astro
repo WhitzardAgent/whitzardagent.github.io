@@ -23,6 +23,8 @@ const featured = featuredNames.map((name) => openSourceAssets.find((item) => ite
     <div class="site-container"><h2 class="serif">{copy.manifesto}</h2></div>
   </section>
 
+  <ResearchProductLoop copy={copy.loop} locale={locale} client:visible />
+
   <section class="risk-section section">
     <div class="site-container">
       <div class="risk-section__head"><div><p class="eyebrow">{copy.risk.eyebrow}</p><h2 class="section-title">{copy.risk.title}</h2></div><p>{copy.risk.intro}</p></div>
@@ -37,7 +39,6 @@ const featured = featuredNames.map((name) => openSourceAssets.find((item) => ite
   </section>
 
   <ThreeChainScrolly copy={copy.chains} client:visible />
-  <ResearchProductLoop copy={copy.loop} client:visible />
 
   <section class="enterprise-section section">
     <div class="site-container enterprise-section__head"><div><p class="eyebrow">{copy.enterprise.eyebrow}</p><h2 class="section-title">{copy.enterprise.title}</h2></div><p>{copy.enterprise.intro}</p></div>
