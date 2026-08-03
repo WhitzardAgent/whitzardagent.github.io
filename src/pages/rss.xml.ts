@@ -11,9 +11,9 @@ export async function GET(context: APIContext) {
     items: researchAssets.map((paper) => ({
       title: paper.title,
       pubDate: paper.year ? new Date(`${paper.year}-01-01`) : new Date(),
-      description: paper.summary || "",
+      description: paper.summary.en,
       link: paper.url || `https://whitzard.tech/research`,
-      categories: paper.topic,
+      categories: paper.topic.en,
     })),
     customData: "<language>en</language>",
   });

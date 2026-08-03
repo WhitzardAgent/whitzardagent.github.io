@@ -84,7 +84,7 @@ const schemas = [organizationSchema, ...(breadcrumbs ? [breadcrumbs] : []), ...(
   </head>
   <body class:list={[brand === "nuwa" ? "nuwa-brand" : "whitzard-brand", locale === "zh" && "locale-zh"]}>
     <a class="skip-link" href="#main-content">{ui[locale].skip}</a>
-    <Header brand={brand} locale={locale} />
+    <Header brand={brand} locale={locale} currentPath={basePath} />
     <main id="main-content" tabindex="-1"><slot /></main>
     <Footer brand={brand} locale={locale} />
     <SmoothScroll />

@@ -1,45 +1,60 @@
+export type LocalizedText = { en: string; zh: string };
+
 export interface TeamMember {
   name: string;
-  role: string;
+  role: LocalizedText;
   affiliation: "whitzard" | "nuwa";
   category: "founding" | "research" | "engineering" | "advisor" | "partner";
-  bio: string;
-  links?: { label: string; url: string }[];
+  bio: LocalizedText;
+  links?: { label: LocalizedText; url: string }[];
   photo?: string;
 }
+
+const linkLabels = {
+  homepage: { en: "Homepage", zh: "个人主页" },
+  scholar: { en: "Google Scholar", zh: "学术主页" },
+  github: { en: "GitHub", zh: "GitHub" },
+};
 
 export const team: TeamMember[] = [
   {
     name: "Dr. Jiarun Dai",
-    role: "CEO",
+    role: { en: "CEO", zh: "CEO" },
     affiliation: "whitzard",
     category: "founding",
-    bio: "Dr. Jiarun Dai is the CEO of Whitzard and an Assistant Professor at Fudan University. He is a cybersecurity expert and former captain of the Fudan Baize CTF team, with deep experience in binary analysis, vulnerability discovery, and exploitation. He received both his Ph.D. and B.Sc. from Fudan University under the supervision of Prof. Min Yang.",
+    bio: {
+      en: "Whitzard CEO and Fudan University assistant professor, researching binary analysis, vulnerability discovery, and exploitation. Former captain of Fudan Baize CTF team.",
+      zh: "Whitzard CEO、复旦大学青年研究员，研究二进制分析、漏洞挖掘与利用。曾任复旦白泽战队队长。",
+    },
     links: [
-      { label: "Homepage", url: "https://djrrr.github.io/" },
-      { label: "Google Scholar", url: "https://scholar.google.com/citations?user=YH1Y454AAAAJ" },
+      { label: linkLabels.homepage, url: "https://djrrr.github.io/" },
+      { label: linkLabels.scholar, url: "https://scholar.google.com/citations?user=YH1Y454AAAAJ" },
     ],
   },
   {
     name: "Dr. Xudong Pan",
-    role: "CTO",
+    role: { en: "CTO", zh: "CTO" },
     affiliation: "whitzard",
     category: "founding",
-    bio: "Dr. Xudong Pan is the CTO of Whitzard and an Assistant Professor (Xuemin Fellow) at Fudan University, as well as a PhD Advisor at the Shanghai Innovation Institute. His work focuses on AI safety, model safety, AI system security, and frontier AI risk evaluation. He received both his Ph.D. and B.Sc. from Fudan University under the supervision of Prof. Min Yang.",
+    bio: {
+      en: "Whitzard CTO, Fudan University assistant professor, and Shanghai Innovation Institute PhD advisor, researching AI safety, system security, and frontier-risk evaluation.",
+      zh: "Whitzard CTO、复旦大学青年研究员、上海创智学院博士生导师，研究 AI 安全、模型安全、系统安全与前沿风险评测。",
+    },
     links: [
-      { label: "Homepage", url: "https://ravensanstete.github.io/" },
-      { label: "Google Scholar", url: "https://scholar.google.com/citations?user=Unl69CYAAAAJ" },
-      { label: "GitHub", url: "https://github.com/ravenSanstete" },
+      { label: linkLabels.homepage, url: "https://ravensanstete.github.io/" },
+      { label: linkLabels.scholar, url: "https://scholar.google.com/citations?user=Unl69CYAAAAJ" },
+      { label: linkLabels.github, url: "https://github.com/ravenSanstete" },
     ],
   },
   {
     name: "Dr. Geng Hong",
-    role: "Strategic Bridge / Research Partner",
+    role: { en: "Strategic & Research Partner", zh: "战略与研究合作" },
     affiliation: "whitzard",
     category: "partner",
-    bio: "Dr. Geng Hong is an Assistant Professor at Fudan University and a strategic bridge and research partner for Whitzard and NUWA Lab. His work spans cybercrime, penetration testing, cybersecurity ecosystem research, and in-the-wild security studies, bringing practical security insight into AI safety evaluation and governance.",
-    links: [
-      { label: "Homepage", url: "https://ghong.site/" },
-    ],
+    bio: {
+      en: "Fudan University assistant professor researching cybercrime, penetration testing, security ecosystems, and in-the-wild security, collaborating with Whitzard and NUWA Lab.",
+      zh: "复旦大学青年研究员，研究网络犯罪、渗透测试、安全生态与真实世界安全，为 Whitzard 与 NUWA Lab 提供研究协作。",
+    },
+    links: [{ label: linkLabels.homepage, url: "https://ghong.site/" }],
   },
 ];

@@ -4,10 +4,9 @@ import { localizedPath, stripLocale } from "../i18n/config";
 import { ui } from "../i18n/ui";
 import LanguageSwitch from "./LanguageSwitch.astro";
 
-interface Props { brand?: "whitzard" | "nuwa"; locale: Locale; }
-const { brand = "whitzard", locale } = Astro.props;
+interface Props { brand?: "whitzard" | "nuwa"; locale: Locale; currentPath: string; }
+const { brand = "whitzard", locale, currentPath } = Astro.props;
 const copy = ui[locale];
-const currentPath = Astro.url.pathname;
 const basePath = stripLocale(currentPath);
 const homePath = localizedPath("/", locale);
 const demoPath = localizedPath("/contact", locale);

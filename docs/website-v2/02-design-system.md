@@ -64,13 +64,13 @@
 ## 状态视觉
 
 - Allow：玉青 / 玄青
-- Correct：朱砂
+- Sanitize：玉青
+- Align：靛蓝
+- Degrade：中性蓝灰
 - Approve：靛蓝
-- Redact：淡朱砂
-- Limit：中性蓝灰
-- Block：深朱砂
+- Deny：朱砂
 
-状态出现动画应像“落印”：
+状态出现动画应克制、明确：
 
 1. 轻微缩放 0.92 → 1
 2. 透明度 0 → 1

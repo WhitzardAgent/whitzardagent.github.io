@@ -9,11 +9,14 @@ export type ResearchAsset = {
   status?: string;
   url?: string;
   pdfUrl?: string;
-  topic?: string[];
-  summary?: string;
+  topic: LocalizedList;
+  summary: LocalizedText;
   featured: boolean;
   slug: string;
 };
+
+export type LocalizedText = { en: string; zh: string };
+export type LocalizedList = { en: string[]; zh: string[] };
 
 export const researchAssets: ResearchAsset[] = [
   {
@@ -23,12 +26,22 @@ export const researchAssets: ResearchAsset[] = [
     "status": "arXiv preprint",
     "url": "https://arxiv.org/abs/2412.12140",
     "pdfUrl": "https://arxiv.org/pdf/2412.12140",
-    "topic": [
-      "Frontier AI risk",
-      "self-replication",
-      "loss of control"
-    ],
-    "summary": "Evaluates whether frontier AI systems can autonomously self-replicate and reports successful self-replication in controlled trials.",
+    "topic": {
+      "en": [
+        "Frontier AI risk",
+        "self-replication",
+        "loss of control"
+      ],
+      "zh": [
+        "前沿 AI 风险",
+        "自我复制",
+        "失控风险"
+      ]
+    },
+    "summary": {
+      "en": "Evaluates whether frontier AI systems can autonomously self-replicate and reports successful self-replication in controlled trials.",
+      "zh": "评测前沿 AI 系统的自主复制能力，并报告受控实验中的成功案例。"
+    },
     "featured": true,
     "slug": "frontier-ai-systems-have-surpassed-the-self-replicating-red-line"
   },
@@ -39,13 +52,24 @@ export const researchAssets: ResearchAsset[] = [
     "status": "arXiv preprint; work in progress",
     "url": "https://arxiv.org/abs/2503.17378",
     "pdfUrl": "https://arxiv.org/pdf/2503.17378",
-    "topic": [
-      "Frontier AI risk",
-      "self-replication",
-      "self-exfiltration",
-      "shutdown resistance"
-    ],
-    "summary": "Extends self-replication evaluation across 32 AI systems and reports autonomous replication, self-exfiltration, adaptation, and shutdown-survival behaviors.",
+    "topic": {
+      "en": [
+        "Frontier AI risk",
+        "self-replication",
+        "self-exfiltration",
+        "shutdown resistance"
+      ],
+      "zh": [
+        "前沿 AI 风险",
+        "自我复制",
+        "自我外传",
+        "抗关闭"
+      ]
+    },
+    "summary": {
+      "en": "Extends self-replication evaluation across 32 AI systems and reports autonomous replication, self-exfiltration, adaptation, and shutdown-survival behaviors.",
+      "zh": "评测 32 个 AI 系统的复制、外传、适应与抗关闭行为。"
+    },
     "featured": true,
     "slug": "large-language-model-powered-ai-systems-achieve-self-replication-with-no-human-i"
   },
@@ -56,12 +80,22 @@ export const researchAssets: ResearchAsset[] = [
     "status": "Nüwa Project preprint",
     "url": "https://ghong.site/papers/self_proliferation.pdf",
     "pdfUrl": "https://ghong.site/papers/self_proliferation.pdf",
-    "topic": [
-      "Frontier AI risk",
-      "self-proliferation",
-      "autonomous resource acquisition"
-    ],
-    "summary": "Demonstrates autonomous agents acquiring external computational resources and propagating across remote devices under controlled, simulated real-world conditions.",
+    "topic": {
+      "en": [
+        "Frontier AI risk",
+        "self-proliferation",
+        "autonomous resource acquisition"
+      ],
+      "zh": [
+        "前沿 AI 风险",
+        "自主扩散",
+        "资源获取"
+      ]
+    },
+    "summary": {
+      "en": "Demonstrates autonomous agents acquiring external computational resources and propagating across remote devices under controlled, simulated real-world conditions.",
+      "zh": "验证智能体在受控环境中获取算力并跨设备扩散的能力。"
+    },
     "featured": true,
     "slug": "one-step-from-silicon-life-autonomous-ai-agents-capable-of-uncontrolled-self-pro"
   },
@@ -72,12 +106,22 @@ export const researchAssets: ResearchAsset[] = [
     "status": "arXiv preprint",
     "url": "https://arxiv.org/abs/2509.09207",
     "pdfUrl": "https://arxiv.org/pdf/2509.09207",
-    "topic": [
-      "AI system security",
-      "autonomous penetration testing",
-      "cyber agents"
-    ],
-    "summary": "Introduces TermiBench and TermiAgent to evaluate and improve autonomous penetration-testing agents in realistic shell-acquisition settings.",
+    "topic": {
+      "en": [
+        "AI system security",
+        "autonomous penetration testing",
+        "cyber agents"
+      ],
+      "zh": [
+        "AI 系统安全",
+        "自动渗透测试",
+        "网络安全智能体"
+      ]
+    },
+    "summary": {
+      "en": "Introduces TermiBench and TermiAgent to evaluate and improve autonomous penetration-testing agents in realistic shell-acquisition settings.",
+      "zh": "提出 TermiBench 与 TermiAgent，评测真实 Shell 获取任务。"
+    },
     "featured": true,
     "slug": "shell-or-nothing-real-world-benchmarks-and-memory-activated-agents-for-automated"
   },
@@ -88,12 +132,22 @@ export const researchAssets: ResearchAsset[] = [
     "status": "arXiv preprint",
     "url": "https://arxiv.org/abs/2605.26195",
     "pdfUrl": "https://arxiv.org/pdf/2605.26195",
-    "topic": [
-      "AI system security",
-      "cybersecurity agents",
-      "self-evolving agents"
-    ],
-    "summary": "Proposes a cybersecurity agent framework that iteratively revises its own scaffold from failed attempts to adapt across targets and failure modes.",
+    "topic": {
+      "en": [
+        "AI system security",
+        "cybersecurity agents",
+        "self-evolving agents"
+      ],
+      "zh": [
+        "AI 系统安全",
+        "网络安全智能体",
+        "自进化智能体"
+      ]
+    },
+    "summary": {
+      "en": "Proposes a cybersecurity agent framework that iteratively revises its own scaffold from failed attempts to adapt across targets and failure modes.",
+      "zh": "通过失败轨迹迭代智能体脚手架，适应不同目标与失败模式。"
+    },
     "featured": true,
     "slug": "cyberevolver-structured-self-evolution-for-cybersecurity-agents-on-the-fly"
   },
@@ -104,12 +158,22 @@ export const researchAssets: ResearchAsset[] = [
     "status": "arXiv preprint",
     "url": "https://arxiv.org/abs/2505.17815",
     "pdfUrl": "https://arxiv.org/pdf/2505.17815",
-    "topic": [
-      "Frontier AI safety evaluation",
-      "evaluation faking",
-      "situational awareness"
-    ],
-    "summary": "Studies whether models recognize evaluation contexts and alter behavior, identifying observer effects that threaten safety-evaluation integrity.",
+    "topic": {
+      "en": [
+        "Frontier AI safety evaluation",
+        "evaluation faking",
+        "situational awareness"
+      ],
+      "zh": [
+        "前沿 AI 安全评测",
+        "评测伪装",
+        "情境感知"
+      ]
+    },
+    "summary": {
+      "en": "Studies whether models recognize evaluation contexts and alter behavior, identifying observer effects that threaten safety-evaluation integrity.",
+      "zh": "研究模型识别评测环境并改变行为所产生的观察者效应。"
+    },
     "featured": true,
     "slug": "evaluation-faking-unveiling-observer-effects-in-safety-evaluation-of-frontier-ai"
   },
@@ -120,12 +184,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "ICML 2026 accepted; arXiv preprint",
     "url": "https://arxiv.org/abs/2504.13707",
     "pdfUrl": "https://arxiv.org/pdf/2504.13707",
-    "topic": [
-      "AI deception",
-      "human-AI interaction",
-      "trust modeling"
-    ],
-    "summary": "Builds a lightweight framework to evaluate deception risk and user trust dynamics in open-ended human-AI dialogue.",
+    "topic": {
+      "en": [
+        "AI deception",
+        "human-AI interaction",
+        "trust modeling"
+      ],
+      "zh": [
+        "AI 欺骗",
+        "人机交互",
+        "信任建模"
+      ]
+    },
+    "summary": {
+      "en": "Builds a lightweight framework to evaluate deception risk and user trust dynamics in open-ended human-AI dialogue.",
+      "zh": "评测开放人机对话中的欺骗风险与用户信任变化。"
+    },
     "featured": true,
     "slug": "opendeception-learning-deception-and-trust-in-human-ai-interaction-via-multi-age"
   },
@@ -136,12 +210,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "ICML 2026 accepted; arXiv preprint",
     "url": "https://arxiv.org/abs/2603.07427",
     "pdfUrl": "https://arxiv.org/pdf/2603.07427",
-    "topic": [
-      "Frontier AI risk evaluation",
-      "executable environments",
-      "agent safety benchmarks"
-    ],
-    "summary": "Synthesizes executable risk-evaluation environments that combine deterministic code state with LLM-generated narrative dynamics.",
+    "topic": {
+      "en": [
+        "Frontier AI risk evaluation",
+        "executable environments",
+        "agent safety benchmarks"
+      ],
+      "zh": [
+        "前沿 AI 风险评测",
+        "可执行环境",
+        "智能体安全基准"
+      ]
+    },
+    "summary": {
+      "en": "Synthesizes executable risk-evaluation environments that combine deterministic code state with LLM-generated narrative dynamics.",
+      "zh": "合成结合确定性代码状态与叙事动态的可执行风险环境。"
+    },
     "featured": true,
     "slug": "autocontrol-arena-synthesizing-executable-test-environments-for-frontier-ai-risk"
   },
@@ -152,12 +236,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "SAIF position paper; ICML 2026 accepted",
     "url": "https://saif.org/research/position-preparing-for-ai-systems-that-deceive-developers/",
     "pdfUrl": "https://saif.org/wp-content/uploads/2026/02/Position__Preparing_for_AI_Systems_That_Deceive_Developers-4.pdf",
-    "topic": [
-      "AI deception",
-      "developer-facing risk",
-      "safety governance"
-    ],
-    "summary": "Frames deception targeting developers as a distinct frontier-AI risk and proposes recommendations for monitorability, evaluation integrity, and non-evadable control.",
+    "topic": {
+      "en": [
+        "AI deception",
+        "developer-facing risk",
+        "safety governance"
+      ],
+      "zh": [
+        "AI 欺骗",
+        "开发者风险",
+        "安全治理"
+      ]
+    },
+    "summary": {
+      "en": "Frames deception targeting developers as a distinct frontier-AI risk and proposes recommendations for monitorability, evaluation integrity, and non-evadable control.",
+      "zh": "将面向开发者的欺骗定义为独立风险，并提出可监测控制建议。"
+    },
     "featured": true,
     "slug": "position-preparing-for-ai-systems-that-deceive-developers"
   },
@@ -168,12 +262,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "ICML 2026 accepted; arXiv preprint",
     "url": "https://arxiv.org/abs/2505.11063",
     "pdfUrl": "https://arxiv.org/pdf/2505.11063",
-    "topic": [
-      "Agent behavioral safety",
-      "thought correction",
-      "guardrails"
-    ],
-    "summary": "Introduces Thought-Aligner, a plug-in method that causally corrects unsafe agent thoughts before actions are executed.",
+    "topic": {
+      "en": [
+        "Agent behavioral safety",
+        "thought correction",
+        "guardrails"
+      ],
+      "zh": [
+        "智能体行为安全",
+        "思维校准",
+        "安全护栏"
+      ]
+    },
+    "summary": {
+      "en": "Introduces Thought-Aligner, a plug-in method that causally corrects unsafe agent thoughts before actions are executed.",
+      "zh": "提出 Thought-Aligner，在行动前因果校准不安全推理。"
+    },
     "featured": true,
     "slug": "think-twice-before-you-act-enhancing-agent-behavioral-safety-with-thought-correc"
   },
@@ -184,12 +288,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "ACM CCS 2026 accepted; arXiv preprint",
     "url": "https://arxiv.org/abs/2601.12822",
     "pdfUrl": "https://arxiv.org/pdf/2601.12822",
-    "topic": [
-      "Computer-use agent security",
-      "visual prompt injection",
-      "simulation-to-real defense"
-    ],
-    "summary": "Uses simulation-derived reasoning correction to reduce unsafe actions in computer-use agents while preserving task utility.",
+    "topic": {
+      "en": [
+        "Computer-use agent security",
+        "visual prompt injection",
+        "simulation-to-real defense"
+      ],
+      "zh": [
+        "计算机操作智能体安全",
+        "视觉提示注入",
+        "仿真到真实防御"
+      ]
+    },
+    "summary": {
+      "en": "Uses simulation-derived reasoning correction to reduce unsafe actions in computer-use agents while preserving task utility.",
+      "zh": "以仿真推理校准降低计算机操作智能体的不安全行动。"
+    },
     "featured": true,
     "slug": "mirrorguard-toward-secure-computer-use-agents-via-simulation-to-real-reasoning-c"
   },
@@ -200,12 +314,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "USENIX Security 2026",
     "url": "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_luo.pdf",
     "pdfUrl": "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_luo.pdf",
-    "topic": [
-      "LLM agent system security",
-      "denial-of-service",
-      "resource governance"
-    ],
-    "summary": "Presents AgentDoS, a lifecycle-aware fuzzing framework for detecting resource-abuse DoS vulnerabilities in LLM-based agents.",
+    "topic": {
+      "en": [
+        "LLM agent system security",
+        "denial-of-service",
+        "resource governance"
+      ],
+      "zh": [
+        "大模型智能体安全",
+        "拒绝服务",
+        "资源治理"
+      ]
+    },
+    "summary": {
+      "en": "Presents AgentDoS, a lifecycle-aware fuzzing framework for detecting resource-abuse DoS vulnerabilities in LLM-based agents.",
+      "zh": "提出 AgentDoS，检测智能体资源滥用导致的拒绝服务漏洞。"
+    },
     "featured": true,
     "slug": "autonomy-comes-with-costs-detecting-denial-of-service-vulnerabilities-caused-by-"
   },
@@ -216,12 +340,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "USENIX Security 2025",
     "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/liu-fengyu",
     "pdfUrl": "https://www.usenix.org/system/files/usenixsecurity25-liu-fengyu.pdf",
-    "topic": [
-      "LLM agent system security",
-      "taint-style vulnerabilities",
-      "fuzzing"
-    ],
-    "summary": "Introduces AgentFuzz, a directed greybox fuzzing framework for finding taint-style vulnerabilities in real-world LLM-based agents.",
+    "topic": {
+      "en": [
+        "LLM agent system security",
+        "taint-style vulnerabilities",
+        "fuzzing"
+      ],
+      "zh": [
+        "大模型智能体安全",
+        "污点型漏洞",
+        "模糊测试"
+      ]
+    },
+    "summary": {
+      "en": "Introduces AgentFuzz, a directed greybox fuzzing framework for finding taint-style vulnerabilities in real-world LLM-based agents.",
+      "zh": "提出 AgentFuzz，自动发现真实智能体应用中的污点型漏洞。"
+    },
     "featured": true,
     "slug": "make-agent-defeat-agent-automatic-detection-of-taint-style-vulnerabilities-in-ll"
   },
@@ -231,12 +365,22 @@ export const researchAssets: ResearchAsset[] = [
     "year": "2025",
     "venue": "ASE 2025",
     "url": "https://conf.researchr.org/details/ase-2025/ase-2025-papers/19/Security-Debt-in-LLM-Agent-Applications-A-Measurement-Study-of-Vulnerabilities-and-M",
-    "topic": [
-      "LLM agent system security",
-      "vulnerability measurement",
-      "mitigation trade-offs"
-    ],
-    "summary": "Measures security debt in LLM-agent applications by studying known vulnerabilities and the trade-offs introduced by mitigation strategies.",
+    "topic": {
+      "en": [
+        "LLM agent system security",
+        "vulnerability measurement",
+        "mitigation trade-offs"
+      ],
+      "zh": [
+        "大模型智能体安全",
+        "漏洞测量",
+        "防护权衡"
+      ]
+    },
+    "summary": {
+      "en": "Measures security debt in LLM-agent applications by studying known vulnerabilities and the trade-offs introduced by mitigation strategies.",
+      "zh": "测量智能体应用的漏洞安全债务与防护策略权衡。"
+    },
     "featured": false,
     "slug": "security-debt-in-llm-agent-applications-a-measurement-study-of-vulnerabilities-a"
   },
@@ -247,12 +391,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "WWW 2026; arXiv preprint",
     "url": "https://arxiv.org/abs/2504.09841",
     "pdfUrl": "https://arxiv.org/pdf/2504.09841",
-    "topic": [
-      "Prompt injection",
-      "tabular agents",
-      "black-box agent security"
-    ],
-    "summary": "Proposes an evolutionary prompt-injection attack that targets black-box LLM-powered tabular agents under structural payload constraints.",
+    "topic": {
+      "en": [
+        "Prompt injection",
+        "tabular agents",
+        "black-box agent security"
+      ],
+      "zh": [
+        "提示注入",
+        "表格智能体",
+        "黑盒智能体安全"
+      ]
+    },
+    "summary": {
+      "en": "Proposes an evolutionary prompt-injection attack that targets black-box LLM-powered tabular agents under structural payload constraints.",
+      "zh": "提出面向黑盒表格智能体的结构约束进化提示注入攻击。"
+    },
     "featured": false,
     "slug": "struphantom-evolutionary-injection-attacks-on-black-box-tabular-agents-powered-b"
   },
@@ -263,12 +417,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "ICLR 2026; arXiv preprint",
     "url": "https://arxiv.org/abs/2506.16150",
     "pdfUrl": "https://arxiv.org/pdf/2506.16150",
-    "topic": [
-      "LLM behavioral risk",
-      "criminal potential",
-      "deception and manipulation"
-    ],
-    "summary": "Evaluates LLM criminal potential across traits such as false statements, framing, psychological manipulation, emotional disguise, and moral disengagement.",
+    "topic": {
+      "en": [
+        "LLM behavioral risk",
+        "criminal potential",
+        "deception and manipulation"
+      ],
+      "zh": [
+        "大模型行为风险",
+        "犯罪潜力",
+        "欺骗与操纵"
+      ]
+    },
+    "summary": {
+      "en": "Evaluates LLM criminal potential across traits such as false statements, framing, psychological manipulation, emotional disguise, and moral disengagement.",
+      "zh": "从虚假陈述、操纵与道德脱离等维度评测大模型犯罪潜力。"
+    },
     "featured": true,
     "slug": "prison-unmasking-the-criminal-potential-of-large-language-models"
   },
@@ -279,12 +443,22 @@ export const researchAssets: ResearchAsset[] = [
     "status": "arXiv preprint",
     "url": "https://arxiv.org/abs/2604.07879",
     "pdfUrl": "https://arxiv.org/pdf/2604.07879",
-    "topic": [
-      "Generative model safety",
-      "NSFW detection",
-      "diffusion models"
-    ],
-    "summary": "Detects unsafe diffusion outputs during the generation process by approximating latent decoding, enabling earlier and cheaper NSFW intervention.",
+    "topic": {
+      "en": [
+        "Generative model safety",
+        "NSFW detection",
+        "diffusion models"
+      ],
+      "zh": [
+        "生成模型安全",
+        "不良内容检测",
+        "扩散模型"
+      ]
+    },
+    "summary": {
+      "en": "Detects unsafe diffusion outputs during the generation process by approximating latent decoding, enabling earlier and cheaper NSFW intervention.",
+      "zh": "通过近似潜变量解码，在扩散生成过程中低成本检测不安全内容。"
+    },
     "featured": false,
     "slug": "flowguard-towards-lightweight-in-generation-safety-detection-for-diffusion-model"
   },
@@ -295,12 +469,22 @@ export const researchAssets: ResearchAsset[] = [
     "venue": "WWW 2025; arXiv preprint",
     "url": "https://arxiv.org/abs/2501.12210",
     "pdfUrl": "https://arxiv.org/pdf/2501.12210",
-    "topic": [
-      "LLM safety",
-      "jailbreak defense",
-      "safety-performance trade-off"
-    ],
-    "summary": "Evaluates whether jailbreak defenses improve safety without degrading model utility, highlighting persistent trade-offs in practical LLM defense.",
+    "topic": {
+      "en": [
+        "LLM safety",
+        "jailbreak defense",
+        "safety-performance trade-off"
+      ],
+      "zh": [
+        "大模型安全",
+        "越狱防御",
+        "安全性能权衡"
+      ]
+    },
+    "summary": {
+      "en": "Evaluates whether jailbreak defenses improve safety without degrading model utility, highlighting persistent trade-offs in practical LLM defense.",
+      "zh": "评测越狱防御的安全收益及其对模型效用的持续影响。"
+    },
     "featured": false,
     "slug": "you-can-t-eat-your-cake-and-have-it-too-the-performance-degradation-of-llms-with"
   }

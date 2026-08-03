@@ -8,11 +8,13 @@ export type CompanyCopy = {
     scenarios: Array<{
       index: string;
       title: string;
-      problem: string;
-      outcomes: string[];
+      task: string;
+      risk: string;
+      controls: string[];
+      link: string;
     }>;
-    methodTitle: string;
-    method: Array<{ title: string; body: string }>;
+    journeyTitle: string;
+    journey: string[];
     cta: string;
   };
   company: {
@@ -53,74 +55,45 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           "Secure enterprise AI agent deployment across development, operations, data access, and high-impact workflows.",
       },
       eyebrow: "ENTERPRISE SOLUTIONS",
-      title: "Secure agents where autonomy meets real authority.",
-      lead: "Whitzard helps teams establish a control boundary around the agent workflows that can change systems, use sensitive data, or act on behalf of people.",
+      title: "Secure high-impact agent workflows.",
+      lead: "Secure data access, system changes, external actions, and multi-agent operations.",
       scenarios: [
         {
           index: "01",
-          title: "Move from pilot to production",
-          problem:
-            "Agent prototypes gain broader tools, identities, and data access when they enter production.",
-          outcomes: [
-            "Pre-deployment risk evaluation",
-            "Runtime controls aligned to the architecture",
-            "Continuous evidence after launch",
-          ],
+          title: "Data and knowledge agents",
+          task: "Enterprise search, reporting, and customer data processing.",
+          risk: "Unauthorized access, sensitive egress, and lost lineage.",
+          controls: ["Data lineage", "Redaction", "Scope limits", "Private audit"],
+          link: "Data controls",
         },
         {
           index: "02",
-          title: "Govern high-impact tool use",
-          problem:
-            "Code execution, browsers, APIs, MCP servers, and operational tools can turn a model mistake into a real action.",
-          outcomes: [
-            "Context-aware authorization",
-            "Approval for high-risk operations",
-            "Sandbox and network boundaries",
-          ],
+          title: "Development and operations agents",
+          task: "Code, shell, filesystem, and cloud operations.",
+          risk: "Prompt injection, unauthorized execution, and compound chains.",
+          controls: ["Dynamic permission", "Approval", "Sandbox", "Network boundary"],
+          link: "Runtime controls",
         },
         {
           index: "03",
-          title: "Protect sensitive data flow",
-          problem:
-            "Agents combine context from users, files, databases, tools, and external systems across multiple steps.",
-          outcomes: [
-            "Data lineage across the trajectory",
-            "Redaction and scope limitation",
-            "Private evidence and audit",
-          ],
+          title: "External-action agents",
+          task: "Email, HTTP, browser, CRM, and notification tools.",
+          risk: "Wrong recipients, untrusted domains, and irreversible action.",
+          controls: ["Allowlists", "Delegated identity", "Approval", "Audit"],
+          link: "Action controls",
         },
         {
           index: "04",
-          title: "Operate multi-agent systems",
-          problem:
-            "Risk compounds when authority and information move between agents and tools.",
-          outcomes: [
-            "Cross-step behavior reasoning",
-            "Dynamic identity and permission",
-            "Central policy and response",
-          ],
+          title: "Multi-agent platforms",
+          task: "Agent collaboration, shared tools, and distributed runtime.",
+          risk: "Lateral authority, compound paths, and policy drift.",
+          controls: ["Control plane", "Dynamic identity", "Cross-agent trace", "Unified response"],
+          link: "Deployment",
         },
       ],
-      methodTitle: "A deployment path grounded in evidence",
-      method: [
-        {
-          title: "Map the runtime",
-          body: "Identify model, tool, identity, data, network, and sandbox boundaries.",
-        },
-        {
-          title: "Evaluate real workflows",
-          body: "Test representative tasks and failure paths before policies reach production.",
-        },
-        {
-          title: "Enforce precise controls",
-          body: "Choose deterministic rules and model intelligence based on risk and latency.",
-        },
-        {
-          title: "Improve continuously",
-          body: "Use deployment evidence to refine evaluations, safety models, and controls.",
-        },
-      ],
-      cta: "Discuss your agent architecture",
+      journeyTitle: "Deployment path",
+      journey: ["Select workflow", "Define boundary", "Connect AgentGuard", "Verify continuously"],
+      cta: "Assess your workflow",
     },
     company: {
       meta: {
@@ -129,8 +102,8 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           "Whitzard builds AI agent security infrastructure, powered by AgentGuard, NUWA Lab research, and the WhitzardAgent open ecosystem.",
       },
       eyebrow: "WHITZARD · 白泽",
-      title: "Security infrastructure for the age of autonomous software.",
-      lead: "Whitzard is an AI agent security company. We combine deployable runtime controls, frontier safety research, and an open technical ecosystem so organizations can use agent autonomy with clear boundaries.",
+      title: "Building agent security infrastructure.",
+      lead: "Whitzard connects AgentGuard, NUWA Lab, and an open technical ecosystem.",
       architecture: [
         {
           name: "Whitzard",
@@ -187,8 +160,8 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           "Talk with Whitzard about AgentGuard, enterprise AI agent security, private deployment, research, or open-source collaboration.",
       },
       eyebrow: "BOOK A DEMO",
-      title: "Build a trustworthy boundary around your agents.",
-      lead: "Tell us what your agents can access, which actions matter most, and where your data boundary lives. We will use that context to focus the conversation.",
+      title: "Book an AgentGuard demo.",
+      lead: "Share your stack, critical permissions, and deployment boundary for a focused demo.",
       primary: "Email Whitzard",
       emailLabel: "Business and collaboration",
       paths: [
@@ -227,58 +200,45 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           "面向开发、运营、数据访问和高影响业务流程的企业智能体安全解决方案。",
       },
       eyebrow: "企业解决方案",
-      title: "在自主性连接真实权限的地方保护智能体",
-      lead: "Whitzard 帮助企业为能够修改系统、使用敏感数据或代表用户行动的智能体工作流建立安全控制边界。",
+      title: "高影响智能体的安全落地",
+      lead: "覆盖数据访问、系统变更、外部行动与多智能体协作。",
       scenarios: [
         {
           index: "01",
-          title: "从试点走向生产",
-          problem: "智能体原型进入生产后，会获得更多工具、身份和数据访问权限。",
-          outcomes: [
-            "上线前风险评测",
-            "匹配架构的运行时控制",
-            "上线后的持续证据",
-          ],
+          title: "数据与知识智能体",
+          task: "企业检索、报告生成、客户数据处理",
+          risk: "越权访问、敏感外流、权限属性丢失",
+          controls: ["数据血缘", "脱敏", "范围限制", "私有审计"],
+          link: "数据控制",
         },
         {
           index: "02",
-          title: "控制高影响工具调用",
-          problem:
-            "代码执行、浏览器、API、MCP 服务和运营工具会把模型错误变成真实行动。",
-          outcomes: ["上下文感知授权", "高风险操作审批", "沙箱与网络边界"],
+          title: "开发与运维智能体",
+          task: "代码、Shell、文件系统、云资源操作",
+          risk: "提示注入、未授权执行、危险组合链",
+          controls: ["动态权限", "人工审批", "沙箱", "网络边界"],
+          link: "运行时控制",
         },
         {
           index: "03",
-          title: "保护敏感数据流转",
-          problem:
-            "智能体会在多个步骤中组合用户、文件、数据库、工具和外部系统的信息。",
-          outcomes: ["完整轨迹的数据血缘", "脱敏与范围限制", "私有证据与审计"],
+          title: "外部行动智能体",
+          task: "邮件、HTTP、浏览器、CRM、通知工具",
+          risk: "错误收件人、非允许域、不可逆行动",
+          controls: ["允许列表", "委托身份", "审批", "完整审计"],
+          link: "行动控制",
         },
         {
           index: "04",
-          title: "运营多智能体系统",
-          problem:
-            "当权限和信息在多个智能体与工具之间移动时，组合风险会迅速增加。",
-          outcomes: ["跨步骤行为推理", "动态身份与权限", "统一策略与响应"],
+          title: "多智能体平台",
+          task: "智能体协作、共享工具、跨节点运行",
+          risk: "权限横向扩散、组合链路、策略漂移",
+          controls: ["集中控制面", "动态身份", "跨智能体轨迹", "统一响应"],
+          link: "部署方式",
         },
       ],
-      methodTitle: "以证据为基础的部署路径",
-      method: [
-        {
-          title: "梳理运行时",
-          body: "识别模型、工具、身份、数据、网络和沙箱边界。",
-        },
-        {
-          title: "评测真实工作流",
-          body: "在策略进入生产前测试代表性任务和失败路径。",
-        },
-        {
-          title: "执行精准控制",
-          body: "根据风险与延迟选择确定性规则和模型智能。",
-        },
-        { title: "持续优化", body: "用部署证据改进评测、安全模型与控制策略。" },
-      ],
-      cta: "讨论你的智能体架构",
+      journeyTitle: "落地路径",
+      journey: ["选择工作流", "建立边界", "接入 AgentGuard", "持续验证"],
+      cta: "评估你的工作流",
     },
     company: {
       meta: {
@@ -287,8 +247,8 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           "Whitzard 构建智能体安全基础设施，由 AgentGuard、NUWA Lab 研究引擎与 WhitzardAgent 开放生态共同支撑。",
       },
       eyebrow: "WHITZARD · 白泽",
-      title: "面向自主软件时代的安全基础设施",
-      lead: "Whitzard 是一家智能体安全公司。我们将可部署的运行时控制、前沿安全研究与开放技术生态结合起来，让组织在清晰边界内释放智能体自主性。",
+      title: "构建智能体安全基础设施",
+      lead: "Whitzard 连接 AgentGuard、NUWA Lab 与开放技术生态。",
       architecture: [
         {
           name: "Whitzard",
@@ -345,8 +305,8 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           "与 Whitzard 讨论 AgentGuard、企业智能体安全、私有化部署、研究或开源合作。",
       },
       eyebrow: "预约产品演示",
-      title: "为你的智能体建立可信运行边界",
-      lead: "告诉我们智能体能够访问什么、哪些行动影响最大、数据边界在哪里，我们会据此聚焦讨论。",
+      title: "预约 AgentGuard 演示",
+      lead: "提交技术栈、关键权限与部署边界，获取针对性演示。",
       primary: "邮件联系 Whitzard",
       emailLabel: "商务与合作",
       paths: [
@@ -373,8 +333,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
         "智能体能够执行的最高影响行动",
         "部署方式与数据驻留要求",
       ],
-      response:
-        "网站不会提交任何表单数据。点击邮件按钮会打开你的邮件客户端，并直接发送到 Whitzard 已公开的联系邮箱。",
+      response: "邮件将由本地客户端直接发送至 Whitzard 联系邮箱。",
     },
   },
 };

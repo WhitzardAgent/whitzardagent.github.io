@@ -2,455 +2,139 @@ import type { Locale } from "../config";
 
 export type AgentGuardCopy = {
   meta: { title: string; description: string };
-  hero: {
-    eyebrow: string;
-    title: string;
-    body: string;
-    primary: string;
-    secondary: string;
-  };
+  hero: { eyebrow: string; title: string; body: string; primary: string; secondary: string; imageAlt: string; imageCaption: string };
+  runtime: { eyebrow: string; title: string; body: string };
   demo: {
-    eyebrow: string;
-    title: string;
-    body: string;
-    play: string;
-    dashboardTitle: string;
-    dashboardBody: string;
-    policyTitle: string;
-    policyBody: string;
-    generationTitle: string;
-    generationBody: string;
+    eyebrow: string; title: string; body: string; play: string;
+    dashboardTitle: string; dashboardBody: string; policyTitle: string; policyBody: string;
+    generationTitle: string; generationBody: string;
     allowed: { label: string; recipient: string; result: string; reason: string };
     denied: { label: string; recipient: string; result: string; reason: string };
-    stepsTitle: string;
-    steps: string[];
+    stepsTitle: string; steps: string[];
   };
-  runtime: {
-    eyebrow: string;
-    title: string;
-    body: string;
-    events: Array<{ name: string; detail: string }>;
-    decisions: string[];
-    alert: string;
-    resolution: string;
-  };
-  chains: {
-    eyebrow: string;
-    title: string;
-    body: string;
-    items: Array<{ title: string; body: string }>;
-    fusion: string;
-  };
-  capabilities: {
-    eyebrow: string;
-    title: string;
-    items: Array<{ title: string; body: string }>;
-  };
-  layers: {
-    eyebrow: string;
-    title: string;
-    items: Array<{
-      index: string;
-      title: string;
-      body: string;
-      items: string[];
-    }>;
-  };
-  deployment: {
-    eyebrow: string;
-    title: string;
-    body: string;
-    nodes: string[];
-    modes: Array<{ title: string; body: string }>;
-  };
-  evidence: {
-    eyebrow: string;
-    title: string;
-    body: string;
-    items: Array<{ title: string; body: string; label: string; href: string }>;
-  };
+  mechanisms: { eyebrow: string; title: string; items: Array<{ title: string; body: string; detail: string }> };
+  deployment: { eyebrow: string; title: string; body: string; nodes: string[]; modes: Array<{ title: string; body: string }> };
+  evidence: { eyebrow: string; title: string; items: Array<{ title: string; body: string; label: string; href: string }> };
   cta: { title: string; body: string; primary: string; github: string };
 };
 
 export const agentguardCopy: Record<Locale, AgentGuardCopy> = {
-  en: {
-    meta: {
-      title: "AgentGuard — Full Runtime Security for AI Agents",
-      description:
-        "AgentGuard provides unified security control across AI agent reasoning, tool use, identity, data flow, evaluation, and operations.",
-    },
-    hero: {
-      eyebrow: "AGENTGUARD · ENTERPRISE AGENT SECURITY",
-      title: "Security control for the full agent runtime.",
-      body: "Observe, reason, and intervene before model calls, after reasoning, around tool execution, and across the data and identity boundaries that agents traverse.",
-      primary: "Book a Demo",
-      secondary: "View on GitHub",
-    },
-    demo: {
-      eyebrow: "REAL PRODUCT SURFACE",
-      title: "See the policy decision, not just the promise.",
-      body: "This walkthrough uses AgentGuard's published dashboard and quick-start policy: retrieve a confidential document, then decide whether the agent may send it to the requested recipient.",
-      play: "Play the official AgentGuard demo",
-      dashboardTitle: "Runtime dashboard",
-      dashboardBody: "Inspect recent traffic, pending approvals, audit records, matched rules, risk scores, and the final decision.",
-      policyTitle: "Visual policy builder",
-      policyBody: "Configure access-control and cross-tool trajectory rules through structured controls.",
-      generationTitle: "Policy generation",
-      generationBody: "Translate a security intention into a reviewable policy before enforcement.",
-      allowed: { label: "Allowed path", recipient: "admin@example.com", result: "ALLOW", reason: "The approved recipient satisfies the rule for confidential document 0." },
-      denied: { label: "Denied path", recipient: "alice@example.com", result: "DENY", reason: "A low-trust principal cannot send confidential document 0 to a non-admin recipient." },
-      stepsTitle: "What happens in the demo",
-      steps: ["The agent calls retrieve_doc for document 0.", "AgentGuard retains the cross-tool context before send_email_to runs.", "The rule evaluates recipient, document, and principal trust level.", "AgentGuard allows the admin path and blocks the non-admin path before the tool action."],
-    },
-    runtime: {
-      eyebrow: "RUNTIME CONTROL SURFACE",
-      title: "Control risk at the moment it becomes actionable.",
-      body: "AgentGuard connects to four critical runtime events and chooses the least disruptive control that preserves safe autonomy.",
-      events: [
-        {
-          name: "Before LLM",
-          detail: "Context, identity, intent, and policy boundary",
-        },
-        {
-          name: "After LLM",
-          detail: "Reasoning alignment and emerging action plan",
-        },
-        {
-          name: "Before Tool",
-          detail: "Permission, arguments, destination, and data scope",
-        },
-        {
-          name: "After Tool",
-          detail: "Result validation, lineage, and downstream exposure",
-        },
-      ],
-      decisions: ["Allow", "Correct", "Approve", "Redact", "Limit", "Block"],
-      alert: "Sensitive dataset requested by an untrusted tool path",
-      resolution: "Redact data · Limit scope · Continue safely",
-    },
-    chains: {
-      eyebrow: "THREE-CHAIN INTELLIGENCE",
-      title: "Reason across thought, behavior, and data—together.",
-      body: "A risky action rarely has one cause. AgentGuard connects intent, multi-step behavior, tool context, and data lineage before it decides.",
-      items: [
-        {
-          title: "Thought chain alignment",
-          body: "Identify and correct high-risk reasoning before it becomes action.",
-        },
-        {
-          title: "Behavior chain reasoning",
-          body: "Connect risk across steps, tools, agents, and delegated authority.",
-        },
-        {
-          title: "Data lineage tracking",
-          body: "Trace sensitive data from source through use, transformation, and destination.",
-        },
-      ],
-      fusion: "Deterministic DSL × Lightweight Safety Model × Frontier Model",
-    },
-    capabilities: {
-      eyebrow: "CONTROL CAPABILITIES",
-      title: "Security primitives for production agent systems.",
-      items: [
-        {
-          title: "Framework runtime hooks",
-          body: "Integrate controls at model and tool boundaries while preserving the agent architecture.",
-        },
-        {
-          title: "Tool & MCP security proxy",
-          body: "Inspect and govern tool calls, MCP traffic, arguments, and destinations.",
-        },
-        {
-          title: "Dynamic identity & permission",
-          body: "Evaluate delegated authority against user, task, resource, and runtime context.",
-        },
-        {
-          title: "Trusted sandbox & network isolation",
-          body: "Contain code, filesystem, process, and network activity inside explicit boundaries.",
-        },
-        {
-          title: "Automated red team & continuous evaluation",
-          body: "Test the same policies and runtime surfaces that protect production agents.",
-        },
-        {
-          title: "Private control plane",
-          body: "Keep policies, traces, evidence, and sensitive runtime data in your environment.",
-        },
-      ],
-    },
-    layers: {
-      eyebrow: "ONE PLATFORM",
-      title: "From secure connection to continuous improvement.",
-      items: [
-        {
-          index: "01",
-          title: "Secure Connect",
-          body: "Connect agents, tools, models, identity, data, and sandbox boundaries.",
-          items: ["SDK / Hook", "Sidecar", "Gateway", "MCP proxy"],
-        },
-        {
-          index: "02",
-          title: "Runtime Intelligence",
-          body: "Understand trajectory risk and intervene with precise controls.",
-          items: [
-            "Thought chain",
-            "Behavior chain",
-            "Data lineage",
-            "Decision engine",
-          ],
-        },
-        {
-          index: "03",
-          title: "Evaluate & Operate",
-          body: "Continuously test, observe, investigate, and improve agent security.",
-          items: [
-            "Red teaming",
-            "Evaluation",
-            "Risk profiles",
-            "Audit response",
-          ],
-        },
-        {
-          index: "04",
-          title: "Model & Data Foundation",
-          body: "Turn research and deployment evidence into stronger safety intelligence.",
-          items: [
-            "Data factory",
-            "Safety models",
-            "Risk knowledge",
-            "Feedback loop",
-          ],
-        },
-      ],
-    },
-    deployment: {
-      eyebrow: "ENTERPRISE ARCHITECTURE",
-      title: "Deploy controls where your trust boundary lives.",
-      body: "Use lightweight hooks for agent context, gateways for shared enforcement, and a private control plane for policy, evidence, and operations.",
-      nodes: [
-        "Agent frameworks",
-        "SDK · Sidecar · Gateway",
-        "AgentGuard Runtime",
-        "Models · Tools · MCP · Data",
-        "Private Control Plane",
-      ],
-      modes: [
-        {
-          title: "Application embedded",
-          body: "SDK and runtime hooks provide detailed agent context.",
-        },
-        {
-          title: "Infrastructure enforced",
-          body: "Sidecar and gateway modes centralize tool and data controls.",
-        },
-        {
-          title: "Privately operated",
-          body: "Run the control plane and evidence store inside your environment.",
-        },
-      ],
-    },
-    evidence: {
-      eyebrow: "VERIFIABLE EVIDENCE",
-      title: "Built in the open where evidence is available.",
-      body: "Explore the open-source project, safety models, and research that substantiate AgentGuard's technical direction.",
-      items: [
-        {
-          title: "AgentGuard open source",
-          body: "Public runtime security project in the WhitzardAgent organization.",
-          label: "Open GitHub",
-          href: "https://github.com/WhitzardAgent/AgentGuard",
-        },
-        {
-          title: "Safety models",
-          body: "Explore Thought-Aligner, MirrorGuard, ReasoningShield, IntentNet, TrustNet, and related safety work.",
-          label: "Browse ecosystem",
-          href: "/en/open-ecosystem",
-        },
-        {
-          title: "NUWA research",
-          body: "Read papers and evaluation work on frontier risk, agent safety, AI control, and runtime security.",
-          label: "Read research",
-          href: "/en/research",
-        },
-      ],
-    },
-    cta: {
-      title: "Put a security control layer around your agent runtime.",
-      body: "Map AgentGuard to your agent frameworks, tools, MCP servers, identity system, data boundary, and deployment requirements.",
-      primary: "Book a Demo",
-      github: "View GitHub",
-    },
-  },
   zh: {
-    meta: {
-      title: "AgentGuard — 企业级智能体运行时安全平台",
-      description:
-        "AgentGuard 统一控制企业智能体的模型推理、工具调用、身份权限、数据流转、持续评测与安全运营。",
-    },
+    meta: { title: "AgentGuard — 智能体运行时安全控制", description: "AgentGuard 在 LLM、工具、身份与数据边界执行运行时安全策略。" },
     hero: {
       eyebrow: "AGENTGUARD · 企业级智能体安全",
-      title: "覆盖智能体完整运行过程的统一安全控制层",
-      body: "在模型调用前、推理生成后、工具执行前后，以及智能体跨越的数据和身份边界中，持续观察、判断并干预风险。",
-      primary: "预约产品演示",
-      secondary: "查看 GitHub",
+      title: "智能体运行时安全控制层",
+      body: "在 LLM 与工具执行前后识别风险，并执行脱敏、降级、审批或阻断。",
+      primary: "预约演示",
+      secondary: "查看源码",
+      imageAlt: "AgentGuard 运行时控制台，显示流量、审批与审计记录",
+      imageCaption: "策略、审批与审计",
     },
+    runtime: { eyebrow: "运行时决策", title: "完整轨迹，精细处置", body: "关联身份、工具与数据流，在行动前执行策略。" },
     demo: {
       eyebrow: "真实产品界面",
-      title: "看见策略如何做出决定，而不只是听见产品承诺",
-      body: "这个演示使用 AgentGuard 已公开的控制台和快速开始策略：智能体读取一份机密文档，然后由策略判断是否允许发送给指定收件人。",
-      play: "播放 AgentGuard 官方演示",
+      title: "真实策略，真实处置",
+      body: "基于公开控制台与跨工具规则，展示读取、校验与阻断。",
+      play: "播放官方演示",
       dashboardTitle: "运行时控制台",
-      dashboardBody: "查看实时流量、待审批请求、审计记录、命中规则、风险评分和最终决策。",
+      dashboardBody: "流量、审批、规则与审计集中呈现。",
       policyTitle: "可视化策略配置",
-      policyBody: "通过结构化控件配置访问控制与跨工具轨迹规则。",
+      policyBody: "通过结构化控件配置访问与轨迹规则。",
       generationTitle: "策略生成",
-      generationBody: "将安全意图转化为可审查的策略，再进入执行阶段。",
-      allowed: { label: "允许路径", recipient: "admin@example.com", result: "ALLOW", reason: "管理员收件人满足机密文档 0 的发送规则。" },
-      denied: { label: "阻断路径", recipient: "alice@example.com", result: "DENY", reason: "低信任主体不能把机密文档 0 发送给非管理员收件人。" },
-      stepsTitle: "演示中发生了什么",
-      steps: ["智能体调用 retrieve_doc 读取文档 0。", "在 send_email_to 执行前，AgentGuard 保留跨工具上下文。", "策略同时判断收件人、文档与主体信任级别。", "AgentGuard 允许管理员路径，并在工具行动前阻断非管理员路径。"],
+      generationBody: "将安全意图转化为可审查策略。",
+      allowed: { label: "允许路径", recipient: "admin@example.com", result: "ALLOW", reason: "管理员地址符合机密文档发送规则。" },
+      denied: { label: "阻断路径", recipient: "alice@example.com", result: "DENY", reason: "低信任主体不得向非管理员发送机密文档。" },
+      stepsTitle: "执行过程",
+      steps: ["读取机密文档。", "保留跨工具上下文。", "校验收件人、文档与信任等级。", "放行管理员路径，阻断其他路径。"],
     },
-    runtime: {
-      eyebrow: "运行时控制面",
-      title: "在风险即将成为真实行动时精准介入",
-      body: "AgentGuard 接入四类关键运行时事件，并选择对自主性干扰最小、又能满足安全边界的处置方式。",
-      events: [
-        { name: "模型调用前", detail: "上下文、身份、意图与策略边界" },
-        { name: "模型调用后", detail: "推理校准与行动计划风险" },
-        { name: "工具调用前", detail: "权限、参数、目标与数据范围" },
-        { name: "工具调用后", detail: "结果校验、数据血缘与下游暴露" },
-      ],
-      decisions: ["允许", "纠正", "审批", "脱敏", "限制", "阻断"],
-      alert: "不可信工具路径请求访问敏感数据集",
-      resolution: "脱敏数据 · 限制范围 · 安全继续",
-    },
-    chains: {
-      eyebrow: "三链智能",
-      title: "协同理解思维、行为和数据",
-      body: "一次危险行动很少只有单一原因。AgentGuard 在处置前关联意图、多步行为、工具上下文和数据血缘。",
+    mechanisms: {
+      eyebrow: "核心机制",
+      title: "从轨迹到处置",
       items: [
-        { title: "思维链实时校准", body: "在行动发生前识别并纠正高风险推理。" },
-        {
-          title: "行为链风险推理",
-          body: "关联跨步骤、跨工具、跨智能体与委托权限的组合风险。",
-        },
-        {
-          title: "数据链血缘追踪",
-          body: "追踪敏感数据的来源、用途、变换过程和目标位置。",
-        },
-      ],
-      fusion: "确定性 DSL × 轻量安全模型 × 前沿大模型",
-    },
-    capabilities: {
-      eyebrow: "控制能力",
-      title: "面向生产级智能体系统的安全基础能力",
-      items: [
-        {
-          title: "多框架运行时 Hook",
-          body: "在模型和工具边界接入控制能力，并保留现有智能体架构。",
-        },
-        {
-          title: "工具与 MCP 安全代理",
-          body: "检查并控制工具调用、MCP 流量、参数和目标位置。",
-        },
-        {
-          title: "动态身份与权限",
-          body: "结合用户、任务、资源和运行时上下文判断委托权限。",
-        },
-        {
-          title: "可信沙箱与网络隔离",
-          body: "将代码、文件、进程和网络活动限制在显式边界内。",
-        },
-        {
-          title: "自动红队与持续评测",
-          body: "持续测试保护生产智能体的策略与运行时控制面。",
-        },
-        {
-          title: "私有企业控制面",
-          body: "让策略、轨迹、证据与敏感运行数据留在企业环境中。",
-        },
-      ],
-    },
-    layers: {
-      eyebrow: "统一平台",
-      title: "从安全接入到持续优化",
-      items: [
-        {
-          index: "01",
-          title: "安全接入",
-          body: "连接智能体、工具、模型、身份、数据和沙箱边界。",
-          items: ["SDK / Hook", "Sidecar", "Gateway", "MCP 代理"],
-        },
-        {
-          index: "02",
-          title: "智能防护",
-          body: "理解轨迹风险，并通过精准处置干预。",
-          items: ["思维链", "行为链", "数据血缘", "决策引擎"],
-        },
-        {
-          index: "03",
-          title: "评测运营",
-          body: "持续测试、观察、调查并改进智能体安全。",
-          items: ["自动红队", "持续评测", "风险画像", "审计响应"],
-        },
-        {
-          index: "04",
-          title: "模型底座",
-          body: "将研究与部署证据转化为更强的安全智能。",
-          items: ["数据工厂", "安全模型", "风险知识", "反馈闭环"],
-        },
+        { title: "全链建模", body: "关联推理、工具、身份与数据来源。", detail: "Thought · Behavior · Data" },
+        { title: "协同研判", body: "确定性规则与安全模型共同判断。", detail: "DSL × Safety Model" },
+        { title: "精细处置", body: "按风险选择脱敏、降级、审批或阻断。", detail: "Sanitize · Degrade · Approve · Deny" },
       ],
     },
     deployment: {
-      eyebrow: "企业架构",
-      title: "在企业信任边界内部署控制能力",
-      body: "用轻量 Hook 获取智能体上下文，用 Gateway 统一执行策略，用私有控制面管理规则、证据与安全运营。",
-      nodes: [
-        "智能体框架",
-        "SDK · Sidecar · Gateway",
-        "AgentGuard Runtime",
-        "模型 · 工具 · MCP · 数据",
-        "私有控制面",
-      ],
+      eyebrow: "接入与部署",
+      title: "控制能力部署在信任边界内",
+      body: "通过 Hook、Sidecar 或 Gateway 接入，策略与证据可留在企业环境。",
+      nodes: ["智能体框架", "SDK · Sidecar · Gateway", "AgentGuard Runtime", "模型 · 工具 · MCP · 数据", "私有控制面"],
       modes: [
-        { title: "应用内嵌", body: "SDK 与运行时 Hook 提供完整智能体上下文。" },
-        {
-          title: "基础设施强制执行",
-          body: "Sidecar 与 Gateway 统一控制工具和数据边界。",
-        },
-        { title: "私有化运营", body: "在企业环境内运行控制面和证据存储。" },
+        { title: "应用内嵌", body: "Hook 提供完整运行时上下文。" },
+        { title: "基础设施执行", body: "Gateway 统一控制工具与数据边界。" },
+        { title: "私有化运营", body: "策略、轨迹与证据留在企业环境。" },
       ],
     },
     evidence: {
       eyebrow: "可核实证据",
-      title: "在能够公开验证的地方保持开放",
-      body: "通过开源项目、安全模型与研究成果了解 AgentGuard 的技术基础。",
+      title: "代码、模型与研究",
       items: [
-        {
-          title: "AgentGuard 开源仓库",
-          body: "WhitzardAgent 组织公开的运行时安全项目。",
-          label: "打开 GitHub",
-          href: "https://github.com/WhitzardAgent/AgentGuard",
-        },
-        {
-          title: "安全模型",
-          body: "探索 Thought-Aligner、MirrorGuard、ReasoningShield、IntentNet、TrustNet 等安全工作。",
-          label: "浏览开放生态",
-          href: "/open-ecosystem",
-        },
-        {
-          title: "NUWA 研究",
-          body: "阅读前沿风险、智能体安全、AI 控制与运行时安全相关论文和评测。",
-          label: "查看研究",
-          href: "/research",
-        },
+        { title: "AgentGuard", body: "公开的智能体运行时安全项目。", label: "GitHub", href: "https://github.com/WhitzardAgent/AgentGuard" },
+        { title: "安全模型", body: "思维校准、意图与推理安全模型。", label: "开源生态", href: "/open-ecosystem" },
+        { title: "NUWA 研究", body: "前沿风险、智能体安全与 AI 控制研究。", label: "研究成果", href: "/research" },
       ],
     },
-    cta: {
-      title: "为智能体完整运行过程建立统一安全控制层",
-      body: "将 AgentGuard 映射到你的智能体框架、工具、MCP 服务、身份系统、数据边界与部署要求。",
-      primary: "预约产品演示",
-      github: "查看 GitHub",
+    cta: { title: "为智能体运行环境建立控制边界", body: "评估技术栈、关键权限与部署约束。", primary: "预约演示", github: "查看源码" },
+  },
+  en: {
+    meta: { title: "AgentGuard — Runtime Security for AI Agents", description: "AgentGuard enforces runtime policy across LLM, tool, identity, and data boundaries." },
+    hero: {
+      eyebrow: "AGENTGUARD · ENTERPRISE AGENT SECURITY",
+      title: "Control the full agent runtime.",
+      body: "Control risk before and after LLM and tool execution with sanitization, degradation, approval, or denial.",
+      primary: "Book a Demo",
+      secondary: "View Source",
+      imageAlt: "AgentGuard runtime console showing traffic, approvals, and audit records",
+      imageCaption: "Policy, approval, and audit",
     },
+    runtime: { eyebrow: "RUNTIME DECISIONS", title: "Full trace. Precise control.", body: "Link identity, tools, and data flow before action executes." },
+    demo: {
+      eyebrow: "PRODUCT SURFACE",
+      title: "Real policy. Real decisions.",
+      body: "A public console and cross-tool rule show retrieval, validation, and denial.",
+      play: "Play official demo",
+      dashboardTitle: "Runtime console",
+      dashboardBody: "Traffic, approvals, policy, and audit in one view.",
+      policyTitle: "Visual policy editor",
+      policyBody: "Configure access and trajectory rules with structured controls.",
+      generationTitle: "Policy generation",
+      generationBody: "Turn security intent into reviewable policy.",
+      allowed: { label: "Allowed", recipient: "admin@example.com", result: "ALLOW", reason: "The admin address satisfies the document rule." },
+      denied: { label: "Denied", recipient: "alice@example.com", result: "DENY", reason: "A low-trust principal cannot send the document externally." },
+      stepsTitle: "Execution",
+      steps: ["Retrieve the confidential document.", "Retain cross-tool context.", "Check recipient, document, and trust.", "Allow the admin path; deny the other path."],
+    },
+    mechanisms: {
+      eyebrow: "CORE MECHANISM",
+      title: "Trace. Judge. Respond.",
+      items: [
+        { title: "Full-chain context", body: "Connect reasoning, tools, identity, and provenance.", detail: "Thought · Behavior · Data" },
+        { title: "Collaborative judgment", body: "Combine deterministic rules with safety models.", detail: "DSL × Safety Model" },
+        { title: "Precise response", body: "Sanitize, degrade, approve, or deny by risk.", detail: "Sanitize · Degrade · Approve · Deny" },
+      ],
+    },
+    deployment: {
+      eyebrow: "INTEGRATION & DEPLOYMENT",
+      title: "Enforce inside the trust boundary.",
+      body: "Connect through hooks, sidecars, or gateways. Keep policy and evidence private.",
+      nodes: ["Agent frameworks", "SDK · Sidecar · Gateway", "AgentGuard Runtime", "Models · Tools · MCP · Data", "Private Control Plane"],
+      modes: [
+        { title: "Application embedded", body: "Hooks preserve full runtime context." },
+        { title: "Infrastructure enforced", body: "Gateways centralize tool and data control." },
+        { title: "Privately operated", body: "Keep policy, traces, and evidence private." },
+      ],
+    },
+    evidence: {
+      eyebrow: "VERIFIABLE EVIDENCE",
+      title: "Code, models, research.",
+      items: [
+        { title: "AgentGuard", body: "The public agent runtime security project.", label: "GitHub", href: "https://github.com/WhitzardAgent/AgentGuard" },
+        { title: "Safety models", body: "Thought, intent, and reasoning safety models.", label: "Ecosystem", href: "/en/open-ecosystem" },
+        { title: "NUWA research", body: "Frontier risk, agent safety, and AI control.", label: "Research", href: "/en/research" },
+      ],
+    },
+    cta: { title: "Set a control boundary for agent runtime.", body: "Assess the stack, critical permissions, and deployment constraints.", primary: "Book a Demo", github: "View Source" },
   },
 };

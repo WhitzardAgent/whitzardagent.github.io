@@ -1,11 +1,29 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";import type{Locale}from"../../i18n/config";import type{ResearchCopy}from"../../i18n/pages/research";import{openSourceAssets}from"../../data/generated/openSourceAssets";import{links}from"../../data/links";import"../../styles/ecosystem.css";
-interface Props{locale:Locale;copy:ResearchCopy["ecosystem"]}const{locale,copy}=Astro.props;
-const groups:Record<string,string[]>={runtime:["AgentGuard","qise","XuanwuBox"],models:["Thought-Aligner","MirrorGuard","ReasoningShield","IntentNet","TrustNet"],evaluation:["snowl","snowl-evals","LLMPentest","NVWA Project"],infrastructure:["qitos","YOGA","Mirror-GUI","agentir"],cyber:["cyberhunter","CyberSecurity-100B","CyberSecurity-1M","CyberRepo-10K","CyberTrainer collection"]};
-const find=(name:string)=>openSourceAssets.find(x=>x.name.toLowerCase()===name.toLowerCase());
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import type { ResearchCopy } from "../../i18n/pages/research";
+import { openSourceAssets } from "../../data/generated/openSourceAssets";
+import { links } from "../../data/links";
+import "../../styles/ecosystem.css";
+
+interface Props { locale: Locale; copy: ResearchCopy["ecosystem"] }
+const { locale, copy } = Astro.props;
+const groups: Record<string, string[]> = {
+  runtime: ["AgentGuard", "qise", "XuanwuBox"],
+  models: ["Thought-Aligner", "MirrorGuard", "ReasoningShield", "IntentNet", "TrustNet"],
+  evaluation: ["snowl", "snowl-evals", "LLMPentest", "NVWA Project"],
+  infrastructure: ["qitos", "YOGA", "Mirror-GUI", "agentir"],
+  cyber: ["cyberhunter", "CyberSecurity-100B", "CyberSecurity-1M", "CyberRepo-10K", "CyberTrainer collection"],
+};
+const find = (name: string) => openSourceAssets.find(item => item.name.toLowerCase() === name.toLowerCase());
+const statusMap: Record<Locale, Record<string, string>> = {
+  en: { "open-source": "Open source", active: "Maintained", "coming soon": "Coming soon" },
+  zh: { "open-source": "开源", active: "持续维护", "coming soon": "即将开放" },
+};
 ---
+
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/open-ecosystem">
- <section class="eco-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a class="button button--primary" href={links.github} target="_blank" rel="noreferrer">{copy.github} ↗</a><a class="button button--secondary" href={links.huggingface} target="_blank" rel="noreferrer">{copy.hf} ↗</a></div></div></section>
- <nav class="eco-index site-container" aria-label={locale==="zh"?"项目分类":"Project categories"}>{copy.categories.map((category,index)=><a href={`#${category.key}`}><span>0{index+1}</span>{category.title}</a>)}</nav>
- {copy.categories.map((category,index)=><section id={category.key} class:list={["section eco-category",index%2===1&&"eco-category--alt"]}><div class="site-container eco-category__head"><div><span>0{index+1}</span><h2>{category.title}</h2></div><p>{category.body}</p></div><div class="site-container eco-grid">{groups[category.key].map(name=>find(name)).filter(Boolean).map(project=>project&&<article><div><span>{copy.status}</span><small>{project.status}</small></div><h3>{project.name}</h3><p>{project.description}</p><div>{project.githubUrl&&<a href={project.githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>}{project.hfUrl&&<a href={Array.isArray(project.hfUrl)?project.hfUrl[0]:project.hfUrl} target="_blank" rel="noreferrer">HF ↗</a>}{project.websiteUrl&&<a href={project.websiteUrl} target="_blank" rel="noreferrer">Web ↗</a>}</div></article>)}</div></section>)}
+  <section class="eco-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a class="button button--primary" href={links.github} target="_blank" rel="noreferrer">{copy.github} ↗</a><a class="button button--secondary" href={links.huggingface} target="_blank" rel="noreferrer">{copy.hf} ↗</a></div></div></section>
+  <nav class="eco-index site-container" aria-label={locale === "zh" ? "项目分类" : "Project categories"}>{copy.categories.map((category, index) => <a href={`#${category.key}`}><span>0{index + 1}</span>{category.title}</a>)}</nav>
+  {copy.categories.map((category, index) => <section id={category.key} class:list={["section eco-category", index % 2 === 1 && "eco-category--alt"]}><div class="site-container eco-category__head"><div><span>0{index + 1}</span><h2>{category.title}</h2></div><p>{category.body}</p></div><div class="site-container eco-grid">{groups[category.key].map(find).filter(Boolean).map(project => project && <article><div><span>{copy.status}</span><small>{statusMap[locale][project.status ?? ""] ?? project.status}</small></div><h3>{project.name}</h3><p>{project.description[locale]}</p><div>{project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>}{project.hfUrl && <a href={Array.isArray(project.hfUrl) ? project.hfUrl[0] : project.hfUrl} target="_blank" rel="noreferrer">HF ↗</a>}{project.websiteUrl && <a href={project.websiteUrl} target="_blank" rel="noreferrer">{locale === "zh" ? "网站" : "Web"} ↗</a>}</div></article>)}</div></section>)}
 </BaseLayout>

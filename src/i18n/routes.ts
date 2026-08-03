@@ -6,11 +6,18 @@ export const localizedRoutes = [
   "/open-ecosystem", "/about", "/contact",
 ] as const;
 
-export function hasLocalizedPeer(pathname: string): boolean {
+function normalizeRoute(pathname: string): string {
   const base = stripLocale(pathname);
+  if (base === "/") return base;
+  return base.replace(/\/+$/, "") || "/";
+}
+
+export function hasLocalizedPeer(pathname: string): boolean {
+  const base = normalizeRoute(pathname);
   return localizedRoutes.includes(base as (typeof localizedRoutes)[number]);
 }
 
 export function localeSwitchPath(pathname: string, target: Locale): string {
-  return hasLocalizedPeer(pathname) ? localizedPath(pathname, target) : target === "zh" ? "/" : "/en/";
+  const base = normalizeRoute(pathname);
+  return hasLocalizedPeer(base) ? localizedPath(base, target) : target === "zh" ? "/" : "/en/";
 }

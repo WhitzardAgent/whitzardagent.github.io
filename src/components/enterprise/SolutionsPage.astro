@@ -1,4 +1,48 @@
 ---
-import BaseLayout from"../../layouts/BaseLayout.astro";import type{Locale}from"../../i18n/config";import{localizedPath}from"../../i18n/config";import type{CompanyCopy}from"../../i18n/pages/company";import"../../styles/company.css";interface Props{locale:Locale;copy:CompanyCopy["solutions"]}const{locale,copy}=Astro.props;
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import type { CompanyCopy } from "../../i18n/pages/company";
+import "../../styles/company.css";
+
+interface Props { locale: Locale; copy: CompanyCopy["solutions"] }
+const { locale, copy } = Astro.props;
+const agentGuardPath = localizedPath("/agentguard", locale);
+const labels = locale === "zh"
+  ? { task: "任务", risk: "风险", control: "控制", entry: "推荐入口" }
+  : { task: "Task", risk: "Risk", control: "Controls", entry: "Recommended entry" };
 ---
-<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/solutions"><section class="commercial-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p></div></section><section class="section solution-scenarios"><div class="site-container">{copy.scenarios.map(item=><article><div><span>{item.index}</span><h2>{item.title}</h2></div><div><p>{item.problem}</p><ul>{item.outcomes.map(outcome=><li>{outcome}</li>)}</ul></div></article>)}</div></section><section class="section solution-method"><div class="site-container"><h2 class="section-title">{copy.methodTitle}</h2><div>{copy.method.map((item,index)=><article><span>0{index+1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div><a class="button button--primary" href={localizedPath("/contact",locale)}>{copy.cta}</a></div></section></BaseLayout>
+
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/solutions">
+  <section class="commercial-hero">
+    <div class="site-container">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{copy.title}</h1>
+      <p>{copy.lead}</p>
+    </div>
+  </section>
+
+  <section class="section solution-workflows">
+    <div class="site-container">
+      {copy.scenarios.map((item, index) => (
+        <article>
+          <header><span>{item.index}</span><h2>{item.title}</h2></header>
+          <dl>
+            <div><dt>{labels.task}</dt><dd>{item.task}</dd></div>
+            <div><dt>{labels.risk}</dt><dd>{item.risk}</dd></div>
+            <div><dt>{labels.control}</dt><dd><ul>{item.controls.map(control => <li>{control}</li>)}</ul></dd></div>
+            <div><dt>{labels.entry}</dt><dd><a href={`${agentGuardPath}#${index === 3 ? "deployment" : "runtime"}`}>{item.link} →</a></dd></div>
+          </dl>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section solution-journey">
+    <div class="site-container">
+      <p class="eyebrow">{copy.journeyTitle}</p>
+      <ol>{copy.journey.map((item, index) => <li><span>0{index + 1}</span><strong>{item}</strong></li>)}</ol>
+      <a class="button button--primary" href={localizedPath("/contact", locale)}>{copy.cta}</a>
+    </div>
+  </section>
+</BaseLayout>

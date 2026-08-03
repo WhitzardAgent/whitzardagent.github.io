@@ -1,108 +1,52 @@
-# 05｜AgentGuard 产品页
+# 05｜AgentGuard 产品页 V3.1
 
-## 页面目标
+## 页面职责
 
-让企业客户完成四个判断：
-
-1. 这是企业产品，不是论文 Demo；
-2. 它保护完整 Agent Runtime；
-3. 它与传统输入输出护栏不同；
-4. 它可以接入现有智能体和私有化部署。
+AgentGuard 只回答产品是什么、如何判断、如何处置、如何接入；企业工作流与采购场景进入解决方案页。
 
 ## 页面结构
 
 ### 1. Product Hero
 
-标题：
+- 中文：`智能体运行时安全控制层`
+- English: `Control the full agent runtime.`
+- 使用公开 Dashboard 局部界面作为真实产品证据。
+- 首屏列出已公开支持的七个 Agent 框架。
 
-`Security control for the full agent runtime`
+### 2. Runtime Console
 
-中文：
+与首页共用 `AgentGuardRuntimeConsole` 数据和状态机，使用完整密度：
 
-`覆盖智能体完整运行过程的统一安全控制层`
+- 三类真实场景与公开策略 ID；
+- 完整轨迹与节点检查；
+- DSL 与安全模型协同研判；
+- `ALLOW · SANITIZE · ALIGN · DEGRADE · APPROVE · DENY`；
+- `HUMAN_CHECK` 的批准一次与拒绝分支；
+- 键盘场景切换、节点检查与重放；
+- SSR 输出完整默认状态，减少动画模式直接显示最终状态。
 
-右侧使用真实运行轨迹，不再使用抽象 Policy / Trace / Approval / Audit 流程。
+### 3. 真实产品界面
 
-### 2. Runtime Control Surface
+- Dashboard
+- 可视化策略配置
+- 策略生成
+- 官方点击播放 Demo
+- `retrieve_doc → send_email_to` Allow / Deny 规则
 
-展示四类事件：
+### 4. 核心机制
 
-- Before LLM
-- After LLM
-- Before Tool
-- After Tool
+- 全链建模
+- 协同研判
+- 精细处置
 
-展示六类处置：
+### 5. 接入与部署
 
-- Allow
-- Correct
-- Approve
-- Redact
-- Limit
-- Block
-
-### 3. Three-Chain Intelligence
-
-- Thought chain alignment
-- Behavior chain reasoning
-- Data lineage tracking
-
-强调：
-
-`Deterministic DSL × Lightweight Model × Frontier Model`
-
-### 4. Four Platform Layers
-
-- Secure Connect
-- Runtime Intelligence
-- Evaluate & Operate
-- Model & Data Foundation
-
-### 5. Enterprise Deployment
-
-展示：
-
-- SDK / Hook
+- Hook
 - Sidecar
 - Gateway
-- Control Plane
-- Private Deployment
+- Runtime
+- 私有控制面
 
-### 6. Evidence
+### 6. 开放证据与 CTA
 
-不要只用形容词，应展示：
-
-- 兼容框架数量；
-- 已公开模型；
-- 评测结果；
-- 开源仓库；
-- 论文或基准；
-- 实际部署形态。
-
-只使用可核实数据。
-
-### 7. CTA
-
-- Book a Demo
-- Read Documentation
-- View GitHub
-
-## 当前代码的具体调整
-
-删除或降级：
-
-- `The Problem` 两段通用说明；
-- `Policy / Trace / Approval / Audit` 四张通用卡片；
-- 仅靠小型 SVG 方框表达产品。
-
-新增 React islands：
-
-- `AgentRuntimeDemo.tsx`
-- `ThreeChainScrolly.tsx`
-- `DeploymentArchitecture.tsx`
-
-静态 Astro 组件：
-
-- `PlatformLayer.astro`
-- `EvidenceStrip.astro`
-- `EnterpriseFeature.astro`
+只链接可核实的 AgentGuard 代码、安全模型与 NUWA 研究，不展示未经证实的客户、部署、性能或规模数据。

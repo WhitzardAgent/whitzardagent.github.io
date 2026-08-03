@@ -1,10 +1,19 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";import type{Locale}from"../../i18n/config";import type{ResearchCopy}from"../../i18n/pages/research";import{researchAssets}from"../../data/generated/researchAssets";import"../../styles/research.css";
-interface Props{locale:Locale;copy:ResearchCopy["research"]}const{locale,copy}=Astro.props;const featured=researchAssets.filter(x=>x.featured);const rest=researchAssets.filter(x=>!x.featured);
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import type { ResearchCopy } from "../../i18n/pages/research";
+import { researchAssets } from "../../data/generated/researchAssets";
+import "../../styles/research.css";
+
+interface Props { locale: Locale; copy: ResearchCopy["research"] }
+const { locale, copy } = Astro.props;
+const featured = researchAssets.filter(item => item.featured);
+const rest = researchAssets.filter(item => !item.featured);
 ---
+
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/research">
- <section class="research-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p></div></section>
- <section class="research-areas"><div class="site-container">{copy.areas.map((item,index)=><article><span>0{index+1}</span><h2>{item.title}</h2><p>{item.body}</p></article>)}</div></section>
- <section class="section nw-research"><div class="site-container nw-section-head"><p class="eyebrow">{locale==="zh"?"精选":"SELECTED"}</p><h2 class="section-title">{copy.featured}</h2></div><div class="site-container research-list">{featured.map(item=><a href={item.url??item.pdfUrl} target="_blank" rel="noreferrer"><div><span>{item.year??item.status}</span><span>{item.venue??item.status}</span></div><h3>{item.title}</h3><p>{item.summary}</p><small>{item.topic?.join(" · ")} · {copy.source} ↗</small></a>)}</div></section>
- {rest.length>0&&<section class="section research-all"><div class="site-container nw-section-head"><p class="eyebrow">{locale==="zh"?"研究索引":"RESEARCH INDEX"}</p><h2 class="section-title">{copy.all}</h2></div><div class="site-container research-compact">{rest.map(item=><a href={item.url??item.pdfUrl} target="_blank" rel="noreferrer"><span>{item.year??"—"}</span><h3>{item.title}</h3><small>{item.venue??item.status??copy.source} ↗</small></a>)}</div></section>}
+  <section class="research-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p></div></section>
+  <section class="research-areas"><div class="site-container">{copy.areas.map((item, index) => <article><span>0{index + 1}</span><h2>{item.title}</h2><p>{item.body}</p></article>)}</div></section>
+  <section class="section nw-research"><div class="site-container nw-section-head"><p class="eyebrow">{locale === "zh" ? "精选" : "SELECTED"}</p><h2 class="section-title">{copy.featured}</h2></div><div class="site-container research-list">{featured.map(item => <a href={item.url ?? item.pdfUrl} target="_blank" rel="noreferrer"><div><span>{item.year ?? item.status}</span><span>{item.venue ?? item.status}</span></div><h3>{item.title}</h3><p>{item.summary[locale]}</p><small>{item.topic[locale].join(" · ")} · {copy.source} ↗</small></a>)}</div></section>
+  {rest.length > 0 && <section class="section research-all"><div class="site-container nw-section-head"><p class="eyebrow">{locale === "zh" ? "研究索引" : "RESEARCH INDEX"}</p><h2 class="section-title">{copy.all}</h2></div><div class="site-container research-compact">{rest.map(item => <a href={item.url ?? item.pdfUrl} target="_blank" rel="noreferrer"><span>{item.year ?? "—"}</span><h3>{item.title}</h3><small>{item.venue ?? item.status ?? copy.source} ↗</small></a>)}</div></section>}
 </BaseLayout>

@@ -8,10 +8,6 @@ export type HomeCopy = {
     description: string;
     primary: string;
     secondary: string;
-    visualLabel: string;
-    risk: string;
-    decision: string;
-    outcome: string;
   };
   manifesto: string;
   risk: {
@@ -77,13 +73,9 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       eyebrow: "AI AGENT SECURITY INFRASTRUCTURE",
       title: "Secure autonomy, by design.",
       description:
-        "Evaluate, govern, and protect AI agents across reasoning, tool use, identity, and data flow while preserving the autonomy that makes them valuable.",
+        "Evaluate and control agent reasoning, tools, identity, and data flow.",
       primary: "Book a Demo",
       secondary: "View the AgentGuard demo",
-      visualLabel: "RUNTIME DECISION TRACE",
-      risk: "Sensitive data requested outside task scope",
-      decision: "CORRECT",
-      outcome: "ALLOWED WITH POLICY",
     },
     manifesto: "Autonomy thrives inside a trustworthy security boundary.",
     risk: {
@@ -182,7 +174,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         },
       ],
       fusion: "DSL Rules × Lightweight Safety Model × Frontier Model",
-      decisions: ["Allow", "Correct", "Approve", "Redact", "Limit", "Block"],
+      decisions: ["Allow", "Sanitize", "Align", "Degrade", "Approve", "Deny"],
     },
     loop: {
       eyebrow: "NUWA LAB × AGENTGUARD",
@@ -270,15 +262,11 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       eyebrow: "企业级智能体安全基础设施",
       title: "守其边界，行其智能",
       description:
-        "让智能体在安全边界内自主行动。统一评测、理解并控制模型推理、工具调用、身份权限与数据流转。",
+        "评测、控制并审计智能体的推理、工具、权限与数据流。",
       primary: "预约产品演示",
       secondary: "查看 AgentGuard 真实演示",
-      visualLabel: "运行时决策轨迹",
-      risk: "敏感数据请求超出当前任务范围",
-      decision: "纠正",
-      outcome: "在策略约束下允许",
     },
-    manifesto: "让自主性在可信安全边界内充分释放。",
+    manifesto: "自主性在可信边界内释放。",
     risk: {
       eyebrow: "新型安全控制面",
       title: "智能体让模型输出成为真实行动。",
@@ -355,13 +343,12 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         },
       ],
       fusion: "DSL 规则 × 轻量安全模型 × 前沿大模型",
-      decisions: ["允许", "纠正", "审批", "脱敏", "限制", "阻断"],
+      decisions: ["允许", "脱敏", "校准", "降级", "审批", "阻断"],
     },
     loop: {
       eyebrow: "NUWA LAB × AGENTGUARD",
-      title: "NUWA Lab 驱动 AgentGuard 智能体安全产品线",
-      statement:
-        "前沿安全研究定义风险并建设评测证据，AgentGuard 将研究转化为运行时控制，企业部署证据持续形成新的研究问题。",
+      title: "研究驱动运行时控制",
+      statement: "NUWA 发现并评估风险，AgentGuard 将安全能力带入企业运行环境。",
       lab: {
         name: "NUWA Lab",
         role: "前沿 AI 安全研究引擎",
@@ -382,7 +369,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     enterprise: {
       eyebrow: "企业级部署",
-      title: "让控制能力贴近它所保护的系统",
+      title: "控制靠近被保护系统",
       intro: "根据企业架构与数据边界，以合适的方式部署 AgentGuard。",
       items: [
         {
@@ -410,14 +397,14 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     ecosystem: {
       eyebrow: "WHITZARDAGENT",
-      title: "支撑平台能力的开放证据",
-      intro: "探索 WhitzardAgent 开放生态中的代表性工具、模型和评测基础设施。",
+      title: "开放技术证据",
+      intro: "代表性工具、模型与评测基础设施。",
       viewAll: "查看开放生态",
     },
     cta: {
       eyebrow: "建立可信边界",
-      title: "让企业放心部署和规模化使用智能体",
-      body: "了解 AgentGuard 如何评测、控制并保护你正在投入生产的智能体系统。",
+      title: "安全部署企业智能体",
+      body: "以 AgentGuard 建立运行时控制边界。",
       primary: "预约产品演示",
       secondary: "联系 Whitzard",
     },
