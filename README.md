@@ -1,9 +1,9 @@
 # Whitzard Website
 
-The official information hub for [Whitzard](https://www.whitzard.tech/) and [Nuwa Frontier AI Safety Lab](https://www.whitzard.tech/nuwa).
+The official information hub for [Whitzard](https://whitzard.tech/) and [Nuwa Frontier AI Safety Lab](https://whitzard.tech/nuwa).
 
 **Repository:** <https://github.com/WhitzardAgent/whitzardagent.github.io>
-**Domain:** [www.whitzard.tech](https://www.whitzard.tech)
+**Domain:** [whitzard.tech](https://whitzard.tech)
 **Hosting:** GitHub Pages
 
 ## Stack
@@ -180,7 +180,7 @@ Steps:
 
 ## DNS / CNAME
 
-CNAME file contains: `www.whitzard.tech`
+CNAME file contains: `whitzard.tech`
 
 DNS configuration:
 
@@ -201,7 +201,7 @@ No paid server or HTTPS certificate is required. GitHub Pages issues HTTPS autom
 
 ### Manual DNS Check
 
-- Verify `www.whitzard.tech` resolves to GitHub Pages
+- Verify `whitzard.tech` resolves to GitHub Pages
 - Verify HTTPS certificate is active
 - If switching canonical domain, update both CNAME file and GitHub Pages settings
 

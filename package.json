@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/WhitzardAgent/whitzardagent.github.io/issues"
   },
-  "homepage": "https://www.whitzard.tech/",
+  "homepage": "https://whitzard.tech/",
   "description": "Whitzard website and Nuwa Frontier AI Safety Lab",
   "dependencies": {
     "@astrojs/mdx": "^7.0.5",

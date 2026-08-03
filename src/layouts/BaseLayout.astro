@@ -34,7 +34,7 @@ const {
   schema,
 } = Astro.props;
 
-const origin = "https://www.whitzard.tech";
+const origin = "https://whitzard.tech";
 const siteTitle = title.includes("Whitzard") || title.includes("NVWA") || title.includes("Nuwa") ? title : `${title} — ${brand === "nuwa" ? "NVWA Lab" : "Whitzard"}`;
 const basePath = stripLocale(canonicalPath ?? Astro.url.pathname);
 const canonicalUrl = new URL(localizedPath(basePath, locale), origin).href;

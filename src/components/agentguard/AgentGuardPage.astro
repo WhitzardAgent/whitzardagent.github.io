@@ -8,7 +8,7 @@ import DeploymentArchitecture from "./DeploymentArchitecture";
 import "../../styles/agentguard.css";
 interface Props{locale:Locale;copy:AgentGuardCopy}
 const{locale,copy}=Astro.props;
-const softwareSchema={"@context":"https://schema.org","@type":"SoftwareApplication",name:"AgentGuard",applicationCategory:"SecurityApplication",operatingSystem:"Enterprise AI agent runtimes",url:"https://www.whitzard.tech/agentguard",isAccessibleForFree:true,codeRepository:"https://github.com/WhitzardAgent/AgentGuard",publisher:{"@type":"Organization",name:"Whitzard"}};
+const softwareSchema={"@context":"https://schema.org","@type":"SoftwareApplication",name:"AgentGuard",applicationCategory:"SecurityApplication",operatingSystem:"Enterprise AI agent runtimes",url:"https://whitzard.tech/agentguard",isAccessibleForFree:true,codeRepository:"https://github.com/WhitzardAgent/AgentGuard",publisher:{"@type":"Organization",name:"Whitzard"}};
 ---
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/agentguard" schema={softwareSchema}>
  <section class="ag-hero"><div class="site-container ag-hero__grid"><div><p class="eyebrow">{copy.hero.eyebrow}</p><h1>{copy.hero.title}</h1><p>{copy.hero.body}</p><div><a class="button button--primary" href={localizedPath("/contact",locale)}>{copy.hero.primary}</a><a class="button button--secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.hero.secondary} ↗</a></div></div><div class="ag-hero__surface" aria-hidden="true"><span>Before LLM</span><span>After LLM</span><b>AgentGuard</b><span>Before Tool</span><span>After Tool</span><i></i></div></div></section>

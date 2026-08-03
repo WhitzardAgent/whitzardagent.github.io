@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 
 export default defineConfig({
-  site: "https://www.whitzard.tech",
+  site: "https://whitzard.tech",
   integrations: [mdx(), sitemap(), react()],
   i18n: {
     defaultLocale: "en",

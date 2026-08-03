@@ -7,12 +7,12 @@ export async function GET(context: APIContext) {
     title: "Nuwa Frontier AI Safety Lab",
     description:
       "Research, publications, and updates from Nuwa Frontier AI Safety Lab.",
-    site: context.site ?? "https://www.whitzard.tech",
+    site: context.site ?? "https://whitzard.tech",
     items: researchAssets.map((paper) => ({
       title: paper.title,
       pubDate: paper.year ? new Date(`${paper.year}-01-01`) : new Date(),
       description: paper.summary || "",
-      link: paper.url || `https://www.whitzard.tech/research`,
+      link: paper.url || `https://whitzard.tech/research`,
       categories: paper.topic,
     })),
     customData: "<language>en</language>",
