@@ -166,20 +166,22 @@ const homeRequirements = [
   "在安全边界内释放自主智能价值",
   "智能体时代带来全新安全挑战",
   "智能体安全运营中台",
-  "AgentGuard 智能体安全引擎",
-  "低侵入适配各类主流智能体架构",
+  "全系统传播与追踪",
+  "三流汇合为一个决策",
+  "风险成形前精准介入",
+  "补充智能体运行时上下文",
   "研究驱动产品持续演进",
   "白泽开放生态",
   "AgentGuard Interaction Boundary Runtime",
-  "AgentGuard 正在追踪",
-  "边界冲突",
   "AgentGuard 处置",
   "业务结果",
-  "数据",
-  "授权",
+  "数据流",
+  "授权流",
   "动作影响",
+  "长期 Memory 写入",
+  "Shell 与生产提交",
 ];
-for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.4 homepage marker: ${marker}`);
+for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.6 homepage marker: ${marker}`);
 for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
   if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
 }
@@ -216,11 +218,11 @@ for (const [file, content] of [["dist/agentguard/index.html", agentGuardZh], ["d
 }
 
 const agentGuardRequirements = [
-  ["dist/agentguard/index.html", agentGuardZh, ["AGENTGUARD 交互边界运行时", "客户续约分析", "生产事故响应", "供应商付款核验", "AgentGuard 正在追踪", "数据", "授权", "动作影响", "边界冲突", "公开规则", "企业策略示例", "从策略配置到审计闭环", "执行模拟"]],
-  ["dist/en/agentguard/index.html", agentGuardEn, ["AGENTGUARD INTERACTION BOUNDARY RUNTIME", "How AgentGuard protects action boundaries", "Renewal analysis", "Production incident", "Vendor payment", "AgentGuard is tracking", "Data", "Authorization", "Effect", "Boundary conflict", "Community rule", "Enterprise policy example", "From policy to audit.", "Run simulation"]],
+  ["dist/agentguard/index.html", agentGuardZh, ["全系统传播与追踪", "看见风险如何穿过智能体系统", "统一安全影响引擎", "三流汇合为一个决策", "客户数据外发", "长期 Memory 写入", "Shell 与生产提交", "数据流", "授权流", "动作影响", "从策略配置到审计闭环", "执行模拟"]],
+  ["dist/en/agentguard/index.html", agentGuardEn, ["SYSTEM-WIDE PROPAGATION", "See risk move through the agent system", "UNIFIED SECURITY INFLUENCE ENGINE", "Three flows. One decision.", "Customer data egress", "Long-term memory write", "Shell and production commit", "Data flow", "Authorization flow", "Action effect", "From policy to audit.", "Run simulation"]],
 ];
 for (const [file, content, required] of agentGuardRequirements) {
-  for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard V3.3 marker: ${marker}`);
+  for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard V3.6 marker: ${marker}`);
   for (const legacy of ["retrieve_doc", "send_email_to", "admin@example.com", "alice@example.com"]) {
     if (content.includes(legacy)) violations.push(`${file}: legacy two-node product demo must not remain: ${legacy}`);
   }
@@ -228,6 +230,13 @@ for (const [file, content, required] of agentGuardRequirements) {
 const enterpriseScenarioSource = await readFile("src/data/agentguardEnterpriseScenarios.ts", "utf8");
 for (const rule of ["chain-redact-pii-on-http-post", "chain-deny-llm-output-to-shell", "trace-deny-unfiltered-to-exec", "ex4-human-check"]) {
   if (!enterpriseScenarioSource.includes(rule)) violations.push(`AgentGuard V3.3 scenario data: missing verified Community rule: ${rule}`);
+}
+const storySource = await readFile("src/data/agentguardStory.ts", "utf8");
+for (const marker of ["customer-egress", "memory-write", "production-commit", "REDACT", "RECHECK", "SWITCH_TO_SANDBOX", "REQUIRE_APPROVAL", "DIRECT", "SEMANTIC", "CONTEXTUAL", "DECLASSIFICATION"]) {
+  if (!storySource.includes(marker)) violations.push(`AgentGuard V3.6 story model: missing ${marker}`);
+}
+for (const legacy of ["<div class=\"site-container platform-stack\"", "<section class=\"three-chain"]) {
+  if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage product narrative must not remain: ${legacy}`);
 }
 const nuwaZh = withoutEmbeddedCode(await readFile("dist/nuwa/index.html", "utf8"));
 const nuwaEn = withoutEmbeddedCode(await readFile("dist/en/nuwa/index.html", "utf8"));

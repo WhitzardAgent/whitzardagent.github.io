@@ -68,3 +68,18 @@ The site deliberately does not invent legal entity details, privacy/terms langua
 ## V3.5 implementation note
 
 V3.5 unifies the Chinese company brand as 白泽（Whitzard）, corrects the research-team roles and advisor references, installs the confirmed NUWA Lab vision, and replaces disconnected runtime diagrams with one shared deterministic interaction-boundary model. Home renders the business projection; AgentGuard renders the complete chronological trace, three tag streams, Gate intervention, approval state, payload change, and audit evidence.
+
+## V3.6 AgentGuard three-layer narrative
+
+V3.6 replaces the debugger-like product story with three shared projections: a system-wide propagation map, a unified data/authorization/effect analysis engine, and a deterministic task simulator for customer-data egress, long-term memory, and shell/production commit. The homepage uses compact projections; the product page exposes node filters, detailed evidence, payload changes, sandboxing, and one-time approval. The real Community dashboard remains as product evidence after the principle narrative.
+
+### V3.6 validation — 2026-08-04
+
+- `npm run ingest:info`: passed with 86 research records and 22 visible ecosystem records.
+- `npm run check`: passed with 0 errors; 31 pre-existing non-blocking framework hints remain.
+- `npm run build`: passed with 26 generated pages.
+- `npm run check:content`: passed across 104 source files and 34 rendered pages.
+- `npm run check:links`: passed across 34 HTML files with no broken internal links.
+- Browser QA: passed at 1440px, 1024px, and 390px for the Chinese homepage and AgentGuard page; English projections share the same component and scenario model.
+- Keyboard QA: flow-mode arrow navigation, scenario selection, node inspection, replay, approve-once, and rejection controls are reachable and stateful.
+- JavaScript budget: all emitted JavaScript totals 176,091 bytes gzip; the three new islands are 2,768, 1,357, and 2,415 bytes gzip respectively.

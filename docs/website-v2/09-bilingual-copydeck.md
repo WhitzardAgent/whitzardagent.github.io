@@ -49,3 +49,13 @@
 | 公共方向 | 公共安全产品 | Public safety goods |
 | 女娲愿景 | 为全球AI治理分享风险实证与公共产品 | Shared Risk Evidence and Public Goods for the World |
 | AgentGuard 运行时 | AgentGuard 如何守住行动边界 | How AgentGuard protects action boundaries |
+
+## V3.6 三层叙事
+
+| 区域 | 中文 | English |
+|---|---|---|
+| 首页 H1 | 在安全边界内释放自主智能价值 | Unlock autonomous intelligence within secure boundaries |
+| 第一层 | 看见风险如何穿过智能体系统 | See risk move through the agent system |
+| 第二层 | 三流汇合为一个决策 | Three flows. One decision. |
+| 第三层 | 风险成形前精准介入 | Intervene before risk becomes impact |
+| 安全体系 | 补充智能体运行时上下文 | Add agent-aware runtime context |

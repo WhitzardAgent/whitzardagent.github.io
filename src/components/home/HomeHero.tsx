@@ -1,11 +1,12 @@
 import type { HomeCopy } from "../../i18n/pages/home";
 import { supportedFrameworks } from "../../data/supportedFrameworks";
-import type { BoundaryFlowCopy, EnterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
-import AgentGuardBoundaryDemo from "./AgentGuardBoundaryDemo";
+import { storyPageCopy } from "../../data/agentguardStory";
+import AgentGuardSystemMap from "../agentguard/AgentGuardSystemMap";
 
-type Props = { copy: HomeCopy["hero"]; flowCopy: BoundaryFlowCopy; scenarioCopy: EnterpriseScenarioLabCopy; locale: "en" | "zh" };
+type Props = { copy: HomeCopy["hero"]; locale: "en" | "zh" };
 
-export default function HomeHero({ copy, flowCopy, scenarioCopy, locale }: Props) {
+export default function HomeHero({ copy, locale }: Props) {
+  const mapCopy = storyPageCopy[locale].map;
   return (
     <section className="home-hero">
       <div className="site-container home-hero__grid">
@@ -22,7 +23,10 @@ export default function HomeHero({ copy, flowCopy, scenarioCopy, locale }: Props
             <div>{supportedFrameworks.map((framework) => <span className="framework-mark" key={framework.id}><img src={framework.logoPath} alt="" width="28" height="28" /><small>{framework.productLabel}</small></span>)}</div>
           </div>
         </div>
-        <AgentGuardBoundaryDemo copy={flowCopy} scenarioCopy={scenarioCopy} />
+        <div className="home-hero__visual">
+          <div className="home-hero__visual-head"><p className="eyebrow">{mapCopy.eyebrow}</p><h2>{mapCopy.title}</h2></div>
+          <AgentGuardSystemMap locale={locale} density="compact" />
+        </div>
       </div>
     </section>
   );

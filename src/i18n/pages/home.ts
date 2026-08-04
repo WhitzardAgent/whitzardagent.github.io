@@ -82,12 +82,12 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         "Whitzard evaluates, governs, and protects enterprise AI agents across reasoning, tool use, identity, and data flow.",
     },
     hero: {
-      eyebrow: "AI AGENT SECURITY INFRASTRUCTURE",
-      title: "Secure autonomy, by design.",
+      eyebrow: "ENTERPRISE AI AGENT RUNTIME SECURITY",
+      title: "Unlock autonomous intelligence within secure boundaries",
       description:
-        "Evaluate and control agent reasoning, tools, identity, and data flow.",
+        "AgentGuard tracks data, authorization, and action effect continuously, repairing or blocking risk before boundaries are crossed.",
       primary: "Book a Demo",
-      secondary: "View the AgentGuard demo",
+      secondary: "Explore AgentGuard",
     },
     manifesto: "Unlock autonomous intelligence within secure boundaries",
     operations: {
@@ -282,12 +282,12 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         "白泽（Whitzard）统一评测、理解并控制企业智能体的模型推理、工具调用、身份权限与数据流转。",
     },
     hero: {
-      eyebrow: "企业级智能体安全基础设施",
-      title: "守其边界，行其智能",
+      eyebrow: "企业级智能体运行时安全",
+      title: "在安全边界内释放自主智能价值",
       description:
-        "评测、控制并审计智能体的推理、工具、权限与数据流。",
-      primary: "预约产品演示",
-      secondary: "了解 AgentGuard Enterprise",
+        "AgentGuard 持续追踪数据、授权与动作影响，在越界前修复或阻断风险，让智能体继续完成业务任务",
+      primary: "预约企业版演示",
+      secondary: "了解 AgentGuard",
     },
     manifesto: "在安全边界内释放自主智能价值",
     operations: {

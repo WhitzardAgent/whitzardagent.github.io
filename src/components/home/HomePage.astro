@@ -5,15 +5,19 @@ import { localizedPath } from "../../i18n/config";
 import type { HomeCopy } from "../../i18n/pages/home";
 import { openSourceAssets } from "../../data/generated/openSourceAssets";
 import { links } from "../../data/links";
-import { boundaryFlowCopy, enterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
+import { storyPageCopy } from "../../data/agentguardStory";
+import { supportedFrameworks } from "../../data/supportedFrameworks";
 import HomeHero from "./HomeHero";
-import ThreeChainScrolly from "./ThreeChainScrolly";
 import ResearchProductLoop from "./ResearchProductLoop";
 import AgentGuardOperationsCenter from "./AgentGuardOperationsCenter.astro";
+import UnifiedSecurityInfluenceEngine from "../agentguard/UnifiedSecurityInfluenceEngine";
+import AgentGuardRiskSimulator from "../agentguard/AgentGuardRiskSimulator";
 import "../../styles/home.css";
+import "../../styles/agentguard-story.css";
 
 interface Props { locale: Locale; copy: HomeCopy; }
 const { locale, copy } = Astro.props;
+const story = storyPageCopy[locale];
 const featuredIds = ["whitzard-os", "whitzard-eval", "thought-aligner", "mate"];
 const featured = featuredIds.map((id) => openSourceAssets.find((item) => item.id === id)).filter(Boolean);
 const statusMap: Record<Locale, Record<string, string>> = {
@@ -23,34 +27,37 @@ const statusMap: Record<Locale, Record<string, string>> = {
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/">
-  <HomeHero copy={copy.hero} flowCopy={boundaryFlowCopy[locale]} scenarioCopy={enterpriseScenarioLabCopy[locale]} locale={locale} client:load />
-
-  <section class="manifesto-band">
-    <div class="manifesto-boundary" aria-hidden="true"></div>
-    <div class="site-container"><h2 class="display-emphasis">{copy.manifesto}</h2></div>
-  </section>
+  <HomeHero copy={copy.hero} locale={locale} client:load />
 
   <section class="risk-section section">
     <div class="site-container">
-      <div class="risk-section__head"><div><p class="eyebrow">{copy.risk.eyebrow}</p><h2 class="section-title">{copy.risk.title}</h2></div><p>{copy.risk.intro}</p></div>
-      <div class="risk-grid">{copy.risk.cards.map((card, index) => <article><span>0{index + 1}</span><h3>{card.title}</h3><p>{card.body}</p></article>)}</div>
-      <p class="risk-closing display-emphasis">{copy.risk.closing}</p>
+      <div class="risk-section__head"><div><p class="eyebrow">{story.challenges.eyebrow}</p><h2 class="section-title">{story.challenges.title}</h2></div><p>{locale === "zh" ? "智能体开始直接使用身份、数据和业务系统，安全控制必须理解完整行动过程" : "Agents now act through identities, data, and business systems. Security must understand the complete action."}</p></div>
+      <div class="risk-grid risk-grid--four">{story.challenges.items.map((item, index) => <article><span>0{index + 1}</span><h3>{item}</h3></article>)}</div>
+      <p class="risk-closing display-emphasis">{story.challenges.closing}</p>
     </div>
+  </section>
+
+  <section class="section story-section story-section--xuan" id="engine">
+    <div class="site-container story-section__head"><div><p class="eyebrow">{story.engine.eyebrow}</p><h2 class="section-title">{story.engine.title}</h2></div><p>{story.engine.body}</p></div>
+    <div class="site-container"><UnifiedSecurityInfluenceEngine locale={locale} density="compact" client:visible /></div>
+  </section>
+
+  <section class="section story-section story-section--frost" id="simulator">
+    <div class="site-container story-section__head"><div><p class="eyebrow">{story.simulator.eyebrow}</p><h2 class="section-title">{story.simulator.title}</h2></div><p>{story.simulator.body}</p></div>
+    <div class="site-container"><AgentGuardRiskSimulator locale={locale} density="compact" client:visible /></div>
   </section>
 
   <AgentGuardOperationsCenter locale={locale} copy={copy.operations} />
 
-  <section class="platform-section section">
-    <div class="site-container platform-section__head"><p class="eyebrow">{copy.platform.eyebrow}</p><h2 class="section-title">{copy.platform.title}</h2><p>{copy.platform.intro}</p></div>
-    <div class="site-container platform-stack">{copy.platform.layers.map((layer) => <article style={`--layer:${layer.index}`}><div><span>{layer.index}</span><h3>{layer.title}</h3><p>{layer.body}</p></div><ul>{layer.items.map((item) => <li>{item}</li>)}</ul></article>)}</div>
+  <section class="enterprise-section section">
+    <div class="site-container enterprise-section__head"><div><p class="eyebrow">{story.protection.eyebrow}</p><h2 class="section-title">{story.protection.title}</h2></div><p>{locale === "zh" ? "通过运行时 Hook 低侵入接入现有技术栈，将控制部署在企业信任边界内" : "Connect through runtime hooks and place control inside the enterprise trust boundary."}</p></div>
+    <div class="site-container protection-strip">{story.protection.items.map((item) => <span>{item}</span>)}</div>
+    <div class="site-container framework-evidence"><span>{locale === "zh" ? "支持的智能体架构" : "SUPPORTED AGENT FRAMEWORKS"}</span><div>{supportedFrameworks.map((framework) => <small><img src={framework.logoPath} width="26" height="26" alt="" />{framework.productLabel}</small>)}</div></div>
   </section>
 
-  <ThreeChainScrolly copy={copy.chains} client:visible />
-
-  <section class="enterprise-section section">
-    <div class="site-container enterprise-section__head"><div><p class="eyebrow">{copy.enterprise.eyebrow}</p><h2 class="section-title">{copy.enterprise.title}</h2></div><p>{copy.enterprise.intro}</p></div>
-    <div class="site-container deployment-diagram" aria-label={copy.enterprise.diagram.join(" to ")}>{copy.enterprise.diagram.map((node, index) => <><div class:list={[index === 1 && "is-control"]}><span>{index === 1 ? "AG" : `0${index + 1}`}</span>{node}</div>{index < copy.enterprise.diagram.length - 1 && <i aria-hidden="true">→</i>}</>)}</div>
-    <div class="site-container enterprise-grid">{copy.enterprise.items.map((item, index) => <article><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+  <section class="section story-section story-section--frost">
+    <div class="site-container story-section__head"><div><p class="eyebrow">{story.securityStack.eyebrow}</p><h2 class="section-title">{story.securityStack.title}</h2></div><p>{story.securityStack.body}</p></div>
+    <div class="site-container security-stack-table">{story.securityStack.rows.map((row) => <div><strong>{row[0]}</strong><span>{row[1]}</span><span>{row[2]}</span></div>)}</div>
   </section>
 
   <ResearchProductLoop copy={copy.loop} locale={locale} client:visible />
@@ -60,5 +67,5 @@ const statusMap: Record<Locale, Record<string, string>> = {
     <div class="site-container ecosystem-grid">{featured.map((project, index) => project && <article><div><span>0{index + 1}</span><small>{project.capability?.[locale] ?? statusMap[locale][project.status ?? ""] ?? project.status}</small></div><h3>{project.name}</h3><p>{project.description[locale]}</p><div class="ecosystem-grid__links">{project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`${project.name} GitHub`}>GitHub ↗</a>}{project.hfUrl && <a href={Array.isArray(project.hfUrl) ? project.hfUrl[0] : project.hfUrl} target="_blank" rel="noreferrer" aria-label={`${project.name} Hugging Face`}>Hugging Face ↗</a>}</div></article>)}</div>
   </section>
 
-  <section class="final-cta"><div class="site-container"><p class="eyebrow">{copy.cta.eyebrow}</p><h2>{copy.cta.title}</h2><p>{copy.cta.body}</p><div><a class="button final-cta__primary" href={localizedPath("/contact", locale)}>{copy.cta.primary}</a><a class="button final-cta__secondary" href={`mailto:${links.email}`}>{copy.cta.secondary}</a></div></div></section>
+  <section class="final-cta"><div class="site-container"><p class="eyebrow">{copy.cta.eyebrow}</p><h2>{copy.cta.title}</h2><p>{copy.cta.body}</p><ol class="demo-agenda">{story.demoAgenda.map((item) => <li>{item}</li>)}</ol><div><a class="button final-cta__primary" href={localizedPath("/contact", locale)} data-umami-event="agentguard-demo-cta">{copy.cta.primary}</a><a class="button final-cta__secondary" href={`mailto:${links.email}`}>{copy.cta.secondary}</a></div></div></section>
 </BaseLayout>

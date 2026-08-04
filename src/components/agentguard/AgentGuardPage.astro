@@ -4,15 +4,18 @@ import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
 import type { AgentGuardCopy } from "../../i18n/pages/agentguard";
 import { supportedFrameworks } from "../../data/supportedFrameworks";
-import { boundaryFlowCopy, enterpriseScenarioLabCopy } from "../../data/agentguardEnterpriseScenarios";
-import AgentGuardEnterpriseScenarioLab from "./AgentGuardEnterpriseScenarioLab";
+import { storyPageCopy } from "../../data/agentguardStory";
+import AgentGuardSystemMap from "./AgentGuardSystemMap";
+import UnifiedSecurityInfluenceEngine from "./UnifiedSecurityInfluenceEngine";
+import AgentGuardRiskSimulator from "./AgentGuardRiskSimulator";
 import AgentGuardShowcase from "./AgentGuardShowcase.astro";
 import DeploymentArchitecture from "./DeploymentArchitecture";
 import "../../styles/agentguard.css";
-import "../../styles/enterprise-scenario-lab.css";
+import "../../styles/agentguard-story.css";
 
 interface Props { locale: Locale; copy: AgentGuardCopy }
 const { locale, copy } = Astro.props;
+const story = storyPageCopy[locale];
 const softwareSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -51,12 +54,31 @@ const softwareSchema = {
         </div>
         <div class="ag-adapter-strip"><span>{locale === "zh" ? "支持的智能体架构" : "SUPPORTED FRAMEWORKS"}</span><div>{supportedFrameworks.map((framework) => <small><img src={framework.logoPath} width="24" height="24" alt="" />{framework.productLabel}</small>)}</div></div>
       </div>
-      <figure class="ag-hero__product">
-        <img src="/assets/agentguard/dashboard.png" width="2505" height="1229" alt={copy.hero.imageAlt} loading="eager" decoding="sync" fetchpriority="high" />
-        <figcaption><span>AgentGuard Console</span><strong>{copy.hero.imageCaption}</strong></figcaption>
-      </figure>
+      <div class="ag-hero__protected" aria-label={story.protection.title}>
+        <header><span>AgentGuard Enterprise</span><strong>{story.protection.title}</strong></header>
+        <div class="ag-hero__protected-core"><b>AG</b><span>Interaction<br/>Boundary Runtime</span></div>
+        <ul>{story.protection.items.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ul>
+        <footer><i aria-hidden="true" />{locale === "zh" ? "持续理解身份、数据、工具与行动后果" : "Continuous context across identity, data, tools, and action"}</footer>
+      </div>
     </div>
   </section>
+
+  <section class="section story-section story-section--frost" id="system-map">
+    <div class="site-container story-section__head"><div><p class="eyebrow">{story.map.eyebrow}</p><h2 class="section-title">{story.map.title}</h2></div><p>{story.map.body}</p></div>
+    <div class="site-container"><AgentGuardSystemMap locale={locale} density="full" client:visible /></div>
+  </section>
+
+  <section class="section story-section story-section--xuan" id="engine">
+    <div class="site-container story-section__head"><div><p class="eyebrow">{story.engine.eyebrow}</p><h2 class="section-title">{story.engine.title}</h2></div><p>{story.engine.body}</p></div>
+    <div class="site-container"><UnifiedSecurityInfluenceEngine locale={locale} density="full" client:visible /></div>
+  </section>
+
+  <section class="section story-section" id="runtime">
+    <div class="site-container story-section__head"><div><p class="eyebrow">{story.simulator.eyebrow}</p><h2 class="section-title">{story.simulator.title}</h2></div><p>{story.simulator.body}</p></div>
+    <div class="site-container"><AgentGuardRiskSimulator locale={locale} density="full" client:visible /></div>
+  </section>
+
+  <AgentGuardShowcase locale={locale} copy={copy.demo} />
 
   <section class="section ag-editions" id="enterprise">
     <div class="site-container ag-section-head ag-section-head--split">
@@ -72,24 +94,9 @@ const softwareSchema = {
       <article class="ag-edition ag-edition--enterprise">
         <span>{copy.editions.enterprise.label}</span><h3>{copy.editions.enterprise.name}</h3><p>{copy.editions.enterprise.body}</p>
         <ul>{copy.editions.enterprise.features.map(item => <li>{item}</li>)}</ul>
-        <a class="button button--primary" href={localizedPath("/contact", locale)}>{copy.editions.enterprise.cta}</a>
+        <a class="button button--primary" href={localizedPath("/contact", locale)} data-umami-event="agentguard-demo-cta">{copy.editions.enterprise.cta}</a>
       </article>
     </div>
-  </section>
-
-  <section class="section ag-runtime-section" id="runtime">
-    <div class="site-container ag-section-head ag-section-head--split">
-      <div><p class="eyebrow">{copy.runtime.eyebrow}</p><h2 class="section-title">{locale === "zh" ? <><span class="nowrap">AgentGuard 如何</span>守住行动边界</> : copy.runtime.title}</h2></div>
-      <p>{copy.runtime.body}</p>
-    </div>
-    <div class="site-container"><AgentGuardEnterpriseScenarioLab copy={enterpriseScenarioLabCopy[locale]} flowCopy={boundaryFlowCopy[locale]} client:visible /></div>
-  </section>
-
-  <AgentGuardShowcase locale={locale} copy={copy.demo} />
-
-  <section class="section ag-mechanisms">
-    <div class="site-container ag-section-head"><p class="eyebrow">{copy.mechanisms.eyebrow}</p><h2 class="section-title">{copy.mechanisms.title}</h2></div>
-    <div class="site-container ag-mechanisms__grid">{copy.mechanisms.items.map((item, index) => <article><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p><small>{item.detail}</small></article>)}</div>
   </section>
 
   <section class="section ag-deploy-section" id="deployment">
@@ -103,5 +110,5 @@ const softwareSchema = {
     <div class="site-container ag-evidence__grid">{copy.evidence.items.map((item) => <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}><h3>{item.title}</h3><p>{item.body}</p><span>{item.label} →</span></a>)}</div>
   </section>
 
-  <section class="ag-cta"><div class="site-container"><h2>{copy.cta.title}</h2><p>{copy.cta.body}</p><div><a class="button ag-cta__primary" href={localizedPath("/contact", locale)}>{copy.cta.primary}</a><a class="button ag-cta__secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.cta.github} ↗</a></div></div></section>
+  <section class="ag-cta"><div class="site-container"><h2>{copy.cta.title}</h2><p>{copy.cta.body}</p><ol class="demo-agenda">{story.demoAgenda.map((item) => <li>{item}</li>)}</ol><div><a class="button ag-cta__primary" href={localizedPath("/contact", locale)} data-umami-event="agentguard-demo-cta">{copy.cta.primary}</a><a class="button ag-cta__secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.cta.github} ↗</a></div></div></section>
 </BaseLayout>
