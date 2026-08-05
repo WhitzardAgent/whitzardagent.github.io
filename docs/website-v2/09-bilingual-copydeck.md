@@ -63,3 +63,15 @@
 ## V3.7 首页文案归属
 
 首页只保留第一层系统传播和第二层统一分析的标题。第三层“风险成形前精准介入”、保护对象与安全体系对照文案仅在 AgentGuard 页输出；“研究驱动产品持续演进”前移至首页企业安全挑战之后。
+
+## V3.8 研究与公共影响
+
+| 区域 | 中文 | English |
+|---|---|---|
+| 首页 Eyebrow | 研究与公共影响 | RESEARCH & PUBLIC IMPACT |
+| 首页 H2 | 从前沿技术证据，到国内外共同规则 | From frontier evidence to shared rules |
+| 首页 CTA | 查看研究与公共影响 | Explore Research & Public Impact |
+| 研究页 Eyebrow | RESEARCH TO GOVERNANCE | RESEARCH TO GOVERNANCE |
+| 研究页 H2 | 从发现风险，到塑造共同规则 | From discovering risk to shaping shared rules |
+
+首页 H2 是经确认的 15 字例外，其余中文标题继续遵守既有预算。公共影响内容不得使用“话语权”“国际影响力”“合作伙伴”或具体参与方式等归属性表述。

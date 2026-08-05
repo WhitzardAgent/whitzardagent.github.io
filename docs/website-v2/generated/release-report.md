@@ -87,3 +87,17 @@ V3.6 replaces the debugger-like product story with three shared projections: a s
 ## V3.7 homepage responsibility reset — 2026-08-05
 
 V3.7 removes the compact task simulator, protected-object strip, duplicate framework strip, and security-stack comparison from the homepage. The research-to-product loop now follows the enterprise-risk section, making the company structure visible before the remaining compact product principle. AgentGuard becomes the sole home for the full simulator, protected-object summary, and IAM/DLP/API Gateway/SIEM comparison; the use-cases page remains focused on business workflows.
+
+## V3.8 research and public impact — 2026-08-05
+
+V3.8 adds a shared, statically verified public-impact data source for the 2025 Shanghai AI Safety Consensus, the 2026 Singapore Consensus on Global AI Safety Research Priorities, and GB/T 45654—2025. The homepage exposes only the compact `02 / 13 / 01` overview; the research page presents the full evidence-to-governance path between research themes and the 86-publication index. The interface makes no claim about Whitzard or NUWA Lab participation, partnership, or institutional endorsement.
+
+### V3.8 validation
+
+- `npm run ingest:info`: passed with 86 research records and 22 visible ecosystem records.
+- `npm run check`: passed with 0 errors and 31 pre-existing non-blocking hints.
+- `npm run build`: passed with 26 generated pages.
+- `npm run check:content`: passed across 108 source files and 34 rendered pages.
+- `npm run check:links`: passed across 34 HTML files with no broken internal links.
+- Browser QA: Chinese and English homepage/research output checked at 1440px, 1024px, and 390px; the impact path has no horizontal overflow, source links are keyboard reachable, and browser console errors remain at zero.
+- JavaScript budget: all emitted JavaScript totals 176,091 bytes gzip, unchanged by the static public-impact components and below the 180 KB budget.

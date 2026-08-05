@@ -25,7 +25,7 @@ export type ResearchCopy = {
     eyebrow: string;
     title: string;
     lead: string;
-    nav: { themes: string; featured: string; index: string; recognition: string };
+    nav: { themes: string; featured: string; impact: string; index: string; recognition: string };
     areas: Array<{ key: string; title: string; body: string; cta: string }>;
     featured: string;
     featuredLead: string;
@@ -112,7 +112,7 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       eyebrow: "NUWA LAB · RESEARCH",
       title: "Define risk. Build safety with evidence.",
       lead: "Frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
-      nav: { themes: "Research themes", featured: "Featured work", index: "All research", recognition: "Recognition" },
+      nav: { themes: "Research themes", featured: "Featured work", impact: "Public impact", index: "All research", recognition: "Recognition" },
       areas: [
         { key: "frontier-risk-control", title: "Frontier risk & AI control", body: "Measure autonomy, deception, proliferation, and control integrity.", cta: "View this theme" },
         { key: "agent-model-safety", title: "Agent & model safety", body: "Protect reasoning, behavior, generative models, and human–AI trust.", cta: "View this theme" },
@@ -235,7 +235,7 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       eyebrow: "女娲实验室 · 研究",
       title: "以研究定义风险，以证据构建安全",
       lead: "聚焦前沿 AI 风险、智能体安全、系统安全与网络安全",
-      nav: { themes: "研究主题", featured: "代表成果", index: "全部成果", recognition: "荣誉与认可" },
+      nav: { themes: "研究主题", featured: "代表成果", impact: "公共影响", index: "全部成果", recognition: "荣誉与认可" },
       areas: [
         { key: "frontier-risk-control", title: "前沿风险与 AI 控制", body: "评测自主性、欺骗、扩散与控制完整性。", cta: "查看主题研究" },
         { key: "agent-model-safety", title: "智能体与模型安全", body: "保护推理、行为、生成模型与人机信任。", cta: "查看主题研究" },

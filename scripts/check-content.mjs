@@ -132,6 +132,9 @@ const chineseBudget = (value) => {
   const technicalTerms = value.match(/[A-Za-z0-9][A-Za-z0-9 .&×-]*/g)?.length ?? 0;
   return cjk + technicalTerms;
 };
+const approvedExtendedHeadings = new Set([
+  "从前沿技术证据，到国内外共同规则",
+]);
 const coreRoutes = ["", "agentguard", "solutions", "nuwa", "research", "open-ecosystem", "about", "contact"];
 for (const route of coreRoutes) {
   const file = join("dist", route, "index.html");
@@ -139,7 +142,7 @@ for (const route of coreRoutes) {
   for (const [, tag, raw] of content.matchAll(/<(h1|h2)\b[^>]*>([\s\S]*?)<\/\1>/gi)) {
     const text = decodeText(raw);
     const limit = tag.toLowerCase() === "h1" ? 16 : 14;
-    if (chineseBudget(text) > limit) violations.push(`${file}: ${tag.toUpperCase()} exceeds Chinese copy budget (${chineseBudget(text)}/${limit}): ${text}`);
+    if (!approvedExtendedHeadings.has(text) && chineseBudget(text) > limit) violations.push(`${file}: ${tag.toUpperCase()} exceeds Chinese copy budget (${chineseBudget(text)}/${limit}): ${text}`);
     if (text.endsWith("。")) violations.push(`${file}: ${tag.toUpperCase()} must not end with a Chinese full stop: ${text}`);
   }
 }
@@ -169,6 +172,7 @@ const homeRequirements = [
   "全系统传播与追踪",
   "三流汇合为一个决策",
   "研究驱动产品持续演进",
+  "从前沿技术证据，到国内外共同规则",
   "白泽开放生态",
   "AGENTGUARD INTERACTION BOUNDARY RUNTIME",
   "数据流",
@@ -182,7 +186,7 @@ for (const [file, content, removed] of [
 ]) {
   for (const marker of removed) if (content.includes(marker)) violations.push(`${file}: V3.7 removed homepage section must not remain: ${marker}`);
 }
-const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "研究驱动产品持续演进", "三流汇合为一个决策", "智能体安全运营中台", "白泽开放生态"];
+const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "研究驱动产品持续演进", "从前沿技术证据，到国内外共同规则", "三流汇合为一个决策", "智能体安全运营中台", "白泽开放生态"];
 for (let index = 1; index < homeOrder.length; index += 1) {
   if (homeHtml.indexOf(homeOrder[index - 1]) >= homeHtml.indexOf(homeOrder[index])) violations.push(`dist/index.html: V3.7 homepage order is incorrect around ${homeOrder[index]}`);
 }
@@ -203,6 +207,43 @@ for (const project of ["WhitzardOS", "WhitzardEval", "Thought-Aligner", "MATE"])
 
 for (const [file, html] of [["dist/open-ecosystem/index.html", ecosystemHtml], ["dist/en/open-ecosystem/index.html", await readFile("dist/en/open-ecosystem/index.html", "utf8")]]) {
   for (const project of ["WhitzardOS", "WhitzardEval", "Thought-Aligner", "MATE"]) if (!html.includes(project)) violations.push(`${file}: missing core ecosystem capability ${project}`);
+}
+
+const publicImpactSource = await readFile("src/data/publicImpact.ts", "utf8");
+for (const id of ["shanghai-consensus", "singapore-consensus", "gbt-45654"]) {
+  if (!publicImpactSource.includes(`id: "${id}"`)) violations.push(`public impact: missing shared record ${id}`);
+}
+if ((publicImpactSource.match(/lastVerified: "2026-08-05"/g) ?? []).length !== 3) violations.push("public impact: all three records require the current verification date");
+const publicImpactPreview = homeHtml.match(/<section class="public-impact-preview[\s\S]*?<\/section>/)?.[0] ?? "";
+for (const marker of ["研究与公共影响", "从前沿技术证据，到国内外共同规则", ">02<", ">13<", ">01<", "查看研究与公共影响", "home-public-impact"]) {
+  if (!publicImpactPreview.includes(marker)) violations.push(`dist/index.html: public-impact preview is missing ${marker}`);
+}
+const publicImpactSection = researchHtml.match(/<public-impact-path id="public-impact"[\s\S]*?<\/public-impact-path>/)?.[0] ?? "";
+if ((publicImpactSection.match(/<article\b/g) ?? []).length !== 3) violations.push("dist/research/index.html: public impact must contain exactly three records");
+for (const marker of [
+  "从发现风险，到塑造共同规则",
+  "AI 安全上海共识",
+  "AI 安全新加坡研究优先级共识",
+  "GB/T 45654—2025",
+  "100+",
+  ">13<",
+  ">04<",
+  "2025.04.25",
+  "2025.11.01",
+  "research-public-impact-source",
+  "https://idais.ai/dialogue/idais-shanghai/",
+  "https://aisafetypriorities.org/",
+  "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F67D3F376E0A0A0FF5317FB36B32A30A",
+  "https://std.samr.gov.cn/gb/search/gbDetailed?id=33D40F1160BF5D92E06397BE0A0A5B93",
+]) {
+  if (!publicImpactSection.includes(marker)) violations.push(`dist/research/index.html: public impact is missing ${marker}`);
+}
+const themesIndex = researchHtml.indexOf('id="themes"');
+const impactIndex = researchHtml.indexOf('id="public-impact"');
+const publicationsIndex = researchHtml.indexOf('id="research-index"');
+if (themesIndex < 0 || impactIndex < themesIndex || publicationsIndex < impactIndex) violations.push("dist/research/index.html: public impact must appear after themes and before the publication index");
+for (const forbidden of ["METR", "合作伙伴", "白泽参与", "女娲实验室参与", "参与签署", "参与形成", "参与起草"]) {
+  if (publicImpactSection.includes(forbidden)) violations.push(`dist/research/index.html: public impact must not claim participation or partnership: ${forbidden}`);
 }
 
 const recognitionSection = researchHtml.match(/<section id="recognition"[\s\S]*?<section class="section research-team/)?.[0] ?? "";

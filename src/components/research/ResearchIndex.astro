@@ -7,6 +7,7 @@ import { researchAssets } from "../../data/generated/researchAssets";
 import { researchRecognitions } from "../../data/researchRecognitions";
 import { links } from "../../data/links";
 import ResearchExplorer from "./ResearchExplorer";
+import PublicImpactPath from "./PublicImpactPath.astro";
 import "../../styles/research.css";
 
 interface Props { locale: Locale; copy: ResearchCopy["research"] }
@@ -38,7 +39,7 @@ const schema = {
     <div class="site-container research-hero__grid">
       <div><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p></div>
       <nav aria-label={locale === "zh" ? "研究页面导航" : "Research page navigation"}>
-        <a href="#themes">{copy.nav.themes}</a><a href="#featured">{copy.nav.featured}</a><a href="#research-index">{copy.nav.index}</a><a href="#recognition">{copy.nav.recognition}</a>
+        <a href="#themes">{copy.nav.themes}</a><a href="#featured">{copy.nav.featured}</a><a href="#public-impact">{copy.nav.impact}</a><a href="#research-index">{copy.nav.index}</a><a href="#recognition">{copy.nav.recognition}</a>
       </nav>
     </div>
   </section>
@@ -65,6 +66,8 @@ const schema = {
       return <article><div class="research-themes__intro"><span>0{index + 1}</span><h3>{area.title}</h3><p>{area.body}</p><a href={`${localizedPath("/research", locale)}?topic=${area.key}#research-index`}>{area.cta} →</a></div><ol>{examples.map((item) => <li><span>{item.year}</span><a href={primaryLink(item)} target="_blank" rel="noreferrer">{item.title}</a></li>)}</ol></article>;
     })}</div>
   </section>
+
+  <PublicImpactPath locale={locale} />
 
   <section id="research-index" class="section research-index">
     <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "出版物" : "PUBLICATIONS"}</p><h2>{copy.all}</h2></div>

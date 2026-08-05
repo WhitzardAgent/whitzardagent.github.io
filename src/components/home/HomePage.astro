@@ -10,6 +10,7 @@ import HomeHero from "./HomeHero";
 import ResearchProductLoop from "./ResearchProductLoop";
 import AgentGuardOperationsCenter from "./AgentGuardOperationsCenter.astro";
 import UnifiedSecurityInfluenceEngine from "../agentguard/UnifiedSecurityInfluenceEngine";
+import PublicImpactPreview from "../research/PublicImpactPreview.astro";
 import "../../styles/home.css";
 import "../../styles/agentguard-story.css";
 
@@ -36,6 +37,8 @@ const statusMap: Record<Locale, Record<string, string>> = {
   </section>
 
   <ResearchProductLoop copy={copy.loop} locale={locale} client:visible />
+
+  <PublicImpactPreview locale={locale} />
 
   <section class="section story-section story-section--xuan" id="engine">
     <div class="site-container story-section__head"><div><p class="eyebrow">{story.engine.eyebrow}</p><h2 class="section-title">{story.engine.title}</h2></div><p>{story.engine.body}</p></div>
