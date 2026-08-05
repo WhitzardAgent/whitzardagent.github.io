@@ -1,6 +1,5 @@
 import type { HomeCopy } from "../../i18n/pages/home";
-import { supportedFrameworks } from "../../data/supportedFrameworks";
-import AgentGuardSystemMap from "../agentguard/AgentGuardSystemMap";
+import AgentGuardBoundaryFlow from "./AgentGuardBoundaryFlow";
 
 type Props = { copy: HomeCopy["hero"]; locale: "en" | "zh" };
 
@@ -18,11 +17,7 @@ export default function HomeHero({ copy, locale }: Props) {
           </div>
         </div>
         <div className="home-hero__visual">
-          <AgentGuardSystemMap locale={locale} density="compact" />
-        </div>
-        <div className="home-hero__adapters" aria-label={locale === "zh" ? "支持的智能体架构" : "Supported agent frameworks"}>
-          <span>{locale === "zh" ? "支持的智能体架构" : "SUPPORTED FRAMEWORKS"}</span>
-          <div>{supportedFrameworks.map((framework) => <span className="framework-mark" key={framework.id}><img src={framework.logoPath} alt="" width="28" height="28" /><small>{framework.productLabel}</small></span>)}</div>
+          <AgentGuardBoundaryFlow locale={locale} />
         </div>
       </div>
     </section>

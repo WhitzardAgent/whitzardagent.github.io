@@ -14,21 +14,22 @@ const productHref = locale === "zh" ? "/agentguard" : "/en/agentguard";
     <h2 id="research-bridge-title" class="section-title">{copy.title}</h2>
     <p>{copy.statement}</p>
   </div>
-  <div class="site-container research-bridge__map">
-    <article class="research-bridge__lab">
+  <div class="site-container research-bridge__stack">
+    <article class="research-bridge__panel research-bridge__panel--lab">
       <header><img src="/assets/logo/nvwa_logo.png" width="80" height="80" alt={locale === "zh" ? "女娲实验室标识" : "NUWA Lab logo"} loading="lazy" /><div><span>{locale === "zh" ? "研究引擎" : "RESEARCH ENGINE"}</span><h3>{copy.lab.name}</h3></div></header>
       <p>{copy.lab.role}</p>
-      <ol>{copy.lab.items.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ol>
+      <ul>{copy.lab.items.map((item) => <li>{item}</li>)}</ul>
       <a href={researchHref}>{copy.lab.link} →</a>
     </article>
     <div class="research-bridge__axis" role="img" aria-label={`${copy.bridge.down}. ${copy.bridge.up}.`}>
-      <span>{copy.bridge.down}</span><i aria-hidden="true">↓</i><strong>RESEARCH<br />×<br />PRODUCT</strong><i aria-hidden="true">↑</i><span>{copy.bridge.up}</span>
+      <div><i aria-hidden="true">↓</i><span>{copy.bridge.down}</span></div>
+      <strong>{locale === "zh" ? "研究 × 产品" : "RESEARCH × PRODUCT"}</strong>
+      <div><i aria-hidden="true">↑</i><span>{copy.bridge.up}</span></div>
     </div>
-    <article class="research-bridge__product">
+    <article class="research-bridge__panel research-bridge__panel--product">
       <header><img src="/assets/logo/whitzard_logo.png" width="72" height="72" alt="AgentGuard" loading="lazy" /><div><span>{locale === "zh" ? "企业产品" : "ENTERPRISE PRODUCT"}</span><h3>{copy.product.name}</h3></div></header>
       <p>{copy.product.role}</p>
-      <ol>{copy.product.items.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ol>
-      <div class="research-bridge__control"><span>RUNTIME</span><strong>{locale === "zh" ? "研判 · 处置 · 验证" : "DECIDE · RESPOND · VERIFY"}</strong></div>
+      <ul>{copy.product.items.map((item) => <li>{item}</li>)}</ul>
       <a href={productHref}>{copy.product.link} →</a>
     </article>
   </div>

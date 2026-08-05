@@ -3,25 +3,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
 import type { HomeCopy } from "../../i18n/pages/home";
-import { openSourceAssets } from "../../data/generated/openSourceAssets";
 import { links } from "../../data/links";
 import { storyPageCopy } from "../../data/agentguardStory";
 import HomeHero from "./HomeHero";
 import ResearchProductBridge from "./ResearchProductBridge.astro";
-import AgentGuardOperationsCenter from "./AgentGuardOperationsCenter.astro";
-import UnifiedSecurityInfluenceEngine from "../agentguard/UnifiedSecurityInfluenceEngine";
 import "../../styles/home.css";
-import "../../styles/agentguard-story.css";
 
 interface Props { locale: Locale; copy: HomeCopy; }
 const { locale, copy } = Astro.props;
 const story = storyPageCopy[locale];
-const featuredIds = ["whitzard-os", "whitzard-eval", "thought-aligner", "mate"];
-const featured = featuredIds.map((id) => openSourceAssets.find((item) => item.id === id)).filter(Boolean);
-const statusMap: Record<Locale, Record<string, string>> = {
-  en: { "open-source": "Open source", active: "Maintained", "coming soon": "Coming soon" },
-  zh: { "open-source": "开源", active: "持续维护", "coming soon": "即将开放" },
-};
+const ecosystemDirections = locale === "zh"
+  ? ["智能体开发框架", "安全评测基础设施", "安全模型", "行为轨迹审计"]
+  : ["Agent development", "Safety evaluation", "Safety models", "Behavior-trace auditing"];
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/">
@@ -37,16 +30,11 @@ const statusMap: Record<Locale, Record<string, string>> = {
 
   <ResearchProductBridge copy={copy.loop} locale={locale} />
 
-  <section class="section story-section story-section--xuan" id="engine">
-    <div class="site-container story-section__head"><div><p class="eyebrow">{locale === "zh" ? "AgentGuard 智能分析核心" : "AGENTGUARD INTELLIGENCE"}</p><h2 class="section-title">{locale === "zh" ? "细粒度管控行为链、思维链和数据链" : "Control behavior, reasoning, and data chains"}</h2></div><p>{locale === "zh" ? "关联行动组合、任务意图与数据血缘，在关键边界执行精细化处置" : "Connect action sequences, task intent, and data lineage to enforce precise controls at critical boundaries"}</p></div>
-    <div class="site-container"><UnifiedSecurityInfluenceEngine locale={locale} density="compact" client:visible /></div>
-  </section>
-
-  <AgentGuardOperationsCenter locale={locale} copy={copy.operations} />
-
-  <section class="ecosystem-preview section">
-    <div class="site-container ecosystem-preview__head"><div><p class="eyebrow">{copy.ecosystem.eyebrow}</p><h2 class="section-title">{copy.ecosystem.title}</h2><p>{copy.ecosystem.intro}</p></div><a class="text-link" href={localizedPath("/open-ecosystem", locale)}>{copy.ecosystem.viewAll} <span class="arrow">→</span></a></div>
-    <div class="site-container ecosystem-grid">{featured.map((project, index) => project && <article><div><span>0{index + 1}</span><small>{project.capability?.[locale] ?? statusMap[locale][project.status ?? ""] ?? project.status}</small></div><h3>{project.name}</h3><p>{project.description[locale]}</p><div class="ecosystem-grid__links">{project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`${project.name} GitHub`}>GitHub ↗</a>}{project.hfUrl && <a href={Array.isArray(project.hfUrl) ? project.hfUrl[0] : project.hfUrl} target="_blank" rel="noreferrer" aria-label={`${project.name} Hugging Face`}>Hugging Face ↗</a>}</div></article>)}</div>
+  <section class="ecosystem-brief section">
+    <div class="site-container ecosystem-brief__grid">
+      <div><p class="eyebrow">{locale === "zh" ? "公共安全技术" : "PUBLIC SAFETY TECHNOLOGY"}</p><h2 class="section-title">{locale === "zh" ? "开放技术方向" : "Open technical directions"}</h2></div>
+      <div><p>{copy.ecosystem.intro}</p><ul>{ecosystemDirections.map((item) => <li>{item}</li>)}</ul><a class="text-link" href={localizedPath("/open-ecosystem", locale)}>{copy.ecosystem.viewAll} <span class="arrow">→</span></a></div>
+    </div>
   </section>
 
   <section class="final-cta"><div class="site-container"><p class="eyebrow">{copy.cta.eyebrow}</p><h2>{copy.cta.title}</h2><p>{copy.cta.body}</p><ol class="demo-agenda">{story.demoAgenda.map((item) => <li>{item}</li>)}</ol><div><a class="button final-cta__primary" href={localizedPath("/contact", locale)} data-umami-event="agentguard-demo-cta">{copy.cta.primary}</a><a class="button final-cta__secondary" href={`mailto:${links.email}`}>{copy.cta.secondary}</a></div></div></section>
