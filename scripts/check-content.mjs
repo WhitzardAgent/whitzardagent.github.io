@@ -168,25 +168,33 @@ const homeRequirements = [
   "智能体安全运营中台",
   "全系统传播与追踪",
   "三流汇合为一个决策",
-  "风险成形前精准介入",
-  "补充智能体运行时上下文",
   "研究驱动产品持续演进",
   "白泽开放生态",
-  "AgentGuard Interaction Boundary Runtime",
-  "AgentGuard 处置",
-  "业务结果",
+  "AGENTGUARD INTERACTION BOUNDARY RUNTIME",
   "数据流",
   "授权流",
   "动作影响",
-  "长期 Memory 写入",
-  "Shell 与生产提交",
 ];
-for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.6 homepage marker: ${marker}`);
+for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.7 homepage marker: ${marker}`);
+for (const [file, content, removed] of [
+  ["dist/index.html", homeHtml, [">风险成形前精准介入</h2>", ">覆盖智能体行动的完整上下文</h2>", ">补充智能体运行时上下文</h2>"]],
+  ["dist/en/index.html", englishHomeHtml, [">Intervene before risk becomes impact</h2>", ">Cover the complete context of agent action</h2>", ">Add agent-aware runtime context</h2>"]],
+]) {
+  for (const marker of removed) if (content.includes(marker)) violations.push(`${file}: V3.7 removed homepage section must not remain: ${marker}`);
+}
+const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "研究驱动产品持续演进", "三流汇合为一个决策", "智能体安全运营中台", "白泽开放生态"];
+for (let index = 1; index < homeOrder.length; index += 1) {
+  if (homeHtml.indexOf(homeOrder[index - 1]) >= homeHtml.indexOf(homeOrder[index])) violations.push(`dist/index.html: V3.7 homepage order is incorrect around ${homeOrder[index]}`);
+}
+const homeSource = await readFile("src/components/home/HomePage.astro", "utf8");
+if (homeSource.includes("AgentGuardRiskSimulator")) violations.push("src/components/home/HomePage.astro: homepage must not import or render AgentGuardRiskSimulator");
 for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
   if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
 }
 for (const framework of ["LangChain", "Microsoft AutoGen", "OpenAI Agents SDK", "LangGraph", "LlamaIndex", "Dify", "OpenClaw"]) {
   if (!homeHtml.includes(framework)) violations.push(`dist/index.html: missing supported framework: ${framework}`);
+  const visibleCount = homeHtml.split(`>${framework}<`).length - 1;
+  if (visibleCount !== 1) violations.push(`dist/index.html: ${framework} must appear exactly once in the visible homepage framework strip, found ${visibleCount}`);
 }
 const homeEcosystem = homeHtml.match(/<section class="ecosystem-preview[\s\S]*?<section class="final-cta/)?.[0] ?? "";
 const homeEcosystemCards = homeEcosystem.match(/<article\b/g)?.length ?? 0;
@@ -218,13 +226,19 @@ for (const [file, content] of [["dist/agentguard/index.html", agentGuardZh], ["d
 }
 
 const agentGuardRequirements = [
-  ["dist/agentguard/index.html", agentGuardZh, ["全系统传播与追踪", "看见风险如何穿过智能体系统", "统一安全影响引擎", "三流汇合为一个决策", "客户数据外发", "长期 Memory 写入", "Shell 与生产提交", "数据流", "授权流", "动作影响", "从策略配置到审计闭环", "执行模拟"]],
-  ["dist/en/agentguard/index.html", agentGuardEn, ["SYSTEM-WIDE PROPAGATION", "See risk move through the agent system", "UNIFIED SECURITY INFLUENCE ENGINE", "Three flows. One decision.", "Customer data egress", "Long-term memory write", "Shell and production commit", "Data flow", "Authorization flow", "Action effect", "From policy to audit.", "Run simulation"]],
+  ["dist/agentguard/index.html", agentGuardZh, ["保护对象", "覆盖智能体行动的完整上下文", "全系统传播与追踪", "看见风险如何穿过智能体系统", "统一安全影响引擎", "三流汇合为一个决策", "客户数据外发", "长期 Memory 写入", "Shell 与生产提交", "数据流", "授权流", "动作影响", "从策略配置到审计闭环", "执行模拟", "融入现有安全体系", "补充智能体运行时上下文", "IAM", "DLP", "API Gateway", "SIEM"]],
+  ["dist/en/agentguard/index.html", agentGuardEn, ["Cover the complete context of agent action", "SYSTEM-WIDE PROPAGATION", "See risk move through the agent system", "UNIFIED SECURITY INFLUENCE ENGINE", "Three flows. One decision.", "Customer data egress", "Long-term memory write", "Shell and production commit", "Data flow", "Authorization flow", "Action effect", "From policy to audit.", "Run simulation", "WORKS WITH YOUR SECURITY STACK", "Add agent-aware runtime context", "IAM", "DLP", "API Gateway", "SIEM"]],
 ];
 for (const [file, content, required] of agentGuardRequirements) {
   for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard V3.6 marker: ${marker}`);
   for (const legacy of ["retrieve_doc", "send_email_to", "admin@example.com", "alice@example.com"]) {
     if (content.includes(legacy)) violations.push(`${file}: legacy two-node product demo must not remain: ${legacy}`);
+  }
+}
+for (const file of ["dist/solutions/index.html", "dist/en/solutions/index.html"]) {
+  const content = withoutEmbeddedCode(await readFile(file, "utf8"));
+  for (const productDetail of ["LLM Before", "LLM After", "Tool Before", "Tool After", "DSL", "risk-simulator", "统一安全影响引擎", "UNIFIED SECURITY INFLUENCE ENGINE"]) {
+    if (content.includes(productDetail)) violations.push(`${file}: use-cases page must not duplicate AgentGuard implementation detail: ${productDetail}`);
   }
 }
 const enterpriseScenarioSource = await readFile("src/data/agentguardEnterpriseScenarios.ts", "utf8");

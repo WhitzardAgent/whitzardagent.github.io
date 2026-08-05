@@ -59,3 +59,7 @@
 | 第二层 | 三流汇合为一个决策 | Three flows. One decision. |
 | 第三层 | 风险成形前精准介入 | Intervene before risk becomes impact |
 | 安全体系 | 补充智能体运行时上下文 | Add agent-aware runtime context |
+
+## V3.7 首页文案归属
+
+首页只保留第一层系统传播和第二层统一分析的标题。第三层“风险成形前精准介入”、保护对象与安全体系对照文案仅在 AgentGuard 页输出；“研究驱动产品持续演进”前移至首页企业安全挑战之后。

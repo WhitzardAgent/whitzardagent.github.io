@@ -105,6 +105,11 @@ const softwareSchema = {
     <div class="site-container ag-deploy-modes">{copy.deployment.modes.map((item) => <article><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
   </section>
 
+  <section class="section story-section story-section--frost" id="security-stack">
+    <div class="site-container story-section__head"><div><p class="eyebrow">{story.securityStack.eyebrow}</p><h2 class="section-title">{story.securityStack.title}</h2></div><p>{story.securityStack.body}</p></div>
+    <div class="site-container security-stack-table">{story.securityStack.rows.map((row) => <div><strong>{row[0]}</strong><span>{row[1]}</span><span>{row[2]}</span></div>)}</div>
+  </section>
+
   <section class="section ag-evidence">
     <div class="site-container ag-section-head"><p class="eyebrow">{copy.evidence.eyebrow}</p><h2 class="section-title">{copy.evidence.title}</h2></div>
     <div class="site-container ag-evidence__grid">{copy.evidence.items.map((item) => <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}><h3>{item.title}</h3><p>{item.body}</p><span>{item.label} →</span></a>)}</div>

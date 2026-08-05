@@ -83,3 +83,7 @@ V3.6 replaces the debugger-like product story with three shared projections: a s
 - Browser QA: passed at 1440px, 1024px, and 390px for the Chinese homepage and AgentGuard page; English projections share the same component and scenario model.
 - Keyboard QA: flow-mode arrow navigation, scenario selection, node inspection, replay, approve-once, and rejection controls are reachable and stateful.
 - JavaScript budget: all emitted JavaScript totals 176,091 bytes gzip; the three new islands are 2,768, 1,357, and 2,415 bytes gzip respectively.
+
+## V3.7 homepage responsibility reset — 2026-08-05
+
+V3.7 removes the compact task simulator, protected-object strip, duplicate framework strip, and security-stack comparison from the homepage. The research-to-product loop now follows the enterprise-risk section, making the company structure visible before the remaining compact product principle. AgentGuard becomes the sole home for the full simulator, protected-object summary, and IAM/DLP/API Gateway/SIEM comparison; the use-cases page remains focused on business workflows.
