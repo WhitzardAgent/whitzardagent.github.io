@@ -80,11 +80,6 @@ const schema = {
     <div class="site-container research-recognition__list">{researchRecognitions.map((item) => <article><span>{item.year}</span><div><h3>{item.title[locale]}</h3>{item.venueNote && <p>{item.venueNote[locale]}</p>}</div><a href={item.sourceUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></article>)}</div>
   </section>
 
-  <section id="team" class="section research-team">
-    <div class="site-container research-team__head"><div><p class="eyebrow">{copy.teamEyebrow}</p><h2>{copy.teamTitle}</h2></div><p>{copy.teamLead}</p></div>
-    <div class="site-container research-team__grid">{researchers.map((person, index) => <article><span>0{index + 1}</span><h3>{person.name}</h3><strong>{person.role}</strong><p>{person.focus}</p><div><a href={person.url} target="_blank" rel="noreferrer">{copy.homepage} ↗</a><a href={`${localizedPath("/research", locale)}?member=${person.slug}#research-index`}>{copy.viewResearch} →</a></div></article>)}</div>
-  </section>
-
   <section id="research-index" class="section research-index">
     <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "出版物" : "PUBLICATIONS"}</p><h2>{copy.all}</h2></div>
     <div class="site-container"><ResearchExplorer assets={sorted} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} members={researchers.map(({ slug, name }) => ({ key: slug, title: name }))} client:load /></div>

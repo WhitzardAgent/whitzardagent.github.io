@@ -43,7 +43,7 @@ const softwareSchema = {
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/agentguard" schema={softwareSchema}>
   <section class="ag-hero">
-    <div class="site-container ag-hero__grid">
+    <div class="site-container ag-hero__grid ag-hero__grid--editorial">
       <div class="ag-hero__copy">
         <p class="eyebrow">{copy.hero.eyebrow}</p>
         <h1>{copy.hero.title}</h1>
@@ -52,13 +52,18 @@ const softwareSchema = {
           <a class="button button--primary" href={localizedPath("/contact", locale)}>{copy.hero.primary}</a>
           <a class="button button--secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.hero.secondary} ↗</a>
         </div>
-        <div class="ag-adapter-strip"><span>{locale === "zh" ? "支持的智能体架构" : "SUPPORTED FRAMEWORKS"}</span><div>{supportedFrameworks.map((framework) => <small><img src={framework.logoPath} width="24" height="24" alt="" />{framework.productLabel}</small>)}</div></div>
+        <div class="ag-hero__scope" aria-label={story.protection.title}>
+          <span>{story.protection.eyebrow}</span>
+          <strong>{story.protection.title}</strong>
+          <ul>{story.protection.items.map((item) => <li>{item}</li>)}</ul>
+        </div>
       </div>
-      <div class="ag-hero__protected" aria-label={story.protection.title}>
-        <header><span>AgentGuard Enterprise</span><strong>{story.protection.title}</strong></header>
-        <div class="ag-hero__protected-core"><b>AG</b><span>Interaction<br/>Boundary Runtime</span></div>
-        <ul>{story.protection.items.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ul>
-        <footer><i aria-hidden="true" />{locale === "zh" ? "持续理解身份、数据、工具与行动后果" : "Continuous context across identity, data, tools, and action"}</footer>
+      <div class="ag-hero__evidence" aria-label={locale === "zh" ? "AgentGuard 产品证据" : "AgentGuard product evidence"}>
+        <div><span>{locale === "zh" ? "企业交付" : "ENTERPRISE"}</span><strong>AgentGuard Enterprise</strong></div>
+        <div><span>{locale === "zh" ? "开放技术" : "OPEN SOURCE"}</span><strong>AgentGuard Community</strong></div>
+        <div class="ag-hero__evidence-frameworks"><span>{locale === "zh" ? "支持框架" : "FRAMEWORKS"}</span><p>{supportedFrameworks.map((framework) => <small><img src={framework.logoPath} width="22" height="22" alt="" />{framework.productLabel}</small>)}</p></div>
+        <div><span>{locale === "zh" ? "关键介入" : "CONTROL POINTS"}</span><strong>LLM · Tool · Memory</strong></div>
+        <div><span>{locale === "zh" ? "部署方式" : "DEPLOYMENT"}</span><strong>{locale === "zh" ? "企业信任边界内" : "Inside the enterprise boundary"}</strong></div>
       </div>
     </div>
   </section>

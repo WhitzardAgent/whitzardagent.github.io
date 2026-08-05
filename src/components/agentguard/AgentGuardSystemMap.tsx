@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useMemo, useState, type KeyboardEvent } from "react";
 import {
   agentGuardSystemEdges,
   agentGuardSystemNodes,
@@ -51,59 +51,21 @@ const kindOrder: SystemNodeKind[] = ["identity", "agent", "model", "data", "memo
 const kindLabels: Record<SystemNodeKind, { zh: string; en: string }> = {
   identity: { zh: "身份", en: "Identity" }, agent: { zh: "智能体", en: "Agent" }, model: { zh: "模型", en: "Model" }, data: { zh: "数据", en: "Data" }, memory: { zh: "Memory", en: "Memory" }, tool: { zh: "工具与 MCP", en: "Tools & MCP" }, mcp: { zh: "MCP", en: "MCP" }, "external-system": { zh: "外部系统", en: "External" },
 };
-const track = (event: string) => (window as Window & { umami?: { track: (name: string) => void } }).umami?.track(event);
 const pathFromPoints = (points: Point[]) => points.map((point, index) => `${index ? "L" : "M"}${point.x} ${point.y}`).join(" ");
 
 export default function AgentGuardSystemMap({ locale, density = "full" }: Props) {
   const copy = storyPageCopy[locale].map;
-  const rootRef = useRef<HTMLElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const resumeRef = useRef<number | null>(null);
-  const [phase, setPhase] = useState(6);
-  const [inView, setInView] = useState(false);
-  const [manualPaused, setManualPaused] = useState(false);
-  const [inspectionPaused, setInspectionPaused] = useState(false);
   const [selectedId, setSelectedId] = useState("external");
   const [kindFilter, setKindFilter] = useState<SystemNodeKind | "all">("all");
-  const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const ids = density === "compact" ? compactIds : fullIds;
   const layout = density === "compact" ? compactLayout : fullLayout;
   const edges = density === "compact" ? compactEdges : fullEdges;
   const nodes = useMemo(() => agentGuardSystemNodes.filter((node) => ids.includes(node.id)), [density]);
   const visibleNodes = useMemo(() => kindFilter === "all" ? nodes : nodes.filter((node) => node.kind === kindFilter), [nodes, kindFilter]);
   const selected = nodes.find((node) => node.id === selectedId) ?? nodes[nodes.length - 1];
-  const narrativeRunning = inView && !manualPaused && !inspectionPaused && !reduced;
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: .18 });
-    observer.observe(root);
-    return () => observer.disconnect();
-  }, []);
-  useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
-    if (!inView || manualPaused || reduced || document.hidden) svg.pauseAnimations(); else svg.unpauseAnimations();
-    const visibility = () => document.hidden || manualPaused || !inView ? svg.pauseAnimations() : svg.unpauseAnimations();
-    document.addEventListener("visibilitychange", visibility);
-    return () => document.removeEventListener("visibilitychange", visibility);
-  }, [inView, manualPaused, reduced]);
-  useEffect(() => {
-    if (!narrativeRunning) return;
-    const timer = window.setInterval(() => setPhase((current) => (current + 1) % 8), 1500);
-    return () => window.clearInterval(timer);
-  }, [narrativeRunning]);
-  useEffect(() => () => { if (resumeRef.current !== null) window.clearTimeout(resumeRef.current); }, []);
-
   const select = (id: string) => {
-    setSelectedId(id); setInspectionPaused(true);
-    if (resumeRef.current !== null) window.clearTimeout(resumeRef.current);
-    resumeRef.current = window.setTimeout(() => { setInspectionPaused(false); setSelectedId("external"); }, 10000);
-    track("home-system-map-node");
+    setSelectedId(id);
   };
-  const restart = () => { setPhase(0); setSelectedId("external"); setInspectionPaused(false); setManualPaused(false); track("home-system-map-replay"); };
-  const togglePause = () => { setManualPaused((value) => !value); track("home-system-map-pause"); };
   const moveNode = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
@@ -119,25 +81,23 @@ export default function AgentGuardSystemMap({ locale, density = "full" }: Props)
     found: "敏感数据将进入外部系统", action: "移除客户身份与合同字段，保留管理结论", result: "分析继续 · 外发合规 · 全程留痕",
   } : { found: "Sensitive data is about to enter an external system", action: "Remove customer identity and contract fields while preserving management findings", result: "Analysis continues · compliant egress · fully audited" };
 
-  return <section ref={rootRef} className={`ag-system-map density-${density}`} aria-label={copy.title} data-running={narrativeRunning ? "true" : "false"} data-paused={manualPaused ? "true" : "false"}>
-    <header className="ag-system-map__bar"><div className="ag-runtime-mark"><b>AG</b><span><strong>AgentGuard</strong><small>{copy.runtime}</small></span></div><em><i aria-hidden="true" />{copy.live}</em></header>
+  return <section className={`ag-system-map density-${density}`} aria-label={copy.title} data-running="false">
+    <header className="ag-system-map__bar"><div className="ag-runtime-mark"><b>AG</b><span><strong>AgentGuard</strong><small>{copy.runtime}</small></span></div><em>{locale === "zh" ? "节点检查视图" : "Node inspection view"}</em></header>
     {density === "full" && <div className="ag-system-map__filters" aria-label={copy.select}><button type="button" className={kindFilter === "all" ? "is-active" : ""} onClick={() => setKindFilter("all")}>{locale === "zh" ? "全部" : "All"}</button>{kindOrder.map((kind) => <button type="button" key={kind} className={kindFilter === kind ? "is-active" : ""} onClick={() => setKindFilter(kind)}>{kindLabels[kind][locale]}</button>)}</div>}
     <div className="ag-system-map__workspace">
       <div className="ag-system-map__canvas">
-        <svg ref={svgRef} viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`} role="img" aria-label={locale === "zh" ? "数据、授权与动作影响在企业智能体系统中的传播路径" : "Data, authorization, and action-effect propagation through an enterprise agent system"}>
+        <svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`} role="img" aria-label={locale === "zh" ? "数据、授权与动作影响在企业智能体系统中的传播路径" : "Data, authorization, and action-effect propagation through an enterprise agent system"}>
           <defs><marker id={`ag-arrow-${density}`} markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" /></marker></defs>
           <rect className="ag-runtime-boundary" x="35" y="40" width="930" height="465" rx="42" /><text className="ag-runtime-boundary-label" x="60" y="70">AGENTGUARD INTERACTION BOUNDARY RUNTIME</text>
-          {edges.map((edge, index) => { const path = pathFromPoints(edge.points); const active = phase >= edge.phase || phase === 7; return <g key={edge.id} className={active ? "is-active" : ""}><path className="ag-map-edge" d={path} markerEnd={`url(#ag-arrow-${density})`} /><g className={`ag-flow-particle is-${edge.kind}`}><title>{flowMeta.find((item) => item.kind === edge.kind)?.[locale === "zh" ? "zh" : "en"]}</title>{edge.kind === "data" ? <circle r="5" /> : edge.kind === "authorization" ? <rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" /> : <rect x="-4" y="-4" width="8" height="8" />}<animateMotion dur={`${5.6 + (index % 3) * .9}s`} begin={`${(index % 4) * -.8}s`} repeatCount="indefinite" path={path} /></g></g>; })}
-          {phase >= 4 && <g className={`ag-intervention-gate ${phase >= 6 ? "is-resolved" : ""}`}><rect x={density === "compact" ? 805 : 840} y="270" width={density === "compact" ? 140 : 130} height="44" rx="22" /><text x={density === "compact" ? 875 : 905} y="297" textAnchor="middle">{phase >= 6 ? (locale === "zh" ? "AgentGuard · 已脱敏放行" : "AgentGuard · Redacted") : (locale === "zh" ? "AgentGuard · 正在复检" : "AgentGuard · Rechecking")}</text></g>}
+          {edges.map((edge) => { const path = pathFromPoints(edge.points); return <g key={edge.id} className="is-active"><path className={`ag-map-edge is-${edge.kind}`} d={path} markerEnd={`url(#ag-arrow-${density})`} /></g>; })}
         </svg>
-        <div className="ag-system-map__nodes">{nodes.map((node) => { const point = layout[node.id]; return <button id={`system-node-${density}-${node.id}`} key={node.id} type="button" className={`ag-system-node kind-${node.kind} ${phase >= (edges.find((edge) => edge.to === node.id)?.phase ?? 0) ? "is-active" : ""} ${selected.id === node.id ? "is-selected" : ""} ${kindFilter !== "all" && kindFilter !== node.kind ? "is-muted" : ""}`} style={{ left: `${point.x / VIEWBOX.width * 100}%`, top: `${point.y / VIEWBOX.height * 100}%` }} aria-pressed={selected.id === node.id} onClick={() => select(node.id)} onKeyDown={moveNode}><i aria-hidden="true" /><span>{density === "compact" && node.id === "tools" ? (locale === "zh" ? "工具与 MCP" : "Tools & MCP") : localize(node.shortLabel, locale)}</span><small>{kindLabels[node.kind][locale]}</small></button>; })}</div>
+        <div className="ag-system-map__nodes">{nodes.map((node) => { const point = layout[node.id]; return <button id={`system-node-${density}-${node.id}`} key={node.id} type="button" className={`ag-system-node kind-${node.kind} is-active ${selected.id === node.id ? "is-selected" : ""} ${kindFilter !== "all" && kindFilter !== node.kind ? "is-muted" : ""}`} style={{ left: `${point.x / VIEWBOX.width * 100}%`, top: `${point.y / VIEWBOX.height * 100}%` }} aria-pressed={selected.id === node.id} onClick={() => select(node.id)} onKeyDown={moveNode}><i aria-hidden="true" /><span>{density === "compact" && node.id === "tools" ? (locale === "zh" ? "工具与 MCP" : "Tools & MCP") : localize(node.shortLabel, locale)}</span><small>{kindLabels[node.kind][locale]}</small></button>; })}</div>
         <ol className="ag-system-map__mobile-trace">{nodes.map((node, index) => <li key={node.id}><button type="button" className={selected.id === node.id ? "is-selected" : ""} onClick={() => select(node.id)}><span>0{index + 1}</span><strong>{density === "compact" && node.id === "tools" ? (locale === "zh" ? "工具与 MCP" : "Tools & MCP") : localize(node.shortLabel, locale)}</strong><small>{localize(node.tracking, locale)}</small></button></li>)}</ol>
         <div className="ag-system-map__legend">{flowMeta.map((item) => <span key={item.kind} className={`is-${item.kind}`}><b aria-hidden="true">{item.symbol}</b>{locale === "zh" ? item.zh : item.en}</span>)}</div>
       </div>
       <aside className="ag-system-map__inspector" aria-live="polite">
-        {selected.id === "external" && !inspectionPaused ? <><header><span>AGENTGUARD</span><strong className="ag-system-map__inspector-title">{locale === "zh" ? "外发边界保护" : "Egress boundary protection"}</strong></header><dl className="ag-system-map__decision"><div><dt>{locale === "zh" ? "AgentGuard 发现" : "AgentGuard detects"}</dt><dd>{intervention.found}</dd></div><div className="is-response"><dt>{locale === "zh" ? "AgentGuard 处置" : "AgentGuard response"}</dt><dd>{intervention.action}</dd></div><div className="is-result"><dt>{locale === "zh" ? "业务结果" : "Business result"}</dt><dd>{intervention.result}</dd></div></dl></> : <><header><span>{kindLabels[selected.kind][locale]}</span><strong className="ag-system-map__inspector-title">{localize(selected.label, locale)}</strong></header><dl><div><dt>{copy.handling}</dt><dd>{localize(selected.handling, locale)}</dd></div><div><dt>{copy.challenge}</dt><dd>{localize(selected.challenge, locale)}</dd></div><div><dt>{copy.tracking}</dt><dd>{localize(selected.tracking, locale)}</dd></div><div className="is-response"><dt>{copy.response}</dt><dd>{localize(selected.response, locale)}</dd></div></dl></>}
+        {selected.id === "external" ? <><header><span>AGENTGUARD</span><strong className="ag-system-map__inspector-title">{locale === "zh" ? "外发边界保护" : "Egress boundary protection"}</strong></header><dl className="ag-system-map__decision"><div><dt>{locale === "zh" ? "AgentGuard 发现" : "AgentGuard detects"}</dt><dd>{intervention.found}</dd></div><div className="is-response"><dt>{locale === "zh" ? "AgentGuard 处置" : "AgentGuard response"}</dt><dd>{intervention.action}</dd></div><div className="is-result"><dt>{locale === "zh" ? "业务结果" : "Business result"}</dt><dd>{intervention.result}</dd></div></dl></> : <><header><span>{kindLabels[selected.kind][locale]}</span><strong className="ag-system-map__inspector-title">{localize(selected.label, locale)}</strong></header><dl><div><dt>{copy.handling}</dt><dd>{localize(selected.handling, locale)}</dd></div><div><dt>{copy.challenge}</dt><dd>{localize(selected.challenge, locale)}</dd></div><div><dt>{copy.tracking}</dt><dd>{localize(selected.tracking, locale)}</dd></div><div className="is-response"><dt>{copy.response}</dt><dd>{localize(selected.response, locale)}</dd></div></dl></>}
         {density === "full" && <div className="ag-system-map__impact"><span>{copy.incoming}<b>{incoming}</b></span><span>{copy.outgoing}<b>{outgoing}</b></span><span>{copy.impact}<b>{incoming + outgoing}</b></span></div>}
-        <div className="ag-map-controls"><button className="ag-map-play" type="button" onClick={togglePause}>{manualPaused ? (locale === "zh" ? "继续" : "Continue") : copy.pause}</button><button className="ag-map-replay" type="button" onClick={restart}>{locale === "zh" ? "重新演示" : "Replay"}</button></div>
       </aside>
     </div>
   </section>;
