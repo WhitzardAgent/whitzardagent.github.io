@@ -82,7 +82,7 @@ const schemas = [organizationSchema, ...(breadcrumbs ? [breadcrumbs] : []), ...(
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={siteTitle} /><meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={ogImageUrl} /><meta name="twitter:image:alt" content={ogImageAlt} />
     {schemas.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="ff378de3-72b9-4ba6-8fc8-985e171cef9e"></script>
+    <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="ff378de3-72b9-4ba6-8fc8-985e171cef9e"></script>
     <ClientRouter />
   </head>
   <body class:list={[brand === "nuwa" ? "nuwa-brand" : "whitzard-brand", locale === "zh" && "locale-zh"]}>

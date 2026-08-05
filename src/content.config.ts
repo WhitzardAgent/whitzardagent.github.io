@@ -1,5 +1,6 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const commonSchema = z.object({
   title: z.string(),
@@ -13,11 +14,11 @@ const commonSchema = z.object({
   featured: z.boolean().default(false),
   homepage: z.boolean().default(false),
   research_area: z.string().optional(),
-  external_url: z.string().url().optional(),
-  substack_url: z.string().url().optional(),
-  github_url: z.string().url().optional(),
-  pdf_url: z.string().url().optional(),
-  doi_url: z.string().url().optional(),
+  external_url: z.url().optional(),
+  substack_url: z.url().optional(),
+  github_url: z.url().optional(),
+  pdf_url: z.url().optional(),
+  doi_url: z.url().optional(),
   project: z.string().optional(),
 });
 

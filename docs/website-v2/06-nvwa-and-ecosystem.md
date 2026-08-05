@@ -1,5 +1,9 @@
 # 06｜NUWA Lab 与开放生态
 
+## V3.10 公共影响表达
+
+上海共识首先呈现 32 位全球专家联署这一权威事实，并突出 Geoffrey Hinton、Yoshua Bengio 与姚期智的准确荣誉。表述使用中性主语，不推断白泽或女娲实验室的具体参与方式；人物、数量与荣誉以 IDAIS 官方页面为准。
+
 ## V3.4 白泽开放生态
 
 中文访客名称统一为“白泽开放生态”，英文为 `Whitzard Open Ecosystem`。首页和完整生态页均以四项核心能力开场：WhitzardOS、WhitzardEval、Thought-Aligner、MATE。

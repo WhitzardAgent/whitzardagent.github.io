@@ -195,6 +195,9 @@ for (let index = 1; index < homeOrder.length; index += 1) {
 }
 const homeSource = await readFile("src/components/home/HomePage.astro", "utf8");
 if (homeSource.includes("AgentGuardRiskSimulator")) violations.push("src/components/home/HomePage.astro: homepage must not import or render AgentGuardRiskSimulator");
+if ((homeHtml.match(/class="ag-system-node/g) ?? []).length !== 7) violations.push("dist/index.html: compact AgentGuard system map must render exactly seven business nodes");
+if ((homeHtml.match(/AgentGuard 交互边界运行时/g) ?? []).length !== 1) violations.push("dist/index.html: homepage must render one AgentGuard runtime title");
+if (homeHtml.includes("autocontrol-arena-figure-2")) violations.push("dist/index.html: paper figures belong on the research page, not the homepage bridge");
 for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
   if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
 }
@@ -217,6 +220,9 @@ for (const id of ["shanghai-consensus", "singapore-consensus", "gbt-45654"]) {
   if (!publicImpactSource.includes(`id: "${id}"`)) violations.push(`public impact: missing shared record ${id}`);
 }
 if ((publicImpactSource.match(/lastVerified: "2026-08-05"/g) ?? []).length !== 3) violations.push("public impact: all three records require the current verification date");
+for (const marker of ["leadFact", "count: 32", "Geoffrey Hinton", "Yoshua Bengio", "姚期智 Andrew Yao"]) {
+  if (!publicImpactSource.includes(marker)) violations.push(`public impact: missing verified signatory data ${marker}`);
+}
 for (const marker of ["public-impact-preview", "home-public-impact", "02 国际 AI 安全共识", "从前沿技术证据，到国内外共同规则"]) {
   if (homeHtml.includes(marker)) violations.push(`dist/index.html: public impact must remain on the research page: ${marker}`);
 }
@@ -235,6 +241,9 @@ for (const marker of [
   "https://aisafetypriorities.org/",
   "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F67D3F376E0A0A0FF5317FB36B32A30A",
   "https://std.samr.gov.cn/gb/search/gbDetailed?id=33D40F1160BF5D92E06397BE0A0A5B93",
+  "由 Geoffrey Hinton、Yoshua Bengio、姚期智等 32 位全球专家联署",
+  "图灵奖 · 诺贝尔奖",
+  "代表性联署专家",
 ]) {
   if (!publicImpactSection.includes(marker)) violations.push(`dist/research/index.html: public impact is missing ${marker}`);
 }

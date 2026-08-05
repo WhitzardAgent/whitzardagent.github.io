@@ -2,6 +2,7 @@ import type { Locale } from "../i18n/config";
 
 export type LocalizedText = Record<Locale, string>;
 export type LocalizedList = Record<Locale, string[]>;
+export type FeaturedSignatory = { name: string; distinction: LocalizedText };
 
 export type PublicImpactRecord = {
   id: "shanghai-consensus" | "singapore-consensus" | "gbt-45654";
@@ -11,6 +12,8 @@ export type PublicImpactRecord = {
   title: LocalizedText;
   officialTitle?: LocalizedText;
   summary: LocalizedText;
+  leadFact: LocalizedText;
+  signatories?: { count: number; featured: FeaturedSignatory[]; additionalNames: string[] };
   metrics: Array<{ value: string; label: LocalizedText }>;
   topics: LocalizedList;
   contextLabel?: LocalizedText;
@@ -37,6 +40,19 @@ export const publicImpactRecords: PublicImpactRecord[] = [
       "围绕高级人工智能系统的对齐、人类控制、安全保障与可验证行为红线形成国际科学共识。",
       "An international scientific consensus on alignment, human control, safety assurance, and verifiable behavioural red lines for advanced AI.",
     ),
+    leadFact: text(
+      "由 Geoffrey Hinton、Yoshua Bengio、姚期智等 32 位全球专家联署，汇集图灵奖与诺贝尔奖得主",
+      "Signed by 32 global experts, including Geoffrey Hinton, Yoshua Bengio, and Andrew Yao; the signatories include Turing Award and Nobel Prize laureates.",
+    ),
+    signatories: {
+      count: 32,
+      featured: [
+        { name: "Geoffrey Hinton", distinction: text("图灵奖 · 诺贝尔奖", "Turing Award · Nobel Prize") },
+        { name: "Yoshua Bengio", distinction: text("图灵奖", "Turing Award") },
+        { name: "姚期智 Andrew Yao", distinction: text("图灵奖", "Turing Award") },
+      ],
+      additionalNames: ["Stuart Russell", "Sam Bowman", "Max Tegmark"],
+    },
     metrics: [
       { value: "2025", label: text("发布年份", "Published") },
       { value: "Shanghai", label: text("共识地点", "Location") },
@@ -62,6 +78,7 @@ export const publicImpactRecords: PublicImpactRecord[] = [
       "汇聚前沿模型开发机构、政府安全研究机构、学术界与社会组织，共同定义紧迫的 AI 安全研究问题。",
       "A global agenda for urgent AI safety research shaped by contributors from frontier developers, government safety institutes, academia, and civil society.",
     ),
+    leadFact: text("由 100 余位全球贡献者形成，覆盖 13 个国家和 4 类研究优先级", "Formed by more than 100 global contributors across 13 countries and four research-priority areas."),
     metrics: [
       { value: "100+", label: text("全球贡献者", "Contributors") },
       { value: "13", label: text("覆盖国家", "Countries") },
@@ -87,6 +104,7 @@ export const publicImpactRecords: PublicImpactRecord[] = [
       "将训练数据、模型安全、服务安全措施与安全评估方法转化为生成式人工智能服务的国家级安全基线。",
       "A national baseline for training-data security, model security, service safeguards, and security assessment of generative AI services.",
     ),
+    leadFact: text("现行国家标准；2025.04.25 发布，2025.11.01 实施", "Current national standard; published 2025.04.25 and effective 2025.11.01."),
     metrics: [
       { value: "现行", label: text("标准状态", "In force") },
       { value: "2025.04.25", label: text("发布日期", "Published") },
@@ -114,6 +132,6 @@ export const publicImpactCopy = {
 
 if (publicImpactRecords.length !== 3) throw new Error("Public impact requires exactly three verified records");
 for (const record of publicImpactRecords) {
-  if (!record.title.zh || !record.title.en || !record.summary.zh || !record.summary.en) throw new Error(`${record.id} requires complete bilingual copy`);
+  if (!record.title.zh || !record.title.en || !record.summary.zh || !record.summary.en || !record.leadFact.zh || !record.leadFact.en) throw new Error(`${record.id} requires complete bilingual copy`);
   if (!record.sourceUrls.length || !record.lastVerified) throw new Error(`${record.id} requires sources and a verification date`);
 }

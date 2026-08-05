@@ -11,11 +11,6 @@ const kindLabel = {
   "research-agenda": locale === "zh" ? "研究议程" : "Research agenda",
   "national-standard": locale === "zh" ? "国家标准" : "National standard",
 };
-const fact = (record: typeof publicImpactRecords[number]) => {
-  if (record.id === "singapore-consensus") return locale === "zh" ? "由 100 余位全球贡献者形成，覆盖 13 个国家和 4 类研究优先级" : "Formed by more than 100 global contributors across 13 countries and four research-priority areas.";
-  if (record.id === "gbt-45654") return locale === "zh" ? "现行国家标准；2025.04.25 发布，2025.11.01 实施" : "Current national standard; published 2025.04.25 and effective 2025.11.01.";
-  return record.summary[locale];
-};
 ---
 
 <section id="public-impact" class="public-impact-path section" aria-labelledby="public-impact-title">
@@ -28,9 +23,14 @@ const fact = (record: typeof publicImpactRecords[number]) => {
       <div class="public-impact-path__meta"><span>{record.year}</span><em>{kindLabel[record.kind]}</em></div>
       <div class="public-impact-path__content">
         <h3>{record.title[locale]}</h3>
+        <p class="public-impact-path__fact">{record.leadFact[locale]}</p>
         {record.officialTitle && <p class="public-impact-path__official">{record.officialTitle[locale]}</p>}
         <p>{record.summary[locale]}</p>
-        <p class="public-impact-path__fact">{fact(record)}</p>
+        {record.signatories && <div class="public-impact-path__signatories" aria-label={locale === "zh" ? `${record.signatories.count} 位全球联署专家中的代表` : `Selected signatories among ${record.signatories.count} global experts`}>
+          <span>{locale === "zh" ? "代表性联署专家" : "SELECTED SIGNATORIES"}</span>
+          <ul>{record.signatories.featured.map((person) => <li><strong>{person.name}</strong><small>{person.distinction[locale]}</small></li>)}</ul>
+          <p>{locale === "zh" ? "其他联署专家包括" : "Other signatories include"} {record.signatories.additionalNames.join(" · ")}</p>
+        </div>}
         <ul class="public-impact-path__topics">{record.topics[locale].map((topic) => <li>{topic}</li>)}</ul>
         <div class="public-impact-path__sources">{record.sourceUrls.map((url, sourceIndex) => <a href={url} target="_blank" rel="noreferrer" data-umami-event="research-public-impact-source">{copy.source}{record.sourceUrls.length > 1 ? ` ${sourceIndex + 1}` : ""} ↗</a>)}</div>
       </div>

@@ -61,7 +61,7 @@ New core routes required by V2: `/solutions`, `/zh/`, `/zh/agentguard`, `/zh/sol
 
 ### Existing dependency shape
 
-`BaseLayout` owns global CSS, metadata, `Header`, and `Footer`. Pages compose Astro cards plus selective React hero islands. `WhitzardHero` uses Framer Motion, `useScroll`, `useTransform`, and `HeroBackdropWhitzard`; that backdrop uses `SignalNodes`. `NuwaHero` uses `HeroBackdropNuwa`, `AnimatedStoneSequence`, and `FloatingResearchCards`. Research and ecosystem pages consume generated data through `UnifiedResearchCard`, `ResearchAreaCard`, and `ProjectCard`.
+`BaseLayout` owns global CSS, metadata, `Header`, and `Footer`. Pages compose Astro sections plus selective React islands. `HomeHero` uses the shared AgentGuard system map; `NuwaHero` uses `HeroBackdropNuwa`, `AnimatedStoneSequence`, and `FloatingResearchCards`. Research and ecosystem pages consume generated data through the current research index and project components.
 
 ### Reuse decisions
 
@@ -69,7 +69,7 @@ New core routes required by V2: `/solutions`, `/zh/`, `/zh/agentguard`, `/zh/sol
 |---|---|
 | `BaseLayout.astro` | rewrite for locale, canonical alternates, OG locale, JSON-LD, skip link, transition router |
 | `Header.astro` / `Footer.astro` | rewrite as bilingual company/product navigation with accessible mobile behavior |
-| `WhitzardHero.tsx` / `HeroBackdropWhitzard.tsx` | retire from active composition after runtime-trace replacement; retain until migration is stable |
+| Legacy `WhitzardHero.tsx` and unused research cards | retired after the V3.10 runtime-map migration stabilized |
 | `NuwaHero.tsx` and Nuwa motion primitives | simplify and localize; preserve the slower jade/paper research idiom |
 | `SignalNodes.tsx` | useful conceptual primitive, but replace abstract field in the hero with semantic runtime nodes |
 | Astro cards and callouts | restyle against semantic tokens and reuse where content remains data-driven |
