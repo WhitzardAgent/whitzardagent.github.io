@@ -1,4 +1,23 @@
-# Whitzard Website V3.1 release report
+# Whitzard Website V3.11 release report
+
+## V3.11 运营级职责与视觉收口 — 2026-08-05
+
+- 首页重构为真实 Agent 执行闭环：业务目标、Agent 规划、LLM 推理、工具调用、Observation、Agent 再规划与外部行动。AgentGuard 控制层贯穿 LLM、Tool、Memory 和 Commit 边界，并明确展示脱敏、重新检查和安全放行。
+- 首页删除完整三链引擎、Dashboard、框架列表和具体开源项目，保留公司定位、风险挑战、上下结构的研究产品关系、开放技术方向和企业演示入口。
+- AgentGuard Hero 删除无意义的右侧抽象图，改为全宽产品定位、保护范围和证据带；系统关系图改为静态节点检查视图，不再播放装饰性粒子或重复 Gate。
+- 女娲实验室页不再重复旗舰论文，研究页不再重复团队长简介，关于页不再重复产品架构；开放生态四项核心资产从完整目录中去重。
+- 研究 Hero 移除通用 AI 网格背景，以论文、公共影响和荣誉作为页面视觉证据。
+
+### V3.11 验证结果
+
+- `npm run ingest:info`：通过，生成 86 项研究记录和 22 项可见开放资产。
+- `npm run check`：通过，100 个源文件，0 errors / 0 warnings / 0 hints。
+- `npm run build`：通过，26 个静态页面与兼容路由完成生成。
+- `npm run check:content`：通过，103 个源文件和 34 个渲染页面；页面职责、重复资产、中文标题预算、品牌与研究事实均通过。
+- `npm run check:links`：通过，34 个 HTML 文件无内部断链。
+- 浏览器：新隔离开发服务上检查 1440、1024、390；中英文核心页面无横向溢出，控制台无 error。
+- 首页动效：连续运行 30 秒后仍处于无限循环运行状态；暂停和继续状态正确；减少动态模式由 CSS 直接输出最终状态。
+- JavaScript：全部 emitted JS 合计 134,433 bytes gzip；首页首屏相关模块约 74,290 bytes gzip。
 
 ## V3.10 运营前修复
 
