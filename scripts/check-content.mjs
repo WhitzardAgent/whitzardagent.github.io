@@ -133,7 +133,7 @@ const chineseBudget = (value) => {
   return cjk + technicalTerms;
 };
 const approvedExtendedHeadings = new Set([
-  "从前沿技术证据，到国内外共同规则",
+  "细粒度管控行为链、思维链和数据链",
 ]);
 const coreRoutes = ["", "agentguard", "solutions", "nuwa", "research", "open-ecosystem", "about", "contact"];
 for (const route of coreRoutes) {
@@ -169,15 +169,18 @@ const homeRequirements = [
   "在安全边界内释放自主智能价值",
   "智能体时代带来全新安全挑战",
   "智能体安全运营中台",
-  "全系统传播与追踪",
-  "三流汇合为一个决策",
+  "细粒度管控行为链、思维链和数据链",
   "研究驱动产品持续演进",
-  "从前沿技术证据，到国内外共同规则",
   "白泽开放生态",
-  "AGENTGUARD INTERACTION BOUNDARY RUNTIME",
-  "数据流",
-  "授权流",
-  "动作影响",
+  "行为链",
+  "思维链",
+  "数据链",
+  "放行",
+  "脱敏",
+  "复检",
+  "沙箱",
+  "审批",
+  "阻断",
 ];
 for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.7 homepage marker: ${marker}`);
 for (const [file, content, removed] of [
@@ -186,7 +189,7 @@ for (const [file, content, removed] of [
 ]) {
   for (const marker of removed) if (content.includes(marker)) violations.push(`${file}: V3.7 removed homepage section must not remain: ${marker}`);
 }
-const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "研究驱动产品持续演进", "从前沿技术证据，到国内外共同规则", "三流汇合为一个决策", "智能体安全运营中台", "白泽开放生态"];
+const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "研究驱动产品持续演进", "细粒度管控行为链、思维链和数据链", "智能体安全运营中台", "白泽开放生态"];
 for (let index = 1; index < homeOrder.length; index += 1) {
   if (homeHtml.indexOf(homeOrder[index - 1]) >= homeHtml.indexOf(homeOrder[index])) violations.push(`dist/index.html: V3.7 homepage order is incorrect around ${homeOrder[index]}`);
 }
@@ -214,20 +217,17 @@ for (const id of ["shanghai-consensus", "singapore-consensus", "gbt-45654"]) {
   if (!publicImpactSource.includes(`id: "${id}"`)) violations.push(`public impact: missing shared record ${id}`);
 }
 if ((publicImpactSource.match(/lastVerified: "2026-08-05"/g) ?? []).length !== 3) violations.push("public impact: all three records require the current verification date");
-const publicImpactPreview = homeHtml.match(/<section class="public-impact-preview[\s\S]*?<\/section>/)?.[0] ?? "";
-for (const marker of ["研究与公共影响", "从前沿技术证据，到国内外共同规则", ">02<", ">13<", ">01<", "查看研究与公共影响", "home-public-impact"]) {
-  if (!publicImpactPreview.includes(marker)) violations.push(`dist/index.html: public-impact preview is missing ${marker}`);
+for (const marker of ["public-impact-preview", "home-public-impact", "02 国际 AI 安全共识", "从前沿技术证据，到国内外共同规则"]) {
+  if (homeHtml.includes(marker)) violations.push(`dist/index.html: public impact must remain on the research page: ${marker}`);
 }
-const publicImpactSection = researchHtml.match(/<public-impact-path id="public-impact"[\s\S]*?<\/public-impact-path>/)?.[0] ?? "";
+const publicImpactSection = researchHtml.match(/<section id="public-impact"[\s\S]*?<section id="recognition"/)?.[0] ?? "";
 if ((publicImpactSection.match(/<article\b/g) ?? []).length !== 3) violations.push("dist/research/index.html: public impact must contain exactly three records");
 for (const marker of [
-  "从发现风险，到塑造共同规则",
+  "研究与公共影响",
   "AI 安全上海共识",
   "AI 安全新加坡研究优先级共识",
   "GB/T 45654—2025",
-  "100+",
-  ">13<",
-  ">04<",
+  "由 100 余位全球贡献者形成，覆盖 13 个国家和 4 类研究优先级",
   "2025.04.25",
   "2025.11.01",
   "research-public-impact-source",
@@ -240,16 +240,28 @@ for (const marker of [
 }
 const themesIndex = researchHtml.indexOf('id="themes"');
 const impactIndex = researchHtml.indexOf('id="public-impact"');
+const recognitionIndex = researchHtml.indexOf('id="recognition"');
+const teamIndex = researchHtml.indexOf('id="team"');
 const publicationsIndex = researchHtml.indexOf('id="research-index"');
-if (themesIndex < 0 || impactIndex < themesIndex || publicationsIndex < impactIndex) violations.push("dist/research/index.html: public impact must appear after themes and before the publication index");
+if (themesIndex < 0 || impactIndex < themesIndex || recognitionIndex < impactIndex || teamIndex < recognitionIndex || publicationsIndex < teamIndex) violations.push("dist/research/index.html: expected themes → public impact → recognition → team → publication index");
 for (const forbidden of ["METR", "合作伙伴", "白泽参与", "女娲实验室参与", "参与签署", "参与形成", "参与起草"]) {
   if (publicImpactSection.includes(forbidden)) violations.push(`dist/research/index.html: public impact must not claim participation or partnership: ${forbidden}`);
 }
 
-const recognitionSection = researchHtml.match(/<section id="recognition"[\s\S]*?<section class="section research-team/)?.[0] ?? "";
+const recognitionSection = researchHtml.match(/<section id="recognition"[\s\S]*?<section id="team"/)?.[0] ?? "";
 const recognitionCount = recognitionSection.match(/<article\b/g)?.length ?? 0;
 if (recognitionCount !== 6) violations.push(`dist/research/index.html: recognition must contain exactly six entries, found ${recognitionCount}`);
 for (const forbidden of ["潘旭东", "戴嘉润", "洪赓", "Awarded to", "个人荣誉", "研究团队荣誉"]) if (recognitionSection.includes(forbidden)) violations.push(`dist/research/index.html: recognition must not expose attribution: ${forbidden}`);
+
+for (const marker of [
+  "/assets/research/self-replication-figure-1.png",
+  "/assets/research/autocontrol-arena-figure-2.png",
+  "/assets/research/thought-aligner-figure-1.png",
+  "Figure 1 · PDF p.3",
+  "Figure 2 · PDF p.3",
+  "Figure 1 · PDF p.2",
+]) if (!researchHtml.includes(marker)) violations.push(`dist/research/index.html: missing verified research visual marker ${marker}`);
+if ((researchHtml.match(/<details class="research-year"/g) ?? []).length !== 9) violations.push("dist/research/index.html: publication index must render nine native year groups");
 
 for (const file of htmlFiles) {
   const content = withoutEmbeddedCode(await readFile(file, "utf8"));

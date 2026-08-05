@@ -5,6 +5,7 @@ import { localizedPath } from "../../i18n/config";
 import type { ResearchCopy } from "../../i18n/pages/research";
 import { researchAssets } from "../../data/generated/researchAssets";
 import { researchRecognitions } from "../../data/researchRecognitions";
+import { researchVisuals } from "../../data/researchVisuals";
 import { links } from "../../data/links";
 import ResearchExplorer from "./ResearchExplorer";
 import PublicImpactPath from "./PublicImpactPath.astro";
@@ -15,7 +16,8 @@ const { locale, copy } = Astro.props;
 const sorted = [...researchAssets].sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
 const featured = researchAssets.filter((item) => item.featuredRank).sort((a, b) => (a.featuredRank ?? 99) - (b.featuredRank ?? 99));
 const featuredPrimary = featured[0];
-const featuredSecondary = featured.slice(1);
+const featuredEvidence = featured[1];
+const featuredVisuals = featured.slice(2).map((item) => ({ item, visual: researchVisuals.find((visual) => visual.researchSlug === item.slug) })).filter((entry) => entry.visual);
 const primaryLink = (item: typeof researchAssets[number]) => item.links.find((link) => link.kind === "paper")?.url ?? item.links[0].url;
 const researcherNames = locale === "zh"
   ? { "jiarun-dai": "戴嘉润", "xudong-pan": "潘旭东", "geng-hong": "洪赓" }
@@ -37,52 +39,56 @@ const schema = {
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/research" schema={schema}>
   <section class="research-hero">
     <div class="site-container research-hero__grid">
-      <div><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p></div>
+      <img class="research-hero__logo" src="/assets/logo/nvwa_logo.png" width="112" height="112" alt={locale === "zh" ? "女娲实验室标识" : "NUWA Lab logo"} />
+      <div class="research-hero__content"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><p class="research-hero__facts">{researchAssets.length} {locale === "zh" ? "项研究成果" : "research works"} <i /> {copy.areas.length} {locale === "zh" ? "个研究主题" : "research themes"} <i /> {researchRecognitions.length} {locale === "zh" ? "项荣誉" : "honours"}</p></div>
       <nav aria-label={locale === "zh" ? "研究页面导航" : "Research page navigation"}>
-        <a href="#themes">{copy.nav.themes}</a><a href="#featured">{copy.nav.featured}</a><a href="#public-impact">{copy.nav.impact}</a><a href="#research-index">{copy.nav.index}</a><a href="#recognition">{copy.nav.recognition}</a>
+        <a href="#featured">{copy.nav.featured}</a><a href="#themes">{copy.nav.themes}</a><a href="#public-impact">{copy.nav.impact}</a><a href="#recognition">{copy.nav.recognition}</a><a href="#research-index">{copy.nav.index}</a>
       </nav>
     </div>
   </section>
 
   <section id="featured" class="section research-featured">
     <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "代表成果" : "FEATURED WORK"}</p><h2>{copy.featured}</h2><p>{copy.featuredLead}</p></div>
-    <div class="site-container research-featured__grid">
+    <div class="site-container research-featured__editorial">
       {featuredPrimary && <article class="research-featured__primary">
         <div class="research-meta"><span>01</span><span>{featuredPrimary.year}</span><span>{featuredPrimary.venue}</span>{featuredPrimary.pages && <span>{featuredPrimary.pages}</span>}</div>
-        <h3>{featuredPrimary.title}</h3><p>{featuredPrimary.summary[locale]}</p><p class="research-authors">{featuredPrimary.authors.join(" · ")}</p>
-        <a href={primaryLink(featuredPrimary)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
+        <h3>{featuredPrimary.title}</h3><p>{featuredPrimary.summary[locale]}</p><p class="research-authors">{featuredPrimary.authors.join(" · ")}</p><a href={primaryLink(featuredPrimary)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
       </article>}
-      <div class="research-featured__secondary">{featuredSecondary.map((item, index) => <article>
-        <div class="research-meta"><span>0{index + 2}</span><span>{item.year}</span><span>{item.venue}</span></div>
-        <h3>{item.title}</h3><p>{item.summary[locale]}</p><p class="research-authors">{item.authors.join(" · ")}</p><a href={primaryLink(item)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
-      </article>)}</div>
+      {featuredEvidence && <article class="research-featured__evidence">
+        <div class="research-meta"><span>02</span><span>{featuredEvidence.year}</span><span>{featuredEvidence.venue}</span></div><h3>{featuredEvidence.title}</h3><p>{featuredEvidence.summary[locale]}</p><a href={primaryLink(featuredEvidence)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
+      </article>}
+      <div class="research-featured__visuals">{featuredVisuals.map(({ item, visual }, index) => visual && <figure>
+        <a href={visual.sourcePdfUrl} target="_blank" rel="noreferrer"><picture><source type="image/webp" srcset={`${visual.assetPath.replace(".png", "-640.webp")} 640w, ${visual.assetPath.replace(".png", ".webp")} ${index === 0 ? 1030 : index === 1 ? 1230 : 1235}w`} sizes="(max-width: 640px) 100vw, (max-width: 900px) 45vw, 34vw" /><img src={visual.assetPath} width={index === 0 ? 1030 : index === 1 ? 1230 : 1235} height={index === 0 ? 1120 : index === 1 ? 420 : 750} alt={visual.alt[locale]} loading="lazy" decoding="async" /></picture></a>
+        <figcaption><div class="research-meta"><span>0{index + 3}</span><span>{item.year}</span><span>{visual.figureLabel} · PDF p.{visual.page}</span></div><h3>{item.title}</h3><p>{visual.caption[locale]}</p><a href={visual.sourcePdfUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></figcaption>
+      </figure>)}</div>
     </div>
   </section>
 
   <section id="themes" class="section research-themes">
     <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "研究版图" : "RESEARCH THEMES"}</p><h2>{copy.nav.themes}</h2></div>
-    <div class="site-container research-themes__list">{copy.areas.map((area, index) => {
-      const examples = sorted.filter((item) => item.category === area.key).slice(0, 4);
-      return <article><div class="research-themes__intro"><span>0{index + 1}</span><h3>{area.title}</h3><p>{area.body}</p><a href={`${localizedPath("/research", locale)}?topic=${area.key}#research-index`}>{area.cta} →</a></div><ol>{examples.map((item) => <li><span>{item.year}</span><a href={primaryLink(item)} target="_blank" rel="noreferrer">{item.title}</a></li>)}</ol></article>;
+    <div class="site-container research-themes__grid">{copy.areas.map((area, index) => {
+      const items = sorted.filter((item) => item.category === area.key);
+      const representative = items[0];
+      return <article><div class="research-themes__meta"><span>0{index + 1}</span><strong>{items.length} {locale === "zh" ? "项成果" : "works"}</strong></div><h3>{area.title}</h3><p>{area.body}</p>{representative && <div class="research-themes__representative"><span>{locale === "zh" ? "代表成果" : "REPRESENTATIVE"}</span><a href={primaryLink(representative)} target="_blank" rel="noreferrer">{representative.title}</a></div>}<a class="research-themes__all" href={`${localizedPath("/research", locale)}?topic=${area.key}#research-index`}>{area.cta} →</a></article>;
     })}</div>
   </section>
 
   <PublicImpactPath locale={locale} />
-
-  <section id="research-index" class="section research-index">
-    <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "出版物" : "PUBLICATIONS"}</p><h2>{copy.all}</h2></div>
-    <div class="site-container"><ResearchExplorer assets={sorted} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} members={researchers.map(({ slug, name }) => ({ key: slug, title: name }))} client:load /></div>
-  </section>
 
   <section id="recognition" class="section research-recognition">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.recognitionEyebrow}</p><h2>{copy.recognitionTitle}</h2></div>
     <div class="site-container research-recognition__list">{researchRecognitions.map((item) => <article><span>{item.year}</span><div><h3>{item.title[locale]}</h3>{item.venueNote && <p>{item.venueNote[locale]}</p>}</div><a href={item.sourceUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></article>)}</div>
   </section>
 
-  <section class="section research-team">
+  <section id="team" class="section research-team">
     <div class="site-container research-team__head"><div><p class="eyebrow">{copy.teamEyebrow}</p><h2>{copy.teamTitle}</h2></div><p>{copy.teamLead}</p></div>
     <div class="site-container research-team__grid">{researchers.map((person, index) => <article><span>0{index + 1}</span><h3>{person.name}</h3><strong>{person.role}</strong><p>{person.focus}</p><div><a href={person.url} target="_blank" rel="noreferrer">{copy.homepage} ↗</a><a href={`${localizedPath("/research", locale)}?member=${person.slug}#research-index`}>{copy.viewResearch} →</a></div></article>)}</div>
   </section>
 
-  <section class="section research-collaboration"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "研究合作" : "COLLABORATION"}</p><h2>{copy.collaborationTitle}</h2><p>{copy.collaborationBody}</p><a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "女娲实验室研究合作" : "NUWA Lab research collaboration")}`}>{copy.collaborationCta}</a></div></section>
+  <section id="research-index" class="section research-index">
+    <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "出版物" : "PUBLICATIONS"}</p><h2>{copy.all}</h2></div>
+    <div class="site-container"><ResearchExplorer assets={sorted} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} members={researchers.map(({ slug, name }) => ({ key: slug, title: name }))} client:load /></div>
+  </section>
+
+  <section id="collaboration" class="section research-collaboration"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "研究合作" : "COLLABORATION"}</p><h2>{copy.collaborationTitle}</h2><p>{copy.collaborationBody}</p><a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "女娲实验室研究合作" : "NUWA Lab research collaboration")}`}>{copy.collaborationCta}</a></div></section>
 </BaseLayout>

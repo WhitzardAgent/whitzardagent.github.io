@@ -1,0 +1,37 @@
+---
+import type { Locale } from "../../i18n/config";
+import type { HomeCopy } from "../../i18n/pages/home";
+
+interface Props { copy: HomeCopy["loop"]; locale: Locale }
+const { copy, locale } = Astro.props;
+const researchHref = locale === "zh" ? "/nuwa" : "/en/nuwa";
+const productHref = locale === "zh" ? "/agentguard" : "/en/agentguard";
+---
+
+<section class="research-bridge section" aria-labelledby="research-bridge-title">
+  <div class="site-container research-bridge__head">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="research-bridge-title" class="section-title">{copy.title}</h2>
+    <p>{copy.statement}</p>
+  </div>
+  <div class="site-container research-bridge__map">
+    <article class="research-bridge__lab">
+      <header><img src="/assets/logo/nvwa_logo.png" width="80" height="80" alt={locale === "zh" ? "女娲实验室标识" : "NUWA Lab logo"} loading="lazy" /><div><span>{locale === "zh" ? "研究引擎" : "RESEARCH ENGINE"}</span><h3>{copy.lab.name}</h3></div></header>
+      <p>{copy.lab.role}</p>
+      <ul>{copy.lab.items.map((item) => <li>{item}</li>)}</ul>
+      <figure><picture><source type="image/webp" srcset="/assets/research/autocontrol-arena-figure-2-640.webp 640w, /assets/research/autocontrol-arena-figure-2.webp 1230w" sizes="(max-width: 680px) 100vw, 45vw" /><img src="/assets/research/autocontrol-arena-figure-2.png" alt={locale === "zh" ? "AutoControl Arena 可执行前沿风险评测流程局部图" : "AutoControl Arena executable frontier-risk evaluation workflow"} loading="lazy" decoding="async" width="1230" height="420" /></picture><figcaption>AutoControl Arena · ICML 2026</figcaption></figure>
+      <a href={researchHref}>{copy.lab.link} →</a>
+    </article>
+    <div class="research-bridge__axis" role="img" aria-label={`${copy.bridge.down}. ${copy.bridge.up}.`}>
+      <span>{copy.bridge.down}</span><i aria-hidden="true">↓</i><strong>RESEARCH<br />×<br />PRODUCT</strong><i aria-hidden="true">↑</i><span>{copy.bridge.up}</span>
+    </div>
+    <article class="research-bridge__product">
+      <header><img src="/assets/logo/whitzard_logo.png" width="72" height="72" alt="AgentGuard" loading="lazy" /><div><span>{locale === "zh" ? "企业产品" : "ENTERPRISE PRODUCT"}</span><h3>{copy.product.name}</h3></div></header>
+      <p>{copy.product.role}</p>
+      <ul>{copy.product.items.map((item) => <li>{item}</li>)}</ul>
+      <div class="research-bridge__control"><span>RUNTIME</span><strong>{locale === "zh" ? "研判 · 处置 · 验证" : "DECIDE · RESPOND · VERIFY"}</strong></div>
+      <a href={productHref}>{copy.product.link} →</a>
+    </article>
+  </div>
+  <p class="site-container research-bridge__feedback">{copy.feedback}</p>
+</section>

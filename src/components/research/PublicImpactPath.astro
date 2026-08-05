@@ -7,45 +7,33 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const copy = publicImpactCopy[locale].section;
 const kindLabel = {
-  "scientific-consensus": locale === "zh" ? "科学共识" : "SCIENTIFIC CONSENSUS",
-  "research-agenda": locale === "zh" ? "研究议程" : "RESEARCH AGENDA",
-  "national-standard": locale === "zh" ? "国家标准" : "NATIONAL STANDARD",
+  "scientific-consensus": locale === "zh" ? "科学共识" : "Scientific consensus",
+  "research-agenda": locale === "zh" ? "研究议程" : "Research agenda",
+  "national-standard": locale === "zh" ? "国家标准" : "National standard",
+};
+const fact = (record: typeof publicImpactRecords[number]) => {
+  if (record.id === "singapore-consensus") return locale === "zh" ? "由 100 余位全球贡献者形成，覆盖 13 个国家和 4 类研究优先级" : "Formed by more than 100 global contributors across 13 countries and four research-priority areas.";
+  if (record.id === "gbt-45654") return locale === "zh" ? "现行国家标准；2025.04.25 发布，2025.11.01 实施" : "Current national standard; published 2025.04.25 and effective 2025.11.01.";
+  return record.summary[locale];
 };
 ---
 
-<public-impact-path id="public-impact" class="public-impact-path section" aria-labelledby="public-impact-title">
-  <div class="site-container public-impact-path__head"><p class="eyebrow">{copy.eyebrow}</p><h2 id="public-impact-title">{copy.title}</h2><p>{copy.body}</p></div>
-  <div class="site-container public-impact-path__map">
-    <aside class="public-impact-path__evidence">
-      <span>01</span><strong>{copy.evidence}</strong><p>{copy.evidenceBody}</p>
-      <ul><li>{locale === "zh" ? "自主性 · 欺骗 · 失控" : "Autonomy · Deception · Loss of control"}</li><li>{locale === "zh" ? "智能体风险 · 运行时控制" : "Agent risk · Runtime control"}</li></ul>
-    </aside>
-    <div class="public-impact-path__line" aria-hidden="true"><i /></div>
-    <div class="public-impact-path__records">{publicImpactRecords.map((record, index) => <article class={`is-${record.kind}`} style={`--impact-order:${index}`}>
-      <div class="public-impact-path__meta"><span>0{index + 1}</span><small>{record.year}{record.location ? ` · ${record.location[locale]}` : ""}</small><em>{kindLabel[record.kind]}</em></div>
-      <h3>{record.title[locale]}</h3>{record.officialTitle && <p class="public-impact-path__official">{record.officialTitle[locale]}</p>}<p>{record.summary[locale]}</p>
-      <div class="public-impact-path__metrics">{record.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label[locale]}</span></div>)}</div>
-      <ul class="public-impact-path__topics">{record.topics[locale].map((topic) => <li>{topic}</li>)}</ul>
-      {record.contextLabel && record.contextItems && <div class="public-impact-path__context"><span>{record.contextLabel[locale]}</span><p>{record.contextItems.join(" · ")}</p></div>}
-      <div class="public-impact-path__sources">{record.sourceUrls.map((url, sourceIndex) => <a href={url} target="_blank" rel="noreferrer" data-umami-event="research-public-impact-source">{copy.source}{record.sourceUrls.length > 1 ? ` ${sourceIndex + 1}` : ""} ↗</a>)}</div>
-    </article>)}</div>
+<section id="public-impact" class="public-impact-path section" aria-labelledby="public-impact-title">
+  <div class="site-container public-impact-path__head">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <div><h2 id="public-impact-title">{copy.title}</h2><p>{copy.body}</p></div>
   </div>
-</public-impact-path>
-
-<script>
-  class PublicImpactPath extends HTMLElement {
-    observer?: IntersectionObserver;
-    connectedCallback() {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      this.classList.add("is-enhanced");
-      this.observer = new IntersectionObserver(([entry]) => {
-        if (!entry?.isIntersecting) return;
-        this.classList.add("is-visible");
-        this.observer?.disconnect();
-      }, { threshold: 0.18 });
-      this.observer.observe(this);
-    }
-    disconnectedCallback() { this.observer?.disconnect(); }
-  }
-  if (!customElements.get("public-impact-path")) customElements.define("public-impact-path", PublicImpactPath);
-</script>
+  <div class="site-container public-impact-path__timeline">
+    {publicImpactRecords.map((record) => <article class={`is-${record.kind}`}>
+      <div class="public-impact-path__meta"><span>{record.year}</span><em>{kindLabel[record.kind]}</em></div>
+      <div class="public-impact-path__content">
+        <h3>{record.title[locale]}</h3>
+        {record.officialTitle && <p class="public-impact-path__official">{record.officialTitle[locale]}</p>}
+        <p>{record.summary[locale]}</p>
+        <p class="public-impact-path__fact">{fact(record)}</p>
+        <ul class="public-impact-path__topics">{record.topics[locale].map((topic) => <li>{topic}</li>)}</ul>
+        <div class="public-impact-path__sources">{record.sourceUrls.map((url, sourceIndex) => <a href={url} target="_blank" rel="noreferrer" data-umami-event="research-public-impact-source">{copy.source}{record.sourceUrls.length > 1 ? ` ${sourceIndex + 1}` : ""} ↗</a>)}</div>
+      </div>
+    </article>)}
+  </div>
+</section>

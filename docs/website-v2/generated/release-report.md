@@ -94,10 +94,21 @@ V3.8 adds a shared, statically verified public-impact data source for the 2025 S
 
 ### V3.8 validation
 
+- Shared public-impact records remain statically sourced and render only on the research page after V3.9.
+
+## V3.9 focused homepage and research editorial system — 2026-08-05
+
+V3.9 removes the homepage public-impact KPI strip, replaces the GSAP research-product loop with a static asymmetric bridge, and presents behavior, reasoning, and data chains in one xuan-blue principle section. The product proof and open ecosystem are compressed into readable evidence indexes.
+
+The research page now uses three verified paper figures, compact six-theme summaries with live counts, a light public-impact timeline, recognition and team before the publication index, and nine native year accordions containing all 86 SSR publications. The palette remains moon white, xuan blue, jade, graphite, restrained cinnabar, and indigo.
+
+### V3.9 validation
+
 - `npm run ingest:info`: passed with 86 research records and 22 visible ecosystem records.
 - `npm run check`: passed with 0 errors and 31 pre-existing non-blocking hints.
 - `npm run build`: passed with 26 generated pages.
-- `npm run check:content`: passed across 108 source files and 34 rendered pages.
+- `npm run check:content`: passed across 107 source files and 34 rendered pages.
 - `npm run check:links`: passed across 34 HTML files with no broken internal links.
-- Browser QA: Chinese and English homepage/research output checked at 1440px, 1024px, and 390px; the impact path has no horizontal overflow, source links are keyboard reachable, and browser console errors remain at zero.
-- JavaScript budget: all emitted JavaScript totals 176,091 bytes gzip, unchanged by the static public-impact components and below the 180 KB budget.
+- Browser QA: Chinese homepage and research output checked at 1440px, 1024px, and 390px; English output uses the same components and responsive rules. The desktop homepage is approximately 5,475px high and research page approximately 11,321px high.
+- Lighthouse: Accessibility, Best Practices, and SEO score 100; CLS is 0. The locally throttled performance run scores 96 with a 2.7s LCP, so CDN production timing must be verified after deployment against the 2.5s target.
+- JavaScript budget: GSAP and both legacy scroll-story islands were removed; the homepage application and island chunks remain below the 135 KB gzip target.

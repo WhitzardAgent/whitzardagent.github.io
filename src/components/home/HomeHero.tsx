@@ -1,12 +1,10 @@
 import type { HomeCopy } from "../../i18n/pages/home";
 import { supportedFrameworks } from "../../data/supportedFrameworks";
-import { storyPageCopy } from "../../data/agentguardStory";
 import AgentGuardSystemMap from "../agentguard/AgentGuardSystemMap";
 
 type Props = { copy: HomeCopy["hero"]; locale: "en" | "zh" };
 
 export default function HomeHero({ copy, locale }: Props) {
-  const mapCopy = storyPageCopy[locale].map;
   return (
     <section className="home-hero">
       <div className="site-container home-hero__grid">
@@ -18,14 +16,14 @@ export default function HomeHero({ copy, locale }: Props) {
             <a className="button button--primary" href={locale === "zh" ? "/contact" : "/en/contact"}>{copy.primary}</a>
             <a className="button button--secondary" href={locale === "zh" ? "/agentguard#enterprise" : "/en/agentguard#enterprise"}>{copy.secondary}<span aria-hidden="true">↗</span></a>
           </div>
-          <div className="home-hero__adapters" aria-label={locale === "zh" ? "支持的智能体架构" : "Supported agent frameworks"}>
-            <span>{locale === "zh" ? "支持的智能体架构" : "SUPPORTED FRAMEWORKS"}</span>
-            <div>{supportedFrameworks.map((framework) => <span className="framework-mark" key={framework.id}><img src={framework.logoPath} alt="" width="28" height="28" /><small>{framework.productLabel}</small></span>)}</div>
-          </div>
         </div>
         <div className="home-hero__visual">
-          <div className="home-hero__visual-head"><p className="eyebrow">{mapCopy.eyebrow}</p><h2>{mapCopy.title}</h2></div>
+          <div className="home-hero__visual-label"><strong>AgentGuard</strong><span>{locale === "zh" ? "实时保护中" : "Runtime protection active"}</span></div>
           <AgentGuardSystemMap locale={locale} density="compact" />
+        </div>
+        <div className="home-hero__adapters" aria-label={locale === "zh" ? "支持的智能体架构" : "Supported agent frameworks"}>
+          <span>{locale === "zh" ? "支持的智能体架构" : "SUPPORTED FRAMEWORKS"}</span>
+          <div>{supportedFrameworks.map((framework) => <span className="framework-mark" key={framework.id}><img src={framework.logoPath} alt="" width="28" height="28" /><small>{framework.productLabel}</small></span>)}</div>
         </div>
       </div>
     </section>

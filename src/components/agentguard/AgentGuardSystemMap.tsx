@@ -163,7 +163,7 @@ export default function AgentGuardSystemMap({ locale, density = "full" }: Props)
         </div>
 
         <aside className="ag-system-map__inspector" aria-live="polite">
-          <header><span>{kindLabels[selected.kind][locale]}</span><h3>{localize(selected.label, locale)}</h3></header>
+          <header><span>{kindLabels[selected.kind][locale]}</span><strong className="ag-system-map__inspector-title">{localize(selected.label, locale)}</strong></header>
           <dl>
             <div><dt>{copy.handling}</dt><dd>{localize(selected.handling, locale)}</dd></div>
             <div><dt>{copy.challenge}</dt><dd>{localize(selected.challenge, locale)}</dd></div>

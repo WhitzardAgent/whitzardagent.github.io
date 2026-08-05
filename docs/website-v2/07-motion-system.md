@@ -13,14 +13,9 @@
 - 局部 scroll-linked 动画
 - reduced motion
 
-### 新增：GSAP + ScrollTrigger
+### 不再使用：GSAP + ScrollTrigger
 
-只用于两个复杂场景：
-
-1. 首页“三链技术” pinned scrollytelling
-2. 首页“研究—产品循环”路径动画
-
-不要全站使用 GSAP，避免多个动画系统互相争夺。
+V3.9 已移除首页 pinned scrollytelling 和研究—产品滚动动画。研究产品闭环采用 Astro 静态结构与 CSS 微动效，不再为单一章节加载独立动画运行时。
 
 ### 新增：Lenis
 
@@ -69,6 +64,8 @@
 - Research-to-Product Loop
 
 时长由滚动驱动，不自动快速播放。
+
+V3.9 约束：未进入视区的内容不得依赖动画脚本保持隐藏；论文、研究关系与公共影响默认完整可读。
 
 ## 东方气质的动效词汇
 

@@ -75,3 +75,15 @@
 | 研究页 H2 | 从发现风险，到塑造共同规则 | From discovering risk to shaping shared rules |
 
 首页 H2 是经确认的 15 字例外，其余中文标题继续遵守既有预算。公共影响内容不得使用“话语权”“国际影响力”“合作伙伴”或具体参与方式等归属性表述。
+
+## V3.9 首页与研究页文案
+
+| 区域 | 中文 | English |
+|---|---|---|
+| 首页三链 H2 | 细粒度管控行为链、思维链和数据链 | Control behavior, reasoning, and data chains |
+| 行为链 | 智能体调用了什么、行动如何组合、是否产生高影响后果 | Tool use, action composition, and high-impact outcomes |
+| 思维链 | 任务意图如何变化、是否出现目标漂移或危险推理 | Task-intent change, goal drift, and unsafe reasoning |
+| 数据链 | 数据来自哪里、如何加工、能否进入目标系统 | Provenance, transformation, and allowed destinations |
+| 研究公共影响 | 研究与公共影响 | Research and public impact |
+
+首页不再输出公共影响 KPI。研究页新加坡记录将 `100+ / 13 / 04` 写入完整句子，不拆成指标卡。中文处置显示为“放行｜脱敏｜复检｜沙箱｜审批｜阻断”，英文决策代码仅在技术依据中出现。三链 H2 是明确放行的中文标题长度例外。

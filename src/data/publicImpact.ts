@@ -105,22 +105,12 @@ export const publicImpactRecords: PublicImpactRecord[] = [
 
 export const publicImpactCopy = {
   zh: {
-    preview: { eyebrow: "研究与公共影响", title: "从前沿技术证据，到国内外共同规则", body: "团队研究连接国际科学共识、全球研究议程与国家安全标准", cta: "查看研究与公共影响" },
-    section: { eyebrow: "RESEARCH TO GOVERNANCE", title: "从发现风险，到塑造共同规则", body: "将前沿风险研究转化为可验证的科学议题，并连接国际共识、全球研究优先级与国家安全标准", evidence: "前沿技术证据", evidenceBody: "从自主性、欺骗与失控风险出发，研究智能体安全与运行时控制", source: "官方来源" },
-    overviewLabels: ["国际 AI 安全共识", "覆盖国家", "国家标准"],
+    section: { eyebrow: "研究与公共影响", title: "研究与公共影响", body: "关注与研究方向相关的国际共识、研究议程和国家安全标准", source: "官方来源" },
   },
   en: {
-    preview: { eyebrow: "RESEARCH & PUBLIC IMPACT", title: "From frontier evidence to shared rules", body: "Research connects international scientific consensus, global research priorities, and national safety standards.", cta: "Explore Research & Public Impact" },
-    section: { eyebrow: "RESEARCH TO GOVERNANCE", title: "From discovering risk to shaping shared rules", body: "Translate frontier-risk research into testable scientific agendas connected to international consensus, global research priorities, and national safety standards.", evidence: "Frontier evidence", evidenceBody: "Research autonomy, deception, and loss-of-control risk alongside agent safety and runtime control.", source: "Official source" },
-    overviewLabels: ["AI safety consensuses", "Countries represented", "National standard"],
+    section: { eyebrow: "RESEARCH & PUBLIC IMPACT", title: "Research and public impact", body: "International consensus, research agendas, and national security standards connected to our research themes.", source: "Official source" },
   },
 } satisfies Record<Locale, unknown>;
-
-export const publicImpactOverview = (locale: Locale) => [
-  { value: String(publicImpactRecords.filter((item) => item.kind !== "national-standard").length).padStart(2, "0"), label: publicImpactCopy[locale].overviewLabels[0] },
-  { value: publicImpactRecords.find((item) => item.id === "singapore-consensus")?.metrics.find((metric) => metric.value === "13")?.value ?? "13", label: publicImpactCopy[locale].overviewLabels[1] },
-  { value: String(publicImpactRecords.filter((item) => item.kind === "national-standard").length).padStart(2, "0"), label: publicImpactCopy[locale].overviewLabels[2] },
-];
 
 if (publicImpactRecords.length !== 3) throw new Error("Public impact requires exactly three verified records");
 for (const record of publicImpactRecords) {

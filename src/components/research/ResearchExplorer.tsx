@@ -61,6 +61,7 @@ export default function ResearchExplorer({ assets, locale, copy, themes, members
     for (const item of filtered) grouped.set(item.year, [...(grouped.get(item.year) ?? []), item]);
     return [...grouped.entries()].sort(([a], [b]) => b - a);
   }, [filtered]);
+  const hasFilters = Boolean(filters.q || filters.topic || filters.year || filters.member);
 
   const commit = (next: FilterState, mode: "push" | "replace" = "push") => {
     setFilters(next);
@@ -102,10 +103,10 @@ export default function ResearchExplorer({ assets, locale, copy, themes, members
       </form>
 
       <p className="research-count" aria-live="polite">{filtered.length} {locale === "zh" ? "项成果" : filtered.length === 1 ? "result" : "results"}</p>
-      {groups.length === 0 ? <p className="research-empty">{copy.filters.noResults}</p> : groups.map(([year, items]) => (
-        <section className="research-year" key={year} aria-labelledby={`research-year-${year}`}>
-          <h3 id={`research-year-${year}`}>{year}</h3>
-          <div>
+      {groups.length === 0 ? <p className="research-empty">{copy.filters.noResults}</p> : groups.map(([year, items], groupIndex) => (
+        <details className="research-year" key={`${year}-${hasFilters ? "filtered" : "default"}`} open={hasFilters || groupIndex === 0}>
+          <summary id={`research-year-${year}`}><strong>{year}</strong><span>{items.length} {locale === "zh" ? "项成果" : items.length === 1 ? "work" : "works"}</span><i aria-hidden="true">＋</i></summary>
+          <div aria-labelledby={`research-year-${year}`}>
             {items.map((item) => (
               <article className="research-entry" id={item.slug} key={item.slug}>
                 <div className="research-entry__meta"><span>{item.venue}</span>{item.pages && <span>{item.pages}</span>}<span>{typeLabel[item.publicationType]}</span></div>
@@ -119,7 +120,7 @@ export default function ResearchExplorer({ assets, locale, copy, themes, members
               </article>
             ))}
           </div>
-        </section>
+        </details>
       ))}
     </div>
   );

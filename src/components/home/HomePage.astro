@@ -7,10 +7,9 @@ import { openSourceAssets } from "../../data/generated/openSourceAssets";
 import { links } from "../../data/links";
 import { storyPageCopy } from "../../data/agentguardStory";
 import HomeHero from "./HomeHero";
-import ResearchProductLoop from "./ResearchProductLoop";
+import ResearchProductBridge from "./ResearchProductBridge.astro";
 import AgentGuardOperationsCenter from "./AgentGuardOperationsCenter.astro";
 import UnifiedSecurityInfluenceEngine from "../agentguard/UnifiedSecurityInfluenceEngine";
-import PublicImpactPreview from "../research/PublicImpactPreview.astro";
 import "../../styles/home.css";
 import "../../styles/agentguard-story.css";
 
@@ -36,12 +35,10 @@ const statusMap: Record<Locale, Record<string, string>> = {
     </div>
   </section>
 
-  <ResearchProductLoop copy={copy.loop} locale={locale} client:visible />
-
-  <PublicImpactPreview locale={locale} />
+  <ResearchProductBridge copy={copy.loop} locale={locale} />
 
   <section class="section story-section story-section--xuan" id="engine">
-    <div class="site-container story-section__head"><div><p class="eyebrow">{story.engine.eyebrow}</p><h2 class="section-title">{story.engine.title}</h2></div><p>{story.engine.body}</p></div>
+    <div class="site-container story-section__head"><div><p class="eyebrow">{locale === "zh" ? "AgentGuard 智能分析核心" : "AGENTGUARD INTELLIGENCE"}</p><h2 class="section-title">{locale === "zh" ? "细粒度管控行为链、思维链和数据链" : "Control behavior, reasoning, and data chains"}</h2></div><p>{locale === "zh" ? "关联行动组合、任务意图与数据血缘，在关键边界执行精细化处置" : "Connect action sequences, task intent, and data lineage to enforce precise controls at critical boundaries"}</p></div>
     <div class="site-container"><UnifiedSecurityInfluenceEngine locale={locale} density="compact" client:visible /></div>
   </section>
 
