@@ -18,7 +18,6 @@ export default function HomeHero({ copy, locale }: Props) {
           </div>
         </div>
         <div className="home-hero__visual">
-          <div className="home-hero__visual-label"><strong>AgentGuard</strong><span>{locale === "zh" ? "实时保护中" : "Runtime protection active"}</span></div>
           <AgentGuardSystemMap locale={locale} density="compact" />
         </div>
         <div className="home-hero__adapters" aria-label={locale === "zh" ? "支持的智能体架构" : "Supported agent frameworks"}>
