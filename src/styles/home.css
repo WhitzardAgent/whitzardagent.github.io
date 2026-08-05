@@ -71,3 +71,7 @@
 @media(max-width:1100px){.home-hero{min-height:auto}.home-hero__grid{grid-template-columns:1fr}.home-hero__adapters{grid-column:auto}}
 @media(max-width:680px){.risk-grid--four article{min-height:0}.operations-center__surface img{height:230px}}
 .operations-center__surface figcaption i{color:#aa3e2f}.operations-center__events dt{color:#8297b2}
+
+/* V3.10 — restore the branded research/product relationship, without paper figures */
+.research-bridge article>ol{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:1.7rem 0;padding:0;list-style:none}.research-bridge article>ol li{display:grid;gap:.45rem;border-top:1px solid #cad6d1;padding:.8rem 0;color:var(--nw-body);font-size:.68rem}.research-bridge article>ol li span{color:var(--nw-deep-jade);font:.48rem var(--font-mono)}
+@media(max-width:680px){.research-bridge article>ol{grid-template-columns:1fr}}

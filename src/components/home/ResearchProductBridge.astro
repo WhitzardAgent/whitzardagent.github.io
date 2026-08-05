@@ -18,8 +18,7 @@ const productHref = locale === "zh" ? "/agentguard" : "/en/agentguard";
     <article class="research-bridge__lab">
       <header><img src="/assets/logo/nvwa_logo.png" width="80" height="80" alt={locale === "zh" ? "女娲实验室标识" : "NUWA Lab logo"} loading="lazy" /><div><span>{locale === "zh" ? "研究引擎" : "RESEARCH ENGINE"}</span><h3>{copy.lab.name}</h3></div></header>
       <p>{copy.lab.role}</p>
-      <ul>{copy.lab.items.map((item) => <li>{item}</li>)}</ul>
-      <figure><picture><source type="image/webp" srcset="/assets/research/autocontrol-arena-figure-2-640.webp 640w, /assets/research/autocontrol-arena-figure-2.webp 1230w" sizes="(max-width: 680px) 100vw, 45vw" /><img src="/assets/research/autocontrol-arena-figure-2.png" alt={locale === "zh" ? "AutoControl Arena 可执行前沿风险评测流程局部图" : "AutoControl Arena executable frontier-risk evaluation workflow"} loading="lazy" decoding="async" width="1230" height="420" /></picture><figcaption>AutoControl Arena · ICML 2026</figcaption></figure>
+      <ol>{copy.lab.items.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ol>
       <a href={researchHref}>{copy.lab.link} →</a>
     </article>
     <div class="research-bridge__axis" role="img" aria-label={`${copy.bridge.down}. ${copy.bridge.up}.`}>
@@ -28,7 +27,7 @@ const productHref = locale === "zh" ? "/agentguard" : "/en/agentguard";
     <article class="research-bridge__product">
       <header><img src="/assets/logo/whitzard_logo.png" width="72" height="72" alt="AgentGuard" loading="lazy" /><div><span>{locale === "zh" ? "企业产品" : "ENTERPRISE PRODUCT"}</span><h3>{copy.product.name}</h3></div></header>
       <p>{copy.product.role}</p>
-      <ul>{copy.product.items.map((item) => <li>{item}</li>)}</ul>
+      <ol>{copy.product.items.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ol>
       <div class="research-bridge__control"><span>RUNTIME</span><strong>{locale === "zh" ? "研判 · 处置 · 验证" : "DECIDE · RESPOND · VERIFY"}</strong></div>
       <a href={productHref}>{copy.product.link} →</a>
     </article>

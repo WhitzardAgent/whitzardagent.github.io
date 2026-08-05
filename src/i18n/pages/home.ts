@@ -224,9 +224,9 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         name: "AgentGuard",
         role: "Enterprise Agent Security Product Line",
         items: [
-          "Runtime security control",
-          "Private deployment",
-          "Continuous security operations",
+          "Runtime decisioning",
+          "Minimum necessary response",
+          "Continuous validation",
         ],
         link: "Explore AgentGuard",
       },
@@ -399,7 +399,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       product: {
         name: "AgentGuard",
         role: "企业级智能体安全解决方案",
-        items: ["运行时安全控制", "私有化部署", "持续安全运营"],
+        items: ["运行时研判", "最小必要处置", "持续验证"],
         link: "了解 AgentGuard",
       },
       feedback: "研究形成控制能力，部署持续增强研究。",
