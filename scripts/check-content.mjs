@@ -235,7 +235,7 @@ for (const marker of ["leadFact", "count: 32", "Geoffrey Hinton", "Yoshua Bengio
 for (const marker of ["public-impact-preview", "home-public-impact", "02 国际 AI 安全共识", "从前沿技术证据，到国内外共同规则"]) {
   if (homeHtml.includes(marker)) violations.push(`dist/index.html: public impact must remain on the research page: ${marker}`);
 }
-const publicImpactSection = researchHtml.match(/<section id="public-impact"[\s\S]*?<section id="recognition"/)?.[0] ?? "";
+const publicImpactSection = researchHtml.match(/<section id="public-impact"[\s\S]*?<section id="infrastructure"/)?.[0] ?? "";
 if ((publicImpactSection.match(/<article\b/g) ?? []).length !== 3) violations.push("dist/research/index.html: public impact must contain exactly three records");
 for (const marker of [
   "研究与公共影响",
@@ -258,9 +258,10 @@ for (const marker of [
 }
 const themesIndex = researchHtml.indexOf('id="themes"');
 const impactIndex = researchHtml.indexOf('id="public-impact"');
+const infrastructureIndex = researchHtml.indexOf('id="infrastructure"');
 const recognitionIndex = researchHtml.indexOf('id="recognition"');
 const publicationsIndex = researchHtml.indexOf('id="research-index"');
-if (themesIndex < 0 || impactIndex < themesIndex || recognitionIndex < impactIndex || publicationsIndex < recognitionIndex) violations.push("dist/research/index.html: expected themes → public impact → recognition → publication index");
+if (impactIndex < 0 || infrastructureIndex < impactIndex || themesIndex < infrastructureIndex || recognitionIndex < themesIndex || publicationsIndex < recognitionIndex) violations.push("dist/research/index.html: expected public impact → infrastructure → themes → recognition → publication index");
 if (researchHtml.includes('id="team"') || researchHtml.includes("research-team__grid")) violations.push("dist/research/index.html: complete team biographies belong only on the about page");
 for (const forbidden of ["METR", "合作伙伴", "白泽参与", "女娲实验室参与", "参与签署", "参与形成", "参与起草"]) {
   if (publicImpactSection.includes(forbidden)) violations.push(`dist/research/index.html: public impact must not claim participation or partnership: ${forbidden}`);

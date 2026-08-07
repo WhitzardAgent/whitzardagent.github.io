@@ -43,7 +43,7 @@ const schema = {
       <img class="research-hero__logo" src="/assets/logo/nvwa_logo.png" width="112" height="112" alt={locale === "zh" ? "女娲实验室标识" : "NUWA Lab logo"} />
       <div class="research-hero__content"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><p class="research-hero__facts">{researchAssets.length} {locale === "zh" ? "项研究成果" : "research works"} <i /> {copy.areas.length} {locale === "zh" ? "个研究主题" : "research themes"} <i /> {researchRecognitions.length} {locale === "zh" ? "项荣誉" : "honours"}</p></div>
       <nav aria-label={locale === "zh" ? "研究页面导航" : "Research page navigation"}>
-        <a href="#featured">{copy.nav.featured}</a><a href="#infrastructure">{copy.nav.infrastructure}</a><a href="#themes">{copy.nav.themes}</a><a href="#public-impact">{copy.nav.impact}</a><a href="#recognition">{copy.nav.recognition}</a><a href="#research-index">{copy.nav.index}</a>
+        <a href="#featured">{copy.nav.featured}</a><a href="#public-impact">{copy.nav.impact}</a><a href="#infrastructure">{copy.nav.infrastructure}</a><a href="#themes">{copy.nav.themes}</a><a href="#recognition">{copy.nav.recognition}</a><a href="#research-index">{copy.nav.index}</a>
       </nav>
     </div>
   </section>
@@ -69,6 +69,8 @@ const schema = {
     </div>
   </section>
 
+  <PublicImpactPath locale={locale} />
+
   <section id="infrastructure" class="section research-infrastructure">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.infrastructure.eyebrow}</p><h2>{copy.infrastructure.title}</h2><p>{copy.infrastructure.lead}</p></div>
     <div class="site-container research-infrastructure__grid">{researchInfrastructure.map((item, index) => <article>
@@ -86,8 +88,6 @@ const schema = {
       return <article><div class="research-themes__meta"><span>0{index + 1}</span><strong>{items.length} {locale === "zh" ? "项成果" : "works"}</strong></div><h3>{area.title}</h3><p>{area.body}</p>{representative && <div class="research-themes__representative"><span>{locale === "zh" ? "代表成果" : "REPRESENTATIVE"}</span><a href={primaryLink(representative)} target="_blank" rel="noreferrer">{representative.title}</a></div>}<a class="research-themes__all" href={`${localizedPath("/research", locale)}?topic=${area.key}#research-index`}>{area.cta} →</a></article>;
     })}</div>
   </section>
-
-  <PublicImpactPath locale={locale} />
 
   <section id="recognition" class="section research-recognition">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.recognitionEyebrow}</p><h2>{copy.recognitionTitle}</h2></div>
