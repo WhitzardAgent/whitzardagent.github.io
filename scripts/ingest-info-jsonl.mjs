@@ -38,7 +38,7 @@ const featuredRankByTitle = new Map([
   ["Privacy Risks of General-Purpose Language Models", 1],
   ["Autonomy Comes with Costs: Detecting Denial-of-Service Vulnerabilities Caused by Resource Abusing in LLM-based Agents", 2],
   ["Large language model-powered AI systems achieve self-replication with no human intervention", 3],
-  ["AutoControl Arena: Synthesizing Executable Test Environments for Frontier AI Risk Evaluation", 4],
+  ["MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction", 4],
   ["Think Twice Before You Act: Enhancing Agent Behavioral Safety with Thought Correction", 5],
 ]);
 
@@ -209,10 +209,12 @@ const researchInfrastructure = researchInfrastructureLines.map((line, idx) => {
   const descriptionZh = String(raw["One-line description zh"] || raw.descriptionZh || "");
   const websiteUrl = String(raw["Website URL"] || raw.websiteUrl || raw.URL || raw.url || "");
   const sourceUrl = String(raw["Source URL"] || raw.sourceUrl || websiteUrl);
+  const linkLabelEn = String(raw["Link label"] || raw.linkLabel || "Official site");
+  const linkLabelZh = String(raw["Link label zh"] || raw.linkLabelZh || "项目官网");
   const lastVerified = String(raw["Last verified"] || raw.lastVerified || "");
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80);
 
-  if (!name || !typeEn || !typeZh || !descriptionEn || !descriptionZh || !websiteUrl || !sourceUrl || !lastVerified) {
+  if (!name || !typeEn || !typeZh || !descriptionEn || !descriptionZh || !websiteUrl || !sourceUrl || !linkLabelEn || !linkLabelZh || !lastVerified) {
     throw new Error(`Incomplete research infrastructure record: ${name}`);
   }
 
@@ -222,6 +224,7 @@ const researchInfrastructure = researchInfrastructureLines.map((line, idx) => {
     description: { en: descriptionEn, zh: descriptionZh },
     websiteUrl,
     sourceUrl,
+    linkLabel: { en: linkLabelEn, zh: linkLabelZh },
     lastVerified,
     slug,
   };
@@ -240,6 +243,7 @@ export type ResearchInfrastructure = {
   description: LocalizedText;
   websiteUrl: string;
   sourceUrl: string;
+  linkLabel: LocalizedText;
   lastVerified: string;
   slug: string;
 };

@@ -99,7 +99,7 @@ const expectedFeatured = [
   "Privacy Risks of General-Purpose Language Models",
   "Autonomy Comes with Costs: Detecting Denial-of-Service Vulnerabilities Caused by Resource Abusing in LLM-based Agents",
   "Large language model-powered AI systems achieve self-replication with no human intervention",
-  "AutoControl Arena: Synthesizing Executable Test Environments for Frontier AI Risk Evaluation",
+  "MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction",
   "Think Twice Before You Act: Enhancing Agent Behavioral Safety with Thought Correction",
 ];
 const actualFeatured = researchRecords.filter((record) => record["Featured rank"]).sort((a, b) => a["Featured rank"] - b["Featured rank"]).map((record) => record.Title);
@@ -156,6 +156,14 @@ for (const route of coreRoutes) {
   for (const label of ["NUWA Lab", "NUWA LAB", "NUWA 研究"]) {
     if (visibleHtml.includes(label)) violations.push(`${file}: Chinese visitor-facing copy must use 女娲实验室 instead of ${label}`);
   }
+  const visibleText = decodeText(visibleHtml);
+  if (/不是[^。！？]{0,80}而是|并非[^。！？]{0,80}而是/.test(visibleText)) violations.push(`${file}: prohibited 不是…而是 rhetorical construction`);
+  if (/\bnot\s+(?:just|only|simply|merely)[^.!?]{0,120}\bbut\b/i.test(visibleText)) violations.push(`${file}: prohibited not…but rhetorical construction`);
+}
+for (const route of coreRoutes) {
+  const file = join("dist", "en", route, "index.html");
+  const visibleText = decodeText(withoutEmbeddedCode(await readFile(file, "utf8")));
+  if (/\bnot\s+(?:just|only|simply|merely)[^.!?]{0,120}\bbut\b/i.test(visibleText)) violations.push(`${file}: prohibited not…but rhetorical construction`);
 }
 
 const homeHtml = withoutEmbeddedCode(await readFile("dist/index.html", "utf8"));
@@ -168,7 +176,7 @@ if (!englishNavHtml.includes("Use Cases") || englishNavHtml.includes(">Solutions
 const homeRequirements = [
   "在安全边界内释放自主智能价值",
   "智能体时代带来全新安全挑战",
-  "研究驱动产品持续演进",
+  "双向驱动，持续演进",
   "业务目标",
   "Agent 规划",
   "LLM 推理",
@@ -191,7 +199,7 @@ for (const [file, content, removed] of [
 ]) {
   for (const marker of removed) if (content.includes(marker)) violations.push(`${file}: V3.7 removed homepage section must not remain: ${marker}`);
 }
-const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "研究驱动产品持续演进", "开放技术方向"];
+const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "双向驱动，持续演进", "开放技术方向"];
 for (let index = 1; index < homeOrder.length; index += 1) {
   if (homeHtml.indexOf(homeOrder[index - 1]) >= homeHtml.indexOf(homeOrder[index])) violations.push(`dist/index.html: V3.7 homepage order is incorrect around ${homeOrder[index]}`);
 }
@@ -265,12 +273,15 @@ for (const forbidden of ["潘旭东", "戴嘉润", "洪赓", "Awarded to", "个�
 
 for (const marker of [
   "/assets/research/self-replication-figure-1.png",
-  "/assets/research/autocontrol-arena-figure-2.png",
   "/assets/research/thought-aligner-figure-1.png",
   "Figure 1 · PDF p.3",
-  "Figure 2 · PDF p.3",
   "Figure 1 · PDF p.2",
+  "MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction",
+  "https://github.com/WhitzardAgent/MirrorGuard",
 ]) if (!researchHtml.includes(marker)) violations.push(`dist/research/index.html: missing verified research visual marker ${marker}`);
+const infrastructureSection = researchHtml.match(/<section id="infrastructure"[\s\S]*?<section id="themes"/)?.[0] ?? "";
+for (const marker of ["AgentCyberRange", "AutoControl Arena", "查看论文"]) if (!infrastructureSection.includes(marker)) violations.push(`dist/research/index.html: missing research infrastructure marker ${marker}`);
+if (infrastructureSection.includes("CyberGym") || (infrastructureSection.match(/<article\b/g) ?? []).length !== 2) violations.push("dist/research/index.html: infrastructure must contain exactly AgentCyberRange and AutoControl Arena");
 if ((researchHtml.match(/<details class="research-year"/g) ?? []).length !== 9) violations.push("dist/research/index.html: publication index must render nine native year groups");
 
 for (const file of htmlFiles) {

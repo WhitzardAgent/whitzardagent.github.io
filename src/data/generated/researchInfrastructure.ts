@@ -7,6 +7,7 @@ export type ResearchInfrastructure = {
   description: LocalizedText;
   websiteUrl: string;
   sourceUrl: string;
+  linkLabel: LocalizedText;
   lastVerified: string;
   slug: string;
 };
@@ -26,22 +27,30 @@ export const researchInfrastructure: ResearchInfrastructure[] = [
     },
     "websiteUrl": "https://agentcyberrange.io/",
     "sourceUrl": "https://agentcyberrange.io/",
+    "linkLabel": {
+      "en": "Official site",
+      "zh": "项目官网"
+    },
     "lastVerified": "2026-08-07",
     "slug": "agentcyberrange"
   },
   {
-    "name": "CyberGym",
+    "name": "AutoControl Arena",
     "type": {
-      "en": "Vulnerability reproduction benchmark",
-      "zh": "漏洞复现基准"
+      "en": "Executable frontier-risk evaluation environment",
+      "zh": "前沿风险可执行评测环境"
     },
     "description": {
-      "en": "A benchmark where agents reproduce real-world vulnerabilities from descriptions and unpatched codebases.",
-      "zh": "给定漏洞描述与未修复代码库，评测智能体复现真实世界漏洞的能力。"
+      "en": "Synthesizes executable test environments that combine deterministic code state with narrative dynamics for frontier AI risk evaluation.",
+      "zh": "合成结合确定性代码状态与叙事动态的可执行测试环境，用于前沿 AI 风险评测。"
     },
-    "websiteUrl": "https://www.cybergym.io/cybergym/",
-    "sourceUrl": "https://www.cybergym.io/cybergym/",
-    "lastVerified": "2026-08-07",
-    "slug": "cybergym"
+    "websiteUrl": "https://arxiv.org/abs/2603.07427",
+    "sourceUrl": "https://arxiv.org/abs/2603.07427",
+    "linkLabel": {
+      "en": "View paper",
+      "zh": "查看论文"
+    },
+    "lastVerified": "2026-08-03",
+    "slug": "autocontrol-arena"
   }
 ] as const;

@@ -71,7 +71,6 @@ export const researchAssets: ResearchAsset[] = [
     "memberSlugs": [
       "xudong-pan"
     ],
-    "featuredRank": 4,
     "sourceUrls": [
       "https://ravensanstete.github.io/en/publications/"
     ],
@@ -453,12 +452,21 @@ export const researchAssets: ResearchAsset[] = [
       {
         "kind": "pdf",
         "url": "https://arxiv.org/pdf/2601.12822"
+      },
+      {
+        "kind": "code",
+        "url": "https://github.com/WhitzardAgent/MirrorGuard"
+      },
+      {
+        "kind": "project",
+        "url": "https://bmz-q-q.github.io"
       }
     ],
     "memberSlugs": [
       "xudong-pan",
       "jiarun-dai"
     ],
+    "featuredRank": 4,
     "sourceUrls": [
       "https://ravensanstete.github.io/en/publications/",
       "https://djrrr.github.io/"

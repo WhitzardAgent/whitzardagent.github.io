@@ -12,26 +12,20 @@ const productHref = locale === "zh" ? "/agentguard" : "/en/agentguard";
   <div class="site-container research-bridge__head">
     <p class="eyebrow">{copy.eyebrow}</p>
     <h2 id="research-bridge-title" class="section-title">{copy.title}</h2>
-    <p>{copy.statement}</p>
   </div>
-  <div class="site-container research-bridge__stack">
-    <article class="research-bridge__panel research-bridge__panel--lab">
-      <header><img src="/assets/logo/nvwa_logo.png" width="80" height="80" alt={locale === "zh" ? "女娲实验室标识" : "NUWA Lab logo"} loading="lazy" /><div><span>{locale === "zh" ? "研究引擎" : "RESEARCH ENGINE"}</span><h3>{copy.lab.name}</h3></div></header>
-      <p>{copy.lab.role}</p>
-      <ul>{copy.lab.items.map((item) => <li>{item}</li>)}</ul>
-      <a href={researchHref}>{copy.lab.link} →</a>
-    </article>
+  <div class="site-container research-bridge__duo">
+    <a class="research-bridge__brand research-bridge__brand--lab" href={researchHref} aria-label={`${copy.lab.name} · ${copy.lab.role}`}>
+      <img src="/assets/logo/nvwa_logo.png" width="112" height="112" alt="" loading="lazy" />
+      <span>{copy.lab.role}</span><h3>{copy.lab.name}</h3>
+    </a>
     <div class="research-bridge__axis" role="img" aria-label={`${copy.bridge.down}. ${copy.bridge.up}.`}>
-      <div><i aria-hidden="true">↓</i><span>{copy.bridge.down}</span></div>
-      <strong>{locale === "zh" ? "研究 × 产品" : "RESEARCH × PRODUCT"}</strong>
-      <div><i aria-hidden="true">↑</i><span>{copy.bridge.up}</span></div>
+      <span class="research-bridge__axis-label research-bridge__axis-label--forward">{copy.bridge.down}</span>
+      <span class="research-bridge__line" aria-hidden="true"><i></i></span>
+      <span class="research-bridge__axis-label research-bridge__axis-label--return">{copy.bridge.up}</span>
     </div>
-    <article class="research-bridge__panel research-bridge__panel--product">
-      <header><img src="/assets/logo/whitzard_logo.png" width="72" height="72" alt="AgentGuard" loading="lazy" /><div><span>{locale === "zh" ? "企业产品" : "ENTERPRISE PRODUCT"}</span><h3>{copy.product.name}</h3></div></header>
-      <p>{copy.product.role}</p>
-      <ul>{copy.product.items.map((item) => <li>{item}</li>)}</ul>
-      <a href={productHref}>{copy.product.link} →</a>
-    </article>
+    <a class="research-bridge__brand research-bridge__brand--product" href={productHref} aria-label={`${copy.product.name} · ${copy.product.role}`}>
+      <img src="/assets/logo/whitzard_logo.png" width="112" height="112" alt="" loading="lazy" />
+      <span>{copy.product.role}</span><h3>{copy.product.name}</h3>
+    </a>
   </div>
-  <p class="site-container research-bridge__feedback">{copy.feedback}</p>
 </section>

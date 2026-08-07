@@ -18,7 +18,7 @@ const sorted = [...researchAssets].sort((a, b) => b.year - a.year || a.title.loc
 const featured = researchAssets.filter((item) => item.featuredRank).sort((a, b) => (a.featuredRank ?? 99) - (b.featuredRank ?? 99));
 const featuredPrimary = featured[0];
 const featuredEvidence = featured[1];
-const featuredVisuals = featured.slice(2).map((item) => ({ item, visual: researchVisuals.find((visual) => visual.researchSlug === item.slug) })).filter((entry) => entry.visual);
+const featuredCards = featured.slice(2).map((item) => ({ item, visual: researchVisuals.find((visual) => visual.researchSlug === item.slug) }));
 const primaryLink = (item: typeof researchAssets[number]) => item.links.find((link) => link.kind === "paper")?.url ?? item.links[0].url;
 const researcherNames = locale === "zh"
   ? { "jiarun-dai": "戴嘉润", "xudong-pan": "潘旭东", "geng-hong": "洪赓" }
@@ -58,10 +58,14 @@ const schema = {
       {featuredEvidence && <article class="research-featured__evidence">
         <div class="research-meta"><span>02</span><span>{featuredEvidence.year}</span><span>{featuredEvidence.venue}</span></div><h3>{featuredEvidence.title}</h3><p>{featuredEvidence.summary[locale]}</p><a href={primaryLink(featuredEvidence)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
       </article>}
-      <div class="research-featured__visuals">{featuredVisuals.map(({ item, visual }, index) => visual && <figure>
-        <a href={visual.sourcePdfUrl} target="_blank" rel="noreferrer"><picture><source type="image/webp" srcset={`${visual.assetPath.replace(".png", "-640.webp")} 640w, ${visual.assetPath.replace(".png", ".webp")} ${index === 0 ? 1030 : index === 1 ? 1230 : 1235}w`} sizes="(max-width: 640px) 100vw, (max-width: 900px) 45vw, 34vw" /><img src={visual.assetPath} width={index === 0 ? 1030 : index === 1 ? 1230 : 1235} height={index === 0 ? 1120 : index === 1 ? 420 : 750} alt={visual.alt[locale]} loading="lazy" decoding="async" /></picture></a>
+      <div class="research-featured__visuals">{featuredCards.map(({ item, visual }, index) => visual ? <figure>
+        <a href={visual.sourcePdfUrl} target="_blank" rel="noreferrer"><picture><source type="image/webp" srcset={`${visual.assetPath.replace(".png", "-640.webp")} 640w, ${visual.assetPath.replace(".png", ".webp")} ${index === 0 ? 1030 : 1235}w`} sizes="(max-width: 640px) 100vw, (max-width: 900px) 45vw, 34vw" /><img src={visual.assetPath} width={index === 0 ? 1030 : 1235} height={index === 0 ? 1120 : 750} alt={visual.alt[locale]} loading="lazy" decoding="async" /></picture></a>
         <figcaption><div class="research-meta"><span>0{index + 3}</span><span>{item.year}</span><span>{visual.figureLabel} · PDF p.{visual.page}</span></div><h3>{item.title}</h3><p>{visual.caption[locale]}</p><a href={visual.sourcePdfUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></figcaption>
-      </figure>)}</div>
+      </figure> : <article class="research-featured__text-card">
+        <div class="research-meta"><span>0{index + 3}</span><span>{item.year}</span><span>{item.venue}</span></div>
+        <div><p class="research-featured__monogram" aria-hidden="true">MG</p><h3>{item.title}</h3><p>{item.summary[locale]}</p><p class="research-authors">{item.authors.join(" · ")}</p></div>
+        <div class="research-featured__links"><a href={primaryLink(item)} target="_blank" rel="noreferrer">{copy.linkLabels.paper} ↗</a>{item.links.filter((link) => link.kind === "project" || link.kind === "code").map((link) => <a href={link.url} target="_blank" rel="noreferrer">{copy.linkLabels[link.kind]} ↗</a>)}</div>
+      </article>)}</div>
     </div>
   </section>
 
@@ -70,7 +74,7 @@ const schema = {
     <div class="site-container research-infrastructure__grid">{researchInfrastructure.map((item, index) => <article>
       <div class="research-infrastructure__meta"><span>{String(index + 1).padStart(2, "0")}</span><span>{item.type[locale]}</span></div>
       <h3>{item.name}</h3><p>{item.description[locale]}</p>
-      <a href={item.websiteUrl} target="_blank" rel="noreferrer">{copy.infrastructure.source} ↗</a>
+      <a href={item.websiteUrl} target="_blank" rel="noreferrer">{item.linkLabel[locale]} ↗</a>
     </article>)}</div>
   </section>
 

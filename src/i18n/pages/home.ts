@@ -51,11 +51,9 @@ export type HomeCopy = {
   loop: {
     eyebrow: string;
     title: string;
-    statement: string;
-    lab: { name: string; role: string; items: string[]; link: string };
+    lab: { name: string; role: string };
     bridge: { down: string; up: string };
-    product: { name: string; role: string; items: string[]; link: string };
-    feedback: string;
+    product: { name: string; role: string };
   };
   enterprise: {
     eyebrow: string;
@@ -203,35 +201,20 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       decisions: ["Allow", "Sanitize", "Align", "Degrade", "Approve", "Deny"],
     },
     loop: {
-      eyebrow: "FRONTIER AI SAFETY RESEARCH",
-      title: "Research drives continuous product evolution",
-      statement: "NUWA Lab identifies and evaluates frontier risks, then turns them into AgentGuard evaluation, model, and control capabilities.",
+      eyebrow: "RESEARCH × PRODUCT",
+      title: "Mutual drive. Continuous evolution.",
       lab: {
         name: "NUWA Lab",
-        role: "Frontier AI Safety Research Engine",
-        items: [
-          "Frontier risk definition",
-          "Evaluation methods & evidence",
-          "Safety model research",
-        ],
-        link: "Explore NUWA Lab Research",
+        role: "Frontier AI safety research",
       },
       bridge: {
-        down: "Risk definition → Evaluation evidence → Safety models",
-        up: "Deployment evidence → Emerging risks → Research iteration",
+        down: "Research outcomes → Safety capabilities",
+        up: "Research iteration ← Deployment feedback",
       },
       product: {
         name: "AgentGuard",
-        role: "Enterprise Agent Security Product Line",
-        items: [
-          "Runtime decisioning",
-          "Minimum necessary response",
-          "Continuous validation",
-        ],
-        link: "Explore AgentGuard",
+        role: "Agent security infrastructure",
       },
-      feedback:
-        "Research becomes control. Deployment continuously strengthens research.",
     },
     enterprise: {
       eyebrow: "ENTERPRISE DEPLOYMENT",
@@ -383,26 +366,20 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       decisions: ["允许", "脱敏", "校准", "降级", "审批", "阻断"],
     },
     loop: {
-      eyebrow: "前沿 AI 安全研究",
-      title: "研究驱动产品持续演进",
-      statement: "女娲实验室持续识别、评估前沿风险，并转化为 AgentGuard 的评测、模型与控制能力。",
+      eyebrow: "研究 × 产品",
+      title: "双向驱动，持续演进",
       lab: {
         name: "女娲实验室",
-        role: "前沿 AI 安全研究引擎",
-        items: ["前沿风险定义", "评测方法与证据", "安全模型研究"],
-        link: "探索女娲实验室研究",
+        role: "前沿 AI 安全研究",
       },
       bridge: {
-        down: "风险定义 → 评测证据 → 安全模型",
-        up: "部署证据 → 新型风险 → 研究迭代",
+        down: "研究成果 → 安全能力",
+        up: "研究迭代 ← 部署反馈",
       },
       product: {
         name: "AgentGuard",
-        role: "企业级智能体安全解决方案",
-        items: ["运行时研判", "最小必要处置", "持续验证"],
-        link: "了解 AgentGuard",
+        role: "智能体安全基础设施",
       },
-      feedback: "研究形成控制能力，部署持续增强研究。",
     },
     enterprise: {
       eyebrow: "企业级部署",
