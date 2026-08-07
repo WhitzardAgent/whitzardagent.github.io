@@ -10,7 +10,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         const pathname = new URL(page).pathname;
-        const redirectOnly = ["/NVWA-Project/", "/open-source/", "/publications/"];
+        const redirectOnly = ["/NVWA-Project/", "/open-source/", "/publications/", "/nuwa/", "/en/nuwa/"];
         return !pathname.startsWith("/zh") && pathname !== "/blog/" && pathname !== "/news/" && !pathname.startsWith("/news/") && !redirectOnly.includes(pathname);
       },
     }),

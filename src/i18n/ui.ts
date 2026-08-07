@@ -22,7 +22,7 @@ export const ui: Record<Locale, UiCopy> = {
     nav: [
       { href: "/agentguard", label: "Platform" },
       { href: "/solutions", label: "Use Cases" },
-      { href: "/research", label: "Research" },
+      { href: "/research", label: "NUWA Lab" },
       { href: "/open-ecosystem", label: "Open Source" },
       { href: "/about", label: "Company" },
     ],
@@ -44,7 +44,7 @@ export const ui: Record<Locale, UiCopy> = {
     nav: [
       { href: "/agentguard", label: "AgentGuard" },
       { href: "/solutions", label: "应用场景" },
-      { href: "/research", label: "研究" },
+      { href: "/research", label: "女娲实验室" },
       { href: "/open-ecosystem", label: "开源生态" },
       { href: "/about", label: "关于我们" },
     ],

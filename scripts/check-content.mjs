@@ -135,7 +135,7 @@ const chineseBudget = (value) => {
 const approvedExtendedHeadings = new Set([
   "细粒度管控行为链、思维链和数据链",
 ]);
-const coreRoutes = ["", "agentguard", "solutions", "nuwa", "research", "open-ecosystem", "about", "contact"];
+const coreRoutes = ["", "agentguard", "solutions", "research", "open-ecosystem", "about", "contact"];
 for (const route of coreRoutes) {
   const file = join("dist", route, "index.html");
   const content = await readFile(file, "utf8");
@@ -315,10 +315,16 @@ for (const marker of ["customer-egress", "memory-write", "production-commit", "R
 for (const legacy of ["<div class=\"site-container platform-stack\"", "<section class=\"three-chain"]) {
   if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage product narrative must not remain: ${legacy}`);
 }
-const nuwaZh = withoutEmbeddedCode(await readFile("dist/nuwa/index.html", "utf8"));
-const nuwaEn = withoutEmbeddedCode(await readFile("dist/en/nuwa/index.html", "utf8"));
-if (!nuwaZh.includes("实验室愿景") || !nuwaZh.includes("为全球AI治理分享风险实证与公共产品")) violations.push("dist/nuwa/index.html: missing confirmed lab vision");
-if (!nuwaEn.includes("LAB VISION") || !nuwaEn.includes("Shared Risk Evidence and Public Goods for the World")) violations.push("dist/en/nuwa/index.html: missing confirmed lab vision");
+for (const [file, destination] of [["dist/nuwa/index.html", "/research"], ["dist/en/nuwa/index.html", "/en/research"], ["dist/NVWA-Project/index.html", "/en/research"]]) {
+  const content = await readFile(file, "utf8");
+  if (!content.includes(`http-equiv="refresh" content="0;url=${destination}"`)) {
+    violations.push(`${file}: legacy NUWA route must redirect to ${destination}`);
+  }
+}
+const sitemapXml = await readFile("dist/sitemap-0.xml", "utf8");
+for (const legacyUrl of ["https://whitzard.tech/nuwa/", "https://whitzard.tech/en/nuwa/", "https://whitzard.tech/NVWA-Project/"]) {
+  if (sitemapXml.includes(`<loc>${legacyUrl}</loc>`)) violations.push(`dist/sitemap-0.xml: legacy redirect must not be indexed: ${legacyUrl}`);
+}
 
 // V3.11 page ownership: complete modules and proof assets have one canonical destination.
 const ownershipPages = Object.fromEntries(await Promise.all(coreRoutes.map(async (route) => [route || "home", withoutEmbeddedCode(await readFile(join("dist", route, "index.html"), "utf8"))])));
@@ -329,7 +335,6 @@ for (const [route, html] of Object.entries(ownershipPages)) {
   if (route !== "agentguard" && html.includes("/assets/agentguard/dashboard.png")) violations.push(`dist/${route}/index.html: AgentGuard Dashboard belongs only on the product page`);
   if (route !== "about" && html.includes("team-advisor-link")) violations.push(`dist/${route}/index.html: complete academic biographies belong only on the about page`);
 }
-if (nuwaZh.includes("research-featured__list") || expectedFeatured.some((title) => nuwaZh.includes(title))) violations.push("dist/nuwa/index.html: flagship publication lists belong only on the research page");
 if (aboutHtml.includes("brand-architecture") || aboutHtml.includes("智能体运行时安全控制层")) violations.push("dist/about/index.html: product architecture belongs on the AgentGuard page");
 
 for (const route of coreRoutes) {

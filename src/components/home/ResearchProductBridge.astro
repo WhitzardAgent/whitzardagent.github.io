@@ -4,7 +4,7 @@ import type { HomeCopy } from "../../i18n/pages/home";
 
 interface Props { copy: HomeCopy["loop"]; locale: Locale }
 const { copy, locale } = Astro.props;
-const researchHref = locale === "zh" ? "/nuwa" : "/en/nuwa";
+const researchHref = locale === "zh" ? "/research" : "/en/research";
 const productHref = locale === "zh" ? "/agentguard" : "/en/agentguard";
 ---
 

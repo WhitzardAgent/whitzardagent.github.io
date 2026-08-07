@@ -25,7 +25,7 @@ export type ResearchCopy = {
     eyebrow: string;
     title: string;
     lead: string;
-    nav: { themes: string; featured: string; impact: string; index: string; recognition: string };
+    nav: { themes: string; featured: string; infrastructure: string; impact: string; index: string; recognition: string };
     areas: Array<{ key: string; title: string; body: string; cta: string }>;
     featured: string;
     featuredLead: string;
@@ -35,6 +35,7 @@ export type ResearchCopy = {
     linkLabels: { paper: string; pdf: string; code: string; project: string };
     recognitionEyebrow: string;
     recognitionTitle: string;
+    infrastructure: { eyebrow: string; title: string; lead: string; source: string };
     teamEyebrow: string;
     teamTitle: string;
     teamLead: string;
@@ -105,14 +106,14 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
     },
     research: {
       meta: {
-        title: "Research — NUWA Lab",
+        title: "NUWA Lab Research — Whitzard",
         description:
           "NUWA Lab research on frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
       },
       eyebrow: "NUWA LAB · RESEARCH",
-      title: "Define risk. Build safety with evidence.",
-      lead: "Frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
-      nav: { themes: "Research themes", featured: "Featured work", impact: "Public impact", index: "All research", recognition: "Recognition" },
+      title: "NUWA Lab Research",
+      lead: "Define risk. Build safety with evidence across frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
+      nav: { themes: "Research themes", featured: "Featured work", infrastructure: "Infrastructure", impact: "Public impact", index: "All research", recognition: "Recognition" },
       areas: [
         { key: "frontier-risk-control", title: "Frontier risk & AI control", body: "Measure autonomy, deception, proliferation, and control integrity.", cta: "View this theme" },
         { key: "agent-model-safety", title: "Agent & model safety", body: "Protect reasoning, behavior, generative models, and human–AI trust.", cta: "View this theme" },
@@ -129,6 +130,12 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       linkLabels: { paper: "Paper", pdf: "PDF", code: "Code", project: "Project" },
       recognitionEyebrow: "RECOGNITION",
       recognitionTitle: "Honours and recognition",
+      infrastructure: {
+        eyebrow: "RESEARCH INFRASTRUCTURE",
+        title: "Research infrastructure & benchmarks",
+        lead: "Public evaluation environments and benchmarks that make agent cybersecurity capability observable.",
+        source: "Official site",
+      },
       teamEyebrow: "RESEARCH CAPABILITY",
       teamTitle: "Research leadership",
       teamLead: "Two founders and a strategic research partner spanning AI safety, systems security, cybercrime, and privacy.",
@@ -228,14 +235,14 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
     },
     research: {
       meta: {
-        title: "研究成果 — 女娲实验室",
+        title: "女娲实验室研究 — 白泽（Whitzard）",
         description:
           "女娲实验室关于前沿 AI 风险、智能体安全、系统安全、网络安全与隐私的研究成果。",
       },
       eyebrow: "女娲实验室 · 研究",
-      title: "以研究定义风险，以证据构建安全",
-      lead: "聚焦前沿 AI 风险、智能体安全、系统安全与网络安全",
-      nav: { themes: "研究主题", featured: "代表成果", impact: "公共影响", index: "全部成果", recognition: "荣誉与认可" },
+      title: "女娲实验室研究",
+      lead: "以研究定义风险，以证据构建安全，聚焦前沿 AI 风险、智能体安全、系统安全与网络安全。",
+      nav: { themes: "研究主题", featured: "代表成果", infrastructure: "研究基础设施", impact: "公共影响", index: "全部成果", recognition: "荣誉与认可" },
       areas: [
         { key: "frontier-risk-control", title: "前沿风险与 AI 控制", body: "评测自主性、欺骗、扩散与控制完整性。", cta: "查看主题研究" },
         { key: "agent-model-safety", title: "智能体与模型安全", body: "保护推理、行为、生成模型与人机信任。", cta: "查看主题研究" },
@@ -251,7 +258,13 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       filters: { searchLabel: "搜索", searchPlaceholder: "搜索标题、作者或主题", topicLabel: "主题", yearLabel: "年份", memberLabel: "成员", allTopics: "全部主题", allYears: "全部年份", allMembers: "全部成员", reset: "重置", noResults: "没有符合条件的研究成果" },
       linkLabels: { paper: "论文", pdf: "PDF", code: "代码", project: "项目" },
       recognitionEyebrow: "荣誉与认可",
-      recognitionTitle: "经公开来源核验的荣誉",
+      recognitionTitle: "荣誉与认可",
+      infrastructure: {
+        eyebrow: "研究基础设施",
+        title: "研究基础设施与基准",
+        lead: "以公开评测环境与基准，让智能体网络安全能力得到持续观测与验证。",
+        source: "项目官网",
+      },
       teamEyebrow: "研究力量",
       teamTitle: "跨越 AI 与系统安全",
       teamLead: "两位联合创始人与一位战略研究合作伙伴，覆盖前沿 AI、系统安全、网络犯罪与隐私。",

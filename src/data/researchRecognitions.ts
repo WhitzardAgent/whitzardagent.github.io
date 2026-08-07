@@ -22,7 +22,7 @@ export const researchRecognitions: ResearchRecognition[] = [
   },
   {
     year: 2025,
-    title: { en: "Distinguished Paper Award · NDSS", zh: "NDSS 最佳论文奖" },
+    title: { en: "Distinguished Paper Award · NDSS", zh: "NDSS 杰出论文奖" },
     venueNote: { en: "Top-tier cybersecurity conference", zh: "顶级网络安全会议" },
     sourceUrl: "https://www.ndss-symposium.org/ndss2025/",
   },

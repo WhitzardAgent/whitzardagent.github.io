@@ -128,7 +128,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           name: "NUWA Lab",
           role: "Frontier safety research engine",
           body: "Research that defines risk, builds evaluation evidence, and advances safety models.",
-          href: "/en/nuwa",
+          href: "/en/research",
         },
         {
           name: "WhitzardAgent",
@@ -275,7 +275,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           name: "女娲实验室",
           role: "前沿安全研究引擎",
           body: "定义风险、建设评测证据并推动安全模型的研究引擎。",
-          href: "/nuwa",
+          href: "/research",
         },
         {
           name: "WhitzardAgent",

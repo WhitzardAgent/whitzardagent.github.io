@@ -7,7 +7,7 @@ export const links = {
   repository: "https://github.com/WhitzardAgent/whitzardagent.github.io",
   currentNuwaProject: "https://whitzard.tech/NVWA-Project/",
   whitzard: "https://whitzard.tech/",
-  nuwa: "/nuwa",
+  nuwa: "/research",
   research: "/research",
   news: "/news",
   openEcosystem: "/open-ecosystem",

@@ -214,7 +214,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
           "Evaluation methods & evidence",
           "Safety model research",
         ],
-        link: "Explore NUWA Lab",
+        link: "Explore NUWA Lab Research",
       },
       bridge: {
         down: "Risk definition → Evaluation evidence → Safety models",
@@ -390,7 +390,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         name: "女娲实验室",
         role: "前沿 AI 安全研究引擎",
         items: ["前沿风险定义", "评测方法与证据", "安全模型研究"],
-        link: "了解女娲实验室",
+        link: "探索女娲实验室研究",
       },
       bridge: {
         down: "风险定义 → 评测证据 → 安全模型",
