@@ -190,7 +190,7 @@ const homeRequirements = [
   "Commit Boundary",
   "脱敏",
   "重新检查",
-  "开放技术方向",
+  "开源生态",
 ];
 for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.11 homepage marker: ${marker}`);
 for (const [file, content, removed] of [
@@ -199,7 +199,7 @@ for (const [file, content, removed] of [
 ]) {
   for (const marker of removed) if (content.includes(marker)) violations.push(`${file}: V3.7 removed homepage section must not remain: ${marker}`);
 }
-const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "双向驱动，持续演进", "开放技术方向"];
+const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "双向驱动，持续演进", ">开源生态</h2>"];
 for (let index = 1; index < homeOrder.length; index += 1) {
   if (homeHtml.indexOf(homeOrder[index - 1]) >= homeHtml.indexOf(homeOrder[index])) violations.push(`dist/index.html: V3.7 homepage order is incorrect around ${homeOrder[index]}`);
 }
