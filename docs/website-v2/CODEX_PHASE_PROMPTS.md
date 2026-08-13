@@ -78,7 +78,7 @@ RuntimeTrace 必须展示可理解的 Agent 执行过程和 AgentGuard 决策，
 新增或完善：
 
 - Solutions
-- Company
+- About Us
 - Contact / Book a Demo
 
 Contact 页面提供清晰表单或邮件 CTA，不能只有研究合作描述。

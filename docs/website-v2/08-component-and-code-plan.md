@@ -133,7 +133,7 @@ interface Props {
 
 桌面端：
 
-`Whitzard | Platform | Solutions | Research | Open Source | Company | EN/中文 | Book a Demo`
+`Whitzard | Platform | Solutions | Research | Open Source | About Us | EN/中文 | Book a Demo`
 
 移动端：
 

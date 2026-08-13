@@ -17,7 +17,7 @@ English:
 - Solutions
 - Research
 - Open Source
-- Company
+- About Us
 - Book a Demo
 
 ## 推荐路由

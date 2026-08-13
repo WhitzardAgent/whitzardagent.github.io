@@ -24,7 +24,7 @@ export const ui: Record<Locale, UiCopy> = {
       { href: "/solutions", label: "Use Cases" },
       { href: "/research", label: "NUWA Lab" },
       { href: "/open-ecosystem", label: "Open Source" },
-      { href: "/about", label: "Company" },
+      { href: "/about", label: "About Us" },
     ],
     demo: "Book a Demo",
     menuOpen: "Open navigation",
@@ -34,7 +34,7 @@ export const ui: Record<Locale, UiCopy> = {
     footer: {
       positioning: "AI agent security infrastructure for secure autonomy.",
       platform: "Platform",
-      company: "Company",
+      company: "About Us",
       resources: "Research & open source",
       legalLine: "Secure autonomy, by design.",
       researchLine: "NUWA Lab is the frontier safety research engine behind Whitzard.",

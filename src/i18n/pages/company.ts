@@ -104,7 +104,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
     },
     company: {
       meta: {
-        title: "Company — Whitzard",
+        title: "About Us — Whitzard",
         description:
           "Whitzard builds AI agent security infrastructure, powered by AgentGuard, NUWA Lab research, and the WhitzardAgent open ecosystem.",
       },
@@ -114,7 +114,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       architecture: [
         {
           name: "Whitzard",
-          role: "Company · AI Agent Security Infrastructure",
+          role: "Company brand · AI Agent Security Infrastructure",
           body: "The company brand that connects product, research, open engineering, and enterprise deployment.",
           href: "/en/",
         },
