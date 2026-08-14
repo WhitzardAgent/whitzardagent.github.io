@@ -42,6 +42,24 @@ export const newsTypeLabels: Record<Locale, Record<NewsType, string>> = {
 export const newsItems: NewsItem[] = [
   {
     title: {
+      en: "AgentGuard: Guardrails for agent tool invocation",
+      zh: "AgentGuard：给智能体工具调用行为带上“紧箍咒”",
+    },
+    date: "2026-05-29",
+    type: "Update",
+    url: "https://mp.weixin.qq.com/s/0F7mcRuwgNTNyCOtlYORaw",
+    source: {
+      en: "Fudan Baize WeChat official account",
+      zh: "复旦白泽战队微信公众号",
+    },
+    sourceLanguage: "zh",
+    summary: {
+      en: "A Chinese public note introduces AgentGuard as a lightweight access-control framework for tool-using agents, with policy matching, risk blocking, trace recording, and audit support.",
+      zh: "文章介绍 AgentGuard 面向工具调用型智能体的轻量级访问控制框架，覆盖策略匹配、高风险调用拦截、执行轨迹记录与安全溯源。",
+    },
+  },
+  {
+    title: {
       en: "The Science of Frontier AI Risk Evaluation",
       zh: "前沿 AI 风险评测的科学方法",
     },
