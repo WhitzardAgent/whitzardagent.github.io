@@ -42,11 +42,11 @@ export const newsTypeLabels: Record<Locale, Record<NewsType, string>> = {
 export const newsItems: NewsItem[] = [
   {
     title: {
-      en: "AgentGuard: Guardrails for agent tool invocation",
-      zh: "AgentGuard：给智能体工具调用行为带上“紧箍咒”",
+      en: "Fudan Baize ranks second globally and first among universities in AI attack-defense",
+      zh: "AI攻防全球第二、高校第一！复旦白泽以“效能美学”跻身世界第一梯队",
     },
-    date: "2026-05-29",
-    type: "Update",
+    date: "2026-08-14",
+    type: "Media",
     url: "https://mp.weixin.qq.com/s/0F7mcRuwgNTNyCOtlYORaw",
     source: {
       en: "Fudan Baize WeChat official account",
@@ -54,8 +54,8 @@ export const newsItems: NewsItem[] = [
     },
     sourceLanguage: "zh",
     summary: {
-      en: "A Chinese public note introduces AgentGuard as a lightweight access-control framework for tool-using agents, with policy matching, risk blocking, trace recording, and audit support.",
-      zh: "文章介绍 AgentGuard 面向工具调用型智能体的轻量级访问控制框架，覆盖策略匹配、高风险调用拦截、执行轨迹记录与安全溯源。",
+      en: "A Chinese report notes that Fudan Baize's Whitzard agent reached a 91.2% success rate on CyberGym, ranking second globally and first among universities.",
+      zh: "报道显示，国际 AI 安全基准 CyberGym 最新榜单中，复旦白泽智能体 Whitzard 以 91.2% 成功率位列全球第二、高校第一。",
     },
   },
   {
