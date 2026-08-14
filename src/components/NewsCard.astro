@@ -1,70 +1,116 @@
 ---
+import type { Locale } from "../i18n/config";
+
 interface Props {
   title: string;
   date: string;
-  type: string;
+  typeLabel: string;
   summary?: string;
   href?: string;
   source?: string;
   featured?: boolean;
+  locale: Locale;
 }
 
-const { title, date, type, summary, href, source, featured = false } = Astro.props;
-
-const typeColors: Record<string, string> = {
-  Research: "bg-nw-jade-pale text-nw-jade",
-  Company: "bg-wz-panel-blue/50 text-wz-blue",
-  Ecosystem: "bg-wz-teal-soft text-wz-teal",
-  Event: "bg-amber-50 text-amber-700",
-  Media: "bg-purple-50 text-purple-700",
-  Update: "bg-stone-100 text-stone-600",
-};
-
-const badgeColor = typeColors[type] || "bg-stone-100 text-stone-600";
-
-const formattedDate = new Date(date).toLocaleDateString("en-US", {
+const { title, date, typeLabel, summary, href, source, featured = false, locale } = Astro.props;
+const formattedDate = new Date(date).toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US", {
   year: "numeric",
-  month: "short",
+  month: locale === "zh" ? "numeric" : "short",
   day: "numeric",
 });
-
-const isExternal = href && href.startsWith("http");
-
-const Tag = href ? "a" : "div";
+const isExternal = href?.startsWith("http") ?? false;
+const Tag = href ? "a" : "article";
 const linkProps = href
   ? {
       href,
       target: isExternal ? "_blank" : undefined,
       rel: isExternal ? "noopener noreferrer" : undefined,
-      class: "block no-underline",
     }
   : {};
 ---
 
-<Tag {...linkProps}>
-  <div class:list={[
-    "border rounded-lg p-5 transition-colors",
-    featured ? "bg-wz-panel-blue/20 border-wz-hairline" : "bg-white border-wz-hairline",
-    href ? "hover:border-wz-border-strong cursor-pointer" : "",
-  ]}>
-    <div class="flex items-center gap-2 mb-2">
-      <span class:list={["text-xs font-medium px-2 py-0.5 rounded-full", badgeColor]}>
-        {type}
-      </span>
-      <span class="text-wz-muted text-xs">{formattedDate}</span>
-      {featured && (
-        <span class="text-wz-blue text-xs font-medium">Featured</span>
-      )}
-      {isExternal && (
-        <span class="text-wz-subtle text-xs">&#8599;</span>
-      )}
-    </div>
-    <p class="text-wz-ink font-semibold text-sm mb-1">{title}</p>
-    {summary && (
-      <p class="text-wz-muted text-sm leading-relaxed">{summary}</p>
-    )}
-    {source && (
-      <p class="text-wz-subtle text-xs mt-2">Source: {source}</p>
-    )}
+<Tag class:list={["news-card", featured && "news-card--featured", href && "news-card--link"]} {...linkProps}>
+  <div class="news-card__meta">
+    <span>{typeLabel}</span>
+    <time datetime={date}>{formattedDate}</time>
+    {featured && <span>{locale === "zh" ? "精选" : "Featured"}</span>}
+    {isExternal && <i aria-hidden="true">↗</i>}
   </div>
+  <h3>{title}</h3>
+  {summary && <p>{summary}</p>}
+  {source && <small>{locale === "zh" ? "来源：" : "Source: "}{source}</small>}
 </Tag>
+
+<style>
+  .news-card {
+    display: block;
+    border-top: 1px solid var(--wz-hairline);
+    padding: 1.1rem 0;
+    color: var(--wz-body);
+    text-decoration: none;
+  }
+  .news-card:last-child {
+    border-bottom: 1px solid var(--wz-hairline);
+  }
+  .news-card--featured {
+    border-color: #c7d6d2;
+  }
+  .news-card--link {
+    transition: border-color var(--duration-micro), transform var(--duration-micro) var(--ease-out);
+  }
+  .news-card--link:hover {
+    border-color: var(--nw-jade);
+    transform: translateX(3px);
+  }
+  .news-card--link:focus-visible {
+    outline: 2px solid var(--wz-cinnabar);
+    outline-offset: 6px;
+  }
+  .news-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    color: var(--wz-muted);
+    font: .64rem var(--font-mono);
+  }
+  .news-card__meta span:first-child {
+    color: var(--nw-deep-jade);
+    font-family: var(--font-sans);
+    font-weight: 650;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+  .news-card__meta i {
+    color: var(--wz-cinnabar-ink);
+    font-style: normal;
+  }
+  .news-card h3 {
+    margin: .72rem 0 0;
+    color: var(--wz-ink);
+    font-size: clamp(1rem, 1.4vw, 1.18rem);
+    font-weight: 620;
+    line-height: 1.35;
+  }
+  .news-card p {
+    max-width: 760px;
+    margin: .45rem 0 0;
+    color: var(--wz-muted);
+    font-size: .9rem;
+    line-height: 1.65;
+  }
+  .news-card small {
+    display: block;
+    margin-top: .55rem;
+    color: var(--wz-subtle);
+    font-size: .72rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .news-card--link {
+      transition: none;
+    }
+    .news-card--link:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -3,7 +3,7 @@ import { localizedPath, stripLocale } from "./config";
 
 export const localizedRoutes = [
   "/", "/agentguard", "/solutions", "/nuwa", "/research",
-  "/open-ecosystem", "/about", "/contact",
+  "/open-ecosystem", "/news", "/about", "/contact",
 ] as const;
 
 function normalizeRoute(pathname: string): string {
@@ -14,6 +14,7 @@ function normalizeRoute(pathname: string): string {
 
 export function hasLocalizedPeer(pathname: string): boolean {
   const base = normalizeRoute(pathname);
+  if (base.startsWith("/news/")) return true;
   return localizedRoutes.includes(base as (typeof localizedRoutes)[number]);
 }
 

@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import { links } from "../../data/links";
+import { getNewsLink, getNewsSourceLabel, newsTypeLabels, sortedNewsItems } from "../../data/news";
+import NewsCard from "../NewsCard.astro";
+import FiveStoneMotif from "../visuals/FiveStoneMotif.astro";
+import "../../styles/news.css";
+
+interface Props { locale: Locale; }
+
+const { locale } = Astro.props;
+const copy = locale === "zh"
+  ? {
+      title: "动态 — 白泽（Whitzard）",
+      heading: "动态",
+      intro: "白泽（Whitzard）与女娲实验室的研究进展、公司动态和开放生态更新。",
+      featured: "精选动态",
+      featuredIntro: "来自白泽与女娲实验室的重点更新。",
+      latest: "最新",
+      latestIntro: "近期发布、活动和生态进展。",
+      subscribe: "订阅女娲实验室研究更新。",
+      subscribeCta: "订阅 NUWA Brief",
+      home: "返回首页",
+    }
+  : {
+      title: "News — Whitzard",
+      heading: "News",
+      intro: "Research updates, company news, ecosystem progress, and public notes from Whitzard and NUWA Lab.",
+      featured: "Featured",
+      featuredIntro: "Highlighted updates from Whitzard and NUWA Lab.",
+      latest: "Latest",
+      latestIntro: "Recent updates and announcements.",
+      subscribe: "Get research updates from NUWA Lab delivered to your inbox.",
+      subscribeCta: "Subscribe to NUWA Brief",
+      home: "Back to Home",
+    };
+const featuredNews = sortedNewsItems.filter((item) => item.featured);
+const latestNews = sortedNewsItems.filter((item) => !item.featured);
+---
+
+<BaseLayout
+  locale={locale}
+  canonicalPath="/news"
+  title={copy.title}
+  description={copy.intro}
+  ogImage="/assets/og/whitzard-og.png"
+>
+  <section class="news-hero">
+    <div class="site-container">
+      <p class="eyebrow">{locale === "zh" ? "NEWSROOM" : "NEWSROOM"}</p>
+      <h1>{copy.heading}</h1>
+      <p>{copy.intro}</p>
+    </div>
+  </section>
+
+  <section class="news-index">
+    <div class="site-container">
+      <FiveStoneMotif class="news-index__motif" />
+
+      {featuredNews.length > 0 && (
+        <section class="news-group" aria-labelledby="featured-news-title">
+          <div class="news-group__head">
+            <h2 id="featured-news-title">{copy.featured}</h2>
+            <p>{copy.featuredIntro}</p>
+          </div>
+          <div class="news-list">
+            {featuredNews.map((item) => (
+              <NewsCard
+                locale={locale}
+                title={item.title[locale]}
+                date={item.date}
+                typeLabel={newsTypeLabels[locale][item.type]}
+                summary={item.summary?.[locale]}
+                href={getNewsLink(item, locale)}
+                source={getNewsSourceLabel(item, locale)}
+                featured={item.featured}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {latestNews.length > 0 && (
+        <section class="news-group" aria-labelledby="latest-news-title">
+          <div class="news-group__head">
+            <h2 id="latest-news-title">{copy.latest}</h2>
+            <p>{copy.latestIntro}</p>
+          </div>
+          <div class="news-list">
+            {latestNews.map((item) => (
+              <NewsCard
+                locale={locale}
+                title={item.title[locale]}
+                date={item.date}
+                typeLabel={newsTypeLabels[locale][item.type]}
+                summary={item.summary?.[locale]}
+                href={getNewsLink(item, locale)}
+                source={getNewsSourceLabel(item, locale)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <aside class="news-subscribe">
+        <p>{copy.subscribe}</p>
+        <div>
+          <a class="button button--primary" href={links.substack} target="_blank" rel="noopener noreferrer">{copy.subscribeCta}</a>
+          <a class="button button--secondary" href={localizedPath("/", locale)}>{copy.home}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

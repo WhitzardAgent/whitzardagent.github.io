@@ -1,5 +1,5 @@
 ---
-import NewsArticle from "../../news/[slug].astro";
+import NewsArticle from "../../../components/news/NewsArticle.astro";
 import { newsItems } from "../../../data/news";
 
 export function getStaticPaths() {
@@ -8,4 +8,5 @@ export function getStaticPaths() {
 
 const { item } = Astro.props;
 ---
-<NewsArticle item={item} />
+
+<NewsArticle item={item} locale="en" />

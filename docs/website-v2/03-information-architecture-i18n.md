@@ -31,6 +31,7 @@ English:
 | `/solutions` | `/en/solutions` |
 | `/nuwa` | `/en/nuwa` |
 | `/research` | `/en/research` |
+| `/news` | `/en/news` |
 | `/open-ecosystem` | `/en/open-ecosystem` |
 | `/about` | `/en/about` |
 | `/contact` | `/en/contact` |

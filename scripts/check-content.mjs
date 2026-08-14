@@ -135,7 +135,7 @@ const chineseBudget = (value) => {
 const approvedExtendedHeadings = new Set([
   "细粒度管控行为链、思维链和数据链",
 ]);
-const coreRoutes = ["", "agentguard", "solutions", "research", "open-ecosystem", "about", "contact"];
+const coreRoutes = ["", "agentguard", "solutions", "research", "open-ecosystem", "news", "about", "contact"];
 for (const route of coreRoutes) {
   const file = join("dist", route, "index.html");
   const content = await readFile(file, "utf8");
@@ -190,6 +190,7 @@ const homeRequirements = [
   "Commit Boundary",
   "脱敏",
   "重新检查",
+  "最新动态",
   "开源生态",
 ];
 for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.11 homepage marker: ${marker}`);
@@ -199,9 +200,23 @@ for (const [file, content, removed] of [
 ]) {
   for (const marker of removed) if (content.includes(marker)) violations.push(`${file}: V3.7 removed homepage section must not remain: ${marker}`);
 }
-const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "双向驱动，持续演进", ">开源生态</h2>"];
+const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "双向驱动，持续演进", ">最新动态</h2>", ">开源生态</h2>"];
 for (let index = 1; index < homeOrder.length; index += 1) {
   if (homeHtml.indexOf(homeOrder[index - 1]) >= homeHtml.indexOf(homeOrder[index])) violations.push(`dist/index.html: V3.7 homepage order is incorrect around ${homeOrder[index]}`);
+}
+const newsHtml = withoutEmbeddedCode(await readFile("dist/news/index.html", "utf8"));
+const newsEnHtml = withoutEmbeddedCode(await readFile("dist/en/news/index.html", "utf8"));
+for (const marker of ["动态 — 白泽", "最新", "精选动态", "白泽开放生态", "返回首页"]) {
+  if (!newsHtml.includes(marker)) violations.push(`dist/news/index.html: missing localized news marker: ${marker}`);
+}
+for (const marker of ["News — Whitzard", "Latest", "Featured", "WhitzardAgent Open Ecosystem", "Back to Home"]) {
+  if (!newsEnHtml.includes(marker)) violations.push(`dist/en/news/index.html: missing localized news marker: ${marker}`);
+}
+if (newsHtml.includes("Research updates, company news")) violations.push("dist/news/index.html: Chinese news page must not render the English page shell");
+for (const marker of ["/news/nuwa-lab-launch", "/en/news/nuwa-lab-launch"]) {
+  const file = marker.startsWith("/en") ? "dist/en/news/index.html" : "dist/news/index.html";
+  const content = marker.startsWith("/en") ? newsEnHtml : newsHtml;
+  if (!content.includes(marker)) violations.push(`${file}: internal news links must use localized detail routes`);
 }
 const homeSource = await readFile("src/components/home/HomePage.astro", "utf8");
 for (const component of ["AgentGuardRiskSimulator", "AgentGuardSystemMap", "UnifiedSecurityInfluenceEngine", "AgentGuardOperationsCenter"]) {

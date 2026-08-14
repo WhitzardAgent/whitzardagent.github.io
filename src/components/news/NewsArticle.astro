@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import type { NewsItem } from "../../data/news";
+import { getNewsSourceLabel, newsTypeLabels } from "../../data/news";
+import "../../styles/content.css";
+
+interface Props {
+  item: NewsItem;
+  locale: Locale;
+}
+
+const { item, locale } = Astro.props;
+const date = new Date(item.date).toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US", {
+  year: "numeric",
+  month: locale === "zh" ? "long" : "long",
+  day: "numeric",
+});
+const title = item.title[locale];
+const summary = item.summary?.[locale] ?? "";
+const body = item.body?.[locale];
+---
+
+<BaseLayout title={`${title} — ${locale === "zh" ? "白泽动态" : "Whitzard News"}`} description={summary} locale={locale} canonicalPath={`/news/${item.slug}`}>
+  <article class="article-shell">
+    <div class="site-container article-shell__inner">
+      <a class="article-back" href={localizedPath("/news", locale)}>{locale === "zh" ? "← 返回动态" : "← Back to News"}</a>
+      <div class="article-meta">
+        <span>{newsTypeLabels[locale][item.type]}</span>
+        <time datetime={item.date}>{date}</time>
+        {getNewsSourceLabel(item, locale) && <span>{getNewsSourceLabel(item, locale)}</span>}
+      </div>
+      <h1>{title}</h1>
+      {summary && <p class="article-summary">{summary}</p>}
+      {body && <div class="article-body">{body.split("\n\n").map((paragraph: string) => <p>{paragraph}</p>)}</div>}
+    </div>
+  </article>
+</BaseLayout>

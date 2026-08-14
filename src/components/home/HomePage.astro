@@ -6,6 +6,7 @@ import type { HomeCopy } from "../../i18n/pages/home";
 import { links } from "../../data/links";
 import { storyPageCopy } from "../../data/agentguardStory";
 import HomeHero from "./HomeHero";
+import LatestNews from "./LatestNews.astro";
 import ResearchProductBridge from "./ResearchProductBridge.astro";
 import "../../styles/home.css";
 
@@ -29,6 +30,8 @@ const ecosystemDirections = locale === "zh"
   </section>
 
   <ResearchProductBridge copy={copy.loop} locale={locale} />
+
+  <LatestNews locale={locale} />
 
   <section class="ecosystem-brief section">
     <div class="site-container ecosystem-brief__grid">
