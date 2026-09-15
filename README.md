@@ -1,6 +1,6 @@
 # Whitzard Website
 
-The official information hub for [Whitzard](https://whitzard.tech/) and [Nuwa Frontier AI Safety Lab](https://whitzard.tech/nuwa).
+The official bilingual website for [Whitzard](https://whitzard.tech/) and the [NUWA Frontier AI Safety Lab](https://whitzard.tech/nuwa).
 
 **Repository:** <https://github.com/WhitzardAgent/whitzardagent.github.io>
 **Domain:** [whitzard.tech](https://whitzard.tech)
@@ -29,6 +29,17 @@ npm run build
 ```
 
 This automatically runs `npm run ingest:info` (via `prebuild`) before building. Output goes to `./dist`.
+
+### Product access configuration
+
+Two optional public environment variables connect the static website to production services:
+
+```bash
+PUBLIC_CONSOLE_URL=https://console.example.com
+PUBLIC_WAITLIST_ENDPOINT=https://api.example.com/waitlist
+```
+
+Only HTTPS values are accepted. Without a console URL, `/login` explains the current access path without rendering a simulated sign-in. Without a waitlist endpoint, the qualification form remains visible but does not claim to store data and offers the published email address instead.
 
 ### Manual data ingestion
 
@@ -70,70 +81,31 @@ To add new OG images, place them in `public/assets/og/` and update the `ogImage`
 | Path | Description |
 |---|---|
 | `/` | Whitzard main entrance |
-| `/nuwa` | Nuwa Frontier AI Safety Lab |
-| `/research` | Research and publications |
-| `/publications` | Alias redirect to `/research` |
-| `/blog` | Posts, briefs, notes, updates |
+| `/agentguard` | AgentGuard product and service system |
+| `/models` | Model Services |
+| `/solutions` | Enterprise use cases |
+| `/nuwa` | NUWA Frontier AI Safety Lab |
+| `/nuwa/research` | Research programs, evidence, and publication archive |
+| `/nuwa/blog` | Human-written Research Blog |
+| `/nuwa/whitzard-index` | Whitzard Index |
+| `/open-ecosystem` | Open ecosystem |
 | `/about` | Team and organization |
 | `/contact` | Collaboration and contact |
-| `/open-source` | WhitzardAgent open-source ecosystem |
-| `/agentguard` | AgentGuard project page |
-| `/NVWA-Project/` | Legacy redirect to `/nuwa` |
+| `/waitlist` | Product waitlist and qualification form |
+| `/login` | Truthful console boundary when no console URL is configured |
 | `/rss.xml` | RSS feed |
 
-## Add New Content
+Chinese routes are unprefixed. English peers live under `/en/*`. Historic `/research`, `/blog`, `/developers`, `/open-source`, `/publications`, and `/NVWA-Project/` routes are compatibility redirects.
 
-### Blog post
+## Publish a Research Blog article
 
-```bash
-npm run new:post
-# Edit src/content/posts/YYYY-MM-DD-new-post.md
-# Set draft: false when ready
-```
-
-### Research note
+Each Research Blog article is paired with an existing research record and published as human-written Chinese and English Markdown.
 
 ```bash
-npm run new:note
-# Edit src/content/notes/YYYY-MM-DD-new-note.md
-# Set brand: nuwa, draft: false
+npm run new:research-blog -- --research <research-slug> --slug <article-slug> --author "Author Name"
 ```
 
-### Nuwa Brief
-
-```bash
-npm run new:brief
-# Edit src/content/briefs/YYYY-MM-DD-new-brief.md
-# Set brand: nuwa, draft: false
-# Optionally add substack_url for cross-posting
-```
-
-### Frontmatter Schema
-
-```yaml
-title: "Title"
-date: 2026-01-01
-type: post | brief | note | report | framework | update
-brand: whitzard | nuwa | whitzardagent
-authors: []
-summary: "Short summary."
-tags: []
-draft: true
-featured: false
-homepage: false
-research_area: ""
-external_url:
-substack_url:
-github_url:
-pdf_url:
-doi_url:
-project:
-```
-
-- `draft: true` content does not appear publicly
-- `featured: true` content appears in Featured sections on Research and Nuwa pages
-- `homepage: true` content appears on the homepage Latest Research section
-- `research_area` tags content for research area filtering
+The command creates paired `.zh.md` and `.en.md` drafts under `src/content/research-blog/`. Edit both, complete human review, then set `draft: false` in both files. The full editorial and release checklist is in [`docs/website-v2/14-research-blog-publishing.md`](docs/website-v2/14-research-blog-publishing.md).
 
 ## Update Team Members
 
@@ -155,13 +127,6 @@ Edit `src/data/team.ts`:
 
 Edit `src/data/links.ts`.
 
-## Publish to Substack from MDX
-
-1. Write the content as a Nuwa Brief in `src/content/briefs/`
-2. Build and verify locally
-3. Copy the markdown body to Substack editor
-4. Add `substack_url` to the frontmatter for cross-linking
-
 ## GitHub Pages Deployment
 
 The site deploys automatically via GitHub Actions on every push to `main`.
@@ -172,9 +137,10 @@ Steps:
 1. Checkout code
 2. Install Node 22
 3. `npm ci`
-4. `npm run build`
-5. Upload `./dist` as artifact
-6. Deploy to GitHub Pages
+4. Validate tests, terminology, Research Blog pairs, and Astro types
+5. `npm run build`
+6. Validate rendered content and internal links
+7. Upload `./dist` and deploy to GitHub Pages
 
 **Important**: GitHub Pages source must be set to "GitHub Actions" in repo Settings > Pages.
 
@@ -213,13 +179,13 @@ No paid server or HTTPS certificate is required. GitHub Pages issues HTTPS autom
 | Substack | <https://nuwasafety.substack.com/> |
 | GitHub | <https://github.com/WhitzardAgent> |
 | Hugging Face | <https://huggingface.co/WhitzardAgent> |
-| Email | <mailto:contact@whitzard.tech> |
+| Email | <mailto:whitzardindex@fudan.edu.cn> |
 
 All links are centralized in `src/data/links.ts`.
 
 ## Contact Email
 
-The contact page uses `contact@whitzard.tech`. Verify this mailbox is configured and receiving mail. If not yet configured, update `src/data/links.ts` with the correct email address.
+The public contact address is defined once in `src/data/links.ts` and reused across the site.
 
 ## Legacy Content
 

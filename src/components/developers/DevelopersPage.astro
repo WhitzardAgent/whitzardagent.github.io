@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import type { DevelopersCopy } from "../../i18n/pages/developers";
+import { openSourceAssets } from "../../data/generated/openSourceAssets";
+import { supportedFrameworks } from "../../data/supportedFrameworks";
+import { links } from "../../data/links";
+import "../../styles/developers.css";
+
+interface Props { locale: Locale; copy: DevelopersCopy }
+const { locale, copy } = Astro.props;
+
+const groups: Record<string, string[]> = {
+  runtime: ["agentguard", "qise", "xuanwubox"],
+  models: ["thought-aligner", "mate", "mirrorguard", "reasoningshield", "intentnet", "trustnet"],
+  evaluation: ["whitzard-eval", "whitzard-eval-evals", "llmpentest", "nvwa-project"],
+  infrastructure: ["whitzard-os", "yoga", "mirror-gui", "agentir"],
+  cyber: ["cyberhunter", "cybersecurity-100b", "cybersecurity-1m", "cyberrepo-10k", "cybertrainer-collection"],
+};
+const find = (id: string) => openSourceAssets.find(item => item.id === id);
+const coreIds = ["whitzard-os", "whitzard-eval", "thought-aligner", "mate"];
+const coreAssets = coreIds.map(find).filter(Boolean);
+const directoryGroups = Object.fromEntries(Object.entries(groups).map(([key, ids]) => [key, ids.filter((id) => !coreIds.includes(id))])) as Record<string, string[]>;
+---
+
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/open-ecosystem">
+  {/* Hero */}
+  <section class="dev-hero">
+    <div class="site-container dev-hero__grid">
+      <div>
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p class="dev-hero__lead">{copy.lead}</p>
+        <div class="dev-hero__actions">
+          <a class="button button--primary" href={links.github} target="_blank" rel="noreferrer">{copy.github} ↗</a>
+          <a class="button button--secondary" href={links.huggingface} target="_blank" rel="noreferrer">{copy.hf} ↗</a>
+        </div>
+      </div>
+      <div class="dev-constellation" aria-hidden="true">
+        <span class="dev-constellation__ring"></span><span class="dev-constellation__arc"></span>
+        <i class="dev-constellation__node dev-constellation__node--one"></i><i class="dev-constellation__node dev-constellation__node--two"></i><i class="dev-constellation__node dev-constellation__node--three"></i><i class="dev-constellation__node dev-constellation__node--four"></i>
+        <b class="dev-constellation__line dev-constellation__line--one"></b><b class="dev-constellation__line dev-constellation__line--two"></b><b class="dev-constellation__line dev-constellation__line--three"></b>
+      </div>
+    </div>
+  </section>
+
+  {/* Core capabilities */}
+  <section class="section dev-core">
+    <div class="site-container dev-core__head">
+      <p class="eyebrow">{copy.coreEyebrow}</p>
+      <h2>{copy.coreTitle}</h2>
+      <p>{copy.coreLead}</p>
+    </div>
+    <div class="site-container dev-core__grid">
+      {coreAssets.map((project, index) => project && (
+        <article>
+          <span>0{index + 1}</span>
+          <small>{project.capability?.[locale]}</small>
+          <h3>{project.name}</h3>
+          <p>{project.description[locale]}</p>
+          <div>
+            {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>}
+            {project.hfUrl && <a href={Array.isArray(project.hfUrl) ? project.hfUrl[0] : project.hfUrl} target="_blank" rel="noreferrer">Hugging Face ↗</a>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {/* Project directory */}
+  <div class="site-container dev-directory-title">
+    <p class="eyebrow">{locale === "zh" ? "开放项目" : "OPEN PROJECTS"}</p>
+    <h2>{copy.directoryTitle}</h2>
+  </div>
+  <nav class="dev-index site-container" aria-label={locale === "zh" ? "项目分类" : "Project categories"}>
+    {copy.categories.map((category, index) => <a href={`#${category.key}`}><span>0{index + 1}</span>{category.title}</a>)}
+  </nav>
+  {copy.categories.map((category, index) => (
+    <section id={category.key} class:list={["section dev-category", index % 2 === 1 && "dev-category--alt"]}>
+      <div class="site-container dev-category__head">
+        <div><span>0{index + 1}</span><h2>{category.title}</h2></div>
+        <p>{category.body}</p>
+      </div>
+      <div class="site-container dev-grid">
+        {directoryGroups[category.key].map(find).filter(Boolean).map(project => project && (
+          <article>
+            <div><span>{locale === "zh" ? "开放生态" : "OPEN ECOSYSTEM"}</span>{project.name === "AgentGuard" && <small>{locale === "zh" ? "社区版" : "Community Edition"}</small>}</div>
+            <h3>{project.name}</h3>
+            <p>{project.description[locale]}</p>
+            <div>
+              {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer">{project.name === "AgentGuard" ? (locale === "zh" ? "查看社区版" : "Community Edition") : "GitHub"} ↗</a>}
+              {project.hfUrl && <a href={Array.isArray(project.hfUrl) ? project.hfUrl[0] : project.hfUrl} target="_blank" rel="noreferrer">HF ↗</a>}
+              {project.websiteUrl && <a href={project.websiteUrl} target="_blank" rel="noreferrer">{locale === "zh" ? "网站" : "Web"} ↗</a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  {/* Framework compatibility */}
+  <section class="section dev-frameworks">
+    <div class="site-container">
+      <p class="eyebrow">{copy.frameworkEyebrow}</p>
+      <h2 class="section-title">{copy.frameworkTitle}</h2>
+      <p>{copy.frameworkLead}</p>
+    </div>
+    <div class="site-container dev-frameworks__grid">
+      {supportedFrameworks.map((fw) => (
+        <a class="dev-frameworks__item" href={fw.sourceUrl} target="_blank" rel="noreferrer" title={fw.productLabel}>
+          <img src={fw.logoPath} alt={fw.name} width="48" height="48" loading="lazy" decoding="async" />
+          <span>{fw.name}</span>
+        </a>
+      ))}
+    </div>
+    <div class="site-container">
+      <p class="dev-frameworks__disclaimer">{copy.frameworkDisclaimer}</p>
+    </div>
+  </section>
+
+  {/* Documentation */}
+  <section class="section dev-docs">
+    <div class="site-container dev-docs__grid">
+      <div>
+        <p class="eyebrow">{copy.docsEyebrow}</p>
+        <h2 class="section-title">{copy.docsTitle}</h2>
+      </div>
+      <div>
+        <p>{copy.docsBody}</p>
+        <div class="dev-docs__links">
+          <a class="button button--secondary" href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a class="button button--secondary" href={links.huggingface} target="_blank" rel="noreferrer">Hugging Face ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Community */}
+  <section class="section dev-community">
+    <div class="site-container">
+      <p class="eyebrow">{copy.communityEyebrow}</p>
+      <h2 class="section-title">{copy.communityTitle}</h2>
+      <p>{copy.communityLead}</p>
+      <div class="dev-community__links">
+        <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href={links.huggingface} target="_blank" rel="noreferrer">Hugging Face ↗</a>
+        <a href={links.x} target="_blank" rel="noreferrer">X / Twitter ↗</a>
+        <a href={links.substack} target="_blank" rel="noreferrer">Substack ↗</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

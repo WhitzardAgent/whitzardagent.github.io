@@ -1,0 +1,205 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import type { NuwaOverviewCopy } from "../../i18n/pages/nuwa";
+import { researchAssets } from "../../data/generated/researchAssets";
+import { researchInfrastructure } from "../../data/generated/researchInfrastructure";
+import { links } from "../../data/links";
+import { researchPrograms } from "../../data/researchPrograms";
+import NuwaEvidenceField from "./NuwaEvidenceField.astro";
+import "../../styles/research.css";
+import "../../styles/nuwa-overview.css";
+
+interface Props { locale: Locale; copy: NuwaOverviewCopy }
+const { locale, copy } = Astro.props;
+
+const featured = researchAssets.filter((item) => item.featuredRank).sort((a, b) => (a.featuredRank ?? 99) - (b.featuredRank ?? 99));
+const featuredTop = featured.slice(0, 3);
+const primaryLink = (item: typeof researchAssets[number]) => item.links.find((link) => link.kind === "paper")?.url ?? item.links[0].url;
+
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ResearchOrganization",
+  name: locale === "zh" ? "女娲实验室" : "NUWA Frontier AI Safety Lab",
+  alternateName: locale === "zh" ? ["NUWA", "NUWA Frontier AI Safety Lab"] : ["NUWA", "女娲实验室"],
+  parentOrganization: { "@type": "Organization", name: locale === "zh" ? "白泽（Whitzard）" : "Whitzard", alternateName: locale === "zh" ? ["Whitzard", "白泽"] : ["白泽"] },
+  url: `https://whitzard.tech${localizedPath("/nuwa", locale)}`,
+  description: copy.meta.description,
+};
+---
+
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa" schema={schema}>
+  <nuwa-motion class="nw-page">
+  {/* Hero */}
+  <section class="nw-hero">
+    <div class="site-container nw-hero__grid">
+      <div class="nw-hero__copy">
+        <span class="nw-hero__side-mark" aria-hidden="true">{locale === "zh" ? "补天" : "REPAIR"}</span>
+        <div class="nw-hero__identity"><strong>{locale === "zh" ? "女娲 · NUWA" : "NUWA"}</strong><span>FRONTIER AI SAFETY LAB</span></div>
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p class="nw-hero__lead">{copy.lead}</p>
+        <div class="nw-hero__actions">
+          <a class="button button--primary" href={localizedPath("/nuwa/blog", locale)}>Research Blog</a>
+          <a class="button button--secondary" href={localizedPath("/nuwa/research", locale)}>{copy.researchCta}</a>
+        </div>
+      </div>
+      <NuwaEvidenceField locale={locale} />
+    </div>
+  </section>
+
+  {/* Lab vision statement */}
+  <section class="nw-statement" data-nuwa-reveal>
+    <div class="site-container">
+      <p class="eyebrow">{copy.statementEyebrow}</p>
+      <blockquote>{copy.statement}</blockquote>
+    </div>
+  </section>
+
+  {/* Mission — what questions does NUWA work on */}
+  <section class="section nw-mission" data-nuwa-reveal>
+    <div class="site-container">
+      <div class="nw-mission__head">
+        <p class="eyebrow">{copy.missionEyebrow}</p>
+        <h2 class="section-title">{copy.missionTitle}</h2>
+        <p class="section-copy">{copy.missionBody}</p>
+      </div>
+      <div class="nw-roles__grid">
+        {copy.roles.map((item, index) => (
+          <article>
+            <span>0{index + 1}</span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Featured research — representative findings */}
+  <section class="section nw-featured" data-nuwa-reveal>
+    <div class="site-container nw-section-head">
+      <p class="eyebrow">{copy.researchEyebrow}</p>
+      <h2 class="section-title">{copy.researchTitle}</h2>
+      <p>{copy.researchLead}</p>
+    </div>
+    <div class="site-container nw-featured__list">
+      {featuredTop.map((item, index) => (
+        <article class="nw-featured__item">
+          <div class="research-meta">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <span>{item.year}</span>
+            <span>{item.venue}</span>
+          </div>
+          <h3>{item.title}</h3>
+          <p>{item.summary[locale]}</p>
+          <p class="research-authors">{item.authors.join(" · ")}</p>
+          <a href={primaryLink(item)} target="_blank" rel="noreferrer">{locale === "zh" ? "原文" : "Source"} ↗</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {/* Three durable research programs */}
+  <section class="section nw-directions" data-nuwa-reveal>
+    <div class="site-container nw-section-head">
+      <p class="eyebrow">{locale === "zh" ? "核心研究方向" : "RESEARCH DIRECTIONS"}</p>
+      <h2 class="section-title">{locale === "zh" ? "三项核心研究主题" : "Three core research themes"}</h2>
+    </div>
+    <div class="site-container nw-directions__grid">
+      {researchPrograms.map((program, index) => (
+        <a class="nw-directions__item" href={`${localizedPath("/nuwa/research", locale)}#themes`}>
+          <span>0{index + 1}</span>
+          <h3>{program.title[locale]}</h3>
+          <p>{program.description[locale]}</p>
+          <small>{program.terms[locale].join(" · ")}</small>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {/* Whitzard Index entry */}
+  <section class="section nw-index-entry" data-nuwa-reveal>
+    <div class="site-container nw-index-entry__grid">
+      <div>
+        <p class="eyebrow">{copy.indexEyebrow}</p>
+        <h2 class="section-title">{copy.indexTitle}</h2>
+      </div>
+      <div>
+        <p>{copy.indexBody}</p>
+        <a class="button button--secondary" href={localizedPath("/nuwa/whitzard-index", locale)}>{copy.indexCta} →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Research infrastructure */}
+  <section class="section nw-infra" data-nuwa-reveal>
+    <div class="site-container nw-section-head">
+      <p class="eyebrow">{copy.infraEyebrow}</p>
+      <h2 class="section-title">{copy.infraTitle}</h2>
+      <p>{copy.infraLead}</p>
+    </div>
+    <div class="site-container nw-infra__grid">
+      {researchInfrastructure.map((infra) => (
+        <article class="nw-infra__card">
+          <h3>{infra.name}</h3>
+          <p>{infra.description[locale]}</p>
+          {infra.websiteUrl && <a href={infra.websiteUrl} target="_blank" rel="noreferrer">{copy.infraSource} ↗</a>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {/* Full research record link */}
+  <section class="section nw-all-research" data-nuwa-reveal>
+    <div class="site-container nw-all-research__grid">
+      <div>
+        <p class="eyebrow">{copy.allResearchEyebrow}</p>
+        <h2 class="section-title">{copy.allResearchTitle}</h2>
+      </div>
+      <div>
+        <p>{copy.allResearchBody}</p>
+        <a class="button button--primary" href={localizedPath("/nuwa/research", locale)}>{copy.allResearchCta} →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Collaboration */}
+  <section class="section nw-collaboration" data-nuwa-reveal>
+    <div class="site-container">
+      <p class="eyebrow">{locale === "zh" ? "研究合作" : "COLLABORATION"}</p>
+      <h2 class="section-title">{copy.collaborationTitle}</h2>
+      <p>{copy.collaborationBody}</p>
+      <div class="nw-collaboration__actions">
+        <a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "女娲实验室研究合作" : "NUWA research collaboration")}`} data-umami-event="research-collaboration-click">{copy.collaborationCta}</a>
+        <a class="button button--secondary" href={localizedPath("/about", locale)}>{copy.teamCta}</a>
+      </div>
+    </div>
+  </section>
+  </nuwa-motion>
+</BaseLayout>
+
+<script>
+  class NuwaMotion extends HTMLElement {
+    private observer?: IntersectionObserver;
+
+    connectedCallback() {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      this.dataset.motionReady = "true";
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          this.observer?.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -6%" });
+      this.querySelectorAll<HTMLElement>("[data-nuwa-reveal]").forEach((section) => this.observer?.observe(section));
+    }
+
+    disconnectedCallback() { this.observer?.disconnect(); }
+  }
+
+  if (!customElements.get("nuwa-motion")) customElements.define("nuwa-motion", NuwaMotion);
+</script>

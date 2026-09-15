@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import type { WhitzardIndexCopy } from "../../i18n/pages/whitzardIndex";
+import {
+  indexPublishedEvidence,
+  whitzardIndexDimensions,
+  whitzardIndexVersions,
+} from "../../data/whitzardIndex";
+import { links } from "../../data/links";
+import HeroMotionController from "../HeroMotionController.astro";
+import WhitzardIndexHero from "./WhitzardIndexHero";
+import "../../styles/whitzard-index.css";
+
+interface Props { locale: Locale; copy: WhitzardIndexCopy }
+const { locale, copy } = Astro.props;
+
+const hasDimensions = whitzardIndexDimensions.length > 0;
+const hasVersions = whitzardIndexVersions.length > 0;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: copy.title,
+  description: copy.meta.description,
+  url: `https://whitzard.tech${localizedPath("/nuwa/whitzard-index", locale)}`,
+  isPartOf: { "@type": "Organization", name: locale === "zh" ? "女娲实验室" : "NUWA Frontier AI Safety Lab" },
+};
+---
+
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa/whitzard-index" schema={schema}>
+  <HeroMotionController />
+  <hero-motion-controller class="wi-hero-motion" data-motion-active="true">
+    <WhitzardIndexHero locale={locale} copy={copy} evidence={indexPublishedEvidence} client:visible />
+  </hero-motion-controller>
+
+  {/* About — what is the Whitzard Index */}
+  <section class="section wi-about">
+    <div class="site-container">
+      <p class="eyebrow">{copy.aboutEyebrow}</p>
+      <h2 class="section-title">{copy.aboutTitle}</h2>
+      <p class="section-copy">{copy.aboutBody}</p>
+    </div>
+  </section>
+
+  {/* Positioning */}
+  <section class="section wi-positioning">
+    <div class="site-container wi-positioning__head">
+      <p class="eyebrow">{copy.positioningEyebrow}</p>
+      <h2 class="section-title">{copy.positioningTitle}</h2>
+    </div>
+    <div class="site-container wi-positioning__list">
+      {copy.positioningItems.map((item) => (
+        <article class="wi-positioning__item">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {hasDimensions && <section class="section wi-dimensions">
+    <div class="site-container wi-dimensions__head">
+      <p class="eyebrow">{copy.dimensionsEyebrow}</p>
+      <h2 class="section-title">{copy.dimensionsTitle}</h2>
+      <p>{copy.dimensionsLead}</p>
+    </div>
+    <div class="site-container">
+      <table class="wi-table">
+          <thead>
+            <tr>
+              <th>{locale === "zh" ? "维度" : "Dimension"}</th>
+              <th>{locale === "zh" ? "说明" : "Description"}</th>
+              <th>{locale === "zh" ? "单位" : "Unit"}</th>
+              <th>{locale === "zh" ? "方向" : "Direction"}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {whitzardIndexDimensions.map((dim) => (
+              <tr>
+                <td class="wi-table__name">{dim.label[locale]}</td>
+                <td class="wi-table__desc">{dim.description[locale]}</td>
+                <td class="wi-table__unit">{dim.unit}</td>
+                <td class="wi-table__dir">
+                  {dim.direction === "higher-is-safer"
+                    ? (locale === "zh" ? "越高越安全" : "Higher is safer")
+                    : (locale === "zh" ? "越低越安全" : "Lower is safer")}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+      </table>
+      <p class="wi-disclaimer">{copy.dimensionsDisclaimer}</p>
+    </div>
+  </section>}
+
+  {/* Proposed method direction */}
+  <section id="methodology" class="section wi-method">
+    <div class="site-container wi-method__head">
+      <p class="eyebrow">{copy.methodEyebrow}</p>
+      <h2 class="section-title">{copy.methodTitle}</h2>
+      <p>{copy.methodLead}</p>
+    </div>
+    <div class="site-container wi-method__list">
+      {copy.methodItems.map((item) => (
+        <article class="wi-method__item">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+    <div class="site-container">
+      <p class="wi-disclaimer">{copy.methodDisclaimer}</p>
+    </div>
+  </section>
+
+  {hasVersions && <section class="section wi-versions">
+    <div class="site-container">
+      <p class="eyebrow">{copy.versionEyebrow}</p>
+      <h2 class="section-title">{copy.versionTitle}</h2>
+      <ul class="wi-versions__list">
+          {whitzardIndexVersions.map((v) => (
+            <li>
+              <div class="wi-versions__head">
+                <strong>{v.version}</strong>
+                <time>{v.date}</time>
+              </div>
+              <p>{v.summary[locale]}</p>
+              {v.methodChanges && <p class="wi-versions__changes">{v.methodChanges[locale]}</p>}
+            </li>
+          ))}
+      </ul>
+    </div>
+  </section>}
+
+  {/* Collaboration */}
+  <section class="section wi-collaboration">
+    <div class="site-container">
+      <p class="eyebrow">{locale === "zh" ? "合作" : "COLLABORATION"}</p>
+      <h2 class="section-title">{copy.collaborationTitle}</h2>
+      <p>{copy.collaborationBody}</p>
+      <div class="wi-collaboration__actions">
+        <a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "白泽指数合作" : "Whitzard Index collaboration")}`} data-umami-event="research-collaboration-click">{copy.collaborationCta}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

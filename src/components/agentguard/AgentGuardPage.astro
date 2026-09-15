@@ -45,11 +45,12 @@ const softwareSchema = {
   <section class="ag-hero">
     <div class="site-container ag-hero__grid ag-hero__grid--editorial">
       <div class="ag-hero__copy">
+        <span class="ag-hero__side-mark" aria-hidden="true">{locale === "zh" ? "守界" : "BOUNDARY"}</span>
         <p class="eyebrow">{copy.hero.eyebrow}</p>
         <h1>{copy.hero.title}</h1>
         <p>{copy.hero.body}</p>
         <div class="ag-hero__actions">
-          <a class="button button--primary" href={localizedPath("/contact", locale)}>{copy.hero.primary}</a>
+          <a class="button button--primary" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.hero.primary}</a>
           <a class="button button--secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.hero.secondary} ↗</a>
         </div>
         <div class="ag-hero__scope" aria-label={story.protection.title}>
@@ -57,6 +58,33 @@ const softwareSchema = {
           <strong>{story.protection.title}</strong>
           <ul>{story.protection.items.map((item) => <li>{item}</li>)}</ul>
         </div>
+      </div>
+      <div class="ag-boundary" aria-label={locale === "zh" ? "AgentGuard 智能体交互边界运行时示意图" : "AgentGuard interaction boundary runtime diagram"}>
+        <header class="ag-boundary__header">
+          <span>INTERACTION BOUNDARY RUNTIME</span>
+          <strong>{locale === "zh" ? "实时守护" : "LIVE CONTROL"}</strong>
+        </header>
+        <div class="ag-boundary__canvas">
+          <span class="ag-boundary__axis ag-boundary__axis--one" aria-hidden="true"></span>
+          <span class="ag-boundary__axis ag-boundary__axis--two" aria-hidden="true"></span>
+          <span class="ag-boundary__ring ag-boundary__ring--outer" aria-hidden="true"></span>
+          <span class="ag-boundary__ring ag-boundary__ring--middle" aria-hidden="true"></span>
+          <span class="ag-boundary__ring ag-boundary__ring--inner" aria-hidden="true"></span>
+          <div class="ag-boundary__core">
+            <span>AGENTGUARD</span>
+            <strong>{locale === "zh" ? "可信边界" : "TRUST BOUNDARY"}</strong>
+          </div>
+          <ol class="ag-boundary__objects">
+            {story.protection.items.map((item, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}
+          </ol>
+        </div>
+        <footer class="ag-boundary__controls">
+          <span>{locale === "zh" ? "放行" : "ALLOW"}</span>
+          <span>{locale === "zh" ? "脱敏" : "REDACT"}</span>
+          <span>{locale === "zh" ? "审批" : "APPROVE"}</span>
+          <span>{locale === "zh" ? "阻断" : "DENY"}</span>
+        </footer>
+        <span class="ag-boundary__side-mark" aria-hidden="true">{locale === "zh" ? "界 · 序 · 智" : "BOUND · ORDER · INTELLIGENCE"}</span>
       </div>
       <div class="ag-hero__evidence" aria-label={locale === "zh" ? "AgentGuard 产品证据" : "AgentGuard product evidence"}>
         <div><span>{locale === "zh" ? "企业交付" : "ENTERPRISE"}</span><strong>AgentGuard Enterprise</strong></div>
@@ -99,15 +127,14 @@ const softwareSchema = {
       <article class="ag-edition ag-edition--enterprise">
         <span>{copy.editions.enterprise.label}</span><h3>{copy.editions.enterprise.name}</h3><p>{copy.editions.enterprise.body}</p>
         <ul>{copy.editions.enterprise.features.map(item => <li>{item}</li>)}</ul>
-        <a class="button button--primary" href={localizedPath("/contact", locale)} data-umami-event="agentguard-demo-cta">{copy.editions.enterprise.cta}</a>
+        <a class="button button--primary" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.editions.enterprise.cta}</a>
       </article>
     </div>
   </section>
 
   <section class="section ag-deploy-section" id="deployment">
     <div class="site-container ag-section-head ag-section-head--split"><div><p class="eyebrow">{copy.deployment.eyebrow}</p><h2 class="section-title">{copy.deployment.title}</h2></div><p>{copy.deployment.body}</p></div>
-    <div class="site-container"><DeploymentArchitecture nodes={copy.deployment.nodes} client:visible /></div>
-    <div class="site-container ag-deploy-modes">{copy.deployment.modes.map((item) => <article><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+    <div class="site-container"><DeploymentArchitecture locale={locale} nodes={copy.deployment.nodes} modes={copy.deployment.modes} /></div>
   </section>
 
   <section class="section story-section story-section--frost" id="security-stack">
@@ -117,8 +144,8 @@ const softwareSchema = {
 
   <section class="section ag-evidence">
     <div class="site-container ag-section-head"><p class="eyebrow">{copy.evidence.eyebrow}</p><h2 class="section-title">{copy.evidence.title}</h2></div>
-    <div class="site-container ag-evidence__grid">{copy.evidence.items.map((item) => <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}><h3>{item.title}</h3><p>{item.body}</p><span>{item.label} →</span></a>)}</div>
+    <div class="site-container ag-evidence__grid">{copy.evidence.items.map((item) => <a href={item.href.startsWith("/") ? localizedPath(item.href, locale) : item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}><h3>{item.title}</h3><p>{item.body}</p><span>{item.label} →</span></a>)}</div>
   </section>
 
-  <section class="ag-cta"><div class="site-container"><h2>{copy.cta.title}</h2><p>{copy.cta.body}</p><ol class="demo-agenda">{story.demoAgenda.map((item) => <li>{item}</li>)}</ol><div><a class="button ag-cta__primary" href={localizedPath("/contact", locale)} data-umami-event="agentguard-demo-cta">{copy.cta.primary}</a><a class="button ag-cta__secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.cta.github} ↗</a></div></div></section>
+  <section class="ag-cta"><div class="site-container"><h2>{copy.cta.title}</h2><p>{copy.cta.body}</p><ol class="demo-agenda">{story.demoAgenda.map((item) => <li>{item}</li>)}</ol><div><a class="button ag-cta__primary" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.cta.primary}</a><a class="button ag-cta__secondary" href="https://github.com/WhitzardAgent/AgentGuard" target="_blank" rel="noreferrer">{copy.cta.github} ↗</a></div></div></section>
 </BaseLayout>

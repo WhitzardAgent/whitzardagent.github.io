@@ -1,0 +1,55 @@
+---
+import type { Locale } from "../../i18n/config";
+import type { CompanyCopy } from "../../i18n/pages/company";
+import HeroMotionController from "../HeroMotionController.astro";
+
+interface Props { locale: Locale; copy: CompanyCopy["company"] }
+const { locale, copy } = Astro.props;
+const labels = locale === "zh"
+  ? { product: "运行时控制", research: "风险证据", ecosystem: "开放生态", mission: "统一使命", flow: ["风险证据", "防护策略", "运行反馈", "开放工具"] }
+  : { product: "RUNTIME CONTROL", research: "RISK EVIDENCE", ecosystem: "OPEN ECOSYSTEM", mission: "ONE MISSION", flow: ["RISK EVIDENCE", "CONTROL POLICY", "RUNTIME FEEDBACK", "OPEN TOOLS"] };
+---
+
+<HeroMotionController />
+<hero-motion-controller class="company-hero-motion" data-motion-active="true">
+  <div class="company-hero-ambient" aria-hidden="true"><i></i><b></b></div>
+  <section class="commercial-hero company-hero">
+    <div class="site-container company-hero__grid">
+      <div class="company-hero__copy">
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p>{copy.lead}</p>
+      </div>
+
+      <figure class="company-confluence" aria-labelledby="company-confluence-caption">
+        <div class="company-confluence__chrome" aria-hidden="true"><span>WHITZARD SYSTEMS</span><i>01 / 03</i></div>
+        <svg viewBox="0 0 640 560" aria-hidden="true">
+          <defs>
+            <path id="company-orbit" d="M320 91C451 91 558 198 558 329S451 567 320 567S82 460 82 329S189 91 320 91Z" />
+          </defs>
+          <path class="company-confluence__guide" d="M320 46V514M86 280H554" />
+          <path class="company-confluence__arc is-agentguard" d="M108 257C133 151 213 88 315 86" />
+          <path class="company-confluence__arc is-nuwa" d="M335 86C448 94 524 171 541 281" />
+          <path class="company-confluence__arc is-open" d="M538 303C516 420 425 486 320 490C212 491 124 424 103 307" />
+          <circle class="company-confluence__ring" cx="320" cy="286" r="104" />
+          <circle class="company-confluence__ring company-confluence__ring--inner" cx="320" cy="286" r="70" />
+          <path class="company-confluence__transfer" d="M225 243C271 208 342 201 398 236C443 264 458 324 425 367" />
+          <circle class="company-confluence__marker" cx="403" cy="239" r="7" />
+          <circle class="company-confluence__pulse" r="5"><animateMotion dur="18s" repeatCount="indefinite"><mpath href="#company-orbit" /></animateMotion></circle>
+        </svg>
+        <a class="company-domain is-agentguard" href={locale === "zh" ? "/agentguard" : "/en/agentguard"}><span>01</span><strong>AgentGuard</strong><small>{labels.product}</small></a>
+        <a class="company-domain is-nuwa" href={locale === "zh" ? "/nuwa" : "/en/nuwa"}><span>02</span><strong>{locale === "zh" ? "女娲实验室" : "NUWA"}</strong><small>{labels.research}</small></a>
+        <a class="company-domain is-open" href={locale === "zh" ? "/open-ecosystem" : "/en/open-ecosystem"}><span>03</span><strong>{locale === "zh" ? "开放生态" : "Open Ecosystem"}</strong><small>{labels.ecosystem}</small></a>
+        <div class="company-confluence__center" aria-hidden="true"><strong>{locale === "zh" ? "白泽" : "Whitzard"}</strong><span>{labels.mission}</span></div>
+        <ol class="company-confluence__flow" aria-label={locale === "zh" ? "系统协同链" : "System feedback chain"}>
+          {labels.flow.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}
+        </ol>
+        <figcaption id="company-confluence-caption">
+          {locale === "zh"
+            ? "AgentGuard、女娲实验室与开放生态围绕白泽使命协同：风险证据转化为防护策略，运行反馈形成开放工具。"
+            : "AgentGuard, NUWA, and the open ecosystem reinforce Whitzard's mission: risk evidence informs control policy, while runtime feedback becomes reusable open technology."}
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+</hero-motion-controller>

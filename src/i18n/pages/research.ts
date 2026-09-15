@@ -64,11 +64,11 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
   en: {
     nuwa: {
       meta: {
-        title: "NUWA Lab — The Research Engine Behind Whitzard",
+        title: "NUWA Frontier AI Safety Lab — Whitzard",
         description:
-          "NUWA Lab studies frontier AI risk, builds evaluation evidence, and turns research into safety models and product capabilities.",
+          "NUWA studies frontier AI risk, builds evaluation evidence, and translates research into safety models and product capabilities.",
       },
-      eyebrow: "NUWA LAB · 女娲实验室",
+      eyebrow: "NUWA · 女娲实验室",
       title: "Research frontier risk. Build control.",
       lead: "Study frontier-risk evaluation, agent safety, AI control, and runtime security.",
       statementEyebrow: "LAB VISION",
@@ -88,7 +88,7 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
         },
         {
           title: "Inform real-world control",
-          body: "Feed evidence into AgentGuard and learn from deployment feedback while preserving research independence.",
+          body: "Feed evidence into AgentGuard and learn from deployment feedback through a clear research-to-product boundary.",
         },
       ],
       researchTitle: "Selected public research",
@@ -97,22 +97,22 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       cta: "View all research",
       evidenceEyebrow: "FEATURED RESEARCH",
       translationTitle: "From frontier-risk evidence to runtime control.",
-      translationBody: "NUWA Lab develops risk definitions, evaluation methods, and safety intelligence. AgentGuard carries that work into the systems where agents use tools, identities, and data.",
+      translationBody: "NUWA develops risk definitions, evaluation methods, and safety intelligence. AgentGuard carries that work into the systems where agents use tools, identities, and data.",
       translationCta: "Explore AgentGuard",
-      collaborationTitle: "Work with NUWA Lab",
+      collaborationTitle: "Work with NUWA",
       collaborationBody: "Connect with us on frontier-risk evaluation, agent safety, AI control, and open technical evidence.",
       collaborationCta: "Start a research conversation",
       teamCta: "Meet the team",
     },
     research: {
       meta: {
-        title: "NUWA Lab Research — Whitzard",
+        title: "Frontier AI Risk Research and Governance — NUWA",
         description:
-          "NUWA Lab research on frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
+          "NUWA research on frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
       },
-      eyebrow: "NUWA LAB · RESEARCH",
-      title: "NUWA Lab Research",
-      lead: "Define risk. Build safety with evidence across frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
+      eyebrow: "NUWA · RESEARCH",
+      title: "Frontier AI Risk Research and Governance",
+      lead: "Research on increasingly capable AI systems, verifiable control, risk evaluation, and the evidence needed for governance decisions.",
       nav: { themes: "Research themes", featured: "Featured work", infrastructure: "Infrastructure", impact: "Public impact", index: "All research", recognition: "Recognition" },
       areas: [
         { key: "frontier-risk-control", title: "Frontier risk & AI control", body: "Measure autonomy, deception, proliferation, and control integrity.", cta: "View this theme" },
@@ -151,14 +151,14 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
         description:
           "Open models, tools, data, and evaluation infrastructure from WhitzardAgent.",
       },
-      eyebrow: "WHITZARDAGENT",
-      title: "Whitzard Open Ecosystem",
-      lead: "Open models, tools, data, and evaluation infrastructure.",
+      eyebrow: "WHITZARD OPEN ECOSYSTEM",
+      title: "Open infrastructure for safer AI agents",
+      lead: "Open models, evaluation infrastructure, runtime tools, and data for reproducible agent-safety research and practical deployment.",
       github: "GitHub organization",
       hf: "Hugging Face",
       coreEyebrow: "CORE CAPABILITIES",
       coreTitle: "Four open foundations",
-      coreLead: "Agent development, safety evaluation, thought correction, and behavior-chain auditing.",
+      coreLead: "Agent development, safety evaluation, reasoning alignment, and behavior-chain auditing.",
       directoryTitle: "Complete project directory",
       status: "Open project",
       categories: [
@@ -201,11 +201,11 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       title: "研究前沿风险，构建可控智能",
       lead: "聚焦前沿风险评测、智能体安全、AI 控制与运行时安全。",
       statementEyebrow: "实验室愿景",
-      statement: "为全球AI治理分享风险实证与公共产品",
+      statement: "为全球 AI 治理提供风险证据与公共产品",
       roles: [
         {
           title: "定义前沿风险",
-          body: "研究自主性、欺骗、算计、失控与持续出现的智能体行为风险。",
+          body: "研究自主性、欺骗、隐蔽谋划、失控与持续出现的智能体行为风险。",
         },
         {
           title: "建设评测证据",
@@ -235,13 +235,13 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
     },
     research: {
       meta: {
-        title: "女娲实验室研究 — 白泽（Whitzard）",
+        title: "前沿 AI 风险研究与治理 — 女娲实验室",
         description:
           "女娲实验室关于前沿 AI 风险、智能体安全、系统安全、网络安全与隐私的研究成果。",
       },
       eyebrow: "女娲实验室 · 研究",
-      title: "女娲实验室研究",
-      lead: "以研究定义风险，以证据构建安全，聚焦前沿 AI 风险、智能体安全、系统安全与网络安全。",
+      title: "前沿 AI 风险研究与治理",
+      lead: "研究能力持续增强的 AI 系统、可验证控制与风险评测，为治理决策提供可核实的技术证据。",
       nav: { themes: "研究主题", featured: "代表成果", infrastructure: "研究基础设施", impact: "公共影响", index: "全部成果", recognition: "荣誉与认可" },
       areas: [
         { key: "frontier-risk-control", title: "前沿风险与 AI 控制", body: "评测自主性、欺骗、扩散与控制完整性。", cta: "查看主题研究" },
@@ -279,14 +279,14 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
         title: "白泽开放生态 — WhitzardAgent",
         description: "WhitzardAgent 开放模型、工具、数据和评测基础设施。",
       },
-      eyebrow: "WHITZARDAGENT",
-      title: "白泽开放生态",
-      lead: "开放智能体框架、安全评测、模型与数据基础设施。",
+      eyebrow: "白泽开放生态",
+      title: "开放构建智能体安全基础设施",
+      lead: "开放模型、评测基础设施、运行时工具与数据，使智能体安全能力能够复现、组合并进入真实系统。",
       github: "GitHub 组织",
       hf: "Hugging Face",
       coreEyebrow: "核心能力",
       coreTitle: "四项开放技术基础",
-      coreLead: "覆盖智能体开发、安全评测、思维矫正与行为链审计。",
+      coreLead: "覆盖智能体开发、安全评测、推理校准与行为链审计。",
       directoryTitle: "完整项目目录",
       status: "开放项目",
       categories: [

@@ -81,8 +81,8 @@ export const openSourceAssets: OpenSourceAsset[] = [
     "name": "Thought-Aligner",
     "aliases": [],
     "capability": {
-      "en": "Thought-chain correction model",
-      "zh": "思维链矫正模型"
+      "en": "Reasoning alignment model",
+      "zh": "推理校准模型"
     },
     "status": "open-source",
     "description": {

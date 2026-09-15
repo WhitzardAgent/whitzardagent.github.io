@@ -9,9 +9,19 @@ export default defineConfig({
     mdx(),
     sitemap({
       filter: (page) => {
-        const pathname = new URL(page).pathname;
-        const redirectOnly = ["/NVWA-Project/", "/open-source/", "/publications/", "/nuwa/", "/en/nuwa/"];
-        return !pathname.startsWith("/zh") && pathname !== "/blog/" && !redirectOnly.includes(pathname);
+        const raw = new URL(page).pathname.replace(/\/+$/, "") || "/";
+        // Strip /en prefix for redirect matching
+        const base = raw.startsWith("/en/") ? raw.slice(3) : raw;
+        if (raw.startsWith("/zh")) return false;
+        if (base === "/blog") return false;
+        const redirectOnly = [
+          "/NVWA-Project",
+          "/open-source",
+          "/publications",
+          "/research",
+          "/developers",
+        ];
+        return !redirectOnly.includes(base);
       },
     }),
     react(),

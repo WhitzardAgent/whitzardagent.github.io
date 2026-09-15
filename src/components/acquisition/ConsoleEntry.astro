@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import { links } from "../../data/links";
+import "../../styles/waitlist.css";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const copy = locale === "zh" ? {
+  title: "登录控制台",
+  eyebrow: "白泽控制台",
+  lead: "控制台入口正在接入产品体系。当前企业网站不收集密码，也不会模拟尚未上线的认证流程。",
+  body: "如果你希望优先了解 AgentGuard 或模型服务，请加入心愿单；已有合作事项可通过公开邮箱联系我们。",
+  waitlist: "加入心愿单",
+  email: "邮件联系",
+} : {
+  title: "Sign in to Console",
+  eyebrow: "Whitzard Console",
+  lead: "Console access is being introduced across the product system. This corporate site does not collect passwords or simulate an authentication flow that is not yet live.",
+  body: "Join the waitlist for early access to AgentGuard or Model Services, or use the published email address for an existing engagement.",
+  waitlist: "Join the waitlist",
+  email: "Contact by email",
+};
+---
+
+<BaseLayout title={`${copy.title} — ${locale === "zh" ? "白泽（Whitzard）" : "Whitzard"}`} description={copy.lead} locale={locale} canonicalPath="/login" noindex>
+  <section class="console-entry">
+    <div class="site-container console-entry__panel">
+      <div class="console-entry__orb" aria-hidden="true"><span></span></div>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{copy.title}</h1>
+      <p class="console-entry__lead">{copy.lead}</p>
+      <p>{copy.body}</p>
+      <div class="console-entry__actions">
+        <a class="button button--primary" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.waitlist}</a>
+        <a class="button button--secondary" href={`mailto:${links.email}`}>{copy.email} ↗</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -69,7 +69,7 @@ export const team: TeamMember[] = [
     affiliation: "whitzard",
     category: "partner",
     bio: {
-      en: "Assistant Research Professor at Fudan University researching cybercrime, privacy, and in-the-wild security, collaborating with Whitzard and NUWA Lab.",
+      en: "Assistant Research Professor at Fudan University researching cybercrime, privacy, and in-the-wild security, collaborating with Whitzard and NUWA.",
       zh: "复旦大学助理研究员，研究网络犯罪、隐私与真实世界安全，为白泽（Whitzard）与女娲实验室提供研究协作。",
     },
     advisor: {

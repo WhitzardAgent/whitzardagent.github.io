@@ -101,7 +101,7 @@ export default function AgentGuardRiskSimulator({ locale, density = "full" }: Pr
             </li>)}
           </ol>
           <div className="risk-simulator__flows">
-            {(["data", "authorization", "effect"] as const).map((kind) => <span key={kind} className={`is-${kind} ${selected.flowKinds.includes(kind) ? "is-active" : ""}`}><b aria-hidden="true">{kind === "data" ? "●" : kind === "authorization" ? "◆" : "■"}</b>{kind === "data" ? locale === "zh" ? "数据流" : "Data" : kind === "authorization" ? locale === "zh" ? "授权流" : "Authorization" : locale === "zh" ? "动作影响" : "Action effect"}</span>)}
+            {(["data", "authorization", "effect"] as const).map((kind) => <span key={kind} className={`is-${kind} ${selected.flowKinds.includes(kind) ? "is-active" : ""}`}><b aria-hidden="true">{kind === "data" ? "●" : kind === "authorization" ? "◆" : "■"}</b>{kind === "data" ? locale === "zh" ? "数据流" : "Data" : kind === "authorization" ? locale === "zh" ? "授权流" : "Authorization" : locale === "zh" ? "行动影响" : "Action impact"}</span>)}
           </div>
         </main>
 

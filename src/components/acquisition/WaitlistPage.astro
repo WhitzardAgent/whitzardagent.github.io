@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import type { WaitlistCopy } from "../../i18n/pages/waitlist";
+import { links } from "../../data/links";
+import WaitlistForm from "./WaitlistForm";
+import "../../styles/waitlist.css";
+
+interface Props { locale: Locale; copy: WaitlistCopy }
+const { locale, copy } = Astro.props;
+const rawEndpoint = import.meta.env.PUBLIC_WAITLIST_ENDPOINT;
+const endpoint = typeof rawEndpoint === "string" && /^https:\/\//.test(rawEndpoint) ? rawEndpoint : undefined;
+---
+
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/waitlist">
+  <section class="waitlist-hero">
+    <div class="site-container waitlist-hero__grid">
+      <header>
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p>{copy.lead}</p>
+      </header>
+      <WaitlistForm client:visible copy={copy} endpoint={endpoint} contactEmail={links.email} />
+    </div>
+  </section>
+</BaseLayout>

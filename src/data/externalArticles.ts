@@ -16,7 +16,7 @@ export const externalArticles: ExternalArticle[] = [
     type: "External · Substack",
     year: "2026",
     summary:
-      "NUWA Lab essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
+      "NUWA essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
     tags: ["Frontier AI Risk", "Evaluation", "Methodology"],
   },
 ];

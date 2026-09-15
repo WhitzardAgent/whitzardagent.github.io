@@ -4,10 +4,12 @@ import { localizedPath } from "../../i18n/config";
 import { getNewsLink, getNewsSourceLabel, newsTypeLabels, sortedNewsItems } from "../../data/news";
 import NewsCard from "../NewsCard.astro";
 
-interface Props { locale: Locale; }
+interface Props { locale: Locale; embedded?: boolean; excludeHref?: string; }
 
-const { locale } = Astro.props;
-const items = sortedNewsItems.slice(0, 3);
+const { locale, embedded = false, excludeHref } = Astro.props;
+const items = sortedNewsItems
+  .filter((item) => !excludeHref || getNewsLink(item, locale) !== excludeHref)
+  .slice(0, 3);
 const copy = locale === "zh"
   ? {
       eyebrow: "NEWSROOM",
@@ -18,13 +20,13 @@ const copy = locale === "zh"
   : {
       eyebrow: "NEWSROOM",
       title: "Latest",
-      intro: "Follow recent updates from Whitzard, NUWA Lab, and the open ecosystem.",
+      intro: "Follow recent updates from Whitzard, NUWA, and the open ecosystem.",
       cta: "View all updates",
     };
 ---
 
 {items.length > 0 && (
-  <section class="home-latest section">
+  <section class:list={["home-latest", !embedded && "section", embedded && "home-latest--embedded"]}>
     <div class="site-container home-latest__grid">
       <div>
         <p class="eyebrow">{copy.eyebrow}</p>

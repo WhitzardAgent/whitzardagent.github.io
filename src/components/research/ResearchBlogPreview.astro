@@ -1,0 +1,25 @@
+---
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import { externalArticles } from "../../data/externalArticles";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const article = externalArticles[0];
+---
+
+<section id="research-blog" class="section research-blog-preview">
+  <div class="site-container research-blog-preview__grid">
+    <header>
+      <p class="eyebrow">{locale === "zh" ? "人工撰写与编辑" : "HUMAN-WRITTEN AND EDITED"}</p>
+      <h2>Research Blog</h2>
+      <p>{locale === "zh" ? "重要研究发布后，我们以中文和英文解读研究问题、关键发现、方法边界与治理意义，并提供论文原文。" : "For significant research releases, we publish Chinese and English explainers covering the question, central findings, methodological limits, and governance relevance, with the original paper alongside them."}</p>
+      <a class="button button--secondary" href={localizedPath("/nuwa/blog", locale)}>{locale === "zh" ? "进入 Research Blog" : "Open Research Blog"} →</a>
+    </header>
+    {article && <a class="research-blog-preview__card" href={article.url} target="_blank" rel="noreferrer">
+      <div><span>{article.year}</span><span>{locale === "zh" ? "外部文章 · Substack" : article.type}</span></div>
+      <h3>{article.title}</h3>
+      <p>{locale === "zh" ? "讨论如何以更科学、基于证据且可执行的方法开展前沿 AI 风险评测。" : article.summary}</p>
+      <footer><span>{article.tags?.join(" · ")}</span><strong>{locale === "zh" ? "阅读原文" : "Read the original"} ↗</strong></footer>
+    </a>}
+  </div>
+</section>

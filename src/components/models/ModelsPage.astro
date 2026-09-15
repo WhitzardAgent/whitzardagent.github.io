@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import type { ModelsCopy } from "../../i18n/pages/models";
+import { localizedPath } from "../../i18n/config";
+import { links } from "../../data/links";
+import "../../styles/models.css";
+
+interface Props { locale: Locale; copy: ModelsCopy }
+const { locale, copy } = Astro.props;
+---
+
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/models">
+  {/* Hero */}
+  <section class="models-hero">
+    <div class="site-container models-hero__grid">
+      <div>
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p class="models-hero__lead">{copy.lead}</p>
+        <a class="button button--primary models-hero__cta" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{locale === "zh" ? "加入心愿单" : "Join the waitlist"}</a>
+      </div>
+      <div class="models-orbit" aria-hidden="true">
+        <span class="models-orbit__ring models-orbit__ring--outer"></span>
+        <span class="models-orbit__ring models-orbit__ring--inner"></span>
+        <i class="models-orbit__node models-orbit__node--one"></i>
+        <i class="models-orbit__node models-orbit__node--two"></i>
+        <i class="models-orbit__node models-orbit__node--three"></i>
+        <b></b>
+      </div>
+    </div>
+  </section>
+
+  {/* Service vision */}
+  <section class="section models-vision">
+    <div class="site-container">
+      <p class="eyebrow">{copy.visionEyebrow}</p>
+      <h2 class="section-title">{copy.visionTitle}</h2>
+      <p class="section-copy">{copy.visionBody}</p>
+    </div>
+    <div class="site-container models-vision__grid">
+      {copy.serviceTypes.map((item) => (
+        <article class="models-vision__item">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {/* Model provenance */}
+  <section class="section models-source">
+    <div class="site-container">
+      <p class="eyebrow">{copy.sourceEyebrow}</p>
+      <h2 class="section-title">{copy.sourceTitle}</h2>
+      <p class="section-copy">{copy.sourceLead}</p>
+    </div>
+    <div class="site-container models-source__grid">
+      {copy.sourceTypes.map((item, index) => (
+        <article class="models-source__item">
+          <span>0{index + 1}</span>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {/* Access */}
+  <section class="section models-access">
+    <div class="site-container models-access__grid">
+      <div>
+        <p class="eyebrow">{copy.accessEyebrow}</p>
+        <h2 class="section-title">{copy.accessTitle}</h2>
+      </div>
+      <div>
+        <p>{copy.accessBody}</p>
+        <a class="button button--primary" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{locale === "zh" ? "加入心愿单" : "Join the waitlist"}</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Updates — two separate subscriptions */}
+  <section class="section models-updates">
+    <div class="site-container">
+      <p class="eyebrow">{copy.updatesEyebrow}</p>
+      <h2 class="section-title">{copy.updatesTitle}</h2>
+      <p class="section-copy">{copy.updatesBody}</p>
+    </div>
+    <div class="site-container models-updates__grid">
+      <article class="models-updates__item">
+        <h3>{copy.researchUpdatesLabel}</h3>
+        <p>{locale === "zh" ? "在 Substack 上订阅女娲实验室的研究通讯。" : "Subscribe to research updates from NUWA on Substack."}</p>
+        <a class="button button--secondary" href={links.substack} target="_blank" rel="noreferrer">{copy.researchUpdatesCta} ↗</a>
+      </article>
+      <article class="models-updates__item">
+        <h3>{copy.serviceUpdatesLabel}</h3>
+        <p>{locale === "zh" ? "说明使用场景与部署计划，加入模型服务产品访问心愿单。" : "Share your use case and deployment plan through the product-access waitlist."}</p>
+        <a class="button button--secondary" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.serviceUpdatesCta}</a>
+      </article>
+    </div>
+  </section>
+
+  {/* Documentation */}
+  <section class="section models-docs">
+    <div class="site-container models-docs__grid">
+      <div>
+        <p class="eyebrow">{copy.docsEyebrow}</p>
+        <h2 class="section-title">{copy.docsTitle}</h2>
+      </div>
+      <div>
+        <p>{copy.docsBody}</p>
+        <div class="models-docs__links">
+          <a class="button button--secondary" href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a class="button button--secondary" href={links.huggingface} target="_blank" rel="noreferrer">Hugging Face ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

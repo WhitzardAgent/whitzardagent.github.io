@@ -1,0 +1,22 @@
+---
+import type { Locale } from "../../i18n/config";
+import type { ResearchBlogEntry } from "../../lib/researchBlog";
+import { companionResearch } from "../../lib/researchBlog";
+
+interface Props { entry: ResearchBlogEntry; locale: Locale }
+const { entry, locale } = Astro.props;
+const research = companionResearch(entry);
+const sourceLinks = research?.links ?? [];
+---
+
+<aside class="rb-companion" aria-labelledby="companion-title">
+  <p class="eyebrow">{locale === "zh" ? "论文原文" : "Original research"}</p>
+  <h2 id="companion-title">{entry.data.originalTitle}</h2>
+  {research && <p>{research.authors.join(" · ")} · {research.venue} · {research.year}</p>}
+  <div class="rb-companion__links">
+    <a class="button button--primary" href={entry.data.originalUrl} target="_blank" rel="noreferrer">{locale === "zh" ? "查看原文" : "View original"} ↗</a>
+    {entry.data.arxivUrl && entry.data.arxivUrl !== entry.data.originalUrl && <a class="button button--secondary" href={entry.data.arxivUrl} target="_blank" rel="noreferrer">arXiv ↗</a>}
+    {entry.data.codeUrl && <a class="button button--secondary" href={entry.data.codeUrl} target="_blank" rel="noreferrer">Code ↗</a>}
+    {!entry.data.codeUrl && sourceLinks.find((link) => link.kind === "code") && <a class="button button--secondary" href={sourceLinks.find((link) => link.kind === "code")!.url} target="_blank" rel="noreferrer">Code ↗</a>}
+  </div>
+</aside>

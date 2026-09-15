@@ -1,0 +1,54 @@
+---
+import type { Locale } from "../../i18n/config";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const labels = locale === "zh"
+  ? ["前沿风险", "可执行评测", "可复现证据", "治理方法"]
+  : ["FRONTIER RISK", "EXECUTABLE EVALS", "REPRODUCIBLE EVIDENCE", "GOVERNANCE"];
+const stages = locale === "zh"
+  ? ["观察", "评测", "验证", "共享"]
+  : ["OBSERVE", "EVALUATE", "VERIFY", "SHARE"];
+---
+
+<div class="nw-evidence-field" aria-hidden="true">
+  <header class="nw-evidence-field__header">
+    <span>NUWA · RISK EVIDENCE FIELD</span>
+    <strong>{locale === "zh" ? "持续观测" : "CONTINUOUS OBSERVATION"}</strong>
+  </header>
+  <div class="nw-evidence-field__canvas">
+    <span class="nw-evidence-field__halo" aria-hidden="true"></span>
+    <svg viewBox="0 0 640 510" fill="none" preserveAspectRatio="xMidYMid meet">
+      <g class="nw-evidence-field__orbit nw-evidence-field__orbit--outer">
+        <circle cx="320" cy="255" r="190" stroke="currentColor" stroke-width="1" stroke-dasharray="2 9" />
+        <circle class="nw-evidence-field__node" cx="181" cy="125" r="5" fill="currentColor" />
+        <rect class="nw-evidence-field__node nw-evidence-field__node--square" x="471" y="363" width="10" height="10" fill="currentColor" />
+      </g>
+      <g class="nw-evidence-field__orbit nw-evidence-field__orbit--middle">
+        <ellipse cx="320" cy="255" rx="153" ry="205" stroke="currentColor" stroke-width="1" />
+        <circle class="nw-evidence-field__node" cx="320" cy="50" r="4" fill="currentColor" />
+      </g>
+      <circle cx="320" cy="255" r="122" stroke="#174aa6" stroke-opacity=".22" stroke-width="1" />
+      <circle cx="320" cy="255" r="72" stroke="#d8563a" stroke-opacity=".26" stroke-width="1" stroke-dasharray="8 8" />
+      <path class="nw-evidence-field__path nw-evidence-field__path--one" d="M22 346 C144 300 198 361 320 255 C428 162 501 183 622 116" stroke="#2f7f7a" stroke-width="1.25" />
+      <path class="nw-evidence-field__path nw-evidence-field__path--two" d="M24 166 C158 217 216 157 320 255 C421 350 512 333 621 397" stroke="#174aa6" stroke-opacity=".55" stroke-width="1" />
+      <path class="nw-evidence-field__path nw-evidence-field__path--three" d="M87 477 C217 419 223 329 320 255 C401 193 467 87 546 24" stroke="#d8563a" stroke-opacity=".42" stroke-width="1" />
+      <g class="nw-evidence-field__aperture">
+        <circle cx="320" cy="255" r="48" fill="#163b39" />
+        <circle cx="320" cy="255" r="31" stroke="#a9d2ca" stroke-opacity=".55" stroke-width="1" />
+        <circle cx="320" cy="255" r="6" fill="#a9d2ca" />
+        <path d="M320 207V303M272 255H368" stroke="#a9d2ca" stroke-opacity=".28" stroke-width="1" />
+      </g>
+      <circle class="nw-evidence-field__tracer" cx="0" cy="0" r="4" fill="#d8563a">
+        <animateMotion dur="15s" repeatCount="indefinite" path="M22 346 C144 300 198 361 320 255 C428 162 501 183 622 116" />
+      </circle>
+    </svg>
+    <ol class="nw-evidence-field__labels">
+      {labels.map((label, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{label}</li>)}
+    </ol>
+    <span class="nw-evidence-field__side">{locale === "zh" ? "证 · 测 · 治" : "EVIDENCE · EVALUATION · GOVERNANCE"}</span>
+  </div>
+  <footer class="nw-evidence-field__stages">
+    {stages.map((stage) => <span>{stage}</span>)}
+  </footer>
+</div>

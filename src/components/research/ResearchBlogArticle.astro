@@ -1,0 +1,51 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { localizedPath } from "../../i18n/config";
+import type { Locale } from "../../i18n/config";
+import type { ResearchBlogEntry } from "../../lib/researchBlog";
+import CompanionPaper from "./CompanionPaper.astro";
+import "../../styles/research-blog.css";
+
+interface Props { entry: ResearchBlogEntry; locale: Locale; slug: string; pairedSlug?: string }
+const { entry, locale, slug, pairedSlug } = Astro.props;
+const { Content } = await render(entry);
+const published = entry.data.date.toISOString();
+const canonicalPath = `/nuwa/blog/${slug}`;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.summary,
+  datePublished: published,
+  dateModified: (entry.data.updated ?? entry.data.date).toISOString(),
+  author: entry.data.authors.map((name) => ({ "@type": "Person", name })),
+  publisher: { "@type": "Organization", name: "NUWA Frontier AI Safety Lab" },
+  mainEntityOfPage: `https://whitzard.tech${localizedPath(canonicalPath, locale)}`,
+};
+---
+
+<BaseLayout title={`${entry.data.title} — Research Blog`} description={entry.data.summary} locale={locale} brand="nuwa" canonicalPath={canonicalPath} schema={schema}>
+  <article class="rb-article">
+    <header class="rb-article__header">
+      <div class="site-container rb-article__header-grid">
+        <div>
+          <p class="eyebrow">Research Blog</p>
+          <h1>{entry.data.title}</h1>
+        </div>
+        <div class="rb-article__meta">
+          <p>{entry.data.summary}</p>
+          <dl>
+            <div><dt>{locale === "zh" ? "发布" : "Published"}</dt><dd><time datetime={published}>{entry.data.date.toISOString().slice(0, 10)}</time></dd></div>
+            <div><dt>{locale === "zh" ? "作者" : "Authors"}</dt><dd>{entry.data.authors.join(" · ")}</dd></div>
+          </dl>
+          {pairedSlug && <a class="text-link" href={localizedPath(`/nuwa/blog/${pairedSlug}`, locale === "zh" ? "en" : "zh")}>{locale === "zh" ? "Read in English" : "阅读中文版"} <span class="arrow">→</span></a>}
+        </div>
+      </div>
+    </header>
+    <div class="site-container rb-article__layout">
+      <div class="rb-prose"><Content /></div>
+      <CompanionPaper entry={entry} locale={locale} />
+    </div>
+  </article>
+</BaseLayout>

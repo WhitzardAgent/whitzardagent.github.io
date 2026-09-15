@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import { externalArticles } from "../../data/externalArticles";
+import { allResearchBlogEntries, publishedResearchBlog, researchBlogSlug } from "../../lib/researchBlog";
+import "../../styles/research-blog.css";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const entries = publishedResearchBlog(await allResearchBlogEntries(), locale);
+const copy = locale === "zh" ? {
+  metaTitle: "Research Blog — 女娲实验室",
+  metaDescription: "女娲实验室以人工撰写的双语文章解读前沿 AI 风险研究，并提供论文原文与可核实来源。",
+  eyebrow: "女娲实验室",
+  title: "Research Blog",
+  lead: "把研究问题、方法、证据与边界讲清楚。文章由团队人工撰写和编辑，并与论文原文或一手来源并列发布。",
+  modelEyebrow: "发布结构",
+  modelTitle: "一项研究，两条阅读路径",
+  modelBody: "面向研究者保留完整原文与引用信息，面向更广泛的读者提供经过人工编辑的中文和英文解读。",
+  paths: [
+    { index: "01", title: "Research Blog", body: "解释研究问题、关键发现、适用边界与治理意义。" },
+    { index: "02", title: "Original Research", body: "链接 arXiv、论文页面、代码或其他可核实的一手来源。" },
+  ],
+  latest: "最新文章",
+  empty: "首批研究解读正在编辑中；当前可先阅读已发布的一手文章。",
+  source: "阅读原文",
+  research: "浏览研究成果",
+} : {
+  metaTitle: "Research Blog — NUWA",
+  metaDescription: "Human-written explainers from NUWA on frontier AI risk, published alongside original research and verifiable sources.",
+  eyebrow: "NUWA Frontier AI Safety Lab",
+  title: "Research Blog",
+  lead: "Clear accounts of research questions, methods, evidence, and limitations. Every article is written and edited by people, with the original paper or primary source presented alongside it.",
+  modelEyebrow: "Publishing model",
+  modelTitle: "One study, two ways to read it",
+  modelBody: "Researchers can reach the complete paper and citation record, while a human-edited explainer makes the work accessible to a wider audience in both Chinese and English.",
+  paths: [
+    { index: "01", title: "Research Blog", body: "Explains the question, central findings, limitations, and governance relevance." },
+    { index: "02", title: "Original Research", body: "Links to arXiv, the paper page, code, or another verifiable primary source." },
+  ],
+  latest: "Latest",
+  empty: "The first paired explainers are in editorial review. Published primary articles remain available below.",
+  source: "Read the original",
+  research: "Browse research",
+};
+---
+
+<BaseLayout title={copy.metaTitle} description={copy.metaDescription} locale={locale} brand="nuwa" canonicalPath="/nuwa/blog">
+  <section class="rb-hero">
+    <div class="site-container rb-hero__grid">
+      <div>
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+      </div>
+      <p>{copy.lead}</p>
+    </div>
+    <div class="rb-orbit" aria-hidden="true"><span></span><i></i></div>
+  </section>
+
+  <section class="section rb-model">
+    <div class="site-container rb-model__grid">
+      <header><p class="eyebrow">{copy.modelEyebrow}</p><h2 class="section-title">{copy.modelTitle}</h2><p>{copy.modelBody}</p></header>
+      <div class="rb-model__paths">{copy.paths.map((item) => <article><span>{item.index}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section rb-latest">
+    <div class="site-container">
+      <div class="rb-section-head"><h2>{copy.latest}</h2><a class="text-link" href={localizedPath("/nuwa/research", locale)}>{copy.research} <span class="arrow">→</span></a></div>
+      <div class="rb-list">
+        {entries.map((entry) => (
+          <a class="rb-card rb-card--internal" href={localizedPath(`/nuwa/blog/${researchBlogSlug(entry)}`, locale)}>
+            <div><span>{entry.data.date.toISOString().slice(0, 10)}</span><span>Research Blog</span></div>
+            <h3>{entry.data.title}</h3>
+            <p>{entry.data.summary}</p>
+            <footer>{entry.data.tags.join(" · ")}<strong>{locale === "zh" ? "阅读解读" : "Read the explainer"} →</strong></footer>
+          </a>
+        ))}
+        {externalArticles.map((article) => (
+          <a class="rb-card" href={article.url} target="_blank" rel="noreferrer">
+            <div><span>{article.year}</span><span>{article.type}</span></div>
+            <h3>{article.title}</h3>
+            <p>{locale === "zh" ? "讨论如何以更科学、基于证据且可执行的方法开展前沿 AI 风险评测。" : article.summary}</p>
+            <footer>{article.tags?.join(" · ")}<strong>{copy.source} ↗</strong></footer>
+          </a>
+        ))}
+      </div>
+      {entries.length === 0 && <p class="rb-empty">{copy.empty}</p>}
+    </div>
+  </section>
+</BaseLayout>

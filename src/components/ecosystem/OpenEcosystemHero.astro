@@ -1,0 +1,64 @@
+---
+import type { Locale } from "../../i18n/config";
+import type { ResearchCopy } from "../../i18n/pages/research";
+import type { OpenSourceAsset } from "../../data/generated/openSourceAssets";
+import { links } from "../../data/links";
+import HeroMotionController from "../HeroMotionController.astro";
+
+interface Props {
+  locale: Locale;
+  copy: ResearchCopy["ecosystem"];
+  projects: OpenSourceAsset[];
+}
+
+const { locale, copy, projects } = Astro.props;
+const stages = locale === "zh" ? ["构建", "评测", "校准", "审计"] : ["BUILD", "EVALUATE", "ALIGN", "AUDIT"];
+const railLabels = locale === "zh" ? ["代码", "模型", "数据", "评测"] : ["CODE", "MODELS", "DATA", "EVALUATION"];
+---
+
+<HeroMotionController />
+<hero-motion-controller class="eco-hero-motion" data-motion-active="true">
+  <div class="eco-hero-ambient" aria-hidden="true"><i></i><b></b></div>
+  <section class="eco-hero">
+    <div class="site-container eco-hero__grid">
+      <div class="eco-hero__copy">
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p>{copy.lead}</p>
+        <div class="eco-hero__actions">
+          <a class="button button--primary" href={links.github} target="_blank" rel="noreferrer">{copy.github} <span aria-hidden="true">↗</span></a>
+          <a class="button button--secondary" href={links.huggingface} target="_blank" rel="noreferrer">{copy.hf} <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <figure class="eco-weave" aria-labelledby="eco-weave-caption">
+        <div class="eco-weave__chrome" aria-hidden="true"><span>OPEN TECHNOLOGY LOOP</span><i>WZ / 04</i></div>
+        <svg class="eco-weave__lines" viewBox="0 0 680 500" aria-hidden="true">
+          <path class="eco-weave__gridline" d="M48 48H632V452H48Z M340 48V452 M48 250H632" />
+          <path class="eco-weave__loop" d="M172 132H508Q552 132 552 176V324Q552 368 508 368H172Q128 368 128 324V176Q128 132 172 132Z" />
+          <path class="eco-weave__return" d="M552 250C614 250 622 410 488 424C390 434 284 424 214 424C110 424 70 374 70 318" />
+          <circle class="eco-weave__pulse eco-weave__pulse--one" r="5"><animateMotion dur="16s" repeatCount="indefinite" path="M172 132H508Q552 132 552 176V324Q552 368 508 368H172Q128 368 128 324V176Q128 132 172 132Z" /></circle>
+          <circle class="eco-weave__pulse eco-weave__pulse--two" r="4"><animateMotion dur="16s" begin="-8s" repeatCount="indefinite" path="M172 132H508Q552 132 552 176V324Q552 368 508 368H172Q128 368 128 324V176Q128 132 172 132Z" /></circle>
+        </svg>
+
+        <div class="eco-weave__rails" aria-hidden="true">{railLabels.map((label) => <span>{label}</span>)}</div>
+        <div class="eco-weave__core" aria-hidden="true"><span>OPEN</span><i></i><small>{locale === "zh" ? "共享基础" : "SHARED CORE"}</small></div>
+        <div class="eco-weave__nodes">
+          {projects.map((project, index) => (
+            <a class={`eco-weave__node is-${index + 1}`} href={`#ecosystem-${project.id}`}>
+              <span>{stages[index]} · 0{index + 1}</span>
+              <strong>{project.name}</strong>
+              <small>{project.capability?.[locale]}</small>
+            </a>
+          ))}
+        </div>
+        <div class="eco-weave__return-label"><i aria-hidden="true"></i><span>{locale === "zh" ? "证据回流" : "EVIDENCE RETURN"}</span></div>
+        <figcaption id="eco-weave-caption">
+          {locale === "zh"
+            ? "WhitzardOS 构建、WhitzardEval 评测、Thought-Aligner 校准与 MATE 审计形成开放技术循环，证据持续回流到共享基础。"
+            : "WhitzardOS builds, WhitzardEval evaluates, Thought-Aligner aligns, and MATE audits in an open loop that returns evidence to the shared foundation."}
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+</hero-motion-controller>

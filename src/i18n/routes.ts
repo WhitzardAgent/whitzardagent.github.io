@@ -2,8 +2,10 @@ import type { Locale } from "./config";
 import { localizedPath, stripLocale } from "./config";
 
 export const localizedRoutes = [
-  "/", "/agentguard", "/solutions", "/nuwa", "/research",
-  "/open-ecosystem", "/news", "/about", "/contact",
+  "/", "/agentguard", "/solutions", "/models",
+  "/nuwa", "/nuwa/research", "/nuwa/whitzard-index",
+  "/nuwa/blog", "/developers", "/open-ecosystem", "/news", "/about", "/contact",
+  "/waitlist", "/login",
 ] as const;
 
 function normalizeRoute(pathname: string): string {
@@ -15,6 +17,7 @@ function normalizeRoute(pathname: string): string {
 export function hasLocalizedPeer(pathname: string): boolean {
   const base = normalizeRoute(pathname);
   if (base.startsWith("/news/")) return true;
+  if (base.startsWith("/nuwa/blog/")) return true;
   return localizedRoutes.includes(base as (typeof localizedRoutes)[number]);
 }
 

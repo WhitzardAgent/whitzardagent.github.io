@@ -1,0 +1,25 @@
+---
+import type { Locale } from "../../i18n/config";
+import { researchPrograms } from "../../data/researchPrograms";
+import { lockedBrandCopy } from "../../data/terminology";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<section id="themes" class="section research-mission">
+  <div class="site-container research-mission__head">
+    <div>
+      <p class="eyebrow">{locale === "zh" ? "研究使命" : "RESEARCH MISSION"}</p>
+      <h2>{lockedBrandCopy.researchMission[locale]}</h2>
+    </div>
+    <p>{locale === "zh" ? "女娲实验室由白泽发起并支持。我们围绕三项长期主题组织研究，使风险定义、技术证据与治理决策能够相互连接。" : "NUWA Frontier AI Safety Lab was initiated and is supported by Whitzard. Three durable themes connect risk definitions, technical evidence, and governance decisions."}</p>
+  </div>
+  <div class="site-container research-mission__programs">
+    {researchPrograms.map((program, index) => <article>
+      <span>0{index + 1}</span>
+      <h3>{program.title[locale]}</h3>
+      <p>{program.description[locale]}</p>
+      <ul>{program.terms[locale].map((term) => <li>{term}</li>)}</ul>
+    </article>)}
+  </div>
+</section>

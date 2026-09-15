@@ -9,418 +9,241 @@ export type HomeCopy = {
     primary: string;
     secondary: string;
   };
-  manifesto: string;
-  operations: {
+  positioning: {
+    eyebrow: string;
+    body: string;
+    pillars: Array<{ keyword: string; body: string }>;
+  };
+  system: {
     eyebrow: string;
     title: string;
     body: string;
-    communityBadge: string;
-    imageAlt: string;
-    callouts: string[];
-    queueLabel: string;
-    fields: { request: string; risk: string; action: string; status: string; audit: string };
-    cases: Array<{ id: string; label: string; request: string; risk: string; action: string; status: string; audit: string }>;
-    cta: string;
+    cycle: string[];
+    feedback: string;
+    runtimeEyebrow: string;
+    runtimeTitle: string;
+    runtimeBody: string;
   };
-  risk: {
+  highlight: {
     eyebrow: string;
     title: string;
-    intro: string;
-    cards: Array<{ title: string; body: string }>;
-    closing: string;
+    body: string;
+    source: string;
+    sourceUrl?: string;
   };
-  platform: {
+  products: {
     eyebrow: string;
     title: string;
-    intro: string;
-    layers: Array<{
-      index: string;
+    agentguard: {
+      label: string;
       title: string;
       body: string;
-      items: string[];
-    }>;
+      cta: string;
+      features: string[];
+    };
+    models: {
+      label: string;
+      title: string;
+      body: string;
+      cta: string;
+    };
   };
-  chains: {
+  research: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    questions: string[];
+    cta: string;
+    indexTitle: string;
+    indexBody: string;
+    indexCta: string;
+  };
+  ecosystem: {
     eyebrow: string;
     title: string;
     intro: string;
-    items: Array<{ short: string; title: string; body: string }>;
-    fusion: string;
-    decisions: string[];
+    directions: string[];
+    viewAll: string;
   };
-  loop: {
-    eyebrow: string;
-    title: string;
-    lab: { name: string; role: string };
-    bridge: { down: string; up: string };
-    product: { name: string; role: string };
-  };
-  enterprise: {
-    eyebrow: string;
-    title: string;
-    intro: string;
-    items: Array<{ title: string; body: string }>;
-    diagram: string[];
-  };
-  ecosystem: { eyebrow: string; title: string; intro: string; viewAll: string };
-  cta: {
+  closing: {
     eyebrow: string;
     title: string;
     body: string;
     primary: string;
     secondary: string;
+    tertiary: string;
   };
 };
 
 export const homeCopy: Record<Locale, HomeCopy> = {
   en: {
     meta: {
-      title: "Whitzard — AI Agent Security Infrastructure",
-      description:
-        "Whitzard evaluates, governs, and protects enterprise AI agents across reasoning, tool use, identity, and data flow.",
+      title: "Whitzard — Security Infrastructure for the Agentic AI Era",
+      description: "Whitzard builds security infrastructure for the agentic AI era through AgentGuard, Model Services, NUWA research, and an open technical ecosystem.",
     },
     hero: {
-      eyebrow: "ENTERPRISE AI AGENT RUNTIME SECURITY",
-      title: "Unlock autonomous intelligence within secure boundaries",
-      description:
-        "AgentGuard tracks data, authorization, and action effect continuously, repairing or blocking risk before boundaries are crossed.",
-      primary: "Book a Demo",
-      secondary: "Explore AgentGuard",
+      eyebrow: "Whitzard",
+      title: "Security infrastructure for the agentic AI era.",
+      description: "Whitzard connects runtime safeguards, model services, frontier-risk research, and an open technical ecosystem so AI agents can operate within clear, verifiable boundaries.",
+      primary: "Explore AgentGuard",
+      secondary: "Explore research",
     },
-    manifesto: "Unlock autonomous intelligence within secure boundaries",
-    operations: {
-      eyebrow: "AGENTGUARD ENTERPRISE",
-      title: "Agent security operations center",
-      body: "Turn runtime decisions into approval, response, policy, and audit workflows.",
-      communityBadge: "Community Edition public interface",
-      imageAlt: "AgentGuard Community dashboard showing traffic, approvals, policy matches, and audit events",
-      callouts: ["Runtime traffic", "Pending approvals", "Policy matches", "Audit events"],
-      queueLabel: "Security event queue",
-      fields: { request: "Business request", risk: "Key risk", action: "AgentGuard response", status: "Current status", audit: "Audit evidence" },
-      cases: [
-        { id: "production", label: "Production change approval", request: "Diagnose an incident, generate a patch, and deploy to production.", risk: "Generated shell commands and irreversible production changes.", action: "Diagnosis and patch generation completed. AgentGuard degraded the command to preview and paused deployment for approval.", status: "Waiting for authorized approval", audit: "Trace · policy decision · change ticket" },
-        { id: "egress", label: "Sensitive data egress", request: "Send a customer renewal summary to an approved adviser.", risk: "Derived output retains customer identity and contract lineage.", action: "AgentGuard removed sensitive fields and restricted the destination.", status: "Sanitized payload allowed", audit: "Lineage · field diff · destination" },
-        { id: "injection", label: "External instruction injection", request: "Use an external guide to repair a production service.", risk: "Untrusted instructions propagated into a shell command.", action: "AgentGuard denied execution before the shell boundary.", status: "Command blocked; investigation open", audit: "Source label · matched chain rule · denied payload" },
-      ],
-      cta: "View the technical product demo",
-    },
-    risk: {
-      eyebrow: "A NEW CONTROL PLANE",
-      title: "The agent era creates a new security frontier",
-      intro: "Once agents connect models, data, and business systems, risk develops across multi-step actions.",
-      cards: [
-        {
-          title: "Autonomous planning",
-          body: "Agents revise plans continuously as tasks, tool results, and context change.",
-        },
-        {
-          title: "Delegated authority",
-          body: "Agents invoke tools, access data, and act on behalf of users and systems.",
-        },
-        {
-          title: "Runtime risk",
-          body: "Harm emerges across plans, permissions, tools, data, and responses.",
-        },
-      ],
-      closing: "Security control must cover the full path from intent to action",
-    },
-    platform: {
-      eyebrow: "AGENTGUARD PLATFORM",
-      title: "AgentGuard Security Engine",
-      intro: "Connect, judge, respond, and operate across the complete agent runtime.",
-      layers: [
-        {
-          index: "01",
-          title: "Secure Connect",
-          body: "Bring runtime security into the systems agents already use.",
-          items: [
-            "Framework hooks",
-            "Tool & MCP proxy",
-            "Dynamic identity",
-            "Trusted sandbox",
-          ],
-        },
-        {
-          index: "02",
-          title: "Runtime Intelligence",
-          body: "Understand and intervene across thought, behavior, and data chains.",
-          items: [
-            "Thought alignment",
-            "Behavior reasoning",
-            "Data lineage",
-            "Policy decisions",
-          ],
-        },
-        {
-          index: "03",
-          title: "Evaluate & Operate",
-          body: "Turn risk evidence into continuous security operations.",
-          items: [
-            "Automated red team",
-            "Continuous evaluation",
-            "Risk profiles",
-            "Audit & response",
-          ],
-        },
-        {
-          index: "04",
-          title: "Model & Data Foundation",
-          body: "Improve safety models from research and deployment feedback.",
-          items: [
-            "Data factory",
-            "Model training",
-            "Risk knowledge",
-            "Feedback optimization",
-          ],
-        },
+    positioning: {
+      eyebrow: "Who we are",
+      body: "Whitzard is a research-driven AI safety company. We connect frontier AI risk research from NUWA with deployable safety technology in AgentGuard, helping teams evaluate and operate increasingly capable AI systems with appropriate safeguards.",
+      pillars: [
+        { keyword: "Trusted boundaries", body: "Security control must cover the full path from intent to action — not just the endpoint." },
+        { keyword: "Verifiable evidence", body: "Every safety claim should be traceable to reproducible evaluation, not asserted." },
+        { keyword: "Minimal necessary intervention", body: "Security enables agents to complete tasks, not just block them." },
       ],
     },
-    chains: {
-      eyebrow: "THREE-CHAIN INTELLIGENCE",
-      title: "Understand the complete runtime trajectory.",
-      intro:
-        "AgentGuard reasons over three connected views of agent activity, then combines deterministic controls with model intelligence.",
-      items: [
-        {
-          short: "Thought",
-          title: "Thought chain alignment",
-          body: "Identify and correct unsafe reasoning before it becomes action.",
-        },
-        {
-          short: "Behavior",
-          title: "Behavior chain reasoning",
-          body: "Reason over multi-step, cross-tool, and cross-agent behavior.",
-        },
-        {
-          short: "Data",
-          title: "Data lineage tracking",
-          body: "Track where sensitive data comes from, how it is used, and where it flows.",
-        },
-      ],
-      fusion: "Rule Engine × Lightweight Safety Models × In-house Large Model",
-      decisions: ["Allow", "Sanitize", "Align", "Degrade", "Approve", "Deny"],
+    system: {
+      eyebrow: "One connected system",
+      title: "Research identifies risk. Protection acts on evidence.",
+      body: "NUWA and AgentGuard connect frontier-risk research with controls that operate inside real agent workflows.",
+      cycle: ["Risk research", "Evaluation evidence", "Protection strategy", "Runtime feedback"],
+      feedback: "Evidence moves into protection. Operational signals sharpen the next evaluation.",
+      runtimeEyebrow: "Runtime control",
+      runtimeTitle: "A boundary that stays with the agent loop.",
+      runtimeBody: "Follow one real task from intent to external action, with data, authorization, and action impact checked at every interaction boundary.",
     },
-    loop: {
-      eyebrow: "RESEARCH × PRODUCT",
-      title: "Mutual drive. Continuous evolution.",
-      lab: {
-        name: "NUWA Lab",
-        role: "Frontier AI safety research",
+    highlight: {
+      eyebrow: "Recent result",
+      title: "Fudan Baize ranks second globally in AI attack-defense evaluation",
+      body: "On the international AI safety benchmark CyberGym, the Whitzard agent reached a 91.2% success rate, ranking second globally and first among universities. This result reflects the strength of Whitzard's research foundation in agent cybersecurity.",
+      source: "Fudan Baize WeChat official account",
+      sourceUrl: "https://mp.weixin.qq.com/s/0F7mcRuwgNTNyCOtlYORaw",
+    },
+    products: {
+      eyebrow: "Products & services",
+      title: "What we build",
+      agentguard: {
+        label: "AgentGuard",
+        title: "Agent runtime security control layer",
+        body: "AgentGuard tracks data, authorization, and action impact continuously — repairing or blocking risk before boundaries are crossed, while letting agents complete their tasks. Available as an open-source community edition and an enterprise deployment.",
+        cta: "Learn about AgentGuard",
+        features: ["Runtime intelligence across thought, behavior, and data", "Allow / sanitize / align / degrade / approve / deny decisions", "Community edition (open source) and enterprise deployment", "Framework-compatible: LangChain, AutoGen, OpenAI Agents, and more"],
       },
-      bridge: {
-        down: "Research outcomes → Safety capabilities",
-        up: "Research iteration ← Deployment feedback",
-      },
-      product: {
-        name: "AgentGuard",
-        role: "Agent security infrastructure",
+      models: {
+        label: "Model Services",
+        title: "Safety evaluation and safety-enhanced models",
+        body: "Model Services connect frontier-risk research with practical workflows for evaluating model safety and strengthening runtime safeguards.",
+        cta: "Learn about model services",
       },
     },
-    enterprise: {
-      eyebrow: "ENTERPRISE DEPLOYMENT",
-      title: "Integrate with leading agent frameworks",
-      intro: "Use runtime hooks to protect the existing stack inside the enterprise trust boundary.",
-      items: [
-        {
-          title: "Low-intrusion integration",
-          body: "Connect through SDK hooks, sidecars, or gateways while preserving the existing agent stack.",
-        },
-        {
-          title: "Private deployment",
-          body: "Keep sensitive runtime data and policy decisions inside your controlled environment.",
-        },
-        {
-          title: "Layered intelligence",
-          body: "Coordinate DSL rules, lightweight safety models, and frontier models by risk and latency.",
-        },
-        {
-          title: "Explainable operations",
-          body: "Trace decisions and interventions across the complete agent runtime.",
-        },
+    research: {
+      eyebrow: "NUWA",
+      title: "Shared Risk Evidence and Public Goods for the World",
+      body: "NUWA Frontier AI Safety Lab advances frontier AI risk research and governance through reproducible evidence, evaluation methods, and public goods.",
+      questions: [
+        "How do we define and measure frontier AI risk — autonomy, deception, loss of control?",
+        "How do we build evaluation environments that make agent cybersecurity capability observable?",
+        "How do we turn risk understanding into deployable safety models and runtime control?",
       ],
-      diagram: [
-        "Agents",
-        "AgentGuard Control Layer",
-        "Models · Tools · MCP · Data · Sandbox",
-      ],
+      cta: "Explore NUWA",
+      indexTitle: "Whitzard Index",
+      indexBody: "A long-term research data project for observing and comparing frontier AI risk across models and systems — not a safety leaderboard.",
+      indexCta: "Learn about the Whitzard Index",
     },
     ecosystem: {
-      eyebrow: "WHITZARDAGENT",
-      title: "Whitzard Open Ecosystem",
-      intro: "Open agent frameworks, evaluation infrastructure, and safety models.",
-      viewAll: "View the open ecosystem",
+      eyebrow: "Open ecosystem",
+      title: "Open models, tools, and evaluation infrastructure",
+      intro: "WhitzardAgent hosts open-source projects spanning agent development, safety evaluation, thought correction, and behavior-chain auditing.",
+      directions: ["Agent development", "Safety evaluation", "Safety models", "Behavior-trace auditing"],
+      viewAll: "Explore the open ecosystem",
     },
-    cta: {
-      eyebrow: "BUILD THE BOUNDARY",
-      title: "Deploy AI agents with confidence.",
-      body: "See how AgentGuard can evaluate, govern, and protect the agent systems you are bringing into production.",
-      primary: "Book a Demo",
-      secondary: "Contact Whitzard",
+    closing: {
+      eyebrow: "Product access",
+      title: "Bring verifiable boundaries to your agent system.",
+      body: "Tell us about your environment, current deployment stage, and the security problem you need to solve.",
+      primary: "Join the waitlist",
+      secondary: "Read the Research Blog",
+      tertiary: "Explore the open ecosystem",
     },
   },
   zh: {
     meta: {
       title: "白泽（Whitzard）— 智能体安全基础设施",
-      description:
-        "白泽（Whitzard）统一评测、理解并控制企业智能体的模型推理、工具调用、身份权限与数据流转。",
+      description: "白泽通过 AgentGuard、模型服务、女娲实验室研究与开放技术生态，打造智能体时代的安全基础设施。",
     },
     hero: {
-      eyebrow: "企业级智能体运行时安全",
-      title: "在安全边界内释放自主智能价值",
-      description:
-        "AgentGuard 持续追踪数据、授权与动作影响，在越界前修复或阻断风险，让智能体继续完成业务任务",
-      primary: "预约企业版演示",
-      secondary: "了解 AgentGuard",
+      eyebrow: "白泽 · Whitzard",
+      title: "打造智能体时代的安全基础设施",
+      description: "白泽连接运行时防护、模型服务、前沿风险研究与开放技术生态，让智能体在清晰、可验证的边界内行动。",
+      primary: "了解 AgentGuard",
+      secondary: "了解研究",
     },
-    manifesto: "在安全边界内释放自主智能价值",
-    operations: {
-      eyebrow: "AGENTGUARD ENTERPRISE",
-      title: "智能体安全运营中台",
-      body: "将运行时判断转化为审批、响应、策略与审计流程。",
-      communityBadge: "社区版公开界面",
-      imageAlt: "AgentGuard 社区版控制台，展示运行流量、待审批、策略命中与审计事件",
-      callouts: ["运行流量", "待审批", "策略命中", "审计事件"],
-      queueLabel: "安全事件队列",
-      fields: { request: "业务请求", risk: "关键风险", action: "AgentGuard 处置", status: "当前状态", audit: "审计证据" },
-      cases: [
-        { id: "production", label: "生产变更审批", request: "定位生产事故、生成补丁并发布生产变更。", risk: "模型生成命令与不可逆生产变更。", action: "诊断与补丁生成已完成；AgentGuard 已将命令降级为预览，并暂停生产发布等待审批。", status: "等待授权负责人审批", audit: "执行轨迹 · 策略判断 · 变更工单" },
-        { id: "egress", label: "敏感数据外发", request: "向获批顾问发送客户续约摘要。", risk: "衍生结果保留客户身份与合同数据血缘。", action: "AgentGuard 已移除敏感字段，并限制外发目标。", status: "脱敏载荷已放行", audit: "数据血缘 · 字段差异 · 外发目标" },
-        { id: "injection", label: "外部指令注入", request: "使用外部排障资料修复生产服务。", risk: "不可信指令传播为 Shell 命令。", action: "AgentGuard 已在 Shell 边界前阻断执行。", status: "命令已阻断，进入调查", audit: "来源标签 · 命中规则 · 阻断载荷" },
-      ],
-      cta: "查看完整技术演示",
-    },
-    risk: {
-      eyebrow: "新型安全控制面",
-      title: "智能体时代带来全新安全挑战",
-      intro: "智能体连接模型、数据与业务系统后，风险会沿多步行动持续扩散。",
-      cards: [
-        {
-          title: "自主规划",
-          body: "智能体会根据任务、工具反馈和上下文持续调整计划。",
-        },
-        {
-          title: "委托权限",
-          body: "智能体能够调用工具、访问数据，并代表用户和系统执行操作。",
-        },
-        {
-          title: "运行时风险",
-          body: "风险会在计划、权限、工具、数据与响应之间组合形成。",
-        },
-      ],
-      closing: "安全控制必须覆盖行动发生的全过程",
-    },
-    platform: {
-      eyebrow: "AGENTGUARD 平台",
-      title: "AgentGuard 智能体安全引擎",
-      intro: "从接入、研判到处置与运营，统一保护智能体运行时。",
-      layers: [
-        {
-          index: "01",
-          title: "安全接入",
-          body: "将运行时安全接入智能体已经使用的系统。",
-          items: ["多框架 Hook", "工具与 MCP 代理", "动态身份权限", "可信沙箱"],
-        },
-        {
-          index: "02",
-          title: "智能防护",
-          body: "理解并干预思维链、行为链和数据链。",
-          items: ["思维链校准", "行为链推理", "数据链追踪", "策略处置"],
-        },
-        {
-          index: "03",
-          title: "评测运营",
-          body: "将风险证据转化为持续安全运营。",
-          items: ["自动红队", "持续评测", "风险画像", "审计响应"],
-        },
-        {
-          index: "04",
-          title: "模型底座",
-          body: "用研究成果与部署反馈持续改进安全模型。",
-          items: ["数据工厂", "模型训练", "风险知识", "反馈优化"],
-        },
+    positioning: {
+      eyebrow: "我们是谁",
+      body: "白泽是一家研究驱动的 AI 安全公司。我们将女娲实验室的前沿 AI 风险研究与 AgentGuard 的可部署安全技术结合起来，让更强大的 AI 系统被可靠评测、安全使用。",
+      pillars: [
+        { keyword: "可信边界", body: "安全控制必须覆盖从意图到行动的完整路径，而不只是终点。" },
+        { keyword: "可核实证据", body: "每一个安全主张都应能追溯到可复现的评测，而非仅仅声称。" },
+        { keyword: "最小必要干预", body: "安全让智能体完成任务，而不只是阻断它们。" },
       ],
     },
-    chains: {
-      eyebrow: "三链智能",
-      title: "理解完整运行轨迹",
-      intro:
-        "AgentGuard 关联智能体活动的三个视角，并将确定性控制与模型智能协同起来。",
-      items: [
-        {
-          short: "思维",
-          title: "思维链实时校准",
-          body: "在行动发生前识别并纠正高风险推理。",
-        },
-        {
-          short: "行为",
-          title: "行为链风险推理",
-          body: "关联跨步骤、跨工具和跨智能体的组合风险。",
-        },
-        {
-          short: "数据",
-          title: "数据链血缘追踪",
-          body: "追踪敏感数据的来源、用途、流向和外泄边界。",
-        },
-      ],
-      fusion: "规则引擎 × 轻量安全模型 × 自研大模型",
-      decisions: ["允许", "脱敏", "校准", "降级", "审批", "阻断"],
+    system: {
+      eyebrow: "同一套安全系统",
+      title: "研究识别风险，产品在运行中实施控制",
+      body: "女娲实验室与 AgentGuard 将前沿风险研究连接到真实智能体工作流中的安全控制。",
+      cycle: ["风险研究", "评测证据", "防护策略", "运行反馈"],
+      feedback: "证据进入防护体系，运行反馈持续校准下一轮评测。",
+      runtimeEyebrow: "运行时控制",
+      runtimeTitle: "让安全边界贯穿智能体执行闭环",
+      runtimeBody: "沿一项真实任务观察从业务意图到外部行动的完整路径，并在每个交互边界联合检查数据、授权与行动影响。",
     },
-    loop: {
-      eyebrow: "研究 × 产品",
-      title: "双向驱动，持续演进",
-      lab: {
-        name: "女娲实验室",
-        role: "前沿 AI 安全研究",
+    highlight: {
+      eyebrow: "近期成果",
+      title: "AI 攻防全球第二、高校第一",
+      body: "在国际 AI 安全基准 CyberGym 最新榜单中，复旦白泽智能体 Whitzard 以 91.2% 成功率位列全球第二、高校第一。这一结果反映了白泽在智能体网络安全方面的研究基础。",
+      source: "复旦白泽战队微信公众号",
+      sourceUrl: "https://mp.weixin.qq.com/s/0F7mcRuwgNTNyCOtlYORaw",
+    },
+    products: {
+      eyebrow: "产品与服务",
+      title: "我们构建什么",
+      agentguard: {
+        label: "AgentGuard",
+        title: "智能体运行时安全控制层",
+        body: "AgentGuard 持续追踪数据、授权与行动影响，在越界前修复或阻断风险，同时让智能体继续完成业务任务。提供开源社区版和企业交付版。",
+        cta: "了解 AgentGuard",
+        features: ["覆盖思维链、行为链与数据链的运行时智能", "允许 / 脱敏 / 校准 / 降级 / 审批 / 阻断 六种处置", "开源社区版与企业交付版", "兼容 LangChain、AutoGen、OpenAI Agents 等主流框架"],
       },
-      bridge: {
-        down: "研究成果 → 安全能力",
-        up: "研究迭代 ← 部署反馈",
-      },
-      product: {
-        name: "AgentGuard",
-        role: "智能体安全基础设施",
+      models: {
+        label: "模型服务",
+        title: "安全评测与安全增强模型",
+        body: "模型服务连接前沿风险研究与实际工作流，用于模型安全评测与智能体运行时防护增强。",
+        cta: "了解模型服务",
       },
     },
-    enterprise: {
-      eyebrow: "企业级部署",
-      title: "低侵入适配各类主流智能体架构",
-      intro: "通过运行时 Hook 接入现有技术栈，将控制部署在企业信任边界内。",
-      items: [
-        {
-          title: "低侵入接入",
-          body: "通过 SDK Hook、Sidecar 或 Gateway 接入，并保留现有智能体技术栈。",
-        },
-        {
-          title: "私有化部署",
-          body: "让敏感运行数据和策略决策保留在企业受控环境中。",
-        },
-        {
-          title: "分层智能协同",
-          body: "根据风险和延迟要求，协同 DSL 规则、轻量安全模型与前沿大模型。",
-        },
-        {
-          title: "可解释安全运营",
-          body: "追踪智能体完整运行过程中的判断、处置和审计证据。",
-        },
+    research: {
+      eyebrow: "女娲实验室",
+      title: "为全球 AI 治理提供风险证据与公共产品",
+      body: "女娲实验室开展前沿 AI 风险研究与治理，通过可复现证据、评测方法和公共产品支持共同的安全决策。",
+      questions: [
+        "如何定义和测量前沿 AI 风险——自主性、欺骗、失控？",
+        "如何建设让智能体网络安全能力可观测的评测环境？",
+        "如何将风险理解转化为可部署的安全模型和运行时控制？",
       ],
-      diagram: [
-        "企业智能体",
-        "AgentGuard 安全控制层",
-        "模型 · 工具 · MCP · 数据 · 沙箱",
-      ],
+      cta: "探索女娲实验室",
+      indexTitle: "白泽指数",
+      indexBody: "一个持续观测和比较前沿 AI 风险的研究数据项目，而非安全性排行榜。",
+      indexCta: "了解白泽指数",
     },
     ecosystem: {
-      eyebrow: "WHITZARDAGENT",
-      title: "白泽开放生态",
-      intro: "开放智能体框架、评测基础设施与安全模型。",
-      viewAll: "查看开放生态",
+      eyebrow: "开源生态",
+      title: "开放模型、工具与评测基础设施",
+      intro: "WhitzardAgent 承载开源项目，覆盖智能体开发、安全评测、思维矫正与行为链审计。",
+      directions: ["智能体开发框架", "安全评测基础设施", "安全模型", "行为轨迹审计"],
+      viewAll: "探索开放生态",
     },
-    cta: {
-      eyebrow: "建立可信边界",
-      title: "安全部署企业智能体",
-      body: "以 AgentGuard 建立运行时控制边界。",
-      primary: "预约产品演示",
-      secondary: "联系白泽（Whitzard）",
+    closing: {
+      eyebrow: "产品访问",
+      title: "建立可验证的智能体安全边界",
+      body: "告诉我们你的技术环境、当前阶段，以及最需要解决的安全问题。",
+      primary: "加入心愿单",
+      secondary: "阅读 Research Blog",
+      tertiary: "探索开放生态",
     },
   },
 };

@@ -4,15 +4,15 @@ import type { APIContext } from "astro";
 
 export async function GET(context: APIContext) {
   return rss({
-    title: "NUWA Lab",
+    title: "NUWA Frontier AI Safety Lab",
     description:
-      "Research, publications, and updates from NUWA Lab.",
+      "Research, publications, and updates from NUWA.",
     site: context.site ?? "https://whitzard.tech",
     items: researchAssets.map((paper) => ({
       title: paper.title,
       pubDate: paper.year ? new Date(`${paper.year}-01-01`) : new Date(),
       description: paper.summary.en,
-      link: paper.links[0]?.url || `https://whitzard.tech/research`,
+      link: paper.links[0]?.url || `https://whitzard.tech/nuwa/research`,
       categories: paper.topics.en,
     })),
     customData: "<language>en</language>",

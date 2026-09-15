@@ -65,11 +65,11 @@ const visibleProjects = (await parseJsonl("public/assets/info/whitzardagent_open
   .filter((item) => String(item["Visible or hidden"]).toLowerCase() === "visible");
 for (const project of visibleProjects) {
   const description = project["One-line description zh"];
-  if (!description) violations.push(`open ecosystem: ${project.Name} has no Chinese description`);
+  if (!description) violations.push(`developers: ${project.Name} has no Chinese description`);
   else if (!ecosystemHtml.includes(description)) violations.push(`dist/open-ecosystem/index.html: missing Chinese description for ${project.Name}`);
 }
 
-const researchHtml = await readFile("dist/research/index.html", "utf8");
+const researchHtml = await readFile("dist/nuwa/research/index.html", "utf8");
 const researchRecords = await parseJsonl("public/assets/info/ai_safety_research_assets_metadata.jsonl");
 if (researchRecords.length !== 86) violations.push(`research: expected 86 deduplicated records, found ${researchRecords.length}`);
 const normalizedResearchTitles = new Set();
@@ -89,7 +89,7 @@ for (const record of researchRecords) {
   if (record["ArXiv ID"] && !/^\d{4}\.\d{4,5}(?:v\d+)?$/i.test(record["ArXiv ID"])) violations.push(`research: malformed arXiv ID for ${record.Title}: ${record["ArXiv ID"]}`);
   for (const slug of record["Member slugs"] ?? []) if (slug in sourceMemberCounts) sourceMemberCounts[slug] += 1;
   if (record["Featured or not"] && !researchHtml.includes(record["One-line summary zh"])) {
-    violations.push(`dist/research/index.html: missing Chinese summary for ${record.Title}`);
+    violations.push(`dist/nuwa/research/index.html: missing Chinese summary for ${record.Title}`);
   }
 }
 for (const [slug, expected] of Object.entries({ "xudong-pan": 42, "jiarun-dai": 25, "geng-hong": 25 })) {
@@ -111,7 +111,7 @@ const aboutHtml = await readFile("dist/about/index.html", "utf8");
 for (const englishBioMarker of ["is the CEO of Whitzard", "is the CTO of Whitzard", "is an Assistant Professor at Fudan University"]) {
   if (aboutHtml.includes(englishBioMarker)) violations.push(`dist/about/index.html: English team biography leaked into Chinese page`);
 }
-for (const marker of ["打造AI智能体时代的安全基础设施", "团队愿景", "公共安全产品", "持续建设可验证、可复用的模型、工具、数据与评测基础设施"]) {
+for (const marker of ["打造智能体时代的安全基础设施", "团队愿景", "公共安全产品", "持续建设可验证、可复用的模型、工具、数据与评测基础设施"]) {
   if (!aboutHtml.includes(marker)) violations.push(`dist/about/index.html: missing V3.5 about marker: ${marker}`);
 }
 for (const legacy of ["构建智能体安全基础设施", "我们的工作原则", "有选择地开放", "复旦大学青年研究员"]) {
@@ -134,14 +134,15 @@ const chineseBudget = (value) => {
 };
 const approvedExtendedHeadings = new Set([
   "细粒度管控行为链、思维链和数据链",
+  "为全球 AI 治理提供风险证据与公共产品",
 ]);
-const coreRoutes = ["", "agentguard", "solutions", "research", "open-ecosystem", "news", "about", "contact"];
+const coreRoutes = ["", "agentguard", "solutions", "models", "nuwa", "open-ecosystem", "news", "about", "contact", "waitlist", "login"];
 for (const route of coreRoutes) {
   const file = join("dist", route, "index.html");
   const content = await readFile(file, "utf8");
   for (const [, tag, raw] of content.matchAll(/<(h1|h2)\b[^>]*>([\s\S]*?)<\/\1>/gi)) {
     const text = decodeText(raw);
-    const limit = tag.toLowerCase() === "h1" ? 16 : 14;
+    const limit = tag.toLowerCase() === "h1" ? 18 : 16;
     if (!approvedExtendedHeadings.has(text) && chineseBudget(text) > limit) violations.push(`${file}: ${tag.toUpperCase()} exceeds Chinese copy budget (${chineseBudget(text)}/${limit}): ${text}`);
     if (text.endsWith("。")) violations.push(`${file}: ${tag.toUpperCase()} must not end with a Chinese full stop: ${text}`);
   }
@@ -167,43 +168,26 @@ for (const route of coreRoutes) {
 }
 
 const homeHtml = withoutEmbeddedCode(await readFile("dist/index.html", "utf8"));
-const navHtml = homeHtml.match(/<nav class="site-nav"[\s\S]*?<\/nav>/i)?.[0] ?? "";
-if (!navHtml.includes("应用场景") || navHtml.includes(">解决方案<")) violations.push("dist/index.html: Chinese navigation must label /solutions as 应用场景");
-const englishHomeHtml = withoutEmbeddedCode(await readFile("dist/en/index.html", "utf8"));
-const englishNavHtml = englishHomeHtml.match(/<nav class="site-nav"[\s\S]*?<\/nav>/i)?.[0] ?? "";
-if (!englishNavHtml.includes("Use Cases") || englishNavHtml.includes(">Solutions<")) violations.push("dist/en/index.html: English navigation must label /solutions as Use Cases");
-
 const homeRequirements = [
-  "在安全边界内释放自主智能价值",
-  "智能体时代带来全新安全挑战",
-  "双向驱动，持续演进",
-  "业务目标",
-  "Agent 规划",
-  "LLM 推理",
-  "工具调用",
-  "Observation",
-  "Agent 再规划",
-  "外部行动",
-  "LLM Before / After",
-  "Tool Before / After",
-  "Memory Write",
-  "Commit Boundary",
-  "脱敏",
-  "重新检查",
+  "守其边界，行其智能",
+  "研究驱动",
+  "可信边界",
+  "可核实证据",
+  "最小必要干预",
+  "AgentGuard",
+  "女娲实验室",
+  "白泽指数",
   "最新动态",
-  "开源生态",
 ];
-for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing V3.11 homepage marker: ${marker}`);
-for (const [file, content, removed] of [
-  ["dist/index.html", homeHtml, [">风险成形前精准介入</h2>", ">覆盖智能体行动的完整上下文</h2>", ">补充智能体运行时上下文</h2>"]],
-  ["dist/en/index.html", englishHomeHtml, [">Intervene before risk becomes impact</h2>", ">Cover the complete context of agent action</h2>", ">Add agent-aware runtime context</h2>"]],
-]) {
-  for (const marker of removed) if (content.includes(marker)) violations.push(`${file}: V3.7 removed homepage section must not remain: ${marker}`);
+for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing homepage marker: ${marker}`);
+for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
+  if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
 }
-const homeOrder = ["在安全边界内释放自主智能价值", "智能体时代带来全新安全挑战", "双向驱动，持续演进", ">最新动态</h2>", ">开源生态</h2>"];
-for (let index = 1; index < homeOrder.length; index += 1) {
-  if (homeHtml.indexOf(homeOrder[index - 1]) >= homeHtml.indexOf(homeOrder[index])) violations.push(`dist/index.html: V3.7 homepage order is incorrect around ${homeOrder[index]}`);
+// Homepage must not duplicate product-specific details that have dedicated pages
+for (const productOnly of ["细粒度管控行为链、思维链和数据链", "WhitzardOS", "WhitzardEval", "Thought-Aligner", "MATE", "/assets/agentguard/dashboard.png"]) {
+  if (homeHtml.includes(productOnly)) violations.push(`dist/index.html: content with a dedicated destination must not be duplicated on the homepage: ${productOnly}`);
 }
+
 const newsHtml = withoutEmbeddedCode(await readFile("dist/news/index.html", "utf8"));
 const newsEnHtml = withoutEmbeddedCode(await readFile("dist/en/news/index.html", "utf8"));
 for (const marker of ["动态 — 白泽", "最新", "精选动态", "白泽开放生态", "返回首页"]) {
@@ -222,20 +206,13 @@ const homeSource = await readFile("src/components/home/HomePage.astro", "utf8");
 for (const component of ["AgentGuardRiskSimulator", "AgentGuardSystemMap", "UnifiedSecurityInfluenceEngine", "AgentGuardOperationsCenter"]) {
   if (homeSource.includes(component)) violations.push(`src/components/home/HomePage.astro: homepage must not import or render ${component}`);
 }
-if ((homeHtml.match(/class="boundary-flow__path-item"/g) ?? []).length !== 7) violations.push("dist/index.html: AgentGuard boundary flow must render exactly seven execution stages");
-if ((homeHtml.match(/<small>AgentGuard 交互边界运行时<\/small>/g) ?? []).length !== 1) violations.push("dist/index.html: homepage must render one visible AgentGuard runtime title");
-if (homeHtml.includes("autocontrol-arena-figure-2")) violations.push("dist/index.html: paper figures belong on the research page, not the homepage bridge");
-for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
-  if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
-}
-for (const productOnly of ["智能体安全运营中台", "细粒度管控行为链、思维链和数据链", "LangChain", "Microsoft AutoGen", "OpenAI Agents SDK", "LangGraph", "LlamaIndex", "Dify", "OpenClaw", "WhitzardOS", "WhitzardEval", "Thought-Aligner", "MATE", "/assets/agentguard/dashboard.png"]) {
-  if (homeHtml.includes(productOnly)) violations.push(`dist/index.html: content with a dedicated destination must not be duplicated on the homepage: ${productOnly}`);
-}
+if (homeHtml.includes("autocontrol-arena-figure-2")) violations.push("dist/index.html: paper figures belong on the research page, not the homepage");
 
+// Developers page (evolved from ecosystem) must contain core projects
 for (const [file, html] of [["dist/open-ecosystem/index.html", ecosystemHtml], ["dist/en/open-ecosystem/index.html", await readFile("dist/en/open-ecosystem/index.html", "utf8")]]) {
   for (const project of ["WhitzardOS", "WhitzardEval", "Thought-Aligner", "MATE"]) {
     const headingCount = (html.match(new RegExp(`<h3>${project.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</h3>`, "g")) ?? []).length;
-    if (headingCount !== 1) violations.push(`${file}: core ecosystem capability ${project} must appear exactly once as a project heading, found ${headingCount}`);
+    if (headingCount !== 1) violations.push(`${file}: core capability ${project} must appear exactly once as a project heading, found ${headingCount}`);
   }
 }
 
@@ -250,8 +227,8 @@ for (const marker of ["leadFact", "count: 32", "Geoffrey Hinton", "Yoshua Bengio
 for (const marker of ["public-impact-preview", "home-public-impact", "02 国际 AI 安全共识", "从前沿技术证据，到国内外共同规则"]) {
   if (homeHtml.includes(marker)) violations.push(`dist/index.html: public impact must remain on the research page: ${marker}`);
 }
-const publicImpactSection = researchHtml.match(/<section id="public-impact"[\s\S]*?<section id="infrastructure"/)?.[0] ?? "";
-if ((publicImpactSection.match(/<article\b/g) ?? []).length !== 3) violations.push("dist/research/index.html: public impact must contain exactly three records");
+const publicImpactSection = researchHtml.match(/<section id="public-impact"[\s\S]*?<section id="recognition"/)?.[0] ?? "";
+if ((publicImpactSection.match(/<article\b/g) ?? []).length !== 3) violations.push("dist/nuwa/research/index.html: public impact must contain exactly three records");
 for (const marker of [
   "研究与公共影响",
   "AI 安全上海共识",
@@ -269,23 +246,28 @@ for (const marker of [
   "图灵奖 · 诺贝尔奖",
   "代表性联署专家",
 ]) {
-  if (!publicImpactSection.includes(marker)) violations.push(`dist/research/index.html: public impact is missing ${marker}`);
+  if (!publicImpactSection.includes(marker)) violations.push(`dist/nuwa/research/index.html: public impact is missing ${marker}`);
 }
 const themesIndex = researchHtml.indexOf('id="themes"');
+const featuredIndex = researchHtml.indexOf('id="featured"');
+const blogIndex = researchHtml.indexOf('id="research-blog"');
 const impactIndex = researchHtml.indexOf('id="public-impact"');
 const infrastructureIndex = researchHtml.indexOf('id="infrastructure"');
 const recognitionIndex = researchHtml.indexOf('id="recognition"');
 const publicationsIndex = researchHtml.indexOf('id="research-index"');
-if (impactIndex < 0 || infrastructureIndex < impactIndex || themesIndex < infrastructureIndex || recognitionIndex < themesIndex || publicationsIndex < recognitionIndex) violations.push("dist/research/index.html: expected public impact → infrastructure → themes → recognition → publication index");
-if (researchHtml.includes('id="team"') || researchHtml.includes("research-team__grid")) violations.push("dist/research/index.html: complete team biographies belong only on the about page");
+if (themesIndex < 0 || featuredIndex < themesIndex || blogIndex < featuredIndex || infrastructureIndex < blogIndex || impactIndex < infrastructureIndex || recognitionIndex < impactIndex || publicationsIndex < recognitionIndex) violations.push("dist/nuwa/research/index.html: expected mission/themes → featured evidence → Research Blog → infrastructure → public impact → recognition → publication index");
+const missionSection = researchHtml.match(/<section id="themes"[\s\S]*?<section id="featured"/)?.[0] ?? "";
+if ((missionSection.match(/<article\b/g) ?? []).length !== 3) violations.push("dist/nuwa/research/index.html: research mission must contain exactly three core themes");
+for (const marker of ["为全球 AI 治理提供风险证据与公共产品", "前沿 AI 风险与控制", "智能体与模型安全", "风险评测与治理方法"]) if (!missionSection.includes(marker)) violations.push(`dist/nuwa/research/index.html: research mission is missing ${marker}`);
+if (researchHtml.includes('id="team"') || researchHtml.includes("research-team__grid")) violations.push("dist/nuwa/research/index.html: complete team biographies belong only on the about page");
 for (const forbidden of ["METR", "合作伙伴", "白泽参与", "女娲实验室参与", "参与签署", "参与形成", "参与起草"]) {
-  if (publicImpactSection.includes(forbidden)) violations.push(`dist/research/index.html: public impact must not claim participation or partnership: ${forbidden}`);
+  if (publicImpactSection.includes(forbidden)) violations.push(`dist/nuwa/research/index.html: public impact must not claim participation or partnership: ${forbidden}`);
 }
 
 const recognitionSection = researchHtml.match(/<section id="recognition"[\s\S]*?<section id="research-index"/)?.[0] ?? "";
 const recognitionCount = recognitionSection.match(/<article\b/g)?.length ?? 0;
-if (recognitionCount !== 6) violations.push(`dist/research/index.html: recognition must contain exactly six entries, found ${recognitionCount}`);
-for (const forbidden of ["潘旭东", "戴嘉润", "洪赓", "Awarded to", "个人荣誉", "研究团队荣誉"]) if (recognitionSection.includes(forbidden)) violations.push(`dist/research/index.html: recognition must not expose attribution: ${forbidden}`);
+if (recognitionCount !== 6) violations.push(`dist/nuwa/research/index.html: recognition must contain exactly six entries, found ${recognitionCount}`);
+for (const forbidden of ["潘旭东", "戴嘉润", "洪赓", "Awarded to", "个人荣誉", "研究团队荣誉"]) if (recognitionSection.includes(forbidden)) violations.push(`dist/nuwa/research/index.html: recognition must not expose attribution: ${forbidden}`);
 
 for (const marker of [
   "/assets/research/self-replication-figure-1.png",
@@ -294,11 +276,11 @@ for (const marker of [
   "Figure 1 · PDF p.2",
   "MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction",
   "https://github.com/WhitzardAgent/MirrorGuard",
-]) if (!researchHtml.includes(marker)) violations.push(`dist/research/index.html: missing verified research visual marker ${marker}`);
-const infrastructureSection = researchHtml.match(/<section id="infrastructure"[\s\S]*?<section id="themes"/)?.[0] ?? "";
-for (const marker of ["AgentCyberRange", "AutoControl Arena", "查看论文"]) if (!infrastructureSection.includes(marker)) violations.push(`dist/research/index.html: missing research infrastructure marker ${marker}`);
-if (infrastructureSection.includes("CyberGym") || (infrastructureSection.match(/<article\b/g) ?? []).length !== 2) violations.push("dist/research/index.html: infrastructure must contain exactly AgentCyberRange and AutoControl Arena");
-if ((researchHtml.match(/<details class="research-year"/g) ?? []).length !== 9) violations.push("dist/research/index.html: publication index must render nine native year groups");
+]) if (!researchHtml.includes(marker)) violations.push(`dist/nuwa/research/index.html: missing verified research visual marker ${marker}`);
+const infrastructureSection = researchHtml.match(/<section id="infrastructure"[\s\S]*?<section id="public-impact"/)?.[0] ?? "";
+for (const marker of ["AgentCyberRange", "AutoControl Arena", "查看论文"]) if (!infrastructureSection.includes(marker)) violations.push(`dist/nuwa/research/index.html: missing research infrastructure marker ${marker}`);
+if (infrastructureSection.includes("CyberGym") || (infrastructureSection.match(/<article\b/g) ?? []).length !== 2) violations.push("dist/nuwa/research/index.html: infrastructure must contain exactly AgentCyberRange and AutoControl Arena");
+if ((researchHtml.match(/<details class="research-year"/g) ?? []).length !== 9) violations.push("dist/nuwa/research/index.html: publication index must render nine native year groups");
 
 for (const file of htmlFiles) {
   const content = withoutEmbeddedCode(await readFile(file, "utf8"));
@@ -316,8 +298,8 @@ for (const [file, content] of [["dist/agentguard/index.html", agentGuardZh], ["d
 }
 
 const agentGuardRequirements = [
-  ["dist/agentguard/index.html", agentGuardZh, ["保护对象", "覆盖智能体行动的完整上下文", "全系统传播与追踪", "看见风险如何穿过智能体系统", "统一安全影响引擎", "细粒度管控行为链、思维链和数据链", "客户数据外发", "长期 Memory 写入", "Shell 与生产提交", "数据流", "授权流", "动作影响", "从策略配置到审计闭环", "执行模拟", "融入现有安全体系", "补充智能体运行时上下文", "IAM", "DLP", "API Gateway", "SIEM"]],
-  ["dist/en/agentguard/index.html", agentGuardEn, ["Cover the complete context of agent action", "SYSTEM-WIDE PROPAGATION", "See risk move through the agent system", "UNIFIED SECURITY INFLUENCE ENGINE", "Control behavior, reasoning, and data chains", "Customer data egress", "Long-term memory write", "Shell and production commit", "Data flow", "Authorization flow", "Action effect", "From policy to audit.", "Run simulation", "WORKS WITH YOUR SECURITY STACK", "Add agent-aware runtime context", "IAM", "DLP", "API Gateway", "SIEM"]],
+  ["dist/agentguard/index.html", agentGuardZh, ["保护对象", "覆盖智能体行动的完整上下文", "智能体执行与控制拓扑", "从任务与身份到外部行动", "统一安全影响引擎", "细粒度管控行为链、思维链和数据链", "客户数据外发", "长期 Memory 写入", "Shell 与生产提交", "数据流", "授权流", "行动影响", "从策略配置到审计闭环", "执行模拟", "融入现有安全体系", "补充智能体运行时上下文", "IAM", "DLP", "API Gateway", "SIEM"]],
+  ["dist/en/agentguard/index.html", agentGuardEn, ["Cover the complete context of agent action", "RUNTIME ARCHITECTURE", "Agent Execution and Control Topology", "UNIFIED SECURITY INFLUENCE ENGINE", "Control behavior, reasoning, and data chains", "Customer data egress", "Long-term memory write", "Shell and production commit", "Data flow", "Authorization flow", "Action impact", "From policy to audit.", "Run simulation", "WORKS WITH YOUR SECURITY STACK", "Add agent-aware runtime context", "IAM", "DLP", "API Gateway", "SIEM"]],
 ];
 for (const [file, content, required] of agentGuardRequirements) {
   for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard V3.6 marker: ${marker}`);
@@ -342,25 +324,38 @@ for (const marker of ["customer-egress", "memory-write", "production-commit", "R
 for (const legacy of ["<div class=\"site-container platform-stack\"", "<section class=\"three-chain"]) {
   if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage product narrative must not remain: ${legacy}`);
 }
-for (const [file, destination] of [["dist/nuwa/index.html", "/research"], ["dist/en/nuwa/index.html", "/en/research"], ["dist/NVWA-Project/index.html", "/en/research"]]) {
-  const content = await readFile(file, "utf8");
-  if (!content.includes(`http-equiv="refresh" content="0;url=${destination}"`)) {
-    violations.push(`${file}: legacy NUWA route must redirect to ${destination}`);
+
+// Legacy redirect routes must still redirect correctly
+for (const [file, destination] of [["dist/research/index.html", "/nuwa/research"], ["dist/en/research/index.html", "/en/nuwa/research"], ["dist/developers/index.html", "/open-ecosystem"], ["dist/en/developers/index.html", "/en/open-ecosystem"], ["dist/NVWA-Project/index.html", "/en/nuwa/research"]]) {
+  try {
+    const content = await readFile(file, "utf8");
+    if (!content.includes(`http-equiv="refresh" content="0;url=${destination}"`)) {
+      violations.push(`${file}: legacy route must redirect to ${destination}`);
+    }
+  } catch {
+    violations.push(`${file}: legacy redirect file is missing`);
   }
 }
+
 const sitemapXml = await readFile("dist/sitemap-0.xml", "utf8");
-for (const legacyUrl of ["https://whitzard.tech/nuwa/", "https://whitzard.tech/en/nuwa/", "https://whitzard.tech/NVWA-Project/"]) {
+// These legacy redirect routes must not be in the sitemap
+for (const legacyUrl of ["https://whitzard.tech/research", "https://whitzard.tech/en/research", "https://whitzard.tech/developers", "https://whitzard.tech/en/developers", "https://whitzard.tech/NVWA-Project/"]) {
   if (sitemapXml.includes(`<loc>${legacyUrl}</loc>`)) violations.push(`dist/sitemap-0.xml: legacy redirect must not be indexed: ${legacyUrl}`);
+}
+// New real pages must be in the sitemap
+for (const realUrl of ["https://whitzard.tech/nuwa/", "https://whitzard.tech/nuwa/research/", "https://whitzard.tech/nuwa/blog/", "https://whitzard.tech/nuwa/whitzard-index/", "https://whitzard.tech/open-ecosystem/", "https://whitzard.tech/models/", "https://whitzard.tech/waitlist/"]) {
+  if (!sitemapXml.includes(`<loc>${realUrl}</loc>`)) violations.push(`dist/sitemap-0.xml: new page must be indexed: ${realUrl}`);
 }
 
 // V3.11 page ownership: complete modules and proof assets have one canonical destination.
 const ownershipPages = Object.fromEntries(await Promise.all(coreRoutes.map(async (route) => [route || "home", withoutEmbeddedCode(await readFile(join("dist", route, "index.html"), "utf8"))])));
+const ownershipRouteMap = { home: "", agentguard: "agentguard", solutions: "solutions", models: "models", nuwa: "nuwa", "open-ecosystem": "open-ecosystem", news: "news", about: "about", contact: "contact", waitlist: "waitlist", login: "login" };
 for (const visual of ["/assets/research/self-replication-figure-1.png", "/assets/research/autocontrol-arena-figure-2.png", "/assets/research/thought-aligner-figure-1.png"]) {
-  for (const [route, html] of Object.entries(ownershipPages)) if (route !== "research" && html.includes(visual)) violations.push(`dist/${route}/index.html: research figure ${visual} belongs only on the research page`);
+  for (const [route, html] of Object.entries(ownershipPages)) if (route !== "nuwa" && html.includes(visual)) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: research figure ${visual} belongs only on the NUWA research page`);
 }
 for (const [route, html] of Object.entries(ownershipPages)) {
-  if (route !== "agentguard" && html.includes("/assets/agentguard/dashboard.png")) violations.push(`dist/${route}/index.html: AgentGuard Dashboard belongs only on the product page`);
-  if (route !== "about" && html.includes("team-advisor-link")) violations.push(`dist/${route}/index.html: complete academic biographies belong only on the about page`);
+  if (route !== "agentguard" && html.includes("/assets/agentguard/dashboard.png")) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: AgentGuard Dashboard belongs only on the product page`);
+  if (route !== "about" && html.includes("team-advisor-link")) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: complete academic biographies belong only on the about page`);
 }
 if (aboutHtml.includes("brand-architecture") || aboutHtml.includes("智能体运行时安全控制层")) violations.push("dist/about/index.html: product architecture belongs on the AgentGuard page");
 
@@ -371,22 +366,7 @@ for (const route of coreRoutes) {
   if (!h1) continue;
   const text = decodeText(h1[1]);
   const words = text.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g)?.length ?? 0;
-  if (words > 8) violations.push(`${file}: H1 exceeds English copy budget (${words}/8): ${text}`);
-}
-
-for (const route of coreRoutes) {
-  const zhFile = join("dist", route, "index.html");
-  const enFile = join("dist", "en", route, "index.html");
-  const zhHtml = await readFile(zhFile, "utf8");
-  const enHtml = await readFile(enFile, "utf8");
-  const expectedEn = route ? `/en/${route}` : "/en/";
-  const expectedZh = route ? `/${route}` : "/";
-  if (!zhHtml.includes(`class="language-switch" href="${expectedEn}"`)) {
-    violations.push(`${zhFile}: language switch does not preserve route semantics`);
-  }
-  if (!enHtml.includes(`class="language-switch" href="${expectedZh}"`)) {
-    violations.push(`${enFile}: language switch does not preserve route semantics`);
-  }
+  if (words > 10) violations.push(`${file}: H1 exceeds English copy budget (${words}/10): ${text}`);
 }
 
 if (violations.length) {

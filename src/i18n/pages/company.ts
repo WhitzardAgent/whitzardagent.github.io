@@ -106,11 +106,11 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       meta: {
         title: "About Us — Whitzard",
         description:
-          "Whitzard builds AI agent security infrastructure, powered by AgentGuard, NUWA Lab research, and the WhitzardAgent open ecosystem.",
+          "Whitzard builds security infrastructure for the agentic AI era through AgentGuard, NUWA research, and the open ecosystem.",
       },
       eyebrow: "WHITZARD · 白泽",
-      title: "Building security infrastructure for the agentic AI era",
-      lead: "Whitzard connects AgentGuard, NUWA Lab, and an open technical ecosystem.",
+      title: "Security infrastructure for the agentic AI era",
+      lead: "Whitzard combines runtime control through AgentGuard, frontier-risk evidence through NUWA, and reusable safety technology through its open ecosystem.",
       architecture: [
         {
           name: "Whitzard",
@@ -125,10 +125,10 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           href: "/en/agentguard",
         },
         {
-          name: "NUWA Lab",
+          name: "NUWA",
           role: "Frontier safety research engine",
           body: "Research that defines risk, builds evaluation evidence, and advances safety models.",
-          href: "/en/research",
+          href: "/en/nuwa/research",
         },
         {
           name: "WhitzardAgent",
@@ -253,11 +253,11 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       meta: {
         title: "关于我们 — 白泽（Whitzard）",
         description:
-          "白泽（Whitzard）打造AI智能体时代的安全基础设施，由 AgentGuard、女娲实验室研究引擎与 WhitzardAgent 开放生态共同支撑。",
+          "白泽（Whitzard）打造智能体时代的安全基础设施，由 AgentGuard、女娲实验室与开放生态共同支撑。",
       },
       eyebrow: "白泽（Whitzard）",
-      title: "打造AI智能体时代的安全基础设施",
-      lead: "白泽（Whitzard）连接 AgentGuard、女娲实验室与开放技术生态。",
+      title: "打造智能体时代的安全基础设施",
+      lead: "白泽以 AgentGuard 建立智能体运行时控制，以女娲实验室建设前沿风险证据，并通过开放生态推动可复用的安全技术。",
       architecture: [
         {
           name: "白泽（Whitzard）",
@@ -275,7 +275,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
           name: "女娲实验室",
           role: "前沿安全研究引擎",
           body: "定义风险、建设评测证据并推动安全模型的研究引擎。",
-          href: "/research",
+          href: "/nuwa/research",
         },
         {
           name: "WhitzardAgent",

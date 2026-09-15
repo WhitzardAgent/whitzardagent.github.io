@@ -10,12 +10,16 @@
     "check": "astro check",
     "check:links": "node scripts/check-links.mjs",
     "check:content": "node scripts/check-content.mjs",
+    "check:terminology": "node scripts/check-terminology.mjs",
+    "check:research-blog": "node scripts/check-research-blog.mjs",
+    "test": "node --test scripts/*.test.mjs",
     "preview": "astro preview",
     "new:post": "node scripts/new-content.mjs post",
     "new:brief": "node scripts/new-content.mjs brief",
     "new:note": "node scripts/new-content.mjs note",
     "new:report": "node scripts/new-content.mjs report",
-    "new:update": "node scripts/new-content.mjs update"
+    "new:update": "node scripts/new-content.mjs update",
+    "new:research-blog": "node scripts/new-research-blog.mjs"
   },
   "repository": {
     "type": "git",
@@ -28,7 +32,7 @@
     "url": "https://github.com/WhitzardAgent/whitzardagent.github.io/issues"
   },
   "homepage": "https://whitzard.tech/",
-  "description": "Whitzard website and Nuwa Frontier AI Safety Lab",
+  "description": "Whitzard website and NUWA Frontier AI Safety Lab",
   "dependencies": {
     "@astrojs/mdx": "^7.0.5",
     "@astrojs/react": "^6.0.2",
@@ -47,6 +51,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "esbuild": "^0.28.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.1"
   }
 }

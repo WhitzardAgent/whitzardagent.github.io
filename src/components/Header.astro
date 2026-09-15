@@ -3,16 +3,32 @@ import type { Locale } from "../i18n/config";
 import { localizedPath, stripLocale } from "../i18n/config";
 import { ui } from "../i18n/ui";
 import LanguageSwitch from "./LanguageSwitch.astro";
+import NavIcon from "./NavIcon.astro";
 
 interface Props { brand?: "whitzard" | "nuwa"; locale: Locale; currentPath: string; }
 const { brand = "whitzard", locale, currentPath } = Astro.props;
 const copy = ui[locale];
 const basePath = stripLocale(currentPath);
 const homePath = localizedPath("/", locale);
-const demoPath = localizedPath("/contact", locale);
+const waitlistPath = localizedPath("/waitlist", locale);
+const consoleUrl = import.meta.env.PUBLIC_CONSOLE_URL;
+const consolePath = typeof consoleUrl === "string" && /^https:\/\//.test(consoleUrl)
+  ? consoleUrl
+  : localizedPath("/login", locale);
+
 function isActive(href: string) {
-  if (href === "/research") return basePath.startsWith("/research") || basePath.startsWith("/nuwa");
-  return basePath === href || basePath.startsWith(`${href}/`);
+  if (href === "/nuwa") return basePath === "/nuwa";
+  if (href === "/nuwa/blog") return basePath === "/nuwa/blog" || basePath.startsWith("/nuwa/blog/");
+  if (href === "/agentguard") return basePath === "/agentguard" || basePath.startsWith("/agentguard/");
+  if (href === "/solutions") return basePath === "/solutions";
+  if (href === "/models") return basePath === "/models";
+  if (href === "/open-ecosystem") return basePath === "/open-ecosystem" || basePath === "/developers";
+  if (href === "/about") return basePath === "/about";
+  return basePath === href;
+}
+
+function isGroupActive(children?: { href: string }[]) {
+  return children?.some((child) => isActive(child.href));
 }
 ---
 
@@ -24,13 +40,42 @@ function isActive(href: string) {
         {locale === "zh" ? <><span class="wordmark__text">白泽</span><span class="wordmark__han">（Whitzard）</span></> : <span class="wordmark__text">Whitzard</span>}
       </a>
       <nav class="site-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
-        {copy.nav.map((item) => (
-          <a href={localizedPath(item.href, locale)} class:list={["site-nav__link", isActive(item.href) && "is-active"]} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
+        {copy.nav.map((item, index) => item.children ? (
+          <div class:list={["site-nav__group", index > 0 && "site-nav__item--divided", isGroupActive(item.children) && "is-active"]} data-dropdown>
+            <button
+              class:list={["site-nav__link", "site-nav__toggle", isGroupActive(item.children) && "is-active"]}
+              type="button"
+              aria-expanded="false"
+              aria-haspopup="true"
+              data-dropdown-toggle
+            >
+              <NavIcon name={item.icon} />
+              <span>{item.label}</span>
+              <svg class="site-nav__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="site-nav__dropdown" data-dropdown-panel role="menu" aria-label={item.label}>
+              {item.children.map((child) => (
+                <a
+                  href={localizedPath(child.href, locale)}
+                  class:list={["site-nav__dropdown-link", isActive(child.href) && "is-active"]}
+                  role="menuitem"
+                  aria-current={isActive(child.href) ? "page" : undefined}
+                >{child.label}</a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={localizedPath(item.href, locale)}
+            class:list={["site-nav__link", index > 0 && "site-nav__item--divided", isActive(item.href) && "is-active"]}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          ><NavIcon name={item.icon} />{item.label}</a>
         ))}
       </nav>
       <div class="site-header__actions">
         <LanguageSwitch locale={locale} pathname={currentPath} label={copy.languageLabel} />
-        <a href={demoPath} class="button button--small button--primary site-header__cta">{copy.demo}</a>
+        <a href={consolePath} class="button button--small button--secondary site-header__console" data-umami-event="console-entry-click">{copy.console}</a>
+        <a href={waitlistPath} class="button button--small button--primary site-header__cta" data-umami-event="waitlist-cta-click">{copy.primaryCta}</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label={copy.menuOpen} data-open-label={copy.menuOpen} data-close-label={copy.menuClose}>
           <span></span><span></span>
         </button>
@@ -38,12 +83,39 @@ function isActive(href: string) {
     </div>
     <div id="mobile-navigation" class="mobile-navigation" hidden>
       <nav class="site-container mobile-navigation__inner" aria-label={locale === "zh" ? "移动端主导航" : "Mobile navigation"}>
-        {copy.nav.map((item, index) => (
-          <a href={localizedPath(item.href, locale)} class:list={["mobile-navigation__link", isActive(item.href) && "is-active"]} data-mobile-first={index === 0 ? "true" : undefined}>
-            <span>{String(index + 1).padStart(2, "0")}</span>{item.label}
+        {copy.nav.map((item, index) => item.children ? (
+          <div class="mobile-nav__group" data-mobile-group>
+            <button
+              class="mobile-navigation__link mobile-navigation__parent"
+              type="button"
+              aria-expanded="false"
+              data-mobile-parent
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <span class="mobile-navigation__label"><NavIcon name={item.icon} />{item.label}</span>
+              <svg class="mobile-navigation__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="mobile-nav__children" hidden>
+              {item.children.map((child) => (
+                <a
+                  href={localizedPath(child.href, locale)}
+                  class:list={["mobile-navigation__sublink", isActive(child.href) && "is-active"]}
+                  data-mobile-first={index === 0 ? "true" : undefined}
+                >{child.label}</a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={localizedPath(item.href, locale)}
+            class:list={["mobile-navigation__link", isActive(item.href) && "is-active"]}
+            data-mobile-first={index === 0 ? "true" : undefined}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span><span class="mobile-navigation__label"><NavIcon name={item.icon} />{item.label}</span>
           </a>
         ))}
-        <a href={demoPath} class="button button--primary mobile-navigation__cta">{copy.demo}</a>
+        <a href={consolePath} class="button button--secondary mobile-navigation__console" data-umami-event="console-entry-click">{copy.console}</a>
+        <a href={waitlistPath} class="button button--primary mobile-navigation__cta" data-umami-event="waitlist-cta-click">{copy.primaryCta}</a>
       </nav>
     </div>
   </header>
@@ -54,14 +126,74 @@ function isActive(href: string) {
     private button: HTMLButtonElement | null = null;
     private panel: HTMLElement | null = null;
     private aborter = new AbortController();
+
     connectedCallback() {
       this.button = this.querySelector(".menu-toggle");
       this.panel = this.querySelector(".mobile-navigation");
       this.button?.addEventListener("click", () => this.toggle(), { signal: this.aborter.signal });
       this.addEventListener("keydown", (event) => { if (event.key === "Escape") this.close(true); }, { signal: this.aborter.signal });
-      this.querySelectorAll(".mobile-navigation a").forEach((link) => link.addEventListener("click", () => this.close(false), { signal: this.aborter.signal }));
+      this.querySelectorAll<HTMLAnchorElement>(".mobile-navigation a").forEach((link) => link.addEventListener("click", () => this.close(false), { signal: this.aborter.signal }));
+
+      // Desktop dropdown: click toggle + hover + escape
+      this.querySelectorAll<HTMLElement>("[data-dropdown]").forEach((group) => {
+        const toggle = group.querySelector<HTMLButtonElement>("[data-dropdown-toggle]");
+        const panel = group.querySelector<HTMLElement>("[data-dropdown-panel]");
+        if (!toggle || !panel) return;
+
+        const open = () => {
+          this.closeAllDropdowns();
+          toggle.setAttribute("aria-expanded", "true");
+          group.classList.add("is-open");
+        };
+        const close = () => {
+          toggle.setAttribute("aria-expanded", "false");
+          group.classList.remove("is-open");
+        };
+
+        toggle.addEventListener("click", (e) => {
+          e.preventDefault();
+          toggle.getAttribute("aria-expanded") === "true" ? close() : open();
+        }, { signal: this.aborter.signal });
+
+        group.addEventListener("mouseenter", open, { signal: this.aborter.signal });
+        group.addEventListener("mouseleave", close, { signal: this.aborter.signal });
+        group.addEventListener("focusin", () => {
+          if (!group.classList.contains("is-open")) open();
+        }, { signal: this.aborter.signal });
+        group.addEventListener("focusout", (e) => {
+          if (!group.contains(e.relatedTarget as Node)) close();
+        }, { signal: this.aborter.signal });
+        toggle.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            open();
+            panel.querySelector<HTMLAnchorElement>(".site-nav__dropdown-link")?.focus();
+          }
+        }, { signal: this.aborter.signal });
+      });
+
+      // Mobile collapsible groups
+      this.querySelectorAll<HTMLElement>("[data-mobile-group]").forEach((group) => {
+        const parent = group.querySelector<HTMLButtonElement>("[data-mobile-parent]");
+        const children = group.querySelector<HTMLElement>(".mobile-nav__children");
+        if (!parent || !children) return;
+        parent.addEventListener("click", () => {
+          const expanded = parent.getAttribute("aria-expanded") === "true";
+          parent.setAttribute("aria-expanded", String(!expanded));
+          children.hidden = expanded;
+        }, { signal: this.aborter.signal });
+      });
     }
+
+    private closeAllDropdowns() {
+      this.querySelectorAll<HTMLElement>("[data-dropdown]").forEach((g) => {
+        g.classList.remove("is-open");
+        g.querySelector<HTMLButtonElement>("[data-dropdown-toggle]")?.setAttribute("aria-expanded", "false");
+      });
+    }
+
     disconnectedCallback() { this.aborter.abort(); }
+
     private toggle() { this.button?.getAttribute("aria-expanded") === "true" ? this.close(true) : this.open(); }
     private open() {
       if (!this.button || !this.panel) return;
@@ -77,6 +209,7 @@ function isActive(href: string) {
       this.button.setAttribute("aria-expanded", "false");
       this.button.setAttribute("aria-label", this.button.dataset.openLabel ?? "Open navigation");
       document.documentElement.classList.remove("menu-open");
+      this.closeAllDropdowns();
       if (restoreFocus) this.button.focus();
     }
   }

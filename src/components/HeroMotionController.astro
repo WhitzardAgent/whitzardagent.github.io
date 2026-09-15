@@ -1,0 +1,36 @@
+<script>
+  class HeroMotionController extends HTMLElement {
+    private observer?: IntersectionObserver;
+    private visible = true;
+
+    connectedCallback() {
+      const update = () => {
+        const active = this.visible && !document.hidden;
+        this.dataset.motionActive = active ? "true" : "false";
+        this.querySelectorAll("svg").forEach((svg) => {
+          const animated = svg as SVGSVGElement & { pauseAnimations?: () => void; unpauseAnimations?: () => void };
+          if (active) animated.unpauseAnimations?.();
+          else animated.pauseAnimations?.();
+        });
+      };
+
+      this.observer = new IntersectionObserver(([entry]) => {
+        this.visible = entry?.isIntersecting ?? false;
+        update();
+      }, { threshold: 0.08 });
+      this.observer.observe(this);
+      document.addEventListener("visibilitychange", update);
+      this.addEventListener("hero-motion-disconnect", () => document.removeEventListener("visibilitychange", update), { once: true });
+      update();
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+      this.dispatchEvent(new Event("hero-motion-disconnect"));
+    }
+  }
+
+  if (!customElements.get("hero-motion-controller")) {
+    customElements.define("hero-motion-controller", HeroMotionController);
+  }
+</script>

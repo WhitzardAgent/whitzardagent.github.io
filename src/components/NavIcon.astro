@@ -1,0 +1,58 @@
+---
+export type NavIconName = "products" | "research" | "ecosystem" | "about";
+
+interface Props {
+  name: NavIconName;
+  size?: number;
+}
+
+const { name, size = 16 } = Astro.props;
+---
+
+<svg
+  class="nav-icon"
+  width={size}
+  height={size}
+  viewBox="0 0 16 16"
+  fill="none"
+  aria-hidden="true"
+>
+  {name === "products" && (
+    <>
+      <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1" />
+      <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1" />
+      <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1" />
+      <path d="M9.5 11.5h4M11.5 9.5v4" />
+    </>
+  )}
+  {name === "research" && (
+    <>
+      <circle cx="6.75" cy="6.75" r="4.25" />
+      <path d="m10 10 3.5 3.5M6.75 4.6v4.3M4.6 6.75h4.3" />
+    </>
+  )}
+  {name === "ecosystem" && (
+    <>
+      <circle cx="3" cy="8" r="1.5" />
+      <circle cx="12.75" cy="3.25" r="1.5" />
+      <circle cx="12.75" cy="12.75" r="1.5" />
+      <path d="m4.4 7.3 6.9-3.35M4.4 8.7l6.9 3.35" />
+    </>
+  )}
+  {name === "about" && (
+    <>
+      <circle cx="8" cy="5" r="2.25" />
+      <path d="M3.5 13.25c.5-2.35 2.05-3.55 4.5-3.55s4 1.2 4.5 3.55" />
+    </>
+  )}
+</svg>
+
+<style>
+  .nav-icon {
+    flex: none;
+    stroke: currentColor;
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>

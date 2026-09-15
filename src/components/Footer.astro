@@ -20,24 +20,29 @@ const copy = ui[locale];
       <p class="site-footer__research">{copy.footer.researchLine}</p>
     </div>
     <div class="site-footer__column">
-      <p class="site-footer__label">{copy.footer.platform}</p>
+      <p class="site-footer__label">{copy.footer.products}</p>
       <a href={localizedPath("/agentguard", locale)}>AgentGuard</a>
+      <a href={localizedPath("/models", locale)}>{locale === "zh" ? "模型服务" : "Model Services"}</a>
       <a href={localizedPath("/solutions", locale)}>{locale === "zh" ? "应用场景" : "Use Cases"}</a>
-      <a href={localizedPath("/contact", locale)}>{locale === "zh" ? "预约演示" : "Book a Demo"}</a>
+      <a href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.primaryCta}</a>
     </div>
     <div class="site-footer__column">
-      <p class="site-footer__label">{copy.footer.resources}</p>
-      <a href={localizedPath("/research", locale)}>{locale === "zh" ? "女娲实验室" : "NUWA Lab"}</a>
-      <a href={`${localizedPath("/research", locale)}#research-index`}>{locale === "zh" ? "研究成果" : "Research publications"}</a>
-      <a href={localizedPath("/news", locale)}>{locale === "zh" ? "最新动态" : "Latest"}</a>
-      <a href={localizedPath("/open-ecosystem", locale)}>WhitzardAgent</a>
+      <p class="site-footer__label">{copy.footer.nuwa}</p>
+      <a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "实验室总览" : "Lab Overview"}</a>
+      <a href={localizedPath("/nuwa/research", locale)}>{locale === "zh" ? "研究成果" : "Research"}</a>
+      <a href={localizedPath("/nuwa/blog", locale)}>Research Blog</a>
+      <a href={localizedPath("/nuwa/whitzard-index", locale)}>{locale === "zh" ? "白泽指数" : "Whitzard Index"}</a>
+    </div>
+    <div class="site-footer__column">
+      <p class="site-footer__label">{copy.footer.ecosystem}</p>
+      <a href={localizedPath("/open-ecosystem", locale)}>{locale === "zh" ? "开放生态" : "Open Ecosystem"}</a>
+      <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href={links.huggingface} target="_blank" rel="noreferrer">Hugging Face ↗</a>
     </div>
     <div class="site-footer__column">
       <p class="site-footer__label">{copy.footer.company}</p>
       <a href={localizedPath("/about", locale)}>{locale === "zh" ? "关于我们" : "About Us"}</a>
       <a href={`mailto:${links.email}`}>{links.email}</a>
-      <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
-      <a href={links.huggingface} target="_blank" rel="noreferrer">Hugging Face ↗</a>
     </div>
   </div>
   <div class="site-container site-footer__bottom">

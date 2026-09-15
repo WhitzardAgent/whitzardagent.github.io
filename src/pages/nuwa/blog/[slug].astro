@@ -1,0 +1,16 @@
+---
+import ResearchBlogArticle from "../../../components/research/ResearchBlogArticle.astro";
+import { allResearchBlogEntries, pairedEntry, publishedResearchBlog, researchBlogSlug } from "../../../lib/researchBlog";
+
+export async function getStaticPaths() {
+  const entries = await allResearchBlogEntries();
+  return publishedResearchBlog(entries, "zh").map((entry) => ({
+    params: { slug: researchBlogSlug(entry) },
+    props: { entry, pairedSlug: pairedEntry(entry, entries) ? researchBlogSlug(pairedEntry(entry, entries)!) : undefined },
+  }));
+}
+
+const { entry, pairedSlug } = Astro.props;
+const { slug } = Astro.params;
+---
+<ResearchBlogArticle entry={entry} locale="zh" slug={slug!} pairedSlug={pairedSlug} />

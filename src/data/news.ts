@@ -72,7 +72,7 @@ export const newsItems: NewsItem[] = [
     },
     sourceLanguage: "en",
     summary: {
-      en: "NUWA Lab's first public research essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
+      en: "NUWA's first public research essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
       zh: "女娲实验室首篇公开研究文章，讨论如何让前沿 AI 风险评测更科学、可验证并可落地。",
     },
     featured: true,
@@ -97,7 +97,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     title: {
-      en: "NUWA Lab Launch",
+      en: "NUWA Launch",
       zh: "女娲实验室发布",
     },
     date: "2025-11-01",
@@ -109,12 +109,12 @@ export const newsItems: NewsItem[] = [
     },
     sourceLanguage: "en",
     summary: {
-      en: "NUWA Lab is launched as the frontier safety research lab supported by Whitzard.",
+      en: "NUWA Frontier AI Safety Lab launches with support from Whitzard.",
       zh: "女娲实验室作为白泽（Whitzard）背后的前沿安全研究引擎正式发布。",
     },
     body: {
-      en: "NUWA Lab is officially launched as the research lab supported by Whitzard. NUWA focuses on transparent, third-party, open infrastructure and benchmarks for frontier AI safety evaluation and governance.\n\nThe lab studies frontier AI risks including autonomy risks, deception, scheming, and loss-of-control, while developing open evaluation frameworks, benchmarks, technical notes, and governance evidence for safe and controllable AI.",
-      zh: "女娲实验室作为白泽（Whitzard）支持的研究引擎正式发布。女娲实验室关注透明、第三方、开放的前沿 AI 安全评测与治理基础设施。\n\n实验室研究自主性风险、欺骗、谋划与失控等前沿 AI 风险，并建设开放评测框架、基准、技术笔记和治理证据，服务安全可控的 AI 发展。",
+      en: "NUWA Frontier AI Safety Lab launches with support from Whitzard. NUWA focuses on transparent, open infrastructure and benchmarks for frontier AI safety evaluation and governance.\n\nThe lab studies frontier AI risks including autonomy risks, deception, scheming, and loss of control, while developing open evaluation frameworks, benchmarks, technical notes, and governance evidence for safe and controllable AI.",
+      zh: "女娲实验室在白泽（Whitzard）的支持下正式发布，关注透明、开放的前沿 AI 安全评测与治理基础设施。\n\n实验室研究自主性风险、欺骗、隐蔽谋划与失控等前沿 AI 风险，并建设开放评测框架、基准、技术笔记和治理证据，服务安全可控的 AI 发展。",
     },
     featured: true,
   },

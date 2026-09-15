@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { researchBlogSchema } from "./content/researchBlogSchema";
 
 const commonSchema = z.object({
   title: z.string(),
@@ -42,4 +43,9 @@ const reports = defineCollection({
   schema: commonSchema,
 });
 
-export const collections = { posts, briefs, notes, reports };
+const researchBlog = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/research-blog" }),
+  schema: researchBlogSchema,
+});
+
+export const collections = { posts, briefs, notes, reports, researchBlog };

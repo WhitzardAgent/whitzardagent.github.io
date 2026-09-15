@@ -10,6 +10,8 @@ import { researchVisuals } from "../../data/researchVisuals";
 import { links } from "../../data/links";
 import ResearchExplorer from "./ResearchExplorer";
 import PublicImpactPath from "./PublicImpactPath.astro";
+import ResearchMission from "./ResearchMission.astro";
+import ResearchBlogPreview from "./ResearchBlogPreview.astro";
 import "../../styles/research.css";
 
 interface Props { locale: Locale; copy: ResearchCopy["research"] }
@@ -31,22 +33,21 @@ const researchers = [
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "ResearchOrganization", name: locale === "zh" ? "女娲实验室" : "NUWA Lab", alternateName: locale === "zh" ? ["NUWA Lab", "NVWA Lab", "Nuwa Frontier AI Safety Lab"] : ["女娲实验室", "NVWA Lab", "Nuwa Frontier AI Safety Lab"], url: `https://whitzard.tech${localizedPath("/research", locale)}` },
+    { "@type": "ResearchOrganization", name: locale === "zh" ? "女娲实验室" : "NUWA Frontier AI Safety Lab", alternateName: locale === "zh" ? ["NUWA", "NUWA Frontier AI Safety Lab"] : ["NUWA", "女娲实验室"], url: `https://whitzard.tech${localizedPath("/nuwa/research", locale)}` },
     ...featured.map((item) => ({ "@type": "ScholarlyArticle", headline: item.title, author: item.authors.map((name) => ({ "@type": "Person", name })), datePublished: String(item.year), url: primaryLink(item), about: item.topics[locale] })),
   ],
 };
 ---
 
-<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/research" schema={schema}>
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa/research" schema={schema}>
   <section class="research-hero">
     <div class="site-container research-hero__grid">
-      <img class="research-hero__logo" src="/assets/logo/nvwa_logo.png" width="112" height="112" alt={locale === "zh" ? "女娲实验室标识" : "NUWA Lab logo"} />
-      <div class="research-hero__content"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><p class="research-hero__facts">{researchAssets.length} {locale === "zh" ? "项研究成果" : "research works"} <i /> {copy.areas.length} {locale === "zh" ? "个研究主题" : "research themes"} <i /> {researchRecognitions.length} {locale === "zh" ? "项荣誉" : "honours"}</p></div>
-      <nav aria-label={locale === "zh" ? "研究页面导航" : "Research page navigation"}>
-        <a href="#featured">{copy.nav.featured}</a><a href="#public-impact">{copy.nav.impact}</a><a href="#infrastructure">{copy.nav.infrastructure}</a><a href="#themes">{copy.nav.themes}</a><a href="#recognition">{copy.nav.recognition}</a><a href="#research-index">{copy.nav.index}</a>
-      </nav>
+      <img class="research-hero__logo" src="/assets/logo/nvwa_logo.png" width="112" height="112" alt={locale === "zh" ? "女娲实验室标识" : "NUWA logo"} />
+      <div class="research-hero__content"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div class="research-hero__actions"><a class="button button--primary" href={localizedPath("/nuwa/blog", locale)}>Research Blog</a><a class="button button--secondary" href={localizedPath("/nuwa/whitzard-index", locale)}>{locale === "zh" ? "白泽指数" : "Whitzard Index"}</a></div></div>
     </div>
   </section>
+
+  <ResearchMission locale={locale} />
 
   <section id="featured" class="section research-featured">
     <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "代表成果" : "FEATURED WORK"}</p><h2>{copy.featured}</h2><p>{copy.featuredLead}</p></div>
@@ -69,7 +70,7 @@ const schema = {
     </div>
   </section>
 
-  <PublicImpactPath locale={locale} />
+  <ResearchBlogPreview locale={locale} />
 
   <section id="infrastructure" class="section research-infrastructure">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.infrastructure.eyebrow}</p><h2>{copy.infrastructure.title}</h2><p>{copy.infrastructure.lead}</p></div>
@@ -80,14 +81,7 @@ const schema = {
     </article>)}</div>
   </section>
 
-  <section id="themes" class="section research-themes">
-    <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "研究版图" : "RESEARCH THEMES"}</p><h2>{copy.nav.themes}</h2></div>
-    <div class="site-container research-themes__grid">{copy.areas.map((area, index) => {
-      const items = sorted.filter((item) => item.category === area.key);
-      const representative = items[0];
-      return <article><div class="research-themes__meta"><span>0{index + 1}</span><strong>{items.length} {locale === "zh" ? "项成果" : "works"}</strong></div><h3>{area.title}</h3><p>{area.body}</p>{representative && <div class="research-themes__representative"><span>{locale === "zh" ? "代表成果" : "REPRESENTATIVE"}</span><a href={primaryLink(representative)} target="_blank" rel="noreferrer">{representative.title}</a></div>}<a class="research-themes__all" href={`${localizedPath("/research", locale)}?topic=${area.key}#research-index`}>{area.cta} →</a></article>;
-    })}</div>
-  </section>
+  <PublicImpactPath locale={locale} />
 
   <section id="recognition" class="section research-recognition">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.recognitionEyebrow}</p><h2>{copy.recognitionTitle}</h2></div>
@@ -99,5 +93,5 @@ const schema = {
     <div class="site-container"><ResearchExplorer assets={sorted} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} members={researchers.map(({ slug, name }) => ({ key: slug, title: name }))} client:load /></div>
   </section>
 
-  <section id="collaboration" class="section research-collaboration"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "研究合作" : "COLLABORATION"}</p><h2>{copy.collaborationTitle}</h2><p>{copy.collaborationBody}</p><a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "女娲实验室研究合作" : "NUWA Lab research collaboration")}`}>{copy.collaborationCta}</a></div></section>
+  <section id="collaboration" class="section research-collaboration"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "研究合作" : "COLLABORATION"}</p><h2>{copy.collaborationTitle}</h2><p>{copy.collaborationBody}</p><a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "女娲实验室研究合作" : "NUWA research collaboration")}`} data-umami-event="research-collaboration-click">{copy.collaborationCta}</a></div></section>
 </BaseLayout>

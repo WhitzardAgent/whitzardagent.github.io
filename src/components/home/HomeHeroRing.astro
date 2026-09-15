@@ -1,0 +1,97 @@
+---
+import type { Locale } from "../../i18n/config";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const labels = locale === "zh"
+  ? [
+      { className: "data", label: "数据", shape: "circle" },
+      { className: "authorization", label: "授权", shape: "diamond" },
+      { className: "effect", label: "行动影响", shape: "square" },
+      { className: "response", label: "安全处置", shape: "gate" },
+    ]
+  : [
+      { className: "data", label: "DATA", shape: "circle" },
+      { className: "authorization", label: "AUTHORIZATION", shape: "diamond" },
+      { className: "effect", label: "ACTION EFFECT", shape: "square" },
+      { className: "response", label: "RESPONSE", shape: "gate" },
+    ];
+---
+
+<figure class="hero-ring" role="img" aria-label={locale === "zh" ? "数据、授权与行动影响在可信边界内持续流动，并在关键边界接受安全处置" : "Data, authorization, and action impact moving through a trusted boundary with a safety intervention at the critical edge"}>
+  <div class="hero-ring__field" aria-hidden="true">
+    <svg viewBox="0 0 660 660" focusable="false">
+      <defs>
+        <linearGradient id="home-boundary-gradient" x1="105" y1="75" x2="555" y2="590" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8bb4aa" />
+          <stop offset=".48" stop-color="#2f7f7a" />
+          <stop offset="1" stop-color="#102b5c" />
+        </linearGradient>
+        <radialGradient id="home-field-wash" cx="0" cy="0" r="1" gradientTransform="translate(350 320) rotate(90) scale(266)">
+          <stop stop-color="#dfece7" stop-opacity=".62" />
+          <stop offset="1" stop-color="#f6f7f3" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+
+      <circle class="hero-ring__wash" cx="330" cy="330" r="268" fill="url(#home-field-wash)" />
+      <g class="hero-ring__coordinates">
+        <path d="M56 165H604M56 330H604M56 495H604M165 56V604M330 56V604M495 56V604" />
+        <circle cx="330" cy="330" r="274" />
+        <circle cx="330" cy="330" r="190" />
+        <circle cx="330" cy="330" r="92" />
+      </g>
+      <g class="hero-ring__boundary">
+        <circle class="hero-ring__boundary-base" cx="330" cy="330" r="247" />
+        <circle class="hero-ring__boundary-safe" cx="330" cy="330" r="247" pathLength="100" />
+        <circle class="hero-ring__boundary-open" cx="330" cy="330" r="247" pathLength="100" />
+      </g>
+      <g class="hero-ring__inner-orbit">
+        <circle cx="330" cy="330" r="178" pathLength="100" />
+        <circle cx="330" cy="330" r="116" pathLength="100" />
+      </g>
+      <g class="hero-ring__flows">
+        <path class="hero-ring__flow hero-ring__flow--data" pathLength="100" d="M112 393C182 365 213 273 302 277C395 281 420 363 548 228" />
+        <path class="hero-ring__flow hero-ring__flow--authorization" pathLength="100" d="M127 457C230 469 252 374 324 354C398 334 454 377 554 279" />
+        <path class="hero-ring__flow hero-ring__flow--effect" pathLength="100" d="M150 516C238 514 306 448 366 411C427 374 483 354 558 326" />
+      </g>
+      <g class="hero-ring__signals">
+        <circle class="hero-ring__signal hero-ring__signal--data" cx="302" cy="277" r="6" />
+        <rect class="hero-ring__signal hero-ring__signal--authorization" x="318" y="348" width="12" height="12" transform="rotate(45 324 354)" />
+        <rect class="hero-ring__signal hero-ring__signal--effect" x="360" y="405" width="12" height="12" rx="1" />
+        <circle class="hero-ring__core" cx="330" cy="330" r="11" />
+        <circle class="hero-ring__core-pulse" cx="330" cy="330" r="25" />
+      </g>
+      <g class="hero-ring__gate">
+        <path d="M538 189A247 247 0 0 1 571 263" />
+        <path d="M526 221L554 209" />
+        <circle cx="540" cy="215" r="4" />
+      </g>
+      <g class="hero-ring__ticks">
+        <path d="M330 43v19M330 598v19M43 330h19M598 330h19" />
+        <path d="M128 128l14 14M518 518l14 14M128 532l14-14M518 142l14-14" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-ring__legend" aria-hidden="true">
+    {labels.map((item) => (
+      <span class={`is-${item.className}`}><i class={`is-${item.shape}`}></i>{item.label}</span>
+    ))}
+  </div>
+  <figcaption>{locale === "zh" ? "可信边界场 · 数据、授权与行动影响的连续控制" : "Trusted boundary field · continuous control across data, authorization, and action impact"}</figcaption>
+</figure>
+
+<style>
+  .hero-ring{position:relative;width:min(100%,40rem);margin:0;justify-self:end;isolation:isolate}.hero-ring:before{content:"";position:absolute;inset:10% 8%;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(79,136,131,.12),rgba(79,136,131,.025) 52%,transparent 72%);transform:translate3d(0,0,0);animation:homeFieldBreathe 28s ease-in-out infinite}.hero-ring__field{position:relative;aspect-ratio:1}.hero-ring svg{display:block;width:100%;height:100%;overflow:visible}.hero-ring__coordinates{fill:none;stroke:rgba(24,34,52,.075);stroke-width:1}.hero-ring__coordinates circle{stroke-dasharray:2 7}.hero-ring__wash{animation:homeWashDrift 32s ease-in-out infinite}.hero-ring__boundary{transform-box:fill-box;transform-origin:center;animation:homeBoundaryTurn 38s linear infinite}.hero-ring__boundary circle{fill:none}.hero-ring__boundary-base{stroke:rgba(16,43,92,.085);stroke-width:20}.hero-ring__boundary-safe{stroke:url(#home-boundary-gradient);stroke-width:18;stroke-linecap:round;stroke-dasharray:78 22;stroke-dashoffset:8}.hero-ring__boundary-open{stroke:rgba(246,247,243,.98);stroke-width:24;stroke-dasharray:11 89;stroke-dashoffset:-4}.hero-ring__inner-orbit{fill:none;stroke:rgba(39,109,104,.26);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:homeInnerTurn 30s linear infinite reverse}.hero-ring__inner-orbit circle:first-child{stroke-dasharray:58 42}.hero-ring__inner-orbit circle:last-child{stroke:rgba(23,74,166,.18);stroke-dasharray:25 75}.hero-ring__flow{fill:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:7 9;animation:homeTraceFlow 9s linear infinite}.hero-ring__flow--data{stroke:#2f7f7a}.hero-ring__flow--authorization{stroke:#174aa6;animation-duration:11s}.hero-ring__flow--effect{stroke:#718091;animation-duration:13s}.hero-ring__signal{transform-box:fill-box;transform-origin:center;animation:homeSignalPulse 7.2s ease-in-out infinite}.hero-ring__signal--data{fill:#2f7f7a}.hero-ring__signal--authorization{fill:#174aa6;animation-delay:-2.4s}.hero-ring__signal--effect{fill:#687786;animation-delay:-4.8s}.hero-ring__core{fill:#102b5c}.hero-ring__core-pulse{fill:none;stroke:rgba(16,43,92,.28);stroke-width:1;transform-box:fill-box;transform-origin:center;animation:homeCorePulse 8s ease-out infinite}.hero-ring__gate{fill:none;stroke:#d8563a;stroke-width:16;stroke-linecap:round}.hero-ring__gate path:nth-child(2){stroke-width:2}.hero-ring__gate circle{fill:#d8563a;stroke:none;animation:homeGatePulse 10s ease-in-out infinite}.hero-ring__ticks{fill:none;stroke:rgba(16,43,92,.28);stroke-width:1}.hero-ring__legend{display:grid;grid-template-columns:repeat(4,auto);justify-content:center;gap:clamp(.8rem,2vw,1.5rem);margin-top:-.7rem;color:#536071;font:600 .62rem var(--font-mono);letter-spacing:.075em}.hero-ring__legend span{display:flex;align-items:center;gap:.42rem;white-space:nowrap}.hero-ring__legend i{display:inline-block;width:7px;height:7px;border:1.5px solid currentColor}.hero-ring__legend .is-circle{border-radius:50%;color:#2f7f7a}.hero-ring__legend .is-diamond{color:#174aa6;transform:rotate(45deg)}.hero-ring__legend .is-square{color:#687786}.hero-ring__legend .is-gate{width:3px;height:11px;border:0;background:#d8563a;color:#d8563a}.hero-ring figcaption{margin:.85rem auto 0;color:var(--wz-subtle);font-size:.7rem;text-align:center;letter-spacing:.035em}
+  @keyframes homeBoundaryTurn{to{transform:rotate(360deg)}}
+  @keyframes homeInnerTurn{to{transform:rotate(360deg)}}
+  @keyframes homeTraceFlow{to{stroke-dashoffset:-64}}
+  @keyframes homeSignalPulse{0%,72%,100%{opacity:.52;transform:scale(.9)}82%{opacity:1;transform:scale(1.35)}}
+  @keyframes homeCorePulse{0%{opacity:.38;transform:scale(.42)}55%,100%{opacity:0;transform:scale(1.34)}}
+  @keyframes homeGatePulse{0%,75%,100%{opacity:.55}84%{opacity:1}}
+  @keyframes homeFieldBreathe{0%,100%{opacity:.7;transform:scale(.96) translate(-4px,3px)}50%{opacity:1;transform:scale(1.02) translate(5px,-4px)}}
+  @keyframes homeWashDrift{0%,100%{opacity:.75;transform:translate(-4px,3px)}50%{opacity:1;transform:translate(5px,-4px)}}
+  @media(max-width:1100px){.hero-ring{justify-self:center;width:min(78vw,35rem)}}
+  @media(max-width:680px){.hero-ring{width:min(104vw,31rem);margin-inline:-2vw}.hero-ring__legend{grid-template-columns:repeat(2,auto);row-gap:.55rem;margin-top:-.25rem}.hero-ring figcaption{max-width:23rem;padding-inline:1rem}}
+  @media(prefers-reduced-motion:reduce){.hero-ring:before,.hero-ring__wash,.hero-ring__boundary,.hero-ring__inner-orbit,.hero-ring__flow,.hero-ring__signal,.hero-ring__core-pulse,.hero-ring__gate circle{animation:none!important}.hero-ring__signal,.hero-ring__gate circle{opacity:1}.hero-ring__core-pulse{opacity:.28;transform:scale(1)}}
+</style>

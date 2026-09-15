@@ -300,7 +300,7 @@ export const boundaryFlowCopy: Record<Locale, BoundaryFlowCopy> = {
         tracks: [
           { kind: "data", label: "数据", description: "来源 · 敏感等级 · 允许流向", shape: "circle", states: ["任务上下文", "客户记录 · C2", "合同字段 · C2", "内部证据", "敏感血缘保留", "PII 衍生摘要", "CRM 内部写入", "显式脱敏 · C1"] },
           { kind: "authorization", label: "授权", description: "主体 · 能力 · 范围 · 有效期", shape: "diamond", states: ["任务级委派", "CRM 只读", "合同字段范围", "知识库只读", "不得自动扩权", "工作区生成", "限定字段写入", "获批顾问域"] },
-          { kind: "effect", label: "动作影响", description: "读取 · 修改 · 执行 · 正式提交", shape: "square", states: ["TASK", "READ", "READ", "READ", "CREATE", "CREATE", "MODIFY", "COMMIT · EXTERNAL"] },
+          { kind: "effect", label: "行动影响", description: "读取 · 修改 · 执行 · 正式提交", shape: "square", states: ["TASK", "READ", "READ", "READ", "CREATE", "CREATE", "MODIFY", "COMMIT · EXTERNAL"] },
         ],
       },
       {
@@ -314,7 +314,7 @@ export const boundaryFlowCopy: Record<Locale, BoundaryFlowCopy> = {
         tracks: [
           { kind: "data", label: "数据", description: "来源 · 敏感等级 · 指令权限", shape: "circle", states: ["事故任务上下文", "内部工单 · A2", "外部资料 · A0", "运行日志", "源代码 · C2", "A0 权限保持", "隔离补丁", "命令预览", "验证补丁"] },
           { kind: "authorization", label: "授权", description: "主体 · 能力 · 范围 · 有效期", shape: "diamond", states: ["任务级委派", "事故任务授权", "仅允许读取", "日志只读", "代码只读", "模型不得扩权", "隔离区写入", "无生产执行权", "一次性发布授权"] },
-          { kind: "effect", label: "动作影响", description: "读取 · 创建 · 执行 · 正式提交", shape: "square", states: ["TASK", "READ", "READ", "READ", "READ", "CREATE", "CREATE", "DRY RUN", "COMMIT · PRODUCTION"] },
+          { kind: "effect", label: "行动影响", description: "读取 · 创建 · 执行 · 正式提交", shape: "square", states: ["TASK", "READ", "READ", "READ", "READ", "CREATE", "CREATE", "DRY RUN", "COMMIT · PRODUCTION"] },
         ],
       },
       {
@@ -328,7 +328,7 @@ export const boundaryFlowCopy: Record<Locale, BoundaryFlowCopy> = {
         tracks: [
           { kind: "data", label: "数据", description: "来源 · 财务标签 · 验证状态", shape: "circle", states: ["付款核验任务", "外部邮件 · V0", "发票字段 · C2", "供应商主数据 · V2", "账户核验", "已验证凭证", "付款载荷", "受控通知"] },
           { kind: "authorization", label: "授权", description: "主体 · 财务能力 · 资源范围", shape: "diamond", states: ["任务级委派", "邮件只读", "文档解析", "主数据只读", "核验能力", "ERP 限定写入", "无自主付款权", "通知范围"] },
-          { kind: "effect", label: "动作影响", description: "读取 · 修改 · 资金提交", shape: "square", states: ["TASK", "READ", "CREATE", "READ", "VALIDATE", "MODIFY", "COMMIT · FUNDS", "COMMUNICATE"] },
+          { kind: "effect", label: "行动影响", description: "读取 · 修改 · 资金提交", shape: "square", states: ["TASK", "READ", "CREATE", "READ", "VALIDATE", "MODIFY", "COMMIT · FUNDS", "COMMUNICATE"] },
         ],
       },
     ],
