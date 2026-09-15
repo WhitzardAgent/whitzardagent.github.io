@@ -1,5 +1,7 @@
 # NUWA Research System Implementation Plan
 
+> **Scope note:** This is the detailed research workstream within the full-site redesign. The master sequence, including homepage, products, acquisition, ecosystem, and company pages, is defined in `docs/superpowers/plans/2026-09-15-whitzard-full-site-redesign.md`.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build the approved bilingual NUWA research experience, including the three-theme research landing, verified evidence visuals, paired arXiv–Research Blog publishing, Markdown authoring commands, terminology enforcement, feeds, SEO, and human-review deployment gate.
