@@ -126,12 +126,12 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
         },
         {
           name: "NUWA",
-          role: "Frontier safety research engine",
+          role: "Frontier AI safety research",
           body: "Research that defines risk, builds evaluation evidence, and advances safety models.",
           href: "/en/nuwa/research",
         },
         {
-          name: "WhitzardAgent",
+          name: "Whitzard Open Ecosystem",
           role: "Open ecosystem",
           body: "Public models, tools, data, and evaluation infrastructure.",
           href: "/en/open-ecosystem",
@@ -273,12 +273,12 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
         },
         {
           name: "女娲实验室",
-          role: "前沿安全研究引擎",
+          role: "前沿 AI 风险研究",
           body: "定义风险、建设评测证据并推动安全模型的研究引擎。",
           href: "/nuwa/research",
         },
         {
-          name: "WhitzardAgent",
+          name: "白泽开放生态",
           role: "开放生态",
           body: "开放模型、工具、数据与评测基础设施。",
           href: "/open-ecosystem",

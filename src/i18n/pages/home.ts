@@ -84,7 +84,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     hero: {
       eyebrow: "Whitzard",
       title: "Security infrastructure for the agentic AI era.",
-      description: "Whitzard connects runtime safeguards, model services, frontier-risk research, and an open technical ecosystem so AI agents can operate within clear, verifiable boundaries.",
+      description: "Secure and evaluate AI agents across reasoning, tool use, permissions, and data flows.",
       primary: "Explore AgentGuard",
       secondary: "Explore research",
     },
@@ -110,7 +110,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     highlight: {
       eyebrow: "Recent result",
       title: "Fudan Baize ranks second globally in AI attack-defense evaluation",
-      body: "On the international AI safety benchmark CyberGym, the Whitzard agent reached a 91.2% success rate, ranking second globally and first among universities. This result reflects the strength of Whitzard's research foundation in agent cybersecurity.",
+      body: "A published report records a 91.2% success rate for the Whitzard agent in that CyberGym evaluation, ranking second globally and first among universities. Read the original report for the evaluation context.",
       source: "Fudan Baize WeChat official account",
       sourceUrl: "https://mp.weixin.qq.com/s/0F7mcRuwgNTNyCOtlYORaw",
     },
@@ -122,7 +122,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         title: "Agent runtime security control layer",
         body: "AgentGuard tracks data, authorization, and action impact continuously — repairing or blocking risk before boundaries are crossed, while letting agents complete their tasks. Available as an open-source community edition and an enterprise deployment.",
         cta: "Learn about AgentGuard",
-        features: ["Runtime intelligence across thought, behavior, and data", "Allow / sanitize / align / degrade / approve / deny decisions", "Community edition (open source) and enterprise deployment", "Framework-compatible: LangChain, AutoGen, OpenAI Agents, and more"],
+        features: ["Reasoning, behavior, and data protection", "Policy-based control at runtime", "Traceable decisions and audit evidence"],
       },
       models: {
         label: "Model Services",
@@ -169,7 +169,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     hero: {
       eyebrow: "白泽 · Whitzard",
       title: "打造智能体时代的安全基础设施",
-      description: "白泽连接运行时防护、模型服务、前沿风险研究与开放技术生态，让智能体在清晰、可验证的边界内行动。",
+      description: "为企业提供智能体安全防护与评测能力，覆盖模型推理、工具调用、权限与数据流转。",
       primary: "了解 AgentGuard",
       secondary: "了解研究",
     },
@@ -195,7 +195,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     highlight: {
       eyebrow: "近期成果",
       title: "AI 攻防全球第二、高校第一",
-      body: "在国际 AI 安全基准 CyberGym 最新榜单中，复旦白泽智能体 Whitzard 以 91.2% 成功率位列全球第二、高校第一。这一结果反映了白泽在智能体网络安全方面的研究基础。",
+      body: "公开报道显示，复旦白泽智能体 Whitzard 在 CyberGym 的该次评测中以 91.2% 成功率位列全球第二、高校第一。查看原始报道，了解评测背景与结果。",
       source: "复旦白泽战队微信公众号",
       sourceUrl: "https://mp.weixin.qq.com/s/0F7mcRuwgNTNyCOtlYORaw",
     },
@@ -207,7 +207,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         title: "智能体运行时安全控制层",
         body: "AgentGuard 持续追踪数据、授权与行动影响，在越界前修复或阻断风险，同时让智能体继续完成业务任务。提供开源社区版和企业交付版。",
         cta: "了解 AgentGuard",
-        features: ["覆盖思维链、行为链与数据链的运行时智能", "允许 / 脱敏 / 校准 / 降级 / 审批 / 阻断 六种处置", "开源社区版与企业交付版", "兼容 LangChain、AutoGen、OpenAI Agents 等主流框架"],
+        features: ["推理、行为与数据防护", "运行时策略控制", "决策追踪与证据审计"],
       },
       models: {
         label: "模型服务",

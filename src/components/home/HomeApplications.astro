@@ -1,0 +1,55 @@
+---
+import type { Locale } from "../../i18n/config";
+import { companyCopy } from "../../i18n/pages/company";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const copy = companyCopy[locale].solutions;
+---
+<home-applications class="home-applications" aria-label={copy.explorer.ariaLabel}>
+  <div class="home-applications__tabs" role="tablist" aria-label={copy.explorer.ariaLabel}>
+    {copy.scenarios.map((item, index) => <button type="button" role="tab" id={`home-case-tab-${index}`} aria-controls={`home-case-panel-${index}`} aria-selected={index === 0 ? "true" : "false"} tabindex={index === 0 ? 0 : -1}><span>{item.index}</span>{item.title}</button>)}
+  </div>
+  <div class="home-applications__panels">
+    {copy.scenarios.map((item, index) => <article id={`home-case-panel-${index}`} class="home-applications__panel" aria-labelledby={`home-case-tab-${index}`}>
+      <header><span>{item.index}</span><h3>{item.title}</h3></header>
+      <dl><div><dt>{copy.explorer.objective}</dt><dd>{item.objective}</dd></div><div><dt>{copy.explorer.boundary}</dt><dd>{item.boundary}</dd></div><div><dt>{copy.explorer.outcome}</dt><dd>{item.outcome}</dd></div></dl>
+    </article>)}
+  </div>
+</home-applications>
+<script>
+  class HomeApplications extends HTMLElement {
+    private aborter?: AbortController;
+    private media?: MediaQueryList;
+    connectedCallback() {
+      this.aborter?.abort();
+      this.aborter = new AbortController();
+      const tabs = Array.from(this.querySelectorAll<HTMLButtonElement>("[role=tab]"));
+      const panels = Array.from(this.querySelectorAll<HTMLElement>(".home-applications__panel"));
+      this.media = window.matchMedia("(min-width: 701px)");
+      let active = 0;
+      const render = () => {
+        const desktop = this.media?.matches;
+        this.dataset.enhanced = desktop ? "desktop" : "mobile";
+        panels.forEach((panel, index) => {
+          panel.hidden = Boolean(desktop && index !== active);
+          if (desktop) { panel.setAttribute("role", "tabpanel"); panel.tabIndex = 0; }
+          else { panel.removeAttribute("role"); panel.removeAttribute("tabindex"); }
+        });
+        tabs.forEach((tab, index) => { tab.setAttribute("aria-selected", String(index === active)); tab.tabIndex = index === active ? 0 : -1; });
+      };
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => { active = index; render(); }, { signal: this.aborter?.signal });
+        tab.addEventListener("keydown", (event) => {
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          active = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : event.key === "ArrowRight" ? (index + 1) % tabs.length : (index + tabs.length - 1) % tabs.length;
+          render(); tabs[active]?.focus();
+        }, { signal: this.aborter?.signal });
+      });
+      this.media.addEventListener("change", render, { signal: this.aborter.signal });
+      render();
+    }
+    disconnectedCallback() { this.aborter?.abort(); }
+  }
+  if (!customElements.get("home-applications")) customElements.define("home-applications", HomeApplications);
+</script>

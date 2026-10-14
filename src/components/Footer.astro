@@ -3,6 +3,7 @@ import type { Locale } from "../i18n/config";
 import { localizedPath } from "../i18n/config";
 import { ui } from "../i18n/ui";
 import { links } from "../data/links";
+import { companyIdentity } from "../data/companyIdentity";
 
 interface Props { brand?: "whitzard" | "nuwa"; locale: Locale; }
 const { locale } = Astro.props;
@@ -17,6 +18,7 @@ const copy = ui[locale];
         {locale === "zh" ? <><span class="wordmark__text">白泽</span><span class="wordmark__han">（Whitzard）</span></> : <span class="wordmark__text">Whitzard</span>}
       </a>
       <p>{copy.footer.positioning}</p>
+      <p class="site-footer__legal-name">{companyIdentity.legalName}</p>
       <p class="site-footer__research">{copy.footer.researchLine}</p>
     </div>
     <div class="site-footer__column">
@@ -46,6 +48,6 @@ const copy = ui[locale];
     </div>
   </div>
   <div class="site-container site-footer__bottom">
-    <p>© {new Date().getFullYear()} {locale === "zh" ? "白泽（Whitzard）" : "Whitzard"}</p><p>{copy.footer.legalLine}</p>
+    <p>© {new Date().getFullYear()} {companyIdentity.legalName} · Whitzard</p><p>{copy.footer.legalLine}</p>
   </div>
 </footer>

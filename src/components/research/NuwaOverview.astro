@@ -7,7 +7,9 @@ import { researchAssets } from "../../data/generated/researchAssets";
 import { researchInfrastructure } from "../../data/generated/researchInfrastructure";
 import { links } from "../../data/links";
 import { researchPrograms } from "../../data/researchPrograms";
-import NuwaEvidenceField from "./NuwaEvidenceField.astro";
+import BrandHero from "../brand/BrandHero.astro";
+import ResearchBlogPreview from "./ResearchBlogPreview.astro";
+import { companyIdentity } from "../../data/companyIdentity";
 import "../../styles/research.css";
 import "../../styles/nuwa-overview.css";
 
@@ -24,7 +26,7 @@ const schema = {
   "@type": "ResearchOrganization",
   name: locale === "zh" ? "女娲实验室" : "NUWA Frontier AI Safety Lab",
   alternateName: locale === "zh" ? ["NUWA", "NUWA Frontier AI Safety Lab"] : ["NUWA", "女娲实验室"],
-  parentOrganization: { "@type": "Organization", name: locale === "zh" ? "白泽（Whitzard）" : "Whitzard", alternateName: locale === "zh" ? ["Whitzard", "白泽"] : ["白泽"] },
+  parentOrganization: { "@type": "Organization", name: companyIdentity.brand[locale], legalName: companyIdentity.legalName },
   url: `https://whitzard.tech${localizedPath("/nuwa", locale)}`,
   description: copy.meta.description,
 };
@@ -33,50 +35,20 @@ const schema = {
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa" schema={schema}>
   <nuwa-motion class="nw-page">
   {/* Hero */}
-  <section class="nw-hero">
-    <div class="site-container nw-hero__grid">
-      <div class="nw-hero__copy">
-        <span class="nw-hero__side-mark" aria-hidden="true">{locale === "zh" ? "补天" : "REPAIR"}</span>
-        <div class="nw-hero__identity"><strong>{locale === "zh" ? "女娲 · NUWA" : "NUWA"}</strong><span>FRONTIER AI SAFETY LAB</span></div>
-        <p class="eyebrow">{copy.eyebrow}</p>
-        <h1>{copy.title}</h1>
-        <p class="nw-hero__lead">{copy.lead}</p>
-        <div class="nw-hero__actions">
-          <a class="button button--primary" href={localizedPath("/nuwa/blog", locale)}>Research Blog</a>
-          <a class="button button--secondary" href={localizedPath("/nuwa/research", locale)}>{copy.researchCta}</a>
-        </div>
-      </div>
-      <NuwaEvidenceField locale={locale} />
-    </div>
-  </section>
+  <BrandHero locale={locale} artwork="nuwa" eyebrow={locale === "zh" ? "女娲实验室 · NUWA" : "NUWA FRONTIER AI SAFETY LAB"} title={copy.title} segments={locale === "zh" ? ["为全球 AI 治理", "提供风险证据", "与公共产品"] : undefined} description={copy.lead}>
+    <a class="button button--primary" href={localizedPath("/nuwa/research", locale)}>{copy.researchCta}</a>
+    <a class="button button--secondary" href={localizedPath("/nuwa/blog", locale)}>Research Blog →</a>
+  </BrandHero>
 
   {/* Lab vision statement */}
-  <section class="nw-statement" data-nuwa-reveal>
+  <section class="nw-statement nw-statement--compact" data-nuwa-reveal>
     <div class="site-container">
       <p class="eyebrow">{copy.statementEyebrow}</p>
       <blockquote>{copy.statement}</blockquote>
     </div>
   </section>
 
-  {/* Mission — what questions does NUWA work on */}
-  <section class="section nw-mission" data-nuwa-reveal>
-    <div class="site-container">
-      <div class="nw-mission__head">
-        <p class="eyebrow">{copy.missionEyebrow}</p>
-        <h2 class="section-title">{copy.missionTitle}</h2>
-        <p class="section-copy">{copy.missionBody}</p>
-      </div>
-      <div class="nw-roles__grid">
-        {copy.roles.map((item, index) => (
-          <article>
-            <span>0{index + 1}</span>
-            <h3>{item.title}</h3>
-            <p>{item.body}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <ResearchBlogPreview locale={locale} />
 
   {/* Featured research — representative findings */}
   <section class="section nw-featured" data-nuwa-reveal>
@@ -103,6 +75,9 @@ const schema = {
   </section>
 
   {/* Three durable research programs */}
+  <section class="section nw-mission" data-nuwa-reveal>
+    <div class="site-container"><div class="nw-mission__head"><p class="eyebrow">{copy.missionEyebrow}</p><h2 class="section-title">{copy.missionTitle}</h2><p class="section-copy">{copy.missionBody}</p></div><div class="nw-roles__grid">{copy.roles.map((item,index)=><article><span>0{index+1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></div>
+  </section>
   <section class="section nw-directions" data-nuwa-reveal>
     <div class="site-container nw-section-head">
       <p class="eyebrow">{locale === "zh" ? "核心研究方向" : "RESEARCH DIRECTIONS"}</p>

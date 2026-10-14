@@ -1,0 +1,29 @@
+---
+import type { Locale } from "../../i18n/config";
+import BrandArtwork from "./BrandArtwork.astro";
+import HeroMotionController from "../HeroMotionController.astro";
+interface Props {
+  locale: Locale;
+  artwork: "home" | "nuwa" | "ecosystem" | "about";
+  eyebrow: string;
+  title: string;
+  description: string;
+  segments?: string[];
+  centered?: boolean;
+}
+const { locale, artwork, eyebrow, title, description, segments, centered = false } = Astro.props;
+---
+<HeroMotionController />
+<hero-motion-controller class="brand-hero-motion" data-motion-active="true">
+  <section class:list={["brand-hero", `brand-hero--${artwork}`, centered && "brand-hero--centered"]}>
+    <BrandArtwork artwork={artwork} eager />
+    <div class="brand-hero__light" aria-hidden="true"></div>
+    <div class="site-container brand-hero__content">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 aria-label={title}>{segments ? segments.map((part) => <span class="brand-phrase">{part}</span>) : title}</h1>
+      <p class="brand-hero__description">{description}</p>
+      <div class="brand-hero__actions"><slot /></div>
+    </div>
+    <div class="site-container brand-hero__signature" aria-hidden="true"><span>WHITZARD</span><i></i><span>{locale === "zh" ? "守其边界，行其智能" : "SECURE AUTONOMY, BY DESIGN"}</span></div>
+  </section>
+</hero-motion-controller>

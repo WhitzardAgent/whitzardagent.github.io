@@ -131,7 +131,15 @@ function isGroupActive(children?: { href: string }[]) {
       this.button = this.querySelector(".menu-toggle");
       this.panel = this.querySelector(".mobile-navigation");
       this.button?.addEventListener("click", () => this.toggle(), { signal: this.aborter.signal });
-      this.addEventListener("keydown", (event) => { if (event.key === "Escape") this.close(true); }, { signal: this.aborter.signal });
+      this.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") this.close(true);
+        if (event.key !== "Tab" || this.button?.getAttribute("aria-expanded") !== "true") return;
+        const focusable = this.mobileFocusables();
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }, { signal: this.aborter.signal });
       this.querySelectorAll<HTMLAnchorElement>(".mobile-navigation a").forEach((link) => link.addEventListener("click", () => this.close(false), { signal: this.aborter.signal }));
 
       // Desktop dropdown: click toggle + hover + escape
@@ -194,6 +202,11 @@ function isGroupActive(children?: { href: string }[]) {
 
     disconnectedCallback() { this.aborter.abort(); }
 
+    private mobileFocusables() {
+      return [this.button, ...Array.from(this.panel?.querySelectorAll<HTMLElement>("a[href],button:not([disabled])") ?? [])]
+        .filter((element): element is HTMLElement => Boolean(element && element.getClientRects().length));
+    }
+
     private toggle() { this.button?.getAttribute("aria-expanded") === "true" ? this.close(true) : this.open(); }
     private open() {
       if (!this.button || !this.panel) return;
@@ -201,7 +214,7 @@ function isGroupActive(children?: { href: string }[]) {
       this.button.setAttribute("aria-expanded", "true");
       this.button.setAttribute("aria-label", this.button.dataset.closeLabel ?? "Close navigation");
       document.documentElement.classList.add("menu-open");
-      requestAnimationFrame(() => this.querySelector<HTMLAnchorElement>("[data-mobile-first]")?.focus());
+      requestAnimationFrame(() => this.mobileFocusables()[1]?.focus());
     }
     private close(restoreFocus: boolean) {
       if (!this.button || !this.panel) return;

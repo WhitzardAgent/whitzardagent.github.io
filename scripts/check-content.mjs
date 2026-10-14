@@ -135,6 +135,7 @@ const chineseBudget = (value) => {
 const approvedExtendedHeadings = new Set([
   "细粒度管控行为链、思维链和数据链",
   "为全球 AI 治理提供风险证据与公共产品",
+  "为全球 AI 治理 提供风险证据 与公共产品",
 ]);
 const coreRoutes = ["", "agentguard", "solutions", "models", "nuwa", "open-ecosystem", "news", "about", "contact", "waitlist", "login"];
 for (const route of coreRoutes) {
@@ -183,8 +184,8 @@ for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violation
 for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
   if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
 }
-// Homepage must not duplicate product-specific details that have dedicated pages
-for (const productOnly of ["细粒度管控行为链、思维链和数据链", "WhitzardOS", "WhitzardEval", "Thought-Aligner", "MATE", "/assets/agentguard/dashboard.png"]) {
+// V4: concise product screenshots and selected research evidence are allowed on home.
+for (const productOnly of ["细粒度管控行为链、思维链和数据链", "WhitzardOS", "WhitzardEval", "MATE"]) {
   if (homeHtml.includes(productOnly)) violations.push(`dist/index.html: content with a dedicated destination must not be duplicated on the homepage: ${productOnly}`);
 }
 
@@ -206,7 +207,9 @@ const homeSource = await readFile("src/components/home/HomePage.astro", "utf8");
 for (const component of ["AgentGuardRiskSimulator", "AgentGuardSystemMap", "UnifiedSecurityInfluenceEngine", "AgentGuardOperationsCenter"]) {
   if (homeSource.includes(component)) violations.push(`src/components/home/HomePage.astro: homepage must not import or render ${component}`);
 }
-if (homeHtml.includes("autocontrol-arena-figure-2")) violations.push("dist/index.html: paper figures belong on the research page, not the homepage");
+for (const marker of ['id="products"', 'id="applications"', 'id="research"', 'id="ecosystem"', '/assets/agentguard/dashboard.png']) {
+  if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing enterprise homepage content: ${marker}`);
+}
 
 // Developers page (evolved from ecosystem) must contain core projects
 for (const [file, html] of [["dist/open-ecosystem/index.html", ecosystemHtml], ["dist/en/open-ecosystem/index.html", await readFile("dist/en/open-ecosystem/index.html", "utf8")]]) {
@@ -354,7 +357,7 @@ for (const visual of ["/assets/research/self-replication-figure-1.png", "/assets
   for (const [route, html] of Object.entries(ownershipPages)) if (route !== "nuwa" && html.includes(visual)) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: research figure ${visual} belongs only on the NUWA research page`);
 }
 for (const [route, html] of Object.entries(ownershipPages)) {
-  if (route !== "agentguard" && html.includes("/assets/agentguard/dashboard.png")) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: AgentGuard Dashboard belongs only on the product page`);
+  if (!["agentguard", "home"].includes(route) && html.includes("/assets/agentguard/dashboard.png")) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: AgentGuard Dashboard belongs on product or homepage`);
   if (route !== "about" && html.includes("team-advisor-link")) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: complete academic biographies belong only on the about page`);
 }
 if (aboutHtml.includes("brand-architecture") || aboutHtml.includes("智能体运行时安全控制层")) violations.push("dist/about/index.html: product architecture belongs on the AgentGuard page");

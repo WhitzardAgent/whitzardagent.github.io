@@ -10,6 +10,8 @@ import UnifiedSecurityInfluenceEngine from "./UnifiedSecurityInfluenceEngine";
 import AgentGuardRiskSimulator from "./AgentGuardRiskSimulator";
 import AgentGuardShowcase from "./AgentGuardShowcase.astro";
 import DeploymentArchitecture from "./DeploymentArchitecture";
+import { companyIdentity } from "../../data/companyIdentity";
+import { companyCopy } from "../../i18n/pages/company";
 import "../../styles/agentguard.css";
 import "../../styles/agentguard-story.css";
 
@@ -28,7 +30,7 @@ const softwareSchema = {
       isAccessibleForFree: true,
       license: "https://www.gnu.org/licenses/gpl-3.0.html",
       codeRepository: "https://github.com/WhitzardAgent/AgentGuard",
-      publisher: { "@type": "Organization", name: locale === "zh" ? "白泽（Whitzard）" : "Whitzard", alternateName: locale === "zh" ? ["Whitzard", "白泽"] : ["白泽"] },
+      publisher: { "@type": "Organization", name: companyIdentity.brand[locale], legalName: companyIdentity.legalName },
     },
     {
       "@type": "Product",
@@ -47,7 +49,7 @@ const softwareSchema = {
       <div class="ag-hero__copy">
         <span class="ag-hero__side-mark" aria-hidden="true">{locale === "zh" ? "守界" : "BOUNDARY"}</span>
         <p class="eyebrow">{copy.hero.eyebrow}</p>
-        <h1>{copy.hero.title}</h1>
+        <h1>{locale === "zh" ? <><span class="brand-phrase">智能体</span><span class="brand-phrase">运行时</span><span class="brand-phrase">安全控制层</span></> : copy.hero.title}</h1>
         <p>{copy.hero.body}</p>
         <div class="ag-hero__actions">
           <a class="button button--primary" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.hero.primary}</a>
@@ -59,33 +61,7 @@ const softwareSchema = {
           <ul>{story.protection.items.map((item) => <li>{item}</li>)}</ul>
         </div>
       </div>
-      <div class="ag-boundary" aria-label={locale === "zh" ? "AgentGuard 智能体交互边界运行时示意图" : "AgentGuard interaction boundary runtime diagram"}>
-        <header class="ag-boundary__header">
-          <span>INTERACTION BOUNDARY RUNTIME</span>
-          <strong>{locale === "zh" ? "实时守护" : "LIVE CONTROL"}</strong>
-        </header>
-        <div class="ag-boundary__canvas">
-          <span class="ag-boundary__axis ag-boundary__axis--one" aria-hidden="true"></span>
-          <span class="ag-boundary__axis ag-boundary__axis--two" aria-hidden="true"></span>
-          <span class="ag-boundary__ring ag-boundary__ring--outer" aria-hidden="true"></span>
-          <span class="ag-boundary__ring ag-boundary__ring--middle" aria-hidden="true"></span>
-          <span class="ag-boundary__ring ag-boundary__ring--inner" aria-hidden="true"></span>
-          <div class="ag-boundary__core">
-            <span>AGENTGUARD</span>
-            <strong>{locale === "zh" ? "可信边界" : "TRUST BOUNDARY"}</strong>
-          </div>
-          <ol class="ag-boundary__objects">
-            {story.protection.items.map((item, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></li>)}
-          </ol>
-        </div>
-        <footer class="ag-boundary__controls">
-          <span>{locale === "zh" ? "放行" : "ALLOW"}</span>
-          <span>{locale === "zh" ? "脱敏" : "REDACT"}</span>
-          <span>{locale === "zh" ? "审批" : "APPROVE"}</span>
-          <span>{locale === "zh" ? "阻断" : "DENY"}</span>
-        </footer>
-        <span class="ag-boundary__side-mark" aria-hidden="true">{locale === "zh" ? "界 · 序 · 智" : "BOUND · ORDER · INTELLIGENCE"}</span>
-      </div>
+      <figure class="ag-product-hero-image"><img src="/assets/agentguard/policy-builder.png" width="2513" height="955" alt={locale === "zh" ? "AgentGuard 社区版策略配置界面" : "AgentGuard Community policy configuration interface"} fetchpriority="high" decoding="async"/><figcaption>{locale === "zh" ? "AgentGuard 社区版 · 策略配置与运行时控制" : "AgentGuard Community · Policy configuration and runtime control"}</figcaption></figure>
       <div class="ag-hero__evidence" aria-label={locale === "zh" ? "AgentGuard 产品证据" : "AgentGuard product evidence"}>
         <div><span>{locale === "zh" ? "企业交付" : "ENTERPRISE"}</span><strong>AgentGuard Enterprise</strong></div>
         <div><span>{locale === "zh" ? "开放技术" : "OPEN SOURCE"}</span><strong>AgentGuard Community</strong></div>
@@ -95,6 +71,9 @@ const softwareSchema = {
       </div>
     </div>
   </section>
+
+  <AgentGuardShowcase locale={locale} copy={copy.demo} />
+  <section class="section ag-product-use-cases"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "应用场景" : "USE CASES"}</p><h2 class="section-title">{locale === "zh" ? "保护业务中的智能体任务" : "Protect agents in business workflows"}</h2><div>{companyCopy[locale].solutions.scenarios.map(item=><a href={localizedPath("/solutions",locale)}><h3>{item.title}</h3><p>{item.objective}</p><span>{locale === "zh" ? "了解场景" : "Explore use case"} →</span></a>)}</div></div></section>
 
   <section class="section story-section story-section--frost" id="system-map">
     <div class="site-container story-section__head"><div><p class="eyebrow">{story.map.eyebrow}</p><h2 class="section-title">{story.map.title}</h2></div><p>{story.map.body}</p></div>
@@ -110,8 +89,6 @@ const softwareSchema = {
     <div class="site-container story-section__head"><div><p class="eyebrow">{story.simulator.eyebrow}</p><h2 class="section-title">{story.simulator.title}</h2></div><p>{story.simulator.body}</p></div>
     <div class="site-container"><AgentGuardRiskSimulator locale={locale} density="full" client:visible /></div>
   </section>
-
-  <AgentGuardShowcase locale={locale} copy={copy.demo} />
 
   <section class="section ag-editions" id="enterprise">
     <div class="site-container ag-section-head ag-section-head--split">

@@ -1,0 +1,19 @@
+<script>
+  class BrandPageMotion extends HTMLElement {
+    private observer?: IntersectionObserver;
+    connectedCallback() {
+      this.observer?.disconnect();
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+      this.observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          (entry.target as HTMLElement).dataset.brandRevealed = "true";
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.06 });
+      this.querySelectorAll(".section").forEach(section => this.observer?.observe(section));
+    }
+    disconnectedCallback() { this.observer?.disconnect(); }
+  }
+  if (!customElements.get("brand-page-motion")) customElements.define("brand-page-motion", BrandPageMotion);
+</script>

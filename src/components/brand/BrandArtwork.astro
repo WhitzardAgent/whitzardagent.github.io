@@ -1,0 +1,11 @@
+---
+interface Props { artwork: "home" | "nuwa" | "ecosystem" | "about"; eager?: boolean; class?: string }
+const { artwork, eager = false, class: className } = Astro.props;
+const prefix = `/assets/brand/v4-${artwork}`;
+---
+<picture class:list={["brand-artwork", className]} aria-hidden="true">
+  <source media="(max-width: 600px)" type="image/avif" srcset={`${prefix}-mobile.avif`} width="750" height="900" />
+  <source media="(max-width: 600px)" type="image/webp" srcset={`${prefix}-mobile.webp`} width="750" height="900" />
+  <source type="image/avif" srcset={`${prefix}-wide.avif`} />
+  <img src={`${prefix}-wide.webp`} width="1600" height="900" alt="" loading={eager ? "eager" : "lazy"} fetchpriority={eager ? "high" : "auto"} decoding="async" />
+</picture>

@@ -14,7 +14,6 @@ const localize = <T extends { zh: string; en: string }>(value: T, locale: Locale
 export default function WhitzardIndexHero({ locale, copy, evidence }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabsRef = useRef<Array<HTMLButtonElement | null>>([]);
-  const active = evidence[activeIndex];
 
   const select = (index: number) => {
     setActiveIndex(index);
@@ -40,7 +39,7 @@ export default function WhitzardIndexHero({ locale, copy, evidence }: Props) {
       <div className="site-container wi-hero__grid">
         <div className="wi-hero__copy">
           <p className="eyebrow">{copy.eyebrow}</p>
-          <h1>{copy.title}</h1>
+          <h1>{locale === "zh" ? <><span className="brand-phrase">持续观测</span><span className="brand-phrase">前沿 AI 风险</span></> : copy.title}</h1>
           <p className="wi-hero__subtitle">{copy.subtitle}</p>
           <p className="wi-hero__lead">{copy.lead}</p>
           <div className="wi-hero__actions">
@@ -81,12 +80,13 @@ export default function WhitzardIndexHero({ locale, copy, evidence }: Props) {
             ))}
           </div>
 
-          <article
+          {evidence.map((active, index) => <article
             key={active.id}
             id={`wi-panel-${active.id}`}
             className={`wi-evidence-panel is-${active.visualType}`}
             role="tabpanel"
             aria-labelledby={`wi-tab-${active.id}`}
+            hidden={activeIndex !== index}
           >
             <div className="wi-evidence-panel__meta">
               <div><span>{copy.evidence.scopeLabel}</span><ul>{active.evaluationScope.map((item) => <li key={item.en}>{localize(item, locale)}</li>)}</ul></div>
@@ -115,7 +115,7 @@ export default function WhitzardIndexHero({ locale, copy, evidence }: Props) {
               <div><span>{copy.evidence.limitationLabel}</span><p>{localize(active.limitation, locale)}</p></div>
               <a href={active.sourceUrl} target="_blank" rel="noreferrer">{copy.evidence.sourceLabel}: {active.sourceLabel} <span aria-hidden="true">↗</span></a>
             </footer>
-          </article>
+          </article>)}
 
           <noscript>
             <div className="wi-evidence-noscript">

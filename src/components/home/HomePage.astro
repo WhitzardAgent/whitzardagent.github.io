@@ -3,226 +3,63 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
 import type { HomeCopy } from "../../i18n/pages/home";
+import BrandHero from "../brand/BrandHero.astro";
+import BrandArtwork from "../brand/BrandArtwork.astro";
 import AgentGuardBoundaryFlow from "./AgentGuardBoundaryFlow";
-import HomeHeroRing from "./HomeHeroRing.astro";
+import HomeApplications from "./HomeApplications.astro";
 import LatestNews from "./LatestNews.astro";
-import "../../styles/home.css";
-
+import { researchAssets } from "../../data/generated/researchAssets";
+import { researchVisuals } from "../../data/researchVisuals";
+import { links } from "../../data/links";
+import "../../styles/enterprise-home.css";
+import "../../styles/boundary-flow.css";
 interface Props { locale: Locale; copy: HomeCopy }
 const { locale, copy } = Astro.props;
-const researchBlogPath = localizedPath("/nuwa/blog", locale);
-const ecosystemPath = localizedPath("/open-ecosystem", locale);
+const path = (value: string) => localizedPath(value, locale);
+const zh = locale === "zh";
+const selectedResearch = [
+  { arxivId: "2503.17378", label: zh ? "自主复制与前沿风险" : "Self-replication and frontier risk" },
+  { arxivId: "2603.07427", label: zh ? "前沿风险评测环境" : "Executable frontier-risk evaluations" },
+  { arxivId: "2505.11063", label: zh ? "智能体推理校准" : "Reasoning alignment for agents" },
+].map(selection => {
+  const item = researchAssets.find(item => item.arxivId === selection.arxivId);
+  const visual = researchVisuals.find(visual => visual.researchSlug === item?.slug);
+  if (!item || !visual) throw new Error(`Homepage research requires a verified paper and matching visual: ${selection.arxivId}`);
+  return { item, visual, label: selection.label };
+});
 ---
-
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/">
-  <home-motion-controller class="home-page" data-page-visible="true" data-tone="hero">
-    <div class="home-ambient" aria-hidden="true">
-      <i class="home-ambient__grid"></i>
-      <i class="home-ambient__field"></i>
-      <i class="home-ambient__arc home-ambient__arc--outer"></i>
-      <i class="home-ambient__arc home-ambient__arc--inner"></i>
-    </div>
+  <div class="enterprise-home">
+    <BrandHero locale={locale} artwork="home" eyebrow={copy.hero.eyebrow} title={copy.hero.title} segments={zh ? ["打造", "智能体时代", "的", "安全基础设施"] : undefined} description={copy.hero.description} centered>
+      <a class="button button--primary" href={path("/agentguard")}>{copy.hero.primary} <span aria-hidden="true">→</span></a>
+      <a class="button button--secondary" href={path("/waitlist")} data-umami-event="waitlist-cta-click">{zh ? "加入心愿单" : "Join the waitlist"}</a>
+    </BrandHero>
 
-    <section class="home-hero" data-home-section="hero">
-      <div class="site-container home-hero__grid">
-        <div class="home-hero__company-copy">
-          <p class="eyebrow" data-reveal>{copy.hero.eyebrow}</p>
-          <h1 data-reveal data-reveal-delay="1">{copy.hero.title}</h1>
-          <p class="home-hero__description" data-reveal data-reveal-delay="2">{copy.hero.description}</p>
-          <div class="home-hero__actions" data-reveal data-reveal-delay="3">
-            <a class="button button--primary" href={localizedPath("/agentguard", locale)} data-umami-event="product-detail-open">{copy.hero.primary}</a>
-            <a class="button button--secondary" href={localizedPath("/nuwa", locale)}>{copy.hero.secondary} <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-        <div class="home-hero__visual" data-reveal data-reveal-delay="2"><HomeHeroRing locale={locale} /></div>
-      </div>
-      <div class="home-hero__index site-container" aria-hidden="true">
-        <span>01</span><i></i><span>{locale === "zh" ? "边界 / 证据 / 行动" : "BOUNDARY / EVIDENCE / ACTION"}</span>
-      </div>
-    </section>
-
-    <section class="home-method section" data-home-section="method">
-      <div class="site-container home-method__head">
-        <div>
-          <p class="eyebrow" data-reveal>{copy.positioning.eyebrow}</p>
-          <p class="home-method__statement" data-reveal data-reveal-delay="1">{copy.positioning.body}</p>
-        </div>
-        <div class="home-method__mark" aria-hidden="true"><span>W</span><i></i></div>
-      </div>
-      <div class="site-container home-method__axis" data-reveal data-reveal-delay="2">
-        <i class="home-method__axis-line" aria-hidden="true"></i>
-        {copy.positioning.pillars.map((pillar, index) => (
-          <article class={`home-method__principle is-${index + 1}`}>
-            <span>0{index + 1}</span>
-            <i aria-hidden="true"></i>
-            <h2>{pillar.keyword}</h2>
-            <p>{pillar.body}</p>
+    <section id="products" class="section home-products">
+      <div class="site-container">
+        <header class="home-section-head"><div><p class="eyebrow">{copy.products.eyebrow}</p><h2>{zh ? "让智能体安全进入业务" : "Bring AI agents into business, securely"}</h2></div><p>{zh ? "贯穿评测、防护与审计，为智能体建立可信边界。" : "Evaluation, runtime protection, and audit across the agent lifecycle."}</p></header>
+        <div class="home-product-showcase">
+          <article class="home-product-main">
+            <div class="home-product-main__copy"><span class="home-product-name">AgentGuard</span><h3>{copy.products.agentguard.title}</h3><p>{copy.products.agentguard.body}</p><ul>{copy.products.agentguard.features.slice(0,3).map((feature)=><li>{feature}</li>)}</ul><a class="text-link" href={path("/agentguard")}>{copy.products.agentguard.cta} →</a></div>
+            <a class="home-product-screen" href={path("/agentguard")} aria-label={zh ? "查看 AgentGuard 产品与社区版界面" : "Explore AgentGuard and its community interface"}><div><i></i><i></i><i></i><span>AgentGuard Community</span></div><img src="/assets/agentguard/dashboard.png" alt={zh ? "AgentGuard 社区版安全审计控制台" : "AgentGuard Community security audit console"} width="2505" height="1229" loading="lazy" decoding="async"/><small>{zh ? "社区版真实产品界面" : "Actual Community Edition interface"}</small></a>
           </article>
-        ))}
+          <article class="home-model-service"><div><span class="eyebrow">MODEL SERVICES</span><h3>{copy.products.models.title}</h3><p>{copy.products.models.body}</p></div><a class="text-link" href={path("/models")}>{copy.products.models.cta} →</a></article>
+        </div>
+        <details class="home-runtime-details"><summary><span>{zh ? "查看智能体安全执行流程" : "See how an agent task is protected"}</span><b aria-hidden="true">＋</b></summary><div class="home-runtime-details__body"><p>{copy.system.runtimeBody}</p><AgentGuardBoundaryFlow locale={locale} client:visible /></div></details>
+        <p class="home-product-principles">{zh ? "可信边界 · 可核实证据 · 最小必要干预" : "Trusted boundaries · Verifiable evidence · Minimal necessary intervention"}</p>
       </div>
     </section>
 
-    <section class="home-system section" data-home-section="system">
-      <div class="site-container home-system__intro">
-        <p class="eyebrow" data-reveal>{copy.system.eyebrow}</p>
-        <div>
-          <h2 class="section-title" data-reveal data-reveal-delay="1">{copy.system.title}</h2>
-          <p data-reveal data-reveal-delay="2">{copy.system.body}</p>
-        </div>
-      </div>
+    <section id="applications" class="section home-use-cases"><div class="site-container"><header class="home-section-head"><div><p class="eyebrow">{zh ? "应用场景" : "USE CASES"}</p><h2>{zh ? "覆盖企业智能体的关键任务" : "Protect the workflows that matter"}</h2></div><a class="text-link" href={path("/solutions")}>{zh ? "查看应用场景" : "Explore use cases"} →</a></header><HomeApplications locale={locale}/></div></section>
 
-      <div class="site-container home-system__map" data-reveal data-reveal-delay="2">
-        <article class="home-core home-core--agentguard">
-          <header><span>{copy.products.agentguard.label}</span><small>{locale === "zh" ? "产品与服务" : "PRODUCTS & SERVICES"}</small></header>
-          <div class="home-core__body">
-            <h3>{copy.products.agentguard.title}</h3>
-            <p>{copy.products.agentguard.body}</p>
-            <ul>{copy.products.agentguard.features.slice(0, 3).map((feature) => <li>{feature}</li>)}</ul>
-          </div>
-          <footer>
-            <a href={localizedPath("/agentguard", locale)}>{copy.products.agentguard.cta} <span aria-hidden="true">→</span></a>
-            <a class="home-core__service" href={localizedPath("/models", locale)}><small>{copy.products.models.label}</small><strong>{copy.products.models.title}</strong><span aria-hidden="true">↗</span></a>
-          </footer>
-        </article>
+    <section id="research" class="section home-research"><div class="site-container">
+      <header class="home-research__intro"><div><p class="eyebrow">{zh ? "女娲实验室 · 研究驱动" : "NUWA · RESEARCH"}</p><h2>{zh ? <><span class="brand-phrase">为全球 AI 治理</span><br/><span class="brand-phrase">提供风险证据</span><span class="brand-phrase">与公共产品</span></> : "Shared Risk Evidence and Public Goods for the World"}</h2><p>{copy.research.body}</p><div class="home-research__links"><a class="button button--primary" href={path("/nuwa")}>{copy.research.cta} →</a><a class="text-link" href={path("/nuwa/blog")}>Research Blog →</a></div></div><BrandArtwork artwork="nuwa" /></header>
+      <div class="home-research__evidence">{selectedResearch.map(({item,visual,label})=><article><img src={visual.assetPath.replace(".png", "-640.webp")} alt={visual.alt[locale]} width="640" height="360" loading="lazy" decoding="async"/><div><span>{item.year} · {item.venue}</span><h3>{label}</h3><p>{item.summary[locale]}</p><a href={item.links.find(link=>link.kind==="paper")?.url ?? item.links[0].url} target="_blank" rel="noreferrer">{zh ? "阅读论文" : "Read the paper"} ↗</a></div></article>)}</div>
+      <div class="home-research__record"><div><span class="eyebrow">{copy.highlight.eyebrow}</span><h3>{copy.highlight.title}</h3><p>{copy.highlight.body}</p><a href={copy.highlight.sourceUrl} target="_blank" rel="noreferrer">{copy.highlight.source} ↗</a></div><a class="home-index-entry" href={path("/nuwa/whitzard-index")}><span class="eyebrow">WHITZARD INDEX</span><h3>{copy.research.indexTitle}</h3><p>{zh ? "持续观测前沿 AI 风险，查看已发表评测证据与方法说明。" : "Track frontier AI risk through published evaluation evidence and documented methods."}</p><span>{zh ? "探索白泽指数" : "Explore Whitzard Index"} →</span></a></div>
+    </div></section>
 
-        <div class="home-system__cycle" aria-label={copy.system.feedback}>
-          <div class="home-system__cycle-line" aria-hidden="true"><i></i><b></b></div>
-          <ol>
-            {copy.system.cycle.map((item, index) => <li><span>0{index + 1}</span><strong>{item}</strong></li>)}
-          </ol>
-          <p>{copy.system.feedback}</p>
-        </div>
-
-        <article class="home-core home-core--nuwa">
-          <header><span>NUWA</span><small>{locale === "zh" ? "前沿风险研究" : "FRONTIER RISK RESEARCH"}</small></header>
-          <div class="home-core__body">
-            <h3>{copy.research.title}</h3>
-            <p>{copy.research.body}</p>
-            <ol>{copy.research.questions.map((question, index) => <li><span>0{index + 1}</span>{question}</li>)}</ol>
-          </div>
-          <footer>
-            <a href={localizedPath("/nuwa", locale)}>{copy.research.cta} <span aria-hidden="true">→</span></a>
-            <a class="home-core__service" href={localizedPath("/nuwa/whitzard-index", locale)}><small>{copy.research.indexTitle}</small><strong>{copy.research.indexBody}</strong><span aria-hidden="true">↗</span></a>
-          </footer>
-        </article>
-      </div>
-    </section>
-
-    <section class="home-runtime section" data-home-section="runtime">
-      <div class="site-container home-runtime__intro">
-        <div>
-          <p class="eyebrow" data-reveal>{copy.system.runtimeEyebrow}</p>
-          <h2 class="section-title" data-reveal data-reveal-delay="1">{copy.system.runtimeTitle}</h2>
-        </div>
-        <p data-reveal data-reveal-delay="2">{copy.system.runtimeBody}</p>
-      </div>
-      <div class="site-container home-runtime__canvas" data-reveal data-reveal-delay="2">
-        <AgentGuardBoundaryFlow locale={locale} client:visible />
-      </div>
-    </section>
-
-    <section class="home-evidence section" data-home-section="evidence">
-      <div class="site-container home-evidence__head">
-        <div>
-          <p class="eyebrow" data-reveal>{locale === "zh" ? "证据与动态" : "EVIDENCE & UPDATES"}</p>
-          <h2 class="section-title" data-reveal data-reveal-delay="1">{locale === "zh" ? "让判断建立在可核实的进展上" : "Ground every claim in verifiable progress."}</h2>
-        </div>
-        <span aria-hidden="true">03 / 06</span>
-      </div>
-      <div class="site-container home-evidence__grid">
-        <article class="home-evidence__highlight" data-reveal>
-          <span>{copy.highlight.eyebrow}</span>
-          <h3>{copy.highlight.title}</h3>
-          <p>{copy.highlight.body}</p>
-          {copy.highlight.sourceUrl && <a href={copy.highlight.sourceUrl} target="_blank" rel="noreferrer">{copy.highlight.source} <span aria-hidden="true">↗</span></a>}
-        </article>
-        <div class="home-evidence__updates" data-reveal data-reveal-delay="1"><LatestNews locale={locale} embedded excludeHref={copy.highlight.sourceUrl} /></div>
-      </div>
-    </section>
-
-    <section class="home-ecosystem section" data-home-section="ecosystem">
-      <div class="site-container home-ecosystem__grid">
-        <div class="home-ecosystem__copy">
-          <p class="eyebrow" data-reveal>{copy.ecosystem.eyebrow}</p>
-          <h2 class="section-title" data-reveal data-reveal-delay="1">{copy.ecosystem.title}</h2>
-          <p data-reveal data-reveal-delay="2">{copy.ecosystem.intro}</p>
-          <a class="text-link" href={ecosystemPath} data-reveal data-reveal-delay="3">{copy.ecosystem.viewAll} <span class="arrow">→</span></a>
-        </div>
-        <div class="home-ecosystem__network" data-reveal data-reveal-delay="2" role="img" aria-label={locale === "zh" ? "开放代码、模型、数据与评测基础设施相互连接" : "Connected open code, models, data, and evaluation infrastructure"}>
-          <svg viewBox="0 0 620 430" aria-hidden="true">
-            <path d="M310 215L116 92M310 215L507 90M310 215L105 340M310 215L516 342" />
-            <circle cx="310" cy="215" r="116" />
-            <circle cx="310" cy="215" r="66" />
-          </svg>
-          <strong class="home-ecosystem__hub">WhitzardAgent<small>OPEN ECOSYSTEM</small></strong>
-          {copy.ecosystem.directions.map((direction, index) => <span class={`home-ecosystem__node is-${index + 1}`}><i aria-hidden="true"></i><b>0{index + 1}</b>{direction}</span>)}
-        </div>
-      </div>
-    </section>
-
-    <section class="home-closing" data-home-section="closing">
-      <div class="home-closing__boundary" aria-hidden="true"><i></i><b></b></div>
-      <div class="site-container home-closing__grid">
-        <div>
-          <p class="eyebrow" data-reveal>{copy.closing.eyebrow}</p>
-          <h2 data-reveal data-reveal-delay="1">{copy.closing.title}</h2>
-        </div>
-        <div data-reveal data-reveal-delay="2">
-          <p>{copy.closing.body}</p>
-          <div class="home-closing__actions">
-            <a class="button button--primary" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.closing.primary}</a>
-            <a class="button button--secondary" href={researchBlogPath}>{copy.closing.secondary}</a>
-            <a class="home-closing__link" href={ecosystemPath}>{copy.closing.tertiary} <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </home-motion-controller>
+    <section id="ecosystem" class="section home-open"><div class="site-container home-open__grid"><BrandArtwork artwork="ecosystem"/><div><p class="eyebrow">{copy.ecosystem.eyebrow}</p><h2>{copy.ecosystem.title}</h2><p>{copy.ecosystem.intro}</p><ul>{copy.ecosystem.directions.map(item=><li>{item}</li>)}</ul><div class="home-open__actions"><a class="button button--primary" href={path("/open-ecosystem")}>{copy.ecosystem.viewAll} →</a><a class="text-link" href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a><a class="text-link" href={links.huggingface} target="_blank" rel="noreferrer">Hugging Face ↗</a></div></div></div></section>
+    <LatestNews locale={locale} excludeHref={copy.highlight.sourceUrl} />
+    <section id="join" class="home-join"><div class="site-container"><p class="eyebrow">{copy.closing.eyebrow}</p><h2>{copy.closing.title}</h2><p>{copy.closing.body}</p><div><a class="button button--primary" href={path("/waitlist")} data-umami-event="waitlist-cta-click">{copy.closing.primary} →</a><a class="button button--secondary" href={path("/contact")}>{zh ? "联系白泽" : "Contact Whitzard"}</a></div></div></section>
+  </div>
 </BaseLayout>
-
-<script>
-  class HomeMotionController extends HTMLElement {
-    sectionObserver?: IntersectionObserver;
-    revealObserver?: IntersectionObserver;
-    media?: MediaQueryList;
-    onVisibility = () => { this.dataset.pageVisible = document.hidden ? "false" : "true"; };
-
-    connectedCallback() {
-      this.disconnectObservers();
-      this.media = window.matchMedia("(prefers-reduced-motion: reduce)");
-      this.dataset.motion = this.media.matches ? "reduce" : "full";
-      this.onVisibility();
-
-      const revealItems = Array.from(this.querySelectorAll<HTMLElement>("[data-reveal]"));
-      if (this.media.matches || !("IntersectionObserver" in window)) {
-        revealItems.forEach((item) => item.dataset.visible = "true");
-      } else {
-        this.revealObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            (entry.target as HTMLElement).dataset.visible = "true";
-            observer.unobserve(entry.target);
-          });
-        }, { rootMargin: "0px 0px -10%", threshold: 0.08 });
-        revealItems.forEach((item) => this.revealObserver?.observe(item));
-      }
-
-      this.sectionObserver = new IntersectionObserver((entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) this.dataset.tone = (visible.target as HTMLElement).dataset.homeSection ?? "hero";
-      }, { rootMargin: "-24% 0px -46%", threshold: [0, .15, .35, .6] });
-      this.querySelectorAll<HTMLElement>("[data-home-section]").forEach((section) => this.sectionObserver?.observe(section));
-      document.addEventListener("visibilitychange", this.onVisibility);
-    }
-
-    disconnectedCallback() { this.disconnectObservers(); }
-
-    disconnectObservers() {
-      this.sectionObserver?.disconnect();
-      this.revealObserver?.disconnect();
-      document.removeEventListener("visibilitychange", this.onVisibility);
-    }
-  }
-
-  if (!customElements.get("home-motion-controller")) customElements.define("home-motion-controller", HomeMotionController);
-</script>

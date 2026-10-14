@@ -3,7 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Locale } from "../../i18n/config";
 import type { CompanyCopy } from "../../i18n/pages/company";
 import { team } from "../../data/team";
-import CompanySystemHero from "./CompanySystemHero.astro";
+import BrandHero from "../brand/BrandHero.astro";
+import { companyIdentity } from "../../data/companyIdentity";
 import "../../styles/company.css";
 
 interface Props { locale: Locale; copy: CompanyCopy["company"] }
@@ -11,7 +12,8 @@ const { locale, copy } = Astro.props;
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/about">
-  <CompanySystemHero locale={locale} copy={copy} />
+  <BrandHero locale={locale} artwork="about" eyebrow={locale === "zh" ? companyIdentity.legalName : "ABOUT WHITZARD"} title={copy.title} segments={locale === "zh" ? ["打造", "智能体时代", "的", "安全基础设施"] : undefined} description={companyIdentity.description[locale]} />
+  <section class="section company-systems"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "我们的业务" : "WHAT WE DO"}</p><h2 class="section-title">{locale === "zh" ? "产品、研究与开放技术" : "Products, research, and open technology"}</h2><div>{copy.architecture.slice(1).map(item => <a href={item.href}><h3>{item.name}</h3><span>{item.role}</span><p>{item.body}</p><b aria-hidden="true">→</b></a>)}</div></div></section>
   <section class="section company-principles"><div class="site-container"><h2 class="section-title">{copy.principlesTitle}</h2><div>{copy.principles.map((item, index) => <article><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></div></section>
   <section class="section company-team">
     <div class="site-container company-team__head"><h2 class="section-title">{copy.teamTitle}</h2><p>{copy.teamLead}</p></div>

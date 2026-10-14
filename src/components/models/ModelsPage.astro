@@ -4,10 +4,12 @@ import type { Locale } from "../../i18n/config";
 import type { ModelsCopy } from "../../i18n/pages/models";
 import { localizedPath } from "../../i18n/config";
 import { links } from "../../data/links";
+import { openSourceAssets } from "../../data/generated/openSourceAssets";
 import "../../styles/models.css";
 
 interface Props { locale: Locale; copy: ModelsCopy }
 const { locale, copy } = Astro.props;
+const relatedModels = ["thought-aligner", "mate", "mirrorguard", "reasoningshield"].map(id => openSourceAssets.find(item => item.id === id)).filter((item): item is NonNullable<typeof item> => Boolean(item));
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/models">
@@ -20,16 +22,11 @@ const { locale, copy } = Astro.props;
         <p class="models-hero__lead">{copy.lead}</p>
         <a class="button button--primary models-hero__cta" href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{locale === "zh" ? "加入心愿单" : "Join the waitlist"}</a>
       </div>
-      <div class="models-orbit" aria-hidden="true">
-        <span class="models-orbit__ring models-orbit__ring--outer"></span>
-        <span class="models-orbit__ring models-orbit__ring--inner"></span>
-        <i class="models-orbit__node models-orbit__node--one"></i>
-        <i class="models-orbit__node models-orbit__node--two"></i>
-        <i class="models-orbit__node models-orbit__node--three"></i>
-        <b></b>
-      </div>
+      <div class="model-service-preview">{copy.serviceTypes.map((item,index)=><article><span>0{index+1}</span><h2>{item.title}</h2><p>{item.body}</p></article>)}</div>
     </div>
   </section>
+
+  <section class="section models-related"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "相关模型" : "RELATED MODELS"}</p><h2 class="section-title">{locale === "zh" ? "开放模型与安全技术" : "Open models and safety technology"}</h2><div>{relatedModels.map(model=><article><span>{model.capability?.[locale]}</span><h3>{model.name}</h3><p>{model.description[locale]}</p><div>{model.githubUrl && <a href={model.githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>}{model.hfUrl && <a href={Array.isArray(model.hfUrl) ? model.hfUrl[0] : model.hfUrl} target="_blank" rel="noreferrer">Hugging Face ↗</a>}</div></article>)}</div></div></section>
 
   {/* Service vision */}
   <section class="section models-vision">

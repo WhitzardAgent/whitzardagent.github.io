@@ -7,6 +7,7 @@
 | 概念 | 中文 | English | 说明 |
 |---|---|---|---|
 | 公司 | 白泽 | Whitzard | 首次出现可写“白泽（Whitzard）” |
+| 公司正式主体 | 上海白泽驭智科技有限公司 | 上海白泽驭智科技有限公司 | 用于公司介绍、页脚版权与 legalName；英文品牌使用 Whitzard，无自行拟定的英文登记名称 |
 | 研究实验室 | 女娲 | NUWA | 仅作为品牌简称 |
 | 实验室全称 | 女娲实验室 | NUWA Frontier AI Safety Lab | 英文首次出现、SEO 与结构化数据使用全称 |
 | 产品体系使命 | 打造智能体时代的安全基础设施 | Build security infrastructure for the agentic AI era | 主品牌定位 |
