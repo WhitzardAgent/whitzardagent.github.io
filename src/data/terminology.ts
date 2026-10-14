@@ -29,7 +29,7 @@ export const lockedBrandCopy = {
     zh: "为全球 AI 治理提供风险证据与公共产品",
     en: "Shared Risk Evidence and Public Goods for the World",
   },
-  researchBlog: { zh: "Research Blog", en: "Research Blog" },
+  researchBlog: { zh: "Blogs", en: "Blogs" },
 } as const;
 
 export const terminology: TerminologyEntry[] = [
@@ -62,10 +62,10 @@ export const terminology: TerminologyEntry[] = [
   },
   {
     id: "research-blog",
-    zh: "Research Blog",
-    en: "Research Blog",
+    zh: "Blogs",
+    en: "Blogs",
     status: "locked",
-    definition: "女娲实验室发布研究解读的双语栏目。",
+    definition: "Research 统一入口下的双语研究解读分类；原 Research Blog 的 Markdown 管线与文章路由保留。",
     useWhen: "栏目名称、页面标题与导航。",
     deprecated: ["女娲简报", "NUWA Brief"],
   },

@@ -1,5 +1,11 @@
 # 06｜NUWA Lab 与开放生态
 
+## 2026-10-14 入口与白泽指数状态（覆盖旧展示规则）
+
+- 女娲介绍是“前沿研究”的首个目的页，Research 入口随后呈现 Publication、Technical Report、Blogs 三类入口卡片。
+- 原独立 Research Blog 列表合并至 Research，文章原文与编辑发布机制保留。
+- 白泽指数当前只显示“建设中 / Under construction”；旧观测仪表、方法与实证段落不对访客展示，仓库数据不删除。
+
 ## V3.12 NUWA 动态视觉（覆盖旧 Logo 首图规则）
 
 - NUWA 实验室首屏不再把 Logo 作为主视觉，品牌名称以文字锁定，主视觉使用代码原生的“风险证据场”。

@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 
 export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024, 900, 808, 390], interactions = true } = {}) {
-  const routes = ["/", "/agentguard", "/models", "/nuwa", "/open-ecosystem", "/nuwa/whitzard-index", "/about", "/nuwa/blog", "/news", "/waitlist", "/login", "/solutions"];
+  const routes = ["/", "/agentguard", "/models", "/nuwa", "/open-ecosystem", "/nuwa/whitzard-index", "/about", "/nuwa/research", "/news", "/waitlist", "/login", "/solutions"];
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   // Third-party analytics must not make local functional checks nondeterministic.
   await context.route("https://cloud.umami.is/**", route => route.abort());
@@ -50,14 +50,8 @@ export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024
     assert.equal(await page.locator(".home-applications__panel:visible").count(), 4, "mobile retains all use cases");
 
     await page.goto(new URL("/nuwa/whitzard-index", baseUrl).href, { waitUntil: "domcontentloaded" });
-    await page.locator("astro-island:not([ssr])").first().waitFor({ state: "attached" });
-    assert.ok(await page.getByRole("tab").evaluateAll(tabs => tabs.every(tab => document.getElementById(tab.getAttribute("aria-controls")))), "every evidence tab controls an existing panel");
-    await page.getByRole("tab", { name: /Self-Replication/ }).click();
-    assert.match(await page.getByRole("tabpanel").innerText(), /50%[\s\S]*90%/);
-    await page.getByRole("tab", { name: /Self-Replication/ }).press("ArrowRight");
-    assert.match(await page.getByRole("tabpanel").innerText(), />80%[\s\S]*>50%/);
-    const labelSize = await page.locator(".wi-chart__label span").first().evaluate(el => parseFloat(getComputedStyle(el).fontSize));
-    assert.ok(labelSize >= 12, "chart labels are readable");
+    assert.match(await page.locator("main").innerText(), /白泽指数[\s\S]*建设中/);
+    assert.equal(await page.locator("main astro-island, main table, main svg").count(), 0, "index does not render withdrawn evidence");
 
     await page.goto(new URL("/waitlist", baseUrl).href, { waitUntil: "domcontentloaded" });
     await page.locator("astro-island:not([ssr])").first().waitFor({ state: "attached" });
@@ -97,10 +91,8 @@ export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024
     await staticPage.goto(new URL("/", baseUrl).href);
     assert.equal(await staticPage.locator(".home-applications__panel:visible").count(), 4, "no-JS use cases remain complete");
     await staticPage.goto(new URL("/nuwa/whitzard-index", baseUrl).href);
-    const evidence = await staticPage.locator(".wi-evidence-noscript").innerText();
-    assert.match(evidence, /AgentCyberRange[\s\S]*34.53%[\s\S]*74.1%/);
-    assert.match(evidence, /Self-Replication[\s\S]*50%[\s\S]*90%/);
-    assert.match(evidence, /OpenDeception[\s\S]*>80%[\s\S]*>50%/);
+    assert.match(await staticPage.locator("main").innerText(), /建设中/);
+    assert.equal(await staticPage.locator("main astro-island, main table").count(), 0);
   } finally {
     await staticContext.close();
   }
@@ -123,9 +115,8 @@ export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024
   const touchPage = await touchContext.newPage();
   try {
     await touchPage.goto(new URL("/nuwa/whitzard-index", baseUrl).href, { waitUntil: "domcontentloaded" });
-    await touchPage.locator("astro-island:not([ssr])").first().waitFor({ state: "attached" });
-    await touchPage.getByRole("tab", { name: /OpenDeception/ }).tap();
-    assert.match(await touchPage.getByRole("tabpanel").innerText(), />80%[\s\S]*>50%/);
+    await touchPage.getByRole("link", { name: "返回女娲实验室 →", exact: true }).tap();
+    await touchPage.waitForURL("**/nuwa");
   } finally { await touchContext.close(); }
   return { combinations, keyboard: true, mobile: true, noJavaScript: true, reducedMotion: true, errors: [] };
 }

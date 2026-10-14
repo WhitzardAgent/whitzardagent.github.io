@@ -32,6 +32,7 @@
 13. `12-acceptance-checklist.md`
 14. `CODEX_MASTER_PROMPT.md`
 15. `CODEX_PHASE_PROMPTS.md`
+16. `16-research-cards-and-tags.md`（Research 图文卡片与标签筛选）
 
 ## 一句话方向
 

@@ -1,5 +1,13 @@
 # 03｜信息架构与中英文方案
 
+## 2026-10-14 Research 统一入口（覆盖下方旧研究栏目规则）
+
+- “前沿研究”文字点击进入 `/nuwa` 的实验室介绍；相邻箭头提供分类菜单，移动端亦分开链接与展开按钮。
+- 实验室介绍下方通过三个入口卡片进入 Research：Publication、Technical Report、Blogs。
+- `/nuwa/research` 与 `/en/nuwa/research` 为统一的研究列表；`?kind=publication`、`?kind=technical-report`、`?kind=blogs` 指定内容类型。默认全部，分类切换清空其他筛选，重置搜索／标签不改变已选分类。
+- 旧 `/nuwa/blog` 与 `/en/nuwa/blog` 保留静态跳转至对应的 Blogs 分类；文章详情与 RSS 保持原路由。重定向列表页不进入 sitemap。
+- 白泽指数仅呈现名称与“建设中 / Under construction”，撤下图表、结果与方法正文；原始数据仍保留在仓库。
+
 ## 推荐导航
 
 中文：

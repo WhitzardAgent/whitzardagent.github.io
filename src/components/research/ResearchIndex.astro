@@ -11,17 +11,25 @@ import { links } from "../../data/links";
 import ResearchExplorer from "./ResearchExplorer";
 import PublicImpactPath from "./PublicImpactPath.astro";
 import ResearchMission from "./ResearchMission.astro";
-import ResearchBlogPreview from "./ResearchBlogPreview.astro";
+import { allResearchBlogEntries, publishedResearchBlog, researchBlogSlug } from "../../lib/researchBlog";
+import { externalArticles } from "../../data/externalArticles";
+import { tagId, type ResearchBlogCard } from "../../lib/researchFilters";
 import "../../styles/research.css";
+import "../../styles/research-library.css";
 
 interface Props { locale: Locale; copy: ResearchCopy["research"] }
 const { locale, copy } = Astro.props;
-const sorted = [...researchAssets].sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
+const sorted = [...researchAssets].sort((a, b) => b.year - a.year || (a.featuredRank ?? 99) - (b.featuredRank ?? 99) || a.title.localeCompare(b.title));
 const featured = researchAssets.filter((item) => item.featuredRank).sort((a, b) => (a.featuredRank ?? 99) - (b.featuredRank ?? 99));
-const featuredPrimary = featured[0];
-const featuredEvidence = featured[1];
-const featuredCards = featured.slice(2).map((item) => ({ item, visual: researchVisuals.find((visual) => visual.researchSlug === item.slug) }));
 const primaryLink = (item: typeof researchAssets[number]) => item.links.find((link) => link.kind === "paper")?.url ?? item.links[0].url;
+const blogEntries = await allResearchBlogEntries();
+const blogs: ResearchBlogCard[] = publishedResearchBlog(blogEntries, locale).map(entry => {
+  const english = blogEntries.find(candidate => candidate.data.pair === entry.data.pair && candidate.data.locale === "en");
+  const chinese = blogEntries.find(candidate => candidate.data.pair === entry.data.pair && candidate.data.locale === "zh");
+  return { id: entry.id, title: entry.data.title, summary: entry.data.summary, year: entry.data.date.getUTCFullYear(), date: entry.data.date.toISOString().slice(0, 10), authors: entry.data.authors, researchSlug: entry.data.researchSlug, url: localizedPath(`/nuwa/blog/${researchBlogSlug(entry)}`, locale), source: "NUWA", external: false, tags: (english?.data.tags ?? entry.data.tags).map((en, index) => ({ id: tagId(en), en, zh: chinese?.data.tags[index] ?? en })) };
+});
+const externalTagNames: Record<string, string> = { "Frontier AI Risk": "前沿 AI 风险", Evaluation: "评测", Methodology: "方法" };
+blogs.push(...externalArticles.map((article, index) => ({ id: `external-${index}`, title: article.title, summary: locale === "zh" ? "讨论如何以更科学、基于证据且可执行的方法开展前沿 AI 风险评测。" : article.summary ?? "", year: Number(article.year), authors: [], url: article.url, source: article.source, external: true, tags: (article.tags ?? []).map(en => ({ id: tagId(en), en, zh: externalTagNames[en] ?? en })) })));
 const researcherNames = locale === "zh"
   ? { "jiarun-dai": "戴嘉润", "xudong-pan": "潘旭东", "geng-hong": "洪赓" }
   : { "jiarun-dai": "Jiarun Dai", "xudong-pan": "Xudong Pan", "geng-hong": "Geng Hong" };
@@ -40,37 +48,16 @@ const schema = {
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa/research" schema={schema}>
-  <section class="research-hero">
-    <div class="site-container research-hero__grid">
-      <img class="research-hero__logo" src="/assets/logo/nvwa_logo.png" width="112" height="112" alt={locale === "zh" ? "女娲实验室标识" : "NUWA logo"} />
-      <div class="research-hero__content"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div class="research-hero__actions"><a class="button button--primary" href={localizedPath("/nuwa/blog", locale)}>Research Blog</a><a class="button button--secondary" href={localizedPath("/nuwa/whitzard-index", locale)}>{locale === "zh" ? "白泽指数" : "Whitzard Index"}</a></div></div>
-    </div>
+  <section class="research-library-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "女娲实验室" : "NUWA"} <span aria-hidden="true">→</span></a><a href={localizedPath("/nuwa/whitzard-index", locale)}>{locale === "zh" ? "白泽指数 · 建设中" : "Whitzard Index · Under construction"}</a></div></div></section>
+
+  <section id="research-index" class="research-library" aria-labelledby="research-library-title">
+    <span id="featured" aria-hidden="true"></span>
+    <div class="site-container"><h2 id="research-library-title" class="sr-only">{copy.all}</h2><ResearchExplorer assets={sorted} visuals={researchVisuals} blogs={blogs} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source, kinds: copy.kinds }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} members={researchers.map(({ slug, name }) => ({ key: slug, title: name }))} client:load /></div>
   </section>
+
+  <noscript><style is:global>.brand-site .research-library .research-filters,.brand-site .research-library .research-tags,.brand-site .research-library .research-kind-filter{display:none !important}</style></noscript>
 
   <ResearchMission locale={locale} />
-
-  <section id="featured" class="section research-featured">
-    <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "代表成果" : "FEATURED WORK"}</p><h2>{copy.featured}</h2><p>{copy.featuredLead}</p></div>
-    <div class="site-container research-featured__editorial">
-      {featuredPrimary && <article class="research-featured__primary">
-        <div class="research-meta"><span>01</span><span>{featuredPrimary.year}</span><span>{featuredPrimary.venue}</span>{featuredPrimary.pages && <span>{featuredPrimary.pages}</span>}</div>
-        <h3>{featuredPrimary.title}</h3><p>{featuredPrimary.summary[locale]}</p><p class="research-authors">{featuredPrimary.authors.join(" · ")}</p><a href={primaryLink(featuredPrimary)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
-      </article>}
-      {featuredEvidence && <article class="research-featured__evidence">
-        <div class="research-meta"><span>02</span><span>{featuredEvidence.year}</span><span>{featuredEvidence.venue}</span></div><h3>{featuredEvidence.title}</h3><p>{featuredEvidence.summary[locale]}</p><a href={primaryLink(featuredEvidence)} target="_blank" rel="noreferrer">{copy.source} ↗</a>
-      </article>}
-      <div class="research-featured__visuals">{featuredCards.map(({ item, visual }, index) => visual ? <figure>
-        <a href={visual.sourcePdfUrl} target="_blank" rel="noreferrer"><picture><source type="image/webp" srcset={`${visual.assetPath.replace(".png", "-640.webp")} 640w, ${visual.assetPath.replace(".png", ".webp")} ${index === 0 ? 1030 : 1235}w`} sizes="(max-width: 640px) 100vw, (max-width: 900px) 45vw, 34vw" /><img src={visual.assetPath} width={index === 0 ? 1030 : 1235} height={index === 0 ? 1120 : 750} alt={visual.alt[locale]} loading="lazy" decoding="async" /></picture></a>
-        <figcaption><div class="research-meta"><span>0{index + 3}</span><span>{item.year}</span><span>{visual.figureLabel} · PDF p.{visual.page}</span></div><h3>{item.title}</h3><p>{visual.caption[locale]}</p><a href={visual.sourcePdfUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></figcaption>
-      </figure> : <article class="research-featured__text-card">
-        <div class="research-meta"><span>0{index + 3}</span><span>{item.year}</span><span>{item.venue}</span></div>
-        <div><p class="research-featured__monogram" aria-hidden="true">MG</p><h3>{item.title}</h3><p>{item.summary[locale]}</p><p class="research-authors">{item.authors.join(" · ")}</p></div>
-        <div class="research-featured__links"><a href={primaryLink(item)} target="_blank" rel="noreferrer">{copy.linkLabels.paper} ↗</a>{item.links.filter((link) => link.kind === "project" || link.kind === "code").map((link) => <a href={link.url} target="_blank" rel="noreferrer">{copy.linkLabels[link.kind]} ↗</a>)}</div>
-      </article>)}</div>
-    </div>
-  </section>
-
-  <ResearchBlogPreview locale={locale} />
 
   <section id="infrastructure" class="section research-infrastructure">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.infrastructure.eyebrow}</p><h2>{copy.infrastructure.title}</h2><p>{copy.infrastructure.lead}</p></div>
@@ -86,11 +73,6 @@ const schema = {
   <section id="recognition" class="section research-recognition">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.recognitionEyebrow}</p><h2>{copy.recognitionTitle}</h2></div>
     <div class="site-container research-recognition__list">{researchRecognitions.map((item) => <article><span>{item.year}</span><div><h3>{item.title[locale]}</h3>{item.venueNote && <p>{item.venueNote[locale]}</p>}</div><a href={item.sourceUrl} target="_blank" rel="noreferrer">{copy.source} ↗</a></article>)}</div>
-  </section>
-
-  <section id="research-index" class="section research-index">
-    <div class="site-container research-section-head"><p class="eyebrow">{locale === "zh" ? "出版物" : "PUBLICATIONS"}</p><h2>{copy.all}</h2></div>
-    <div class="site-container"><ResearchExplorer assets={sorted} locale={locale} copy={{ filters: copy.filters, linkLabels: copy.linkLabels, source: copy.source }} themes={copy.areas.map(({ key, title }) => ({ key, title }))} members={researchers.map(({ slug, name }) => ({ key: slug, title: name }))} client:load /></div>
   </section>
 
   <section id="collaboration" class="section research-collaboration"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "研究合作" : "COLLABORATION"}</p><h2>{copy.collaborationTitle}</h2><p>{copy.collaborationBody}</p><a class="button button--primary" href={`mailto:${links.email}?subject=${encodeURIComponent(locale === "zh" ? "女娲实验室研究合作" : "NUWA research collaboration")}`} data-umami-event="research-collaboration-click">{copy.collaborationCta}</a></div></section>

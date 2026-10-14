@@ -1,0 +1,23 @@
+---
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const base = localizedPath("/nuwa/research", locale);
+const entries = [
+  { id: "publication", title: "Publication", body: locale === "zh" ? "已发表或已获会议、期刊接收的研究论文。" : "Research papers published in or accepted by conferences and journals." },
+  { id: "technical-report", title: "Technical Report", body: locale === "zh" ? "预印本、技术报告与公开研究记录。" : "Preprints, technical reports, and public research records." },
+  { id: "blogs", title: "Blogs", body: locale === "zh" ? "解读研究问题、关键发现、方法与适用边界。" : "Insights into research questions, findings, methods, and limitations." },
+];
+---
+<section id="research-entry" class="section research-entry">
+  <div class="site-container">
+    <div class="research-entry__head"><div><p class="eyebrow">{locale === "zh" ? "研究与解读" : "RESEARCH & INSIGHTS"}</p><h2 class="section-title">Research</h2></div><a class="text-link" href={base}>{locale === "zh" ? "浏览全部内容" : "Explore all research"} →</a></div>
+    <div class="research-entry__grid">{entries.map((entry, index) => <a href={`${base}?kind=${entry.id}`}><span>0{index + 1}</span><h3>{entry.title}</h3><p>{entry.body}</p><span aria-hidden="true">→</span></a>)}</div>
+  </div>
+</section>
+<style>
+  .research-entry{background:var(--wz-moon)}.research-entry__head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:32px}.research-entry__head h2{margin:12px 0 0}.research-entry__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.research-entry__grid a{display:flex;flex-direction:column;min-height:240px;border:1px solid var(--wz-hairline);border-radius:10px;padding:28px;background:white;color:var(--wz-ink);text-decoration:none;transition:border-color 180ms,background 180ms}.research-entry__grid a:hover{border-color:var(--nw-jade);background:#fafcf9}.research-entry__grid span{color:var(--nw-deep-jade);font-size:13px}.research-entry__grid h3{margin:36px 0 16px;font-size:24px;font-weight:500}.research-entry__grid p{margin:0 0 24px;color:var(--wz-body);font-size:16px;line-height:1.7}.research-entry__grid span:last-child{margin-top:auto}
+  @media(max-width:700px){.research-entry__head{align-items:start;flex-direction:column}.research-entry__grid{grid-template-columns:1fr}.research-entry__grid a{min-height:220px}}
+  @media(prefers-reduced-motion:reduce){.research-entry__grid a{transition:none}}
+</style>

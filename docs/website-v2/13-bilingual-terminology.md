@@ -13,7 +13,10 @@
 | 产品体系使命 | 打造智能体时代的安全基础设施 | Build security infrastructure for the agentic AI era | 主品牌定位 |
 | 实验室职责 | 前沿 AI 风险研究与治理 | Frontier AI risk research and governance | NUWA 页面定位 |
 | 研究使命 | 为全球 AI 治理提供风险证据与公共产品 | Shared Risk Evidence and Public Goods for the World | 必须保持原文 |
-| 研究解读栏目 | Research Blog | Research Blog | 中文界面也不翻译栏目名 |
+| 研究统一入口 | Research | Research | 中文与英文使用相同入口名称 |
+| 研究论文分类 | Publication | Publication | 已发表或已接收论文，以仓库的发表类型与会议／期刊记录为依据 |
+| 技术报告分类 | Technical Report | Technical Report | 未正式发表的预印本与技术报告 |
+| 研究解读分类 | Blogs | Blogs | 替代原 Research Blog 列表；保留 Markdown 管线和详情 URL |
 
 推荐关系表述：
 

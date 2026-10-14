@@ -17,6 +17,8 @@ const consolePath = typeof consoleUrl === "string" && /^https:\/\//.test(console
   : localizedPath("/login", locale);
 
 function isActive(href: string) {
+  if (href.includes("?")) return false;
+  if (href === "/nuwa/research") return basePath === href || basePath.startsWith("/nuwa/blog/");
   if (href === "/nuwa") return basePath === "/nuwa";
   if (href === "/nuwa/blog") return basePath === "/nuwa/blog" || basePath.startsWith("/nuwa/blog/");
   if (href === "/agentguard") return basePath === "/agentguard" || basePath.startsWith("/agentguard/");
@@ -41,16 +43,17 @@ function isGroupActive(children?: { href: string }[]) {
       </a>
       <nav class="site-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
         {copy.nav.map((item, index) => item.children ? (
-          <div class:list={["site-nav__group", index > 0 && "site-nav__item--divided", isGroupActive(item.children) && "is-active"]} data-dropdown>
+          <div class:list={["site-nav__group", item.href !== "#" && "site-nav__group--linked", index > 0 && "site-nav__item--divided", isGroupActive(item.children) && "is-active"]} data-dropdown>
+            {item.href !== "#" && <a href={localizedPath(item.href, locale)} class:list={["site-nav__link", "site-nav__destination", isGroupActive(item.children) && "is-active"]} aria-current={isActive(item.href) ? "page" : undefined}><NavIcon name={item.icon} /><span>{item.label}</span></a>}
             <button
-              class:list={["site-nav__link", "site-nav__toggle", isGroupActive(item.children) && "is-active"]}
+              class:list={["site-nav__link", "site-nav__toggle", item.href !== "#" && "site-nav__toggle--split", isGroupActive(item.children) && "is-active"]}
               type="button"
               aria-expanded="false"
               aria-haspopup="true"
               data-dropdown-toggle
+              aria-label={item.href !== "#" ? `${copy.menuOpen}: ${item.label}` : undefined}
             >
-              <NavIcon name={item.icon} />
-              <span>{item.label}</span>
+              {item.href === "#" && <><NavIcon name={item.icon} /><span>{item.label}</span></>}
               <svg class="site-nav__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="site-nav__dropdown" data-dropdown-panel role="menu" aria-label={item.label}>
@@ -85,16 +88,19 @@ function isGroupActive(children?: { href: string }[]) {
       <nav class="site-container mobile-navigation__inner" aria-label={locale === "zh" ? "移动端主导航" : "Mobile navigation"}>
         {copy.nav.map((item, index) => item.children ? (
           <div class="mobile-nav__group" data-mobile-group>
+            <div class:list={["mobile-nav__parent-row", item.href !== "#" && "mobile-nav__parent-row--linked"]}>
+            {item.href !== "#" && <a class="mobile-navigation__link" href={localizedPath(item.href, locale)}><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span class="mobile-navigation__label"><NavIcon name={item.icon} />{item.label}</span></a>}
             <button
-              class="mobile-navigation__link mobile-navigation__parent"
+              class:list={["mobile-navigation__link", "mobile-navigation__parent", item.href !== "#" && "mobile-navigation__toggle--split"]}
               type="button"
               aria-expanded="false"
               data-mobile-parent
+              aria-label={item.href !== "#" ? `${copy.menuOpen}: ${item.label}` : undefined}
             >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <span class="mobile-navigation__label"><NavIcon name={item.icon} />{item.label}</span>
+              {item.href === "#" && <><span>{String(index + 1).padStart(2, "0")}</span><span class="mobile-navigation__label"><NavIcon name={item.icon} />{item.label}</span></>}
               <svg class="mobile-navigation__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
+            </div>
             <div class="mobile-nav__children" hidden>
               {item.children.map((child) => (
                 <a
@@ -132,7 +138,13 @@ function isGroupActive(children?: { href: string }[]) {
       this.panel = this.querySelector(".mobile-navigation");
       this.button?.addEventListener("click", () => this.toggle(), { signal: this.aborter.signal });
       this.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") this.close(true);
+        if (event.key === "Escape") {
+          const desktopGroup = (event.target as Element | null)?.closest<HTMLElement>("[data-dropdown]");
+          if (desktopGroup) {
+            desktopGroup.querySelector<HTMLButtonElement>("[data-dropdown-toggle]")?.focus();
+            this.closeAllDropdowns();
+          } else this.close(true);
+        }
         if (event.key !== "Tab" || this.button?.getAttribute("aria-expanded") !== "true") return;
         const focusable = this.mobileFocusables();
         const first = focusable[0];
@@ -147,6 +159,7 @@ function isGroupActive(children?: { href: string }[]) {
         const toggle = group.querySelector<HTMLButtonElement>("[data-dropdown-toggle]");
         const panel = group.querySelector<HTMLElement>("[data-dropdown-panel]");
         if (!toggle || !panel) return;
+        group.dataset.dropdownEnhanced = "true";
 
         const open = () => {
           this.closeAllDropdowns();
@@ -175,7 +188,10 @@ function isGroupActive(children?: { href: string }[]) {
           if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             open();
-            panel.querySelector<HTMLAnchorElement>(".site-nav__dropdown-link")?.focus();
+            // Focus after the visibility transition has started, not while the panel is hidden.
+            requestAnimationFrame(() => {
+              if (toggle.getAttribute("aria-expanded") === "true") panel.querySelector<HTMLAnchorElement>(".site-nav__dropdown-link")?.focus();
+            });
           }
         }, { signal: this.aborter.signal });
       });

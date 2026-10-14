@@ -1,6 +1,6 @@
-# Research Blog 发布流程
+# Research · Blogs 发布流程
 
-Research Blog 是女娲实验室对原始研究的人工撰写与编辑解读。每个公开条目由中文和英文两份 Markdown 组成，并与仓库中已有的研究记录绑定。
+Blogs 是 Research 统一页面中的研究解读分类，替代原独立 Research Blog 列表。每个公开条目由中文和英文两份 Markdown 组成，并与仓库中已有的研究记录绑定。现有模板命令、目录与文章 URL 保持兼容。
 
 ## 1. 生成双语草稿
 
@@ -27,7 +27,9 @@ npm test
 npm run build
 ```
 
-校验会检查中英配对、研究记录关联、必填元数据与正文。构建成功后，文章会出现在 `/nuwa/blog/<slug>`、`/en/nuwa/blog/<slug>` 和对应 RSS 中。
+校验会检查中英配对、研究记录关联、必填元数据与正文。构建成功后，文章会自动进入 `/nuwa/research?kind=blogs` 与英文对应页；详情保留 `/nuwa/blog/<slug>`、`/en/nuwa/blog/<slug>` 和对应 RSS。旧列表页跳转到统一 Research 的 Blogs 分类。
+
+文章列表直接读取已发布 Markdown 的标题、摘要、日期、作者、标签及关联论文，不另维护一份列表 JSON。双语标签应维持语义和顺序一致，便于共享筛选 ID；文章文案仍独立编辑。
 
 ## 4. 编辑责任
 

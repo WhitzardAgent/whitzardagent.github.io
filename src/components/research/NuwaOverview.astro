@@ -8,7 +8,7 @@ import { researchInfrastructure } from "../../data/generated/researchInfrastruct
 import { links } from "../../data/links";
 import { researchPrograms } from "../../data/researchPrograms";
 import BrandHero from "../brand/BrandHero.astro";
-import ResearchBlogPreview from "./ResearchBlogPreview.astro";
+import ResearchEntryCards from "./ResearchEntryCards.astro";
 import { companyIdentity } from "../../data/companyIdentity";
 import "../../styles/research.css";
 import "../../styles/nuwa-overview.css";
@@ -36,8 +36,7 @@ const schema = {
   <nuwa-motion class="nw-page">
   {/* Hero */}
   <BrandHero locale={locale} artwork="nuwa" eyebrow={locale === "zh" ? "女娲实验室 · NUWA" : "NUWA FRONTIER AI SAFETY LAB"} title={copy.title} segments={locale === "zh" ? ["为全球 AI 治理", "提供风险证据", "与公共产品"] : undefined} description={copy.lead}>
-    <a class="button button--primary" href={localizedPath("/nuwa/research", locale)}>{copy.researchCta}</a>
-    <a class="button button--secondary" href={localizedPath("/nuwa/blog", locale)}>Research Blog →</a>
+    <a class="button button--primary" href={localizedPath("/nuwa/research", locale)}>Research →</a>
   </BrandHero>
 
   {/* Lab vision statement */}
@@ -48,7 +47,7 @@ const schema = {
     </div>
   </section>
 
-  <ResearchBlogPreview locale={locale} />
+  <ResearchEntryCards locale={locale} />
 
   {/* Featured research — representative findings */}
   <section class="section nw-featured" data-nuwa-reveal>
@@ -103,8 +102,7 @@ const schema = {
         <h2 class="section-title">{copy.indexTitle}</h2>
       </div>
       <div>
-        <p>{copy.indexBody}</p>
-        <a class="button button--secondary" href={localizedPath("/nuwa/whitzard-index", locale)}>{copy.indexCta} →</a>
+        <a class="text-link" href={localizedPath("/nuwa/whitzard-index", locale)}>{locale === "zh" ? "建设中" : "Under construction"}</a>
       </div>
     </div>
   </section>
@@ -124,20 +122,6 @@ const schema = {
           {infra.websiteUrl && <a href={infra.websiteUrl} target="_blank" rel="noreferrer">{copy.infraSource} ↗</a>}
         </article>
       ))}
-    </div>
-  </section>
-
-  {/* Full research record link */}
-  <section class="section nw-all-research" data-nuwa-reveal>
-    <div class="site-container nw-all-research__grid">
-      <div>
-        <p class="eyebrow">{copy.allResearchEyebrow}</p>
-        <h2 class="section-title">{copy.allResearchTitle}</h2>
-      </div>
-      <div>
-        <p>{copy.allResearchBody}</p>
-        <a class="button button--primary" href={localizedPath("/nuwa/research", locale)}>{copy.allResearchCta} →</a>
-      </div>
     </div>
   </section>
 

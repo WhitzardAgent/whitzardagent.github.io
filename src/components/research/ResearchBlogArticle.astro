@@ -25,12 +25,12 @@ const schema = {
 };
 ---
 
-<BaseLayout title={`${entry.data.title} — Research Blog`} description={entry.data.summary} locale={locale} brand="nuwa" canonicalPath={canonicalPath} schema={schema}>
+<BaseLayout title={`${entry.data.title} — Blogs`} description={entry.data.summary} locale={locale} brand="nuwa" canonicalPath={canonicalPath} schema={schema}>
   <article class="rb-article">
     <header class="rb-article__header">
       <div class="site-container rb-article__header-grid">
         <div>
-          <p class="eyebrow">Research Blog</p>
+          <p class="eyebrow"><a href={`${localizedPath("/nuwa/research", locale)}?kind=blogs`}>Research · Blogs</a></p>
           <h1>{entry.data.title}</h1>
         </div>
         <div class="rb-article__meta">

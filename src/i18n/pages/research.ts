@@ -31,7 +31,8 @@ export type ResearchCopy = {
     featuredLead: string;
     all: string;
     source: string;
-    filters: { searchLabel: string; searchPlaceholder: string; topicLabel: string; yearLabel: string; memberLabel: string; allTopics: string; allYears: string; allMembers: string; reset: string; noResults: string };
+    kinds: { all: string; label: string; brandCover: string; readBlog: string };
+    filters: { searchLabel: string; searchPlaceholder: string; topicLabel: string; yearLabel: string; memberLabel: string; allTopics: string; allYears: string; allMembers: string; reset: string; noResults: string; tagLabel: string; filterByTag: string; removeTag: string; allTags: string; tagHint: string; results: string; figureSource: string; typeLabels: Record<"conference" | "journal" | "preprint" | "report" | "position", string> };
     linkLabels: { paper: string; pdf: string; code: string; project: string };
     recognitionEyebrow: string;
     recognitionTitle: string;
@@ -111,8 +112,8 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
           "NUWA research on frontier AI risk, agent safety, systems security, cybersecurity, and privacy.",
       },
       eyebrow: "NUWA · RESEARCH",
-      title: "Frontier AI Risk Research and Governance",
-      lead: "Research on increasingly capable AI systems, verifiable control, risk evaluation, and the evidence needed for governance decisions.",
+      title: "Research",
+      lead: "Publications, technical reports, and research insights on frontier AI risk, agent safety, and system security.",
       nav: { themes: "Research themes", featured: "Featured work", infrastructure: "Infrastructure", impact: "Public impact", index: "All research", recognition: "Recognition" },
       areas: [
         { key: "frontier-risk-control", title: "Frontier risk & AI control", body: "Measure autonomy, deception, proliferation, and control integrity.", cta: "View this theme" },
@@ -126,7 +127,8 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       featuredLead: "Five research programs defining frontier risk and practical control.",
       all: "Research index",
       source: "Original source",
-      filters: { searchLabel: "Search", searchPlaceholder: "Search title, author, or topic", topicLabel: "Theme", yearLabel: "Year", memberLabel: "Member", allTopics: "All themes", allYears: "All years", allMembers: "All members", reset: "Reset", noResults: "No research matches these filters." },
+      kinds: { all: "All", label: "Research content type", brandCover: "NUWA Frontier AI Safety Lab brand cover", readBlog: "Read the blog" },
+      filters: { searchLabel: "Search", searchPlaceholder: "Search title, author, or topic", topicLabel: "Theme", yearLabel: "Year", memberLabel: "Member", allTopics: "All themes", allYears: "All years", allMembers: "All members", reset: "Reset", noResults: "No research matches these filters.", tagLabel: "Tags", filterByTag: "Filter by tag", removeTag: "Remove tag", allTags: "Browse all tags", tagHint: "Match any selected tag. Combine with other filters to narrow results.", results: "results", figureSource: "Paper figure", typeLabels: { conference: "Conference", journal: "Journal", preprint: "Preprint", report: "Report", position: "Position paper" } },
       linkLabels: { paper: "Paper", pdf: "PDF", code: "Code", project: "Project" },
       recognitionEyebrow: "RECOGNITION",
       recognitionTitle: "Honours and recognition",
@@ -240,8 +242,8 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
           "女娲实验室关于前沿 AI 风险、智能体安全、系统安全、网络安全与隐私的研究成果。",
       },
       eyebrow: "女娲实验室 · 研究",
-      title: "前沿 AI 风险研究与治理",
-      lead: "研究能力持续增强的 AI 系统、可验证控制与风险评测，为治理决策提供可核实的技术证据。",
+      title: "Research",
+      lead: "前沿 AI 风险、智能体与系统安全的研究论文、技术报告与研究解读。",
       nav: { themes: "研究主题", featured: "代表成果", infrastructure: "研究基础设施", impact: "公共影响", index: "全部成果", recognition: "荣誉与认可" },
       areas: [
         { key: "frontier-risk-control", title: "前沿风险与 AI 控制", body: "评测自主性、欺骗、扩散与控制完整性。", cta: "查看主题研究" },
@@ -255,7 +257,8 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       featuredLead: "五项代表性工作，连接前沿风险、智能体防护与系统安全。",
       all: "成果索引",
       source: "原文",
-      filters: { searchLabel: "搜索", searchPlaceholder: "搜索标题、作者或主题", topicLabel: "主题", yearLabel: "年份", memberLabel: "成员", allTopics: "全部主题", allYears: "全部年份", allMembers: "全部成员", reset: "重置", noResults: "没有符合条件的研究成果" },
+      kinds: { all: "全部", label: "研究内容类型", brandCover: "女娲前沿 AI 安全实验室品牌封面", readBlog: "阅读解读" },
+      filters: { searchLabel: "搜索", searchPlaceholder: "搜索标题、作者或主题", topicLabel: "主题", yearLabel: "年份", memberLabel: "成员", allTopics: "全部主题", allYears: "全部年份", allMembers: "全部成员", reset: "重置", noResults: "没有符合条件的研究成果", tagLabel: "标签", filterByTag: "筛选标签", removeTag: "移除标签", allTags: "浏览全部标签", tagHint: "匹配任一所选标签，并与其他筛选条件组合。", results: "项成果", figureSource: "论文主图", typeLabels: { conference: "会议论文", journal: "期刊论文", preprint: "预印本", report: "报告", position: "立场论文" } },
       linkLabels: { paper: "论文", pdf: "PDF", code: "代码", project: "项目" },
       recognitionEyebrow: "荣誉与认可",
       recognitionTitle: "荣誉与认可",

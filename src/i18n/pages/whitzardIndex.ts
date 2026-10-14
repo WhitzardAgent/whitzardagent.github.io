@@ -2,6 +2,7 @@ import type { Locale } from "../config";
 
 export type WhitzardIndexCopy = {
   meta: { title: string; description: string };
+  status: string;
   eyebrow: string;
   title: string;
   subtitle: string;
@@ -44,8 +45,9 @@ export const whitzardIndexCopy: Record<Locale, WhitzardIndexCopy> = {
   en: {
     meta: {
       title: "Whitzard Index — NUWA",
-      description: "The Whitzard Index is NUWA's long-term project for observing and comparing frontier AI risk across models and systems.",
+      description: "Whitzard Index — under construction.",
     },
+    status: "Under construction",
     eyebrow: "WHITZARD INDEX · NUWA",
     title: "Track frontier AI risk over time",
     subtitle: "A longitudinal evidence system for frontier AI risk",
@@ -98,8 +100,9 @@ export const whitzardIndexCopy: Record<Locale, WhitzardIndexCopy> = {
   zh: {
     meta: {
       title: "白泽指数 — 女娲实验室",
-      description: "白泽指数是女娲实验室持续观测和比较前沿 AI 风险的研究数据项目。",
+      description: "白泽指数，建设中。",
     },
+    status: "建设中",
     eyebrow: "白泽指数 · 女娲实验室",
     title: "持续观测前沿 AI 风险",
     subtitle: "面向前沿 AI 风险的长期证据系统",

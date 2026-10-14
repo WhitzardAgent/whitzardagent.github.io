@@ -13,7 +13,7 @@ export const links = {
   developers: "/open-ecosystem",
   openEcosystem: "/open-ecosystem",
   models: "/models",
-  blog: "/nuwa/blog",
+  blog: "/nuwa/research?kind=blogs",
   about: "/about",
   contact: "/contact",
   agentguard: "https://github.com/WhitzardAgent/AgentGuard",

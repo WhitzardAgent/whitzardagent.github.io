@@ -13,7 +13,7 @@ export default defineConfig({
         // Strip /en prefix for redirect matching
         const base = raw.startsWith("/en/") ? raw.slice(3) : raw;
         if (raw.startsWith("/zh")) return false;
-        if (base === "/blog") return false;
+        if (base === "/blog" || base === "/nuwa/blog") return false;
         const redirectOnly = [
           "/NVWA-Project",
           "/open-source",

@@ -31,9 +31,9 @@ const copy = ui[locale];
     <div class="site-footer__column">
       <p class="site-footer__label">{copy.footer.nuwa}</p>
       <a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "实验室总览" : "Lab Overview"}</a>
-      <a href={localizedPath("/nuwa/research", locale)}>{locale === "zh" ? "研究成果" : "Research"}</a>
-      <a href={localizedPath("/nuwa/blog", locale)}>Research Blog</a>
-      <a href={localizedPath("/nuwa/whitzard-index", locale)}>{locale === "zh" ? "白泽指数" : "Whitzard Index"}</a>
+      <a href={localizedPath("/nuwa/research", locale)}>Research</a>
+      <a href={`${localizedPath("/nuwa/research", locale)}?kind=blogs`}>Blogs</a>
+      <a href={localizedPath("/nuwa/whitzard-index", locale)}>{locale === "zh" ? "白泽指数 · 建设中" : "Whitzard Index · Under construction"}</a>
     </div>
     <div class="site-footer__column">
       <p class="site-footer__label">{copy.footer.ecosystem}</p>

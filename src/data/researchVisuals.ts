@@ -1,4 +1,5 @@
 import type { Locale } from "../i18n/config";
+import curatedTeasers from "./researchTeasers.json";
 
 type LocalizedText = Record<Locale, string>;
 
@@ -8,6 +9,9 @@ export type ResearchVisual = {
   sourcePdfUrl: string;
   figureLabel: string;
   page: number;
+  thumbnailPath?: string;
+  width?: number;
+  height?: number;
   caption: LocalizedText;
   alt: LocalizedText;
 };
@@ -19,6 +23,8 @@ export const researchVisuals: ResearchVisual[] = [
     sourcePdfUrl: "https://arxiv.org/pdf/2503.17378",
     figureLabel: "Figure 1",
     page: 3,
+    width: 1030,
+    height: 1120,
     caption: {
       zh: "自我复制、环境适应与抗关闭测试构成可执行的前沿风险证据链",
       en: "Executable tests connect self-replication, adaptation, and shutdown-survival evidence.",
@@ -34,6 +40,8 @@ export const researchVisuals: ResearchVisual[] = [
     sourcePdfUrl: "https://arxiv.org/pdf/2603.07427",
     figureLabel: "Figure 2",
     page: 3,
+    width: 1230,
+    height: 420,
     caption: {
       zh: "由 Architect 与 Coder 合成可执行环境，再对目标智能体进行监测与评估",
       en: "Architect and Coder agents synthesize executable environments for monitored frontier-risk evaluation.",
@@ -49,6 +57,8 @@ export const researchVisuals: ResearchVisual[] = [
     sourcePdfUrl: "https://arxiv.org/pdf/2505.11063",
     figureLabel: "Figure 1",
     page: 2,
+    width: 1235,
+    height: 750,
     caption: {
       zh: "Thought-Aligner 在危险行动发生前修正推理路径，并保留任务能力",
       en: "Thought-Aligner corrects unsafe reasoning before action while preserving task utility.",
@@ -58,8 +68,13 @@ export const researchVisuals: ResearchVisual[] = [
       en: "Figure 1 comparing an unsafe action trajectory with a Thought-Aligner-corrected trajectory",
     },
   },
+  ...curatedTeasers.map(({ researchSlug, assetPath, thumbnailPath, sourcePdfUrl, figureLabel, page, width, height, title }): ResearchVisual => ({
+    researchSlug, assetPath, thumbnailPath, sourcePdfUrl, figureLabel, page, width, height,
+    caption: { zh: `论文主图：${title}`, en: `Paper figure: ${title}` },
+    alt: { zh: `${title} — 论文 ${figureLabel}`, en: `${figureLabel} from ${title}` },
+  })),
 ];
 
-if (researchVisuals.length !== 3 || new Set(researchVisuals.map((item) => item.researchSlug)).size !== 3) {
-  throw new Error("Research visuals require three unique verified figures");
+if (new Set(researchVisuals.map((item) => item.researchSlug)).size !== researchVisuals.length) {
+  throw new Error("Research visuals require unique verified figures");
 }

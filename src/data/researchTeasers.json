@@ -1,0 +1,942 @@
+[
+  {
+    "researchSlug": "autonomy-comes-with-costs-detecting-denial-of-service-vulnerabilities-caused-by-",
+    "title": "Autonomy Comes with Costs: Detecting Denial-of-Service Vulnerabilities Caused by Resource Abusing in LLM-based Agents",
+    "assetPath": "/assets/research/teasers/autonomy-comes-with-costs-detecting-denial-of-service-vulnerabilities-caused-by--figure-3.webp",
+    "thumbnailPath": "/assets/research/teasers/autonomy-comes-with-costs-detecting-denial-of-service-vulnerabilities-caused-by--figure-3-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_luo.pdf",
+    "figureLabel": "Figure 3",
+    "page": 5,
+    "width": 1280,
+    "height": 394,
+    "cropPdfPoints": [
+      44.0,
+      58.0,
+      568.0,
+      219.0
+    ],
+    "pdfSha256": "68670c39f8eb0f0471951b569496b83f090195291b5d530714e1c13849908b51",
+    "captionOriginal": "Figure 3: Architecture of AgentDoS.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "better-safe-than-sorry-uncovering-the-insecure-resource-management-in-app-in-app",
+    "title": "Better Safe than Sorry: Uncovering the Insecure Resource Management in App-in-App Cloud Services",
+    "assetPath": "/assets/research/teasers/better-safe-than-sorry-uncovering-the-insecure-resource-management-in-app-in-app-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/better-safe-than-sorry-uncovering-the-insecure-resource-management-in-app-in-app-figure-1-640.webp",
+    "sourcePdfUrl": "https://www.ndss-symposium.org/wp-content/uploads/2026-s194-paper.pdf",
+    "figureLabel": "Figure 1",
+    "page": 1,
+    "width": 666,
+    "height": 307,
+    "cropPdfPoints": [
+      304.6050109863281,
+      264.3046875,
+      570.5986938476562,
+      386.4056396484375
+    ],
+    "pdfSha256": "920366f1fd3338631e6953976a89919c1fc62f3091f52279a092d0419da4d69d",
+    "captionOriginal": "Fig. 1. Identity management mechanism in the app-in-app ecosystem.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "firmcross-detecting-taint-style-vulnerabilities-in-modern-c-lua-hybrid-web-servi",
+    "title": "FirmCross: Detecting Taint-style Vulnerabilities in Modern C-Lua Hybrid Web Services of Linux-based Firmware",
+    "assetPath": "/assets/research/teasers/firmcross-detecting-taint-style-vulnerabilities-in-modern-c-lua-hybrid-web-servi-figure-4.webp",
+    "thumbnailPath": "/assets/research/teasers/firmcross-detecting-taint-style-vulnerabilities-in-modern-c-lua-hybrid-web-servi-figure-4-640.webp",
+    "sourcePdfUrl": "https://www.ndss-symposium.org/wp-content/uploads/2026-s1251-paper.pdf",
+    "figureLabel": "Figure 4",
+    "page": 7,
+    "width": 529,
+    "height": 543,
+    "cropPdfPoints": [
+      68.81800079345703,
+      36.54144287109375,
+      280.1180419921875,
+      253.449462890625
+    ],
+    "pdfSha256": "e1fc6e2ef97b84e1829c98246b32ae0f5f99f55bdc2fa694bafe83e307085ec0",
+    "captionOriginal": "Fig. 4: FirmCross Workflow.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "flowguard-towards-lightweight-in-generation-safety-detection-for-diffusion-model",
+    "title": "FlowGuard: Towards Lightweight In-Generation Safety Detection for Diffusion Models via Linear Latent Decoding",
+    "assetPath": "/assets/research/teasers/flowguard-towards-lightweight-in-generation-safety-detection-for-diffusion-model-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/flowguard-towards-lightweight-in-generation-safety-detection-for-diffusion-model-figure-2-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2604.07879v1",
+    "figureLabel": "Figure 2",
+    "page": 4,
+    "width": 1280,
+    "height": 568,
+    "cropPdfPoints": [
+      45.79800033569336,
+      72.48394012451172,
+      567.8050537109375,
+      304.07330322265625
+    ],
+    "pdfSha256": "40e5fed5a74003ace565981e6bc1bd2a9ef7dac3383689c9cd2f891bc2d1f3d4",
+    "captionOriginal": "Figure 2: Overview of the FlowGuard framework. (1) Linear Approximation replaces heavy VAE decoding with a lightweight\nprojection layer for early-stage visual reconstruction. (2) The Training Pipeline utilizes a Low-Pass Filter (LPF) and a noise-\nprogressive Curriculum Arrangement to enhance detector robustness. (3) During Deployment, the unified detector intercepts\nunsafe trajectories across diverse T2I models, skipping final decoding for flagged content to significantly reduce latency and\nmemory overhead.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "khost-kvm-based-near-native-mcu-firmware-rehosting",
+    "title": "Khost: KVM-based Near Native MCU Firmware Rehosting",
+    "assetPath": "/assets/research/teasers/khost-kvm-based-near-native-mcu-firmware-rehosting-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/khost-kvm-based-near-native-mcu-firmware-rehosting-figure-2-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_wang-chunlin.pdf",
+    "figureLabel": "Figure 2",
+    "page": 5,
+    "width": 648,
+    "height": 338,
+    "cropPdfPoints": [
+      44.0,
+      56.0,
+      303.0,
+      191.0
+    ],
+    "pdfSha256": "7ff538ff6cbc4c15b43fb6a6d23dd4edeb19433a0d2bb3e5aa4b6528a5686945",
+    "captionOriginal": "Figure 2: The overview of Khost",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "mirrorguard-toward-secure-computer-use-agents-via-simulation-to-real-reasoning-c",
+    "title": "MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction",
+    "assetPath": "/assets/research/teasers/mirrorguard-toward-secure-computer-use-agents-via-simulation-to-real-reasoning-c-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/mirrorguard-toward-secure-computer-use-agents-via-simulation-to-real-reasoning-c-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2601.12822",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 1280,
+    "height": 468,
+    "cropPdfPoints": [
+      45.79800033569336,
+      69.68623352050781,
+      566.3951416015625,
+      259.64349365234375
+    ],
+    "pdfSha256": "7be84727bcc747b36a9236819093a686599db81e030a103417e66cd803ba034a",
+    "captionOriginal": "Figure 1: Overview of MirrorGuard: “Train in the MirrorWorld, Act in the Wild.” MirrorGuard trains a reasoning correction\nmodule entirely within a text-based MirrorWorld, where a ReAct agent interacts with a symbolic environment and insecure\nthoughts are automatically identified and corrected under explicit security rules. These paired trajectories are used for\nsupervised fine-tuning to learn safety-aware reasoning. At deployment, the trained MirrorGuard intercepts and corrects unsafe\nreasoning in real-world GUI environments before execution, enabling scalable sim-to-real transfer of security reasoning while\navoiding irreversible system damage and preserving agent utility.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "one-email-many-faces-a-deep-dive-into-identity-confusion-in-email-aliases",
+    "title": "One Email, Many Faces: A Deep Dive into Identity Confusion in Email Aliases",
+    "assetPath": "/assets/research/teasers/one-email-many-faces-a-deep-dive-into-identity-confusion-in-email-aliases-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/one-email-many-faces-a-deep-dive-into-identity-confusion-in-email-aliases-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/ndss26summer-email.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 669,
+    "height": 480,
+    "cropPdfPoints": [
+      40.9640007019043,
+      36.543304443359375,
+      308.02154541015625,
+      228.1444854736328
+    ],
+    "pdfSha256": "206a8f9e257626f2e3e8349664d9f3f36b34e035c7da979ad16f39aed2eade37",
+    "captionOriginal": "Fig. 1: The attack model. Alias Multiplicity Abuse allows\nabusers to create unlimited accounts from a single base email\naddress, potentially exploiting resources such as free trials.\nAlias Misidentification Attack involves mimicking valid email\naliases with non-alias addresses to trick victims.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "one-step-from-silicon-life-autonomous-ai-agents-capable-of-uncontrolled-self-pro",
+    "title": "One Step from Silicon Life: Autonomous AI Agents Capable of Uncontrolled Self-Proliferation",
+    "assetPath": "/assets/research/teasers/one-step-from-silicon-life-autonomous-ai-agents-capable-of-uncontrolled-self-pro-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/one-step-from-silicon-life-autonomous-ai-agents-capable-of-uncontrolled-self-pro-figure-2-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/self_proliferation.pdf",
+    "figureLabel": "Figure 2",
+    "page": 3,
+    "width": 967,
+    "height": 314,
+    "cropPdfPoints": [
+      92.07099914550781,
+      500.34820556640625,
+      478.6749572753906,
+      625.3861083984375
+    ],
+    "pdfSha256": "dc7a5769d32b2b563fb12d60873d8a723be1f75c787c2791d5f579d45c84274d",
+    "captionOriginal": "Fig. 2 Experimental design and execution flow of an agent that acquire resource, self-replicate, and\nself–prliferate across multiple hosts.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "opendeception-learning-deception-and-trust-in-human-ai-interaction-via-multi-age",
+    "title": "OpenDeception: Learning Deception and Trust in Human-AI Interaction via Multi-Agent Simulation",
+    "assetPath": "/assets/research/teasers/opendeception-learning-deception-and-trust-in-human-ai-interaction-via-multi-age-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/opendeception-learning-deception-and-trust-in-human-ai-interaction-via-multi-age-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2504.13707v1",
+    "figureLabel": "Figure 1",
+    "page": 3,
+    "width": 627,
+    "height": 803,
+    "cropPdfPoints": [
+      46.9379997253418,
+      65.060546875,
+      297.4371032714844,
+      385.88531494140625
+    ],
+    "pdfSha256": "e320b503e91205e01a084e14f26889813b25418a3e7ca887f8c924f18cefe2b8",
+    "captionOriginal": "Figure 1. OpenDeception comprises 50 scenarios, spanning five",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "position-preparing-for-ai-systems-that-deceive-developers",
+    "title": "Position: Preparing for AI Systems That Deceive Developers",
+    "assetPath": "/assets/research/teasers/position-preparing-for-ai-systems-that-deceive-developers-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/position-preparing-for-ai-systems-that-deceive-developers-figure-1-640.webp",
+    "sourcePdfUrl": "https://saif.org/wp-content/uploads/2026/02/Position__Preparing_for_AI_Systems_That_Deceive_Developers-4.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 1196,
+    "height": 665,
+    "cropPdfPoints": [
+      59.59100341796875,
+      61.058624267578125,
+      537.284912109375,
+      326.469482421875
+    ],
+    "pdfSha256": "1a1333b6a0eec2903846b5d076d95788801d314c74fca044af033d0d7eee60f6",
+    "captionOriginal": "Figure 1. Summary of Risk Models and Recommendations for Deception Targeting Developers",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "prison-unmasking-the-criminal-potential-of-large-language-models",
+    "title": "PRISON: Unmasking the Criminal Potential of Large Language Models",
+    "assetPath": "/assets/research/teasers/prison-unmasking-the-criminal-potential-of-large-language-models-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/prison-unmasking-the-criminal-potential-of-large-language-models-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2506.16150",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 1031,
+    "height": 557,
+    "cropPdfPoints": [
+      100.0,
+      67.86103820800781,
+      512.0032348632812,
+      290.38446044921875
+    ],
+    "pdfSha256": "e7c1c8f1cbd70e2665438749e9b4724c2ffdd39f2ccf89726984a985e9797a87",
+    "captionOriginal": "Figure 1: Framework for Evaluating Criminal Potential and Detection Capability Based on Perspec-\ntive Recognition in Statement Observation (Three Perspectives: Criminal, Detective and God)",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "struphantom-evolutionary-injection-attacks-on-black-box-tabular-agents-powered-b",
+    "title": "StruPhantom: Evolutionary Injection Attacks on Black-Box Tabular Agents Powered by Large Language Models",
+    "assetPath": "/assets/research/teasers/struphantom-evolutionary-injection-attacks-on-black-box-tabular-agents-powered-b-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/struphantom-evolutionary-injection-attacks-on-black-box-tabular-agents-powered-b-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2504.09841",
+    "figureLabel": "Figure 1",
+    "page": 1,
+    "width": 627,
+    "height": 396,
+    "cropPdfPoints": [
+      298.93798828125,
+      179.20359802246094,
+      549.4391479492188,
+      337.5412902832031
+    ],
+    "pdfSha256": "63c3983634afea3871450e042431d802d647a4fd943de80e9337e2688e4b65a7",
+    "captionOriginal": "Figure 1. Indirect prompt injection attacks on LLM-based agents\nwith structural inputs (i.e., tabular agents).",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "unveiling-the-resilience-of-llm-enhanced-search-engines-against-black-hat-seo-ma",
+    "title": "Unveiling the Resilience of LLM-Enhanced Search Engines Against Black-Hat SEO Manipulation",
+    "assetPath": "/assets/research/teasers/unveiling-the-resilience-of-llm-enhanced-search-engines-against-black-hat-seo-ma-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/unveiling-the-resilience-of-llm-enhanced-search-engines-against-black-hat-seo-ma-figure-2-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/www26-llmseo.pdf",
+    "figureLabel": "Figure 2",
+    "page": 3,
+    "width": 1280,
+    "height": 491,
+    "cropPdfPoints": [
+      45.79800033569336,
+      69.68525695800781,
+      567.3004760742188,
+      269.8462219238281
+    ],
+    "pdfSha256": "f32f480f8a30752c517fa088e29ace49a507605b01dae7fbbb34a7e1733267d1",
+    "captionOriginal": "Figure 2: The Workflow and the Attack Surfaces of LLMSE. It includes three phases: (1) Understanding: LLMSE analyzes user\nquery’s intent and rewrites the original query; (2) Retrieval: fetching information from multiple databases with the rewritten\nqueries, and re-ranking references; (3) Summarizing: gathers all the structured information and generates the final answer,\noutputting the summary content and references.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "when-fun-turns-toxic-a-first-look-at-aggressive-advertising-in-mini-games",
+    "title": "When Fun Turns Toxic: A First Look at Aggressive Advertising in Mini-games",
+    "assetPath": "/assets/research/teasers/when-fun-turns-toxic-a-first-look-at-aggressive-advertising-in-mini-games-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/when-fun-turns-toxic-a-first-look-at-aggressive-advertising-in-mini-games-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/sec26-minigame.pdf",
+    "figureLabel": "Figure 1",
+    "page": 1,
+    "width": 647,
+    "height": 251,
+    "cropPdfPoints": [
+      309.52099609375,
+      238.59451293945312,
+      567.6583862304688,
+      338.4367980957031
+    ],
+    "pdfSha256": "c2049587f1dd6e8e4631e810ab54a650b182113629b917af63d66a130f7e047a",
+    "captionOriginal": "Figure 1: Examples of Aggressive Advertising: Unstoppable\nAdvertising. The user is repeatedly interrupted by advertise-\nment pop-ups every 15 seconds, making it impossible to close\nthe advertisements and continue the game permanently.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "apsfuzz-simulation-based-fuzzing-testing-for-automated-parking-systems",
+    "title": "APSFUZZ: Simulation-Based Fuzzing Testing for Automated Parking Systems",
+    "assetPath": "/assets/research/teasers/apsfuzz-simulation-based-fuzzing-testing-for-automated-parking-systems-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/apsfuzz-simulation-based-fuzzing-testing-for-automated-parking-systems-figure-2-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/vehiclesec25-bu.pdf",
+    "figureLabel": "Figure 2",
+    "page": 3,
+    "width": 670,
+    "height": 410,
+    "cropPdfPoints": [
+      306.0,
+      446.0,
+      574.0,
+      610.0
+    ],
+    "pdfSha256": "ed648344a9364b7b68ffa34a531e3c4dd2da560105d0429e8e43245993f09376",
+    "captionOriginal": "Figure 2: Workflow of APSFUZZ",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "beyond-exploit-scanning-a-functional-change-driven-approach-to-remote-software-v",
+    "title": "Beyond Exploit Scanning: A Functional Change-Driven Approach to Remote Software Version Identification",
+    "assetPath": "/assets/research/teasers/beyond-exploit-scanning-a-functional-change-driven-approach-to-remote-software-v-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/beyond-exploit-scanning-a-functional-change-driven-approach-to-remote-software-v-figure-2-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/sec25-versionseek.pdf",
+    "figureLabel": "Figure 2",
+    "page": 5,
+    "width": 1174,
+    "height": 687,
+    "cropPdfPoints": [
+      71.2020034790039,
+      57.99552917480469,
+      540.7930297851562,
+      332.1116027832031
+    ],
+    "pdfSha256": "301f8c48d15d6dfde503f4eff1cb007169cfb1e5c3119f329cd1cfcdf1e1dd38",
+    "captionOriginal": "Figure 2: Overview of the VersionSeek framework.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "effective-directed-fuzzing-with-hierarchical-scheduling-for-web-vulnerability-de",
+    "title": "Effective Directed Fuzzing with Hierarchical Scheduling for Web Vulnerability Detection",
+    "assetPath": "/assets/research/teasers/effective-directed-fuzzing-with-hierarchical-scheduling-for-web-vulnerability-de-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/effective-directed-fuzzing-with-hierarchical-scheduling-for-web-vulnerability-de-figure-2-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/usenixsecurity25-lin-zihan.pdf",
+    "figureLabel": "Figure 2",
+    "page": 6,
+    "width": 1280,
+    "height": 340,
+    "cropPdfPoints": [
+      48.51900100708008,
+      58.00092315673828,
+      563.6300659179688,
+      194.4984893798828
+    ],
+    "pdfSha256": "8b5cdfdd0fffe558572e53821d6325c29d72c30617c10e38a0e6dabf5a6f4cbb",
+    "captionOriginal": "Figure 2: The system architecture of WDFUZZ.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "email-cloaking-deceiving-users-and-spam-email-detectors-with-invisible-html-sett",
+    "title": "Email Cloaking: Deceiving Users and Spam Email Detectors with Invisible HTML Settings",
+    "assetPath": "/assets/research/teasers/email-cloaking-deceiving-users-and-spam-email-detectors-with-invisible-html-sett-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/email-cloaking-deceiving-users-and-spam-email-detectors-with-invisible-html-sett-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/esorics25-emailcloaking.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 723,
+    "height": 278,
+    "cropPdfPoints": [
+      162.0,
+      101.0,
+      451.0,
+      212.0
+    ],
+    "pdfSha256": "ba610ad537734b9f6c988b1a820ecb060f4c8cff2bff53fa2d134c7c48d4d9b7",
+    "captionOriginal": "Fig. 1: Threat example of Cloaked Spam Email (CSE).",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "evaluation-faking-unveiling-observer-effects-in-safety-evaluation-of-frontier-ai",
+    "title": "Evaluation Faking: Unveiling Observer Effects in Safety Evaluation of Frontier AI Systems",
+    "assetPath": "/assets/research/teasers/evaluation-faking-unveiling-observer-effects-in-safety-evaluation-of-frontier-ai-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/evaluation-faking-unveiling-observer-effects-in-safety-evaluation-of-frontier-ai-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2505.17815",
+    "figureLabel": "Figure 1",
+    "page": 3,
+    "width": 441,
+    "height": 332,
+    "cropPdfPoints": [
+      337.60198974609375,
+      191.14749145507812,
+      513.6610412597656,
+      323.3954772949219
+    ],
+    "pdfSha256": "55a85f41a5dcc0743ccce348833bda7355f9b14ef96b1f4a0d9fb6b3c091af8c",
+    "captionOriginal": "Figure 1: A schematic diagram of evalu-\nation faking, structured with perception,\nbehavior and consequence.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "frontier-ai-systems-have-surpassed-the-self-replicating-red-line",
+    "title": "Frontier AI systems have surpassed the self-replicating red line",
+    "assetPath": "/assets/research/teasers/frontier-ai-systems-have-surpassed-the-self-replicating-red-line-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/frontier-ai-systems-have-surpassed-the-self-replicating-red-line-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2412.12140",
+    "figureLabel": "Figure 1",
+    "page": 4,
+    "width": 968,
+    "height": 439,
+    "cropPdfPoints": [
+      116.59500122070312,
+      59.69938659667969,
+      503.2083740234375,
+      235.0408935546875
+    ],
+    "pdfSha256": "bf41804c495a4c9a89c17e479bbe8502602c8fe5d77aaaabf6649dc3e8b013e9",
+    "captionOriginal": "Fig. 1 A schematic definition of the AI system’s self-replication process: ❶When assigned with\nthe self-replication task, ❷the AI system continually works out and updates a complex plan on\nhow to accomplish self-replication. ❸To fulfill the plan, the system performs long-horizon execution,\nwhich reach milestones via resolving multiple obstacles. ❹Finally, the AI system successfully start a\nseparate and running replica of itself, ❺interact the replica to check its aliveness, and ❻finishes the\ntask by responding with the completion status.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "make-agent-defeat-agent-automatic-detection-of-taint-style-vulnerabilities-in-ll",
+    "title": "Make Agent Defeat Agent: Automatic Detection of Taint-Style Vulnerabilities in LLM-based Agents",
+    "assetPath": "/assets/research/teasers/make-agent-defeat-agent-automatic-detection-of-taint-style-vulnerabilities-in-ll-figure-3.webp",
+    "thumbnailPath": "/assets/research/teasers/make-agent-defeat-agent-automatic-detection-of-taint-style-vulnerabilities-in-ll-figure-3-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/usenixsecurity25-liu-fengyu.pdf",
+    "figureLabel": "Figure 3",
+    "page": 8,
+    "width": 1280,
+    "height": 369,
+    "cropPdfPoints": [
+      44.0,
+      56.0,
+      568.0,
+      207.0
+    ],
+    "pdfSha256": "bda46472a3dade37204aa4b3f8c9b96a6533977d348e7d5000abcb519b130476",
+    "captionOriginal": "Figure 3: Architecture of AgentFuzz.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "nokescam-understanding-and-rectifying-non-sense-keywords-spear-scam-in-search-en",
+    "title": "NOKEScam: Understanding and Rectifying Non-Sense Keywords Spear Scam in Search Engines",
+    "assetPath": "/assets/research/teasers/nokescam-understanding-and-rectifying-non-sense-keywords-spear-scam-in-search-en-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/nokescam-understanding-and-rectifying-non-sense-keywords-spear-scam-in-search-en-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/sec25-nokescam.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 642,
+    "height": 453,
+    "cropPdfPoints": [
+      309.8800048828125,
+      239.15353393554688,
+      566.000732421875,
+      419.6537780761719
+    ],
+    "pdfSha256": "1366c24e6016550db5fa5ebcf0d1e536fe13adbb4050bcc86cabe0676a85c898",
+    "captionOriginal": "Figure 1: Example of NOKEScam in search engine. Only the\ntop search result exactly matches the NSKeyword, redirecting\nto a fraudulent online gaming account trading website, while\nother results do not exactly match.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "rag-thief-scalable-extraction-of-private-data-from-retrieval-augmented-generatio",
+    "title": "RAG-Thief: Scalable Extraction of Private Data from Retrieval-Augmented Generation Applications with Agent-based Attacks",
+    "assetPath": "/assets/research/teasers/rag-thief-scalable-extraction-of-private-data-from-retrieval-augmented-generatio-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/rag-thief-scalable-extraction-of-private-data-from-retrieval-augmented-generatio-figure-2-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2411.14110v1",
+    "figureLabel": "Figure 2",
+    "page": 4,
+    "width": 1280,
+    "height": 483,
+    "cropPdfPoints": [
+      45.999969482421875,
+      57.21520233154297,
+      573.2113037109375,
+      256.0460205078125
+    ],
+    "pdfSha256": "47e008f33749176acaaca82d7bcaf8dddb88573030e7cc56c454bc6254323616",
+    "captionOriginal": "Figure 2: The pipeline of RAG-Thief, which initiates the attack with ❶an initial adversarial query targeting the RAG\napplication to ❷extract specific chunks. Then RAG-Thief ❸stores these chunks in the short-term memory, and ❹heuristically\ngenerates multiple anchor questions for each chunk based on an attack LLM. These anchor questions are then ❺concatenated\nwith the initial adversarial query to create new adversarial queries for the next round of attacks. The extracted chunks are\nsubsequently ❻stored as the agent’s long-term memory, with duplicates excluded from storage.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "unveiling-the-ab-usage-of-serverless-cloud-function-in-the-wild",
+    "title": "Unveiling the (Ab)usage of Serverless Cloud Function in the Wild",
+    "assetPath": "/assets/research/teasers/unveiling-the-ab-usage-of-serverless-cloud-function-in-the-wild-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/unveiling-the-ab-usage-of-serverless-cloud-function-in-the-wild-figure-2-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/imc25-cloudfun.pdf",
+    "figureLabel": "Figure 2",
+    "page": 3,
+    "width": 670,
+    "height": 215,
+    "cropPdfPoints": [
+      306.0,
+      604.0,
+      574.0,
+      690.0
+    ],
+    "pdfSha256": "dc97680bd7f0b6b9d7196c9c48d3809ba872cab3987769fa13d3994a17eb4853",
+    "captionOriginal": "Figure 2: Overview of the data collection process.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "xssky-detecting-xss-vulnerabilities-through-local-path-persistent-fuzzing",
+    "title": "XSSky: Detecting XSS Vulnerabilities through Local Path-Persistent Fuzzing",
+    "assetPath": "/assets/research/teasers/xssky-detecting-xss-vulnerabilities-through-local-path-persistent-fuzzing-figure-3.webp",
+    "thumbnailPath": "/assets/research/teasers/xssky-detecting-xss-vulnerabilities-through-local-path-persistent-fuzzing-figure-3-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/usenixsecurity25-shi-youkun.pdf",
+    "figureLabel": "Figure 3",
+    "page": 7,
+    "width": 1260,
+    "height": 512,
+    "cropPdfPoints": [
+      56.9237060546875,
+      58.29356384277344,
+      560.5767211914062,
+      262.51446533203125
+    ],
+    "pdfSha256": "e2cf1ff460cf4b87ab8a81b9e703b40d8c5f4c86110031e7422b95b2738037fc",
+    "captionOriginal": "Figure 3: A running example of XSS vulnerability found in Dolibarr (5.5k stars); Fully fixed on June 13, 2022.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "you-can-t-eat-your-cake-and-have-it-too-the-performance-degradation-of-llms-with",
+    "title": "You Can't Eat Your Cake and Have It Too: The Performance Degradation of LLMs with Jailbreak Defense",
+    "assetPath": "/assets/research/teasers/you-can-t-eat-your-cake-and-have-it-too-the-performance-degradation-of-llms-with-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/you-can-t-eat-your-cake-and-have-it-too-the-performance-degradation-of-llms-with-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2501.12210",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 642,
+    "height": 489,
+    "cropPdfPoints": [
+      45.79800033569336,
+      71.6573486328125,
+      302.2298889160156,
+      267.1725158691406
+    ],
+    "pdfSha256": "0f0516098792b8ad9be8256c5f34932e0e2877598caab8a3d012edad25c3e042",
+    "captionOriginal": "Figure 1: An example of LLM’s false-refusal to a normal user\nquery, due to the additional defense mechanisms activated\nby the jailbreak, which would not be rejected without it.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "belt-old-school-backdoor-attacks-can-evade-the-state-of-the-art-defense-with-bac",
+    "title": "BELT: Old-School Backdoor Attacks can Evade the State-of-the-Art Defense with Backdoor Exclusivity Lifting",
+    "assetPath": "/assets/research/teasers/belt-old-school-backdoor-attacks-can-evade-the-state-of-the-art-defense-with-bac-figure-4.webp",
+    "thumbnailPath": "/assets/research/teasers/belt-old-school-backdoor-attacks-can-evade-the-state-of-the-art-defense-with-bac-figure-4-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2312.04902",
+    "figureLabel": "Figure 4",
+    "page": 6,
+    "width": 1174,
+    "height": 564,
+    "cropPdfPoints": [
+      71.2020034790039,
+      57.21791076660156,
+      540.780029296875,
+      282.5830993652344
+    ],
+    "pdfSha256": "82f6c35004ca9a92eebbab1635d8ec81e9973e7b8d6a5a15687a15e59eba1cde",
+    "captionOriginal": "Figure 4: Overview of BELT in data outsourcing and model outsourcing scenarios.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "hades-attack-understanding-and-evaluating-manipulation-risks-of-email-blocklists",
+    "title": "HADES Attack: Understanding and Evaluating Manipulation Risks of Email Blocklists",
+    "assetPath": "/assets/research/teasers/hades-attack-understanding-and-evaluating-manipulation-risks-of-email-blocklists-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/hades-attack-understanding-and-evaluating-manipulation-risks-of-email-blocklists-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/ndss25fall-email.pdf",
+    "figureLabel": "Figure 1",
+    "page": 3,
+    "width": 678,
+    "height": 505,
+    "cropPdfPoints": [
+      35.0,
+      44.0,
+      306.0,
+      246.0
+    ],
+    "pdfSha256": "2809c367a3478db04ab1f0da1c4f7cabac7fb3e280df8b87098aef210f1e33a0",
+    "captionOriginal": "Figure 1.\nThe construction process and usage of the DNSBL.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "interface-illusions-uncovering-the-rise-of-visual-scams-in-cryptocurrency-wallet",
+    "title": "Interface Illusions: Uncovering the Rise of Visual Scams in Cryptocurrency Wallets",
+    "assetPath": "/assets/research/teasers/interface-illusions-uncovering-the-rise-of-visual-scams-in-cryptocurrency-wallet-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/interface-illusions-uncovering-the-rise-of-visual-scams-in-cryptocurrency-wallet-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/www24-visualscam.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 1252,
+    "height": 322,
+    "cropPdfPoints": [
+      55.8849983215332,
+      68.99673461914062,
+      556.0745239257812,
+      197.3390350341797
+    ],
+    "pdfSha256": "121e4d494130211bbfae18b627b3a169fafa3c714d07f3810c60a9b326d06581",
+    "captionOriginal": "Figure 1: Motivating Example of Visual Scams",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "misdirection-of-trust-demystifying-the-abuse-of-dedicated-url-shortening-service",
+    "title": "Misdirection of Trust: Demystifying the Abuse of Dedicated URL Shortening Service",
+    "assetPath": "/assets/research/teasers/misdirection-of-trust-demystifying-the-abuse-of-dedicated-url-shortening-service-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/misdirection-of-trust-demystifying-the-abuse-of-dedicated-url-shortening-service-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/ndss25summer-duss.pdf",
+    "figureLabel": "Figure 1",
+    "page": 3,
+    "width": 669,
+    "height": 824,
+    "cropPdfPoints": [
+      40.9640007019043,
+      37.420989990234375,
+      308.0221862792969,
+      366.4295654296875
+    ],
+    "pdfSha256": "d3a48f83187a77fe9dfe9740e60eba42d776d04891df76ba00adf32058d6ff66",
+    "captionOriginal": "Fig. 1. Simplified motivating example for a remote attacker to exploit China\nUnicom’s DUSS and launch phishing and code injection attacks.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "neural-dehydration-effective-erasure-of-black-box-watermarks-from-dnns-with-limi",
+    "title": "Neural Dehydration: Effective Erasure of Black-box Watermarks from DNNs with Limited Data",
+    "assetPath": "/assets/research/teasers/neural-dehydration-effective-erasure-of-black-box-watermarks-from-dnns-with-limi-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/neural-dehydration-effective-erasure-of-black-box-watermarks-from-dnns-with-limi-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2309.03466v1",
+    "figureLabel": "Figure 1",
+    "page": 5,
+    "width": 1280,
+    "height": 488,
+    "cropPdfPoints": [
+      46.0,
+      56.894927978515625,
+      566.2488403320312,
+      254.87844848632812
+    ],
+    "pdfSha256": "6d3a94b57752f68f721415e160255f3f31e0009b67a20dee54c471b677315b1f",
+    "captionOriginal": "Figure 1: The overview of our MIRA. The upper region shows our basic MIRA, which consists of two stages, watermark\nrecovering (§4.1) and watermark unlearning (§4.2). The lower region represents our improved MIRA, which detects the possible\ntarget class of the underlying watermark after recovering (§5.1), and identifies samples more relevant to the real watermark data\nbefore unlearning (§5.2).",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "revealing-the-black-box-of-device-search-engine-scanning-assets-strategies-and-e",
+    "title": "Revealing the black box of device search engine: scanning assets, strategies, and ethical consideration",
+    "assetPath": "/assets/research/teasers/revealing-the-black-box-of-device-search-engine-scanning-assets-strategies-and-e-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/revealing-the-black-box-of-device-search-engine-scanning-assets-strategies-and-e-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/ndss25fall-ipmirror.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 671,
+    "height": 512,
+    "cropPdfPoints": [
+      40.95899200439453,
+      40.001983642578125,
+      309.0640563964844,
+      244.66944885253906
+    ],
+    "pdfSha256": "2de15784b751cf46ba1ff0d1341944ebef005df63bb66ed0a4f0f3980491434a",
+    "captionOriginal": "Fig. 1: IP Mirror Service. Interacting with a SIP server by\nsipsak -v -s {IP} will reply with the sender’s IP. When\nquerying {\"SIP\" \"received\"} in Shodan, its ScanIP is\nshown under the red mark.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "cracking-white-box-dnn-watermarks-via-invariant-neuron-transforms",
+    "title": "Cracking White-box DNN Watermarks via Invariant Neuron Transforms",
+    "assetPath": "/assets/research/teasers/cracking-white-box-dnn-watermarks-via-invariant-neuron-transforms-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/cracking-white-box-dnn-watermarks-via-invariant-neuron-transforms-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2205.00199v1",
+    "figureLabel": "Figure 1",
+    "page": 6,
+    "width": 669,
+    "height": 590,
+    "cropPdfPoints": [
+      40.9640007019043,
+      36.54411315917969,
+      308.0263366699219,
+      272.0603942871094
+    ],
+    "pdfSha256": "66b92d1ee7cbd7c201ec1cce17c5460de2b21ed05ae78749a8ee1676525d1c34",
+    "captionOriginal": "Fig. 1.\nA ConvBlock (a) is a sequence of intermediate layers and (b)\nis connected with other ConvBlock modules with incoming and outgoing\nweights.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "exorcising-wraith-protecting-lidar-based-object-detector-in-automated-driving-sy",
+    "title": "Exorcising “Wraith”: Protecting LiDAR-based Object Detector in Automated Driving System from Appearing Attacks",
+    "assetPath": "/assets/research/teasers/exorcising-wraith-protecting-lidar-based-object-detector-in-automated-driving-sy-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/exorcising-wraith-protecting-lidar-based-object-detector-in-automated-driving-sy-figure-1-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/usenixsecurity23-xiao-qifan.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 641,
+    "height": 277,
+    "cropPdfPoints": [
+      309.8800048828125,
+      238.00018310546875,
+      565.9998168945312,
+      348.5354309082031
+    ],
+    "pdfSha256": "88480329903c9c4fbf6164be74d4184f7318619ae4e6a2879d5486338ca3398b",
+    "captionOriginal": "Figure 1: Appearing attacks on LiDAR-based object detectors\nin ADS can cause severe traffic accidents by forging cars.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "rethinking-white-box-watermarks-on-deep-learning-models-under-neural-structural-",
+    "title": "Rethinking White-Box Watermarks on Deep Learning Models under Neural Structural Obfuscation",
+    "assetPath": "/assets/research/teasers/rethinking-white-box-watermarks-on-deep-learning-models-under-neural-structural--figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/rethinking-white-box-watermarks-on-deep-learning-models-under-neural-structural--figure-2-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/usenixsecurity23-yan.pdf",
+    "figureLabel": "Figure 2",
+    "page": 7,
+    "width": 1210,
+    "height": 337,
+    "cropPdfPoints": [
+      64.09400177001953,
+      57.99928283691406,
+      547.9077758789062,
+      192.31446838378906
+    ],
+    "pdfSha256": "8dc4e6d1b85723a4aeead72d1f8cdcdf93483210097650b9772c45fd4e086280",
+    "captionOriginal": "Figure 2: Overview of our proposed watermark removal attack by neural structural obfuscation with dummy neurons.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "slowbert-slow-down-attacks-on-input-adaptive-multi-exit-bert",
+    "title": "SlowBERT: Slow-down Attacks on Input-adaptive Multi-exit BERT",
+    "assetPath": "/assets/research/teasers/slowbert-slow-down-attacks-on-input-adaptive-multi-exit-bert-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/slowbert-slow-down-attacks-on-input-adaptive-multi-exit-bert-figure-1-640.webp",
+    "sourcePdfUrl": "https://aclanthology.org/2023.findings-acl.634.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 1175,
+    "height": 622,
+    "cropPdfPoints": [
+      62.856536865234375,
+      56.84576416015625,
+      532.4230346679688,
+      305.5549621582031
+    ],
+    "pdfSha256": "7e6919d1d8c1185600cc8837c28a79f473d3d88b81f00fff9435a1ddca16d12c",
+    "captionOriginal": "Figure 1: Early-exit criterions of the multi-exit BERT on sentiment binary classification task (IC as internal\nclassifier). (a) BERT exits when the confidence value is large than a threshold (i.e., 0.91>0.8). (b) BERT exits when\na certain number of consecutive ICs predict the same label (i.e., ’POS’ for 2 times).",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "under-the-dark-a-systematical-study-of-stealthy-mining-pools-ab-use-in-the-wild",
+    "title": "Under the Dark: A Systematical Study of Stealthy Mining Pools (Ab)use in the Wild",
+    "assetPath": "/assets/research/teasers/under-the-dark-a-systematical-study-of-stealthy-mining-pools-ab-use-in-the-wild-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/under-the-dark-a-systematical-study-of-stealthy-mining-pools-ab-use-in-the-wild-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/ccs23a-pool.pdf",
+    "figureLabel": "Figure 1",
+    "page": 3,
+    "width": 642,
+    "height": 474,
+    "cropPdfPoints": [
+      309.9549865722656,
+      69.19043731689453,
+      566.2000122070312,
+      258.1865539550781
+    ],
+    "pdfSha256": "f7d13ea3b1873e31a0c1efd400a06e8d4ae4e37f8b86626f74246307d6462664",
+    "captionOriginal": "Figure 1: An example of a miner using the Stratum protocol\nto communicate with a mining pool.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "analyzing-ground-truth-data-of-mobile-gambling-scams",
+    "title": "Analyzing Ground-Truth Data of Mobile Gambling Scams",
+    "assetPath": "/assets/research/teasers/analyzing-ground-truth-data-of-mobile-gambling-scams-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/analyzing-ground-truth-data-of-mobile-gambling-scams-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/sp22-gambling.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 549,
+    "height": 599,
+    "cropPdfPoints": [
+      327.9840087890625,
+      36.540252685546875,
+      547.0302734375,
+      275.8665771484375
+    ],
+    "pdfSha256": "92f359a42fa16474bf506b5f238ac5ce4be7ba7a2837aee0ae149456be6b70a9",
+    "captionOriginal": "Figure 1. The operational pipeline of mobile gambling scam.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "exploring-the-security-boundary-of-data-reconstruction-via-neuron-exclusivity-an",
+    "title": "Exploring the Security Boundary of Data Reconstruction via Neuron Exclusivity Analysis",
+    "assetPath": "/assets/research/teasers/exploring-the-security-boundary-of-data-reconstruction-via-neuron-exclusivity-an-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/exploring-the-security-boundary-of-data-reconstruction-via-neuron-exclusivity-an-figure-1-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/sec22-pan-exploring.pdf",
+    "figureLabel": "Figure 1",
+    "page": 2,
+    "width": 671,
+    "height": 475,
+    "cropPdfPoints": [
+      309.8800048828125,
+      238.9950408935547,
+      577.8872680664062,
+      428.41229248046875
+    ],
+    "pdfSha256": "ee83645c51a52d2dd3172ea7ae7b960986494d5158a95316f4f544b172d566d4",
+    "captionOriginal": "Figure 1: The information flow of producing the average\ngradient of a training batch in a face recognition model and\nthe scenario of data reconstruction attack.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "hidden-trigger-backdoor-attack-on-nlp-models-via-linguistic-style-manipulation",
+    "title": "Hidden Trigger Backdoor Attack on NLP Models via Linguistic Style Manipulation",
+    "assetPath": "/assets/research/teasers/hidden-trigger-backdoor-attack-on-nlp-models-via-linguistic-style-manipulation-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/hidden-trigger-backdoor-attack-on-nlp-models-via-linguistic-style-manipulation-figure-1-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/sec22-pan-hidden.pdf",
+    "figureLabel": "Figure 1",
+    "page": 5,
+    "width": 671,
+    "height": 319,
+    "cropPdfPoints": [
+      309.8800048828125,
+      58.99601745605469,
+      577.8777465820312,
+      186.3824005126953
+    ],
+    "pdfSha256": "b6fa20b4ee38c6829045f2a800eb32dbf7df863384ddff3d48fb3755cb4c3655",
+    "captionOriginal": "Figure 1: Attack scenario of our LISM attack on NLP models.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "metav-a-meta-verifier-approach-to-task-agnostic-model-fingerprinting",
+    "title": "MetaV: A Meta-Verifier Approach to Task-Agnostic Model Fingerprinting",
+    "assetPath": "/assets/research/teasers/metav-a-meta-verifier-approach-to-task-agnostic-model-fingerprinting-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/metav-a-meta-verifier-approach-to-task-agnostic-model-fingerprinting-figure-1-640.webp",
+    "sourcePdfUrl": "https://arxiv.org/pdf/2201.07391",
+    "figureLabel": "Figure 1",
+    "page": 4,
+    "width": 1280,
+    "height": 517,
+    "cropPdfPoints": [
+      45.79800033569336,
+      71.60202026367188,
+      566.1857299804688,
+      281.76336669921875
+    ],
+    "pdfSha256": "027faceaa5bfbe154a47270a57640e22a621736c645a13f1c5d273e6f768dc18",
+    "captionOriginal": "Figure 1: The general pipeline of our proposed MetaV: (a) model ensemble preparation and (b) fingerprint construction.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "bscout-direct-whole-patch-presence-test-for-java-executables",
+    "title": "BScout: Direct Whole Patch Presence Test for Java Executables",
+    "assetPath": "/assets/research/teasers/bscout-direct-whole-patch-presence-test-for-java-executables-figure-2.webp",
+    "thumbnailPath": "/assets/research/teasers/bscout-direct-whole-patch-presence-test-for-java-executables-figure-2-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/sec20-dai.pdf",
+    "figureLabel": "Figure 2",
+    "page": 6,
+    "width": 1280,
+    "height": 446,
+    "cropPdfPoints": [
+      46.0,
+      59.35313415527344,
+      566.0035400390625,
+      240.20046997070312
+    ],
+    "pdfSha256": "1cf87257c42e90fffeb720071bcd19af1a64e7e9e12a78c1fea4413a403409a9",
+    "captionOriginal": "Figure 2: Architecture of BSCOUT. There are two core techniques: cross-layer line-level correlative analysis and patch-derived\ndifferential analysis. The ﬁrst technique is capable of generating a line-to-line map between a Java source method and a Java\nbytecode method by leveraging language-independent features, while the latter technique takes the line-to-line maps between\npre-patch/post-patch reference source code (not the source code for the target executable) and target Java executable as input and\nutilizes the characteristics extracted from the patch itself to give a patch presence test result.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "how-android-developers-handle-evolution-induced-api-compatibility-issues-a-large",
+    "title": "How Android Developers Handle Evolution-induced API Compatibility Issues: A Large-scale Study",
+    "assetPath": "/assets/research/teasers/how-android-developers-handle-evolution-induced-api-compatibility-issues-a-large-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/how-android-developers-handle-evolution-induced-api-compatibility-issues-a-large-figure-1-640.webp",
+    "sourcePdfUrl": "https://ghong.site/papers/icse20-comp.pdf",
+    "figureLabel": "Figure 1",
+    "page": 3,
+    "width": 647,
+    "height": 408,
+    "cropPdfPoints": [
+      307.96002197265625,
+      75.56568908691406,
+      566.2009887695312,
+      238.31619262695312
+    ],
+    "pdfSha256": "cf37b49fe972f6c8023050522e4bb6d423b4743ee91d738d4514b4cc1cf615dc",
+    "captionOriginal": "Figure 1: API Lifecycle ranging from API Level 19 (Android\n4.4) to 28 (Android P). This figure shows the numbers of\nAPIs that are deprecated/added at this API level and those\ninherited from the previous API level.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "improving-the-robustness-of-wasserstein-embedding-by-adversarial-pac-bayesian-le",
+    "title": "Improving the Robustness of Wasserstein Embedding by Adversarial PAC-Bayesian Learning",
+    "assetPath": "/assets/research/teasers/improving-the-robustness-of-wasserstein-embedding-by-adversarial-pac-bayesian-le-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/improving-the-robustness-of-wasserstein-embedding-by-adversarial-pac-bayesian-le-figure-1-640.webp",
+    "sourcePdfUrl": "http://staff.ustc.edu.cn/~hexn/papers/aaai20-adversarial-embedding.pdf",
+    "figureLabel": "Figure 1",
+    "page": 3,
+    "width": 1222,
+    "height": 434,
+    "cropPdfPoints": [
+      61.72699737548828,
+      40.00126647949219,
+      550.2716674804688,
+      213.3424835205078
+    ],
+    "pdfSha256": "72b384f7b5195964efd46f659f49b70a370fb774e09c7ed59f87cbc2d716362a",
+    "captionOriginal": "Figure 1: Overview of the proposed framework.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "justinian-s-gaavernor-robust-distributed-learning-with-gradient-aggregation-agen",
+    "title": "Justinian’s GAAvernor: Robust Distributed Learning with Gradient Aggregation Agent",
+    "assetPath": "/assets/research/teasers/justinian-s-gaavernor-robust-distributed-learning-with-gradient-aggregation-agen-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/justinian-s-gaavernor-robust-distributed-learning-with-gradient-aggregation-agen-figure-1-640.webp",
+    "sourcePdfUrl": "https://www.usenix.org/system/files/sec20-pan.pdf",
+    "figureLabel": "Figure 1",
+    "page": 6,
+    "width": 488,
+    "height": 210,
+    "cropPdfPoints": [
+      76.75499725341797,
+      156.2939910888672,
+      271.36444091796875,
+      239.68849182128906
+    ],
+    "pdfSha256": "2d03af4091be245bba6412d9e38d1d6e4c2e784333e09816d064dc3522316b48",
+    "captionOriginal": "Figure 1: Overview of our proposed defense.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "modeling-personalized-out-of-town-distances-in-location-recommendation",
+    "title": "Modeling Personalized Out-of-Town Distances in Location Recommendation",
+    "assetPath": "/assets/research/teasers/modeling-personalized-out-of-town-distances-in-location-recommendation-figure-1.webp",
+    "thumbnailPath": "/assets/research/teasers/modeling-personalized-out-of-town-distances-in-location-recommendation-figure-1-640.webp",
+    "sourcePdfUrl": "http://staff.ustc.edu.cn/~hexn/papers/ICDM2020_VolNet.pdf",
+    "figureLabel": "Figure 1",
+    "page": 1,
+    "width": 669,
+    "height": 260,
+    "cropPdfPoints": [
+      303.9779968261719,
+      180.0034637451172,
+      571.0371704101562,
+      283.9244689941406
+    ],
+    "pdfSha256": "7083d1e243053c862315c8131314cf9913101240867bd8cbc4359c4f0a7243ec",
+    "captionOriginal": "Fig. 1. The left ﬁgure is the recommendation results by one state-of-the-art\nmethod (GeoMF++ [8]), where contour line depicts the probability of being\nrecommended. The left ﬁgure shows the frequency of visited distances of a\nuser. The detailed settings such as how to ﬁnd the center of the user are listed\nin Sec. 3.",
+    "verifiedAt": "2026-10-14"
+  },
+  {
+    "researchSlug": "modeling-extreme-events-in-time-series-prediction",
+    "title": "Modeling Extreme Events in Time Series Prediction",
+    "assetPath": "/assets/research/teasers/modeling-extreme-events-in-time-series-prediction-figure-3.webp",
+    "thumbnailPath": "/assets/research/teasers/modeling-extreme-events-in-time-series-prediction-figure-3-640.webp",
+    "sourcePdfUrl": "http://staff.ustc.edu.cn/~hexn/papers/kdd19-timeseries.pdf",
+    "figureLabel": "Figure 3",
+    "page": 5,
+    "width": 1280,
+    "height": 353,
+    "cropPdfPoints": [
+      45.7979736328125,
+      77.4669189453125,
+      566.4533081054688,
+      220.45785522460938
+    ],
+    "pdfSha256": "e9f3f314322972a4755bd6d9e884135fe8848bd8635986b284e27b5a1202dc67",
+    "captionOriginal": "Figure 3: Illustration of predicting process. For each time step t, we sample M windows and use GRU to build the memory\nnetwork module.",
+    "verifiedAt": "2026-10-14"
+  }
+]

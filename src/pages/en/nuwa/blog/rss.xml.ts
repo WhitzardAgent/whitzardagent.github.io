@@ -5,7 +5,7 @@ import { allResearchBlogEntries, publishedResearchBlog, researchBlogSlug } from 
 export async function GET(context: APIContext) {
   const entries = publishedResearchBlog(await allResearchBlogEntries(), "en");
   return rss({
-    title: "Research Blog — NUWA",
+    title: "Blogs — NUWA Research",
     description: "Human-written and edited explainers from NUWA Frontier AI Safety Lab.",
     site: context.site ?? "https://whitzard.tech",
     items: entries.map((entry) => ({

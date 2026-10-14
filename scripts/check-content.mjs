@@ -258,8 +258,8 @@ const impactIndex = researchHtml.indexOf('id="public-impact"');
 const infrastructureIndex = researchHtml.indexOf('id="infrastructure"');
 const recognitionIndex = researchHtml.indexOf('id="recognition"');
 const publicationsIndex = researchHtml.indexOf('id="research-index"');
-if (themesIndex < 0 || featuredIndex < themesIndex || blogIndex < featuredIndex || infrastructureIndex < blogIndex || impactIndex < infrastructureIndex || recognitionIndex < impactIndex || publicationsIndex < recognitionIndex) violations.push("dist/nuwa/research/index.html: expected mission/themes → featured evidence → Research Blog → infrastructure → public impact → recognition → publication index");
-const missionSection = researchHtml.match(/<section id="themes"[\s\S]*?<section id="featured"/)?.[0] ?? "";
+if (publicationsIndex < 0 || featuredIndex < publicationsIndex || blogIndex < publicationsIndex || themesIndex < blogIndex || infrastructureIndex < themesIndex || impactIndex < infrastructureIndex || recognitionIndex < impactIndex) violations.push("dist/nuwa/research/index.html: expected research cards → Research Blog → mission/themes → infrastructure → public impact → recognition");
+const missionSection = researchHtml.match(/<section id="themes"[\s\S]*?<section id="infrastructure"/)?.[0] ?? "";
 if ((missionSection.match(/<article\b/g) ?? []).length !== 3) violations.push("dist/nuwa/research/index.html: research mission must contain exactly three core themes");
 for (const marker of ["为全球 AI 治理提供风险证据与公共产品", "前沿 AI 风险与控制", "智能体与模型安全", "风险评测与治理方法"]) if (!missionSection.includes(marker)) violations.push(`dist/nuwa/research/index.html: research mission is missing ${marker}`);
 if (researchHtml.includes('id="team"') || researchHtml.includes("research-team__grid")) violations.push("dist/nuwa/research/index.html: complete team biographies belong only on the about page");
@@ -267,7 +267,7 @@ for (const forbidden of ["METR", "合作伙伴", "白泽参与", "女娲实验�
   if (publicImpactSection.includes(forbidden)) violations.push(`dist/nuwa/research/index.html: public impact must not claim participation or partnership: ${forbidden}`);
 }
 
-const recognitionSection = researchHtml.match(/<section id="recognition"[\s\S]*?<section id="research-index"/)?.[0] ?? "";
+const recognitionSection = researchHtml.match(/<section id="recognition"[\s\S]*?<section id="collaboration"/)?.[0] ?? "";
 const recognitionCount = recognitionSection.match(/<article\b/g)?.length ?? 0;
 if (recognitionCount !== 6) violations.push(`dist/nuwa/research/index.html: recognition must contain exactly six entries, found ${recognitionCount}`);
 for (const forbidden of ["潘旭东", "戴嘉润", "洪赓", "Awarded to", "个人荣誉", "研究团队荣誉"]) if (recognitionSection.includes(forbidden)) violations.push(`dist/nuwa/research/index.html: recognition must not expose attribution: ${forbidden}`);
@@ -279,11 +279,12 @@ for (const marker of [
   "Figure 1 · PDF p.2",
   "MirrorGuard: Toward Secure Computer-Use Agents via Simulation-to-Real Reasoning Correction",
   "https://github.com/WhitzardAgent/MirrorGuard",
-]) if (!researchHtml.includes(marker)) violations.push(`dist/nuwa/research/index.html: missing verified research visual marker ${marker}`);
+]) if (!researchHtml.replace(/<!--[\s\S]*?-->/g, "").includes(marker)) violations.push(`dist/nuwa/research/index.html: missing verified research visual marker ${marker}`);
 const infrastructureSection = researchHtml.match(/<section id="infrastructure"[\s\S]*?<section id="public-impact"/)?.[0] ?? "";
 for (const marker of ["AgentCyberRange", "AutoControl Arena", "查看论文"]) if (!infrastructureSection.includes(marker)) violations.push(`dist/nuwa/research/index.html: missing research infrastructure marker ${marker}`);
 if (infrastructureSection.includes("CyberGym") || (infrastructureSection.match(/<article\b/g) ?? []).length !== 2) violations.push("dist/nuwa/research/index.html: infrastructure must contain exactly AgentCyberRange and AutoControl Arena");
-if ((researchHtml.match(/<details class="research-year"/g) ?? []).length !== 9) violations.push("dist/nuwa/research/index.html: publication index must render nine native year groups");
+if ((researchHtml.match(/<section class="research-year-group"/g) ?? []).length !== 9) violations.push("dist/nuwa/research/index.html: publication index must render nine year groups");
+if ((researchHtml.match(/<article class="research-card(?: has-visual)?"/g) ?? []).length !== 86) violations.push("dist/nuwa/research/index.html: research cards must preserve all 86 publication records");
 
 for (const file of htmlFiles) {
   const content = withoutEmbeddedCode(await readFile(file, "utf8"));
@@ -342,11 +343,11 @@ for (const [file, destination] of [["dist/research/index.html", "/nuwa/research"
 
 const sitemapXml = await readFile("dist/sitemap-0.xml", "utf8");
 // These legacy redirect routes must not be in the sitemap
-for (const legacyUrl of ["https://whitzard.tech/research", "https://whitzard.tech/en/research", "https://whitzard.tech/developers", "https://whitzard.tech/en/developers", "https://whitzard.tech/NVWA-Project/"]) {
+for (const legacyUrl of ["https://whitzard.tech/research", "https://whitzard.tech/en/research", "https://whitzard.tech/developers", "https://whitzard.tech/en/developers", "https://whitzard.tech/NVWA-Project/", "https://whitzard.tech/nuwa/blog/", "https://whitzard.tech/en/nuwa/blog/"]) {
   if (sitemapXml.includes(`<loc>${legacyUrl}</loc>`)) violations.push(`dist/sitemap-0.xml: legacy redirect must not be indexed: ${legacyUrl}`);
 }
 // New real pages must be in the sitemap
-for (const realUrl of ["https://whitzard.tech/nuwa/", "https://whitzard.tech/nuwa/research/", "https://whitzard.tech/nuwa/blog/", "https://whitzard.tech/nuwa/whitzard-index/", "https://whitzard.tech/open-ecosystem/", "https://whitzard.tech/models/", "https://whitzard.tech/waitlist/"]) {
+for (const realUrl of ["https://whitzard.tech/nuwa/", "https://whitzard.tech/nuwa/research/", "https://whitzard.tech/nuwa/whitzard-index/", "https://whitzard.tech/open-ecosystem/", "https://whitzard.tech/models/", "https://whitzard.tech/waitlist/"]) {
   if (!sitemapXml.includes(`<loc>${realUrl}</loc>`)) violations.push(`dist/sitemap-0.xml: new page must be indexed: ${realUrl}`);
 }
 
