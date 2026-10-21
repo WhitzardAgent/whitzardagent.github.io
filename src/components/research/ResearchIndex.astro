@@ -11,6 +11,9 @@ import { links } from "../../data/links";
 import ResearchExplorer from "./ResearchExplorer";
 import PublicImpactPath from "./PublicImpactPath.astro";
 import ResearchMission from "./ResearchMission.astro";
+import ResearchHighlightBanner from "./ResearchHighlightBanner.astro";
+import ResearchMediaWall from "./ResearchMediaWall.astro";
+import { getResearchHighlights } from "../../lib/researchHighlights";
 import { allResearchBlogEntries, publishedResearchBlog, researchBlogSlug } from "../../lib/researchBlog";
 import { externalArticles } from "../../data/externalArticles";
 import { tagId, type ResearchBlogCard } from "../../lib/researchFilters";
@@ -23,10 +26,11 @@ const sorted = [...researchAssets].sort((a, b) => b.year - a.year || (a.featured
 const featured = researchAssets.filter((item) => item.featuredRank).sort((a, b) => (a.featuredRank ?? 99) - (b.featuredRank ?? 99));
 const primaryLink = (item: typeof researchAssets[number]) => item.links.find((link) => link.kind === "paper")?.url ?? item.links[0].url;
 const blogEntries = await allResearchBlogEntries();
+const highlights = await getResearchHighlights(locale, "research");
 const blogs: ResearchBlogCard[] = publishedResearchBlog(blogEntries, locale).map(entry => {
   const english = blogEntries.find(candidate => candidate.data.pair === entry.data.pair && candidate.data.locale === "en");
   const chinese = blogEntries.find(candidate => candidate.data.pair === entry.data.pair && candidate.data.locale === "zh");
-  return { id: entry.id, title: entry.data.title, summary: entry.data.summary, year: entry.data.date.getUTCFullYear(), date: entry.data.date.toISOString().slice(0, 10), authors: entry.data.authors, researchSlug: entry.data.researchSlug, url: localizedPath(`/nuwa/blog/${researchBlogSlug(entry)}`, locale), source: "NUWA", external: false, tags: (english?.data.tags ?? entry.data.tags).map((en, index) => ({ id: tagId(en), en, zh: chinese?.data.tags[index] ?? en })) };
+  return { id: entry.id, title: entry.data.title, summary: entry.data.summary, year: entry.data.date.getUTCFullYear(), date: entry.data.date.toISOString().slice(0, 10), authors: entry.data.authors, researchSlug: entry.data.researchSlug, cover: entry.data.cover, url: localizedPath(`/nuwa/blog/${researchBlogSlug(entry)}`, locale), source: "NUWA", external: false, tags: (english?.data.tags ?? entry.data.tags).map((en, index) => ({ id: tagId(en), en, zh: chinese?.data.tags[index] ?? en })) };
 });
 const externalTagNames: Record<string, string> = { "Frontier AI Risk": "前沿 AI 风险", Evaluation: "评测", Methodology: "方法" };
 blogs.push(...externalArticles.map((article, index) => ({ id: `external-${index}`, title: article.title, summary: locale === "zh" ? "讨论如何以更科学、基于证据且可执行的方法开展前沿 AI 风险评测。" : article.summary ?? "", year: Number(article.year), authors: [], url: article.url, source: article.source, external: true, tags: (article.tags ?? []).map(en => ({ id: tagId(en), en, zh: externalTagNames[en] ?? en })) })));
@@ -48,7 +52,9 @@ const schema = {
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa/research" schema={schema}>
-  <section class="research-library-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "女娲实验室" : "NUWA"} <span aria-hidden="true">→</span></a><a href={localizedPath("/nuwa/whitzard-index", locale)}>{locale === "zh" ? "白泽指数 · 建设中" : "Whitzard Index · Under construction"}</a></div></div></section>
+  <section class="research-library-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "女娲实验室" : "NUWA"} <span aria-hidden="true">→</span></a><a href={localizedPath("/nuwa/whitzard-index", locale)}>NUWA Index · {locale === "zh" ? "建设中" : "Under construction"}</a></div></div></section>
+
+  {highlights[0] && <div class="site-container research-library-highlight"><ResearchHighlightBanner highlight={highlights[0]} locale={locale} compact /></div>}
 
   <section id="research-index" class="research-library" aria-labelledby="research-library-title">
     <span id="featured" aria-hidden="true"></span>
@@ -58,6 +64,8 @@ const schema = {
   <noscript><style is:global>.brand-site .research-library .research-filters,.brand-site .research-library .research-tags,.brand-site .research-library .research-kind-filter{display:none !important}</style></noscript>
 
   <ResearchMission locale={locale} />
+
+  <section class="section research-media-section"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "自我复制研究" : "SELF-REPLICATION RESEARCH"}</p><h2 class="section-title">Media Coverage</h2><p><a class="text-link" href={localizedPath("/nuwa/blog/self-replication", locale)}>{locale === "zh" ? "了解自我复制研究" : "Explore our self-replication research"} →</a></p><ResearchMediaWall locale={locale}/></div></section>
 
   <section id="infrastructure" class="section research-infrastructure">
     <div class="site-container research-section-head"><p class="eyebrow">{copy.infrastructure.eyebrow}</p><h2>{copy.infrastructure.title}</h2><p>{copy.infrastructure.lead}</p></div>

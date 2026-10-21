@@ -1,0 +1,15 @@
+---
+import type { Locale } from "../../i18n/config";
+import { selfReplicationMedia } from "../../data/researchMedia";
+import "../../styles/research-impact-showcase.css";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+<div class="research-media-wall">
+  <p class="research-media-wall__label">Media Coverage</p>
+  <ul>{selfReplicationMedia.map(item => <li><a href={item.url} target="_blank" rel="noreferrer" aria-label={`${item.name} · ${locale === "zh" ? "阅读报道" : "Read coverage"}`}>
+    <span class={`research-media-wall__mark is-${item.id}`}>{item.logo ? <img src={item.logo} alt={item.name} width="180" height="60" loading="lazy" decoding="async" /> : <strong>{item.name}</strong>}</span>
+    {item.logo && <span class="research-media-wall__name">{item.name}</span>}
+    <span class="research-media-wall__action">{item.platform ?? (locale === "zh" ? "阅读报道" : "Read coverage")} <span aria-hidden="true">↗</span></span>
+  </a></li>)}</ul>
+</div>

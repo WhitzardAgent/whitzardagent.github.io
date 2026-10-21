@@ -1,0 +1,24 @@
+---
+import type { Locale } from "../../i18n/config";
+import type { ResolvedHighlight } from "../../lib/researchHighlights";
+import ResearchLogoWall from "./ResearchLogoWall.astro";
+import "../../styles/research-highlights.css";
+interface Props { highlight: ResolvedHighlight; locale: Locale; compact?: boolean; logos?: boolean; secondary?: boolean }
+const { highlight: item, locale, compact = false, logos = false, secondary = false } = Astro.props;
+const Title = secondary ? "h3" : "h2";
+const separator = locale === "zh" ? "：" : ": ";
+const [name, ...description] = item.article.data.title.split(separator);
+---
+<article class:list={["research-highlight", compact && "research-highlight--compact", secondary && "research-highlight--secondary"]} data-highlight-id={item.id}>
+  <div class="research-highlight__main">
+    <div class="research-highlight__copy">
+      <p class="eyebrow">{locale === "zh" ? "女娲实验室 · 研究亮点" : "NUWA · RESEARCH HIGHLIGHT"}</p>
+      <Title><a href={item.href}>{description.length ? <><span class="research-highlight__name">{name}</span>{description.join(separator)}</> : name}</a></Title>
+      <p>{item.article.data.summary}</p>
+      <p class="research-highlight__impact">{item.impact[locale]}</p>
+      <div class="research-highlight__actions"><a class="text-link" href={item.href}>{locale === "zh" ? "了解研究" : "Explore the research"} <span aria-hidden="true">→</span></a><a class="text-link" href={item.projectUrl} target="_blank" rel="noreferrer">{locale === "zh" ? "访问项目" : "Visit the project"} <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <figure class="research-highlight__figure"><a href={item.image.src} target="_blank" rel="noreferrer" aria-label={locale === "zh" ? "查看完整图示" : "View the full figure"}><img src={item.image.thumbnail} width={item.image.width} height={item.image.height} alt={item.image.alt[locale]} loading="lazy" decoding="async" /></a><figcaption>{item.image.caption[locale]}</figcaption></figure>
+  </div>
+  {logos && <ResearchLogoWall highlight={item} locale={locale} compact />}
+</article>

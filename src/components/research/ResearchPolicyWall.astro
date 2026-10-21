@@ -1,0 +1,23 @@
+---
+import type { Locale } from "../../i18n/config";
+import { publicImpactRecords } from "../../data/publicImpact";
+import "../../styles/research-impact-showcase.css";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const labels = { "shanghai-consensus": "IDAIS", "singapore-consensus": "IMDA", "gbt-45654": "GB/T 45654—2025" };
+---
+<div class="research-policy-wall">
+  {publicImpactRecords.map(item => <article class={`research-report is-${item.kind}`}>
+    <a class="research-report__cover" href={item.sourceUrls[0]} target="_blank" rel="noreferrer" data-umami-event="research-public-impact-source">
+      <div class="research-report__masthead"><span>{labels[item.id]}</span><span>{item.year}</span></div>
+      <span class="research-report__rule" aria-hidden="true"></span>
+      <p class="research-report__type">{item.kind === "national-standard" ? (locale === "zh" ? "国家标准" : "NATIONAL STANDARD") : (locale === "zh" ? "共识与研究议程" : "CONSENSUS & RESEARCH PRIORITIES")}</p>
+      <h3>{item.kind === "national-standard" ? (locale === "zh" ? "生成式人工智能服务安全基本要求" : "Generative AI service safety requirements") : item.title[locale]}</h3>
+      <p class="research-report__subtitle">{item.kind === "national-standard" ? item.officialTitle?.[locale] : item.topics[locale].join(" · ")}</p>
+      <span class="research-report__footer">{locale === "zh" ? "查看官方文件" : "Read the official document"} <span aria-hidden="true">↗</span></span>
+    </a>
+    <p class="research-report__participation">{item.participation?.[locale]}</p>
+    <p class="research-report__context">{item.summary[locale]}</p>
+    <div class="research-report__sources">{item.sourceUrls.map((url, index) => <a href={url} target="_blank" rel="noreferrer" data-umami-event="research-public-impact-source">{locale === "zh" ? "官方来源" : "Official source"}{item.sourceUrls.length > 1 ? ` ${index + 1}` : ""} ↗</a>)}</div>
+  </article>)}
+</div>

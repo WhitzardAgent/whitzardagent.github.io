@@ -1,6 +1,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { Locale } from "../i18n/config";
 import { researchAssets } from "../data/generated/researchAssets";
+import { researchInfrastructure } from "../data/generated/researchInfrastructure";
 
 export type ResearchBlogEntry = CollectionEntry<"researchBlog">;
 const researchBlogModules = import.meta.glob("../content/research-blog/**/*.{md,mdx}");
@@ -16,11 +17,15 @@ export function publishedResearchBlog(entries: ResearchBlogEntry[], locale: Loca
 }
 
 export function researchBlogSlug(entry: ResearchBlogEntry) {
-  return entry.id.replace(/\.mdx?$/, "").split("/").pop() ?? entry.id;
+  return entry.data.articleSlug ?? entry.id.replace(/\.mdx?$/, "").split("/").pop() ?? entry.id;
 }
 
 export function companionResearch(entry: ResearchBlogEntry) {
   return researchAssets.find((asset) => asset.slug === entry.data.researchSlug);
+}
+
+export function companionInfrastructure(entry: ResearchBlogEntry) {
+  return researchInfrastructure.find(asset => asset.slug === entry.data.infrastructureSlug);
 }
 
 export function pairedEntry(entry: ResearchBlogEntry, entries: ResearchBlogEntry[]) {

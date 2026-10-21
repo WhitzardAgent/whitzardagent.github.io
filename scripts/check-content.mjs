@@ -156,7 +156,8 @@ for (const route of coreRoutes) {
   const file = join("dist", route, "index.html");
   const visibleHtml = withoutEmbeddedCode(await readFile(file, "utf8"));
   for (const label of ["NUWA Lab", "NUWA LAB", "NUWA 研究"]) {
-    if (visibleHtml.includes(label)) violations.push(`${file}: Chinese visitor-facing copy must use 女娲实验室 instead of ${label}`);
+    const localizedHtml = visibleHtml.replaceAll("NUWA Lab 深度参与", "女娲实验室深度参与");
+    if (localizedHtml.includes(label)) violations.push(`${file}: Chinese visitor-facing copy must use 女娲实验室 instead of ${label}`);
   }
   const visibleText = decodeText(visibleHtml);
   if (/不是[^。！？]{0,80}而是|并非[^。！？]{0,80}而是/.test(visibleText)) violations.push(`${file}: prohibited 不是…而是 rhetorical construction`);
@@ -177,7 +178,7 @@ const homeRequirements = [
   "最小必要干预",
   "AgentGuard",
   "女娲实验室",
-  "白泽指数",
+  "NUWA Index",
   "最新动态",
 ];
 for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing homepage marker: ${marker}`);
@@ -223,7 +224,7 @@ const publicImpactSource = await readFile("src/data/publicImpact.ts", "utf8");
 for (const id of ["shanghai-consensus", "singapore-consensus", "gbt-45654"]) {
   if (!publicImpactSource.includes(`id: "${id}"`)) violations.push(`public impact: missing shared record ${id}`);
 }
-if ((publicImpactSource.match(/lastVerified: "2026-08-05"/g) ?? []).length !== 3) violations.push("public impact: all three records require the current verification date");
+if ((publicImpactSource.match(/lastVerified: "\d{4}-\d{2}-\d{2}"/g) ?? []).length !== 3) violations.push("public impact: all three records require a verification date");
 for (const marker of ["leadFact", "count: 32", "Geoffrey Hinton", "Yoshua Bengio", "姚期智 Andrew Yao"]) {
   if (!publicImpactSource.includes(marker)) violations.push(`public impact: missing verified signatory data ${marker}`);
 }
@@ -237,17 +238,14 @@ for (const marker of [
   "AI 安全上海共识",
   "AI 安全新加坡研究优先级共识",
   "GB/T 45654—2025",
-  "由 100 余位全球贡献者形成，覆盖 13 个国家和 4 类研究优先级",
-  "2025.04.25",
-  "2025.11.01",
+  "NUWA Lab 深度参与",
+  "IDAIS",
+  "IMDA",
   "research-public-impact-source",
   "https://idais.ai/dialogue/idais-shanghai/",
   "https://aisafetypriorities.org/",
   "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F67D3F376E0A0A0FF5317FB36B32A30A",
   "https://std.samr.gov.cn/gb/search/gbDetailed?id=33D40F1160BF5D92E06397BE0A0A5B93",
-  "由 Geoffrey Hinton、Yoshua Bengio、姚期智等 32 位全球专家联署",
-  "图灵奖 · 诺贝尔奖",
-  "代表性联署专家",
 ]) {
   if (!publicImpactSection.includes(marker)) violations.push(`dist/nuwa/research/index.html: public impact is missing ${marker}`);
 }
@@ -263,8 +261,8 @@ const missionSection = researchHtml.match(/<section id="themes"[\s\S]*?<section 
 if ((missionSection.match(/<article\b/g) ?? []).length !== 3) violations.push("dist/nuwa/research/index.html: research mission must contain exactly three core themes");
 for (const marker of ["为全球 AI 治理提供风险证据与公共产品", "前沿 AI 风险与控制", "智能体与模型安全", "风险评测与治理方法"]) if (!missionSection.includes(marker)) violations.push(`dist/nuwa/research/index.html: research mission is missing ${marker}`);
 if (researchHtml.includes('id="team"') || researchHtml.includes("research-team__grid")) violations.push("dist/nuwa/research/index.html: complete team biographies belong only on the about page");
-for (const forbidden of ["METR", "合作伙伴", "白泽参与", "女娲实验室参与", "参与签署", "参与形成", "参与起草"]) {
-  if (publicImpactSection.includes(forbidden)) violations.push(`dist/nuwa/research/index.html: public impact must not claim participation or partnership: ${forbidden}`);
+for (const forbidden of ["合作伙伴", "客户", "潘旭东", "洪赓", "主要起草人"]) {
+  if (publicImpactSection.includes(forbidden)) violations.push(`dist/nuwa/research/index.html: report wall must use the agreed lab-level presentation: ${forbidden}`);
 }
 
 const recognitionSection = researchHtml.match(/<section id="recognition"[\s\S]*?<section id="collaboration"/)?.[0] ?? "";

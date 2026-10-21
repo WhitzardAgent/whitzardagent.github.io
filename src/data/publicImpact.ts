@@ -20,6 +20,7 @@ export type PublicImpactRecord = {
   contextItems?: string[];
   sourceUrls: string[];
   lastVerified: string;
+  participation?: LocalizedText;
 };
 
 const text = (zh: string, en: string): LocalizedText => ({ zh, en });
@@ -62,7 +63,8 @@ export const publicImpactRecords: PublicImpactRecord[] = [
     contextLabel: text("国际签署者包括", "Global signatories include"),
     contextItems: ["Geoffrey Hinton", "Yoshua Bengio", "Stuart Russell", "Andrew Yao", "Sam Bowman", "Max Tegmark"],
     sourceUrls: ["https://idais.ai/dialogue/idais-shanghai/"],
-    lastVerified: "2026-08-05",
+    lastVerified: "2026-10-21",
+    participation: text("NUWA Lab 深度参与", "Deep involvement from NUWA Lab"),
   },
   {
     id: "singapore-consensus",
@@ -88,7 +90,8 @@ export const publicImpactRecords: PublicImpactRecord[] = [
     contextLabel: text("贡献者所在机构包括", "Contributor affiliations include"),
     contextItems: ["OpenAI", "Anthropic", "Google DeepMind", "Meta", "Microsoft", "UK AI Security Institute", "EU AI Office", "CAICT", "IMDA"],
     sourceUrls: ["https://aisafetypriorities.org/"],
-    lastVerified: "2026-08-05",
+    lastVerified: "2026-10-21",
+    participation: text("NUWA Lab 深度参与", "Deep involvement from NUWA Lab"),
   },
   {
     id: "gbt-45654",
@@ -117,7 +120,8 @@ export const publicImpactRecords: PublicImpactRecord[] = [
       "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F67D3F376E0A0A0FF5317FB36B32A30A",
       "https://std.samr.gov.cn/gb/search/gbDetailed?id=33D40F1160BF5D92E06397BE0A0A5B93",
     ],
-    lastVerified: "2026-08-05",
+    lastVerified: "2026-10-21",
+    participation: text("NUWA Lab 深度参与", "Deep involvement from NUWA Lab"),
   },
 ];
 

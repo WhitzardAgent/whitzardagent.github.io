@@ -5,12 +5,17 @@ import { localizedPath } from "../../i18n/config";
 import type { Locale } from "../../i18n/config";
 import type { ResearchBlogEntry } from "../../lib/researchBlog";
 import CompanionPaper from "./CompanionPaper.astro";
+import ResearchLogoWall from "./ResearchLogoWall.astro";
+import ResearchMediaWall from "./ResearchMediaWall.astro";
+import { researchHighlights } from "../../data/researchHighlights";
 import "../../styles/research-blog.css";
 
 interface Props { entry: ResearchBlogEntry; locale: Locale; slug: string; pairedSlug?: string }
 const { entry, locale, slug, pairedSlug } = Astro.props;
 const { Content } = await render(entry);
 const published = entry.data.date.toISOString();
+const highlight = researchHighlights.find(item => item.articlePair === entry.data.pair);
+const cover = entry.data.cover;
 const canonicalPath = `/nuwa/blog/${slug}`;
 const schema = {
   "@context": "https://schema.org",
@@ -25,7 +30,7 @@ const schema = {
 };
 ---
 
-<BaseLayout title={`${entry.data.title} — Blogs`} description={entry.data.summary} locale={locale} brand="nuwa" canonicalPath={canonicalPath} schema={schema}>
+<BaseLayout title={`${entry.data.title} — Blogs`} description={entry.data.summary} locale={locale} brand="nuwa" canonicalPath={canonicalPath} schema={schema} ogImage={cover?.src} ogImageAlt={cover?.alt}>
   <article class="rb-article">
     <header class="rb-article__header">
       <div class="site-container rb-article__header-grid">
@@ -43,8 +48,9 @@ const schema = {
         </div>
       </div>
     </header>
+    {cover && <div class="site-container rb-cover"><figure><a href={cover.src} target="_blank" rel="noreferrer"><img src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} decoding="async" /></a>{highlight && <figcaption>{highlight.image.caption[locale]}</figcaption>}</figure></div>}
     <div class="site-container rb-article__layout">
-      <div class="rb-prose"><Content /></div>
+      <div class="rb-prose"><Content />{highlight && <><ResearchLogoWall highlight={highlight} locale={locale} />{highlight.media && <ResearchMediaWall locale={locale}/>}<p><a href={highlight.sourceUrl} target="_blank" rel="noreferrer">{highlight.sourceLabel[locale]} ↗</a></p></>}{entry.data.updated && <p class="rb-updated">{locale === "zh" ? "更新于" : "Updated"} <time datetime={entry.data.updated.toISOString()}>{entry.data.updated.toISOString().slice(0, 10)}</time></p>}</div>
       <CompanionPaper entry={entry} locale={locale} />
     </div>
   </article>

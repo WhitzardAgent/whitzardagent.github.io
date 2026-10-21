@@ -59,7 +59,7 @@ export async function checkResearchLayouts(browser, baseUrl) {
     await page.goto(new URL(`${locale === "en" ? "/en" : ""}/nuwa/research`, baseUrl).href, { waitUntil: "domcontentloaded" });
     await page.locator("astro-island:not([ssr])").waitFor({ state: "attached" });
     assert.equal(await page.locator(".research-card:not(.research-card--blog)").count(), 86);
-    assert.equal(await page.locator(".research-card__teaser img").count(), 87);
+    assert.equal(await page.locator(".research-card__teaser img").count(), 86);
     assert.equal(await page.locator(".research-card.has-visual").count(), 50);
     assert.equal(await page.locator(".research-card:not(.research-card--blog) .research-card__teaser--brand").count(), 36);
     assert.equal(await page.locator(".research-card:not(.has-visual) .research-card__credit").count(), 0);
@@ -86,7 +86,7 @@ export async function checkResearchLayouts(browser, baseUrl) {
     const page = await context.newPage();
     await page.goto(new URL(`${locale === "en" ? "/en" : ""}/nuwa/research`, baseUrl).href, { waitUntil: "domcontentloaded" });
     assert.equal(await page.locator(".research-card:not(.research-card--blog)").count(), 86);
-    assert.equal(await page.locator(".research-card__teaser img").count(), 87);
+    assert.equal(await page.locator(".research-card__teaser img").count(), 89);
     assert.equal(await page.locator(".research-filters").isVisible(), false);
     assert.equal(await page.locator(".research-tags").isVisible(), false);
     await context.close();

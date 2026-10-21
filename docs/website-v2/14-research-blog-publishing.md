@@ -4,6 +4,8 @@ Blogs 是 Research 统一页面中的研究解读分类，替代原独立 Resear
 
 ## 1. 生成双语草稿
 
+研究项目解读使用 `npm run new:research-blog -- --project <infrastructure-slug> --slug <article-slug> --author "Author Name"`；论文仍使用下方命令。项目解读关联现有基础设施并显示“项目与资源”。研究亮点的跨页面呈现见 `17-research-highlights-and-navigation.md`。
+
 先从 `src/data/generated/researchAssets.ts` 找到论文的 `slug`，再运行：
 
 ```bash

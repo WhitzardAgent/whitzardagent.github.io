@@ -18,6 +18,9 @@ export type NewsItem = {
   source?: LocalizedText;
   sourceLanguage?: Locale;
   featured?: boolean;
+  articlePair?: string;
+  articleSlug?: string;
+  cover?: { src: string; alt: LocalizedText; width: number; height: number };
 };
 
 export const newsTypeLabels: Record<Locale, Record<NewsType, string>> = {
@@ -122,7 +125,27 @@ export const newsItems: NewsItem[] = [
 
 export const sortedNewsItems = [...newsItems].sort((a, b) => b.date.localeCompare(a.date));
 
+/** Research announcements resolve their title/date from the published article. */
+export async function getSortedNewsItems(): Promise<NewsItem[]> {
+  const { getResearchHighlights } = await import("../lib/researchHighlights");
+  const [zh, en] = await Promise.all([getResearchHighlights("zh", "news"), getResearchHighlights("en", "news")]);
+  const researchNews: NewsItem[] = zh.flatMap(item => {
+    const english = en.find(candidate => candidate.id === item.id);
+    if (!english) return [];
+    return [{
+      title: { zh: item.article.data.title, en: english.article.data.title },
+      summary: { zh: `${item.article.data.summary} ${item.impact.zh}。`, en: `${english.article.data.summary} ${item.impact.en}.` },
+      date: item.article.data.date.toISOString().slice(0, 10), type: "Research" as const,
+      articlePair: item.articlePair, articleSlug: item.href.split("/").pop(),
+      source: { zh: "女娲实验室", en: "NUWA Frontier AI Safety Lab" }, featured: true,
+      cover: { src: item.image.thumbnail, alt: item.image.alt, width: item.image.width, height: item.image.height },
+    }];
+  });
+  return [...newsItems, ...researchNews].sort((a, b) => b.date.localeCompare(a.date));
+}
+
 export function getNewsLink(item: NewsItem, locale: Locale): string | undefined {
+  if (item.articleSlug) return localizedPath(`/nuwa/blog/${item.articleSlug}`, locale);
   if (item.url) return item.url;
   if (item.slug) return localizedPath(`/news/${item.slug}`, locale);
   return undefined;

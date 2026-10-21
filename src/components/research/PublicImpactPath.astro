@@ -1,39 +1,9 @@
 ---
 import type { Locale } from "../../i18n/config";
-import { publicImpactCopy, publicImpactRecords } from "../../data/publicImpact";
-import "../../styles/public-impact.css";
+import ResearchPolicyWall from "./ResearchPolicyWall.astro";
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
-const copy = publicImpactCopy[locale].section;
-const kindLabel = {
-  "scientific-consensus": locale === "zh" ? "科学共识" : "Scientific consensus",
-  "research-agenda": locale === "zh" ? "研究议程" : "Research agenda",
-  "national-standard": locale === "zh" ? "国家标准" : "National standard",
-};
 ---
 
-<section id="public-impact" class="public-impact-path section" aria-labelledby="public-impact-title">
-  <div class="site-container public-impact-path__head">
-    <p class="eyebrow">{copy.eyebrow}</p>
-    <div><h2 id="public-impact-title">{copy.title}</h2><p>{copy.body}</p></div>
-  </div>
-  <div class="site-container public-impact-path__timeline">
-    {publicImpactRecords.map((record) => <article class={`is-${record.kind}`}>
-      <div class="public-impact-path__meta"><span>{record.year}</span><em>{kindLabel[record.kind]}</em></div>
-      <div class="public-impact-path__content">
-        <h3>{record.title[locale]}</h3>
-        <p class="public-impact-path__fact">{record.leadFact[locale]}</p>
-        {record.officialTitle && <p class="public-impact-path__official">{record.officialTitle[locale]}</p>}
-        <p>{record.summary[locale]}</p>
-        {record.signatories && <div class="public-impact-path__signatories" aria-label={locale === "zh" ? `${record.signatories.count} 位全球联署专家中的代表` : `Selected signatories among ${record.signatories.count} global experts`}>
-          <span>{locale === "zh" ? "代表性联署专家" : "SELECTED SIGNATORIES"}</span>
-          <ul>{record.signatories.featured.map((person) => <li><strong>{person.name}</strong><small>{person.distinction[locale]}</small></li>)}</ul>
-          <p>{locale === "zh" ? "其他联署专家包括" : "Other signatories include"} {record.signatories.additionalNames.join(" · ")}</p>
-        </div>}
-        <ul class="public-impact-path__topics">{record.topics[locale].map((topic) => <li>{topic}</li>)}</ul>
-        <div class="public-impact-path__sources">{record.sourceUrls.map((url, sourceIndex) => <a href={url} target="_blank" rel="noreferrer" data-umami-event="research-public-impact-source">{copy.source}{record.sourceUrls.length > 1 ? ` ${sourceIndex + 1}` : ""} ↗</a>)}</div>
-      </div>
-    </article>)}
-  </div>
-</section>
+<section id="public-impact" class="section research-policy-section" aria-labelledby="public-impact-title"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "研究与公共影响" : "RESEARCH & PUBLIC IMPACT"}</p><h2 id="public-impact-title" class="section-title">{locale === "zh" ? "深度参与共识与标准建设" : "Contributing to consensus and standards"}</h2><p class="research-policy-section__lead">{locale === "zh" ? "NUWA Lab 深度参与国际 AI 安全共识、研究优先级与生成式人工智能安全标准建设。" : "NUWA Lab is deeply involved in international AI safety consensus, research priorities, and generative AI safety standards."}</p><ResearchPolicyWall locale={locale}/></div></section>

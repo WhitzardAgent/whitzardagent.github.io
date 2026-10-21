@@ -53,6 +53,15 @@ test("Publication includes accepted preprints, not unpublished reports", () => {
   assert.equal(matchesResearch({ ...paper, publicationType: "report" }, { ...filters, kind: "publication" }, "en"), false);
   assert.equal(matchesResearch(paper, { ...filters, kind: "blogs" }, "en"), false);
 });
+
+test("Publications combines papers and technical reports while preserving legacy type filters", () => {
+  const report = { ...paper, publicationType: "report", venue: "Technical report" };
+  assert.equal(matchesResearch(report, { ...filters, kind: "publications" }, "en"), true);
+  assert.equal(matchesResearch(paper, { ...filters, kind: "publications" }, "en"), true);
+  assert.equal(readResearchFilters("?kind=publications").kind, "publications");
+  assert.equal(readResearchFilters("?kind=technical-report").kind, "technical-report");
+  assert.equal(matchesResearchBlog({ year: 2026, tags: [] }, { ...filters, kind: "publications" }, "en"), false);
+});
 test("Research category URLs round trip and unknown categories fall back to all", () => {
   assert.equal(readResearchFilters("?kind=blogs&tag=ai-deception").kind, "blogs");
   assert.equal(readResearchFilters("?kind=unknown").kind, "");

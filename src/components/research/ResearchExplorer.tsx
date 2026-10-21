@@ -19,13 +19,13 @@ export default function ResearchExplorer({ assets, visuals, blogs, locale, copy,
   const [filters, setFilters] = useState<ResearchFilterState>(emptyResearchFilters);
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
-    const sync = () => setFilters(readResearchFilters(window.location.search));
+    const sync = () => { const parsed = readResearchFilters(window.location.search); setFilters({ ...parsed, kind: parsed.kind || "publications" }); };
     sync();
     setHydrated(true);
     window.addEventListener("popstate", sync);
     return () => window.removeEventListener("popstate", sync);
   }, []);
-  const scopedAssets = useMemo(() => assets.filter(asset => !filters.kind || researchKind(asset) === filters.kind), [assets, filters.kind]);
+  const scopedAssets = useMemo(() => assets.filter(asset => !filters.kind || filters.kind === "publications" || researchKind(asset) === filters.kind), [assets, filters.kind]);
   const scopedBlogs = useMemo(() => blogs.filter(() => !filters.kind || filters.kind === "blogs"), [blogs, filters.kind]);
   const tags = useMemo(() => buildResearchTags(scopedAssets, scopedBlogs), [scopedAssets, scopedBlogs]);
   const images = useMemo(() => new Map(visuals.map(visual => [visual.researchSlug, visual])), [visuals]);
@@ -44,12 +44,13 @@ export default function ResearchExplorer({ assets, visuals, blogs, locale, copy,
   const toggleTag = (id: string) => commit({ ...filters, tags: filters.tags.includes(id) ? filters.tags.filter(tag => tag !== id) : [...filters.tags, id] });
   const accessibleTagLabel = (prefix: string, label: string) => `${prefix}${locale === "zh" ? "：" : ": "}${label}`;
   const badge = (tag: ResearchTag, counted = false) => <button key={tag.id} type="button" className="research-tag" disabled={!hydrated} aria-pressed={filters.tags.includes(tag.id)} aria-label={accessibleTagLabel(copy.filters.filterByTag, tag[locale])} onClick={() => toggleTag(tag.id)}>{tag[locale]}{counted && <span aria-hidden="true">{tag.count}</span>}</button>;
-  const kinds: Array<{ id: ResearchKind; label: string }> = [{ id: "", label: copy.kinds.all }, { id: "publication", label: "Publication" }, { id: "technical-report", label: "Technical Report" }, { id: "blogs", label: "Blogs" }];
+  const kinds: Array<{ id: ResearchKind; label: string }> = [{ id: "publications", label: "Publications" }, { id: "blogs", label: "Blogs" }];
 
   return <div className="research-explorer">
-    <div className="research-kind-filter" role="group" aria-label={copy.kinds.label}>{kinds.map(kind => <button type="button" key={kind.id} disabled={!hydrated} aria-pressed={(filters.kind ?? "") === kind.id} onClick={() => commit({ ...emptyResearchFilters, kind: kind.id })}>{kind.label}</button>)}</div>
+    <div className="research-kind-filter" role="group" aria-label={copy.kinds.label}>{kinds.map(kind => <button type="button" key={kind.id} disabled={!hydrated} aria-pressed={(filters.kind === "blogs" ? "blogs" : "publications") === kind.id} onClick={() => commit({ ...emptyResearchFilters, kind: kind.id })}>{kind.label}</button>)}</div>
     <form className="research-filters" role="search" onSubmit={event => event.preventDefault()}>
       <label className="research-filters__search"><span>{copy.filters.searchLabel}</span><input type="search" value={filters.q} placeholder={copy.filters.searchPlaceholder} onChange={event => commit({ ...filters, q: event.target.value }, true)} /></label>
+      {filters.kind !== "blogs" && <label><span>{copy.kinds.typeLabel}</span><select value={filters.kind === "publication" || filters.kind === "technical-report" ? filters.kind : ""} onChange={event => commit({ ...emptyResearchFilters, kind: (event.target.value || "publications") as ResearchKind })}><option value="">{copy.kinds.allTypes}</option><option value="publication">{copy.kinds.accepted}</option><option value="technical-report">{copy.kinds.reports}</option></select></label>}
       <label><span>{copy.filters.topicLabel}</span><select value={filters.topic} onChange={event => commit({ ...filters, topic: event.target.value })}><option value="">{copy.filters.allTopics}</option>{themes.map(theme => <option key={theme.key} value={theme.key}>{theme.title}</option>)}</select></label>
       <label><span>{copy.filters.yearLabel}</span><select value={filters.year} onChange={event => commit({ ...filters, year: event.target.value })}><option value="">{copy.filters.allYears}</option>{years.map(year => <option key={year} value={year}>{year}</option>)}</select></label>
       <label><span>{copy.filters.memberLabel}</span><select value={filters.member} onChange={event => commit({ ...filters, member: event.target.value })}><option value="">{copy.filters.allMembers}</option>{members.map(member => <option key={member.key} value={member.key}>{member.title}</option>)}</select></label>
@@ -86,7 +87,7 @@ export default function ResearchExplorer({ assets, visuals, blogs, locale, copy,
       })}</div>
     </section>)}
     {filteredBlogs.length > 0 && <section id="research-blog" className="research-year-group" aria-labelledby="research-blogs-title"><h3 id="research-blogs-title">Blogs<span>{filteredBlogs.length} {copy.filters.results}</span></h3><div className="research-card-grid">{filteredBlogs.map(blog => <article className="research-card research-card--blog" data-research-kind="blogs" key={blog.id}>
-      <div className="research-card__teaser research-card__teaser--brand"><img src="/assets/research/nuwa-brand-cover-640.webp" srcSet="/assets/research/nuwa-brand-cover-640.webp 640w, /assets/research/nuwa-brand-cover.webp 1536w" sizes="(max-width: 700px) calc(100vw - 40px), 640px" width="1536" height="512" alt={copy.kinds.brandCover} loading="lazy" decoding="async" /></div>
+      <div className={`research-card__teaser${blog.cover ? "" : " research-card__teaser--brand"}`}><img src={blog.cover?.src ?? "/assets/research/nuwa-brand-cover-640.webp"} srcSet={blog.cover ? undefined : "/assets/research/nuwa-brand-cover-640.webp 640w, /assets/research/nuwa-brand-cover.webp 1536w"} sizes="(max-width: 700px) calc(100vw - 40px), 640px" width={blog.cover?.width ?? 1536} height={blog.cover?.height ?? 512} alt={blog.cover?.alt ?? copy.kinds.brandCover} loading="lazy" decoding="async" /></div>
       <div className="research-card__body"><div className="research-card__meta">{blog.date ? <time dateTime={blog.date}>{blog.date}</time> : <span>{blog.year}</span>}<span>{blog.source}</span><span>Blog</span></div><h4><a href={blog.url} target={blog.external ? "_blank" : undefined} rel={blog.external ? "noreferrer" : undefined}>{blog.title}</a></h4><p className="research-card__summary">{blog.summary}</p>{blog.authors.length > 0 && <p className="research-card__authors">{blog.authors.join(" · ")}</p>}<div className="research-card__tags" aria-label={copy.filters.tagLabel}>{blog.tags.map(tag => badge(tag))}</div><div className="research-card__links"><a href={blog.url} target={blog.external ? "_blank" : undefined} rel={blog.external ? "noreferrer" : undefined}>{copy.kinds.readBlog} <span aria-hidden="true">{blog.external ? "↗" : "→"}</span></a></div></div>
     </article>)}</div></section>}
   </div>;

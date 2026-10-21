@@ -8,6 +8,8 @@
 
 ## 设计目标
 
+最新研究导航与亮点展示基线见 [17-research-highlights-and-navigation.md](17-research-highlights-and-navigation.md)，覆盖历史导航与指数命名条目。
+
 - 公司优先：Whitzard 是公司品牌，AgentGuard 是核心产品，NUWA Lab 是研究引擎，WhitzardAgent 是开源生态。
 - 商业优先：首页首先解释“我们解决什么企业问题”，研究与论文用于证明壁垒。
 - 双语优先：中文使用无前缀默认路由，英文使用 `/en/*`，旧 `/zh/*` 保留兼容入口。

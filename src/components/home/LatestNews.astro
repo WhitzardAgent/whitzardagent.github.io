@@ -1,14 +1,15 @@
 ---
 import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
-import { getNewsLink, getNewsSourceLabel, newsTypeLabels, sortedNewsItems } from "../../data/news";
+import { getNewsLink, getNewsSourceLabel, newsTypeLabels, getSortedNewsItems } from "../../data/news";
 import NewsCard from "../NewsCard.astro";
 
-interface Props { locale: Locale; embedded?: boolean; excludeHref?: string; }
+interface Props { locale: Locale; embedded?: boolean; excludeHref?: string; excludeArticlePairs?: string[]; }
 
-const { locale, embedded = false, excludeHref } = Astro.props;
-const items = sortedNewsItems
+const { locale, embedded = false, excludeHref, excludeArticlePairs = [] } = Astro.props;
+const items = (await getSortedNewsItems())
   .filter((item) => !excludeHref || getNewsLink(item, locale) !== excludeHref)
+  .filter(item => !item.articlePair || !excludeArticlePairs.includes(item.articlePair))
   .slice(0, 3);
 const copy = locale === "zh"
   ? {

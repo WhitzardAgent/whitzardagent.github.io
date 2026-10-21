@@ -5,15 +5,15 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const base = localizedPath("/nuwa/research", locale);
 const entries = [
-  { id: "publication", title: "Publication", body: locale === "zh" ? "已发表或已获会议、期刊接收的研究论文。" : "Research papers published in or accepted by conferences and journals." },
-  { id: "technical-report", title: "Technical Report", body: locale === "zh" ? "预印本、技术报告与公开研究记录。" : "Preprints, technical reports, and public research records." },
-  { id: "blogs", title: "Blogs", body: locale === "zh" ? "解读研究问题、关键发现、方法与适用边界。" : "Insights into research questions, findings, methods, and limitations." },
+  { href: base, title: "Publications", body: locale === "zh" ? "论文、预印本与技术报告，按研究类型浏览与筛选。" : "Papers, preprints, and technical reports, with filters for publication type." },
+  { href: `${base}?kind=blogs`, title: "Blogs", body: locale === "zh" ? "解读研究问题、关键发现、方法与适用边界。" : "Insights into research questions, findings, methods, and limitations." },
+  { href: localizedPath("/nuwa/whitzard-index", locale), title: "NUWA Index", body: locale === "zh" ? "建设中" : "Under construction" },
 ];
 ---
 <section id="research-entry" class="section research-entry">
   <div class="site-container">
-    <div class="research-entry__head"><div><p class="eyebrow">{locale === "zh" ? "研究与解读" : "RESEARCH & INSIGHTS"}</p><h2 class="section-title">Research</h2></div><a class="text-link" href={base}>{locale === "zh" ? "浏览全部内容" : "Explore all research"} →</a></div>
-    <div class="research-entry__grid">{entries.map((entry, index) => <a href={`${base}?kind=${entry.id}`}><span>0{index + 1}</span><h3>{entry.title}</h3><p>{entry.body}</p><span aria-hidden="true">→</span></a>)}</div>
+    <div class="research-entry__head"><div><p class="eyebrow">{locale === "zh" ? "研究与解读" : "RESEARCH & INSIGHTS"}</p><h2 class="section-title">{locale === "zh" ? "探索女娲研究" : "Explore NUWA research"}</h2></div></div>
+    <div class="research-entry__grid">{entries.map((entry, index) => <a href={entry.href}><span>0{index + 1}</span><h3>{entry.title}</h3><p>{entry.body}</p><span aria-hidden="true">→</span></a>)}</div>
   </div>
 </section>
 <style>

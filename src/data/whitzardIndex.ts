@@ -1,7 +1,7 @@
 /**
- * Whitzard Index data structures and types.
+ * NUWA Index data structures and types.
  *
- * The Whitzard Index is NUWA's long-term project for observing and
+ * The NUWA Index is NUWA's long-term project for observing and
  * comparing frontier AI risk across models and systems.
  *
  * Formal index entries remain separate from published evaluation evidence.
@@ -223,5 +223,5 @@ export const whitzardIndexVersions: IndexVersion[] = [];
  * Runtime assertion: the public index must not contain fabricated data.
  */
 if (whitzardIndexEntries.length > 0 && import.meta.env.PROD) {
-  throw new Error("Whitzard Index entries must be confirmed before production deployment.");
+  throw new Error("NUWA Index entries must be confirmed before production deployment.");
 }

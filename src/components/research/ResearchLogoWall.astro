@@ -1,0 +1,12 @@
+---
+import type { Locale } from "../../i18n/config";
+import type { ResearchHighlight } from "../../data/researchHighlights";
+import "../../styles/research-highlights.css";
+interface Props { highlight: ResearchHighlight; locale: Locale; compact?: boolean }
+const { highlight, locale, compact = false } = Astro.props;
+const organizations = compact ? highlight.compactOrganizations.map(id => highlight.organizations.find(org => org.id === id)!).filter(Boolean) : highlight.organizations;
+---
+{organizations.length > 0 && <div class:list={["research-logo-wall", compact && "research-logo-wall--compact"]}>
+  <p class="research-logo-wall__label">{highlight.organizationLabel[locale]}</p>
+  <ul aria-label={highlight.organizationLabel[locale]}>{organizations.map(org => <li><img src={`/assets/research/${highlight.id}/${org.id}.webp`} alt={org.name} width="180" height="60" loading="lazy" decoding="async" /></li>)}</ul>
+</div>}

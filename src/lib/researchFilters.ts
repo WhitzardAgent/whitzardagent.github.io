@@ -1,13 +1,13 @@
 import type { ResearchAsset } from "../data/generated/researchAssets";
 import type { Locale } from "../i18n/config";
 
-export type ResearchKind = "" | "publication" | "technical-report" | "blogs";
+export type ResearchKind = "" | "publications" | "publication" | "technical-report" | "blogs";
 export type ResearchFilterState = { q: string; topic: string; year: string; member: string; tags: string[]; kind?: ResearchKind };
-export type ResearchBlogCard = { id: string; title: string; summary: string; year: number; date?: string; authors: string[]; tags: ResearchTag[]; url: string; source: string; external: boolean; researchSlug?: string };
+export type ResearchBlogCard = { id: string; title: string; summary: string; year: number; date?: string; authors: string[]; tags: ResearchTag[]; url: string; source: string; external: boolean; researchSlug?: string; cover?: { src: string; alt: string; width: number; height: number } };
 export type ResearchTag = { id: string; en: string; zh: string; count?: number };
 export const emptyResearchFilters: ResearchFilterState = { q: "", topic: "", year: "", member: "", tags: [] };
 export const tagId = (value: string) => value.normalize("NFKC").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-export function researchKind(asset: ResearchAsset): Exclude<ResearchKind, "" | "blogs"> {
+export function researchKind(asset: ResearchAsset): "publication" | "technical-report" {
   if (asset.publicationType === "report") return "technical-report";
   // Legacy records sometimes retain "preprint" after a venue is documented.
   // Classify from that source metadata; an arXiv URL alone never implies acceptance.
@@ -41,7 +41,7 @@ export function buildResearchTags(assets: ResearchAsset[], blogs: ResearchBlogCa
 export function readResearchFilters(search: string): ResearchFilterState {
   const params = new URLSearchParams(search);
   const candidate = params.get("kind");
-  const kind: ResearchKind = candidate === "publication" || candidate === "technical-report" || candidate === "blogs" ? candidate : "";
+  const kind: ResearchKind = candidate === "publications" || candidate === "publication" || candidate === "technical-report" || candidate === "blogs" ? candidate : "";
   return { q: params.get("q") ?? "", topic: params.get("topic") ?? "", year: params.get("year") ?? "", member: params.get("member") ?? "", tags: [...new Set(params.getAll("tag").map(tag => tag.trim()).filter(Boolean))], ...(params.has("kind") ? { kind } : {}) };
 }
 export function writeResearchFilterParams(search: string, filters: ResearchFilterState): string {
@@ -57,7 +57,7 @@ export function writeResearchFilterParams(search: string, filters: ResearchFilte
   return params.toString();
 }
 export function matchesResearch(asset: ResearchAsset, filters: ResearchFilterState, locale: Locale): boolean {
-  if (filters.kind && researchKind(asset) !== filters.kind) return false;
+  if (filters.kind && filters.kind !== "publications" && researchKind(asset) !== filters.kind) return false;
   if (filters.topic && asset.category !== filters.topic) return false;
   if (filters.year && asset.year !== Number(filters.year)) return false;
   if (filters.member && !asset.memberSlugs.includes(filters.member as ResearchAsset["memberSlugs"][number])) return false;

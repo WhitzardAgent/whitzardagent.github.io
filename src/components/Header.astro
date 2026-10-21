@@ -18,7 +18,7 @@ const consolePath = typeof consoleUrl === "string" && /^https:\/\//.test(console
 
 function isActive(href: string) {
   if (href.includes("?")) return false;
-  if (href === "/nuwa/research") return basePath === href || basePath.startsWith("/nuwa/blog/");
+  if (href === "/nuwa/research") return basePath === href;
   if (href === "/nuwa") return basePath === "/nuwa";
   if (href === "/nuwa/blog") return basePath === "/nuwa/blog" || basePath.startsWith("/nuwa/blog/");
   if (href === "/agentguard") return basePath === "/agentguard" || basePath.startsWith("/agentguard/");
@@ -43,7 +43,7 @@ function isGroupActive(children?: { href: string }[]) {
       </a>
       <nav class="site-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
         {copy.nav.map((item, index) => item.children ? (
-          <div class:list={["site-nav__group", item.href !== "#" && "site-nav__group--linked", index > 0 && "site-nav__item--divided", isGroupActive(item.children) && "is-active"]} data-dropdown>
+          <div class:list={["site-nav__group", item.icon === "research" && "site-nav__group--research", item.href !== "#" && "site-nav__group--linked", index > 0 && "site-nav__item--divided", isGroupActive(item.children) && "is-active"]} data-dropdown>
             {item.href !== "#" && <a href={localizedPath(item.href, locale)} class:list={["site-nav__link", "site-nav__destination", isGroupActive(item.children) && "is-active"]} aria-current={isActive(item.href) ? "page" : undefined}><NavIcon name={item.icon} /><span>{item.label}</span></a>}
             <button
               class:list={["site-nav__link", "site-nav__toggle", item.href !== "#" && "site-nav__toggle--split", isGroupActive(item.children) && "is-active"]}
@@ -57,13 +57,13 @@ function isGroupActive(children?: { href: string }[]) {
               <svg class="site-nav__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="site-nav__dropdown" data-dropdown-panel role="menu" aria-label={item.label}>
-              {item.children.map((child) => (
+              {item.children.map((child, childIndex) => (
                 <a
                   href={localizedPath(child.href, locale)}
-                  class:list={["site-nav__dropdown-link", isActive(child.href) && "is-active"]}
+                  class:list={["site-nav__dropdown-link", item.icon === "research" && childIndex === 0 && "site-nav__lab-intro", isActive(child.href) && "is-active"]}
                   role="menuitem"
                   aria-current={isActive(child.href) ? "page" : undefined}
-                >{child.label}</a>
+                >{child.label}{item.icon === "research" && childIndex === 0 && <small>{locale === "zh" ? "前沿 AI 风险研究与治理" : "Frontier AI risk research and governance"}</small>}</a>
               ))}
             </div>
           </div>
@@ -87,7 +87,7 @@ function isGroupActive(children?: { href: string }[]) {
     <div id="mobile-navigation" class="mobile-navigation" hidden>
       <nav class="site-container mobile-navigation__inner" aria-label={locale === "zh" ? "移动端主导航" : "Mobile navigation"}>
         {copy.nav.map((item, index) => item.children ? (
-          <div class="mobile-nav__group" data-mobile-group>
+          <div class:list={["mobile-nav__group", item.icon === "research" && "mobile-nav__group--research"]} data-mobile-group>
             <div class:list={["mobile-nav__parent-row", item.href !== "#" && "mobile-nav__parent-row--linked"]}>
             {item.href !== "#" && <a class="mobile-navigation__link" href={localizedPath(item.href, locale)}><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span class="mobile-navigation__label"><NavIcon name={item.icon} />{item.label}</span></a>}
             <button

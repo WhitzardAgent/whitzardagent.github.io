@@ -10,9 +10,10 @@ interface Props {
   source?: string;
   featured?: boolean;
   locale: Locale;
+  cover?: { src: string; alt: string; width: number; height: number };
 }
 
-const { title, date, typeLabel, summary, href, source, featured = false, locale } = Astro.props;
+const { title, date, typeLabel, summary, href, source, featured = false, locale, cover } = Astro.props;
 const formattedDate = new Date(date).toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US", {
   year: "numeric",
   month: locale === "zh" ? "numeric" : "short",
@@ -29,7 +30,9 @@ const linkProps = href
   : {};
 ---
 
-<Tag class:list={["news-card", featured && "news-card--featured", href && "news-card--link"]} {...linkProps}>
+<Tag class:list={["news-card", featured && "news-card--featured", href && "news-card--link", cover && "news-card--illustrated"]} {...linkProps}>
+  {cover && <div class="news-card__cover"><img src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} loading="lazy" decoding="async" /></div>}
+  <div class="news-card__body">
   <div class="news-card__meta">
     <span>{typeLabel}</span>
     <time datetime={date}>{formattedDate}</time>
@@ -39,6 +42,7 @@ const linkProps = href
   <h3>{title}</h3>
   {summary && <p>{summary}</p>}
   {source && <small>{locale === "zh" ? "来源：" : "Source: "}{source}</small>}
+  </div>
 </Tag>
 
 <style>
@@ -55,6 +59,8 @@ const linkProps = href
   .news-card--featured {
     border-color: #c7d6d2;
   }
+  .news-card--illustrated{display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1fr);gap:32px;align-items:center;padding-block:24px}.news-card__cover{padding:28px 12px;background:#fff;border:1px solid var(--wz-hairline);border-radius:8px}.news-card__cover img{display:block;width:100%;height:auto}.news-card__body{min-width:0}
+  @media(max-width:700px){.news-card--illustrated{grid-template-columns:1fr;gap:20px}}
   .news-card--link {
     transition: border-color var(--duration-micro), transform var(--duration-micro) var(--ease-out);
   }

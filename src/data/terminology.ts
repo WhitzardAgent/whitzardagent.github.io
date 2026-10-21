@@ -58,7 +58,17 @@ export const terminology: TerminologyEntry[] = [
     status: "locked",
     definition: "实验室正式全称。",
     useWhen: "首次出现、页面标题、SEO 与结构化数据。",
-    deprecated: ["NUWA Lab", "NUWA LAB", "Nuwa Lab", "Nuwa Frontier AI Safety Lab"],
+    deprecated: ["NUWA LAB", "Nuwa Lab", "Nuwa Frontier AI Safety Lab"],
+    notes: "紧凑导航可使用 NUWA Lab；页面标题、SEO 和结构化数据使用正式全称。",
+  },
+  {
+    id: "nuwa-index",
+    zh: "NUWA Index",
+    en: "NUWA Index",
+    status: "locked",
+    definition: "女娲实验室的前沿 AI 风险指数项目；当前显示建设中。",
+    useWhen: "导航、栏目、页面标题与 metadata；历史网址保持兼容。",
+    deprecated: ["Whitzard Index", "白泽指数"],
   },
   {
     id: "research-blog",
@@ -225,7 +235,7 @@ export const terminology: TerminologyEntry[] = [
     en: "safety leaderboard",
     status: "preferred",
     definition: "以单一排序方式展示模型安全表现的榜单。",
-    useWhen: "仅在确实讨论此类榜单时使用；白泽指数不应被描述为排行榜。",
+    useWhen: "仅在确实讨论此类榜单时使用；NUWA Index不应被描述为排行榜。",
     deprecated: ["安全版跑分榜"],
   },
   {

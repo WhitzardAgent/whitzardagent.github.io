@@ -50,7 +50,7 @@ export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024
     assert.equal(await page.locator(".home-applications__panel:visible").count(), 4, "mobile retains all use cases");
 
     await page.goto(new URL("/nuwa/whitzard-index", baseUrl).href, { waitUntil: "domcontentloaded" });
-    assert.match(await page.locator("main").innerText(), /白泽指数[\s\S]*建设中/);
+    assert.match(await page.locator("main").innerText(), /NUWA Index[\s\S]*建设中/);
     assert.equal(await page.locator("main astro-island, main table, main svg").count(), 0, "index does not render withdrawn evidence");
 
     await page.goto(new URL("/waitlist", baseUrl).href, { waitUntil: "domcontentloaded" });

@@ -1,0 +1,62 @@
+# 研究亮点与女娲导航
+
+实施基线：2026-10-21。覆盖此前独立 Research / Publication / Technical Report 并列导航与指数命名规则。
+
+## 导航与浏览
+
+- 前沿研究文字进入女娲介绍 `/nuwa`，箭头展开单列菜单。首项是女娲实验室 / NUWA Lab 介绍，随后为 Publications、Blogs、NUWA Index；移动端相同。
+- `/nuwa/research` 继续使用 Research 页面壳，内容仅有 Publications、Blogs 两个分类。Publications 包含全部论文、预印本和技术报告；成果类型是页内筛选。
+- `kind=publication`、`kind=technical-report` 保留原有类型筛选；新增 `kind=publications` 表示两者合集。无参数时水合后默认 Publications。无 JavaScript 时全部论文和 Blogs 完整输出。
+- 对外名称统一 NUWA Index，当前仍为建设中；历史 `/nuwa/whitzard-index` 地址、隐藏数据与旧重定向保留。
+
+## 成果的唯一内容来源
+
+正文为中英文 Markdown；共享 pair 与可选显式 articleSlug。articleSlug 使两种语言使用相同文章尾路径，旧文章未配置时沿用旧解析规则。不使用 Astro 保留的 slug 字段覆盖 collection ID，避免两种语言互相覆盖。
+
+`researchSlug` 关联论文，`infrastructureSlug` 关联现有研究项目；恰选一个。两种语言必须关联相同对象、同步发布并保持相同发布日期。封面声明 src、alt、width、height；图注与方法范围由作者撰写。
+
+亮点记录维护 pair、主图、影响力口径、机构关系说明、来源与人工排序。标题、摘要和日期读取关联的已发布文章；News 同样解析文章，不另写一份研究标题和日期。草稿不进入亮点与新闻。
+
+研究展示使用中性、可核实的表达。不要自行使用“经典研究”“全球关注”或 Landmark 等评价性标签；研究摘要介绍问题、方法与范围，媒体关注通过具体报道链接呈现，不写自我评价。
+
+首页研究区与女娲页面使用一个主展位；女娲可再展示最多两个辅助亮点，只有一条时无空位。Research 使用紧凑横幅。首页 Latest News 排除已经展示的研究亮点公告；完整 News 保留公告。
+
+## AgentCyberRange 素材与范围
+
+- 来源：用户提供的 `AgentCyberRange-v1.docx`，及 https://mp.weixin.qq.com/s/giumeYfpF0tmQ6CKK5KiCg 。微信抓取受限，正文与图片由用户提供的文档核对；不声称已在线核验微信全文。
+- 首期为 30 个真实 Web 应用、200+ 个漏洞、50+ 个内网环境、300+ 台漏洞主机的版本快照，不覆盖隐藏指数中的历史快照。
+- 用户明确选择文档图片中的保守口径“50+ 家单位申请试用”，不采用正文的 96 家口径；Logo 墙标题必须与“试用申请”关系共同显示。
+- 使用原始流程图与 23 个原始机构标志，去掉原 Logo 墙卡片边框和总数占位，不生成标志。`scripts/extract-research-highlight-assets.py <docx>` 可重复提取。原 DOCX 不进入公开仓库。
+- 排行榜通过项目官网链接访问，不复制旧排行榜作为当前结果；不新增评测成功率或机构使用状态。
+- 首次站内版本日期为 2026-10-21，不推断原微信发布日期。若实际发布在更晚日期，发布前调整中英文章日期；重要更新使用 updated 并记录版本。
+
+## 新增与更新
+
+1. 用 `npm run new:research-blog -- --project <infrastructure-slug> --slug <article-slug> --author "Author"` 生成项目解读；论文继续使用 `--research`。
+2. 人工编辑两种语言，补封面、图注、规模与来源。局部更新沿用 pair 和 slug，修改 updated；新公告关联原文章。
+3. 在研究亮点记录配置展示页面和排序；机构关系标签属于每项成果的数据，不默认通用为合作伙伴。
+4. 检查文章配对、引用与素材后构建，再检查首页、女娲、Research、News 和文章双语布局。
+
+## 验收
+
+### 2026-10-21 影响力展示补充
+
+- 首页与女娲采用连续纵向展示：开放研究与评测（AgentCyberRange）→ Media Coverage（自我复制研究）→ 共识与标准（三份报告）。桌面左侧章节索引随可见卡片更新，右侧自然纵向滚动；移动端纵向展开。不接管滚轮、不自动切换媒体结论。
+- 自我复制新增中英文研究回顾，关联仓库已有的 2025 年论文。首页原自我复制小卡合并到研究与媒体报道卡，避免重复。
+- 媒体墙包含 WIRED、DeepTech、Live Science、Forbes、The Independent，各自链接具体报道；DeepTech 标明搜狐号发布入口。WIRED 使用用户提供的原文链接。Live Science、Forbes、The Independent 复用项目站原媒体资产并显示名称，WIRED / DeepTech 在无独立图形资产时使用文字名称。
+- 报告墙使用 HTML 编辑式文件卡，不冒充官方 PDF 截图。上海共识标 IDAIS，新加坡共识标 IMDA，国标保留 GB/T 45654—2025 与完整官方名称。
+- 按用户最终要求统一呈现“NUWA Lab 深度参与”，不展示个人名单或具体角色。内部核验依据：IDAIS 上海页面参与者含潘旭东，新加坡共识个人贡献者名单含潘旭东，国标官方起草人名单含洪赓、潘旭东。公开来源与核验日期保存在现有数据中，覆盖历史“不陈述参与”的规则。
+- 媒体墙也用于 Research 与自我复制解读文章；报告墙替换 Research 原时间线，保留底层历史共识、标准与联署者数据。
+
+- 两种语言 × 1440 / 900 / 808 / 390px，无溢出、图像裁切或标题遮挡。
+- 单列菜单、键盘 ArrowDown / Escape、移动菜单、旧分类参数、搜索、标签与历史导航。
+- 单成果及多个成果布局；无 JS / reduced-motion 内容完整。
+- 项目 / 论文关联、未知引用、双语日期、显式 slug 冲突和缺失素材校验。
+- 运行类型、术语、内容、Research Blog、链接、测试和正式静态构建。交付本地审阅，发布单独执行。
+
+### 本轮实测记录
+
+- Astro 检查 179 文件，0 错误；20 项单元测试全部通过。Research Blog、术语、内容、站内链接检查通过，静态构建 44 个页面；JSONL 摄取保持 86 项研究、2 项研究基础设施及 22 项开放项目。
+- 浏览器覆盖中英两种语言、1440 / 900 / 808 / 390px，首页、女娲、Research、News、AgentCyberRange 文章及指数页，共 48 组布局；未发现横向溢出或控制台错误。
+- 验证 86 项 Publications、6 项历史 Technical Report 筛选、3 项 Blogs，以及 tags、旧查询地址、刷新与浏览器返回。导航键盘、移动端展开、关闭与焦点恢复通过。
+- 无 JavaScript 下论文、博客、来源与 23 个试用申请单位标志完整输出；reduced-motion 下三类展示卡稳定可读。媒体墙及报告墙另外复核桌面 / 移动双语构图和纵向章节定位。

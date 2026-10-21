@@ -141,9 +141,9 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         "How do we turn risk understanding into deployable safety models and runtime control?",
       ],
       cta: "Explore NUWA",
-      indexTitle: "Whitzard Index",
+      indexTitle: "NUWA Index",
       indexBody: "A long-term research data project for observing and comparing frontier AI risk across models and systems — not a safety leaderboard.",
-      indexCta: "Learn about the Whitzard Index",
+      indexCta: "Learn about the NUWA Index",
     },
     ecosystem: {
       eyebrow: "Open ecosystem",
@@ -226,9 +226,9 @@ export const homeCopy: Record<Locale, HomeCopy> = {
         "如何将风险理解转化为可部署的安全模型和运行时控制？",
       ],
       cta: "探索女娲实验室",
-      indexTitle: "白泽指数",
+      indexTitle: "NUWA Index",
       indexBody: "一个持续观测和比较前沿 AI 风险的研究数据项目，而非安全性排行榜。",
-      indexCta: "了解白泽指数",
+      indexCta: "了解NUWA Index",
     },
     ecosystem: {
       eyebrow: "开源生态",

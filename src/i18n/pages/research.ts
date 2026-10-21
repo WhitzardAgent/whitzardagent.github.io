@@ -31,7 +31,7 @@ export type ResearchCopy = {
     featuredLead: string;
     all: string;
     source: string;
-    kinds: { all: string; label: string; brandCover: string; readBlog: string };
+    kinds: { all: string; label: string; brandCover: string; readBlog: string; typeLabel: string; allTypes: string; accepted: string; reports: string };
     filters: { searchLabel: string; searchPlaceholder: string; topicLabel: string; yearLabel: string; memberLabel: string; allTopics: string; allYears: string; allMembers: string; reset: string; noResults: string; tagLabel: string; filterByTag: string; removeTag: string; allTags: string; tagHint: string; results: string; figureSource: string; typeLabels: Record<"conference" | "journal" | "preprint" | "report" | "position", string> };
     linkLabels: { paper: string; pdf: string; code: string; project: string };
     recognitionEyebrow: string;
@@ -127,7 +127,7 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       featuredLead: "Five research programs defining frontier risk and practical control.",
       all: "Research index",
       source: "Original source",
-      kinds: { all: "All", label: "Research content type", brandCover: "NUWA Frontier AI Safety Lab brand cover", readBlog: "Read the blog" },
+      kinds: { all: "All", label: "Research content type", brandCover: "NUWA Frontier AI Safety Lab brand cover", readBlog: "Read the blog", typeLabel: "Publication type", allTypes: "All publications", accepted: "Published / accepted papers", reports: "Preprints / technical reports" },
       filters: { searchLabel: "Search", searchPlaceholder: "Search title, author, or topic", topicLabel: "Theme", yearLabel: "Year", memberLabel: "Member", allTopics: "All themes", allYears: "All years", allMembers: "All members", reset: "Reset", noResults: "No research matches these filters.", tagLabel: "Tags", filterByTag: "Filter by tag", removeTag: "Remove tag", allTags: "Browse all tags", tagHint: "Match any selected tag. Combine with other filters to narrow results.", results: "results", figureSource: "Paper figure", typeLabels: { conference: "Conference", journal: "Journal", preprint: "Preprint", report: "Report", position: "Position paper" } },
       linkLabels: { paper: "Paper", pdf: "PDF", code: "Code", project: "Project" },
       recognitionEyebrow: "RECOGNITION",
@@ -257,7 +257,7 @@ export const researchCopy: Record<Locale, ResearchCopy> = {
       featuredLead: "五项代表性工作，连接前沿风险、智能体防护与系统安全。",
       all: "成果索引",
       source: "原文",
-      kinds: { all: "全部", label: "研究内容类型", brandCover: "女娲前沿 AI 安全实验室品牌封面", readBlog: "阅读解读" },
+      kinds: { all: "全部", label: "研究内容类型", brandCover: "女娲前沿 AI 安全实验室品牌封面", readBlog: "阅读解读", typeLabel: "成果类型", allTypes: "全部成果", accepted: "已发表 / 已接收论文", reports: "预印本 / 技术报告" },
       filters: { searchLabel: "搜索", searchPlaceholder: "搜索标题、作者或主题", topicLabel: "主题", yearLabel: "年份", memberLabel: "成员", allTopics: "全部主题", allYears: "全部年份", allMembers: "全部成员", reset: "重置", noResults: "没有符合条件的研究成果", tagLabel: "标签", filterByTag: "筛选标签", removeTag: "移除标签", allTags: "浏览全部标签", tagHint: "匹配任一所选标签，并与其他筛选条件组合。", results: "项成果", figureSource: "论文主图", typeLabels: { conference: "会议论文", journal: "期刊论文", preprint: "预印本", report: "报告", position: "立场论文" } },
       linkLabels: { paper: "论文", pdf: "PDF", code: "代码", project: "项目" },
       recognitionEyebrow: "荣誉与认可",

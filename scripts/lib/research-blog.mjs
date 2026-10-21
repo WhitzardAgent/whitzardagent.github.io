@@ -5,9 +5,9 @@ import { build } from "esbuild";
 
 export const researchBlogRoot = join("src", "content", "research-blog");
 
-export async function loadResearchAssets() {
+async function loadData(file, exportName) {
   const result = await build({
-    entryPoints: ["src/data/generated/researchAssets.ts"],
+    entryPoints: [file],
     bundle: true,
     format: "esm",
     platform: "node",
@@ -15,7 +15,18 @@ export async function loadResearchAssets() {
   });
   const source = result.outputFiles[0]?.text;
   if (!source) throw new Error("Unable to load generated research assets");
-  return (await import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}`)).researchAssets;
+  return (await import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}`))[exportName];
+}
+export const loadResearchAssets = () => loadData("src/data/generated/researchAssets.ts", "researchAssets");
+export const loadResearchInfrastructure = () => loadData("src/data/generated/researchInfrastructure.ts", "researchInfrastructure");
+export const loadResearchHighlights = () => loadData("src/data/researchHighlights.ts", "researchHighlights");
+export const loadResearchMedia = () => loadData("src/data/researchMedia.ts", "selfReplicationMedia");
+
+export function validateResearchReference(data, researchSlugs, infrastructureSlugs) {
+  if (Boolean(data.researchSlug) === Boolean(data.infrastructureSlug)) return "reference exactly one researchSlug or infrastructureSlug";
+  if (data.researchSlug && !researchSlugs.has(data.researchSlug)) return `unknown researchSlug ${data.researchSlug}`;
+  if (data.infrastructureSlug && !infrastructureSlugs.has(data.infrastructureSlug)) return `unknown infrastructureSlug ${data.infrastructureSlug}`;
+  return undefined;
 }
 
 export function parseResearchBlogFile(source, file) {
