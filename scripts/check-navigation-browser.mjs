@@ -59,6 +59,7 @@ export async function checkNavigationBrowser(browser, baseUrl) {
         assert.equal(await toggle.getAttribute("aria-expanded"), "false");
         assert.equal(await toggle.evaluate(el => document.activeElement === el), true, "Escape restores trigger focus");
         await toggle.press("ArrowDown");
+        await page.waitForFunction(el => document.activeElement === el, await panel.locator("a").first().elementHandle());
         await last.focus();
         await page.keyboard.press("Tab");
         assert.equal(await toggle.getAttribute("aria-expanded"), "false", "Tab out dismisses the old menu");
