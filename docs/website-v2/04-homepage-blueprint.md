@@ -2,6 +2,8 @@
 
 ## V4.1 双产品与真实界面（当前基线）
 
+应用场景采用 [四类场景与安全价值](20-use-cases-and-security-value.md)：通用办公、开发运维、GUI 智能体、AI 工作流；每类呈现典型任务、安全维度 badge 与应用价值。
+
 按 [双产品方案](19-dual-products-and-static-evidence.md)，首页等权展示 AgentGuard 与 WhitzardGateway，模型服务置于下方。主按钮“了解产品”指向产品区。删除全部首页执行模拟；不加载其 React island。真实截图完整展示，1024px 以下单列。以下版本关于可展开或自动流程演示的要求已失效。
 
 ## V4 企业品牌首页（覆盖以下历史方案）

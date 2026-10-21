@@ -76,7 +76,7 @@ export async function checkProductsBrowser(browser, baseUrl) {
         assert.equal(await view.locator(".ag-controls__grid article:visible").count(), 3);
         if (options.javaScriptEnabled === false) {
           await view.goto(`${baseUrl}${prefix}/solutions`, { waitUntil: "domcontentloaded" });
-          assert.equal(await view.locator(".use-case-explorer__flow:visible").count(), 4);
+          assert.equal(await view.locator(".use-case-explorer__content:visible").count(), 4);
         }
       }
     } finally { await fallback.close(); }

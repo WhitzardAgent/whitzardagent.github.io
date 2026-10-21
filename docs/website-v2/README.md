@@ -46,3 +46,4 @@
 ## 当前产品展示补充
 
 - [19｜双产品展示与静态产品证据](19-dual-products-and-static-evidence.md)：WhitzardGateway、首页等权展位、全站模拟演示撤下及本地验收。
+- [20｜企业应用场景与安全价值](20-use-cases-and-security-value.md)：四类场景、双语安全维度、产品职责及验收。

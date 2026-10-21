@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "../../i18n/config";
 import { companyCopy } from "../../i18n/pages/company";
+import "../../styles/use-cases.css";
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const copy = companyCopy[locale].solutions;
@@ -12,7 +13,7 @@ const copy = companyCopy[locale].solutions;
   <div class="home-applications__panels">
     {copy.scenarios.map((item, index) => <article id={`home-case-panel-${index}`} class="home-applications__panel" aria-labelledby={`home-case-tab-${index}`}>
       <header><span>{item.index}</span><h3>{item.title}</h3></header>
-      <dl><div><dt>{copy.explorer.objective}</dt><dd>{item.objective}</dd></div><div><dt>{copy.explorer.boundary}</dt><dd>{item.boundary}</dd></div><div><dt>{copy.explorer.outcome}</dt><dd>{item.outcome}</dd></div></dl>
+      <dl><div><dt>{copy.explorer.tasks}</dt><dd>{item.tasks}</dd></div><div><dt>{copy.explorer.securityDimensions}</dt><dd><ul class="security-dimensions">{item.securityDimensions.map(dimension => <li>{dimension}</li>)}</ul></dd></div><div><dt>{copy.explorer.value}</dt><dd>{item.value}</dd></div></dl>
     </article>)}
   </div>
 </home-applications>

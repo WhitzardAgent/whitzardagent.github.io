@@ -37,13 +37,13 @@ export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(new URL("/", baseUrl).href, { waitUntil: "domcontentloaded" });
     await page.waitForFunction(() => document.querySelector("home-applications")?.getAttribute("data-enhanced") === "desktop");
-    const firstTab = page.getByRole("tab", { name: /数据与知识智能体/ });
+    const firstTab = page.getByRole("tab", { name: /通用办公/ });
     await firstTab.click();
     await firstTab.press("ArrowRight");
-    assert.match(await page.locator("home-applications [aria-selected=true]").innerText(), /开发与运维智能体/);
+    assert.match(await page.locator("home-applications [aria-selected=true]").innerText(), /开发运维/);
     assert.equal(await page.locator(".home-applications__panel:visible").count(), 1);
     await page.locator("home-applications [aria-selected=true]").press("End");
-    assert.match(await page.locator("home-applications [aria-selected=true]").innerText(), /多智能体平台/);
+    assert.match(await page.locator("home-applications [aria-selected=true]").innerText(), /AI 工作流/);
     await page.keyboard.press("Tab");
     assert.ok(await page.getByRole("tabpanel").evaluate(panel => panel === document.activeElement), "keyboard reaches selected use-case content");
     await page.setViewportSize({ width: 390, height: 844 });

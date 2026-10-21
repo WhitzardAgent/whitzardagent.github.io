@@ -158,3 +158,15 @@ NUWA Index 是风险观察和研究数据项目，当前仅展示“建设中 / 
 | 团队权限与运行防护 | Access policies and runtime safeguards | 权限及安全检查 |
 | 参考费用 | Estimated costs | 与实际账单区分 |
 | 控制要求 | Control requirements | 应用场景中的要求，不是已实现结果 |
+
+## 企业应用场景（2026-10-21）
+
+| 中文 | English | 用法 |
+| --- | --- | --- |
+| 通用办公 | Office productivity | 检索、文档、邮件与协作 |
+| 开发运维 | Development & operations | 代码、命令、环境与资源 |
+| GUI 智能体 | Computer-use agents | 浏览器、桌面、移动应用的场景类别 |
+| AI 工作流 | AI workflows | Dify 等为说明中的示例 |
+| 典型任务 | Typical tasks | 替代本场景模块中的“业务目标” |
+| 安全维度 | Security dimensions | 静态标签，不表示通过验证或已受保护 |
+| 应用价值 | Business value | 商业用途和安全目标，不承诺零风险 |

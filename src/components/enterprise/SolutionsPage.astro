@@ -5,6 +5,7 @@ import { localizedPath } from "../../i18n/config";
 import type { CompanyCopy } from "../../i18n/pages/company";
 import UseCaseBoundaryExplorer from "./UseCaseBoundaryExplorer";
 import "../../styles/company.css";
+import "../../styles/use-cases.css";
 
 interface Props { locale: Locale; copy: CompanyCopy["solutions"] }
 const { locale, copy } = Astro.props;
@@ -33,6 +34,19 @@ const agentGuardPath = localizedPath("/agentguard", locale);
       <div><p>{copy.valueBody}</p><a href={agentGuardPath}>{copy.secondary} →</a></div>
     </div>
   </section>
+
+  <section class="section use-case-controls"><div class="site-container">
+    <h2 class="section-title">{copy.controlsTitle}</h2>
+    <div class="use-case-controls__list">{copy.scenarios.map(item => <article id={`use-case-${item.index}`}>
+      <header><span>{item.index}</span><h3>{item.title}</h3></header>
+      <ul class="security-dimensions">{item.securityDimensions.map(dimension => <li>{dimension}</li>)}</ul>
+      <div class="use-case-controls__products">
+        <div><h4>AgentGuard</h4><p>{item.controls.agentguard}</p><a href={agentGuardPath}>AgentGuard →</a></div>
+        <div><h4>WhitzardGateway</h4><p>{item.controls.gateway}</p><a href={localizedPath("/gateway", locale)}>WhitzardGateway →</a></div>
+      </div>
+    </article>)}</div>
+    <p class="use-case-controls__scope">{copy.controlScope}</p>
+  </div></section>
 
   <section class="section solution-journey">
     <div class="site-container">

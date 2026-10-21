@@ -70,7 +70,7 @@ const softwareSchema = {
   </section>
 
   <AgentGuardShowcase locale={locale} copy={copy.demo} />
-  <section class="section ag-product-use-cases"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "应用场景" : "USE CASES"}</p><h2 class="section-title">{locale === "zh" ? "保护业务中的智能体任务" : "Protect agents in business workflows"}</h2><div>{companyCopy[locale].solutions.scenarios.map(item=><a href={localizedPath("/solutions",locale)}><h3>{item.title}</h3><p>{item.objective}</p><span>{locale === "zh" ? "了解场景" : "Explore use case"} →</span></a>)}</div></div></section>
+  <section class="section ag-product-use-cases"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "应用场景" : "USE CASES"}</p><h2 class="section-title">{locale === "zh" ? "保护业务中的智能体任务" : "Protect agents in business workflows"}</h2><div>{companyCopy[locale].solutions.scenarios.map(item=><a href={localizedPath(`/solutions#use-case-${item.index}`,locale)}><h3>{item.title}</h3><p>{item.tasks}</p><p>{item.value}</p><span>{locale === "zh" ? "了解场景" : "Explore use case"} →</span></a>)}</div></div></section>
 
   <section class="section ag-controls" aria-labelledby="ag-controls-title">
     <div class="site-container"><header class="ag-section-head"><h2 id="ag-controls-title" class="section-title">{copy.controls.title}</h2><p>{copy.controls.body}</p></header>

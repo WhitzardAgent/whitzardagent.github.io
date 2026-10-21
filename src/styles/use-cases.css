@@ -1,0 +1,21 @@
+/* Shared labels describe security requirements, not product status. */
+.security-dimensions{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.security-dimensions li{max-width:100%;padding:7px 11px;border:1px solid var(--case-badge-border,#cbdad4);border-radius:6px;background:var(--case-badge-bg,#edf3ef);color:var(--case-badge-text,#245953);font-size:13px;line-height:1.55;overflow-wrap:break-word}
+.home-applications{--case-badge-border:#476570;--case-badge-bg:#1b3845;--case-badge-text:#dbebe6}
+.use-case-explorer__content{display:grid;gap:24px;margin:24px 0 0}
+.use-case-explorer__content>div+div{border-top:1px solid var(--wz-hairline);padding-top:24px}
+.use-case-explorer__content dt{color:var(--nw-deep-jade);font-size:13px;margin-bottom:12px}
+.use-case-explorer__content dd{margin:0;font-size:16px;line-height:1.85;color:var(--wz-body)}
+.use-case-explorer__panel h2{font-size:22px;font-weight:500;color:var(--wz-ink);margin:8px 0 20px}
+.use-case-controls{background:#edf2ee}
+.use-case-controls__list{display:grid;gap:40px;margin-top:40px}
+.use-case-controls__list>article{border-top:1px solid var(--wz-hairline);padding-top:28px;scroll-margin-top:120px}
+.use-case-controls__list header{display:flex;gap:18px;align-items:center;margin-bottom:20px}
+.use-case-controls__list header>span{color:var(--nw-deep-jade);font:13px var(--font-mono)}
+.use-case-controls__list h3{margin:0;color:var(--wz-ink);font-size:28px;font-weight:500}
+.use-case-controls__products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;margin-top:24px}
+.use-case-controls__products h4{margin:0 0 12px;font-size:20px;color:var(--wz-xuan);font-weight:600}
+.use-case-controls__products p{font-size:16px;line-height:1.85;margin:0 0 16px}
+.use-case-controls__products a{color:var(--nw-deep-jade);font-size:14px;text-decoration:none}
+.use-case-controls__scope{max-width:900px;margin:40px 0 0;padding-top:24px;border-top:1px solid var(--wz-hairline);color:var(--wz-muted);font-size:14px;line-height:1.8}
+@media(max-width:700px){.use-case-controls__products{grid-template-columns:1fr;gap:24px}.use-case-controls__list h3{font-size:24px}.use-case-explorer__panel+.use-case-explorer__panel{border-top:1px solid var(--wz-hairline);margin-top:28px;padding-top:28px}}
