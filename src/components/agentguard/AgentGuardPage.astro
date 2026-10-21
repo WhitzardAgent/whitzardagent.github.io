@@ -5,9 +5,6 @@ import { localizedPath } from "../../i18n/config";
 import type { AgentGuardCopy } from "../../i18n/pages/agentguard";
 import { supportedFrameworks } from "../../data/supportedFrameworks";
 import { storyPageCopy } from "../../data/agentguardStory";
-import AgentGuardSystemMap from "./AgentGuardSystemMap";
-import UnifiedSecurityInfluenceEngine from "./UnifiedSecurityInfluenceEngine";
-import AgentGuardRiskSimulator from "./AgentGuardRiskSimulator";
 import AgentGuardShowcase from "./AgentGuardShowcase.astro";
 import DeploymentArchitecture from "./DeploymentArchitecture";
 import { companyIdentity } from "../../data/companyIdentity";
@@ -75,19 +72,10 @@ const softwareSchema = {
   <AgentGuardShowcase locale={locale} copy={copy.demo} />
   <section class="section ag-product-use-cases"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "应用场景" : "USE CASES"}</p><h2 class="section-title">{locale === "zh" ? "保护业务中的智能体任务" : "Protect agents in business workflows"}</h2><div>{companyCopy[locale].solutions.scenarios.map(item=><a href={localizedPath("/solutions",locale)}><h3>{item.title}</h3><p>{item.objective}</p><span>{locale === "zh" ? "了解场景" : "Explore use case"} →</span></a>)}</div></div></section>
 
-  <section class="section story-section story-section--frost" id="system-map">
-    <div class="site-container story-section__head"><div><p class="eyebrow">{story.map.eyebrow}</p><h2 class="section-title">{story.map.title}</h2></div><p>{story.map.body}</p></div>
-    <div class="site-container"><AgentGuardSystemMap locale={locale} density="full" client:visible /></div>
-  </section>
-
-  <section class="section story-section story-section--xuan" id="engine">
-    <div class="site-container story-section__head"><div><p class="eyebrow">{story.engine.eyebrow}</p><h2 class="section-title">{story.engine.title}</h2></div><p>{story.engine.body}</p></div>
-    <div class="site-container"><UnifiedSecurityInfluenceEngine locale={locale} density="full" client:visible /></div>
-  </section>
-
-  <section class="section story-section" id="runtime">
-    <div class="site-container story-section__head"><div><p class="eyebrow">{story.simulator.eyebrow}</p><h2 class="section-title">{story.simulator.title}</h2></div><p>{story.simulator.body}</p></div>
-    <div class="site-container"><AgentGuardRiskSimulator locale={locale} density="full" client:visible /></div>
+  <section class="section ag-controls" aria-labelledby="ag-controls-title">
+    <div class="site-container"><header class="ag-section-head"><h2 id="ag-controls-title" class="section-title">{copy.controls.title}</h2><p>{copy.controls.body}</p></header>
+      <div class="ag-controls__grid">{copy.controls.items.map((item, index) => <article id={item.id}><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+    </div>
   </section>
 
   <section class="section ag-editions" id="enterprise">

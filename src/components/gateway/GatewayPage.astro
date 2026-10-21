@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { localizedPath, type Locale } from "../../i18n/config";
+import type { GatewayCopy } from "../../i18n/pages/gateway";
+import "../../styles/gateway.css";
+interface Props { locale: Locale; copy: GatewayCopy }
+const { locale, copy } = Astro.props;
+const path = (value: string) => localizedPath(value, locale);
+---
+<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/gateway">
+  <section class="gateway-hero">
+    <div class="site-container">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <p class="gateway-wordmark">WhitzardGateway</p>
+      <h1>{copy.product.titleSegments ? copy.product.titleSegments.map(segment => <span class="brand-phrase">{segment}</span>) : copy.product.title}</h1>
+      <p class="gateway-lead">{copy.product.body}</p>
+      <div class="gateway-actions"><a class="button button--primary" href={path("/waitlist")} data-umami-event="waitlist-cta-click">{copy.primary} →</a><a class="button button--secondary" href={path("/contact")}>{copy.secondary}</a></div>
+    </div>
+  </section>
+  <section class="gateway-interface site-container" aria-label={copy.screenshot.caption}>
+    <figure>
+      <a href="/assets/gateway/sign-in-original.png" target="_blank" rel="noreferrer" aria-label={copy.screenshot.original}>
+        <img src="/assets/gateway/sign-in-1600.webp" srcset="/assets/gateway/sign-in-800.webp 800w, /assets/gateway/sign-in-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 80px), 1360px" alt={copy.screenshot.alt} width="2684" height="1636" fetchpriority="high" decoding="async" />
+      </a>
+      <figcaption><span>{copy.screenshot.caption}</span><a href="/assets/gateway/sign-in-original.png" target="_blank" rel="noreferrer">{copy.screenshot.original} ↗</a></figcaption>
+    </figure>
+  </section>
+  <section class="section gateway-capabilities"><div class="site-container">
+    <h2 class="section-title">{copy.capabilitiesTitle}</h2>
+    <div class="gateway-columns">{copy.capabilities.map((item, index) => <article><span class="gateway-number">0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+  </div></section>
+  <section class="section gateway-scenarios"><div class="site-container gateway-scenarios__layout">
+    <h2 class="section-title">{copy.scenariosTitle}</h2>
+    <div>{copy.scenarios.map((item, index) => <article><span class="gateway-number">0{index + 1}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></article>)}</div>
+  </div></section>
+  <section class="section gateway-access"><div class="site-container">
+    <h2 class="section-title">{copy.access.title}</h2><p>{copy.access.body}</p><p>{copy.access.roadmap}</p>
+    <div class="gateway-actions"><a class="button button--primary" href={path("/waitlist")} data-umami-event="waitlist-cta-click">{copy.primary} →</a><a class="text-link" href={path("/contact")}>{copy.secondary} →</a></div>
+  </div></section>
+</BaseLayout>

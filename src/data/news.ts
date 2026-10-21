@@ -35,7 +35,7 @@ export const newsTypeLabels: Record<Locale, Record<NewsType, string>> = {
   zh: {
     Research: "研究",
     Company: "公司动态",
-    Ecosystem: "开源生态",
+    Ecosystem: "开放生态",
     Event: "活动",
     Media: "媒体",
     Update: "更新",
@@ -45,8 +45,8 @@ export const newsTypeLabels: Record<Locale, Record<NewsType, string>> = {
 export const newsItems: NewsItem[] = [
   {
     title: {
-      en: "Fudan Baize ranks second globally and first among universities in AI attack-defense",
-      zh: "AI攻防全球第二、高校第一！复旦白泽以“效能美学”跻身世界第一梯队",
+      en: "Fudan Baize CyberGym evaluation results",
+      zh: "复旦白泽 CyberGym 评测结果",
     },
     date: "2026-08-14",
     type: "Media",
@@ -58,7 +58,7 @@ export const newsItems: NewsItem[] = [
     sourceLanguage: "zh",
     summary: {
       en: "A Chinese report notes that Fudan Baize's Whitzard agent reached a 91.2% success rate on CyberGym, ranking second globally and first among universities.",
-      zh: "报道显示，国际 AI 安全基准 CyberGym 最新榜单中，复旦白泽智能体 Whitzard 以 91.2% 成功率位列全球第二、高校第一。",
+      zh: "2026 年 8 月报道记录，复旦白泽智能体 Whitzard 在该次 CyberGym 评测中取得 91.2% 成功率，位列全球第二、高校第一。",
     },
   },
   {
@@ -76,7 +76,7 @@ export const newsItems: NewsItem[] = [
     sourceLanguage: "en",
     summary: {
       en: "NUWA's first public research essay on making frontier AI risk evaluation more scientific, evidence-based, and operational.",
-      zh: "女娲实验室首篇公开研究文章，讨论如何让前沿 AI 风险评测更科学、可验证并可落地。",
+      zh: "女娲实验室首篇公开研究文章，讨论基于证据与可执行实验的前沿 AI 风险评测方法。",
     },
     featured: true,
   },
@@ -113,7 +113,7 @@ export const newsItems: NewsItem[] = [
     sourceLanguage: "en",
     summary: {
       en: "NUWA Frontier AI Safety Lab launches with support from Whitzard.",
-      zh: "女娲实验室作为白泽（Whitzard）背后的前沿安全研究引擎正式发布。",
+      zh: "女娲实验室由白泽发起并支持，开展前沿 AI 风险研究与治理。",
     },
     body: {
       en: "NUWA Frontier AI Safety Lab launches with support from Whitzard. NUWA focuses on transparent, open infrastructure and benchmarks for frontier AI safety evaluation and governance.\n\nThe lab studies frontier AI risks including autonomy risks, deception, scheming, and loss of control, while developing open evaluation frameworks, benchmarks, technical notes, and governance evidence for safe and controllable AI.",

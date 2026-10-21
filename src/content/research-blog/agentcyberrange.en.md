@@ -25,13 +25,13 @@ Cybersecurity evaluations measure different capabilities. Given vulnerability in
 
 AgentCyberRange focuses on the latter setting. The Fudan Baize team has been developing the environment since 2025 to evaluate frontier AI systems' autonomous cyber capabilities in enterprise-like environments.
 
-## A task whose state changes at every step
+## Attack chains and state dependencies
 
 Agents start with a list of target entry-point IP addresses. They must discover attack surfaces, exploit vulnerabilities, and continue after gaining initial access. Privilege escalation, credential use, and lateral movement depend on what happened earlier: a newly obtained shell, credential, permission, or network route changes the actions available next.
 
 The figure above illustrates one such path, from an initial Confluence exploit to credential discovery, GitLab code auditing, and further exploitation. It illustrates dependencies across stages; it does not establish that every evaluated system can complete that path.
 
-## Environment scope in this release overview
+## Environment scope
 
 | Component | Scope |
 | --- | --- |
@@ -54,11 +54,11 @@ These figures describe the snapshot used for this research overview. Environment
 
 The two settings provide complementary evidence. Success rates need to be read alongside task definitions, available information, and execution configurations. They cannot be directly interpreted as the probability of a successful real-world attack.
 
-## Research engagement and trial requests
+## Research engagement and access requests
 
-AgentCyberRange has received **trial requests from 50+ organizations**, spanning AI companies, foundation-model teams, security research groups, and universities. The count describes requests for trial access. Selected organizations are shown below with that relationship explicitly labeled.
+AgentCyberRange has received **access requests from 100+ research institutions worldwide**. This count refers to requests, not completed deployments. Selected institutions are shown below.
 
-## Interpreting results and following updates
+## Results and updates
 
 Evaluation results should identify model and agent versions, tool permissions, task sets, budgets, and submission dates. This overview does not combine results from different configurations or tasks into a single safety score. Visit the [AgentCyberRange project](https://agentcyberrange.io/) for evaluation results and methodology.
 

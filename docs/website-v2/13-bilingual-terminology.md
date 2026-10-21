@@ -14,7 +14,8 @@
 | 实验室职责 | 前沿 AI 风险研究与治理 | Frontier AI risk research and governance | NUWA 页面定位 |
 | 研究使命 | 为全球 AI 治理提供风险证据与公共产品 | Shared Risk Evidence and Public Goods for the World | 必须保持原文 |
 | 研究统一入口 | Research | Research | 中文与英文使用相同入口名称 |
-| 研究论文分类 | Publication | Publication | 已发表或已接收论文，以仓库的发表类型与会议／期刊记录为依据 |
+| 研究成果入口 | Publications | Publications | 合集包含论文、预印本与技术报告，页内保留准确类型 |
+| 已发表论文类型 | Publication | Publication | 已发表或已接收论文，以仓库的发表类型与会议／期刊记录为依据 |
 | 技术报告分类 | Technical Report | Technical Report | 未正式发表的预印本与技术报告 |
 | 研究解读分类 | Blogs | Blogs | 替代原 Research Blog 列表；保留 Markdown 管线和详情 URL |
 
@@ -101,15 +102,17 @@
 - `研究基础设施 / research infrastructure`：支持可执行、可复现研究的环境、平台和工具。
 - `公共产品 / public goods`：能够被广泛复用并支持共同安全决策的开放研究资源。
 
-白泽指数是风险观察和研究数据项目，不使用“安全版跑分榜”之类的消费型表达；需要对照说明时使用“安全性排行榜 / safety leaderboard”。
+NUWA Index 是风险观察和研究数据项目，当前仅展示“建设中 / Under construction”；不使用“安全版跑分榜”之类的消费型表达。
 
-白泽指数中的 `已发表评测证据 / published evaluation evidence` 指原始论文或项目已经公开、且保留方法边界的观察结果；它与未来的 `正式指数记录 / formal index record` 分开存储和呈现。`多维风险证据 / multidimensional risk evidence` 不得缩写为单一的 `安全总分 / overall safety score`。
+历史指数数据中的 `已发表评测证据 / published evaluation evidence` 与未来的 `正式指数记录 / formal index record` 分开存储，不在建设中页面重新启用。`多维风险证据 / multidimensional risk evidence` 不得缩写为单一的 `安全总分 / overall safety score`。
 
 ## 中文编辑原则
 
 - 使用正式、清晰的现代书面汉语，避免营销腔和过度抽象的四字短语堆叠。
 - 中文与拉丁缩写之间留空格：`AI 风险`、`API 接口`、`AgentGuard 企业版`。
 - 标题不以句号结尾。
+- 标题优先使用简洁主题短语，如“核心问题”“研究方向”“模型来源”；不以问答式标题或无必要的数量前缀代替信息主题。正文保留技术解释、方法范围和限制。
+- 创始团队仅戴嘉润、潘旭东，不展示导师关系。页脚使用用户确认的“由复旦大学系统软件与安全实验室孵化 / Incubated by Fudan University Security Lab”，不扩展其他关系。
 - 先说明对象与行动，再说明价值；避免“赋能、重塑、引领、颠覆”等无证据动词。
 - 数字、排名、性能、部署和影响力必须指向仓库中的公开来源。
 
@@ -123,11 +126,12 @@
 
 ## 已弃用表达
 
+`NUWA Lab` 可用作导航短称及用户确认的参与标签；首次正式介绍、SEO 与结构化数据使用全称。
+
 以下表达不得作为当前访客可见文案：
 
 - NVWA
 - Nvwa
-- NUWA Lab
 - Nuwa Lab
 - Nuwa Frontier AI Safety Lab
 - 女娲简报
@@ -143,3 +147,14 @@
 - 安全版跑分榜
 
 历史 URL 可以继续作为重定向入口，但不得把历史拼写重新带入页面标题、正文、SEO 或结构化数据。
+
+## WhitzardGateway 补充术语（2026-10-21）
+
+| 中文 | English | 用法 |
+| --- | --- | --- |
+| WhitzardGateway | WhitzardGateway | 正式产品名；不使用目录名 SafeGateway |
+| 智能体安全网关 | AI agent security gateway | 产品类别 |
+| 模型统一接入 | Unified model access | 不暗示任意客户端或协议兼容 |
+| 团队权限与运行防护 | Access policies and runtime safeguards | 权限及安全检查 |
+| 参考费用 | Estimated costs | 与实际账单区分 |
+| 控制要求 | Control requirements | 应用场景中的要求，不是已实现结果 |

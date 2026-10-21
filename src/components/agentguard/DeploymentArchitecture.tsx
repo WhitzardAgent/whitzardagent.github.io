@@ -40,7 +40,6 @@ export default function DeploymentArchitecture({ locale, nodes, modes }: Props) 
             <span>{nodes[3]}</span>
             <span>{nodes[4]}</span>
           </div>
-          <span className="ag-trust__signal" aria-hidden="true"></span>
         </section>
 
         <aside className="ag-trust__matrix">

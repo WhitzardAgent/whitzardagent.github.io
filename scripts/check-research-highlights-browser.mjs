@@ -21,7 +21,7 @@ export async function checkResearchHighlightsBrowser(browser, baseUrl) {
         assert.equal(await page.locator('link[rel="canonical"]').getAttribute("href"), `https://whitzard.tech${prefix}${path === "/" && locale === "en" ? "/" : path}`);
         if (["/", "/nuwa", "/nuwa/research"].includes(path)) {
           assert.equal(await page.locator('[data-highlight-id="agentcyberrange"]').count(), 1);
-          assert.match(text, /50\+/);
+          assert.match(text, /100\+/);
         }
         if (path === "/") {
           assert.equal(await page.locator('.home-latest a[href*="/nuwa/blog/agentcyberrange"]').count(), 0);

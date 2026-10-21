@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 
 export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024, 900, 808, 390], interactions = true } = {}) {
-  const routes = ["/", "/agentguard", "/models", "/nuwa", "/open-ecosystem", "/nuwa/whitzard-index", "/about", "/nuwa/research", "/news", "/waitlist", "/login", "/solutions"];
+  const routes = ["/", "/agentguard", "/gateway", "/models", "/nuwa", "/open-ecosystem", "/nuwa/whitzard-index", "/about", "/nuwa/research", "/news", "/waitlist", "/login", "/solutions"];
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   // Third-party analytics must not make local functional checks nondeterministic.
   await context.route("https://cloud.umami.is/**", route => route.abort());
@@ -55,7 +55,7 @@ export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024
 
     await page.goto(new URL("/waitlist", baseUrl).href, { waitUntil: "domcontentloaded" });
     await page.locator("astro-island:not([ssr])").first().waitFor({ state: "attached" });
-    await page.getByRole("button", { name: "继续" }).click();
+    await page.getByRole("button", { name: /^继续/ }).click();
     assert.equal(await page.getByRole("alert").count(), 4, "required fields prevent advancing");
 
     await page.goto(new URL("/", baseUrl).href, { waitUntil: "domcontentloaded" });
@@ -103,10 +103,9 @@ export async function checkBrandBrowser(browser, baseUrl, { widths = [1440, 1024
   try {
     await reducedPage.goto(new URL("/", baseUrl).href, { waitUntil: "domcontentloaded" });
     assert.equal(await reducedPage.locator(".brand-hero>.brand-artwork").evaluate(el => getComputedStyle(el).animationName), "none");
-    await reducedPage.locator(".home-runtime-details summary").click();
-    assert.equal(await reducedPage.locator(".boundary-flow__agentguard").evaluate(el => getComputedStyle(el).display), "grid", "runtime control gates retain their layout");
-    assert.equal(await reducedPage.locator(".boundary-flow__decision").evaluate(el => getComputedStyle(el).display), "grid", "runtime outcome retains its layout");
-    assert.match(await reducedPage.locator(".boundary-flow").innerText(), /安全处置完成|字段脱敏/);
+    assert.equal(await reducedPage.locator(".home-runtime-details, .boundary-flow").count(), 0, "simulated execution is removed");
+    assert.equal(await reducedPage.locator(".home-product-pair > article").count(), 2);
+    assert.equal(await reducedPage.locator(".home-product-screen").first().evaluate(el => getComputedStyle(el).transform), "none", "real screenshots remain undistorted");
   } finally {
     await reducedContext.close();
   }

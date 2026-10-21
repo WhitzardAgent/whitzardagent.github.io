@@ -132,6 +132,7 @@ function isGroupActive(children?: { href: string }[]) {
     private button: HTMLButtonElement | null = null;
     private panel: HTMLElement | null = null;
     private aborter = new AbortController();
+    private closeTimers = new Map<HTMLElement, number>();
 
     connectedCallback() {
       this.button = this.querySelector(".menu-toggle");
@@ -154,7 +155,10 @@ function isGroupActive(children?: { href: string }[]) {
       }, { signal: this.aborter.signal });
       this.querySelectorAll<HTMLAnchorElement>(".mobile-navigation a").forEach((link) => link.addEventListener("click", () => this.close(false), { signal: this.aborter.signal }));
 
-      // Desktop dropdown: click toggle + hover + escape
+      // Desktop: hover preview, click to keep open, delayed pointer dismissal.
+      document.addEventListener("pointerdown", (event) => {
+        if (!(event.target instanceof Element) || !event.target.closest("[data-dropdown]")) this.closeAllDropdowns();
+      }, { signal: this.aborter.signal });
       this.querySelectorAll<HTMLElement>("[data-dropdown]").forEach((group) => {
         const toggle = group.querySelector<HTMLButtonElement>("[data-dropdown-toggle]");
         const panel = group.querySelector<HTMLElement>("[data-dropdown-panel]");
@@ -162,23 +166,34 @@ function isGroupActive(children?: { href: string }[]) {
         group.dataset.dropdownEnhanced = "true";
 
         const open = () => {
-          this.closeAllDropdowns();
+          this.cancelDropdownClose(group);
+          this.closeAllDropdowns(group);
           toggle.setAttribute("aria-expanded", "true");
           group.classList.add("is-open");
         };
         const close = () => {
-          toggle.setAttribute("aria-expanded", "false");
-          group.classList.remove("is-open");
+          this.closeDropdown(group);
         };
 
         toggle.addEventListener("click", (e) => {
           e.preventDefault();
-          toggle.getAttribute("aria-expanded") === "true" ? close() : open();
+          if (group.dataset.dropdownPinned === "true") close();
+          else { open(); group.dataset.dropdownPinned = "true"; }
         }, { signal: this.aborter.signal });
 
-        group.addEventListener("mouseenter", open, { signal: this.aborter.signal });
-        group.addEventListener("mouseleave", close, { signal: this.aborter.signal });
+        group.addEventListener("pointerenter", (event) => {
+          if (event.pointerType === "mouse") open();
+        }, { signal: this.aborter.signal });
+        group.addEventListener("pointerleave", (event) => {
+          if (event.pointerType !== "mouse" || group.dataset.dropdownPinned === "true" || group.contains(document.activeElement)) return;
+          this.cancelDropdownClose(group);
+          this.closeTimers.set(group, window.setTimeout(() => {
+            this.closeTimers.delete(group);
+            if (!group.matches(":hover") && !group.contains(document.activeElement) && group.dataset.dropdownPinned !== "true") close();
+          }, 240));
+        }, { signal: this.aborter.signal });
         group.addEventListener("focusin", () => {
+          this.cancelDropdownClose(group);
           if (!group.classList.contains("is-open")) open();
         }, { signal: this.aborter.signal });
         group.addEventListener("focusout", (e) => {
@@ -209,14 +224,30 @@ function isGroupActive(children?: { href: string }[]) {
       });
     }
 
-    private closeAllDropdowns() {
+    private cancelDropdownClose(group: HTMLElement) {
+      const timer = this.closeTimers.get(group);
+      if (timer !== undefined) window.clearTimeout(timer);
+      this.closeTimers.delete(group);
+    }
+
+    private closeDropdown(group: HTMLElement) {
+      this.cancelDropdownClose(group);
+      group.classList.remove("is-open");
+      delete group.dataset.dropdownPinned;
+      group.querySelector<HTMLButtonElement>("[data-dropdown-toggle]")?.setAttribute("aria-expanded", "false");
+    }
+
+    private closeAllDropdowns(except?: HTMLElement) {
       this.querySelectorAll<HTMLElement>("[data-dropdown]").forEach((g) => {
-        g.classList.remove("is-open");
-        g.querySelector<HTMLButtonElement>("[data-dropdown-toggle]")?.setAttribute("aria-expanded", "false");
+        if (g !== except) this.closeDropdown(g);
       });
     }
 
-    disconnectedCallback() { this.aborter.abort(); }
+    disconnectedCallback() {
+      this.aborter.abort();
+      this.closeTimers.forEach(timer => window.clearTimeout(timer));
+      this.closeTimers.clear();
+    }
 
     private mobileFocusables() {
       return [this.button, ...Array.from(this.panel?.querySelectorAll<HTMLElement>("a[href],button:not([disabled])") ?? [])]

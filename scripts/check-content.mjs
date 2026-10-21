@@ -118,9 +118,14 @@ for (const legacy of ["构建智能体安全基础设施", "我们的工作原�
   if (aboutHtml.includes(legacy)) violations.push(`dist/about/index.html: legacy company copy must not remain: ${legacy}`);
 }
 if ((aboutHtml.match(/复旦大学副研究员/g) ?? []).length !== 2) violations.push("dist/about/index.html: Dai and Pan must both be 复旦大学副研究员");
-if ((aboutHtml.match(/复旦大学助理研究员/g) ?? []).length !== 1) violations.push("dist/about/index.html: Hong must be 复旦大学助理研究员");
-if ((aboutHtml.match(/师从<a class="team-advisor-link" href="https:\/\/min-yang-fudan\.github\.io\/"/g) ?? []).length !== 3) violations.push("dist/about/index.html: all three biographies must link Prof. Min Yang inline");
-if (/<h3>杨珉教授<\/h3>/.test(aboutHtml)) violations.push("dist/about/index.html: Prof. Min Yang must not appear as a team member");
+for (const [locale, expectedNames] of [["zh", ["戴嘉润", "潘旭东"]], ["en", ["Dr. Jiarun Dai", "Dr. Xudong Pan"]]]) {
+  const html = await readFile(locale === "zh" ? "dist/about/index.html" : "dist/en/about/index.html", "utf8");
+  const teamSection = html.match(/<section class="section company-team">([\s\S]*?)<\/section>/)?.[1] ?? "";
+  const names = [...teamSection.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map(match => match[1]);
+  if (JSON.stringify(names) !== JSON.stringify(expectedNames)) violations.push(`about/${locale}: only the two confirmed founders may appear`);
+  if (/师从|杨珉|Prof\. Min Yang|under the supervision|team-advisor-link|ghong\.site|Strategic.*Partner|战略.*合作/.test(teamSection)) violations.push(`about/${locale}: removed partner/advisor presentation must not return`);
+  if (!teamSection.includes("CEO") || !teamSection.includes("CTO")) violations.push(`about/${locale}: founder roles must remain`);
+}
 
 const decodeText = (value) => value
   .replace(/<[^>]*>/g, " ")
@@ -137,7 +142,22 @@ const approvedExtendedHeadings = new Set([
   "为全球 AI 治理提供风险证据与公共产品",
   "为全球 AI 治理 提供风险证据 与公共产品",
 ]);
-const coreRoutes = ["", "agentguard", "solutions", "models", "nuwa", "open-ecosystem", "news", "about", "contact", "waitlist", "login"];
+const coreRoutes = ["", "agentguard", "gateway", "solutions", "models", "nuwa", "open-ecosystem", "news", "about", "contact", "waitlist", "login"];
+for (const [route, zhHeadings, enHeadings] of [
+  ["nuwa", ["核心问题", "研究方向"], ["Core questions", "Research areas"]],
+  ["agentguard", ["行动边界控制"], ["Action boundary control"]],
+  ["models", ["模型来源"], ["Model provenance"]],
+  ["about", ["创始团队"], ["Founders"]],
+]) for (const [prefix, headings] of [["", zhHeadings], ["en", enHeadings]]) {
+  const file = join("dist", prefix, route, "index.html");
+  const html = await readFile(file, "utf8");
+  const rendered = [...html.matchAll(/<h[1-3]\b[^>]*>([\s\S]*?)<\/h[1-3]>/g)].map(match => decodeText(match[1]));
+  for (const heading of headings) if (!rendered.includes(heading)) violations.push(`${file}: missing approved rendered heading: ${heading}`);
+}
+for (const file of htmlFiles) {
+  const html = await readFile(file, "utf8");
+  if (html.includes('class="site-footer"') && (!html.includes('class="site-container site-footer__links"') || !html.includes('href="https://security.fudan.edu.cn/"'))) violations.push(`${file}: missing independent footer links`);
+}
 for (const route of coreRoutes) {
   const file = join("dist", route, "index.html");
   const content = await readFile(file, "utf8");
@@ -172,11 +192,12 @@ for (const route of coreRoutes) {
 const homeHtml = withoutEmbeddedCode(await readFile("dist/index.html", "utf8"));
 const homeRequirements = [
   "守其边界，行其智能",
-  "研究驱动",
+  "产品与服务",
   "可信边界",
   "可核实证据",
   "最小必要干预",
   "AgentGuard",
+  "WhitzardGateway",
   "女娲实验室",
   "NUWA Index",
   "最新动态",
@@ -205,7 +226,7 @@ for (const marker of ["/news/nuwa-lab-launch", "/en/news/nuwa-lab-launch"]) {
   if (!content.includes(marker)) violations.push(`${file}: internal news links must use localized detail routes`);
 }
 const homeSource = await readFile("src/components/home/HomePage.astro", "utf8");
-for (const component of ["AgentGuardRiskSimulator", "AgentGuardSystemMap", "UnifiedSecurityInfluenceEngine", "AgentGuardOperationsCenter"]) {
+for (const component of ["AgentGuardBoundaryFlow", "AgentGuardRiskSimulator", "AgentGuardSystemMap", "UnifiedSecurityInfluenceEngine", "AgentGuardOperationsCenter"]) {
   if (homeSource.includes(component)) violations.push(`src/components/home/HomePage.astro: homepage must not import or render ${component}`);
 }
 for (const marker of ['id="products"', 'id="applications"', 'id="research"', 'id="ecosystem"', '/assets/agentguard/dashboard.png']) {
@@ -300,12 +321,13 @@ for (const [file, content] of [["dist/agentguard/index.html", agentGuardZh], ["d
 }
 
 const agentGuardRequirements = [
-  ["dist/agentguard/index.html", agentGuardZh, ["保护对象", "覆盖智能体行动的完整上下文", "智能体执行与控制拓扑", "从任务与身份到外部行动", "统一安全影响引擎", "细粒度管控行为链、思维链和数据链", "客户数据外发", "长期 Memory 写入", "Shell 与生产提交", "数据流", "授权流", "行动影响", "从策略配置到审计闭环", "执行模拟", "融入现有安全体系", "补充智能体运行时上下文", "IAM", "DLP", "API Gateway", "SIEM"]],
-  ["dist/en/agentguard/index.html", agentGuardEn, ["Cover the complete context of agent action", "RUNTIME ARCHITECTURE", "Agent Execution and Control Topology", "UNIFIED SECURITY INFLUENCE ENGINE", "Control behavior, reasoning, and data chains", "Customer data egress", "Long-term memory write", "Shell and production commit", "Data flow", "Authorization flow", "Action impact", "From policy to audit.", "Run simulation", "WORKS WITH YOUR SECURITY STACK", "Add agent-aware runtime context", "IAM", "DLP", "API Gateway", "SIEM"]],
+  ["dist/agentguard/index.html", agentGuardZh, ["保护对象", "覆盖智能体行动的完整上下文", "行动边界控制", "控制位置", "策略配置", "审计记录", "补充智能体运行时上下文", "IAM", "DLP", "API Gateway", "SIEM"]],
+  ["dist/en/agentguard/index.html", agentGuardEn, ["Cover the complete context of agent action", "Action boundary control", "Control points", "Policy configuration", "Audit records", "Add agent-aware runtime context", "IAM", "DLP", "API Gateway", "SIEM"]],
 ];
 for (const [file, content, required] of agentGuardRequirements) {
-  for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard V3.6 marker: ${marker}`);
-  for (const legacy of ["retrieve_doc", "send_email_to", "admin@example.com", "alice@example.com"]) {
+  for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard product content: ${marker}`);
+  for (const id of ["system-map", "engine", "runtime"]) if (!content.includes(`id="${id}"`)) violations.push(`${file}: missing legacy anchor ${id}`);
+  for (const legacy of ["retrieve_doc", "send_email_to", "admin@example.com", "alice@example.com", "执行模拟", "Run simulation", "risk-simulator", "ag-system-map__", "influence-engine__"]) {
     if (content.includes(legacy)) violations.push(`${file}: legacy two-node product demo must not remain: ${legacy}`);
   }
 }
@@ -357,7 +379,7 @@ for (const visual of ["/assets/research/self-replication-figure-1.png", "/assets
 }
 for (const [route, html] of Object.entries(ownershipPages)) {
   if (!["agentguard", "home"].includes(route) && html.includes("/assets/agentguard/dashboard.png")) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: AgentGuard Dashboard belongs on product or homepage`);
-  if (route !== "about" && html.includes("team-advisor-link")) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: complete academic biographies belong only on the about page`);
+  if (html.includes("team-advisor-link")) violations.push(`dist/${ownershipRouteMap[route] || ""}/index.html: advisor emphasis must not be rendered`);
 }
 if (aboutHtml.includes("brand-architecture") || aboutHtml.includes("智能体运行时安全控制层")) violations.push("dist/about/index.html: product architecture belongs on the AgentGuard page");
 

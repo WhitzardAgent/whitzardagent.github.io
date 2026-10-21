@@ -20,6 +20,7 @@ export type UiCopy = {
     company: string;
     legalLine: string;
     researchLine: string;
+    incubation: string;
   };
 };
 
@@ -32,8 +33,7 @@ export const ui: Record<Locale, UiCopy> = {
         icon: "products",
         children: [
           { href: "/agentguard", label: "AgentGuard" },
-          { href: "/models", label: "Model Services" },
-          { href: "/solutions", label: "Use Cases" },
+          { href: "/gateway", label: "WhitzardGateway" },
         ],
       },
       {
@@ -64,6 +64,7 @@ export const ui: Record<Locale, UiCopy> = {
       company: "Company",
       legalLine: "Secure autonomy, by design.",
       researchLine: "NUWA provides shared risk evidence and public goods for global AI governance.",
+      incubation: "Incubated by Fudan University Security Lab",
     },
   },
   zh: {
@@ -74,8 +75,7 @@ export const ui: Record<Locale, UiCopy> = {
         icon: "products",
         children: [
           { href: "/agentguard", label: "AgentGuard" },
-          { href: "/models", label: "模型服务" },
-          { href: "/solutions", label: "应用场景" },
+          { href: "/gateway", label: "WhitzardGateway" },
         ],
       },
       {
@@ -106,6 +106,7 @@ export const ui: Record<Locale, UiCopy> = {
       company: "公司",
       legalLine: "守其边界，行其智能。",
       researchLine: "女娲实验室为全球 AI 治理提供风险证据与公共产品。",
+      incubation: "由复旦大学系统软件与安全实验室孵化",
     },
   },
 };

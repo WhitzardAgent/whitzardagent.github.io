@@ -12,7 +12,7 @@ const entries = [
 ---
 <section id="research-entry" class="section research-entry">
   <div class="site-container">
-    <div class="research-entry__head"><div><p class="eyebrow">{locale === "zh" ? "研究与解读" : "RESEARCH & INSIGHTS"}</p><h2 class="section-title">{locale === "zh" ? "探索女娲研究" : "Explore NUWA research"}</h2></div></div>
+    <div class="research-entry__head"><div><p class="eyebrow">{locale === "zh" ? "研究与解读" : "RESEARCH & INSIGHTS"}</p><h2 class="section-title">{locale === "zh" ? "研究成果" : "Research outputs"}</h2></div></div>
     <div class="research-entry__grid">{entries.map((entry, index) => <a href={entry.href}><span>0{index + 1}</span><h3>{entry.title}</h3><p>{entry.body}</p><span aria-hidden="true">→</span></a>)}</div>
   </div>
 </section>

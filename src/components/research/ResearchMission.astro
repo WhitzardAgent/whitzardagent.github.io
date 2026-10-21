@@ -12,7 +12,7 @@ const { locale } = Astro.props;
       <p class="eyebrow">{locale === "zh" ? "研究使命" : "RESEARCH MISSION"}</p>
       <h2>{lockedBrandCopy.researchMission[locale]}</h2>
     </div>
-    <p>{locale === "zh" ? "女娲实验室由白泽发起并支持。我们围绕三项长期主题组织研究，使风险定义、技术证据与治理决策能够相互连接。" : "NUWA Frontier AI Safety Lab was initiated and is supported by Whitzard. Three durable themes connect risk definitions, technical evidence, and governance decisions."}</p>
+    <p>{locale === "zh" ? "女娲实验室由白泽发起并支持，围绕前沿风险、智能体与模型安全、风险评测与治理开展研究。" : "NUWA Frontier AI Safety Lab was initiated and is supported by Whitzard. Its research covers frontier risk, agent and model safety, and risk evaluation and governance."}</p>
   </div>
   <div class="site-container research-mission__programs">
     {researchPrograms.map((program, index) => <article>

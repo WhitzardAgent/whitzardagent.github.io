@@ -20,8 +20,9 @@ export type ResearchHighlight = {
 };
 
 /** Editorial snapshot from the supplied AgentCyberRange-v1.docx.
- * The user selected the conservative 50+ trial-request count from its logo wall.
- * These are trial requests, not a claim of deployment or partnership.
+ * Impact count updated by the owner on 2026-10-21 to 100+ global research institutions.
+ * This newer owner-confirmed count supersedes the document's 50+ logo-wall caption.
+ * These are access requests, not a claim of deployment or partnership.
  */
 export const researchHighlights: ResearchHighlight[] = [{
   id: "agentcyberrange",
@@ -35,8 +36,8 @@ export const researchHighlights: ResearchHighlight[] = [{
     alt: { zh: "攻击链示例：Confluence 初始利用、凭证发现、GitLab 代码审计与后续漏洞利用", en: "Example attack chain: initial Confluence exploitation, credential discovery, GitLab code auditing, and subsequent exploitation" },
     caption: { zh: "长程任务示例：前一步获得的权限与信息，会改变后续攻击路径。", en: "A long-horizon task: access and information gained in one step shape the next." },
   },
-  impact: { zh: "50+ 家单位申请试用", en: "Trial requests from 50+ organizations" },
-  organizationLabel: { zh: "部分试用申请单位", en: "Selected organizations requesting trial access" },
+  impact: { zh: "100+ 家全球研究机构申请使用", en: "Access requests from 100+ research institutions worldwide" },
+  organizationLabel: { zh: "部分申请使用机构", en: "Selected institutions requesting access" },
   projectUrl: "https://agentcyberrange.io/",
   sourceUrl: "https://mp.weixin.qq.com/s/giumeYfpF0tmQ6CKK5KiCg",
   sourceLabel: { zh: "原始报道", en: "Original report · Chinese" },

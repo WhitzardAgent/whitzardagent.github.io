@@ -24,6 +24,7 @@ const copy = ui[locale];
     <div class="site-footer__column">
       <p class="site-footer__label">{copy.footer.products}</p>
       <a href={localizedPath("/agentguard", locale)}>AgentGuard</a>
+      <a href={localizedPath("/gateway", locale)}>WhitzardGateway</a>
       <a href={localizedPath("/models", locale)}>{locale === "zh" ? "模型服务" : "Model Services"}</a>
       <a href={localizedPath("/solutions", locale)}>{locale === "zh" ? "应用场景" : "Use Cases"}</a>
       <a href={localizedPath("/waitlist", locale)} data-umami-event="waitlist-cta-click">{copy.primaryCta}</a>
@@ -46,6 +47,9 @@ const copy = ui[locale];
       <a href={localizedPath("/about", locale)}>{locale === "zh" ? "关于我们" : "About Us"}</a>
       <a href={`mailto:${links.email}`}>{links.email}</a>
     </div>
+  </div>
+  <div class="site-container site-footer__links">
+    <a href={links.fudanSecurityLab} target="_blank" rel="noreferrer">{copy.footer.incubation} ↗</a>
   </div>
   <div class="site-container site-footer__bottom">
     <p>© {new Date().getFullYear()} {companyIdentity.legalName} · Whitzard</p><p>{copy.footer.legalLine}</p>
