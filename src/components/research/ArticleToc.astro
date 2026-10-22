@@ -1,0 +1,74 @@
+---
+import type { Locale } from "../../i18n/config";
+interface Props { headings: Array<{ depth: number; slug: string; text: string }>; locale: Locale }
+const { headings, locale } = Astro.props;
+const title = locale === "zh" ? "本文目录" : "On this page";
+---
+<article-toc class="rb-toc">
+  <nav class="rb-toc__desktop" aria-label={title}>
+    <p>{title}</p>
+    <ol>{headings.map(item => <li data-depth={item.depth}><a href={`#${item.slug}`} data-section={item.slug}>{item.text}</a></li>)}</ol>
+  </nav>
+  <details class="rb-toc__mobile">
+    <summary>{title}<span aria-hidden="true">＋</span></summary>
+    <nav aria-label={title}><ol>{headings.map(item => <li data-depth={item.depth}><a href={`#${item.slug}`} data-section={item.slug}>{item.text}</a></li>)}</ol></nav>
+  </details>
+</article-toc>
+<script>
+  class ArticleToc extends HTMLElement {
+    private controller?: AbortController;
+    private frame = 0;
+    connectedCallback() {
+      this.controller?.abort();
+      this.controller = new AbortController();
+      const signal = this.controller.signal;
+      const links = Array.from(this.querySelectorAll<HTMLAnchorElement>("a[data-section]"));
+      const headings = [...new Set(links.map(link => link.dataset.section!))].map(id => document.getElementById(id)).filter((node): node is HTMLElement => Boolean(node));
+      headings.forEach(heading => { heading.tabIndex = -1; });
+      const update = () => {
+        this.frame = 0;
+        const header = document.querySelector("[data-site-header]")?.getBoundingClientRect().height ?? 80;
+        const anchorOffset = headings[0] ? parseFloat(getComputedStyle(headings[0]).scrollMarginTop) || header + 40 : header + 40;
+        let current = headings[0]?.id;
+        for (const heading of headings) if (heading.getBoundingClientRect().top <= Math.max(header + 24, anchorOffset) + 8) current = heading.id;
+        links.forEach(link => {
+          if (link.dataset.section === current) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+        const active = this.querySelector<HTMLElement>('.rb-toc__desktop a[aria-current="location"]');
+        const list = this.querySelector<HTMLElement>(".rb-toc__desktop ol");
+        if (active && list && list.clientHeight) {
+          const itemRect = active.getBoundingClientRect(), listRect = list.getBoundingClientRect();
+          if (itemRect.top < listRect.top + 8) list.scrollTop -= listRect.top + 8 - itemRect.top;
+          else if (itemRect.bottom > listRect.bottom - 8) list.scrollTop += itemRect.bottom - listRect.bottom + 8;
+        }
+      };
+      const schedule = () => { if (!this.frame) this.frame = requestAnimationFrame(update); };
+      const restoreFragment = () => {
+        // ClientRouter may restore a stale top-of-page position before scrollend.
+        // Honor an explicit article fragment after its initial restoration.
+        if (window.scrollY < 2 && location.hash) {
+          let id = "";
+          try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+          const target = headings.find(heading => heading.id === id);
+          if (target && target.getBoundingClientRect().top > 140) target.scrollIntoView({ behavior: "instant", block: "start" });
+        }
+        schedule();
+      };
+      window.addEventListener("scroll", schedule, { passive: true, signal });
+      window.addEventListener("resize", schedule, { signal });
+      window.addEventListener("hashchange", schedule, { signal });
+      window.addEventListener("pageshow", restoreFragment, { signal });
+      document.addEventListener("astro:page-load", restoreFragment, { signal });
+      document.fonts.ready.then(() => { if (this.isConnected) restoreFragment(); });
+      links.forEach(link => link.addEventListener("click", () => {
+        const details = link.closest("details");
+        if (details) details.open = false;
+        requestAnimationFrame(() => { document.getElementById(link.dataset.section!)?.focus({ preventScroll: true }); schedule(); });
+      }, { signal }));
+      update();
+    }
+    disconnectedCallback() { this.controller?.abort(); cancelAnimationFrame(this.frame); this.frame = 0; }
+  }
+  if (!customElements.get("article-toc")) customElements.define("article-toc", ArticleToc);
+</script>

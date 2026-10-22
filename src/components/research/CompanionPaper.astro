@@ -3,22 +3,25 @@ import type { Locale } from "../../i18n/config";
 import type { ResearchBlogEntry } from "../../lib/researchBlog";
 import { companionResearch, companionInfrastructure } from "../../lib/researchBlog";
 
-interface Props { entry: ResearchBlogEntry; locale: Locale }
-const { entry, locale } = Astro.props;
+interface Props { entry: ResearchBlogEntry; locale: Locale; inline?: boolean }
+const { entry, locale, inline = false } = Astro.props;
 const research = companionResearch(entry);
 const project = companionInfrastructure(entry);
 const sourceLinks = research?.links ?? [];
+const code = entry.data.codeUrl ?? sourceLinks.find(link => link.kind === "code")?.url;
+const resources = [
+  { href: entry.data.originalUrl, label: project ? (locale === "zh" ? "访问项目" : "Visit the project") : (locale === "zh" ? "查看原文" : "View original") },
+  ...(entry.data.arxivUrl && entry.data.arxivUrl !== entry.data.originalUrl ? [{ href: entry.data.arxivUrl, label: "arXiv" }] : []),
+  ...(code ? [{ href: code, label: "Code" }] : []),
+];
 ---
 
-<aside class="rb-companion" aria-labelledby="companion-title">
+{inline ? <nav class="rb-resource-links" aria-label={locale === "zh" ? "研究资源" : "Research resources"}>{resources.map(item => <a href={item.href} target="_blank" rel="noreferrer">{item.label} ↗</a>)}</nav> : <section class="rb-companion" aria-labelledby="companion-title">
   <p class="eyebrow">{project ? (locale === "zh" ? "项目与资源" : "Project & resources") : (locale === "zh" ? "论文原文" : "Original research")}</p>
   <h2 id="companion-title">{entry.data.originalTitle}</h2>
   {research && <p>{research.authors.join(" · ")} · {research.venue} · {research.year}</p>}
   {project && <p>{project.description[locale]}</p>}
   <div class="rb-companion__links">
-    <a class="button button--primary" href={entry.data.originalUrl} target="_blank" rel="noreferrer">{project ? (locale === "zh" ? "访问项目" : "Visit the project") : (locale === "zh" ? "查看原文" : "View original")} ↗</a>
-    {entry.data.arxivUrl && entry.data.arxivUrl !== entry.data.originalUrl && <a class="button button--secondary" href={entry.data.arxivUrl} target="_blank" rel="noreferrer">arXiv ↗</a>}
-    {entry.data.codeUrl && <a class="button button--secondary" href={entry.data.codeUrl} target="_blank" rel="noreferrer">Code ↗</a>}
-    {!entry.data.codeUrl && sourceLinks.find((link) => link.kind === "code") && <a class="button button--secondary" href={sourceLinks.find((link) => link.kind === "code")!.url} target="_blank" rel="noreferrer">Code ↗</a>}
+    {resources.map(item => <a class="text-link" href={item.href} target="_blank" rel="noreferrer">{item.label} ↗</a>)}
   </div>
-</aside>
+</section>}

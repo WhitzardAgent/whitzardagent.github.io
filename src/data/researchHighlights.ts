@@ -20,6 +20,8 @@ export type ResearchHighlight = {
 };
 
 /** Editorial snapshot from the supplied AgentCyberRange-v1.docx.
+ * Result figure supplied separately by the owner on 2026-10-22.
+ * Resolved placements use the paired article cover as the current image source.
  * Impact count updated by the owner on 2026-10-21 to 100+ global research institutions.
  * This newer owner-confirmed count supersedes the document's 50+ logo-wall caption.
  * These are access requests, not a claim of deployment or partnership.
@@ -30,11 +32,11 @@ export const researchHighlights: ResearchHighlight[] = [{
   order: 1,
   placements: ["home", "nuwa", "research", "news"],
   image: {
-    src: "/assets/research/agentcyberrange/attack-flow.webp",
-    thumbnail: "/assets/research/agentcyberrange/attack-flow-1280.webp",
-    width: 2510, height: 532,
-    alt: { zh: "攻击链示例：Confluence 初始利用、凭证发现、GitLab 代码审计与后续漏洞利用", en: "Example attack chain: initial Confluence exploitation, credential discovery, GitLab code auditing, and subsequent exploitation" },
-    caption: { zh: "长程任务示例：前一步获得的权限与信息，会改变后续攻击路径。", en: "A long-horizon task: access and information gained in one step shape the next." },
+    src: "/assets/research/agentcyberrange/results-comparison.webp",
+    thumbnail: "/assets/research/agentcyberrange/results-comparison-1280.webp",
+    width: 2372, height: 972,
+    alt: { zh: "模型在 Web 利用与后渗透任务中的结果对比", en: "Model results on web exploitation and post-exploitation tasks" },
+    caption: { zh: "Web 利用与后渗透任务的结果对比。不同任务阶段应分别解读。", en: "Results for web exploitation and post-exploitation tasks. Interpret each task stage separately." },
   },
   impact: { zh: "100+ 家全球研究机构申请使用", en: "Access requests from 100+ research institutions worldwide" },
   organizationLabel: { zh: "部分申请使用机构", en: "Selected institutions requesting access" },

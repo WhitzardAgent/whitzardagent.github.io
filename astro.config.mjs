@@ -2,9 +2,12 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
+import rehypeResearchFigures from "./src/lib/rehypeResearchFigures.mjs";
+import { unified } from "@astrojs/markdown-remark";
 
 export default defineConfig({
   site: "https://whitzard.tech",
+  markdown: { processor: unified({ rehypePlugins: [rehypeResearchFigures] }) },
   integrations: [
     mdx(),
     sitemap({

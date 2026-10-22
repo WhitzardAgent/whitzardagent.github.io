@@ -8,7 +8,7 @@ authors:
   - "{{AUTHOR}}"
 summary: "{{SUMMARY_ZH}}"
 tags: []
-{{REFERENCE_LINE}}# 封面可添加 cover: { src: /assets/..., alt: 图像说明, width: 1280, height: 720 }
+{{REFERENCE_LINE}}# 封面可添加 cover: { src: /assets/..., alt: 图像说明, caption: 独立图注, thumbnail: /assets/...-1280.webp, width: 1280, height: 720 }
 originalTitle: "{{ORIGINAL_TITLE}}"
 originalUrl: "{{ORIGINAL_URL}}"
 {{ARXIV_LINE}}featured: false
@@ -22,6 +22,24 @@ draft: true
 ## 方法与证据
 
 请解释实验设计、数据、评测环境与主要证据。
+
+图示写法示例（替换路径、图注与来源后，移出代码块）：
+
+```markdown
+![描述图中比较的对象与指标](/assets/research/your-study/results.webp "图 1｜结果图：说明比较对象、任务条件与读图要点。")
+
+图示来源：[论文或项目原文](https://example.org/)。
+
+用一两段文字解释图中最重要的观察，以及它支持的结论。
+
+![方法结构或任务轨迹](/assets/research/your-study/trajectory.webp "图 2｜轨迹图：说明关键步骤、依赖关系及图例。")
+
+图示来源：[论文或项目原文](https://example.org/)。
+
+解释关键依赖、分支或失败条件，不重复罗列图中的所有标签。
+```
+
+目录自动读取 H2、H3；无需手工维护目录。不同图示有不同解释价值，不必凑固定图片数量。
 
 ## 关键发现
 

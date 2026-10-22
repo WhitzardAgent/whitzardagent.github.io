@@ -8,15 +8,22 @@ import CompanionPaper from "./CompanionPaper.astro";
 import ResearchLogoWall from "./ResearchLogoWall.astro";
 import ResearchMediaWall from "./ResearchMediaWall.astro";
 import { researchHighlights } from "../../data/researchHighlights";
+import ArticleToc from "./ArticleToc.astro";
+import { researchFigureAsset } from "../../lib/researchFigureAssets.mjs";
 import "../../styles/research-blog.css";
 
 interface Props { entry: ResearchBlogEntry; locale: Locale; slug: string; pairedSlug?: string }
 const { entry, locale, slug, pairedSlug } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+const toc = headings.filter(item => item.depth === 2 || item.depth === 3);
 const published = entry.data.date.toISOString();
 const highlight = researchHighlights.find(item => item.articlePair === entry.data.pair);
 const cover = entry.data.cover;
+const coverInBody = cover && entry.body?.includes(cover.src);
+const coverAsset = cover ? await researchFigureAsset(cover.src) : undefined;
 const canonicalPath = `/nuwa/blog/${slug}`;
+const titleParts = entry.data.title.split("：");
+const separateName = locale === "zh" && titleParts.length > 1 && /[A-Za-z]/.test(titleParts[0]);
 const schema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -27,6 +34,7 @@ const schema = {
   author: entry.data.authors.map((name) => ({ "@type": "Person", name })),
   publisher: { "@type": "Organization", name: "NUWA Frontier AI Safety Lab" },
   mainEntityOfPage: `https://whitzard.tech${localizedPath(canonicalPath, locale)}`,
+  image: cover ? `https://whitzard.tech${cover.src}` : undefined,
 };
 ---
 
@@ -36,22 +44,28 @@ const schema = {
       <div class="site-container rb-article__header-grid">
         <div>
           <p class="eyebrow"><a href={`${localizedPath("/nuwa/research", locale)}?kind=blogs`}>Research · Blogs</a></p>
-          <h1>{entry.data.title}</h1>
+          <h1>{separateName ? <><span class="rb-title-name">{titleParts[0]}：</span>{titleParts.slice(1).join("：")}</> : entry.data.title}</h1>
         </div>
         <div class="rb-article__meta">
           <p>{entry.data.summary}</p>
           <dl>
             <div><dt>{locale === "zh" ? "发布" : "Published"}</dt><dd><time datetime={published}>{entry.data.date.toISOString().slice(0, 10)}</time></dd></div>
             <div><dt>{locale === "zh" ? "作者" : "Authors"}</dt><dd>{entry.data.authors.join(" · ")}</dd></div>
+            {entry.data.updated && <div><dt>{locale === "zh" ? "更新" : "Updated"}</dt><dd><time datetime={entry.data.updated.toISOString()}>{entry.data.updated.toISOString().slice(0, 10)}</time></dd></div>}
           </dl>
+          <CompanionPaper entry={entry} locale={locale} inline />
           {pairedSlug && <a class="text-link" href={localizedPath(`/nuwa/blog/${pairedSlug}`, locale === "zh" ? "en" : "zh")}>{locale === "zh" ? "Read in English" : "阅读中文版"} <span class="arrow">→</span></a>}
         </div>
       </div>
     </header>
-    {cover && <div class="site-container rb-cover"><figure><a href={cover.src} target="_blank" rel="noreferrer"><img src={cover.src} alt={cover.alt} width={cover.width} height={cover.height} decoding="async" /></a>{highlight && <figcaption>{highlight.image.caption[locale]}</figcaption>}</figure></div>}
-    <div class="site-container rb-article__layout">
-      <div class="rb-prose"><Content />{highlight && <><ResearchLogoWall highlight={highlight} locale={locale} />{highlight.media && <ResearchMediaWall locale={locale}/>}<p><a href={highlight.sourceUrl} target="_blank" rel="noreferrer">{highlight.sourceLabel[locale]} ↗</a></p></>}{entry.data.updated && <p class="rb-updated">{locale === "zh" ? "更新于" : "Updated"} <time datetime={entry.data.updated.toISOString()}>{entry.data.updated.toISOString().slice(0, 10)}</time></p>}</div>
-      <CompanionPaper entry={entry} locale={locale} />
+    <div class:list={["site-container rb-article__layout", { "rb-article__layout--toc": toc.length >= 3 }]}>
+      {toc.length >= 3 && <ArticleToc headings={toc} locale={locale} />}
+      <div class="rb-prose">
+        {cover && !coverInBody && <figure class="rb-cover rb-figure"><a href={coverAsset?.original ?? cover.src} target="_blank" rel="noreferrer"><img src={cover.src} srcset={coverAsset?.srcset} sizes="(max-width: 600px) calc(100vw - 40px), 1000px" alt={cover.alt} width={cover.width} height={cover.height} decoding="async" loading="lazy" /></a><figcaption><span>{cover.caption ?? cover.alt}</span><a href={coverAsset?.original ?? cover.src} target="_blank" rel="noreferrer">{locale === "zh" ? "查看原图" : "View original"} ↗</a></figcaption></figure>}
+        <Content />
+        {highlight && <><ResearchLogoWall highlight={highlight} locale={locale} />{highlight.media && <ResearchMediaWall locale={locale}/>}<p><a href={highlight.sourceUrl} target="_blank" rel="noreferrer">{highlight.sourceLabel[locale]} ↗</a></p></>}
+        <CompanionPaper entry={entry} locale={locale} />
+      </div>
     </div>
   </article>
 </BaseLayout>

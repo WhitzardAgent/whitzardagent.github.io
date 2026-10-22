@@ -3,7 +3,7 @@ import type { Locale } from "../i18n/config";
 
 export type ResearchKind = "" | "publications" | "publication" | "technical-report" | "blogs";
 export type ResearchFilterState = { q: string; topic: string; year: string; member: string; tags: string[]; kind?: ResearchKind };
-export type ResearchBlogCard = { id: string; title: string; summary: string; year: number; date?: string; authors: string[]; tags: ResearchTag[]; url: string; source: string; external: boolean; researchSlug?: string; cover?: { src: string; alt: string; width: number; height: number } };
+export type ResearchBlogCard = { id: string; title: string; summary: string; year: number; date?: string; authors: string[]; tags: ResearchTag[]; url: string; source: string; external: boolean; researchSlug?: string; cover?: { src: string; thumbnail?: string; alt: string; width: number; height: number } };
 export type ResearchTag = { id: string; en: string; zh: string; count?: number };
 export const emptyResearchFilters: ResearchFilterState = { q: "", topic: "", year: "", member: "", tags: [] };
 export const tagId = (value: string) => value.normalize("NFKC").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

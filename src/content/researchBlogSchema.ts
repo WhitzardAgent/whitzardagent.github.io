@@ -16,7 +16,7 @@ export const researchBlogSchema = z.object({
   originalUrl: z.url(),
   arxivUrl: z.url().optional(),
   codeUrl: z.url().optional(),
-  cover: z.object({ src: z.string().startsWith("/assets/"), alt: z.string().min(1), width: z.number().positive(), height: z.number().positive() }).optional(),
+  cover: z.object({ src: z.string().startsWith("/assets/"), alt: z.string().min(1), width: z.number().positive(), height: z.number().positive(), caption: z.string().min(1).optional(), thumbnail: z.string().startsWith("/assets/").optional() }).optional(),
   featured: z.boolean().default(false),
   draft: z.boolean().default(true),
 }).refine(data => Boolean(data.researchSlug) !== Boolean(data.infrastructureSlug), {

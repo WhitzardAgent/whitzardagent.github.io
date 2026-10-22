@@ -26,6 +26,12 @@ for (const entry of entries) {
   if (data.cover) {
     if (!data.cover.alt || !data.cover.width || !data.cover.height) errors.push(`${file}: cover requires alt, width and height`);
     await access(join("public", data.cover.src)).catch(() => errors.push(`${file}: missing cover asset ${data.cover.src}`));
+    if (data.cover.thumbnail) await access(join("public", data.cover.thumbnail)).catch(() => errors.push(`${file}: missing cover thumbnail ${data.cover.thumbnail}`));
+  }
+  const figureBody = body.replace(/```[\s\S]*?```/g, "");
+  for (const image of figureBody.matchAll(/!\[[^\]]*\]\((\/assets\/[^\s)]+)(?:\s+"([^"]+)")?\)/g)) {
+    await access(join("public", image[1])).catch(() => errors.push(`${file}: missing body figure ${image[1]}`));
+    if (!image[2]) errors.push(`${file}: research figures need a Markdown title as their caption: ${image[1]}`);
   }
   if (!body) errors.push(`${file}: article body is empty`);
   const pairEntries = byPair.get(data.pair) ?? [];
