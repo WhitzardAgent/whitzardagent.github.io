@@ -5,7 +5,7 @@ import { candidatePaths, releasedSnapshotErrors } from './lib/nuwa-index-release
 const base = process.argv[process.argv.indexOf('--base') + 1];
 if (!process.argv.includes('--base') || !base) throw new Error('Provide --base <trusted Git revision>.');
 const file = 'src/data/nuwa-index/catalogue.json';
-const before = JSON.parse(execFileSync('git', ['show', `${base}:${file}`], { encoding: 'utf8' }));
+const before = JSON.parse(execFileSync('git', ['show', `${base}:${file}`], { encoding: 'utf8', maxBuffer:64*1024*1024 }));
 const after = JSON.parse(await readFile(file, 'utf8'));
 const files = candidatePaths(base);
 const policy = factUpdatePolicy(before, after, files);
