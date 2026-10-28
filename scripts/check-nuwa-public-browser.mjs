@@ -1,7 +1,7 @@
 import assert from'node:assert/strict';import fs from'node:fs/promises';
 /** Accept a caller-supplied browser; the site does not add a Playwright runtime dependency. */
 export async function checkNuwaPublicBrowser(browser,base='http://127.0.0.1:4342',out='output/playwright/nuwa-public-launch'){
- await fs.mkdir(out,{recursive:true});const response=await fetch(base+'/nuwa/whitzard-index/release.json');assert.ok(response.ok());const release=await response.json();assert.ok(release.publication.state==='published');
+ await fs.mkdir(out,{recursive:true});const response=await fetch(base+'/nuwa/whitzard-index/release.json');assert.ok(response.ok);const release=await response.json();assert.ok(release.publication.state==='published');
  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});await context.route('https://cloud.umami.is/**',r=>r.abort());const page=await context.newPage(),errors=[],cases=[];page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(15000);
  try{
  for(const locale of ['zh','en'])for(const width of [390,808,1024,1280,1440]){
