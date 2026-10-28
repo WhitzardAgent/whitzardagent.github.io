@@ -10,7 +10,8 @@ for(const record of editions.records){const{contentHash,...payload}=record;if(di
 const base=process.env.NUWA_SNAPSHOT_BASE??(process.argv.includes('--base')?process.argv[process.argv.indexOf('--base')+1]:null);
 if(base){
  const actual=execFileSync('git',['rev-parse',base],{encoding:'utf8'}).trim();let before=null;
- try{before=JSON.parse(execFileSync('git',['show',`${actual}:src/data/nuwa-index/catalogue.json`],{encoding:'utf8',stdio:['ignore','pipe','pipe']}));}catch{if(actual!==publicRelease.bootstrapBaseRevision)errors.push('Missing trusted catalogue base: bootstrap must name the actual reviewed pre-launch revision');}
+ let exists=true;try{execFileSync('git',['cat-file','-e',`${actual}:src/data/nuwa-index/catalogue.json`],{stdio:'pipe'});}catch(error){if(error.status===128)exists=false;else throw error;}
+ if(exists)before=JSON.parse(execFileSync('git',['show',`${actual}:src/data/nuwa-index/catalogue.json`],{encoding:'utf8',maxBuffer:64*1024*1024,stdio:['ignore','pipe','pipe']}));else if(actual!==publicRelease.bootstrapBaseRevision)errors.push('Missing trusted catalogue base: bootstrap must name the actual reviewed pre-launch revision');
  if(before&&digest(before)!==digest(catalogue)&&before.snapshotId===catalogue.snapshotId)errors.push('Material changes need a new snapshot');
  errors.push(...await releasedSnapshotErrors(actual),...await releasedReadingEditionErrors(actual));
  console.log(before?'Validated publication against an existing committed catalogue baseline.':'Validated explicit bootstrap against the pre-launch commit; no fact-only gate pass is claimed.');
