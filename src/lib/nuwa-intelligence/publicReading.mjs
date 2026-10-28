@@ -8,6 +8,7 @@ export function validatePublicReading(catalogue,edition=bundle,manifest=release)
  const errors=[];
  if(edition.snapshotId!==catalogue.snapshotId||manifest.snapshotId!==catalogue.snapshotId)errors.push('Published reading snapshot mismatch');
  if(digest(edition)!==manifest.readingEditionHash)errors.push('Published reading content hash mismatch');
+ if(manifest.counts?.works!==catalogue.works.length||manifest.counts?.protocols!==catalogue.benchmarks.length||manifest.counts?.syntheses!==edition.analyses.length||manifest.counts?.recordObservations!==edition.works.flatMap(d=>d.observations??[]).length||manifest.counts?.rawResults!==catalogue.results.length)errors.push('Published summary counts differ from the catalogue or reading edition');
  if(edition.publication?.state!=='published'||!edition.publication.authorizationReference)errors.push('Publication consent missing');
  for(const [key,expected]of [['works',catalogue.works],['protocols',catalogue.benchmarks]])if(edition[key].length!==expected.length||new Set(edition[key].map(r=>r.id)).size!==expected.length||expected.some(r=>!edition[key].some(p=>p.id===r.id)))errors.push(`Published ${key} coverage mismatch`);
  if(/\/Users\/|\/Downloads\/|BEGIN (?:RSA|OPENSSH) PRIVATE KEY|data-private-dossier|DRAFT_NUWA_/.test(JSON.stringify(edition)))errors.push('Private material in public reading edition');

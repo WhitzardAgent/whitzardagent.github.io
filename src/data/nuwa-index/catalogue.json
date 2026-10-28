@@ -1,11 +1,11 @@
 {
   "schemaVersion": "5.2",
-  "snapshotId": "2026-10-28.1",
+  "snapshotId": "2026-10-28.2",
   "verifiedOn": "2026-10-28",
   "title": "NUWA Frontier AI Safety Index",
   "coverage": {
-    "en": "This snapshot indexes 155 research works across three research functions. Coverage, source reading, numerical extraction and editorial approval are recorded separately.",
-    "zh": "本快照收录 155 项研究，按三类研究功能组织。目录覆盖、来源阅读、数值提取和编辑批准分别记录。"
+    "en": "Research records are organized by research function. Catalogue coverage, source reading, numerical extraction and editorial review are recorded separately.",
+    "zh": "研究记录按研究功能组织。目录覆盖、来源阅读、数值提取和编辑复核分别记录。"
   },
   "sources": [
     {
