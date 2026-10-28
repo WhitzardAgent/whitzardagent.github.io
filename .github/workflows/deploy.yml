@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -20,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v7
@@ -31,13 +35,15 @@ jobs:
         run: npm ci
 
       - name: Validate content contracts
-        run: npm test && npm run check:terminology && npm run check:research-blog && npm run check
+        env:
+          NUWA_SNAPSHOT_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD' }}
+        run: npm test && npm run check:nuwa-index && npm run check:nuwa-publication && npm run check:terminology && npm run check:research-blog && npm run check
 
       - name: Build site
         run: npm run build
 
       - name: Validate rendered site
-        run: npm run check:content && npm run check:links
+        run: npm run check:content && npm run check:links && node scripts/check-nuwa-source-output.mjs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
@@ -45,6 +51,7 @@ jobs:
           path: "./dist"
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:

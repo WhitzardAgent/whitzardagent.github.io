@@ -1,0 +1,12 @@
+const clean=s=>String(s??'').normalize('NFKC').toLocaleLowerCase().replace(/\s+/g,' ').trim();
+const plain=s=>String(s??'').replace(/<[^>]*>/g,' ').replace(/!\[[^\]]*\]\([^)]*\)/g,' ').replace(/\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/[#*_`>|]/g,' ').replace(/\s+/g,' ').trim();
+export function buildSearchDocument(work,catalogue,{body={},dossier}={}){
+ const orgs=(work.contributions??[]).flatMap(c=>{const o=catalogue.organizations?.find(o=>o.id===c.organizationId);return o?[o.name.en,o.name.zh,...o.aliases]:[];});
+ const fields=[{kind:'title',weight:12,en:work.title,zh:work.title},{kind:'aliases',weight:10,en:[...(work.aliases??[]),...(work.authors??[]),...orgs].join(' '),zh:[...(work.aliases??[]),...(work.authors??[]),...orgs].join(' ')},{kind:'summary',weight:3,...work.summary},...Object.entries(work.note??{}).filter(([,v])=>v).map(([kind,value])=>({kind,weight:kind==='finding'?6:kind==='question'?7:3,...value})),{kind:'body',weight:1,en:plain(body.en),zh:plain(body.zh)}];
+ if(dossier)for(const locale of ['en','zh'])for(const [kind,value]of Object.entries(dossier[locale]??{}))fields.push({kind,weight:4,[locale]:plain(Array.isArray(value)?value.map(v=>typeof v==='string'?v:v.text??v.body??'').join(' '):typeof value==='string'?value:'')});
+ return {id:work.id,title:work.title,areas:work.areas,primaryFunction:work.primaryFunction,kind:work.kind,publicationDate:work.publicationDate,fields,searchText:fields.flatMap(f=>[f.en,f.zh]).filter(Boolean).join(' ')};
+}
+export function searchResearch(documents,query,locale='en'){
+ const terms=clean(query).split(/\s+/).filter(Boolean);if(!terms.length)return documents.map(doc=>({...doc,score:0,snippet:'',matchedField:''}));
+ return documents.flatMap(doc=>{const all=clean(doc.searchText);if(!terms.every(t=>all.includes(t)))return [];let score=0,best=null,bestScore=0;for(const field of doc.fields){const value=field[locale]||field.en||field.zh||'',normalized=clean(value),hits=terms.filter(t=>normalized.includes(t)).length,points=hits*field.weight;if(points){score+=points;if(points>bestScore&&field.kind!=='aliases'){best={value,kind:field.kind};bestScore=points;}}}const value=best?.value??doc.title,index=Math.max(0,clean(value).indexOf(terms[0])),start=Math.max(0,index-55),snippet=(start?'…':'')+value.slice(start,start+220)+(value.length>start+220?'…':'');return [{...doc,score,snippet,matchedField:best?.kind??'title'}];}).sort((a,b)=>b.score-a.score||String(b.publicationDate??'').localeCompare(String(a.publicationDate??''))||a.title.localeCompare(b.title));
+}

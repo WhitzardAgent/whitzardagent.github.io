@@ -1,0 +1,31 @@
+---
+import InstitutionByline from './InstitutionByline.astro';
+import type { ResearchWork } from '../../../data/nuwa-index/types';
+import type { Locale } from '../../../i18n/config';
+import { localizedPath } from '../../../i18n/config';
+import { catalogue, indexBase } from '../../../data/nuwa-index';
+import { knowledgeCopy } from '../../../i18n/pages/nuwaKnowledge';
+import { nuwaIndexCopy } from '../../../i18n/pages/nuwaIndex';
+import {loadResearchDossiers,readingStatus} from '../../../lib/nuwa-intelligence/researchReading.mjs';
+interface Props { work: ResearchWork; locale: Locale; filterable?: boolean }
+const { work:w, locale, filterable=false } = Astro.props;
+const c=knowledgeCopy[locale];
+const path=(tail='')=>localizedPath(`${indexBase}${tail}`,locale);
+const contributions=w.contributions.map(x=>({...x,org:catalogue.organizations.find(o=>o.id===x.organizationId)!}));
+const dimensions=[...new Set(catalogue.benchmarks.filter(p=>w.protocolIds.includes(p.id)).map(p=>p.primaryDimension))];
+const search=[w.title,...(w.tags??[]),...w.aliases,...w.authors,w.summary.en,w.summary.zh,w.note.question?.en??'',w.note.question?.zh??'',...contributions.flatMap(x=>[x.org.name.en,x.org.name.zh,...x.org.aliases])].join(' ');
+const dossier=loadResearchDossiers(catalogue).find((d:any)=>d.id===w.id),draft=dossier?.[locale];
+const en=locale==='en',reading=readingStatus(w,{dossier}),recordUrl=path(`/work/${w.id}`);
+const question=draft?.question??w.note.question?.[locale],finding=(typeof draft?.findings?.[0]==='string'?draft.findings[0]:draft?.takeaway)??w.note.finding?.[locale]??w.summary[locale];
+const scopeLabels:Record<string,string>=en?{question:'question',method:'method',finding:'findings',supports:'interpretation',limits:'limits',connections:'connections'}:{question:'问题',method:'方法',finding:'发现',supports:'解读',limits:'局限',connections:'关联'};
+const availableScope=reading.sections.filter((s:{id:string;available:boolean})=>s.available).map((s:{id:string})=>scopeLabels[s.id]).join(' / ');
+---
+<article class="nk-card" data-source-ids={[w.sourceId,w.attributionSourceId,...w.contributions.map(c=>c.sourceId)].filter(Boolean).join(' ')} data-scenario={catalogue.scenarioAssociations?.some(s=>s.workId===w.id)?'multi-agent':''} data-work-record={filterable || undefined} data-id={w.id} data-reading-scope={reading.id} data-title={w.title} data-areas={w.areas.join(' ')} data-tags={(w.tags??[]).join(' ')} data-functions={[w.primaryFunction,...w.secondaryFunctions.map(f=>f.function)].join(' ')} data-organizations={contributions.map(x=>x.organizationId).join(' ')} data-dimensions={dimensions.join(' ')} data-kind={w.kind} data-year={w.publicationDate?.slice(0,4) ?? ''} data-date={w.publicationDate ?? ''} data-updated={w.updatedOn} data-search={search} data-protocols={w.protocolIds.join(' ')}>
+  <div class="nk-card__meta"><a href={path(`/function/${w.primaryFunction}`)}>{catalogue.functions.find(f=>f.id===w.primaryFunction)!.label[locale]}</a><span>{c.kinds[w.kind]}</span></div>
+  <h3><a href={reading.hasSubstantiveContent?recordUrl:w.originalUrl} target={reading.hasSubstantiveContent?undefined:'_blank'} rel={reading.hasSubstantiveContent?undefined:'noreferrer'}>{w.title}<span aria-hidden="true"> {reading.hasSubstantiveContent?'→':'↗'}</span></a></h3>
+  <InstitutionByline contributions={w.contributions} locale={locale} unverified={Boolean(w.localReviewBatchId||w.contentEditionId)}/>
+  <time datetime={w.publicationDate ?? undefined}>{w.publicationDate ?? c.dateUnknown}</time>
+  <div class="nk-card__summary">{question&&question!==finding&&<p class="nk-card__question"><span>{en?'Question':'研究问题'}</span>{question}</p>}<p class="nk-card__finding"><span>{en?'Source summary':'来源摘要'}</span>{finding}</p><p class="nk-card__review" data-reading-status={reading.id}>{reading.label[locale]}{availableScope&&<> · {en?'Contains':'包含'}: {availableScope}</>}</p><p data-research-snippet hidden aria-live="polite"></p></div>
+  <div class="ni-tags">{(w.tags??[]).map(tag=><a href={`${path()}?view=research&tag=${tag}`}>{catalogue.researchTags?.find(t=>t.id===tag)?.label[locale]}</a>)}{w.areas.length ? w.areas.map(id=><a href={path(`/risk/${id}`)}>{catalogue.areas.find(a=>a.id===id)!.label[locale]}</a>) : <span>{c.crosscutting}</span>}{dimensions.map(d=><span>{nuwaIndexCopy[locale].dimensions[d].label}</span>)}</div>
+  <div class="nk-card__actions">{reading.hasSubstantiveContent&&<a class="nk-card__primary" href={recordUrl}>{en?'Read source note':'阅读来源笔记'} <span aria-hidden="true">→</span></a>}<a href={w.originalUrl} target="_blank" rel="noreferrer">{en?'Original source':'原始来源'} ↗</a>{!reading.hasSubstantiveContent&&<a href={recordUrl}>{en?'Bibliographic record':'书目记录'} →</a>}</div>
+</article>

@@ -1,0 +1,3 @@
+import {researchSupplement} from '../../../../../data/nuwa-index';
+export function getStaticPaths(){return researchSupplement?[...new Set<string>([...researchSupplement.dossiers.map((d:any)=>d.id),...researchSupplement.updates.map((d:any)=>d.id)])].map(id=>({params:{id},props:{id}})):[];}
+export function GET({props}:{props:{id:string}}){return Response.json({schemaVersion:'nuwa-record-evidence-1',batchId:researchSupplement.batchId,baseSnapshotId:researchSupplement.baseSnapshotId,publication:'published',dossier:researchSupplement.dossiers.find((d:any)=>d.id===props.id)??null,update:researchSupplement.updates.find((d:any)=>d.id===props.id)??null});}

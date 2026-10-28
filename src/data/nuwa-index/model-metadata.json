@@ -1,0 +1,2612 @@
+{
+  "schemaVersion": 1,
+  "updatedOn": "2026-10-27",
+  "dateConvention": "First verified public availability, including public preview; private evaluator access is not public release. API and weight events are separate.",
+  "models": [
+    {
+      "modelId": "kimi-k3",
+      "release": {
+        "status": "verified",
+        "date": "2026-07-16",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+            "title": "Kimi Code — What’s New",
+            "locator": "Kimi K3 · July 16, 2026",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-07-16",
+            "sourceUrl": "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 2800000000000.0,
+        "active": 104000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/moonshotai/Kimi-K3",
+            "title": "kimi-k3 developer model card",
+            "locator": "Model Summary: Total Parameters; Activated Parameters",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-07-16",
+        "sourceId": "neo-kimi-k3-source",
+        "basis": "assessment-reports-release"
+      }
+    },
+    {
+      "modelId": "glm-5-2",
+      "release": {
+        "status": "verified",
+        "date": "2026-06-16",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://docs.z.ai/release-notes/new-released",
+            "title": "Z.ai release notes",
+            "locator": "GLM-5.2 entry dated 2026-06-16",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-06-16",
+            "sourceUrl": "https://docs.z.ai/release-notes/new-released"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://huggingface.co/zai-org/GLM-5.2",
+            "title": "GLM-5.2 model card",
+            "locator": "Parameter counts not disclosed in reviewed developer source",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-06-16",
+        "sourceId": "saferai-glm52-source",
+        "basis": "assessment-reports-release"
+      }
+    },
+    {
+      "modelId": "deepseek-v4-pro",
+      "release": {
+        "status": "verified",
+        "date": "2026-04-24",
+        "event": "public-preview",
+        "sources": [
+          {
+            "url": "https://api-docs.deepseek.com/news/news260424/",
+            "title": "deepseek-v4-pro release",
+            "locator": "News article title, dated heading and availability",
+            "checkedOn": "2026-10-27",
+            "sha256": "9fec5d17e3ed62a4624c87027b36254c317bd5a093b7c38b2244c101eec98ce6"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-preview",
+            "date": "2026-04-24",
+            "sourceUrl": "https://api-docs.deepseek.com/news/news260424/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 1600000000000.0,
+        "active": 49000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+            "title": "deepseek-v4-pro developer model card",
+            "locator": "Introduction; model comparison table",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-04-24",
+        "sourceId": "neo-deepseek-v4-source",
+        "basis": "assessment-reports-release"
+      }
+    },
+    {
+      "modelId": "deepseek-v4-flash-0731",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-5-6-terra",
+      "release": {
+        "status": "verified",
+        "date": "2026-07-09",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/gpt-5-6/",
+            "title": "GPT-5.6 official general availability",
+            "locator": "July 9, 2026: general availability following limited trusted-partner preview",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-07-09",
+            "sourceUrl": "https://openai.com/index/gpt-5-6/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/gpt-5-6/",
+            "title": "GPT-5.6 official release",
+            "locator": "Parameter counts not disclosed in reviewed launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5",
+      "release": {
+        "status": "verified",
+        "date": "2026-06-30",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "title": "Introducing Claude Sonnet 5 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "bf75561313ae10f7f3c69d63bc044337f8c7cd669310ff0faa41f162443c610d"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-06-30",
+            "sourceUrl": "https://www.anthropic.com/news/claude-sonnet-5"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "title": "Introducing Claude Sonnet 5 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-5-5",
+      "release": {
+        "status": "verified",
+        "date": "2026-04-23",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-5/",
+            "title": "OpenAI — introducing gpt 5 5",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-04-23",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-5-5/"
+          },
+          {
+            "kind": "api-release",
+            "date": "2026-04-24",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-5-5/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-5/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-04-24",
+        "sourceId": "saferai-glm52-source",
+        "basis": "assessment-reports-release"
+      }
+    },
+    {
+      "modelId": "claude-opus-4-7",
+      "release": {
+        "status": "verified",
+        "date": "2026-04-16",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "title": "Introducing Claude Opus 4.7 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "78b972ac4f83ba487a5b7287d6c25cc2a44804470538f13f624dcaf43f6afb12"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-04-16",
+            "sourceUrl": "https://www.anthropic.com/news/claude-opus-4-7"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "title": "Introducing Claude Opus 4.7 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-04-16",
+        "sourceId": "saferai-glm52-source",
+        "basis": "assessment-reports-release"
+      }
+    },
+    {
+      "modelId": "gpt-5-4",
+      "release": {
+        "status": "verified",
+        "date": "2026-03-05",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-4/",
+            "title": "OpenAI — introducing gpt 5 4",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-03-05",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-5-4/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-4/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-03-05",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-5-4-mini",
+      "release": {
+        "status": "verified",
+        "date": "2026-03-17",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/",
+            "title": "OpenAI — introducing gpt 5 4 mini and nano",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-03-17",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-opus-4-6",
+      "release": {
+        "status": "verified",
+        "date": "2026-02-05",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-6",
+            "title": "Claude Opus 4.6 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "a2f1e6324da0fba1e7dd24c6fd87b14f95be758799972cf409ec418701d9c807"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-02-05",
+            "sourceUrl": "https://www.anthropic.com/news/claude-opus-4-6"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-6",
+            "title": "Claude Opus 4.6 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-02-05",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "deepseek-r1",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 671000000000.0,
+        "active": 37000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
+            "title": "deepseek-r1 developer model card",
+            "locator": "Model Downloads: DeepSeek-R1 row",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "deepseek-r1-0528",
+      "release": {
+        "status": "verified",
+        "date": "2025-05-28",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://api-docs.deepseek.com/news/news250528/",
+            "title": "deepseek-r1-0528 release",
+            "locator": "News article title, dated heading and availability",
+            "checkedOn": "2026-10-27",
+            "sha256": "f19ffe21342438a0857903cd7d2de85885146a776d0bc599a59985f879c06a4a"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-05-28",
+            "sourceUrl": "https://api-docs.deepseek.com/news/news250528/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "deepseek-v3-1",
+      "release": {
+        "status": "verified",
+        "date": "2025-08-21",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://api-docs.deepseek.com/news/news250821/",
+            "title": "deepseek-v3-1 release",
+            "locator": "News article title, dated heading and availability",
+            "checkedOn": "2026-10-27",
+            "sha256": "14b384c41a5044d3caaabfe8d1c085cb9228da493c41db042e8125b40cfe9e88"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-08-21",
+            "sourceUrl": "https://api-docs.deepseek.com/news/news250821/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 671000000000.0,
+        "active": 37000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+            "title": "deepseek-v3-1 developer model card",
+            "locator": "Model Downloads: DeepSeek-V3.1 row",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-5",
+      "release": {
+        "status": "verified",
+        "date": "2025-08-07",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5/",
+            "title": "OpenAI — introducing gpt 5",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-08-07",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-5/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-08-07",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-5-mini",
+      "release": {
+        "status": "verified",
+        "date": "2025-08-07",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5/",
+            "title": "OpenAI — introducing gpt 5",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-08-07",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-5/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-oss-120b",
+      "release": {
+        "status": "verified",
+        "date": "2025-08-05",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-oss/",
+            "title": "OpenAI — introducing gpt oss",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-08-05",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-oss/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 117000000000.0,
+        "active": 5100000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/openai/gpt-oss-120b",
+            "title": "gpt-oss-120b developer model card",
+            "locator": "Introduction: gpt-oss-120b parameters",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-opus-4",
+      "release": {
+        "status": "verified",
+        "date": "2025-05-22",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-4",
+            "title": "Introducing Claude 4 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "81ce0a0b857b1a7472c563a5c0a80efe41ffcf4fc83014c018bf057acf9e41f0"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-05-22",
+            "sourceUrl": "https://www.anthropic.com/news/claude-4"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-4",
+            "title": "Introducing Claude 4 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-05-22",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "claude-sonnet-4-6",
+      "release": {
+        "status": "verified",
+        "date": "2026-02-17",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-sonnet-4-6",
+            "title": "Introducing Sonnet 4.6 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "205b057d39a850c7bd20dedd9f04dfd3175c9542f75a7425b7b7f40907585785"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-02-17",
+            "sourceUrl": "https://www.anthropic.com/news/claude-sonnet-4-6"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-sonnet-4-6",
+            "title": "Introducing Sonnet 4.6 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-02-17",
+        "sourceId": "claude-sonnet-4-6-official-launch",
+        "basis": "developer-announcement"
+      }
+    },
+    {
+      "modelId": "gemini-2-5-pro",
+      "release": {
+        "status": "verified",
+        "date": "2025-03-25",
+        "event": "public-preview",
+        "sources": [
+          {
+            "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/",
+            "title": "Gemini 2.5: Our newest Gemini model with thinking",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "37e87c18b9c73082c04e24ff4bb36ca6e1bfae195b925ea2e98f52a9ea5c48c3"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-preview",
+            "date": "2025-03-25",
+            "sourceUrl": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/",
+            "title": "Gemini 2.5: Our newest Gemini model with thinking",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-3-5-sonnet-june-2024",
+      "release": {
+        "status": "verified",
+        "date": "2024-06-20",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://cloud.google.com/blog/products/ai-machine-learning/announcing-anthropics-claude-3-5-sonnet-on-vertex-ai-providing-more-choice-for-enterprises/",
+            "title": "Claude 3.5 Sonnet on Vertex AI",
+            "locator": "June 20, 2024: newly released model now generally available on Vertex AI",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2024-06-20",
+            "sourceUrl": "https://cloud.google.com/blog/products/ai-machine-learning/announcing-anthropics-claude-3-5-sonnet-on-vertex-ai-providing-more-choice-for-enterprises/"
+          }
+        ],
+        "note": {
+          "en": "The current Anthropic launch page displays June 21. The contemporaneous Google Cloud availability announcement establishes public availability on June 20.",
+          "zh": "Anthropic 当前发布页显示 6 月 21 日；Google Cloud 当时的开放公告确认 6 月 20 日已公开可用。"
+        }
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": "2024-06-20",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "claude-3-5-sonnet-october-2024",
+      "release": {
+        "status": "verified",
+        "date": "2024-10-22",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
+            "title": "Computer use, Claude 3.5 Sonnet, and Claude 3.5 Haiku — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "d445afef9e9d5679538bbd43245cfa821e9baa8cb73581724b781a08ed27bbea"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2024-10-22",
+            "sourceUrl": "https://www.anthropic.com/news/3-5-models-and-computer-use"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
+            "title": "Computer use, Claude 3.5 Sonnet, and Claude 3.5 Haiku \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2024-10-22",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "claude-3-7-sonnet",
+      "release": {
+        "status": "verified",
+        "date": "2025-02-24",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+            "title": "Claude 3.7 Sonnet and Claude Code — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "23ea9f26bdaa9bee8b72b412fc9057ceec0c8740e624f04d8a1673092ee8ef59"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-02-24",
+            "sourceUrl": "https://www.anthropic.com/news/claude-3-7-sonnet"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+            "title": "Claude 3.7 Sonnet and Claude Code \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-02-24",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "claude-3-opus",
+      "release": {
+        "status": "verified",
+        "date": "2024-03-04",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-3-family",
+            "title": "Introducing the next generation of Claude — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "6ec3c741eec6acc952546fb08a6ebc36bab46214bc8d75eafb050ab076817a1b"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2024-03-04",
+            "sourceUrl": "https://www.anthropic.com/news/claude-3-family"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-3-family",
+            "title": "Introducing the next generation of Claude \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2024-03-04",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "claude-opus-4-1",
+      "release": {
+        "status": "verified",
+        "date": "2025-08-05",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-1",
+            "title": "Claude Opus 4.1 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "5c2125f74e4a929f4216fc0dfd037427e13d9c21e80947906eb3c2fdeb14f8e0"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-08-05",
+            "sourceUrl": "https://www.anthropic.com/news/claude-opus-4-1"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-1",
+            "title": "Claude Opus 4.1 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-08-05",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "claude-opus-4-5",
+      "release": {
+        "status": "verified",
+        "date": "2025-11-24",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-5",
+            "title": "Introducing Claude Opus 4.5 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "8e1da41c767db1f9891cc639ba6811beb7a68ad4118c3d460004870ee7139f62"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-11-24",
+            "sourceUrl": "https://www.anthropic.com/news/claude-opus-4-5"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-5",
+            "title": "Introducing Claude Opus 4.5 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-11-24",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-3-davinci-002",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": "2020-05-28",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-5-3-codex",
+      "release": {
+        "status": "verified",
+        "date": "2026-02-05",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
+            "title": "OpenAI — introducing gpt 5 3 codex",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-02-05",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-5-3-codex/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-02-05",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gemini-3-pro",
+      "release": {
+        "status": "verified",
+        "date": "2025-11-18",
+        "event": "public-preview",
+        "sources": [
+          {
+            "url": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+            "title": "Gemini 3: Introducing the latest Gemini AI model from Google",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "dc3ea8283c25f86c80dceb6692d781c66ea36989f94b9e69916c5690ecece6cc"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-preview",
+            "date": "2025-11-18",
+            "sourceUrl": "https://blog.google/products-and-platforms/products/gemini/gemini-3/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://blog.google/products-and-platforms/products/gemini/gemini-3/",
+            "title": "Gemini 3: Introducing the latest Gemini AI model from Google",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-11-18",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gemini-3-1-pro",
+      "release": {
+        "status": "verified",
+        "date": "2026-02-19",
+        "event": "public-preview",
+        "sources": [
+          {
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
+            "title": "Gemini 3.1 Pro: Announcing our latest Gemini AI model",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "73edb1649b355d6abb8720b1a0e925b821900debf6f849d1a76a46d2315561f0"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-preview",
+            "date": "2026-02-19",
+            "sourceUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
+            "title": "Gemini 3.1 Pro: Announcing our latest Gemini AI model",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-02-19",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-2",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": "2019-02-14",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-3-5-turbo-instruct",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": "2022-03-15",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-4",
+      "release": {
+        "status": "verified",
+        "date": "2023-03-14",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/gpt-4-research/",
+            "title": "OpenAI — gpt 4 research",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2023-03-14",
+            "sourceUrl": "https://openai.com/index/gpt-4-research/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/gpt-4-research/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2023-03-14",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-4-november-2023",
+      "release": {
+        "status": "verified",
+        "date": "2023-11-06",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/new-models-and-developer-products-announced-at-devday/",
+            "title": "OpenAI DevDay",
+            "locator": "Dated launch: GPT-4 Turbo preview available today",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2023-11-06",
+            "sourceUrl": "https://openai.com/index/new-models-and-developer-products-announced-at-devday/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": "2023-11-06",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-4-turbo",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": "2024-04-09",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-4o",
+      "release": {
+        "status": "verified",
+        "date": "2024-05-13",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/hello-gpt-4o/",
+            "title": "OpenAI — hello gpt 4o",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2024-05-13",
+            "sourceUrl": "https://openai.com/index/hello-gpt-4o/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/hello-gpt-4o/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2024-05-13",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-5-1-codex-max",
+      "release": {
+        "status": "verified",
+        "date": "2025-11-19",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/gpt-5-1-codex-max/",
+            "title": "OpenAI — gpt 5 1 codex max",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-11-19",
+            "sourceUrl": "https://openai.com/index/gpt-5-1-codex-max/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/gpt-5-1-codex-max/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-11-19",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "gpt-5-2",
+      "release": {
+        "status": "verified",
+        "date": "2025-12-11",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-2/",
+            "title": "OpenAI — introducing gpt 5 2",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-12-11",
+            "sourceUrl": "https://openai.com/index/introducing-gpt-5-2/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-gpt-5-2/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-12-11",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "o1",
+      "release": {
+        "status": "verified",
+        "date": "2024-12-05",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-chatgpt-pro/",
+            "title": "OpenAI — introducing chatgpt pro",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2024-12-05",
+            "sourceUrl": "https://openai.com/index/introducing-chatgpt-pro/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-chatgpt-pro/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2024-12-05",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "o1-preview",
+      "release": {
+        "status": "verified",
+        "date": "2024-09-12",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-openai-o1-preview/",
+            "title": "OpenAI — introducing openai o1 preview",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2024-09-12",
+            "sourceUrl": "https://openai.com/index/introducing-openai-o1-preview/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-openai-o1-preview/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2024-09-12",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "o3",
+      "release": {
+        "status": "verified",
+        "date": "2025-04-16",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
+            "title": "OpenAI — introducing o3 and o4 mini",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2025-04-16",
+            "sourceUrl": "https://openai.com/index/introducing-o3-and-o4-mini/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
+            "title": "OpenAI official release",
+            "locator": "Parameter counts not disclosed in launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2025-04-16",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "claude-mythos-preview-early",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": "2026-04-07",
+        "sourceId": "metr-horizon-11-data",
+        "basis": "evaluator-release-date"
+      }
+    },
+    {
+      "modelId": "claude-mythos-preview",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-opus-4-8",
+      "release": {
+        "status": "verified",
+        "date": "2026-05-28",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "title": "Introducing Claude Opus 4.8 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "4f90c13cdd65eb56f5d31e63397aa812aca123332df133da5585e5e2f6a47d2f"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-05-28",
+            "sourceUrl": "https://www.anthropic.com/news/claude-opus-4-8"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "title": "Introducing Claude Opus 4.8 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-fable-5-1",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-mythos-5-1",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "release": {
+        "status": "verified",
+        "date": "2026-09-22",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/claude-opus-5-5",
+            "title": "Introducing Claude Opus 5.5 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "47bcfe2c93bd2e1de6e60792fee01485e9a58aaaaef570e78e0acf146aff3edf"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-09-22",
+            "sourceUrl": "https://www.anthropic.com/claude-opus-5-5"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/claude-opus-5-5",
+            "title": "Introducing Claude Opus 5.5 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "release": {
+        "status": "verified",
+        "date": "2026-09-28",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/claude-sonnet-5-5",
+            "title": "Introducing Claude Sonnet 5.5 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "1ec2168ec85096383e54e1aaf9ced9553b0668426dbf0f5f546fa7f28adc4c38"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-09-28",
+            "sourceUrl": "https://www.anthropic.com/claude-sonnet-5-5"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/claude-sonnet-5-5",
+            "title": "Introducing Claude Sonnet 5.5 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "release": {
+        "status": "verified",
+        "date": "2026-10-07",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/claude-haiku-5-5",
+            "title": "Introducing Claude Haiku 5.5 — Anthropic",
+            "locator": "Publication date and availability section",
+            "checkedOn": "2026-10-27",
+            "sha256": "ec7cea99875a17b65f8d1321c5cf4dd60d51ee6942e8c2d3e6f8dfcacdd1b5f9"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-10-07",
+            "sourceUrl": "https://www.anthropic.com/claude-haiku-5-5"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://www.anthropic.com/claude-haiku-5-5",
+            "title": "Introducing Claude Haiku 5.5 \\ Anthropic",
+            "locator": "Official launch article; parameter counts not disclosed",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "deepseek-v4-flash",
+      "release": {
+        "status": "verified",
+        "date": "2026-04-24",
+        "event": "public-preview",
+        "sources": [
+          {
+            "url": "https://api-docs.deepseek.com/news/news260424/",
+            "title": "deepseek-v4-flash release",
+            "locator": "News article title, dated heading and availability",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-preview",
+            "date": "2026-04-24",
+            "sourceUrl": "https://api-docs.deepseek.com/news/news260424/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 284000000000.0,
+        "active": 13000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+            "title": "deepseek-v4-flash developer model card",
+            "locator": "Introduction; model comparison table",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "muse-glimmer",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "muse-spark-1-2",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "muse-spark-1-3",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "muse-spark-contemplating",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "muse-spark-open",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "muse-spark",
+      "release": {
+        "status": "verified",
+        "date": "2026-04-08",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+            "title": "Meta — muse-spark",
+            "locator": "Dated launch and explicit availability",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-04-08",
+            "sourceUrl": "https://ai.meta.com/blog/introducing-muse-spark-msl/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+            "title": "Meta official release",
+            "locator": "Parameter counts not disclosed in reviewed developer source",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-04-08",
+        "sourceId": "muse-spark-official-launch",
+        "basis": "developer-announcement"
+      }
+    },
+    {
+      "modelId": "muse-wonder",
+      "release": {
+        "status": "verified",
+        "date": "2026-10-12",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://research.meta.ai/blog/muse-wonder",
+            "title": "Meta — muse-wonder",
+            "locator": "Dated launch and explicit availability",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-10-12",
+            "sourceUrl": "https://research.meta.ai/blog/muse-wonder"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://research.meta.ai/blog/muse-wonder",
+            "title": "Meta official release",
+            "locator": "Parameter counts not disclosed in reviewed developer source",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-10-12",
+        "sourceId": "official-meta-muse-wonder-model-card",
+        "basis": "developer-release-record"
+      }
+    },
+    {
+      "modelId": "muse-wonder-full",
+      "release": {
+        "status": "verified",
+        "date": "2026-10-12",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://research.meta.ai/blog/muse-wonder",
+            "title": "Meta — muse-wonder-full",
+            "locator": "Dated launch and explicit availability",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-10-12",
+            "sourceUrl": "https://research.meta.ai/blog/muse-wonder"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://research.meta.ai/blog/muse-wonder",
+            "title": "Meta official release",
+            "locator": "Parameter counts not disclosed in reviewed developer source",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-10-12",
+        "sourceId": "official-meta-muse-wonder-model-card",
+        "basis": "developer-release-record"
+      }
+    },
+    {
+      "modelId": "muse-spark-1-1",
+      "release": {
+        "status": "verified",
+        "date": "2026-07-09",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://research.meta.ai/blog/introducing-muse-spark-meta-model-api",
+            "title": "Meta — muse-spark-1-1",
+            "locator": "Dated launch and explicit availability",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-07-09",
+            "sourceUrl": "https://research.meta.ai/blog/introducing-muse-spark-meta-model-api"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://research.meta.ai/blog/introducing-muse-spark-meta-model-api",
+            "title": "Meta official release",
+            "locator": "Parameter counts not disclosed in reviewed developer source",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": "2026-07-09",
+        "sourceId": "official-meta-muse-spark-1-1-evaluation-report",
+        "basis": "developer-release-record"
+      }
+    },
+    {
+      "modelId": "mistral-large-4",
+      "release": {
+        "status": "verified",
+        "date": "2026-10-06",
+        "event": "public-preview",
+        "sources": [
+          {
+            "url": "https://docs.mistral.ai/models/mistral-large-4",
+            "title": "Mistral Large 4",
+            "locator": "Dated Public Preview header",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-preview",
+            "date": "2026-10-06",
+            "sourceUrl": "https://docs.mistral.ai/models/mistral-large-4"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 1050000000000.0,
+        "active": 52000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://docs.mistral.ai/models/mistral-large-4",
+            "title": "Mistral Large 4",
+            "locator": "Model description: 1.05T total; 52B active; 1.6B vision encoder separately",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "note": {
+          "en": "The developer also reports a 1.6B vision encoder separately.",
+          "zh": "开发者另外报告 1.6B 视觉编码器。"
+        }
+      },
+      "reportedRelease": {
+        "date": "2026-10-06",
+        "sourceId": "official-mistral-mistral-large-4-official-technical-documentation",
+        "basis": "developer-release-record"
+      }
+    },
+    {
+      "modelId": "gpt-5-4-thinking",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-5-6",
+      "release": {
+        "status": "verified",
+        "date": "2026-07-09",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://openai.com/index/gpt-5-6/",
+            "title": "GPT-5.6 official general availability",
+            "locator": "July 9, 2026: general availability following limited trusted-partner preview",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-07-09",
+            "sourceUrl": "https://openai.com/index/gpt-5-6/"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "not-disclosed",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": [
+          {
+            "url": "https://openai.com/index/gpt-5-6/",
+            "title": "GPT-5.6 official release",
+            "locator": "Parameter counts not disclosed in reviewed launch article",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-6-sol-september",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-september",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-6-1-sol",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-6-sol-october",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-october",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "qwen3-8-2-4t-a95b",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 2400000000000.0,
+        "active": 95000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+            "title": "qwen3-8-2-4t-a95b developer model card",
+            "locator": "Model Overview: Number of Parameters",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "qwen3-8-flash-next",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 125000000000.0,
+        "active": 6000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+            "title": "qwen3-8-flash-next developer model card",
+            "locator": "Model Overview: Number of Parameters",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "note": {
+          "en": "125B main parameters and 6B active; the source lists a separate 51B n-gram embedding and 4B MTP. These are not silently added to the main count.",
+          "zh": "主体参数 125B、激活参数 6B；原文另列 51B n-gram embedding 与 4B MTP，不将其静默合并为主体参数量。"
+        }
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "grok-4-7",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "glm-5-3-bf16",
+      "release": {
+        "status": "pending",
+        "date": null,
+        "event": null,
+        "sources": [],
+        "events": []
+      },
+      "parameters": {
+        "status": "pending",
+        "total": null,
+        "active": null,
+        "architecture": null,
+        "sources": []
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    },
+    {
+      "modelId": "glm-5",
+      "release": {
+        "status": "verified",
+        "date": "2026-02-12",
+        "event": "public-release",
+        "sources": [
+          {
+            "url": "https://docs.z.ai/release-notes/new-released",
+            "title": "Z.ai release notes",
+            "locator": "GLM-5 entry dated 2026-02-12",
+            "checkedOn": "2026-10-27"
+          }
+        ],
+        "events": [
+          {
+            "kind": "public-release",
+            "date": "2026-02-12",
+            "sourceUrl": "https://docs.z.ai/release-notes/new-released"
+          }
+        ]
+      },
+      "parameters": {
+        "status": "disclosed",
+        "total": 744000000000.0,
+        "active": 40000000000.0,
+        "architecture": "MoE",
+        "sources": [
+          {
+            "url": "https://huggingface.co/zai-org/GLM-5",
+            "title": "glm-5 developer model card",
+            "locator": "Introduction: model scaling",
+            "checkedOn": "2026-10-27"
+          }
+        ]
+      },
+      "reportedRelease": {
+        "date": null,
+        "sourceId": null,
+        "basis": "unknown"
+      }
+    }
+  ]
+}

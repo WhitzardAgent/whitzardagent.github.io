@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source("../");
+@import "./theme.css";
 
 @font-face {
   font-family: "Geist Local";

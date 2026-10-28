@@ -1,0 +1,18 @@
+---
+import type {Locale} from '../../../i18n/config';
+import {catalogue,indexBase} from '../../../data/nuwa-index';
+import {localizedPath} from '../../../i18n/config';
+import {researchCoverage} from '../../../lib/nuwa-intelligence/editorial.mjs';
+interface Props{locale:Locale}
+const {locale}=Astro.props,en=locale==='en',rows=researchCoverage(catalogue),max=Math.max(...rows.flatMap(r=>r.cells.map(c=>c.count))),base=localizedPath(indexBase,locale);
+---
+<details class="nr-coverage-disclosure" data-research-coverage><summary>{en?'Explore collection coverage by topic and function':'按主题与研究功能查看收录范围'}</summary>
+<section class="nr-coverage" aria-label={en?'Research coverage by topic and function':'按风险主题与研究功能浏览'}>
+ <header><h2>{en?'Research landscape':'研究图谱'}</h2><p>{en?'Published work by risk topic and research function. Select a cell to explore.':'按风险主题与研究功能整理的公开研究；选择单元格可查看对应作品。'}</p></header>
+ <div class="nr-coverage-grid"><div class="nr-coverage-head" aria-hidden="true"><span>{en?'Risk topic':'风险主题'}</span>{catalogue.functions.map(f=><span>{f.label[locale]}</span>)}</div>{rows.map(r=><div class="nr-coverage-row"><a class="nr-area" href={`${base}/risk/${r.area}/`}>{r.label[locale]} <span>↗</span></a>{r.cells.map(c=><a class="nr-cell" href={`?view=research&area=${r.area}&function=${c.functionId}#ni-research`} data-coverage-function={c.functionId} data-coverage-area={r.area} aria-label={`${r.label[locale]} · ${c.label[locale]}: ${c.count} ${en?'works':'项研究'}`} style={`--coverage:${max?c.count/max*100:0}%`}><span class="nr-cell-bar" aria-hidden="true"/><span>{c.count}</span></a>)}</div>)}</div>
+ <p class="nr-coverage-note">{en?'Counts describe this collection; a work can cover more than one topic.':'数量表示当前目录收录情况，一项研究可以涉及多个主题。'}</p>
+</section>
+</details>
+<style is:global>
+.nr-coverage{margin:12px 0 22px;padding:0 0 14px;border-bottom:1px solid #dce5e1}.nr-coverage header{display:flex;justify-content:space-between;gap:30px;align-items:baseline;margin:0 0 16px}.nr-coverage h2{font-size:21px;font-weight:550;margin:0}.nr-coverage header p{font-size:12px;color:#5a7075;margin:0}.nr-coverage-grid{max-width:1050px}.nr-coverage-head,.nr-coverage-row{display:grid;grid-template-columns:minmax(170px,1.5fr) repeat(3,minmax(0,1fr));gap:12px;align-items:center}.nr-coverage-head{font-size:11px;color:#537069;padding-bottom:9px}.nr-coverage-row{margin:5px 0}.nr-area{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#344e5c;padding-right:20px}.nr-area>span{color:#6c857b;font-size:11px}.nr-cell{position:relative;min-height:23px;background:#f0f5f1;border:1px solid transparent;border-radius:3px;display:flex;align-items:center;justify-content:flex-end;overflow:hidden;padding-right:10px;font-size:11px;font-variant-numeric:tabular-nums;color:#194c3f}.nr-cell-bar{position:absolute;inset:0 auto 0 0;width:var(--coverage);background:#b9d8c9}.nr-cell>span:last-child{position:relative}.nr-cell:hover,.nr-cell[aria-current=true]{border-color:#2c7562}.nr-cell:focus-visible{outline:2px solid #153963;outline-offset:2px}.nr-coverage-note{font-size:10px;line-height:1.7;color:#6a7f7b;margin:12px 0 0}@media(max-width:700px){.nr-coverage header{display:block}.nr-coverage header p{margin-top:8px}.nr-coverage-head,.nr-coverage-row{grid-template-columns:minmax(110px,1.4fr) repeat(3,minmax(0,1fr));gap:6px}.nr-coverage-head{font-size:10px;line-height:1.5}.nr-area{font-size:11px;padding-right:5px;line-height:1.5}.nr-area>span{display:none}.nr-cell{min-height:30px;padding-right:7px}.nr-coverage-note{font-size:11px}}
+</style>

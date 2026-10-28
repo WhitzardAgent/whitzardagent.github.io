@@ -1,0 +1,16 @@
+import {csvRecordCount} from './browser-csv.mjs';
+import assert from 'node:assert/strict';import fs from 'node:fs/promises';
+export async function checkNuwaConditionsBrowser(browser,base='http://127.0.0.1:4336'){
+ const errors=[],cx=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce',acceptDownloads:true}),p=await cx.newPage();await cx.route('https://cloud.umami.is/**',r=>r.abort());p.on('pageerror',e=>errors.push(e.message));p.setDefaultTimeout(15000);await fs.mkdir('output/playwright/nuwa-conditions',{recursive:true});let layouts=0;
+ for(const prefix of ['/en',''])for(const width of [1440,900,390]){
+  await p.setViewportSize({width,height:1000});await p.goto(base+prefix+'/nuwa/whitzard-index/?mon-topic-autonomy-display=bars&mon-topic-autonomy-sort=metric&area=disinformation&view=trend');const m=p.locator('[data-risk-panel=disinformation] nuwa-monitor').first();await m.locator('[data-keyboard-points] a').first().waitFor();
+  assert.equal(await m.locator('[data-keyboard-points] a').count(),4);assert.match(await m.locator('[data-facet-status]').textContent(),/1.*8/);
+  const labels=await m.locator('[data-keyboard-points] a').evaluateAll(as=>as.map(a=>a.getAttribute('aria-label')));assert.equal(labels.filter(l=>l.includes('DeepSeek')).length,1);assert.ok(labels.every(l=>/Conspiracy|阴谋论/.test(l)));
+  await m.locator('[data-keyboard-points] a').first().click();assert.match(await m.locator('[data-monitor-selection]').textContent(),/Conspiracy|阴谋论/);
+  await p.screenshot({path:`output/playwright/nuwa-conditions/${prefix?'en':'zh'}-${width}.png`});
+  await m.locator('[data-facet-next]').click();assert.equal(await m.locator('[data-keyboard-points] a').count(),4);assert.match(await m.locator('[data-keyboard-points] a').first().getAttribute('aria-label'),/Undermining Control|削弱控制/);await p.goBack();assert.match(await m.locator('[data-keyboard-points] a').first().getAttribute('aria-label'),/Conspiracy|阴谋论/);
+  assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));layouts++;
+ }
+ await p.goto(base+'/en/nuwa/whitzard-index/?area=disinformation&view=trend');const m=p.locator('[data-risk-panel=disinformation] nuwa-monitor').first();await m.locator('[data-display=table]').click();await m.locator('nuwa-evidence-grid[data-grid-ready=true]').waitFor();assert.equal(await m.locator('[data-grid-fallback-rows] tr').count(),32);assert.match(await m.locator('.ag-root').textContent(),/Conspiracy/);const dl=p.waitForEvent('download');await m.locator('[data-monitor-csv]').click();const csv=await fs.readFile(await(await dl).path(),'utf8');assert.equal(csvRecordCount(csv),33);assert.match(csv,/observationCondition/);assert.match(csv,/Undermining Control/);assert.match(csv,/Torture Innocent People/);
+ await cx.close();const no=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}}),np=await no.newPage();await np.goto(base+'/en/nuwa/whitzard-index/');assert.match(await np.locator('[data-risk-panel=disinformation] [data-grid-fallback-rows]').first().textContent(),/Undermining Control/);await no.close();assert.deepEqual(errors,[]);return{layouts,conditionScopes:8,allObservations:32,selection:true,history:true,table:true,csv:true,noJS:true};
+}

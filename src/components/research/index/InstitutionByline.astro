@@ -1,0 +1,26 @@
+---
+import OrganizationMark from './OrganizationMark.astro';
+import {catalogue,indexBase} from '../../../data/nuwa-index';
+import type {Contribution} from '../../../data/nuwa-index/types';
+import type {Locale} from '../../../i18n/config';
+import {localizedPath} from '../../../i18n/config';
+import {knowledgeCopy} from '../../../i18n/pages/nuwaKnowledge';
+interface Props {contributions:Contribution[];locale:Locale;unverified?:boolean}
+const {contributions,locale,unverified=false}=Astro.props;
+const c=knowledgeCopy[locale];
+const roles={research:c.research,evaluation:c.evaluation,publisher:c.publisher,implementation:c.implementation};
+const groups=Object.entries(roles).map(([role,label])=>({role,label,organizations:[...new Set(contributions.filter(co=>co.role===role).map(co=>co.organizationId))].map(id=>catalogue.organizations.find(o=>o.id===id)!).filter(Boolean)})).filter(group=>group.organizations.length);
+---
+<div class="research-byline">
+ {groups.length?groups.map(group=><p data-attribution-role={group.role}><span class="research-byline__label">{group.label}</span>{' '}{group.organizations.map((org,i)=><>{i>0&&<span class="research-byline__separator" aria-hidden="true"> · </span>}<a href={localizedPath(`${indexBase}/organization/${org.id}`,locale)}><OrganizationMark organizationId={org.id} locale={locale}/></a></>)}</p>):<p>{unverified?(locale==='en'?'Affiliation not indexed in this review':'本轮尚未登记机构署名'):c.affiliation}</p>}
+</div>
+<style>
+.research-byline{font-size:13px;line-height:1.8;color:#3b514e;min-width:0}
+.research-byline p{display:block;margin:0;font:inherit;color:inherit;line-height:inherit;overflow-wrap:anywhere}
+.research-byline p+p{margin-top:4px}
+.research-byline__label{color:#52645f;margin-right:3px}
+.research-byline a{color:inherit;text-decoration:underline;text-decoration-color:#afc5b9;text-underline-offset:3px}
+.research-byline a:hover{color:#176b65;text-decoration-color:currentColor}
+.research-byline a:focus-visible{outline:2px solid #176b65;outline-offset:3px}
+.research-byline__separator{color:#6a8179;padding:0 3px}
+</style>

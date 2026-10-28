@@ -1,0 +1,109 @@
+---
+import {buildDisplaySets} from '../../../lib/nuwa-intelligence/panorama.mjs';
+import CrossReportInventory from './CrossReportInventory.astro';
+import MonitoringPanel from './MonitoringPanel.astro';
+import TopicMonitoring from './TopicMonitoring.astro';
+import {loadMonitoringDrafts} from '../../../lib/nuwa-intelligence/localReview.mjs';
+import {correctionFor} from '../../../lib/nuwa-intelligence/lineage.mjs';
+import OfficialEvidenceChart from './OfficialEvidenceChart.astro';
+import ResearchCard from './ResearchCard.astro';
+import ResearchSupplement from './ResearchSupplement.astro';
+import {formatMetric} from '../../../lib/evidenceCharts.mjs';
+import {knowledgeCopy} from '../../../i18n/pages/nuwaKnowledge';
+import {wikiFor} from '../../../lib/nuwaWiki';
+import ProtocolDossier from './ProtocolDossier.astro';
+import BenchmarkReading from './BenchmarkReading.astro';
+import WikiBody from './WikiBody.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {catalogue,historicalCatalogue,indexBase,benchmarkFor} from '../../../data/nuwa-index';
+import type {Locale} from '../../../i18n/config';
+import {localizedPath} from '../../../i18n/config';
+import {nuwaIndexCopy} from '../../../i18n/pages/nuwaIndex';
+import {modelMetadataReferences,modelMetadataSources} from '../../../lib/modelMetadata.mjs';
+import PageSources from '../PageSources.astro';
+import EvidenceChart from './EvidenceChart.astro';
+import RiskMatrix from './RiskMatrix.astro';
+import '../../../styles/nuwa-index.css';
+interface Props {locale:Locale;kind:'risk'|'benchmark'|'result';id:string}
+const {locale,kind,id}=Astro.props,en=locale==='en',c=nuwaIndexCopy[locale];
+const path=(tail='')=>localizedPath(`${indexBase}${tail}`,locale);
+const area=kind==='risk'?catalogue.areas.find(a=>a.id===id):undefined;
+const record=kind==='result'?historicalCatalogue.results.find(r=>r.id===id):undefined;
+const benchmark=kind==='benchmark'?benchmarkFor(id):record?benchmarkFor(record.benchmarkId):undefined;
+const wiki=kind==='benchmark'?await wikiFor(id,locale):null;
+const title=area?.label[locale]??(record?record.system:benchmark!.name);
+const description=area?.definition[locale]??(record?`${benchmark!.name} · ${c.resultRecord}`:benchmark!.summary[locale]);
+const records=record?[record]:catalogue.results.filter(r=>r.benchmarkId===benchmark?.id);
+const charts=catalogue.charts?.filter(ch=>ch.protocolId===benchmark?.id&&ch.id!=='metr-horizon-11-protocol-chart'&&(record?ch.recordIds.includes(record.id):true))??[];
+const officialUnit=kind==='benchmark'?catalogue.sourceUnits?.find(u=>u.id===({'cybergym':'cybergym-official','exploitgym':'exploitgym-official','secbench-pro':'secbench-pro-official','agentcyberrange':'agentcyberrange-official'} as Record<string,string>)[id]):undefined;
+const chart=charts[0];
+const monitoringGroups=kind==='benchmark'?buildDisplaySets(catalogue,{benchmarkId:id}):[];
+const analysisDrafts=loadMonitoringDrafts(catalogue);
+const corrections=record?correctionFor(record.id,catalogue.evidenceLineage??[]):[];
+const sourceUnit=record?catalogue.sourceUnits?.find(u=>catalogue.observationEvidence?.some(o=>o.resultId===record.id&&o.sourceVersionId===u.sourceVersionId)):undefined;
+const evidenceLinks=catalogue.assessmentEvidence?.filter(l=>records.some(r=>r.id===l.resultId))??[];
+const figure=catalogue.figures?.find(f=>f.protocolId===benchmark?.id);
+const audit=catalogue.visualAudits?.find(a=>a.protocolId===benchmark?.id);
+const work=catalogue.works.find(w=>w.protocolIds.includes(benchmark?.id??''));
+const organizations=work?.contributions.filter(co=>co.role==='research').map(co=>catalogue.organizations.find(o=>o.id===co.organizationId)?.name[locale]).filter(Boolean)??[];
+const related=area?catalogue.works.filter(w=>w.areas.includes(area.id)):catalogue.works.filter(w=>w.protocolIds.includes(benchmark?.id??''));
+const refs:any[]=[...(wiki?.entry.data.sourceRefs??[])];
+const metadataModels=(catalogue.models??[]).filter(m=>monitoringGroups.some(g=>g.bindings.some((b:any)=>b.modelId===m.id)));
+refs.push(...metadataModels.flatMap(m=>modelMetadataReferences(m,locale)));
+for(const g of monitoringGroups)for(const sourceId of g.sourceIds)refs.push({sourceId,appliesTo:en?'Cross-report monitoring':'跨报告监测'});
+for(const a of analysisDrafts)if(monitoringGroups.some(g=>g.id===a.groupId))for(const sourceId of a.sourceIds)refs.push({sourceId,appliesTo:'NUWA analysis'});
+if(benchmark)refs.push({sourceId:benchmark.sourceId,appliesTo:en?'Protocol and method':'协议与方法'});
+if(work)for(const co of work.contributions)refs.push({sourceId:co.sourceId,locator:co.locator,appliesTo:en?'Institutional attribution':'机构署名'});
+for(const r of records)refs.push({sourceId:r.sourceId,url:r.sourceUrl,version:r.sourceVersion,locator:r.locator,appliesTo:en?'Result chart and data table':'结果图与数据表'});
+if(figure)refs.push({sourceId:figure.sourceId,locator:figure.sourceLocator,appliesTo:figure.figureLabel});
+if(area){for(const v of catalogue.protocolVariants??[])if(v.riskAssociations.some(a=>a.area===area.id))refs.push({sourceId:v.sourceId,locator:v.locator,appliesTo:en?'Report-specific protocol mapping':'报告特定协议关联'});for(const q of catalogue.questions.filter(q=>q.area===area.id))for(const sourceId of q.sourceIds)refs.push({sourceId,appliesTo:q.label[locale]});for(const b of catalogue.benchmarks.filter(b=>b.links.some(l=>catalogue.questions.some(q=>q.id===l.questionId&&q.area===area.id))))refs.push({sourceId:b.sourceId,locator:b.links.map(l=>l.locator).join('; ')});}
+const versionLabel=benchmark?.version.startsWith('Website bundle')?(en?'Project snapshot · 2026-10-24':'项目快照 · 2026-10-24'):benchmark?.version;
+const suiteComponents=[['MITRE / false-refusal tests','攻击请求与误拒评测'],['Secure code generation','安全代码生成'],['Prompt injection','提示注入'],['Code interpreter','代码解释器'],['Vulnerability exploitation','漏洞利用'],['Spear phishing','定向钓鱼'],['Autonomous cyber operations','自主网络行动'],['AutoPatch','自动修补'],['Malware analysis','恶意软件分析'],['Threat intelligence reasoning','威胁情报推理']];
+const parentView=area?'trend':record?'results':'benchmarks';
+---
+<BaseLayout title={`${title} — NUWA Index`} description={description} locale={locale} brand="nuwa" canonicalPath={`${indexBase}/${kind}/${id}`}>
+ <article class="ni-page ni-detail ni-evaluation">
+  <header class="ni-header site-container"><a class="ni-back" href={`${path()}?view=${parentView}${area?'&area='+area.id:''}#ni-${parentView}`}>← {c.back}</a><p class="ni-kicker">{area?c.risks:record?c.resultRecord:c.dossier}</p><h1>{title}</h1><p class="ni-lead">{description}</p>{benchmark&&<p class="ni-evaluation__metadata">{organizations.join(' · ')||((work?.localReviewBatchId||work?.contentEditionId)?(en?'Affiliation not indexed in this review':'本轮尚未登记机构署名'):knowledgeCopy[locale].affiliation)} <span> / </span> {versionLabel} <span> / </span> {c.dimensions[benchmark.primaryDimension].label}</p>}<p><a href="#research-sources">{en?'Sources and provenance':'来源与出处'} ↓</a>{work&&<> <span aria-hidden="true"> · </span><a href={path(`/work/${work.id}`)}>{en?'Read the research narrative':'阅读研究记录'} →</a></>}</p></header>
+  <div class:list={['site-container ni-evaluation__body',{'nw-evaluation-layout':kind==='benchmark'}]}>
+  {kind==='benchmark'&&<aside class="nw-evaluation-toc"><details><summary>{en?'On this page':'本文目录'}</summary>{wiki?wiki.headings.map(h=><a href={`#${h.slug}`}>{h.text}</a>):<><a href="#task-and-measurement">{en?'Task and measurement':'任务与测量'}</a>{records.length>0&&<a href="#reported-evaluation">{en?'A reported evaluation':'已报告评测'}</a>}<a href="#reading-boundary">{en?'Interpretation':'测量解读'}</a></>}<a href="#monitoring">{en?'Results':'评测结果'}</a><a href="#benchmark-context">{en?'Research context':'研究背景'}</a><a href="#research-sources">{en?'References':'参考文献'}</a></details><nav aria-label={en?'On this page':'本文目录'}>{wiki?wiki.headings.map(h=><a href={`#${h.slug}`}>{h.text}</a>):<><a href="#task-and-measurement">{en?'Task and measurement':'任务与测量'}</a>{records.length>0&&<a href="#reported-evaluation">{en?'A reported evaluation':'已报告评测'}</a>}<a href="#reading-boundary">{en?'Interpretation':'测量解读'}</a></>}<a href="#monitoring">{en?'Results':'评测结果'}</a><a href="#benchmark-context">{en?'Research context':'研究背景'}</a><a href="#research-sources">{en?'References':'参考文献'}</a></nav></aside>}
+  <div class="nw-evaluation-content">
+  {kind==='benchmark'&&<BenchmarkReading benchmark={benchmark} work={work} record={records[0]} locale={locale} profileOnly={Boolean(wiki)}/>}
+  {kind==='benchmark'&&<ProtocolDossier protocolId={id} locale={locale}/>}
+  {kind==='benchmark'&&work&&<ResearchSupplement workId={work.id} locale={locale}/>}
+  {wiki&&<WikiBody wiki={wiki}/>}
+   {corrections.length>0&&<p class="ni-notice">{en?"This historical record has a correction or withdrawal. Current views use the effective evidence.":"此历史记录已有更正或撤回，当前视图使用有效证据。"}{corrections.filter(c=>historicalCatalogue.results.some(r=>r.id===c.from)).map(c=><a href={path(`/result/${c.from}`)}>{en?" View correction":" 查看更正"} →</a>)}</p>}
+   {sourceUnit&&<p><a href={path(`/source/${sourceUnit.id}`)}>{en?"Source snapshot, chart and review scope":"来源快照、图表与核查范围"} →</a></p>}
+   {area?<><TopicMonitoring areaId={area.id} locale={locale} analyses={analysisDrafts}/><ResearchSupplement areaId={area.id} locale={locale}/><section class="ni-risk-overview"><div><h2>{c.scope}</h2><p>{area.scope[locale]}</p></div><div><h2>{c.threat}</h2><p>{area.threatModel[locale]}</p></div><div><h2>{c.gaps}</h2><p>{area.gap[locale]}</p></div></section><section class="nk-related-section"><h2>{knowledgeCopy[locale].relatedResearch}</h2><div class="nk-library">{related.slice(0,6).map(w=><ResearchCard work={w} locale={locale}/>)}</div></section><RiskMatrix area={area} locale={locale}/></>:<>
+    {monitoringGroups.length===0&&<span id="monitoring"/>}{monitoringGroups.length>0&&<section id="monitoring" class="ni-evaluation__section"><p class="ni-kicker">{en?'CROSS-REPORT MONITORING':'跨报告监测'}</p><MonitoringPanel groups={monitoringGroups} namespace={`benchmark-${id}`} locale={locale} analyses={analysisDrafts}/></section>}
+    {kind==='benchmark'&&<CrossReportInventory benchmarkId={id} locale={locale}/>}
+    <details class="nm-original-results" open={!monitoringGroups.length}><summary>{en?'Original source charts and materials':'原始来源图表与材料'}</summary>
+    {officialUnit?<><OfficialEvidenceChart unit={officialUnit} records={catalogue.officialObservations?.filter(o=>o.unitId===officialUnit.id)??[]} locale={locale}/><p><a href={path(`/source/${officialUnit.id}`)}>{en?'Version and extraction scope':'版本与提取范围'} →</a></p></>:chart&&records.length?<>{charts.map(ch=><EvidenceChart namespace={charts.length>1?ch.id:undefined} spec={ch} records={records.filter(r=>ch.recordIds.includes(r.id))} locale={locale}/>)}</>:record?<section class="nm-record-values ni-evaluation__section"><h2>{en?'Recorded measurements':'记录指标'}</h2><dl class="ni-facts">{record.metrics.map(m=><div><dt>{m.label[locale]}</dt><dd>{formatMetric(m)}{m.interval&&<small>{m.interval}</small>}</dd></div>)}</dl><p>{record.sampleSize[locale]}</p>{record.experimentalConditions&&<dl class="ni-facts"><div><dt>{en?'Goal condition':'目标条件'}</dt><dd>{record.experimentalConditions.goal}</dd></div><div><dt>{en?'Threat condition':'威胁条件'}</dt><dd>{record.experimentalConditions.threat}</dd></div><div><dt>{en?'Reasoning':'推理配置'}</dt><dd>{record.experimentalConditions.reasoning}</dd></div></dl>}<p class="ni-note">{record.configuration.harness??(en?'Harness not specified':'Harness 未注明')} · {record.configuration.budget??(en?'Budget not specified':'预算未注明')}</p></section>:figure?<figure class="ni-original-figure"><a href={figure.original} target="_blank"><img src={figure.src} srcset={figure.srcset} sizes="(max-width: 700px) calc(100vw - 64px), 1100px" width={figure.width} height={figure.height} alt={figure.alt[locale]} loading="eager"/></a><figcaption><strong>{figure.figureLabel}</strong> · {figure.caption[locale]} <a href={figure.original} target="_blank">{en?'View original image':'查看原图'} ↗</a></figcaption></figure>:benchmark?.id==='cyberseceval'?<section class="ni-method-map ni-suite-overview"><p class="ni-kicker">{en?'Evaluation suite':'评测套件'}</p><h2>{en?'Component protocols':'组成协议'}</h2><p>{audit?.note[locale]}</p><ol>{suiteComponents.map((label,i)=><li><span>{String(i+1).padStart(2,'0')}</span>{label[en?0:1]}</li>)}</ol><a href={path('/benchmark/cybersoceval')}>{en?'CyberSOCEval results':'CyberSOCEval 结果'} →</a></section>:<section class="ni-protocol-source"><p><a href={catalogue.sources.find(s=>s.id===benchmark!.sourceId)?.url} target="_blank" rel="noreferrer">{en?'Read the original protocol':'阅读原始协议'} ↗</a></p>{audit?.note[locale]&&<p class="ni-note">{audit.note[locale]}</p>}</section>}
+    </details>
+    {evidenceLinks.length>0&&<section class="ni-evaluation__section nm-source-line"><h2>{en?'Assessment provenance':'评估出处'}</h2>{[...new Set(evidenceLinks.map(l=>l.assessmentId))].map(id=>{const a=catalogue.assessments!.find(a=>a.id===id)!;return <p><a href={path(`/assessment/${id}`)}>{a.title} →</a> · {a.kind==='developer'?(en?'Developer disclosure':'开发者披露'):(en?'External report':'外部报告')}</p>;})}{record&&evidenceLinks.filter(l=>l.resultId===record.id).map(l=><p>{en?'Actual evaluation':'实际评测'}: {(l.origin==='reused'?l.originalExecutorIds:l.executorIds).map(id=>catalogue.organizations.find(o=>o.id===id)?.name[locale]??id).join(' · ')}{l.measurement==='imputed'&&<strong> · {en?'IRT-imputed; not a directly observed success rate':'IRT 插补，非直接观察成功率'}</strong>} · <a href={path(`/model/${l.modelId}`)}>{en?'Model record':'模型档案'} →</a></p>)}</section>}
+    {kind==='result'&&<section class="ni-evaluation__section"><h2>{en?'Method and scope':'方法与范围'}</h2><p>{benchmark!.measures[locale]}</p><dl class="ni-facts"><div><dt>{c.evidenceType}</dt><dd>{benchmark!.kind==='benchmark'?c.reusable:benchmark!.kind==='report'?c.report:c.study}</dd></div><div><dt>{c.assessmentSubject}</dt><dd>{benchmark!.assessmentSubject[locale]}</dd></div><div><dt>{c.primaryDimension}</dt><dd>{c.dimensions[benchmark!.primaryDimension].label}</dd></div><div><dt>{c.snapshot}</dt><dd>{catalogue.snapshotId}</dd></div></dl><p class="ni-note">{benchmark!.classificationNote[locale]}</p></section>}
+    {record&&<section class="ni-evaluation__section"><h2>{c.observed}</h2><p>{record.sourceFinding[locale]}</p>{record.interpretation&&<><h3>{c.interpretation}</h3><p>{record.interpretation[locale]}</p></>}</section>}
+    {kind==='result'&&<section class="ni-evaluation__section"><h2>{c.limits}</h2><p>{benchmark!.limitations[locale]}</p>{record&&<p>{record.limitations[locale]}</p>}{audit&&audit.display==='original-figure'&&<p class="ni-note">{audit.note[locale]}</p>}</section>}
+    <section id="benchmark-context" class="ni-evaluation__section"><h2>{c.related}</h2><div class="ni-benchmark-links">{benchmark!.links.map(link=>{const question=catalogue.questions.find(q=>q.id===link.questionId)!;const ar=catalogue.areas.find(a=>a.id===question.area)!;return <article><span class="ni-kind">{c.dimensions[link.dimension].label} · {link.relation==='direct'?c.direct:link.relation==='enabling'?c.enabling:c.context}</span><h3><a href={path(`/risk/${ar.id}#cell-${question.id}-${link.dimension}`)}>{ar.label[locale]} / {question.label[locale]} →</a></h3><p>{link.rationale[locale]}</p></article>;})}</div></section>
+   </>}
+   <PageSources locale={locale} sources={[...catalogue.sources,...modelMetadataSources(metadataModels,catalogue.sources)]} references={refs} numerical={Boolean(records.length)}/>
+  </div></div>
+ </article>
+</BaseLayout>
+<style is:global>
+.nm-record-values dd small{display:block;font-size:12px;font-weight:400;color:#546b63;margin-top:6px}.ni-evaluation__body{max-width:1360px}.nw-evaluation-content{min-width:0}.nw-evaluation-toc{display:none}.nw-benchmark-intro{max-width:760px;margin:0 auto 30px}.nw-benchmark-intro p{font-size:17px;line-height:1.85}.nw-benchmark-intro h2{font-size:25px;margin-bottom:15px}.nw-evaluation-toc a{display:block;color:#3b5e64;font-size:13px;line-height:1.6;margin:0 0 11px}.nw-evaluation-content #monitoring,.nw-evaluation-content #benchmark-context{scroll-margin-top:110px}@media(min-width:1200px){.nw-evaluation-layout{display:grid;grid-template-columns:170px minmax(0,1fr);gap:36px}.nw-evaluation-toc{display:block;position:sticky;top:112px;align-self:start}.nw-evaluation-toc details{display:none}}@media(max-width:1199px){.nw-evaluation-toc{display:block;margin:0 0 24px}.nw-evaluation-toc nav{display:none}.nw-evaluation-toc details{font-size:14px}.nw-evaluation-toc summary{margin-bottom:12px;color:#315d55}.nw-evaluation-toc a{margin:8px 0}}.ni-evaluation .ni-header{padding-bottom:28px;max-width:1180px}.ni-evaluation .ni-back{margin-bottom:22px}.ni-evaluation .ni-header h1{font-size:clamp(34px,4vw,54px);line-height:1.12;margin:10px 0 16px}.ni-evaluation .ni-lead{max-width:920px;font-size:18px}.ni-evaluation__metadata{margin:8px 0}.ni-evaluation .ni-header>p:last-child{margin:8px 0 0}.ni-evaluation h1{overflow-wrap:anywhere}.ni-evaluation__metadata{overflow-wrap:anywhere}.ni-evaluation__metadata{font-size:14px;color:#4e646d;line-height:1.9}.ni-evaluation__metadata span{margin:0 10px;color:#8caca6}.ni-evaluation__section{padding:24px 0;border:0}.ni-evaluation__section>p{max-width:850px;line-height:1.8}.ni-evaluation__section h2{font-size:25px;margin-bottom:18px}.ni-original-figure{margin:0 0 30px;border:0;background:white;padding:clamp(10px,2vw,28px);border-radius:10px}.ni-original-figure img{width:100%;height:auto;max-height:900px;object-fit:contain}.ni-original-figure figcaption{font-size:13px;line-height:1.8;color:#4e636b;margin-top:18px}.ni-original-figure figcaption a{margin-left:12px}.ni-method-map{padding:30px;background:#edf3ef;border:1px solid #d3e0d9}.ni-suite-overview ol{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 28px;padding:0;margin:25px 0}.ni-suite-overview li{display:flex;align-items:center;gap:15px;border-top:1px solid #c8d9cf;padding:17px 0;font-size:15px;line-height:1.5}.ni-suite-overview li span{font-size:11px;color:#427b71}.ni-suite-overview>p{font-size:15px;line-height:1.8;max-width:850px}.ni-method-map>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:24px 0}.ni-method-map article{border-top:2px solid #267c76;padding-top:20px}.ni-method-map article>span{font-size:12px;color:#497e76}.ni-method-map h2{font-size:20px;margin:10px 0}.ni-method-map article p{font-size:14px;line-height:1.8;color:#4c6269}@media(max-width:700px){.ni-suite-overview ol{grid-template-columns:1fr}.ni-method-map>div{grid-template-columns:1fr}.ni-evaluation .ni-header{padding-bottom:30px}.ni-evaluation__metadata span{margin:0 4px}}
+</style>
+
+<script>
+// Native and Astro history navigation must reveal legacy chart anchors inside the source disclosure.
+function revealOriginalChart(){
+ let id='';try{id=decodeURIComponent(location.hash.slice(1));}catch{return;}
+ if(!id.startsWith('chart-'))return;
+ const target=document.getElementById(id);
+ const disclosure=target?.closest<HTMLDetailsElement>('details.nm-original-results');
+ if(disclosure)disclosure.open=true;
+}
+revealOriginalChart();
+document.addEventListener('astro:page-load',revealOriginalChart);
+window.addEventListener('hashchange',revealOriginalChart);
+window.addEventListener('popstate',()=>requestAnimationFrame(revealOriginalChart));
+</script>

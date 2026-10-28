@@ -1,0 +1,13 @@
+---
+import {catalogue,indexBase} from '../../../data/nuwa-index';
+import {localizedPath,type Locale} from '../../../i18n/config';
+interface Props{assertion:any;locale:Locale}
+const{assertion:a,locale}=Astro.props,en=locale==='en',base=localizedPath(indexBase,locale);
+const ids=[...new Set<string>(a.resultIds??[])],labels:Record<string,string>=en?{'model-recommendation':'Research recommendation','source-finding':'Source finding','source-report':'Source finding','nuwa-calculation':'NUWA calculation',interpretation:'NUWA interpretation','nuwa-interpretation':'NUWA interpretation',recommendation:'Research recommendation'}:{'model-recommendation':'研究建议','source-finding':'来源发现','source-report':'来源发现','nuwa-calculation':'NUWA 计算',interpretation:'NUWA 解读','nuwa-interpretation':'NUWA 解读',recommendation:'研究建议'};
+---
+<div class="nw-assertion-evidence" data-assertion-evidence>
+ <small>{labels[a.assertionKind]??(en?'Editorial interpretation':'编辑解读')}</small>
+ {ids.length>0&&<details><summary>{ids.length} {en?'supporting observations':'条支撑观测'}</summary><ul>{ids.map(id=>{const r=catalogue.results.find(r=>r.id===id);return r&&<li><a href={`${base}/result/${id}/`}>{r.system}</a> · {r.taskSet}{r.experimentalConditions&&<> · {r.experimentalConditions.goal} · {r.experimentalConditions.threat}</>} · {r.locator}</li>;})}</ul></details>}
+ {(a.sourceRefs??[]).map((ref:any)=>{const s=catalogue.sources.find(s=>s.id===ref.sourceId);return <p><a href={ref.url??s?.url}>{s?.title??ref.title??(en?'Original source':'原始来源')}</a> · {ref.locator}</p>;})}
+</div>
+<style>.nw-assertion-evidence{font-size:11px;line-height:1.65;color:#526763}.nw-assertion-evidence small{display:block;font-size:10px;margin:7px 0 4px;color:#276455}.nw-assertion-evidence summary{cursor:pointer;color:#276455}.nw-assertion-evidence ul{display:block!important;list-style:disc!important;margin:8px 0!important;padding-left:16px!important;max-height:220px;overflow:auto}.nw-assertion-evidence li{display:list-item!important;border:0!important;padding:0 0 7px!important;margin:0!important;font-size:11px;overflow-wrap:anywhere}.nw-assertion-evidence p{font-size:11px!important;line-height:1.6!important;margin:7px 0!important}</style>

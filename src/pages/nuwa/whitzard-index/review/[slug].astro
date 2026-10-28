@@ -1,0 +1,6 @@
+---
+import {catalogue} from '../../../../data/nuwa-index';
+import {loadResearchSyntheses} from '../../../../lib/nuwa-intelligence/researchReading.mjs';
+export function getStaticPaths(){return loadResearchSyntheses(catalogue).filter((a:any)=>a.groupId).map((a:any)=>({params:{slug:a.id},props:{id:a.id}}));}
+return Astro.redirect(`/nuwa/whitzard-index/synthesis/${Astro.props.id}/`);
+---

@@ -1,7 +1,9 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { extname, join, relative } from "node:path";
 
-const root = new URL("../dist/", import.meta.url).pathname;
+const rootIndex = process.argv.indexOf("--root");
+const root = rootIndex >= 0 ? process.argv[rootIndex + 1] : new URL("../dist/", import.meta.url).pathname;
+if (!root) throw new Error("Provide --root <build directory>.");
 const htmlFiles = [];
 function walk(dir) {
   for (const name of readdirSync(dir)) {

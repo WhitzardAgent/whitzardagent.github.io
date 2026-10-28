@@ -18,6 +18,7 @@ export function hasLocalizedPeer(pathname: string): boolean {
   const base = normalizeRoute(pathname);
   if (base.startsWith("/news/")) return true;
   if (base.startsWith("/nuwa/blog/")) return true;
+  if (base.startsWith('/nuwa/whitzard-index/')) return true;
   return localizedRoutes.includes(base as (typeof localizedRoutes)[number]);
 }
 

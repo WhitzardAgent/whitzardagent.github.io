@@ -19,7 +19,7 @@ const href = localeSwitchPath(pathname, target);
     const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("[data-language-switch]");
     if (link?.dataset.locale) {
       localStorage.setItem("wz-locale", link.dataset.locale);
-      if (window.location.pathname.replace(/\/$/, "").endsWith("/nuwa/research")) link.search = window.location.search;
+      if (/\/nuwa\/(research(?:\/.*)?|whitzard-index(?:\/.*)?)$/.test(window.location.pathname.replace(/\/$/, ""))) { link.search = window.location.search; link.hash = window.location.hash; }
     }
   }, { capture: true });
 </script>

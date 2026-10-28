@@ -47,7 +47,7 @@ export const whitzardIndexCopy: Record<Locale, WhitzardIndexCopy> = {
       title: "NUWA Index — NUWA",
       description: "NUWA Index — under construction.",
     },
-    status: "Under construction",
+    status: "Research and evidence index",
     eyebrow: "NUWA INDEX · NUWA",
     title: "Track frontier AI risk over time",
     subtitle: "A longitudinal evidence system for frontier AI risk",
@@ -100,9 +100,9 @@ export const whitzardIndexCopy: Record<Locale, WhitzardIndexCopy> = {
   zh: {
     meta: {
       title: "NUWA Index — 女娲实验室",
-      description: "NUWA Index，建设中。",
+      description: "NUWA Index：前沿 AI 风险研究与证据索引。",
     },
-    status: "建设中",
+    status: "研究与证据索引",
     eyebrow: "NUWA Index · 女娲实验室",
     title: "持续观测前沿 AI 风险",
     subtitle: "面向前沿 AI 风险的长期证据系统",

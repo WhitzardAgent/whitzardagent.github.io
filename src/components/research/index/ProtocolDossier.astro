@@ -1,0 +1,11 @@
+---
+import {catalogue} from '../../../data/nuwa-index';
+import {loadProtocolDossiers} from '../../../lib/nuwa-intelligence/researchReading.mjs';
+import {protocolProfileText} from '../../../lib/nuwa-intelligence/protocolComparison.mjs';
+import type {Locale} from '../../../i18n/config';
+interface Props{protocolId:string;locale:Locale}
+const{protocolId,locale}=Astro.props,en=locale==='en',profile=loadProtocolDossiers(catalogue).find((p:any)=>p.id===protocolId);
+const fields=[['measurement',en?'Measurement construct':'测量构念'],['task',en?'Task population':'任务与样本'],['scoring',en?'Scoring and failure modes':'判分与失效情形'],['conditions',en?'System conditions':'系统条件'],['statistics',en?'Statistical meaning':'统计含义'],['validity',en?'Validity and interpretation':'效度与解释'],['usage',en?'Appropriate research use':'适用研究问题']];
+---
+{profile&&<details class="np-dossier" data-protocol-dossier><summary>{en?'Measurement dossier · NUWA reading':'测量档案 · NUWA 解读'}</summary><p>{en?'Source-method reading and retained catalogue information are distinguished. Publication does not establish independent evidence or bilingual editorial review.':'档案区分来源方法阅读与既有目录信息；已经公开不代表完成独立证据复核或双语编辑复核。'}</p>{profile.review?.state==='review-pending'?<p role="status">{en?'The source has changed. This interpretation is withheld until review.':'来源有变化，测量解读暂缓显示，等待复核。'}</p>:<dl>{fields.map(([key,title])=><div><dt>{title}</dt><dd>{protocolProfileText(profile,key,locale)}</dd></div>)}</dl>}<ul>{profile.sourceRefs?.map((ref:any)=>{const source=catalogue.sources.find(s=>s.id===ref.sourceId);return <li><a href={ref.url??source?.url}>{source?.title??ref.title??profile.name}</a> · {ref.locator}{ref.version&&<small style="display:block;overflow-wrap:anywhere">{ref.version}</small>}</li>;})}</ul></details>}
+<style>.np-dossier{margin:0 0 32px;padding:18px 22px;background:#f0f4ef;border:1px solid #d6e0d7;font-size:14px;line-height:1.8}.np-dossier summary{cursor:pointer;font-weight:600;color:#2b6052}.np-dossier>p,.np-dossier li{font-size:12px;overflow-wrap:anywhere}.np-dossier dl>div{border-top:1px solid #d8e0d9;padding:14px 0}.np-dossier dt{font-size:13px;font-weight:600}.np-dossier dd{margin:5px 0;font-size:15px;white-space:pre-line}.np-dossier a{color:#286453}</style>

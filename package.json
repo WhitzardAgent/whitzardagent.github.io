@@ -9,6 +9,8 @@
     "build": "astro build",
     "check": "astro check",
     "check:links": "node scripts/check-links.mjs",
+    "check:nuwa-index": "node scripts/check-nuwa-index.mjs",
+    "check:nuwa-index:update": "node scripts/check-nuwa-index-update.mjs",
     "check:content": "node scripts/check-content.mjs",
     "check:terminology": "node scripts/check-terminology.mjs",
     "check:research-blog": "node scripts/check-research-blog.mjs",
@@ -19,7 +21,11 @@
     "new:note": "node scripts/new-content.mjs note",
     "new:report": "node scripts/new-content.mjs report",
     "new:update": "node scripts/new-content.mjs update",
-    "new:research-blog": "node scripts/new-research-blog.mjs"
+    "new:research-blog": "node scripts/new-research-blog.mjs",
+    "audit:nuwa-reading": "node scripts/audit-nuwa-reading.mjs && node scripts/audit-nuwa-evidence-reading.mjs",
+    "prepare:nuwa-reading-review": "node scripts/prepare-nuwa-reading-review.mjs && node scripts/validate-nuwa-reading-package.mjs",
+    "check:nuwa-publication": "node scripts/check-nuwa-publication.mjs",
+    "prepare:nuwa-weekly": "node scripts/prepare-nuwa-weekly.mjs"
   },
   "repository": {
     "type": "git",
@@ -38,15 +44,18 @@
     "@astrojs/react": "^6.0.2",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
+    "@headlessui/react": "^2.2.10",
+    "@tailwindcss/vite": "^4.3.3",
+    "ag-grid-community": "^36.2.0",
     "astro": "^7.1.6",
-    "autoprefixer": "^10.5.0",
     "clsx": "^2.1.1",
+    "echarts": "^6.1.0",
     "framer-motion": "^12.40.0",
     "lenis": "^1.3.25",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tailwind-merge": "^3.6.0",
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

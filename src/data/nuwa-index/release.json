@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "nuwa-public-release-1",
+  "snapshotId": "2026-10-28.1",
+  "publishedOn": "2026-10-28",
+  "publication": {
+    "state": "published",
+    "publishedOn": "2026-10-28",
+    "authorizationReference": "user-authorized-full-reading-release-2026-10-28"
+  },
+  "readingEditionHash": "b2c5024c588cb4c79513d34bd6e0eca6135182b3b43b84c60df75ddc23ebd994",
+  "bootstrapBaseRevision": "da9c04a3b63c0c4338ec7bdd1eb6f07f4a32646d",
+  "counts": {
+    "works": 175,
+    "protocols": 79,
+    "syntheses": 5,
+    "recordObservations": 100,
+    "rawResults": 1076
+  },
+  "changes": {
+    "en": "Public launch of the bilingual reading index, measurement profiles and evidence-linked research analyses.",
+    "zh": "双语研究索引、测量档案及证据关联专题正式公开。"
+  },
+  "review": {
+    "independentEvidenceReview": "pending-human-review",
+    "bilingualEditorialReview": "pending-human-review"
+  }
+}

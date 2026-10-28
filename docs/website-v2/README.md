@@ -48,3 +48,5 @@
 - [19｜双产品展示与静态产品证据](19-dual-products-and-static-evidence.md)：WhitzardGateway、首页等权展位、全站模拟演示撤下及本地验收。
 - [20｜企业应用场景与安全价值](20-use-cases-and-security-value.md)：四类场景、双语安全维度、产品职责及验收。
 - [21｜研究图示与长文阅读](21-research-reading-and-figures.md)：AgentCyberRange 新图、Markdown 图注、左侧目录与响应式长文。
+
+- [38｜NUWA Index 公开阅读版与每周维护](38-public-launch-and-weekly-maintenance.md)：正式内容、初始化发布基线、每周五候选准备与统一审阅发布。

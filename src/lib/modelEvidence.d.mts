@@ -1,0 +1,12 @@
+import type {Catalogue,Text,AssessmentEvidence,Evidence,TrendSeries} from '../data/nuwa-index/types';
+export type TrendState={series:string;metric:string;developer:string;origin:string;from:string;to:string;asOf:string;display:string};
+export type TrendData=Pick<Catalogue,'models'|'assessments'|'protocolVariants'|'assessmentEvidence'|'trendSeries'|'results'>;
+export type TrendPoint={id:string;resultId:string;modelId:string;system:string;releaseDate:string|null;releaseDateBasis:string;developerId:string;origin:AssessmentEvidence['origin'];executorIds:string[];originalExecutorIds:string[];publicSince:string|null;availability:string;reportDate:string|null;reportRevisionDate:string|null;evaluationDate:string|null;value:number;unit:string;precision:number;qualifier:string;interval:{lower:number;upper:number}|null;intervalText:string|null;configuration:Evidence['configuration'];sample:Text;sourceId:string;sourceUrl:string;sourceVersion:string;locator:string;limitations:Text;variant:string|undefined;measurement:string};
+export const modelOriginLabels:Record<'en'|'zh',Record<string,string>>;
+export function readTrendState(search:string,series:TrendSeries[]):TrendState;
+export function writeTrendState(search:string,state:TrendState):string;
+export function filterTrendPoints(points:TrendPoint[],state:TrendState):TrendPoint[];
+export function trendPoints(data:TrendData,seriesId:string,metricId:string):TrendPoint[];
+export function validateModelEvidence(data:Catalogue):string[];
+export function variantRiskAreas(data:Catalogue,variant:import('../data/nuwa-index/types').ProtocolVariant|undefined):string[];
+export function resultGroups(data:Catalogue,records:Evidence[]):{id:string;benchmark:import('../data/nuwa-index/types').Benchmark;chart:import('../data/nuwa-index/types').ChartSpec|null;records:Evidence[];areas:string[]|null;variantId?:string}[];

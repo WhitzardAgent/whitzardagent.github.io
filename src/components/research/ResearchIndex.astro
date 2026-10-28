@@ -16,6 +16,7 @@ import ResearchMediaWall from "./ResearchMediaWall.astro";
 import { getResearchHighlights } from "../../lib/researchHighlights";
 import { allResearchBlogEntries, publishedResearchBlog, researchBlogSlug } from "../../lib/researchBlog";
 import { externalArticles } from "../../data/externalArticles";
+import { publishedIndexReports } from '../../lib/indexReports';
 import { tagId, type ResearchBlogCard } from "../../lib/researchFilters";
 import "../../styles/research.css";
 import "../../styles/research-library.css";
@@ -33,6 +34,7 @@ const blogs: ResearchBlogCard[] = publishedResearchBlog(blogEntries, locale).map
   return { id: entry.id, title: entry.data.title, summary: entry.data.summary, year: entry.data.date.getUTCFullYear(), date: entry.data.date.toISOString().slice(0, 10), authors: entry.data.authors, researchSlug: entry.data.researchSlug, cover: entry.data.cover, url: localizedPath(`/nuwa/blog/${researchBlogSlug(entry)}`, locale), source: "NUWA", external: false, tags: (english?.data.tags ?? entry.data.tags).map((en, index) => ({ id: tagId(en), en, zh: chinese?.data.tags[index] ?? en })) };
 });
 const externalTagNames: Record<string, string> = { "Frontier AI Risk": "前沿 AI 风险", Evaluation: "评测", Methodology: "方法" };
+blogs.push(...(await publishedIndexReports()).filter(entry => entry.data.locale === locale).map(entry => ({ id: `index-${entry.id}`, title: entry.data.title, summary: entry.data.summary, year: entry.data.date.getUTCFullYear(), date: entry.data.date.toISOString().slice(0, 10), authors: entry.data.authors, url: localizedPath(`/nuwa/whitzard-index/reports/${entry.data.articleSlug}`, locale), source: 'NUWA Index', external: false, tags: [{ id: 'nuwa-index', en: 'NUWA Index', zh: 'NUWA Index' }] })));
 blogs.push(...externalArticles.map((article, index) => ({ id: `external-${index}`, title: article.title, summary: locale === "zh" ? "讨论基于证据与可执行实验的前沿 AI 风险评测方法。" : article.summary ?? "", year: Number(article.year), authors: [], url: article.url, source: article.source, external: true, tags: (article.tags ?? []).map(en => ({ id: tagId(en), en, zh: externalTagNames[en] ?? en })) })));
 const researcherNames = locale === "zh"
   ? { "jiarun-dai": "戴嘉润", "xudong-pan": "潘旭东", "geng-hong": "洪赓" }
@@ -49,7 +51,7 @@ const schema = {
 ---
 
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa/research" schema={schema}>
-  <section class="research-library-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "女娲实验室" : "NUWA"} <span aria-hidden="true">→</span></a><a href={localizedPath("/nuwa/whitzard-index", locale)}>NUWA Index · {locale === "zh" ? "建设中" : "Under construction"}</a></div></div></section>
+  <section class="research-library-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "女娲实验室" : "NUWA"} <span aria-hidden="true">→</span></a><a href={localizedPath("/nuwa/whitzard-index", locale)}>NUWA Index</a></div></div></section>
 
   {highlights[0] && <div class="site-container research-library-highlight"><ResearchHighlightBanner highlight={highlights[0]} locale={locale} compact /></div>}
 

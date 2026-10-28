@@ -1,0 +1,50 @@
+---
+import {wikiFor} from '../../../lib/nuwaWiki';
+import {readingSections} from '../../../lib/wikiReading.mjs';
+import WikiBody from './WikiBody.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { catalogue,indexBase,researchSupplement } from '../../../data/nuwa-index';
+import type {Locale} from '../../../i18n/config';
+import {localizedPath} from '../../../i18n/config';
+import {knowledgeCopy} from '../../../i18n/pages/nuwaKnowledge';
+import PageSources from '../PageSources.astro';
+import InstitutionByline from './InstitutionByline.astro';
+import IncidentReview from './IncidentReview.astro';
+import ResearchDossier from './ResearchDossier.astro';
+import ResearchSupplement from './ResearchSupplement.astro';
+import ResearchCitations from './ResearchCitations.astro';
+import {loadResearchDossiers,readingStatus} from '../../../lib/nuwa-intelligence/researchReading.mjs';
+import '../../../styles/nuwa-index.css';
+interface Props {locale:Locale; id:string}
+const {locale,id}=Astro.props;const w=catalogue.works.find(w=>w.id===id)!;const k=knowledgeCopy[locale];
+const path=(tail='')=>localizedPath(`${indexBase}${tail}`,locale);
+const refs=[{sourceId:w.sourceId,appliesTo:locale==='en'?'Research question, method and findings':'研究问题、方法与发现'},...w.contributions.map(c=>({sourceId:c.sourceId,locator:c.locator,appliesTo:locale==='en'?'Institutional attribution':'机构署名'})),...w.resources.map(r=>({url:r.url,title:r.label})),...catalogue.relations.filter(r=>r.from===id||r.to===id).map(r=>({sourceId:r.sourceId,locator:r.locator,appliesTo:locale==='en'?'Research context':'研究背景'}))];
+const wiki=await wikiFor(id,locale);
+const sections=readingSections(w,locale);
+const dossier=loadResearchDossiers(catalogue).find((d:any)=>d.id===id),draft=dossier?.review?.state==='review-pending'?null:dossier?.[locale];
+const richDraft=Boolean(draft&&['full','full-text','abstract','introduction-only'].includes(dossier?.review?.sourceScope??dossier?.sourceScope)&&['design','findings','interpretation','limits'].some(key=>draft[key]?.length));
+const reading=readingStatus(w,{dossier}),en=locale==='en';
+const draftHeadings=[['question',en?'Research question':'研究问题'],['design',en?'Design and assumptions':'研究设计与假设'],['findings',en?'Source findings':'来源发现'],['interpretation',en?'NUWA interpretation':'NUWA 解读'],['limits',en?'Limits and contrary evidence':'局限与相反证据'],['connections',en?'Research connections':'研究联系'],['decisionRelevance',en?'Research and decision relevance':'研究与决策意义']].filter(([key])=>draft?.[key]?.length).map(([key,text])=>({depth:2,slug:`claim-${id}-${key}`,text}));
+const hasSupplement=Boolean(dossier?.batchId||researchSupplement?.updates.some((u:any)=>u.id===id));
+const headings=[...(richDraft?draftHeadings:[]),...(richDraft?[]:wiki?wiki.headings:sections.map(s=>({depth:2,slug:s.id,text:s.title}))),...(hasSupplement?[{depth:2,slug:'research-update',text:en?'Evidence update':'证据补充'}]:[])];
+const scenario=catalogue.scenarioAssociations?.find(a=>a.workId===id);
+const relations=catalogue.relations.filter(r=>r.from===id||r.to===id);
+---
+<BaseLayout title={`${w.title} — NUWA Index`} description={w.summary[locale]} locale={locale} brand="nuwa" canonicalPath={`${indexBase}/work/${id}`}>
+<article class="ni-page nk-page nk-work site-container">
+  <header class="ni-header"><a class="ni-back" href={`${path()}?view=research#ni-library`}>← {k.library}</a><p class="ni-kicker">{catalogue.functions.find(f=>f.id===w.primaryFunction)!.label[locale]} · {k.kinds[w.kind]}</p><h1>{w.title}</h1><p class="nk-reading-scope" data-reading-status={reading.id}>{reading.label[locale]}</p><div class="nk-work__meta"><span>{k.publication}: <time datetime={w.publicationDate??undefined}>{w.publicationDate??k.dateUnknown}</time></span><span>{k.checked}: {w.updatedOn}</span>{wiki&&<span>{locale==='en'?'Article updated':'正文更新'}: {wiki.entry.data.updatedOn}</span>}</div><div class="ni-tags">{(w.tags??[]).map(tag=><a href={`${path()}?view=research&tag=${tag}`}>{catalogue.researchTags?.find(t=>t.id===tag)?.label[locale]}</a>)}</div><div class="nk-work__links"><a class="button button-primary" href={w.originalUrl} target="_blank" rel="noreferrer">{en?'Original source':'原始来源'} ↗</a><a href="#research-citations">{en?'Cite this record':'引用本记录'} ↓</a>{w.areas.map(id=><a href={path(`/risk/${id}`)}>{catalogue.areas.find(a=>a.id===id)!.label[locale]} →</a>)}</div></header>
+  <details class="nk-toc-mobile"><summary>{k.notes}</summary>{headings.map(h=><a href={`#${h.slug}`}>{h.text}</a>)}<a href="#attribution">{k.attribution}</a><a href="#research-sources">{k.resources}</a></details><div class="nk-reading"><nav class="nk-toc" aria-label={k.notes}><strong>{k.notes}</strong>{headings.map(h=><a href={`#${h.slug}`}>{h.text}</a>)}<a href="#attribution">{k.attribution}</a>{w.protocolIds.length>0&&<a href="#protocols">{k.protocols}</a>}<a href="#research-sources">{k.resources}</a></nav>
+  <div class="nk-reading__body">{richDraft&&(wiki?wiki.headings.map(h=>h.slug):sections.map(s=>s.id)).map(slug=><span id={slug} class="nw-legacy-note-anchor"/>)}<ResearchDossier recordId={id} locale={locale}/>{id==='hugging-face-incident'&&<IncidentReview locale={locale}/>}{wiki&&!richDraft?<WikiBody wiki={wiki}/>:!richDraft&&sections.map(section=><section id={section.id} class="nw-note-section"><h2>{section.title}</h2>{section.paragraphs.map(p=><p>{p}</p>)}</section>)}{scenario&&<section><h2>{locale==='en'?'Multi-agent dynamics':'多智能体效应'}</h2><p>{scenario.configuration[locale]}</p></section>}
+
+  <ResearchSupplement workId={id} locale={locale}/>
+  <section id="attribution"><h2>{k.attribution}</h2><InstitutionByline contributions={w.contributions} locale={locale} unverified={Boolean(w.localReviewBatchId||w.contentEditionId)}/>{w.authors.length>0&&<details><summary>{k.authors} ({w.authors.length})</summary><p>{w.authors.join(' · ')}</p></details>}</section>
+  {w.protocolIds.length>0&&<section id="protocols"><h2>{k.protocols}</h2>{w.protocolIds.map(id=><p><a href={path(`/benchmark/${id}`)}>{catalogue.benchmarks.find(b=>b.id===id)!.name} →</a></p>)}</section>}
+  {relations.length>0&&<section><h2>{k.relations}</h2>{relations.map(r=>{const other=catalogue.works.find(w=>w.id===(r.from===id?r.to:r.from))!;return <article class="nk-relation"><small>{k.relationTypes[r.type]} · {r.from===id?w.title:other.title}</small><h3><a href={path(`/work/${other.id}`)}>{other.title}</a></h3><p>{r.rationale[locale]}</p></article>})}</section>}
+  <ResearchCitations workId={id} locale={locale}/>
+  <PageSources locale={locale} references={[...(wiki?.entry.data.sourceRefs??[]),...refs,...(dossier?.sourceRefs??[]),...(w.noteSourceLocator?[{sourceId:w.sourceId,locator:w.noteSourceLocator,appliesTo:'NUWA Research Note'}]:[])]} sources={catalogue.sources}/>
+  </div></div>
+</article>
+</BaseLayout>
+<style is:global>
+.nk-work .nk-reading__body{max-width:850px;min-width:0}.nk-work .nk-reading__body>section{padding:0;margin:0 0 30px;border:0}.nk-work .nk-reading__body p{overflow-wrap:anywhere;font-size:17px;line-height:1.85}.nk-work .nk-reading__body h2{font-size:25px;line-height:1.4;letter-spacing:-.025em;margin:0 0 15px;scroll-margin-top:110px}.nk-work .nk-toc a{line-height:1.55}.nk-work .nk-work__links .button{padding:0;background:transparent;color:#276455;border:0;box-shadow:none;font-size:13px}.nk-work .nk-relation{border:0;background:transparent;padding:0;margin:22px 0}.nk-work .nw-wiki-prose{margin-left:0}.nk-work .ni-header{max-width:1040px}.nw-note-section{max-width:760px}
+</style>

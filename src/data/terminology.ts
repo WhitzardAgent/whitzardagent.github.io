@@ -66,7 +66,7 @@ export const terminology: TerminologyEntry[] = [
     zh: "NUWA Index",
     en: "NUWA Index",
     status: "locked",
-    definition: "女娲实验室的前沿 AI 风险指数项目；当前显示建设中。",
+    definition: "女娲实验室的前沿 AI 风险证据项目；正式名称为 NUWA Frontier AI Safety Index。",
     useWhen: "导航、栏目、页面标题与 metadata；历史网址保持兼容。",
     deprecated: ["Whitzard Index", "白泽指数"],
   },
@@ -188,6 +188,51 @@ export const terminology: TerminologyEntry[] = [
     deprecated: ["算计"],
   },
   {
+    id: "risk-entry", zh: "风险入口", en: "risk entry", status: "preferred",
+    definition: "NUWA 两类风险总类下的一级研究入口；具体评测按二级问题建立关联。",
+    useWhen: "NUWA Index 分类导航与证据矩阵。",
+  },
+  {
+    id: "threat-model", zh: "威胁模型", en: "threat model", status: "preferred",
+    definition: "说明行为主体、前提条件和潜在损害路径的分析设定。",
+    useWhen: "研究问题、评测设置与适用范围。",
+  },
+  {
+    id: "capability", zh: "任务能力", en: "capability", status: "preferred",
+    definition: "系统在规定条件和资源约束下能够完成的任务。",
+    useWhen: "技术评测；不得直接等同于行为倾向或部署风险概率。",
+  },
+  {
+    id: "propensity", zh: "行为倾向", en: "propensity", status: "preferred",
+    definition: "系统在明确条件且存在选择空间时选择某种行为的条件性倾向。",
+    useWhen: "须有支持推断的重复或变条件试验；不从单次行为推断稳定内在意图。",
+  },
+  {
+    id: "behavior", zh: "观察行为", en: "behavior", status: "preferred",
+    definition: "在具体实验或运行中记录到的输出和行动，包括尝试、失败与拒绝。",
+    useWhen: "描述实际观察到什么，不直接推断能力上限或普遍行为倾向。",
+  },
+  {
+    id: "deception", zh: "欺骗", en: "deception", status: "preferred",
+    definition: "使他人形成错误认知的行为；其操作定义和意图证据须按研究说明。",
+    useWhen: "研究行为证据，不将任意错误输出直接认定为欺骗或隐蔽谋划。",
+  },
+  {
+    id: "power-seeking", zh: "寻求权力", en: "power-seeking", status: "preferred",
+    definition: "增加对资源、影响力或后续行动选择的控制。",
+    useWhen: "前沿风险研究；不将正常授权的资源使用直接认定为此类风险。",
+  },
+  {
+    id: "self-replication", zh: "自我复制", en: "self-replication", status: "preferred",
+    definition: "系统在规定环境中建立可运行副本的能力或行为。",
+    useWhen: "分别说明受控任务、授权条件与未经授权扩散，不混用其结论。",
+  },
+  {
+    id: "shutdown-avoidance", zh: "关闭规避", en: "shutdown avoidance", status: "preferred",
+    definition: "系统主动规避经授权的人类关闭或停止控制。",
+    useWhen: "区分主动规避行为、普通服务恢复和任务失败。",
+  },
+  {
     id: "reasoning-trace",
     zh: "推理轨迹",
     en: "reasoning trace",
@@ -288,4 +333,11 @@ export const terminology: TerminologyEntry[] = [
     definition: "进入真实 SaaS 控制台身份验证流程。",
     useWhen: "仅在存在真实控制台或如实说明页面时使用。",
   },
+  { id: 'risk-discovery', zh: '风险发现', en: 'Risk Discovery', status: "preferred", definition: '研究风险机制、触发条件和失效模式。', useWhen: "NUWA Index 研究知识库。" },
+  { id: 'risk-evaluation', zh: '风险评测', en: 'Risk Evaluation', status: "preferred", definition: '在指定条件下测量能力、倾向或行为。', useWhen: "NUWA Index 研究知识库。" },
+  { id: 'risk-monitoring', zh: '风险监测', en: 'Risk Monitoring', status: "preferred", definition: '研究风险信号、可监测性和检测可靠性。', useWhen: "NUWA Index 研究知识库。" },
+  { id: 'risk-investigation', zh: '风险调查', en: 'Risk Investigation', status: "preferred", definition: '依据留存证据重建事件并检验解释。', useWhen: "NUWA Index 研究知识库。" },
+  { id: 'risk-governance', zh: '风险治理', en: 'Risk Governance', status: "preferred", definition: '技术防护、控制、安全论证和部署决策研究。', useWhen: "NUWA Index 研究知识库。" },
+  { id: 'research-work', zh: '研究作品', en: 'research work', status: "preferred", definition: '原始作品身份，与实现版本和单项结果区分。', useWhen: "NUWA Index 研究知识库。" },
+  { id: 'evaluation-protocol', zh: '评测协议', en: 'evaluation protocol', status: "preferred", definition: '任务、评分方法、配置和测量概念的组合。', useWhen: "NUWA Index 研究知识库。" },
 ];
