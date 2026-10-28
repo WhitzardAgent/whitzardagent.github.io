@@ -1,0 +1,12 @@
+---
+import SourceDetail from '../../../../components/research/index/SourceDetail.astro';
+import ModelDetail from '../../../../components/research/index/ModelDetail.astro';
+import AssessmentDetail from '../../../../components/research/index/AssessmentDetail.astro';
+import WorkDetail from '../../../../components/research/index/WorkDetail.astro';
+import IndexCollection from '../../../../components/research/index/IndexCollection.astro';
+import IndexDetail from '../../../../components/research/index/IndexDetail.astro';
+import { indexDetailPaths } from '../../../../lib/nuwaIndexPaths';
+export const getStaticPaths = indexDetailPaths;
+const { kind, id } = Astro.props;
+---
+{kind === "source" ? <SourceDetail locale="zh" id={id}/> : kind === "model" ? <ModelDetail locale="zh" id={id}/> : kind === "assessment" ? <AssessmentDetail locale="zh" id={id}/> : kind === 'work' ? <WorkDetail locale="zh" id={id}/> : kind === 'function' || kind === 'organization' ? <IndexCollection locale="zh" kind={kind} id={id}/> : <IndexDetail locale="zh" kind={kind} id={id}/> }

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "nuwa-bootstrap-retention-1",
+  "baseGitRevision": "da9c04a3b63c0c4338ec7bdd1eb6f07f4a32646d",
+  "scope": "Retained pre-launch snapshots and record editions copied byte-for-byte from the user-designated review workspace. Archival retention does not imply prior public deployment.",
+  "files": [
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-26.1.json",
+      "sha256": "e999f188fb73b8696cf0b6ee10579b4d9732f47384813d79499b036ff308eb85"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-25.4.json",
+      "sha256": "bb07249c05ab8b1da060724a4fddf1785752e643cbdc180ba15267b9276bc857"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-25.5.json",
+      "sha256": "0452f0ed291442bab781daa7e31ec1a44aad1d4739d6017806cc7cf045aa9966"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-27.3.json",
+      "sha256": "83546585409016297cc06add040688ccc72d7889eb6102827fb3fb080c2d81e1"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-25.2.json",
+      "sha256": "1611a57763b9f20bea0a98825eeeef55c5e1fdb3dec217931e5348cfc81a0ab8"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-25.3.json",
+      "sha256": "7c1dd682bac26bc9bfd74413dfe62b23d0a1abd10d40be69f6e4203ffe0299c6"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-27.2.json",
+      "sha256": "88799e565a601d62d732fa2100f912d2a26f65944eccbbf4bbc1715e2ac655e3"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-27.1.json",
+      "sha256": "7447519cef90cf7814a6bd94ea964db61304bad04f3a3393bc89123788df167c"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-26.4.json",
+      "sha256": "3c6c861fed26998e7bd9b8b3b2ab4e3d73a3f72e226bd8881130385e4420457e"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-26.3.json",
+      "sha256": "de3395e074bdf15f1c93543e368e1ad61d0aa2421530ff4b48afeaec596f5af9"
+    },
+    {
+      "file": "src/data/nuwa-index/snapshots/2026-10-26.2.json",
+      "sha256": "ae6b535e4905db746ed33efdbb24154b8e90f81f4ac39eddb9a82af9dda09fe1"
+    },
+    {
+      "file": "src/data/nuwa-index/record-editions/2026-10-27.3.json",
+      "sha256": "ad3c4a99076cbd1f9bdfcfd5359729736dd31a09a36751621151e42ef99a05a0"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+export function readingStatus(work:any,options?:{dossier?:any}):any;
+export function loadResearchDossiers(catalogue:any,environment?:any,read?:any):any[];
+export function loadProtocolDossiers(catalogue:any,environment?:any):any[];
+export function readingManifest(catalogue:any,options?:any):any;
+export function assertionState(assertion:any,fingerprint:string):string;
+export function validateAssertion(assertion:any,catalogue:any):string[];
+export function loadResearchSyntheses(catalogue:any,environment?:any):any[];
+export function dossierFingerprint(catalogue:any,dossier:any):string;
+export function synthesisEvidenceFingerprint(catalogue:any,analysis:any):string;
+export function registerResearchSupplement(data:any):void;

@@ -1,0 +1,142 @@
+---
+import {monitorValue, serializeMonitoringPayload} from '../../../lib/nuwa-intelligence/monitoring.mjs';
+import {organizationMarkMarkup} from '../../../lib/organizationBrands.mjs';
+interface Props {rows: any[]; locale: 'en' | 'zh'; namespace: string; active?: boolean; rankAllowed?: boolean}
+const {rows, locale, namespace, active = false, rankAllowed = false} = Astro.props;
+const en = locale === 'en';
+const base = `${en ? '/en' : ''}/nuwa/whitzard-index`;
+const metricLabel = (row:any) => [row.benchmarkName,typeof row.label === 'string' ? row.label : row.label?.[locale] ?? row.label?.en ?? ''].filter(Boolean).join(' · ');
+const conditionLabels:Record<string,string> = en ? {matched:'Matched',conditional:'Conditional',incomplete:'Incomplete'} : {matched:'条件匹配',conditional:'附条件',incomplete:'条件不完整'};
+const payload = serializeMonitoringPayload({rows, rankAllowed});
+---
+<nuwa-evidence-grid data-locale={locale} data-namespace={namespace} data-active={String(active)}>
+  <script is:inline type="application/json" data-evidence-grid-props set:html={payload}/>
+  <p class="ne-grid-status" data-grid-status role="status" aria-live="polite">{rows.length ? `${rows.length} ${en ? 'observations' : '条观测'}` : en ? 'No observations match these filters.' : '没有符合筛选条件的观测。'}</p>
+  <div class="ne-grid-host" data-grid-host hidden></div>
+  <div class="ne-grid-fallback" data-grid-fallback tabindex="0" role="region" aria-label={en ? 'Complete evidence table' : '完整证据表'}>
+    <table>
+      <caption>{en ? 'Measurements and source conditions' : '测量值与来源条件'}</caption>
+      <thead><tr><th scope="col">{en ? 'System / model' : '系统／模型'}</th><th scope="col">{en ? 'Result' : '结果'}</th><th scope="col">{en ? 'Condition status' : '条件状态'}</th><th scope="col">{en ? 'Task / conditions' : '任务／条件'}</th><th scope="col">{en ? 'Evaluator / report' : '评测方／报告'}</th><th scope="col">{en ? 'Dates' : '日期'}</th></tr></thead>
+      <tbody data-grid-fallback-rows>{rows.map(row => <tr data-evidence-key={row.key ?? `${row.resultId}|${row.metricId}`}>
+        <th scope="row"><span set:html={(row.developerIds??[row.developerId ?? row.developerID]).map((id:string)=>organizationMarkMarkup(id,'',{showName:false})).join('')}/><a href={`${base}/result/${row.resultId}/`}>{row.system}</a>{row.modelName !== row.system && <small>{row.modelName}</small>}</th>
+        <td>{monitorValue(row)}<small>{metricLabel(row)}</small><small>{row.intervalText}</small></td><td>{conditionLabels[row.conditionStatus] ?? row.conditionStatus ?? '—'}</td>
+        <td>{row.taskSet}{row.observationCondition&&<small>{row.observationCondition[locale]??row.observationCondition.en}</small>}<small>{row.configuration?.budget}</small>{row.experimentalConditions&&<small>{row.experimentalConditions.goal} · {row.experimentalConditions.threat}</small>}<small>{row.configuration?.harness ?? '—'}</small></td>
+        <td>{row.attribution?.evaluator ?? '—'}<small>{row.attribution?.sourceTitle}</small></td>
+        <td>{en ? 'Release' : '发布'} {row.releaseDate ?? '—'}<small>{en ? 'Report' : '报告'} {row.reportDate ?? '—'}</small></td>
+      </tr>)}</tbody>
+    </table>
+  </div>
+</nuwa-evidence-grid>
+<script>
+import {monitorValue} from '../../../lib/nuwa-intelligence/monitoring.mjs';
+import type {EvidenceGridController, EvidenceGridOptions} from '../../../lib/nuwa-intelligence/evidenceGrid';
+class NuwaEvidenceGrid extends HTMLElement {
+  rows: any[] = [];
+  options: EvidenceGridOptions = {};
+  grid?: EvidenceGridController;
+  loading?: Promise<void>;
+  generation = 0;
+  initialized = false;
+  connectedCallback() {
+    if (!this.initialized) {
+      const payload = JSON.parse(this.querySelector('[data-evidence-grid-props]')?.textContent ?? '{}');
+      this.rows = payload.rows ?? [];
+      this.options = {active: this.dataset.active === 'true', rankAllowed: Boolean(payload.rankAllowed)};
+      this.initialized = true;
+    }
+    if (this.options.active) this.activate();
+  }
+  setRows(rows: any[], options: EvidenceGridOptions = {}) {
+    this.rows = rows;
+    this.options = {...this.options, ...options};
+    this.dataset.active = String(Boolean(this.options.active));
+    this.renderFallback();
+    this.grid?.update(this.rows, this.options);
+    this.syncVisibility();
+    if (this.options.active) this.activate();
+  }
+  setActive(active: boolean) {
+    this.options.active = active;
+    this.dataset.active = String(active);
+    this.syncVisibility();
+    if (active) this.activate();
+  }
+  syncVisibility() {
+    const enhanced = Boolean(this.grid && this.options.active);
+    this.querySelector<HTMLElement>('[data-grid-host]')!.hidden = !enhanced;
+    this.querySelector<HTMLElement>('[data-grid-fallback]')!.hidden = enhanced;
+  }
+  activate() {
+    if (this.grid || this.loading || !this.isConnected || !this.options.active) return;
+    const generation = this.generation;
+    this.loading = import('../../../lib/nuwa-intelligence/evidenceGrid').then(module => {
+      if (!this.isConnected || generation !== this.generation || !this.options.active) return;
+      const host = this.querySelector<HTMLElement>('[data-grid-host]')!;
+      // Give the grid measurable dimensions before creating it; keep the table until creation succeeds.
+      host.hidden = false;
+      try {
+        this.grid = module.createEvidenceGrid(host, this, this.rows, this.dataset.locale === 'en' ? 'en' : 'zh', this.options);
+        this.dataset.gridReady = 'true';
+        this.syncVisibility();
+      } catch (error) {
+        host.replaceChildren(); host.hidden = true; throw error;
+      }
+    }).catch(() => {
+      if (!this.isConnected || generation !== this.generation) return;
+      this.dataset.gridReady = 'false';
+      this.querySelector<HTMLElement>('[data-grid-status]')!.textContent = this.dataset.locale === 'en'
+        ? 'Interactive table unavailable. The complete table is available below.' : '交互表格暂不可用，下方保留完整数据表。';
+      this.syncVisibility();
+    }).finally(() => {if (generation === this.generation) this.loading = undefined;});
+  }
+  renderFallback() {
+    const en = this.dataset.locale === 'en';
+    const base = `${en ? '/en' : ''}/nuwa/whitzard-index`;
+    const metricLabel = (row:any) => [row.benchmarkName,typeof row.label === 'string' ? row.label : row.label?.[en?'en':'zh'] ?? row.label?.en ?? ''].filter(Boolean).join(' · ');
+    const conditionLabels:Record<string,string> = en ? {matched:'Matched',conditional:'Conditional',incomplete:'Incomplete'} : {matched:'条件匹配',conditional:'附条件',incomplete:'条件不完整'};
+    const body = this.querySelector('[data-grid-fallback-rows]')!;
+    const fragment = document.createDocumentFragment();
+    const cell = (value: any, detail?: any) => {
+      const td = document.createElement('td'); td.textContent = value ?? '—';
+      if (detail) {const small = document.createElement('small'); small.textContent = detail; td.append(small);}
+      return td;
+    };
+    for (const row of this.rows) {
+      const tr = document.createElement('tr'); tr.dataset.evidenceKey = row.key ?? `${row.resultId}|${row.metricId}`;
+      const th = document.createElement('th'); th.scope = 'row';
+      const link = document.createElement('a'); link.href = `${base}/result/${encodeURIComponent(row.resultId)}/`; link.textContent = row.system; th.append(link);
+      if (row.modelName && row.modelName !== row.system) {const small = document.createElement('small'); small.textContent = row.modelName; th.append(small);}
+      if(row.experimentalConditions){const c=document.createElement('small');c.textContent=row.experimentalConditions.goal+' · '+row.experimentalConditions.threat;th.append(c);}
+      const value=cell(monitorValue(row), metricLabel(row));
+      if(row.intervalText){const interval=document.createElement('small');interval.textContent=row.intervalText;value.append(interval);}
+      tr.append(th, value, cell(conditionLabels[row.conditionStatus] ?? row.conditionStatus), cell(row.taskSet,[row.observationCondition?.[en?'en':'zh'],row.configuration?.budget,row.experimentalConditions?.goal,row.experimentalConditions?.threat,row.configuration?.harness].filter(Boolean).join(' · ')), cell(row.attribution?.evaluator, row.attribution?.sourceTitle), cell(`${en ? 'Release' : '发布'} ${row.releaseDate ?? '—'}`, `${en ? 'Report' : '报告'} ${row.reportDate ?? '—'}`));
+      fragment.append(tr);
+    }
+    body.replaceChildren(fragment);
+    const status = this.querySelector<HTMLElement>('[data-grid-status]')!;
+    if (!this.grid) status.textContent = this.rows.length ? `${this.rows.length} ${en ? 'observations' : '条观测'}` : en ? 'No observations match these filters.' : '没有符合筛选条件的观测。';
+  }
+  disconnectedCallback() {
+    this.generation++; this.grid?.destroy(); this.grid = undefined; this.loading = undefined;
+    this.dataset.gridReady = 'false'; this.syncVisibility();
+  }
+}
+if (!customElements.get('nuwa-evidence-grid')) customElements.define('nuwa-evidence-grid', NuwaEvidenceGrid);
+</script>
+<style is:global>
+nuwa-evidence-grid{display:block;min-width:0;font-family:var(--font-sans,system-ui)}
+nuwa-evidence-grid [hidden]{display:none!important}
+.ne-grid-status{font-size:12px;line-height:1.7;color:#425b61;margin:10px 0}
+.ne-grid-host{height:520px;width:100%;min-width:0}
+.ne-grid-fallback{max-width:100%;overflow:auto}
+.ne-grid-fallback table{width:100%;min-width:950px;border-collapse:collapse;text-align:left;font-size:12px;line-height:1.7}
+.ne-grid-fallback caption{text-align:left;font-size:13px;font-weight:500;padding:12px 0;color:#102b5c}
+.ne-grid-fallback :is(th,td){padding:14px 12px;vertical-align:top;border-bottom:1px solid #dce2e8;max-width:290px;overflow-wrap:anywhere}
+.ne-grid-fallback th{font-weight:500}
+.ne-grid-fallback small{display:block;color:#52665f;font-size:11px;line-height:1.7;margin-top:5px}
+.ne-grid-system{display:flex;gap:8px;flex-wrap:wrap;align-items:center;min-width:0;overflow-wrap:anywhere}
+.ne-grid-system a{color:#174aa6;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere;min-width:0;flex:1}
+.ne-grid-value small{display:block;font-size:11px;line-height:1.6;color:#52665f;margin-top:4px;overflow-wrap:anywhere}
+.ne-grid-system small{display:block;width:100%;font-size:11px;color:#52665f;line-height:1.6}
+@media(max-width:699px){.ne-grid-host{height:440px}.ne-grid-fallback table{min-width:850px}}
+</style>

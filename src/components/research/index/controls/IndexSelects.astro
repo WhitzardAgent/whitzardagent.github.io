@@ -1,0 +1,16 @@
+---
+import {catalogue} from '../../../../data/nuwa-index';
+import type {Locale} from '../../../../i18n/config';
+interface Props {locale:Locale}
+const {locale}=Astro.props;
+---
+<nuwa-select-system><script type="application/json" is:inline set:html={JSON.stringify({locale,developers:Object.fromEntries((catalogue.models??[]).map(m=>[m.id,m.developerId]))}).replace(/</g,'\\u003c')}/></nuwa-select-system>
+<script>
+if(import.meta.env.DEV){
+ const runtimePath='/@react-refresh';
+ const {default:RefreshRuntime}=await import(/* @vite-ignore */runtimePath);
+ RefreshRuntime.injectIntoGlobalHook(window);
+ const target=window as any;target.$RefreshReg$=()=>{};target.$RefreshSig$=()=>((type:any)=>type);target.__vite_plugin_react_preamble_installed__=true;
+}
+await import('./selectEnhancement');
+</script>

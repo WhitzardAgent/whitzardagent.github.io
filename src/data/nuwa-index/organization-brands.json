@@ -1,0 +1,2111 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-26",
+  "organizations": [
+    {
+      "organizationId": "openai",
+      "officialHomepage": "https://openai.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/openai.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://openai.com/apple-icon.png?apple-icon.3o0tf8iy4mx7y.png",
+        "resolvedSourceUrl": "https://openai.com/apple-icon.png?apple-icon.3o0tf8iy4mx7y.png",
+        "sourcePage": "https://openai.com/",
+        "kind": "official-site-icon",
+        "sha256": "b603cea988928c96dd579202820c4b83b677fc02b601eee604e8b4a42d1506b7",
+        "sourceSha256": "20e104394082ee2d501a2bd118ec36b8ae8bcf75c8ab5dee51c3a361e34f6837",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://openai.com/"
+    },
+    {
+      "organizationId": "anthropic",
+      "officialHomepage": "https://www.anthropic.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/anthropic.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.anthropic.com/images/icons/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://www.anthropic.com/images/icons/apple-touch-icon.png",
+        "sourcePage": "https://www.anthropic.com/",
+        "kind": "official-site-icon",
+        "sha256": "fba2dda7c6f6e14033ed25013059caa859d3b945091cd33801e7a61fea3bc010",
+        "sourceSha256": "40e3900fcb3ad237af6869dbd40e77efc8eb23549c478125b40e563ac74423cb",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.anthropic.com/"
+    },
+    {
+      "organizationId": "deepmind",
+      "officialHomepage": "https://deepmind.google/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/deepmind.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://storage.googleapis.com/gdm-deepmind-com-prod-public/icons/google_deepmind_2x_96dp.png",
+        "resolvedSourceUrl": "https://storage.googleapis.com/gdm-deepmind-com-prod-public/icons/google_deepmind_2x_96dp.png",
+        "sourcePage": "https://deepmind.google/",
+        "kind": "official-site-icon",
+        "sha256": "484ae535d660889e9b8a3ee9a53ea069958e88e20c0cf81e127973ef5b30af8a",
+        "sourceSha256": "f6afca9f404ddc85771925805944ce37c31e2429f2cb0f2aafd41d52ad0be357",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. DeepMind-specific official mark, not a generic Google parent logo.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://deepmind.google/"
+    },
+    {
+      "organizationId": "meta",
+      "officialHomepage": "https://ai.meta.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/meta.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://static.xx.fbcdn.net/rsrc.php/yQ/r/0eWKxz9kEoF.webp",
+        "resolvedSourceUrl": "https://static.xx.fbcdn.net/rsrc.php/yQ/r/0eWKxz9kEoF.webp",
+        "sourcePage": "https://ai.meta.com/",
+        "kind": "official-site-icon",
+        "sha256": "418d0780a33007bfebfed4bb0b53672619c9e564d96c923c1eff4522e4ab155d",
+        "sourceSha256": "2d1ac8a2fd4b90aa0e4be05bfdb634c02404c94c9f5c1923e4be7b89fa36cfe3",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://ai.meta.com/"
+    },
+    {
+      "organizationId": "metr",
+      "officialHomepage": "https://metr.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/metr.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://metr.org/assets/images/favicon/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://metr.org/assets/images/favicon/apple-touch-icon.png",
+        "sourcePage": "https://metr.org/",
+        "kind": "official-site-icon",
+        "sha256": "80a8c5f8561d3ec12940d2b1340b4d98e185d27f084b0354f5f4444b0d680092",
+        "sourceSha256": "da3679016897da8b513fe1566d2d985bb9a1fa1b7d3d7f1ff9658dd9f238d311",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://metr.org/"
+    },
+    {
+      "organizationId": "apollo",
+      "officialHomepage": "https://www.apolloresearch.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/apollo.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.prod.website-files.com/6a2925787c793541e9bde0a9/6a61c0d0ff5085da8cd48720_Vector.png",
+        "resolvedSourceUrl": "https://cdn.prod.website-files.com/6a2925787c793541e9bde0a9/6a61c0d0ff5085da8cd48720_Vector.png",
+        "sourcePage": "https://www.apolloresearch.ai/",
+        "kind": "official-site-icon",
+        "sha256": "e4989afbb2bc058a64b6968ff1e79751d37daf71fcd824b912e8478528c6faab",
+        "sourceSha256": "44813d197408275a6da48906df2600a2741423cf39f8d83dec1d4f70ec0d1233",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.apolloresearch.ai/"
+    },
+    {
+      "organizationId": "aisi",
+      "officialHomepage": "https://www.aisi.gov.uk/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/aisi.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.prod.website-files.com/663bd486c5e4c81588db7a1d/6851b4acf52818a86a4f9f86_AISI%20icon%20256.png",
+        "resolvedSourceUrl": "https://cdn.prod.website-files.com/663bd486c5e4c81588db7a1d/6851b4acf52818a86a4f9f86_AISI%20icon%20256.png",
+        "sourcePage": "https://www.aisi.gov.uk/",
+        "kind": "official-site-icon",
+        "sha256": "d75e212c1d15294532ce0aa2d4b1eeffd765845be0f607d4b4efb158af7f81ca",
+        "sourceSha256": "ef56a0eccf21e465e5964e6ee47ccb8d114cd6c903d831ccd6c2aec32e4c4562",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.aisi.gov.uk/"
+    },
+    {
+      "organizationId": "far",
+      "officialHomepage": "https://www.far.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/far.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.prod.website-files.com/6a1367b300e755d2620f62ba/6a2d2d69931400223a7bcf4c_Favicon%20-%20light.png",
+        "resolvedSourceUrl": "https://cdn.prod.website-files.com/6a1367b300e755d2620f62ba/6a2d2d69931400223a7bcf4c_Favicon%20-%20light.png",
+        "sourcePage": "https://www.far.ai/",
+        "kind": "official-site-icon",
+        "sha256": "65fcd01edfe1245a5b9ed4f0c6d64defce12037273bdd561df4f11533b705e0d",
+        "sourceSha256": "54faf7f108462a902202a682cd846072b47ff98ba8b309bd204c201eb5116792",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.far.ai/"
+    },
+    {
+      "organizationId": "palisade",
+      "officialHomepage": "https://palisaderesearch.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/palisade.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://palisaderesearch.org/assets/images/logos/favicon.svg",
+        "resolvedSourceUrl": "https://palisaderesearch.org/assets/images/logos/favicon.svg",
+        "sourcePage": "https://palisaderesearch.org/",
+        "kind": "official-site-icon",
+        "sha256": "7bebc7f35cb4f52cc8a76617fd49474365917aeb39e9ccc8bffd8dbd452e4253",
+        "sourceSha256": "b0cf398f7f92c847b35db7e40b870a911638f27cf3b26ab8a01c5b23f9ae9fb8",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. SVG parsed, checked for active/external content, then rasterized to a static PNG.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://palisaderesearch.org/"
+    },
+    {
+      "organizationId": "truthful",
+      "officialHomepage": "https://truthful.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/truthful.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://truthful.ai/favicon.svg",
+        "resolvedSourceUrl": "https://truthful.ai/favicon.svg",
+        "sourcePage": "https://truthful.ai/",
+        "kind": "official-site-icon",
+        "sha256": "f476c13679e66ffcd4c3012cfb3b6d189b03e0c97c9027c035e9257550ad113f",
+        "sourceSha256": "8a03d5a379a2ee93763a2861a4a736792522437bc3f412eb308d33a77c3f6221",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. SVG parsed, checked for active/external content, then rasterized to a static PNG.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://truthful.ai/"
+    },
+    {
+      "organizationId": "redwood",
+      "officialHomepage": "https://www.redwoodresearch.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/redwood.png",
+        "format": "png",
+        "width": 32,
+        "height": 32,
+        "sourceUrl": "https://www.redwoodresearch.org/icon.png?d561c2534611285d",
+        "resolvedSourceUrl": "https://www.redwoodresearch.org/icon.png?d561c2534611285d",
+        "sourcePage": "https://www.redwoodresearch.org/",
+        "kind": "official-site-icon",
+        "sha256": "bf73a5fe7c2ab383ebba10f03fdf6f59b7b6ddf77adbbf5e3a740b4f88b2fc86",
+        "sourceSha256": "969277d9ef386defb43c0d854e70f35afae17d46568458b3520d63e6dadfcf6f",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.redwoodresearch.org/"
+    },
+    {
+      "organizationId": "fudan",
+      "officialHomepage": "https://www.fudan.edu.cn/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/fudan.png",
+        "format": "png",
+        "width": 32,
+        "height": 32,
+        "sourceUrl": "https://www.fudan.edu.cn/_upload/tpl/00/0e/14/template14/images/favicon.ico",
+        "resolvedSourceUrl": "https://www.fudan.edu.cn/_upload/tpl/00/0e/14/template14/images/favicon.ico",
+        "sourcePage": "https://www.fudan.edu.cn/",
+        "kind": "official-site-icon",
+        "sha256": "92de958701720dec58322134f1813ac12bbd49e24456e2a1c3668bad6f69834c",
+        "sourceSha256": "4735809cf302abbcbf63584e1abca1b416c3981f493f5a0d775ba653245e21d1",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.fudan.edu.cn/"
+    },
+    {
+      "organizationId": "whitzard",
+      "officialHomepage": "https://whitzard.tech/nuwa/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/whitzard.png",
+        "format": "png",
+        "width": 128,
+        "height": 128,
+        "sourceUrl": "https://whitzard.tech/favicon.png",
+        "resolvedSourceUrl": "https://whitzard.tech/favicon.png",
+        "sourcePage": "https://whitzard.tech/nuwa/",
+        "kind": "official-site-icon",
+        "sha256": "d3a236f716bf87aaa405d92b89cf8ffb107ed62746202cb89e5c5d232ef27a08",
+        "sourceSha256": "1196dc79b642510b61756251e8fedf11831f29693ff4476dbe4dcf3ef9b16a6b",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. Existing official Whitzard site icon identifies the combined Whitzard / NUWA record; no standalone NUWA mark asserted.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://whitzard.tech/nuwa/"
+    },
+    {
+      "organizationId": "berkeley",
+      "officialHomepage": "https://www.berkeley.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/berkeley.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.berkeley.edu/favicon.svg?v=2",
+        "resolvedSourceUrl": "https://www.berkeley.edu/favicon.svg?v=2",
+        "sourcePage": "https://www.berkeley.edu/",
+        "kind": "official-site-icon",
+        "sha256": "8c8cebebe59742df06063605c41ffc7748977c2ad485495f2bad5fd4852842f3",
+        "sourceSha256": "5c2926f8ff21a96a7140a24d33b3e0b7ff159ee214546ab6c476171e5c3a7f0f",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. SVG parsed, checked for active/external content, then rasterized to a static PNG.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.berkeley.edu/"
+    },
+    {
+      "organizationId": "stanford",
+      "officialHomepage": "https://www.stanford.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/stanford.png",
+        "format": "png",
+        "width": 16,
+        "height": 16,
+        "sourceUrl": "https://www.stanford.edu/icon5.png?icon5.1s5w2slgta8u9.png?dpl=e269585a260c91a54b81a8c27aec30eb9f650bf5d78a3deb966fbc1957bcfe3f366164626530346331343261303532626262333732346435",
+        "resolvedSourceUrl": "https://www.stanford.edu/icon5.png?icon5.1s5w2slgta8u9.png?dpl=e269585a260c91a54b81a8c27aec30eb9f650bf5d78a3deb966fbc1957bcfe3f366164626530346331343261303532626262333732346435",
+        "sourcePage": "https://www.stanford.edu/",
+        "kind": "official-site-icon",
+        "sha256": "d18c3b60be769921472a9aa68be1d9fc7e26a046cd49c2ee4808f50b86e73a83",
+        "sourceSha256": "dd3d138ed021f15fb014dc5e321e55c294c615d32449b9212c6f0b7f9ca634bb",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.stanford.edu/"
+    },
+    {
+      "organizationId": "uiuc",
+      "officialHomepage": "https://illinois.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/uiuc.png",
+        "format": "png",
+        "width": 40,
+        "height": 40,
+        "sourceUrl": "https://cdn.brand.illinois.edu/touch-icon-40x40.png",
+        "resolvedSourceUrl": "https://cdn.brand.illinois.edu/touch-icon-40x40.png",
+        "sourcePage": "https://illinois.edu/",
+        "kind": "official-site-icon",
+        "sha256": "c9e4ae097917a2d6ec012d608a8bc0fcfd02b0d3c8abfb5fd291f4208cd54708",
+        "sourceSha256": "8af0665562ea459eb205393da22b761c8e19d2ca1416609fc1cb1e38dc15de5c",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://illinois.edu/"
+    },
+    {
+      "organizationId": "mit",
+      "officialHomepage": "https://www.mit.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/mit.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.mit.edu/themes/mit/assets/favicon/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://www.mit.edu/themes/mit/assets/favicon/apple-touch-icon.png",
+        "sourcePage": "https://www.mit.edu/",
+        "kind": "official-site-icon",
+        "sha256": "1c3cde7f7cf53941d29ea4c740ac48122a3be202888e7a8344dbe07ff6d0eb75",
+        "sourceSha256": "410ac5b7186d50ca8259742ac3f3778f3ddc750d76598232b061cc71efb086bf",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. University-level identity matches the catalogue organization; no CSAIL-specific claim.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.mit.edu/"
+    },
+    {
+      "organizationId": "cmu",
+      "officialHomepage": "https://www.cmu.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/cmu.png",
+        "format": "png",
+        "width": 48,
+        "height": 48,
+        "sourceUrl": "https://www.cmu.edu/themes/custom/cmu_base/favicon.ico",
+        "resolvedSourceUrl": "https://www.cmu.edu/themes/custom/cmu_base/favicon.ico",
+        "sourcePage": "https://www.cmu.edu/",
+        "kind": "official-site-icon",
+        "sha256": "a8e46f70b9d84eb98c54a3d79b23b7629735ad5aa6e3f0bbfd2e841e0544d6e4",
+        "sourceSha256": "07e720a8d3afd981be56fb76aa146bd2b31c840765e81f89a8ccb7af93456d2a",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.cmu.edu/"
+    },
+    {
+      "organizationId": "oxford",
+      "officialHomepage": "https://www.ox.ac.uk/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/oxford.png",
+        "format": "png",
+        "width": 160,
+        "height": 47,
+        "sourceUrl": "/assets/research/agentcyberrange/oxford.webp",
+        "sourcePage": "https://www.ox.ac.uk/about/the-university/brand/guidelines",
+        "kind": "project-supplied-mark",
+        "sha256": "66f207ff1bf3a35fde3abbae535657fb72b00fec4d7c7932b6c1763320fc109b",
+        "sourceSha256": "03f37ae90a7fb6599c6ec6cc754cf18cf09fa755c9107d44ff84c148fd72f193",
+        "background": "light",
+        "sourceTitle": "User/project-supplied institution mark (existing Research asset)"
+      },
+      "attempts": [
+        {
+          "url": "https://www.ox.ac.uk/favicon.ico",
+          "result": "HTTPSConnectionPool(host='www.ox.ac.uk', port=443): Read timed out. (read timeout=8)"
+        },
+        {
+          "url": "https://communications.admin.ox.ac.uk/communications-resources/visual-identity",
+          "result": "HTTP 403 (redirected official communications page)"
+        },
+        {
+          "url": "https://www.ox.ac.uk/about/the-university/brand/guidelines",
+          "result": "HTTP 403 from direct request; official content readable through web retrieval; reused supplied institution mark"
+        }
+      ],
+      "note": "User/project-supplied existing mark reused from public/assets/research/agentcyberrange/oxford.webp. Institution identity visually checked against the official institution brand/identity page. Original asset acquisition URL is not recorded; not represented as a fresh official download.",
+      "homepageStatus": 403,
+      "homepageResolvedUrl": "https://www.ox.ac.uk/"
+    },
+    {
+      "organizationId": "mila",
+      "officialHomepage": "https://mila.quebec/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/mila.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://mila.quebec/sites/default/themes/mila_v1/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://mila.quebec/sites/default/themes/mila_v1/apple-touch-icon.png",
+        "sourcePage": "https://mila.quebec/en",
+        "kind": "official-site-icon",
+        "sha256": "155eb02e450362f138b6e45c14a4ac370ec81b08c6cc3d6bc2f1ee956956f2e0",
+        "sourceSha256": "e76953df36f4ec7b010308d3b3db9ff0bb4096d460e4feb3c13409e0f88f12f1",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://mila.quebec/en"
+    },
+    {
+      "organizationId": "montreal",
+      "officialHomepage": "https://www.umontreal.ca/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/montreal.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.umontreal.ca/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://www.umontreal.ca/apple-touch-icon.png",
+        "sourcePage": "https://www.umontreal.ca/",
+        "kind": "official-site-icon",
+        "sha256": "32723dbfee64149b10827f488c1392b48f5bed1fba328ae59d476926d4f1e44a",
+        "sourceSha256": "6aadcae6fdad226a560dd14ac4e027b491325845ce36d2792c0d9b41672bb542",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.umontreal.ca/"
+    },
+    {
+      "organizationId": "princeton",
+      "officialHomepage": "https://www.princeton.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/princeton.png",
+        "format": "png",
+        "width": 64,
+        "height": 64,
+        "sourceUrl": "https://www.cs.princeton.edu/sites/default/files/favicon.ico",
+        "resolvedSourceUrl": "https://www.cs.princeton.edu/sites/default/files/favicon.ico",
+        "sourcePage": "https://www.cs.princeton.edu/",
+        "kind": "official-site-icon",
+        "sha256": "8ba29a4399958ffc5c9e759abaa899ff67264f4663a4185a87c9154b1b876c31",
+        "sourceSha256": "d6e15ded4fc322ef9152de36ba5488546c6289fe50302a4450b2d1be66797c5d",
+        "background": "light"
+      },
+      "attempts": [
+        {
+          "url": "https://www.princeton.edu/favicon.ico",
+          "result": "HTTPSConnectionPool(host='www.princeton.edu', port=443): Read timed out. (read timeout=8)"
+        },
+        {
+          "url": "https://communications.princeton.edu/guides-tools/logo-graphic-identity",
+          "result": "HTTP 403"
+        },
+        {
+          "url": "https://trademarks.princeton.edu/campus-communities",
+          "result": "HTTP 403"
+        },
+        {
+          "url": "https://www.cs.princeton.edu/",
+          "result": "HTTP 200; official university shield favicon explicitly declared in head"
+        }
+      ],
+      "note": "Official Princeton Computer Science site favicon; image identity checked against Princeton university shield.",
+      "homepageStatus": 403,
+      "homepageResolvedUrl": "https://www.princeton.edu/"
+    },
+    {
+      "organizationId": "eth",
+      "officialHomepage": "https://ethz.ch/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/eth.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://ethz.ch/etc/designs/ethz/img/icons/ETH-APP-Icons-Theme-white/192-xxxhpdi.png",
+        "resolvedSourceUrl": "https://ethz.ch/etc/designs/ethz/img/icons/ETH-APP-Icons-Theme-white/192-xxxhpdi.png",
+        "sourcePage": "https://ethz.ch/de.html",
+        "kind": "official-site-icon",
+        "sha256": "8cf257190e5c14957f0a2d9a8415c4251a8b42d0f7acb0d1269f8fc7c8d984aa",
+        "sourceSha256": "888099b7f5eeb07003841f18b2b0ca25e3076ab7fbde962bfe8a0ee1d4e57a62",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://ethz.ch/de.html"
+    },
+    {
+      "organizationId": "invariant",
+      "officialHomepage": "https://invariantlabs.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/invariant.png",
+        "format": "png",
+        "width": 159,
+        "height": 160,
+        "sourceUrl": "https://invariantlabs.ai/theme/icon/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://invariantlabs.ai/theme/icon/apple-touch-icon.png",
+        "sourcePage": "https://invariantlabs.ai/",
+        "kind": "official-site-icon",
+        "sha256": "42ac79067cec222eafb5582e32efc767f417f9f46d00a1a1f4d3c005a36fe42e",
+        "sourceSha256": "9852d767913fa7f9936230effb025602424a469a467cf4929e38b72cd6fb5143",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://invariantlabs.ai/"
+    },
+    {
+      "organizationId": "securebio",
+      "officialHomepage": "https://securebio.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/securebio.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://securebio.org/assets/favicon.svg",
+        "resolvedSourceUrl": "https://securebio.org/assets/favicon.svg",
+        "sourcePage": "https://securebio.org/",
+        "kind": "official-site-icon",
+        "sha256": "33eeeb65dd9c92cac026979aca0743a3445c5286696bf03af072c8085811cb6e",
+        "sourceSha256": "3dfcc43e05bc4d8816805dbff430c2d10a215e1655d1fe9da2d5056fd5860757",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. SVG parsed, checked for active/external content, then rasterized to a static PNG.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://securebio.org/"
+    },
+    {
+      "organizationId": "cais",
+      "officialHomepage": "https://www.safe.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/cais.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.prod.website-files.com/63fe96aeda6bea77ac7d3000/69cf08b22029149dfc7085f7_CAIS%20Logomark%20256.png",
+        "resolvedSourceUrl": "https://cdn.prod.website-files.com/63fe96aeda6bea77ac7d3000/69cf08b22029149dfc7085f7_CAIS%20Logomark%20256.png",
+        "sourcePage": "https://safe.ai/",
+        "kind": "official-site-icon",
+        "sha256": "c773596f54c630e930388de566113bcf2109eda7a377a0a4551e4c0e3d1d57e2",
+        "sourceSha256": "2746305ff514265c437f3ddc54ca2728da3d440cf0cfb7d9d9823f2795ecd292",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://safe.ai/"
+    },
+    {
+      "organizationId": "scale",
+      "officialHomepage": "https://scale.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/scale.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://scale.com/static/global/favicon/v3/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://scale.com/static/global/favicon/v3/apple-touch-icon.png",
+        "sourcePage": "https://scale.com/",
+        "kind": "official-site-icon",
+        "sha256": "27c74000cd165ff5766343c12208b3149b2d4406a82a415779c95a6495904c17",
+        "sourceSha256": "3aee2b1d959a47e2fca59407a1c821fe89fa2a9eb3b49b510142498d9d2290c0",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://scale.com/"
+    },
+    {
+      "organizationId": "grayswan",
+      "officialHomepage": "https://www.grayswan.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/grayswan.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.prod.website-files.com/6614467b00e631b0f073e2b7/68715172841ef6679c94f2bb_GS-256.png",
+        "resolvedSourceUrl": "https://cdn.prod.website-files.com/6614467b00e631b0f073e2b7/68715172841ef6679c94f2bb_GS-256.png",
+        "sourcePage": "https://www.grayswan.ai/",
+        "kind": "official-site-icon",
+        "sha256": "181e628b2d6fd4ae22c134798415d287ac08d366d69f238082d966786f11441e",
+        "sourceSha256": "602fe3e93dff578dcc5ebc62d2b0cefbdc42a3aa6b1bd10d9995d9dd99c8b2dc",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.grayswan.ai/"
+    },
+    {
+      "organizationId": "eleuther",
+      "officialHomepage": "https://www.eleuther.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/eleuther.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://eleuther.ai/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://eleuther.ai/apple-touch-icon.png",
+        "sourcePage": "https://eleuther.ai/",
+        "kind": "official-site-icon",
+        "sha256": "ccb0609e440070314d326796ecd6dd0353fe043b8a1b870cdba15a1e17bc65e7",
+        "sourceSha256": "fac6ec873bcc31fdd28e78d2ac4ec1876c3aa0af712b4974c980d753b5ca0cea",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://eleuther.ai/"
+    },
+    {
+      "organizationId": "tsinghua",
+      "officialHomepage": "https://www.tsinghua.edu.cn/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/tsinghua.png",
+        "format": "png",
+        "width": 160,
+        "height": 52,
+        "sourceUrl": "https://www.tsinghua.edu.cn/image/logo180.png",
+        "resolvedSourceUrl": "https://www.tsinghua.edu.cn/image/logo180.png",
+        "sourcePage": "https://www.tsinghua.edu.cn/",
+        "kind": "official-site-logo",
+        "sha256": "b4b194bcada705bd480e3f21a0ed5e2ba7db4492a045f70f2730d0ce020e8116",
+        "sourceSha256": "dd43e6bb8c1bb332cc38d255e2cbf60eb5240d902deb7ea76904a2cea9aef987",
+        "background": "dark"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. Official white wordmark displayed on a dark backing for contrast.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.tsinghua.edu.cn/"
+    },
+    {
+      "organizationId": "sii",
+      "officialHomepage": "https://www.sii.edu.cn/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/sii.png",
+        "format": "png",
+        "width": 48,
+        "height": 48,
+        "sourceUrl": "https://www.sii.edu.cn/_upload/tpl/00/09/9/template9/favicon.ico",
+        "resolvedSourceUrl": "https://www.sii.edu.cn/_upload/tpl/00/09/9/template9/favicon.ico",
+        "sourcePage": "https://www.sii.edu.cn/",
+        "kind": "official-site-icon",
+        "sha256": "1dee9416fe08135485f92ed480692a9a1888ca871ba74f1e086af76c5c7f7fae",
+        "sourceSha256": "750d54738aab99e673a02bf45468918e0f17d3f7fe810ee6cc21717d9de3fa19",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.sii.edu.cn/"
+    },
+    {
+      "organizationId": "yale",
+      "officialHomepage": "https://www.yale.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/yale.png",
+        "format": "png",
+        "width": 76,
+        "height": 76,
+        "sourceUrl": "https://www.yale.edu/sites/all/themes/yale_blue/images/favicons/apple-touch-icon-76x76.png",
+        "resolvedSourceUrl": "https://www.yale.edu/sites/all/themes/yale_blue/images/favicons/apple-touch-icon-76x76.png",
+        "sourcePage": "https://www.yale.edu/",
+        "kind": "official-site-icon",
+        "sha256": "e939f426db1a37385ad55d65ccd2253b103acd041c4981c8f55c8055d5ad4ed7",
+        "sourceSha256": "c38bbabdbea1558b7fc7d06a6260c5e00b0fde77af58d469395e83226d401269",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.yale.edu/"
+    },
+    {
+      "organizationId": "purdue",
+      "officialHomepage": "https://www.purdue.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/purdue.png",
+        "format": "png",
+        "width": 76,
+        "height": 76,
+        "sourceUrl": "https://www.purdue.edu/home/wp-content/mu-plugins/boilerup-wp/favicon/apple-icon-76x76.png",
+        "resolvedSourceUrl": "https://www.purdue.edu/home/wp-content/mu-plugins/boilerup-wp/favicon/apple-icon-76x76.png",
+        "sourcePage": "https://www.purdue.edu/",
+        "kind": "official-site-icon",
+        "sha256": "ba21ade1556ad9552aca6ed241b73d41f5a0ff3ea70c6d1a312d5e9c64b2c77e",
+        "sourceSha256": "0f4c2c7f5893570a516c952ef48d6970ea7c59023186d2637c38b403f2c6e32c",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.purdue.edu/"
+    },
+    {
+      "organizationId": "cornell",
+      "officialHomepage": "https://www.cornell.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/cornell.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.cornell.edu/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://www.cornell.edu/apple-touch-icon.png",
+        "sourcePage": "https://www.cornell.edu/",
+        "kind": "official-site-icon",
+        "sha256": "c7f6cdae7af667e28feb118d8b6123eb5c01feb1f620e1e2daf5313770b44831",
+        "sourceSha256": "866ac3eb378c4e1e69d2f217a261ea98ef06fb40479420bf0d755ebe28d92f5c",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.cornell.edu/"
+    },
+    {
+      "organizationId": "regina",
+      "officialHomepage": "https://www.uregina.ca/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/regina.png",
+        "format": "png",
+        "width": 32,
+        "height": 32,
+        "sourceUrl": "https://www.uregina.ca/favicon.ico",
+        "resolvedSourceUrl": "https://www.uregina.ca/favicon.ico",
+        "sourcePage": "https://www.uregina.ca/",
+        "kind": "official-site-icon",
+        "sha256": "467e54232b7f373e287b2e03823d4087c6fe52b663f12f3e9307a104cfc38f37",
+        "sourceSha256": "d1dee31f68d861c9c8252722398e3e143e681b2fff7a0d705a8f71313968110d",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official website root favicon; no third-party brand service used.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.uregina.ca/"
+    },
+    {
+      "organizationId": "mats",
+      "officialHomepage": "https://www.matsprogram.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/mats.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.prod.website-files.com/6909901117f6b8d83783ca29/690f9d5d84c6852815a8b073_mats%20logo%20mark%20256.png",
+        "resolvedSourceUrl": "https://cdn.prod.website-files.com/6909901117f6b8d83783ca29/690f9d5d84c6852815a8b073_mats%20logo%20mark%20256.png",
+        "sourcePage": "https://www.matsprogram.org/",
+        "kind": "official-site-icon",
+        "sha256": "12fad84b9d7218c52766d4522f474b6b6896ce57b7b186fea6f3bc7ccd1c002c",
+        "sourceSha256": "784d235d50726ec1c1bafab8d077762751daa30568e0deab637f9b45ff7219cc",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.matsprogram.org/"
+    },
+    {
+      "organizationId": "imperial",
+      "officialHomepage": "https://www.imperial.ac.uk/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/imperial.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.imperial.ac.uk/assets/website/images/favicon/favicon-180.png",
+        "resolvedSourceUrl": "https://www.imperial.ac.uk/assets/website/images/favicon/favicon-180.png",
+        "sourcePage": "https://www.imperial.ac.uk/",
+        "kind": "official-site-icon",
+        "sha256": "e4316164319acd3e605b57fd7d9721985e52ccaa5585ef82d0b10a4247212202",
+        "sourceSha256": "ce653020d06485f61ed63320108b80996709a6195bb6af5c2e12975f18fd5fa4",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.imperial.ac.uk/"
+    },
+    {
+      "organizationId": "waterloo",
+      "officialHomepage": "https://uwaterloo.ca/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/waterloo.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://uwaterloo.ca/profiles/uw_base_profile/themes/uw_fdsu_theme_resp/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://uwaterloo.ca/profiles/uw_base_profile/themes/uw_fdsu_theme_resp/apple-touch-icon.png",
+        "sourcePage": "https://uwaterloo.ca/",
+        "kind": "official-site-icon",
+        "sha256": "a104fbb3f0d859bd4c0b0268e15e6c6dcfe421346ff5e8e21fafdcad6df54a88",
+        "sourceSha256": "3a30d46aeb1560b9da5c0bbe5e1c75288c8d14a0bb337e22a108c5987e8e09cd",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://uwaterloo.ca/"
+    },
+    {
+      "organizationId": "toronto",
+      "officialHomepage": "https://www.utoronto.ca/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/toronto.png",
+        "format": "png",
+        "width": 48,
+        "height": 48,
+        "sourceUrl": "https://www.utoronto.ca/themes/custom/bootstrap_uoft/images/favicons/favicon.ico",
+        "resolvedSourceUrl": "https://www.utoronto.ca/themes/custom/bootstrap_uoft/images/favicons/favicon.ico",
+        "sourcePage": "https://www.utoronto.ca/",
+        "kind": "official-site-icon",
+        "sha256": "da0873d60c968b97e66134bc585e890c9d09c8f8b884f6d3376de280f60e2f4c",
+        "sourceSha256": "7698fa568caac7a6585bd62514f8703167029e47d153e3c3f9707511fa24e912",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.utoronto.ca/"
+    },
+    {
+      "organizationId": "mpi",
+      "officialHomepage": "https://is.mpg.de/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/mpi.png",
+        "format": "png",
+        "width": 160,
+        "height": 40,
+        "sourceUrl": "https://imprs.is.mpg.de/uploads/partner/image/19/thumb_md_MPG_IS_Logo_RGB_green-ENG600_ppi.png",
+        "resolvedSourceUrl": "https://imprs.is.mpg.de/uploads/partner/image/19/thumb_md_MPG_IS_Logo_RGB_green-ENG600_ppi.png",
+        "sourcePage": "https://imprs.is.mpg.de/acknowledgments",
+        "kind": "official-site-logo",
+        "sha256": "afd87c2eb970a665e79dd8a9dd2b0b7695e659dc63682aca5aebb9b2327dbaa8",
+        "sourceSha256": "cd0794e95715958ec62cb1f31420b6f76e4765c86a2fbbdc037b5d54bf00566a",
+        "background": "light"
+      },
+      "attempts": [
+        {
+          "url": "https://is.mpg.de/favicon.ico",
+          "result": "HTTP 403"
+        },
+        {
+          "url": "https://is.mpg.de/en/about-us",
+          "result": "HTTP 403; access-denied-page icon rejected as identity evidence"
+        },
+        {
+          "url": "https://is.mpg.de/en/media",
+          "result": "HTTP 403; access-denied icon rejected"
+        },
+        {
+          "url": "https://imprs.is.mpg.de/acknowledgments",
+          "result": "HTTP 200; institute-specific partner footer mark explicitly referenced separately from IMPRS-IS program logo"
+        }
+      ],
+      "note": "MPI-IS university/institute partner-footer logo, distinct from IMPRS-IS program header.",
+      "homepageStatus": 403,
+      "homepageResolvedUrl": "https://is.mpg.de/"
+    },
+    {
+      "organizationId": "tubingen",
+      "officialHomepage": "https://uni-tuebingen.de/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/tubingen.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://uni-tuebingen.de/_assets/7d66ab3e4599366251c5af46f0e770b9/Images/Favicons/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://uni-tuebingen.de/_assets/7d66ab3e4599366251c5af46f0e770b9/Images/Favicons/apple-touch-icon.png",
+        "sourcePage": "https://uni-tuebingen.de/",
+        "kind": "official-site-icon",
+        "sha256": "12ab80aa1158e5bb5c96edef37aca1228d6ecaf04a442808d1468b5e8c8a8349",
+        "sourceSha256": "b918dec5c57d1c5850a8e1a37075e7ab780ddd0dc9c6cebdd9985b97c9e87012",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://uni-tuebingen.de/"
+    },
+    {
+      "organizationId": "ellis",
+      "officialHomepage": "https://tuebingen.ellis.eu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/ellis.png",
+        "format": "png",
+        "width": 48,
+        "height": 48,
+        "sourceUrl": "https://tuebingen.ellis.eu/assets/fav-a67817c6e498ff813c1d49ef99780dbf6c2c0256009d84c09f38dc72613f0771.png",
+        "resolvedSourceUrl": "https://tuebingen.ellis.eu/assets/fav-a67817c6e498ff813c1d49ef99780dbf6c2c0256009d84c09f38dc72613f0771.png",
+        "sourcePage": "https://tuebingen.ellis.eu/",
+        "kind": "official-site-icon",
+        "sha256": "7ed3c7088b73f4e771acdf8c5a5448fb4c853e4fe58e91db4df2b97ac3c8e188",
+        "sourceSha256": "a81666d6fe15c29f53f01afc0f4cbd53956f178357f7bae665e34f31321fa545",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://tuebingen.ellis.eu/"
+    },
+    {
+      "organizationId": "edison",
+      "officialHomepage": "https://edisonscientific.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/edison.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.prod.website-files.com/6a05ae6a3f0a6ce150583845/6a0b19333184f0ef28b53aef_android-chrome-512x512.png",
+        "resolvedSourceUrl": "https://cdn.prod.website-files.com/6a05ae6a3f0a6ce150583845/6a0b19333184f0ef28b53aef_android-chrome-512x512.png",
+        "sourcePage": "https://edisonscientific.com/",
+        "kind": "official-site-icon",
+        "sha256": "07adbb54d259dfda9a83cdeae3ca6bf4a8068b08d273c85e628596ab368da0f2",
+        "sourceSha256": "191bf243fc377eaf3b0324a7b769b761117079629f6266967a661a5fff414b5d",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://edisonscientific.com/"
+    },
+    {
+      "organizationId": "futurehouse",
+      "officialHomepage": "https://www.futurehouse.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/futurehouse.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.prod.website-files.com/669f0d63ca36f46df2e0682f/66a3bbd71dc20fd088202b11_FutureHouse%20Webclip.png",
+        "resolvedSourceUrl": "https://cdn.prod.website-files.com/669f0d63ca36f46df2e0682f/66a3bbd71dc20fd088202b11_FutureHouse%20Webclip.png",
+        "sourcePage": "https://www.futurehouse.org/",
+        "kind": "official-site-icon",
+        "sha256": "8e0b4ebcdfe1fd2c0a96686d52606c05d3058de49329561246aceee67b700846",
+        "sourceSha256": "d8649f63d7acf0d520b9db47d39cc0f88d6a4e00f74ad43d3f304539148b27b9",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.futurehouse.org/"
+    },
+    {
+      "organizationId": "ufabc",
+      "officialHomepage": "https://www.ufabc.edu.br/",
+      "retrievedOn": "2026-10-26",
+      "status": "unavailable",
+      "asset": null,
+      "attempts": [
+        {
+          "url": "https://www.ufabc.edu.br/favicon.ico",
+          "result": "HTTPSConnectionPool(host='www.ufabc.edu.br', port=443): Read timed out. (read timeout=8)"
+        },
+        {
+          "url": "http://www.ufabc.edu.br/favicon.ico",
+          "result": "HTTPConnectionPool(host='127.0.0.1', port=1097): Read timed out. (read timeout=16)"
+        },
+        {
+          "url": "https://www.ufabc.edu.br/",
+          "result": "Connection/read timeout"
+        },
+        {
+          "url": "https://www.ufabc.edu.br/administracao/sucom/programacao-visual/manual-de-identidade-visual-da-ufabc",
+          "result": "Connection/read timeout; official identity manual found through search, no image bytes obtained"
+        },
+        {
+          "url": "https://prograd.ufabc.edu.br/logotipo-da-prograd",
+          "result": "Connection/read timeout; no department mark substituted"
+        },
+        {
+          "url": "https://en.ufabc.edu.br/",
+          "result": "Connection/read timeout"
+        },
+        {
+          "url": "https://uf.abc.br/administracao/sucom/programacao-visual/manual-de-identidade-visual-da-ufabc",
+          "result": "Connection/read timeout"
+        }
+      ],
+      "note": "Official homepage, identity-manual page, English site and Prograd page timed out. No usable official image bytes retrieved; no third-party or department mark substituted."
+    },
+    {
+      "organizationId": "irregular",
+      "officialHomepage": "https://www.irregular.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/irregular.png",
+        "format": "png",
+        "width": 70,
+        "height": 70,
+        "sourceUrl": "https://framerusercontent.com/images/QFYpbFIEf3Ru4FTdTU6BcwRHcU0.png",
+        "resolvedSourceUrl": "https://framerusercontent.com/images/QFYpbFIEf3Ru4FTdTU6BcwRHcU0.png",
+        "sourcePage": "https://www.irregular.com/",
+        "kind": "official-site-icon",
+        "sha256": "99a2d2ee33f1e1cac125b820d46d34d8104e21915d0a544002fe3bcbf79bcc42",
+        "sourceSha256": "9ac6ec42f562070d6cef15e18198ddb08f34f9677232f0f9072146f1ba000c22",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.irregular.com/"
+    },
+    {
+      "organizationId": "rand",
+      "officialHomepage": "https://www.rand.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/rand.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.rand.org/etc.clientlibs/rand/designs/common/images/resources/favicon.svg",
+        "resolvedSourceUrl": "https://www.rand.org/etc.clientlibs/rand/designs/common/images/resources/favicon.svg",
+        "sourcePage": "https://www.rand.org/",
+        "kind": "official-site-icon",
+        "sha256": "71b77e44e153c574f81d58c0c9bae75be6718e0190003dbe29ce6a5b34f8b75e",
+        "sourceSha256": "31bfdb8a22b8d6c58a76c17fa9329eb7c7eb5cd5f02edae20365809b2d1229d5",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. SVG parsed, checked for active/external content, then rasterized to a static PNG.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.rand.org/"
+    },
+    {
+      "organizationId": "nist",
+      "officialHomepage": "https://www.nist.gov/caisi",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/nist.png",
+        "format": "png",
+        "width": 64,
+        "height": 64,
+        "sourceUrl": "https://www.nist.gov/themes/custom/nist_www/favicon.ico",
+        "resolvedSourceUrl": "https://www.nist.gov/themes/custom/nist_www/favicon.ico",
+        "sourcePage": "https://www.nist.gov/caissi",
+        "kind": "official-site-icon",
+        "sha256": "17d61c326e7926dbccac4db10223f6966efa58fa7c17366fec0842480fe0a941",
+        "sourceSha256": "78eacb1a528cb29d29a908dec235826144799489ac4101848bb0686e38558655",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. NIST mark identifies the parent agency in the catalogue’s combined NIST / CAISI record; it is not asserted to be a separate CAISI logo.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.nist.gov/caissi"
+    },
+    {
+      "organizationId": "saferai",
+      "officialHomepage": "https://www.safer-ai.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/saferai.png",
+        "format": "png",
+        "width": 96,
+        "height": 96,
+        "sourceUrl": "https://www.safer-ai.org/t/assets/img/favicon-96x96.png",
+        "resolvedSourceUrl": "https://www.safer-ai.org/t/assets/img/favicon-96x96.png",
+        "sourcePage": "https://www.safer-ai.org/",
+        "kind": "official-site-icon",
+        "sha256": "4c465327cb0c8728e2c4a464dbaca1c99536a8bef14435854271d8313a2d072c",
+        "sourceSha256": "8036901bc9c0f16f8fd9a6cc903b237b9432dc4b523144ea383f4c495781908b",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.safer-ai.org/"
+    },
+    {
+      "organizationId": "columbia",
+      "officialHomepage": "https://www.columbia.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/columbia.png",
+        "format": "png",
+        "width": 160,
+        "height": 24,
+        "sourceUrl": "/assets/research/agentcyberrange/columbia.webp",
+        "sourcePage": "https://visualidentity.columbia.edu/",
+        "kind": "project-supplied-mark",
+        "sha256": "845edc665d55d8019a7e4e640074fd1fc1ed11301e9b255764d197bba7bea0b1",
+        "sourceSha256": "ad05c07b40468d62345727eca94593f624f13e9da01cc567dc8f866aee9615ae",
+        "background": "light",
+        "sourceTitle": "User/project-supplied institution mark (existing Research asset)"
+      },
+      "attempts": [
+        {
+          "url": "https://www.columbia.edu/favicon.ico",
+          "result": "HTTPSConnectionPool(host='www.columbia.edu', port=443): Read timed out. (read timeout=8)"
+        },
+        {
+          "url": "https://visualidentity.columbia.edu/",
+          "result": "HTTP 403"
+        },
+        {
+          "url": "https://www.columbia.edu/cu/identityguidelines/",
+          "result": "HTTP 403; official identity documentation readable through web retrieval; reused supplied institution mark"
+        }
+      ],
+      "note": "User/project-supplied existing mark reused from public/assets/research/agentcyberrange/columbia.webp. Institution identity visually checked against the official institution brand/identity page. Original asset acquisition URL is not recorded; not represented as a fresh official download.",
+      "homepageStatus": 403,
+      "homepageResolvedUrl": "https://www.columbia.edu/"
+    },
+    {
+      "organizationId": "washington",
+      "officialHomepage": "https://www.washington.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/washington.png",
+        "format": "png",
+        "width": 16,
+        "height": 16,
+        "sourceUrl": "https://uw.edu/static/hometemp/wp-content/themes/uw_wp_theme/favicon.ico",
+        "resolvedSourceUrl": "https://www.washington.edu/static/hometemp/wp-content/themes/uw_wp_theme/favicon.ico",
+        "sourcePage": "https://www.washington.edu/",
+        "kind": "official-site-icon",
+        "sha256": "4b4932cade3b6d11358738520b0e02e5c5a9e257940dad1ba6f4091843749bb1",
+        "sourceSha256": "db50254289030326387be82d1fd73f214750a82b71fa95053e1742453d33c1f1",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.washington.edu/"
+    },
+    {
+      "organizationId": "ucsd",
+      "officialHomepage": "https://ucsd.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/ucsd.png",
+        "format": "png",
+        "width": 48,
+        "height": 48,
+        "sourceUrl": "https://ucsd.edu/favicon.ico",
+        "resolvedSourceUrl": "https://ucsd.edu/favicon.ico",
+        "sourcePage": "https://ucsd.edu/",
+        "kind": "official-site-icon",
+        "sha256": "b0fc3124be00b9c4086d1da8e5fb8617f755adece86b7e48d2ebab8e87e6d753",
+        "sourceSha256": "8220fddfd7e9ebcb98bc53389bbe307d21191fffe913b1a32f3887a76c0b31e6",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://ucsd.edu/"
+    },
+    {
+      "organizationId": "bugcrowd",
+      "officialHomepage": "https://www.bugcrowd.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/bugcrowd.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.bugcrowd.com/wp-content/themes/bugcrowd/assets/images/favicon/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://www.bugcrowd.com/wp-content/themes/bugcrowd/assets/images/favicon/apple-touch-icon.png",
+        "sourcePage": "https://www.bugcrowd.com/",
+        "kind": "official-site-icon",
+        "sha256": "c4c16b4e4869380b42b1b63ec1642a1006e64d78c5298cf4f6807572b28f0b82",
+        "sourceSha256": "7686bf69ef3cfb8870b444d80796308be38cab5c32f1b522e9c44847004afe7c",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.bugcrowd.com/"
+    },
+    {
+      "organizationId": "nus",
+      "officialHomepage": "https://nus.edu.sg/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/nus.png",
+        "format": "png",
+        "width": 160,
+        "height": 73,
+        "sourceUrl": "/assets/research/agentcyberrange/nus.webp",
+        "sourcePage": "https://www.nus.edu.sg/identity/guidelines/logo-guideline",
+        "kind": "project-supplied-mark",
+        "sha256": "4128c0efb411963c355a93c9c253ada4f480732a6a71c40ef41039cfd94ba782",
+        "sourceSha256": "4b26b77fc38e1830ed6fb1cebb34d62da39fcb146b36d3cfd777ae26a33e7b79",
+        "background": "light",
+        "sourceTitle": "User/project-supplied institution mark (existing Research asset)"
+      },
+      "attempts": [
+        {
+          "url": "https://nus.edu.sg/favicon.ico",
+          "result": "Not a decodable image"
+        },
+        {
+          "url": "https://www.nus.edu.sg/images/default-source/base/favicon.ico",
+          "result": "HTTPSConnectionPool(host='www.nus.edu.sg', port=443): Read timed out. (read timeout=8)"
+        },
+        {
+          "url": "https://www.nus.edu.sg/favicon.ico",
+          "result": "cannot identify image file <_io.BytesIO object at 0x106c4a980>"
+        },
+        {
+          "url": "https://nus.edu.sg/images/favicon.ico",
+          "result": "cannot identify image file <_io.BytesIO object at 0x106c1ef70>"
+        },
+        {
+          "url": "https://www.nus.edu.sg/identity",
+          "result": "HTTP 200 contained only an Incapsula bot challenge; no institution asset"
+        },
+        {
+          "url": "https://www.nus.edu.sg/identity/guidelines/logo-guideline",
+          "result": "HTTP 200 bot challenge on direct request; official guide readable through web retrieval; reused supplied institution mark"
+        }
+      ],
+      "note": "User/project-supplied existing mark reused from public/assets/research/agentcyberrange/nus.webp. Institution identity visually checked against the official institution brand/identity page. Original asset acquisition URL is not recorded; not represented as a fresh official download.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://nus.edu.sg/"
+    },
+    {
+      "organizationId": "apart",
+      "officialHomepage": "https://apartresearch.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/apart.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://apartresearch.com/apple-icon.png?apple-icon.2cgnph1f0cqa2.png",
+        "resolvedSourceUrl": "https://apartresearch.com/apple-icon.png?apple-icon.2cgnph1f0cqa2.png",
+        "sourcePage": "https://apartresearch.com/",
+        "kind": "official-site-icon",
+        "sha256": "05bf8540a64d359baa86fac1740015ffe1ae826a0e62a1226b0c04d4374aa4eb",
+        "sourceSha256": "604b1c8901ff3c7ba0a03d0844b422d8715e235fbb0932f89b5b1d4bc70ac35d",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://apartresearch.com/"
+    },
+    {
+      "organizationId": "crowdstrike",
+      "officialHomepage": "https://www.crowdstrike.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/crowdstrike.png",
+        "format": "png",
+        "width": 117,
+        "height": 121,
+        "sourceUrl": "https://www.crowdstrike.com/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-common/resources/favicon.ico",
+        "resolvedSourceUrl": "https://www.crowdstrike.com/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-common/resources/favicon.ico",
+        "sourcePage": "https://www.crowdstrike.com/en-us/",
+        "kind": "official-site-icon",
+        "sha256": "13636746056b6c1ebc66e8e1611afae65a300ad311966372bb236cad8fd95d3a",
+        "sourceSha256": "9b24aef7f1f536c9a5dbf4fd94bcd37e372737765f9d0530f1cd286f255b764c",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.crowdstrike.com/en-us/"
+    },
+    {
+      "organizationId": "constellation",
+      "officialHomepage": "https://www.constellation.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/constellation.png",
+        "format": "png",
+        "width": 32,
+        "height": 32,
+        "sourceUrl": "https://constellation.org/hubfs/Constellation%2032%20favi.png",
+        "resolvedSourceUrl": "https://constellation.org/hubfs/Constellation%2032%20favi.png",
+        "sourcePage": "https://constellation.org/",
+        "kind": "official-site-icon",
+        "sha256": "e0846acbb6ffca7c4bdc9c4ebd54ca8e7f4b831870c7f83e796e23f35f87f7b0",
+        "sourceSha256": "0041d389288633cb0430037bd7838929045fbf01ffb90a2ade42ea8bada5329d",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://constellation.org/"
+    },
+    {
+      "organizationId": "harvard",
+      "officialHomepage": "https://www.harvard.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/harvard.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.harvard.edu/wp-content/uploads/2020/10/cropped-logo-branding-compressed.png?w=180",
+        "resolvedSourceUrl": "https://www.harvard.edu/wp-content/uploads/2020/10/cropped-logo-branding-compressed.png?w=180",
+        "sourcePage": "https://www.harvard.edu/",
+        "kind": "official-site-icon",
+        "sha256": "25e3c55d5227f8436ecae0f7edf31cbc7f66f5d059fb651962291d1d75dec819",
+        "sourceSha256": "5053428ee2bbeccd2cf9b96bd380d2f057d75656a9dfcb89b1a91666d30d426a",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.harvard.edu/"
+    },
+    {
+      "organizationId": "usc",
+      "officialHomepage": "https://www.usc.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/usc.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.usc.edu/wp-content/uploads/2025/11/cropped-usc_512x512-Android@1x-180x180.png",
+        "resolvedSourceUrl": "https://www.usc.edu/wp-content/uploads/2025/11/cropped-usc_512x512-Android@1x-180x180.png",
+        "sourcePage": "https://www.usc.edu/",
+        "kind": "official-site-icon",
+        "sha256": "dd7a08f3fa95599db7a1f22da938e70444ba73d832d50e9a7a70cc78b4a6b9ca",
+        "sourceSha256": "2b317c5a434d8ebc65d19fa5c82f71cb7d64521209b13c95405ecf6f817e4d10",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.usc.edu/"
+    },
+    {
+      "organizationId": "ucla",
+      "officialHomepage": "https://www.ucla.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/ucla.png",
+        "format": "png",
+        "width": 56,
+        "height": 56,
+        "sourceUrl": "https://www.ucla.edu/img/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://www.ucla.edu/img/apple-touch-icon.png",
+        "sourcePage": "https://www.ucla.edu/",
+        "kind": "official-site-icon",
+        "sha256": "1becac2455f307a3dc7b395f6df0f62187b32e167a4a632abb056d25ba030f69",
+        "sourceSha256": "b03be85d2578d855abd9025af2b6555cfbf4b127b9557cffcb62f10c34132a5b",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.ucla.edu/"
+    },
+    {
+      "organizationId": "caltech",
+      "officialHomepage": "https://www.caltech.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/caltech.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.caltech.edu/static/core/img/apple-touch-icon.png?v=7.14.13",
+        "resolvedSourceUrl": "https://www.caltech.edu/static/core/img/apple-touch-icon.png?v=7.14.13",
+        "sourcePage": "https://www.caltech.edu/",
+        "kind": "official-site-icon",
+        "sha256": "d91c67a7beb89aa679bf14cf3921c1df15a970140f09664ae1715585b7183a79",
+        "sourceSha256": "f38b4564d77b0257144593b64f45ab600b30232bad1dbced6cca8abe0f953b01",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.caltech.edu/"
+    },
+    {
+      "organizationId": "northeastern",
+      "officialHomepage": "https://www.northeastern.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/northeastern.png",
+        "format": "png",
+        "width": 76,
+        "height": 76,
+        "sourceUrl": "https://brand.northeastern.edu/global/assets/favicon/apple-touch-76x76.png?v=2",
+        "resolvedSourceUrl": "https://brand.northeastern.edu/global/assets/favicon/apple-touch-76x76.png?v=2",
+        "sourcePage": "https://www.northeastern.edu/",
+        "kind": "official-site-icon",
+        "sha256": "b78d9a3d34b17c55d8246dbe5e0c366f382fc0a9c838e62fd71a18f883c9f362",
+        "sourceSha256": "efc9f84edc75c6cab91820e8eed5344fce3545276912acd8451afb7915de0879",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.northeastern.edu/"
+    },
+    {
+      "organizationId": "newcastle",
+      "officialHomepage": "https://www.newcastle.edu.au/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/newcastle.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cdn.sin0sites.com/1151075878605074432/PBSLW_2049352140730691584/UON_LOGO_2024_v1.3_PRIMARY-INTL.jpg",
+        "resolvedSourceUrl": "https://cdn.sin0sites.com/1151075878605074432/PBSLW_2049352140730691584/UON_LOGO_2024_v1.3_PRIMARY-INTL.jpg",
+        "sourcePage": "https://china.newcastle.edu.au/",
+        "kind": "official-site-logo",
+        "sha256": "7ea56856ef853cd164e80a9062eb8db5100db4eb530adc1739b80c0740c6d4f4",
+        "sourceSha256": "f22098631bd0e008062dcc6938975ec3b2f07ad3ea7ec677590a9f502cc4d66c",
+        "background": "light"
+      },
+      "attempts": [
+        {
+          "url": "https://www.newcastle.edu.au/favicon.ico",
+          "result": "HTTPSConnectionPool(host='www.newcastle.edu.au', port=443): Read timed out. (read timeout=8)"
+        },
+        {
+          "url": "https://www.newcastle.edu.au/identity",
+          "result": "HTTP 403"
+        },
+        {
+          "url": "https://www.newcastle.edu.au/current-staff/our-organisation/reputation-brand-and-communication",
+          "result": "HTTP 403 from direct request; official page web retrieval links china.newcastle.edu.au"
+        },
+        {
+          "url": "https://china.newcastle.edu.au/",
+          "result": "HTTP 200; University of Newcastle Australia primary international JPG explicitly referenced"
+        }
+      ],
+      "note": "Exact University of Newcastle Australia primary international logo from its official Chinese site, linked by the central university site.",
+      "homepageStatus": 403,
+      "homepageResolvedUrl": "https://www.newcastle.edu.au/"
+    },
+    {
+      "organizationId": "keio",
+      "officialHomepage": "https://www.keio.ac.jp/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/keio.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.keio.ac.jp/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://www.keio.ac.jp/apple-touch-icon.png",
+        "sourcePage": "https://www.keio.ac.jp/ja/",
+        "kind": "official-site-icon",
+        "sha256": "a28e040ecd7aa990ea3e4ec26ca43e9332074265f2e5f4cf63e1677c13130494",
+        "sourceSha256": "00cd0f31b2dae03e26150f1bb404dd232b46c845300182fdad381abe70e08f6c",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.keio.ac.jp/ja/"
+    },
+    {
+      "organizationId": "ariel",
+      "officialHomepage": "https://www.ariel.ac.il/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/ariel.png",
+        "format": "png",
+        "width": 16,
+        "height": 16,
+        "sourceUrl": "https://www.ariel.ac.il/favicon.ico",
+        "resolvedSourceUrl": "https://campuscore.ariel.ac.il/favicon.ico",
+        "sourcePage": "https://www.ariel.ac.il/",
+        "kind": "official-site-icon",
+        "sha256": "786dc800b8653e8951c0c4744ece92a8fb59d3732aacfd51d9c0b67afb1b1dee",
+        "sourceSha256": "527fd617e9ec6d4eb641f07b40756cfaf1da202c6bfb1942d917e96f0619beb9",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official website root favicon; no third-party brand service used.",
+      "homepageStatus": 247,
+      "homepageResolvedUrl": "https://www.ariel.ac.il/"
+    },
+    {
+      "organizationId": "asu",
+      "officialHomepage": "https://www.asu.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/asu.png",
+        "format": "png",
+        "width": 48,
+        "height": 48,
+        "sourceUrl": "https://www.asu.edu/themes/custom/asu_edu/favicon.ico",
+        "resolvedSourceUrl": "https://www.asu.edu/themes/custom/asu_edu/favicon.ico",
+        "sourcePage": "https://www.asu.edu/",
+        "kind": "official-site-icon",
+        "sha256": "f46cca6c9c642000caa31a8dc978e41aae87938961de59670ca2084373cf3ab6",
+        "sourceSha256": "4d8336ddd9487b519d23a407f4b863ca9b68d911e3ebb90f4b47d208790753e0",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.asu.edu/"
+    },
+    {
+      "organizationId": "xai",
+      "officialHomepage": "https://x.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/xai.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://x.ai/apple-icon.png?apple-icon.167itqrsbgzm4.png?dpl=3a4bcbb9cbd7a588efa9b97a791e7abf21fb5dea",
+        "resolvedSourceUrl": "https://x.ai/apple-icon.png?apple-icon.167itqrsbgzm4.png?dpl=3a4bcbb9cbd7a588efa9b97a791e7abf21fb5dea",
+        "sourcePage": "https://x.ai/",
+        "kind": "official-site-icon",
+        "sha256": "e18832f82ceec0fd8a1212f3393526be40dafb2cf8492fcaa9aae36b8cdcb380",
+        "sourceSha256": "a2596c54bd97a7d11e0df1b3f4b2e3e229bfea31c84c9b05e62edefd846673cf",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://x.ai/"
+    },
+    {
+      "organizationId": "lapis",
+      "officialHomepage": null,
+      "retrievedOn": "2026-10-26",
+      "status": "unavailable",
+      "asset": null,
+      "attempts": [],
+      "note": "No verified official homepage in catalogue; no identity inferred from the name."
+    },
+    {
+      "organizationId": "sybil",
+      "officialHomepage": null,
+      "retrievedOn": "2026-10-26",
+      "status": "unavailable",
+      "asset": null,
+      "attempts": [],
+      "note": "No verified official homepage in catalogue; no identity inferred from the name."
+    },
+    {
+      "organizationId": "bbn",
+      "officialHomepage": "https://www.bbn.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/bbn.png",
+        "format": "png",
+        "width": 160,
+        "height": 158,
+        "sourceUrl": "https://www.rtx.com/-/media/themes/raytheon-technologies/rtx-shared/rtx-theme/images/rtx-balck-favicon.png?rev=3da99ab1a2a54dca92c98a2ede690339&rid=e3e3f4840c2742cc9f36e2d33430c8cd",
+        "resolvedSourceUrl": "https://www.rtx.com/-/media/themes/raytheon-technologies/rtx-shared/rtx-theme/images/rtx-balck-favicon.png?rev=3da99ab1a2a54dca92c98a2ede690339&rid=e3e3f4840c2742cc9f36e2d33430c8cd",
+        "sourcePage": "https://www.rtx.com/what-we-do/bbn-technologies",
+        "kind": "official-site-icon",
+        "sha256": "43513523b4b2eb1be153fc10724994355fa3394082de630ad9781c393e23df60",
+        "sourceSha256": "4edc00897aa90373a039754a47ef44abe9fb2b0ce11ce05a7ba8d673343a23d8",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.rtx.com/what-we-do/bbn-technologies"
+    },
+    {
+      "organizationId": "vals",
+      "officialHomepage": "https://www.vals.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/vals.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.vals.ai/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://www.vals.ai/apple-touch-icon.png",
+        "sourcePage": "https://www.vals.ai/home",
+        "kind": "official-site-icon",
+        "sha256": "2b009ec34ab8f365fc5ed24ba0f4c2879e28c89378393505e062ca73e21eedff",
+        "sourceSha256": "8776276ddf8997697cbca1a927e473abff3e79a396c328bcd98bb184f819f86f",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.vals.ai/home"
+    },
+    {
+      "organizationId": "tufts",
+      "officialHomepage": "https://www.tufts.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/tufts.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.tufts.edu/themes/custom/tuftsedu_theme/favicon.png",
+        "resolvedSourceUrl": "https://www.tufts.edu/themes/custom/tuftsedu_theme/favicon.png",
+        "sourcePage": "https://www.tufts.edu/",
+        "kind": "official-site-icon",
+        "sha256": "a155cf0f2d74d8e4a684a25059ab3b1d5964d2009cc65cea4c6d79895bfd7459",
+        "sourceSha256": "f175fc3b421131673421e98bf2cf17dba813f222d6ee49ce156f39d65b65a1e7",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.tufts.edu/"
+    },
+    {
+      "organizationId": "vector",
+      "officialHomepage": "https://vectorinstitute.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/vector.png",
+        "format": "png",
+        "width": 32,
+        "height": 32,
+        "sourceUrl": "https://vectorinstitute.ai/wp-content/uploads/2023/01/favicon-vector-institute-32x32-1.png",
+        "resolvedSourceUrl": "https://vectorinstitute.ai/wp-content/uploads/2023/01/favicon-vector-institute-32x32-1.png",
+        "sourcePage": "https://vectorinstitute.ai/",
+        "kind": "official-site-icon",
+        "sha256": "b4b770f84ec67d5a910573725b05a2a926f7e6ab1cbe598eeb985b5b06b01d7e",
+        "sourceSha256": "d44223f0ae1bec6df5069ea3dc3c1dc443dad4442fe1593334e2129b6713a3fd",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://vectorinstitute.ai/"
+    },
+    {
+      "organizationId": "thoughtful",
+      "officialHomepage": null,
+      "retrievedOn": "2026-10-26",
+      "status": "unavailable",
+      "asset": null,
+      "attempts": [],
+      "note": "No verified official homepage in catalogue; no identity inferred from the name."
+    },
+    {
+      "organizationId": "equistamp",
+      "officialHomepage": "https://equistamp.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/equistamp.png",
+        "format": "png",
+        "width": 48,
+        "height": 48,
+        "sourceUrl": "https://equistamp.com/favicon.ico",
+        "resolvedSourceUrl": "https://equistamp.com/favicon.ico",
+        "sourcePage": "https://equistamp.com/",
+        "kind": "official-site-icon",
+        "sha256": "c4d99fac2dcf1a3828780e6855747bc90b3931a3e5c04ca62e6cc136f16c8016",
+        "sourceSha256": "41989286f3fd65595a9cf350a613b03d131b75d3dc07c7be92849241f857b8fe",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://equistamp.com/"
+    },
+    {
+      "organizationId": "microsoft",
+      "officialHomepage": "https://www.microsoft.com/research/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/microsoft.png",
+        "format": "png",
+        "width": 128,
+        "height": 128,
+        "sourceUrl": "https://www.microsoft.com/favicon.ico",
+        "resolvedSourceUrl": "https://www.microsoft.com/favicon.ico",
+        "sourcePage": "https://www.microsoft.com/en-us/research/",
+        "kind": "official-site-icon",
+        "sha256": "6002cc3d86dffd229dd4995352d55c66a58619762ce438f027644e895744e00e",
+        "sourceSha256": "90cdaf487716184e4034000935c605d1633926d348116d198f355a98b8c6cd21",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official website root favicon; no third-party brand service used.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.microsoft.com/en-us/research/"
+    },
+    {
+      "organizationId": "nyu",
+      "officialHomepage": "https://www.nyu.edu/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/nyu.png",
+        "format": "png",
+        "width": 160,
+        "height": 56,
+        "sourceUrl": "https://www.nyu.edu/",
+        "resolvedSourceUrl": "https://www.nyu.edu/",
+        "sourcePage": "https://www.nyu.edu/",
+        "sourceLocator": "Header wordmark: second inline SVG, viewBox 0 0 68 24",
+        "kind": "official-site-logo",
+        "sha256": "2ab884d32f1db95c6120df976b7fa017f3ed59834012a5eb3ffcb6b9c2e503d2",
+        "sourceSha256": "2e89c162faa03667299bdb43338a276ec4f9707ef09504a52ba1dce283426f7a",
+        "background": "dark"
+      },
+      "attempts": [
+        {
+          "url": "https://www.nyu.edu/favicon.ico",
+          "result": "HTTPSConnectionPool(host='www.nyu.edu', port=443): Read timed out. (read timeout=8)"
+        }
+      ],
+      "note": "Exact header inline SVG extracted from the official homepage; no geometry redrawn. SVG parsed, checked for active/external content, then rasterized to a static PNG. Original white header wordmark uses a dark backing for contrast.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.nyu.edu/"
+    },
+    {
+      "organizationId": "iiit",
+      "officialHomepage": "https://www.iiit.ac.in/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/iiit.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.iiit.ac.in/wp-content/uploads/2022/07/cropped-IIIT-Favicon-180x180.png",
+        "resolvedSourceUrl": "https://www.iiit.ac.in/wp-content/uploads/2022/07/cropped-IIIT-Favicon-180x180.png",
+        "sourcePage": "https://www.iiit.ac.in/",
+        "kind": "official-site-icon",
+        "sha256": "16440da55d5d9af4839a8bd6ef871db8bcbe6ac301b303ed847591965f4d6dcd",
+        "sourceSha256": "459394ef36742390ad1a338da647d29c16f53b51b4341845b306e45d8abab1e4",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.iiit.ac.in/"
+    },
+    {
+      "organizationId": "ustc",
+      "officialHomepage": "https://www.ustc.edu.cn/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/ustc.png",
+        "format": "png",
+        "width": 16,
+        "height": 16,
+        "sourceUrl": "https://www.ustc.edu.cn/news/images/ustc.ico",
+        "resolvedSourceUrl": "https://www.ustc.edu.cn/news/images/ustc.ico",
+        "sourcePage": "https://www.ustc.edu.cn/",
+        "kind": "official-site-icon",
+        "sha256": "fe674d6d9949723733831cfc5c058c66c62260bba628b26853ee79dbb1589117",
+        "sourceSha256": "23f56e3f2f8706dc3a4489cd0fc2752bc76fbb47c51a81445d38ba60cfdbfc60",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.ustc.edu.cn/"
+    },
+    {
+      "organizationId": "beihang",
+      "officialHomepage": "https://www.buaa.edu.cn/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/beihang.png",
+        "format": "png",
+        "width": 160,
+        "height": 34,
+        "sourceUrl": "https://www.buaa.edu.cn/images/logo.png",
+        "resolvedSourceUrl": "https://www.buaa.edu.cn/images/logo.png",
+        "sourcePage": "https://www.buaa.edu.cn/",
+        "kind": "official-site-logo",
+        "sha256": "77d0126334e34f5f499f8814783eaca0e50a1491c36033e249ea8676b972bc49",
+        "sourceSha256": "f25d77b0c25b9e7f25ccfaa9a1fa22123fe38172e07d866b6d897a946db11b5e",
+        "background": "dark"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. Official white wordmark displayed on a dark backing for contrast.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.buaa.edu.cn/"
+    },
+    {
+      "organizationId": "neo",
+      "officialHomepage": "https://neoresearch.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/neo.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://neoresearch.ai/assets/neo-research-A-mark-light.png",
+        "resolvedSourceUrl": "https://neoresearch.ai/assets/neo-research-A-mark-light.png",
+        "sourcePage": "https://neoresearch.ai/",
+        "kind": "official-site-icon",
+        "sha256": "ba8c2bd102f5e5a4187face3e330760aee2663767ec40b4e160f292ea04327d8",
+        "sourceSha256": "aa87d64925b4ef8f7621efaa36bf628e56d3eb5efd045df87fe9a8f4ef7b67af",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://neoresearch.ai/"
+    },
+    {
+      "organizationId": "moonshot",
+      "officialHomepage": "https://www.kimi.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/moonshot.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.kimi.com/pwa-192.png",
+        "resolvedSourceUrl": "https://www.kimi.com/pwa-192.png",
+        "sourcePage": "https://www.kimi.com/",
+        "kind": "official-site-icon",
+        "sha256": "045ebc14e59bd08ece22c96067c9c2020735b47dc328b4e4189d65b28db50690",
+        "sourceSha256": "6c14f9c3062e953b3ed57ae3e19db931c1c1bba38d4d8d55550544f31d55e469",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. Kimi site icon from the catalogue’s official Moonshot AI homepage; recorded as a product/site identity, not a separate corporate wordmark.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.kimi.com/"
+    },
+    {
+      "organizationId": "zai",
+      "officialHomepage": "https://z.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/zai.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+        "resolvedSourceUrl": "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+        "sourcePage": "https://chat.z.ai/",
+        "kind": "official-site-icon",
+        "sha256": "f923cd96367d8f95f2ea9518023b788c189c766f8ce359c9165c30fedad98ff8",
+        "sourceSha256": "07a45e8e35b0b631ed2c68cd1cb041f9721b1ceeb0bd0e34f1459b0304a741c7",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. SVG parsed, checked for active/external content, then rasterized to a static PNG.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://chat.z.ai/"
+    },
+    {
+      "organizationId": "deepseek",
+      "officialHomepage": "https://www.deepseek.com/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/deepseek.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://www.deepseek.com/favicon.ico",
+        "resolvedSourceUrl": "https://www.deepseek.com/favicon.ico",
+        "sourcePage": "https://www.deepseek.com/",
+        "kind": "official-site-icon",
+        "sha256": "f705f40ab4541100a9a5ff741204feb523aa80a7d7fb690860bd2366d5fb2462",
+        "sourceSha256": "30a4420e6e4dcb17fd7de560c5004346c2bc8cd971d2d5f5ee15326603e51321",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://www.deepseek.com/"
+    },
+    {
+      "organizationId": "qwen",
+      "officialHomepage": "https://qwen.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/qwen.png",
+        "format": "png",
+        "width": 80,
+        "height": 80,
+        "sourceUrl": "https://img.alicdn.com/imgextra/i4/O1CN01OXv3EM1FN8t9W4P79_!!6000000000474-2-tps-80-80.png",
+        "resolvedSourceUrl": "https://img.alicdn.com/imgextra/i4/O1CN01OXv3EM1FN8t9W4P79_!!6000000000474-2-tps-80-80.png",
+        "sourcePage": "https://qwen.ai/",
+        "kind": "official-site-icon",
+        "sha256": "47a769cda8708a9773d7b0da1393dcb7a3139d6c0c138e5d4a857f6e95258685",
+        "sourceSha256": "cd9390bc4209c319121d111f3a1f535b3c7dd909b8f860d41acc9744138d58df",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage. Qwen product/lab mark from qwen.ai; no Alibaba parent mark substituted.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://qwen.ai/"
+    },
+    {
+      "organizationId": "mistral",
+      "officialHomepage": "https://mistral.ai/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/mistral.png",
+        "format": "png",
+        "width": 160,
+        "height": 114,
+        "sourceUrl": "https://mistral.ai/",
+        "resolvedSourceUrl": "https://mistral.ai/",
+        "sourcePage": "https://mistral.ai/",
+        "sourceLocator": "Header mobile logo: SVG within data-mobile-logo-icon, viewBox 0 0 21 15",
+        "kind": "official-site-logo",
+        "sha256": "c0f1d9784896dfed7a1c3ec943bf6bd6a752c402fad75adbe1351862bd29a1d1",
+        "sourceSha256": "fcc1e2b4b630bf7eab2c12b5228d8e788f8394bba7db3cfcb2bb3d8d7cba9986",
+        "background": "light"
+      },
+      "attempts": [
+        {
+          "url": "https://mistral.ai/favicon.ico",
+          "result": "HTTPSConnectionPool(host='mistral.ai', port=443): Read timed out. (read timeout=8)"
+        },
+        {
+          "url": "https://mistral.ai/favicon.png",
+          "result": "HTTP 404"
+        },
+        {
+          "url": "https://mistral.ai/favicon.svg",
+          "result": "cannot identify image file <_io.BytesIO object at 0x106c75580>"
+        }
+      ],
+      "note": "Exact header inline SVG extracted from the official homepage; no geometry redrawn. SVG parsed, checked for active/external content, then rasterized to a static PNG.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://mistral.ai/"
+    },
+    {
+      "organizationId": "lyptus",
+      "officialHomepage": "https://lyptusresearch.org/",
+      "retrievedOn": "2026-10-26",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/lyptus.png",
+        "format": "png",
+        "width": 155,
+        "height": 160,
+        "sourceUrl": "https://lyptusresearch.org/assets/logo/lyptus_logo_256.png",
+        "resolvedSourceUrl": "https://lyptusresearch.org/assets/logo/lyptus_logo_256.png",
+        "sourcePage": "https://lyptusresearch.org/",
+        "kind": "official-site-icon",
+        "sha256": "d4e473996655c8869235b8c56f620e6e0b5e3688b97cb96f081a61317b2f367f",
+        "sourceSha256": "b17ffd3a22b4e325e661eb0441691d428dd6b14be2979ceb6dcc570bb3988f9b",
+        "background": "light"
+      },
+      "attempts": [],
+      "note": "Official-site asset linked from this organization’s homepage.",
+      "homepageStatus": 200,
+      "homepageResolvedUrl": "https://lyptusresearch.org/"
+    },
+    {
+      "organizationId": "generality",
+      "officialHomepage": "https://generality.org/",
+      "retrievedOn": "2026-10-27",
+      "status": "unavailable",
+      "asset": null,
+      "attempts": [],
+      "note": "Publisher attribution verified from the primary audit article. No approved local brand asset has been collected."
+    }
+  ]
+}

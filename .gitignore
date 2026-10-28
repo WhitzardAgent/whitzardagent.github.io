@@ -4,3 +4,9 @@ dist/
 .DS_Store
 screenshots/
 screenshot.mjs
+output/playwright/
+
+.playwright-cli/
+
+# Local source-batch implementation scratch
+.superpowers/nuwa-source-first-2026-10-26/

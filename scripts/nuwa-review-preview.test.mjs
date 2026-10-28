@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+test('private review server has a finite route allowlist and no raw-file exposure',async()=>{const{reviewRoute}=await import('./nuwa-review-preview.mjs');assert.equal(reviewRoute('/en'),'baseline.en.html');assert.equal(reviewRoute('/zh'),'baseline.zh.html');assert.equal(reviewRoute('/../baseline.json'),null);assert.equal(reviewRoute('/source/package.json'),null);});
+test('research text cannot inject executable HTML into the private baseline',async()=>{const{renderReviewMarkdown}=await import('./nuwa-review-preview.mjs');const out=await renderReviewMarkdown('## Source\n\n<script>globalThis.bad=1</script>');assert.doesNotMatch(out.code,/<script>/);assert.match(out.code,/(?:&lt;|&#x3C;)script/i);});

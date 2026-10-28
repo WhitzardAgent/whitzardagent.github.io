@@ -139,7 +139,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       ],
       cta: "Explore NUWA",
       indexTitle: "NUWA Index",
-      indexBody: "A long-term research data project for observing and comparing frontier AI risk across models and systems — not a safety leaderboard.",
+      indexBody: "A research knowledge base on frontier AI risks, maintained by NUWA Lab.",
       indexCta: "Learn about the NUWA Index",
     },
     ecosystem: {
@@ -222,7 +222,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       ],
       cta: "探索女娲实验室",
       indexTitle: "NUWA Index",
-      indexBody: "一个持续观测和比较前沿 AI 风险的研究数据项目，而非安全性排行榜。",
+      indexBody: "由女娲实验室维护的前沿 AI 风险研究知识库。",
       indexCta: "了解 NUWA Index",
     },
     ecosystem: {

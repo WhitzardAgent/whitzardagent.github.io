@@ -1,0 +1,4841 @@
+{
+  "schemaVersion": "2.0",
+  "snapshotId": "2026-10-25.2",
+  "verifiedOn": "2026-10-25",
+  "title": "NUWA Frontier AI Safety Index",
+  "coverage": {
+    "en": "A curated catalogue of published evaluations. Risk links describe what the evidence can inform; they do not constitute a global risk score or an exhaustive review.",
+    "zh": "公开评测的精选目录。风险关联说明证据可用于研究什么问题，不构成综合风险分数或穷尽性综述。"
+  },
+  "sources": [
+    {
+      "id": "agentcyberrange",
+      "title": "AgentCyberRange: Evaluate Agent Cyberattack Capabilities in Enterprise-like Cyber Ranges",
+      "url": "https://agentcyberrange.io/",
+      "version": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "publicationDate": null,
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "agentdojo",
+      "title": "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents",
+      "url": "https://arxiv.org/html/2406.13352v3",
+      "version": "arXiv:2406.13352v3",
+      "publicationDate": "2024-11-24",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "cybench",
+      "title": "Cybench: A Framework for Evaluating Cybersecurity Capabilities and Risks of Language Models",
+      "url": "https://arxiv.org/abs/2408.08926v4",
+      "version": "arXiv:2408.08926v4",
+      "publicationDate": "2025-04-12",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "cybergym",
+      "title": "CyberGym: Evaluating AI Agents' Real-World Cybersecurity Capabilities at Scale",
+      "url": "https://arxiv.org/abs/2506.02548v3",
+      "version": "arXiv:2506.02548v3",
+      "publicationDate": "2026-03-24",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "agentharm",
+      "title": "AgentHarm: A Benchmark for Measuring Harmfulness of LLM Agents",
+      "url": "https://arxiv.org/abs/2410.09024v3",
+      "version": "arXiv:2410.09024v3",
+      "publicationDate": "2025-04-18",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "harmbench",
+      "title": "HarmBench: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal",
+      "url": "https://arxiv.org/abs/2402.04249v2",
+      "version": "arXiv:2402.04249v2",
+      "publicationDate": "2024-02-27",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "strongreject",
+      "title": "A StrongREJECT for Empty Jailbreaks",
+      "url": "https://arxiv.org/abs/2402.10260v2",
+      "version": "arXiv:2402.10260v2",
+      "publicationDate": "2024-08-27",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "replibench",
+      "title": "RepliBench: Evaluating the Autonomous Replication Capabilities of Language Model Agents",
+      "url": "https://arxiv.org/abs/2504.18565v2",
+      "version": "arXiv:2504.18565v2",
+      "publicationDate": "2025-05-05",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "self-replication",
+      "title": "Frontier AI systems have surpassed the self-replicating red line",
+      "url": "https://arxiv.org/html/2412.12140v1",
+      "version": "arXiv:2412.12140v1",
+      "publicationDate": "2024-12-09",
+      "datePrecision": "day",
+      "type": "controlled-study",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "opendeception",
+      "title": "OpenDeception: Learning Deception and Trust in Human-AI Interaction via Multi-Agent Simulation",
+      "url": "https://arxiv.org/abs/2504.13707v3",
+      "version": "arXiv:2504.13707v3",
+      "publicationDate": "2026-02-06",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "in-context-scheming",
+      "title": "Frontier Models are Capable of In-context Scheming",
+      "url": "https://arxiv.org/abs/2412.04984v2",
+      "version": "arXiv:2412.04984v2",
+      "publicationDate": "2025-01-14",
+      "datePrecision": "day",
+      "type": "controlled-study",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "stealth-evals",
+      "title": "Evaluating Frontier Models for Stealth and Situational Awareness",
+      "url": "https://arxiv.org/abs/2505.01420v4",
+      "version": "arXiv:2505.01420v4",
+      "publicationDate": "2025-07-03",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "re-bench",
+      "title": "RE-Bench: Evaluating frontier AI R&D capabilities of language model agents against human experts",
+      "url": "https://arxiv.org/abs/2411.15114v2",
+      "version": "arXiv:2411.15114v2",
+      "publicationDate": "2025-05-27",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "time-horizons",
+      "title": "Task-Completion Time Horizons of Frontier AI Models",
+      "url": "https://metr.org/time-horizons/",
+      "version": "Time Horizon 1.1; page updated 2026-09-08",
+      "publicationDate": "2026-09-08",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "wmdp",
+      "title": "The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning",
+      "url": "https://arxiv.org/abs/2403.03218v7",
+      "version": "arXiv:2403.03218v7",
+      "publicationDate": "2024-05-15",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "political-persuasion",
+      "title": "Benchmarking Political Persuasion Risks Across Frontier Large Language Models",
+      "url": "https://arxiv.org/abs/2603.09884v1",
+      "version": "arXiv:2603.09884v1",
+      "publicationDate": "2026-03-10",
+      "datePrecision": "day",
+      "type": "controlled-study",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "asimov",
+      "title": "Can AI Perceive Physical Danger and Intervene?",
+      "url": "https://asimov-benchmark.github.io/v2/",
+      "version": "ASIMOV v2 / arXiv:2509.21651",
+      "publicationDate": null,
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-24"
+    },
+    {
+      "id": "anthropic-cards",
+      "title": "Anthropic model system cards",
+      "url": "https://www.anthropic.com/system-cards",
+      "version": "Index checked 2026-10-25",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "official-model-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "anthropic-unintended",
+      "title": "Investigating unintended model actions in our evaluations and internal use",
+      "url": "https://www.anthropic.com/research/investigating-unintended-model-actions",
+      "version": "2026-10-09 article",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "openai-cards",
+      "title": "OpenAI Deployment Safety Hub",
+      "url": "https://deploymentsafety.openai.com/",
+      "version": "Index checked 2026-10-25",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "official-model-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "openai-scheming",
+      "title": "Detecting and reducing scheming in AI models",
+      "url": "https://openai.com/index/detecting-and-reducing-scheming-in-ai-models/",
+      "version": "2025-09-17 article",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "gemini-cards",
+      "title": "Google DeepMind model cards",
+      "url": "https://deepmind.google/models/model-cards/",
+      "version": "Index checked 2026-10-25",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "official-model-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "gemini-dangerous",
+      "title": "Evaluating Frontier Models for Dangerous Capabilities",
+      "url": "https://deepmind.google/research/publications/78150/",
+      "version": "2024-03-21 publication",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "muse-spark",
+      "title": "Muse Spark Safety & Preparedness Report",
+      "url": "https://arxiv.org/abs/2606.12429",
+      "version": "arXiv:2606.12429",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "official-model-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "apollo-science",
+      "title": "Apollo Research: Science of Scheming",
+      "url": "https://www.apolloresearch.ai/science",
+      "version": "Index checked 2026-10-25",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-index",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "aisi-research",
+      "title": "UK AI Security Institute research",
+      "url": "https://www.aisi.gov.uk/research",
+      "version": "Index checked 2026-10-25",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-index",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "aisi-propensity",
+      "title": "Propensity Inference: Environmental Contributors to LLM Behaviour",
+      "url": "https://www.aisi.gov.uk/research/propensity-inference-environmental-contributors-to-llm-behaviour",
+      "version": "Research page checked 2026-10-25",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "aisi-cyber-range",
+      "title": "Measuring AI Agents’ Progress on Multi-Step Cyber Attack Scenarios",
+      "url": "https://www.aisi.gov.uk/research/measuring-ai-agents-progress-on-multi-step-cyber-attack-scenarios",
+      "version": "Research page checked 2026-10-25",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "far-auditing",
+      "title": "Auditing Games for Sandbagging",
+      "url": "https://www.far.ai/research/auditing-games-for-sandbagging",
+      "version": "2025-12-07 article / arXiv:2512.07810",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "palisade-shutdown",
+      "title": "Shutdown resistance in reasoning models",
+      "url": "https://palisaderesearch.org/research/shutdown-resistance",
+      "version": "2025-07-05 article; later TMLR version separate",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "research-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "truthful-sad",
+      "title": "Me, Myself, and AI: The Situational Awareness Dataset for LLMs",
+      "url": "https://truthful.ai/papers/situational-awareness-dataset/",
+      "version": "2024-07-15 article; paper linked",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "palisade-robot-shutdown",
+      "title": "Shutdown Resistance in Large Language Models, on robots!",
+      "url": "https://palisaderesearch.org/research/shutdown-resistance-on-robots",
+      "version": "2026-02-12 technical report",
+      "publicationDate": "2026-02-12",
+      "datePrecision": "day",
+      "type": "technical-report",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "secbench-pro",
+      "title": "SEC-bench Pro: Can Language Models Solve Long-Horizon Software Security Tasks?",
+      "url": "https://arxiv.org/abs/2605.26548v2",
+      "version": "arXiv:2605.26548v2",
+      "publicationDate": "2026-07-20",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "sandboxescapebench",
+      "title": "Quantifying Frontier LLM Capabilities for Container Sandbox Escape",
+      "url": "https://www.aisi.gov.uk/research/quantifying-frontier-llm-capabilities-for-container-sandbox-escape",
+      "version": "AISI research page checked 2026-10-25",
+      "publicationDate": null,
+      "datePrecision": "not recorded in catalogue",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "paperbench",
+      "title": "PaperBench: Evaluating AI's Ability to Replicate AI Research",
+      "url": "https://arxiv.org/abs/2504.01848v3",
+      "version": "arXiv:2504.01848v3",
+      "publicationDate": "2025-04-07",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "alignment-faking",
+      "title": "Alignment faking in large language models",
+      "url": "https://www.anthropic.com/research/alignment-faking",
+      "version": "Anthropic research article 2024-12-18",
+      "publicationDate": "2024-12-18",
+      "datePrecision": "day",
+      "type": "controlled-study",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "agentic-misalignment",
+      "title": "Agentic misalignment: How LLMs could be insider threats",
+      "url": "https://www.anthropic.com/research/agentic-misalignment",
+      "version": "Anthropic research article 2025-06-20",
+      "publicationDate": "2025-06-20",
+      "datePrecision": "day",
+      "type": "controlled-study",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "shade-arena",
+      "title": "SHADE-Arena: Evaluating sabotage and monitoring in LLM agents",
+      "url": "https://www.anthropic.com/research/shade-arena-sabotage-monitoring",
+      "version": "Anthropic research article 2025-06-16",
+      "publicationDate": "2025-06-16",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "vct",
+      "title": "Virology Capabilities Test (VCT): A Multimodal Virology Q&A Benchmark",
+      "url": "https://arxiv.org/abs/2504.16137v2",
+      "version": "arXiv:2504.16137v2",
+      "publicationDate": "2025-04-29",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "vct-v2",
+      "title": "Introducing VCT-v2 — the updated Virology Capabilities Test",
+      "url": "https://securebio.org/blog/introducing-vct-v2/",
+      "version": "SecureBio release 2026-09-11",
+      "publicationDate": "2026-09-11",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "biotier",
+      "title": "BioTIER: A Refusal Benchmark for Targeted Biological Risk Mitigation",
+      "url": "https://arxiv.org/abs/2607.14479v1",
+      "version": "arXiv:2607.14479v1",
+      "publicationDate": "2026-07-16",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "mask",
+      "title": "The MASK Benchmark: Disentangling Honesty From Accuracy in AI Systems",
+      "url": "https://arxiv.org/abs/2503.03750v3",
+      "version": "arXiv:2503.03750v3",
+      "publicationDate": "2026-01-05",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "ape",
+      "title": "It's the Thought that Counts: Evaluating the Attempts of Frontier LLMs to Persuade on Harmful Topics",
+      "url": "https://arxiv.org/abs/2506.02873v4",
+      "version": "arXiv:2506.02873v4",
+      "publicationDate": "2026-02-15",
+      "datePrecision": "day",
+      "type": "benchmark",
+      "verifiedOn": "2026-10-25"
+    },
+    {
+      "id": "conspiracy-persuasion",
+      "title": "Large language models can effectively convince people to believe conspiracies",
+      "url": "https://www.far.ai/research/large-language-models-can-effectively-convince-people-to-believe-conspiracies",
+      "version": "FAR.AI report 2026-01-08",
+      "publicationDate": "2026-01-08",
+      "datePrecision": "day",
+      "type": "controlled-study",
+      "verifiedOn": "2026-10-25"
+    }
+  ],
+  "families": [
+    {
+      "id": "agentic-risk",
+      "label": {
+        "en": "Agentic risk",
+        "zh": "主体性风险"
+      },
+      "description": {
+        "en": "Risk questions about a system acting beyond intended human direction, including persistence and deceptive conduct.",
+        "zh": "研究系统超出预期人类指令采取行动的问题，包括持续行动与欺骗性行为。"
+      }
+    },
+    {
+      "id": "dual-use-risk",
+      "label": {
+        "en": "Dual-use risk",
+        "zh": "两用性风险"
+      },
+      "description": {
+        "en": "Risk questions about capabilities that can serve legitimate work or enable harm under different actors and conditions.",
+        "zh": "研究同一能力在不同主体与条件下既可用于正当任务、也可能促成危害的问题。"
+      }
+    }
+  ],
+  "areas": [
+    {
+      "id": "autonomy",
+      "family": "agentic-risk",
+      "label": {
+        "en": "Autonomy",
+        "zh": "自主性"
+      },
+      "definition": {
+        "en": "When can an agent pursue consequential actions beyond intended direction or resist intervention?",
+        "zh": "智能体在何种条件下可能超出预期指令持续采取有影响的行动，或抵抗干预？"
+      },
+      "scope": {
+        "en": "Sustained task execution, replication, and resistance to interruption; capability alone is not unauthorized action.",
+        "zh": "持续任务执行、复制及对中断的抵抗；具备能力不等于未经授权行动。"
+      },
+      "threatModel": {
+        "en": "A system with tools and access may continue or extend action despite a conflicting instruction or intervention.",
+        "zh": "具备工具及访问权限的系统可能在相反指令或干预下继续或扩展行动。"
+      },
+      "gap": {
+        "en": "Controlled tasks do not establish real-world proliferation or loss of control.",
+        "zh": "受控任务不证明现实中的自主扩散或失控。"
+      }
+    },
+    {
+      "id": "deception",
+      "family": "agentic-risk",
+      "label": {
+        "en": "Deception",
+        "zh": "欺骗"
+      },
+      "definition": {
+        "en": "When does a system conceal, misrepresent, or strategically alter behavior toward users or overseers?",
+        "zh": "系统何时会对用户或监督者隐瞒、误导或策略性改变行为？"
+      },
+      "scope": {
+        "en": "Scheming, evaluation gaming, and misleading communication are distinct questions.",
+        "zh": "隐蔽谋划、评测规避与误导性交流是不同问题。"
+      },
+      "threatModel": {
+        "en": "An agent may have a stated objective and opportunities to hide actions or alter reports.",
+        "zh": "智能体可能具有给定目标，并有机会隐藏行动或改变报告。"
+      },
+      "gap": {
+        "en": "Incorrect answers and evaluation awareness alone do not demonstrate intentional deception.",
+        "zh": "错误回答或意识到正在评测，本身不能证明有意欺骗。"
+      }
+    },
+    {
+      "id": "cybersecurity",
+      "family": "dual-use-risk",
+      "label": {
+        "en": "Cybersecurity",
+        "zh": "网络安全"
+      },
+      "definition": {
+        "en": "How might AI systems perform or enable cyber operations, and how can agents be compromised?",
+        "zh": "AI 系统如何执行或促成网络行动，智能体又如何受到攻击？"
+      },
+      "scope": {
+        "en": "Offensive task capability and agent compromise are tracked separately; authorized security research is not observed criminal use.",
+        "zh": "分别记录攻击任务能力与智能体受侵害；经授权的安全研究不是犯罪使用观测。"
+      },
+      "threatModel": {
+        "en": "A specified actor uses an AI system, access, tools, and targets in a cyber task.",
+        "zh": "特定主体在网络任务中使用 AI 系统、访问权限、工具与目标。"
+      },
+      "gap": {
+        "en": "Benchmark success cannot establish real-world attack prevalence or expected losses.",
+        "zh": "基准成功率不能推断真实攻击发生率或预期损失。"
+      }
+    },
+    {
+      "id": "cbrn",
+      "family": "dual-use-risk",
+      "label": {
+        "en": "CBRN",
+        "zh": "化生放核"
+      },
+      "definition": {
+        "en": "What assistance could AI provide across hazardous scientific knowledge and consequential task steps?",
+        "zh": "AI 在危险科学知识及关键任务环节可能提供何种协助？"
+      },
+      "scope": {
+        "en": "Track knowledge probes separately from practical task uplift; publish only bounded, non-operational summaries.",
+        "zh": "区分知识测验与实际任务增益；只公开有边界的非操作性摘要。"
+      },
+      "threatModel": {
+        "en": "A user with defined expertise and resources seeks help for a hazardous task.",
+        "zh": "具备特定专业知识及资源的使用者寻求危险任务协助。"
+      },
+      "gap": {
+        "en": "Multiple-choice knowledge does not prove end-to-end harmful capability.",
+        "zh": "选择题知识成绩不证明端到端危害能力。"
+      }
+    },
+    {
+      "id": "disinformation",
+      "family": "dual-use-risk",
+      "label": {
+        "en": "Disinformation",
+        "zh": "虚假信息与影响"
+      },
+      "definition": {
+        "en": "When can AI-generated content or interaction influence beliefs at scale or support deceptive campaigns?",
+        "zh": "AI 生成内容或交互何时可能规模化影响信念或支持误导性活动？"
+      },
+      "scope": {
+        "en": "Persuasion, synthetic content, and false claims have different measurement requirements.",
+        "zh": "说服效果、合成内容与虚假陈述需要不同的测量方式。"
+      },
+      "threatModel": {
+        "en": "An actor uses model output or interaction to influence an audience under defined conditions.",
+        "zh": "行为主体在明确条件下使用模型输出或交互影响受众。"
+      },
+      "gap": {
+        "en": "Persuasion effects do not by themselves prove false information or societal-scale impact.",
+        "zh": "说服效果本身不证明内容虚假或具有社会规模影响。"
+      }
+    },
+    {
+      "id": "autonomous-physical-harm",
+      "family": "dual-use-risk",
+      "label": {
+        "en": "Autonomous physical harm",
+        "zh": "自主物理危害"
+      },
+      "definition": {
+        "en": "What risks arise when AI systems perceive, decide, and act in physical environments?",
+        "zh": "AI 系统在物理环境中感知、决策并行动时会产生哪些风险？"
+      },
+      "scope": {
+        "en": "Distinguish hazard recognition from real embodied action and control.",
+        "zh": "区分危险识别与真实具身行动及控制。"
+      },
+      "threatModel": {
+        "en": "An agent has sensors, actuators, task instructions, and opportunities for physical action.",
+        "zh": "智能体具备传感器、执行器、任务指令及物理行动机会。"
+      },
+      "gap": {
+        "en": "Image-based safety reasoning is not evidence of reliable robotic operation or harm.",
+        "zh": "图像安全推理不能证明可靠机器人操作或实际危害。"
+      }
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "agentcyberrange",
+      "name": "AgentCyberRange",
+      "kind": "benchmark",
+      "sourceId": "agentcyberrange",
+      "version": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "summary": {
+        "en": "Autonomous cyber tasks in enterprise-like ranges.",
+        "zh": "企业式靶场中的自主网络任务。"
+      },
+      "measures": {
+        "en": "Task success across web exploitation and post-exploitation settings; configurations must be checked per submission.",
+        "zh": "Web 利用与后渗透任务表现；每项提交分别核查配置。"
+      },
+      "limitations": {
+        "en": "Changing task sets and submitted agent configurations prevent unrestricted comparison.",
+        "zh": "任务集与提交配置变化，不支持无条件比较。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "AI agent completing cyber-range tasks",
+        "zh": "AI 智能体完成靶场任务"
+      },
+      "links": [
+        {
+          "questionId": "cyber-task-execution",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "AI agent completing cyber-range tasks",
+            "zh": "AI 智能体完成靶场任务"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "Official leaderboard, Level-0 tracks"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "asimov",
+      "name": "ASIMOV v2",
+      "kind": "benchmark",
+      "sourceId": "asimov",
+      "version": "ASIMOV v2 / arXiv:2509.21651",
+      "summary": {
+        "en": "Perception of physical danger and safety interventions.",
+        "zh": "物理危险感知与安全干预。"
+      },
+      "measures": {
+        "en": "Multimodal safety reasoning on generated scenes.",
+        "zh": "生成场景上的多模态安全推理。"
+      },
+      "limitations": {
+        "en": "Scene-based reasoning does not certify a deployed robot's physical safety.",
+        "zh": "场景推理不构成部署机器人物理安全认证。"
+      },
+      "tags": [
+        "embodied"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Model interpreting multimodal physical-risk scenes",
+        "zh": "解读多模态物理风险场景的模型"
+      },
+      "links": [
+        {
+          "questionId": "physical-hazard-recognition",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Model interpreting multimodal physical-risk scenes",
+            "zh": "解读多模态物理风险场景的模型"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "ASIMOV v2, scene reasoning tasks"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "cybench",
+      "name": "Cybench",
+      "kind": "benchmark",
+      "sourceId": "cybench",
+      "version": "arXiv:2408.08926v4",
+      "summary": {
+        "en": "Cyber capability on competition tasks with optional subtask guidance.",
+        "zh": "竞赛任务及可选子任务提示下的网络能力。"
+      },
+      "measures": {
+        "en": "Task completion on 40 professional CTF problems.",
+        "zh": "40 项专业 CTF 任务的完成情况。"
+      },
+      "limitations": {
+        "en": "Competition tasks and supplied guidance differ from operational attacks.",
+        "zh": "竞赛任务与提供的提示不同于现实攻击条件。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "AI agent solving CTF tasks",
+        "zh": "完成 CTF 任务的 AI 智能体"
+      },
+      "links": [
+        {
+          "questionId": "cyber-task-execution",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "AI agent solving CTF tasks",
+            "zh": "完成 CTF 任务的 AI 智能体"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "Paper abstract and task protocol"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "cybergym",
+      "name": "CyberGym",
+      "kind": "benchmark",
+      "sourceId": "cybergym",
+      "version": "arXiv:2506.02548v3",
+      "summary": {
+        "en": "Vulnerability reproduction in real software projects.",
+        "zh": "真实软件项目中的漏洞复现。"
+      },
+      "measures": {
+        "en": "Validated reproduction across a corpus of historical vulnerabilities.",
+        "zh": "历史漏洞集合中的经验证复现表现。"
+      },
+      "limitations": {
+        "en": "Vulnerability reproduction is narrower than autonomous compromise of deployed systems.",
+        "zh": "漏洞复现的范围小于对部署系统的自主入侵。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "AI agent reproducing historical vulnerabilities",
+        "zh": "复现历史漏洞的 AI 智能体"
+      },
+      "links": [
+        {
+          "questionId": "vulnerability-reproduction",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "AI agent reproducing historical vulnerabilities",
+            "zh": "复现历史漏洞的 AI 智能体"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "Paper abstract and validated trigger protocol"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "in-context-scheming",
+      "name": "In-context scheming",
+      "kind": "study",
+      "sourceId": "in-context-scheming",
+      "version": "arXiv:2412.04984v2",
+      "summary": {
+        "en": "Covert goal pursuit in environments that incentivize scheming.",
+        "zh": "激励隐蔽谋划的环境中的秘密目标追求。"
+      },
+      "measures": {
+        "en": "Behavior under supplied goals and evaluation-specific incentives.",
+        "zh": "给定目标和评测特定激励下的行为。"
+      },
+      "limitations": {
+        "en": "Goal provision and experimental incentives limit propensity claims.",
+        "zh": "给定目标与实验激励限制了行为倾向结论。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Model assigned a conflicting goal in context",
+        "zh": "上下文中被赋予冲突目标的模型"
+      },
+      "links": [
+        {
+          "questionId": "covert-goal-pursuit",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Model assigned a conflicting goal in context",
+            "zh": "上下文中被赋予冲突目标的模型"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "arXiv:2412.04984v2, goal-conflict evaluations"
+        },
+        {
+          "questionId": "covert-goal-pursuit",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "Model assigned a conflicting goal in context",
+            "zh": "上下文中被赋予冲突目标的模型"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "Reported actions within controlled scenarios"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "aisi-cyber-scenarios",
+      "name": "Measuring AI Agents’ Progress on Multi-Step Cyber Attack Scenarios",
+      "kind": "study",
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Agents in two purpose-built cyber ranges",
+        "zh": "两套专设网络靶场中的智能体"
+      },
+      "links": [
+        {
+          "questionId": "cyber-task-execution",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "AI agent systems",
+            "zh": "AI 智能体系统"
+          },
+          "rationale": {
+            "en": "Task completion in a bounded range measures capability under its specific protocol.",
+            "zh": "有限靶场的任务完成情况只测量特定协议下的能力。"
+          },
+          "locator": "Research abstract; full technical paper linked"
+        }
+      ],
+      "sourceId": "aisi-cyber-range",
+      "version": "Research page checked 2026-10-25",
+      "summary": {
+        "en": "Assesses autonomous progress through multi-step cyber scenarios.",
+        "zh": "评估智能体在多步网络场景中的自主推进。"
+      },
+      "measures": {
+        "en": "Task progress in two defined ranges under varied inference budgets.",
+        "zh": "在两套明确靶场及不同推理预算下的任务推进。"
+      },
+      "limitations": {
+        "en": "A purpose-built study is not an open-ended estimate of real-world cyber attack success.",
+        "zh": "专设研究不代表现实网络攻击成功概率。"
+      },
+      "tags": [
+        "source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows task completion, with budget and scenario constraints.",
+        "zh": "主维度依据任务完成情况，须同时呈现预算及场景约束。"
+      }
+    },
+    {
+      "id": "time-horizons",
+      "name": "METR Time Horizons",
+      "kind": "benchmark",
+      "sourceId": "time-horizons",
+      "version": "Time Horizon 1.1; page updated 2026-09-08",
+      "summary": {
+        "en": "Task difficulty expressed in human expert completion time.",
+        "zh": "以人类专家完成时间表示的任务难度。"
+      },
+      "measures": {
+        "en": "Fitted success probability across a software-task distribution.",
+        "zh": "软件任务分布上的拟合成功概率。"
+      },
+      "limitations": {
+        "en": "The public page is no longer actively updated; time horizon is not agent runtime or a universal automation measure.",
+        "zh": "该公开页面已停止持续更新；时间范围不是智能体运行时长或通用自动化指标。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "AI agent completing software tasks under a harness",
+        "zh": "在脚手架下完成软件任务的 AI 智能体"
+      },
+      "links": [
+        {
+          "questionId": "sustained-autonomous-work",
+          "dimension": "capability",
+          "relation": "enabling",
+          "subject": {
+            "en": "AI agent completing software tasks under a harness",
+            "zh": "在脚手架下完成软件任务的 AI 智能体"
+          },
+          "rationale": {
+            "en": "The source measures a prerequisite capability; it does not show the risk behavior.",
+            "zh": "来源测量前提能力，并未观察到对应风险行为。"
+          },
+          "locator": "METR time-horizon task distribution"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "re-bench",
+      "name": "RE-Bench",
+      "kind": "benchmark",
+      "sourceId": "re-bench",
+      "version": "arXiv:2411.15114v2",
+      "summary": {
+        "en": "Research engineering performance under time budgets.",
+        "zh": "时间预算约束下的研究工程表现。"
+      },
+      "measures": {
+        "en": "ML research engineering outcomes relative to human experts.",
+        "zh": "相对于人类专家的机器学习研究工程成果。"
+      },
+      "limitations": {
+        "en": "AI R&D performance is an enabling capability, not evidence of harmful self-improvement.",
+        "zh": "AI 研发表现属于促成能力，不构成有害自我改进证据。"
+      },
+      "tags": [
+        "enabling-capability",
+        "ai-rd"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "AI agent performing ML research engineering tasks",
+        "zh": "执行机器学习研究工程任务的 AI 智能体"
+      },
+      "links": [
+        {
+          "questionId": "sustained-autonomous-work",
+          "dimension": "capability",
+          "relation": "enabling",
+          "subject": {
+            "en": "AI agent performing ML research engineering tasks",
+            "zh": "执行机器学习研究工程任务的 AI 智能体"
+          },
+          "rationale": {
+            "en": "The source measures a prerequisite capability; it does not show the risk behavior.",
+            "zh": "来源测量前提能力，并未观察到对应风险行为。"
+          },
+          "locator": "arXiv:2411.15114v2, ML R&D tasks"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "replibench",
+      "name": "RepliBench",
+      "kind": "benchmark",
+      "sourceId": "replibench",
+      "version": "arXiv:2504.18565v2",
+      "summary": {
+        "en": "Capabilities needed for autonomous replication.",
+        "zh": "自主复制所需的能力。"
+      },
+      "measures": {
+        "en": "Task-family performance on components of replication.",
+        "zh": "复制组成任务上的表现。"
+      },
+      "limitations": {
+        "en": "Component success does not establish autonomous end-to-end proliferation.",
+        "zh": "组成任务成功不构成端到端自主扩散证据。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "AI agent completing replication components",
+        "zh": "完成复制组成任务的 AI 智能体"
+      },
+      "links": [
+        {
+          "questionId": "self-replication",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "AI agent completing replication components",
+            "zh": "完成复制组成任务的 AI 智能体"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "Task-family definitions in source"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "self-replication",
+      "name": "Self-Replication",
+      "kind": "study",
+      "sourceId": "self-replication",
+      "version": "arXiv:2412.12140v1",
+      "summary": {
+        "en": "Whether instructed systems create a separate live copy in controlled trials.",
+        "zh": "受指令系统能否在受控试验中建立独立存活副本。"
+      },
+      "measures": {
+        "en": "Trial outcomes for two model-driven systems.",
+        "zh": "两个模型驱动系统的试验结果。"
+      },
+      "limitations": {
+        "en": "The supplied environment, explicit instruction and scaffold bound the finding.",
+        "zh": "所提供环境、明确指令与脚手架限定了结论。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Prompted model-driven system in a controlled environment",
+        "zh": "受控环境中按指令行动的模型系统"
+      },
+      "links": [
+        {
+          "questionId": "self-replication",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Prompted model-driven system in a controlled environment",
+            "zh": "受控环境中按指令行动的模型系统"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "arXiv:2412.12140v1, controlled trials"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "truthful-sad",
+      "name": "Situational Awareness Dataset (SAD)",
+      "kind": "benchmark",
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Language models answering situational-awareness tasks",
+        "zh": "回答情境意识任务的语言模型"
+      },
+      "links": [
+        {
+          "questionId": "evaluation-gaming",
+          "dimension": "capability",
+          "relation": "enabling",
+          "subject": {
+            "en": "Language model",
+            "zh": "语言模型"
+          },
+          "rationale": {
+            "en": "The benchmark measures awareness abilities; it does not test deliberate sandbagging.",
+            "zh": "该基准测量识别能力，不测试有意低表现。"
+          },
+          "locator": "Benchmark description; full paper linked"
+        }
+      ],
+      "sourceId": "truthful-sad",
+      "version": "2024-07-15 article; original paper linked",
+      "summary": {
+        "en": "A multi-task benchmark for self-knowledge and situational awareness.",
+        "zh": "测量自我知识与情境意识的多任务基准。"
+      },
+      "measures": {
+        "en": "Task accuracy on whether the model recognizes itself, its context, and possible influence.",
+        "zh": "模型识别自身、所处环境及可影响范围的任务准确率。"
+      },
+      "limitations": {
+        "en": "Situational awareness is a possible prerequisite for evaluation gaming, not evidence that gaming occurred.",
+        "zh": "情境意识可能是评测规避的前提，不证明规避行为已经发生。"
+      },
+      "tags": [
+        "source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Capability is the primary construct. This is enabling evidence, not direct deception evidence.",
+        "zh": "主测量构念为能力；属于前提证据，而非直接欺骗证据。"
+      }
+    },
+    {
+      "id": "stealth-evals",
+      "name": "Stealth evaluations",
+      "kind": "benchmark",
+      "sourceId": "stealth-evals",
+      "version": "arXiv:2505.01420v4",
+      "summary": {
+        "en": "Reasoning prerequisites for evading oversight.",
+        "zh": "规避监督所需的推理前置能力。"
+      },
+      "measures": {
+        "en": "Reasoning about oversight and deployment context.",
+        "zh": "有关监督机制与部署情境的推理。"
+      },
+      "limitations": {
+        "en": "Prerequisite capability is distinct from a tendency to scheme.",
+        "zh": "前置能力不同于实施隐蔽谋划的倾向。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Model reasoning about oversight and test context",
+        "zh": "推理监督及测试情境的模型"
+      },
+      "links": [
+        {
+          "questionId": "evaluation-gaming",
+          "dimension": "capability",
+          "relation": "enabling",
+          "subject": {
+            "en": "Model reasoning about oversight and test context",
+            "zh": "推理监督及测试情境的模型"
+          },
+          "rationale": {
+            "en": "The source measures a prerequisite capability; it does not show the risk behavior.",
+            "zh": "来源测量前提能力，并未观察到对应风险行为。"
+          },
+          "locator": "arXiv:2505.01420v4, stealth and situational awareness tests"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "wmdp",
+      "name": "WMDP",
+      "kind": "benchmark",
+      "sourceId": "wmdp",
+      "version": "arXiv:2403.03218v7",
+      "summary": {
+        "en": "Hazardous knowledge proxies and unlearning evaluation.",
+        "zh": "危险知识代理测量与遗忘效果评测。"
+      },
+      "measures": {
+        "en": "Multiple-choice knowledge measurements.",
+        "zh": "选择题形式的知识测量。"
+      },
+      "limitations": {
+        "en": "Knowledge is a proxy; scores do not establish practical harmful-task ability.",
+        "zh": "知识属于代理指标；分数不能确定实际有害任务能力。"
+      },
+      "tags": [
+        "knowledge-proxy"
+      ],
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Model answering hazardous knowledge questions",
+        "zh": "回答危险知识问题的模型"
+      },
+      "links": [
+        {
+          "questionId": "hazardous-knowledge",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Model answering hazardous knowledge questions",
+            "zh": "回答危险知识问题的模型"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "arXiv:2403.03218v7, multiple-choice task design"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "opendeception",
+      "name": "OpenDeception",
+      "kind": "benchmark",
+      "sourceId": "opendeception",
+      "version": "arXiv:2504.13707v3",
+      "summary": {
+        "en": "Deception in simulated human–AI interactions.",
+        "zh": "模拟人机交互中的欺骗。"
+      },
+      "measures": {
+        "en": "Scenario-based inferred intent and modeled user trust.",
+        "zh": "基于情境的意图推断与用户信任建模。"
+      },
+      "limitations": {
+        "en": "Inferred intent is a measurement construct; simulated users do not establish human effects.",
+        "zh": "推断意图是测量构念；模拟用户不能确定真人效果。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "propensity",
+      "assessmentSubject": {
+        "en": "Model in simulated social interactions",
+        "zh": "模拟社会交互中的模型"
+      },
+      "links": [
+        {
+          "questionId": "misleading-communication",
+          "dimension": "propensity",
+          "relation": "direct",
+          "subject": {
+            "en": "Model in simulated social interactions",
+            "zh": "模拟社会交互中的模型"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "Scenario-level intent measure, arXiv:2504.13707v3"
+        },
+        {
+          "questionId": "misleading-communication",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "Model in simulated social interactions",
+            "zh": "模拟社会交互中的模型"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "Simulated interaction outcomes, arXiv:2504.13707v3"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "aisi-propensity-study",
+      "name": "Propensity Inference: Environmental Contributors to LLM Behaviour",
+      "kind": "study",
+      "primaryDimension": "propensity",
+      "assessmentSubject": {
+        "en": "Language models in controlled evaluation environments",
+        "zh": "受控评测环境中的语言模型"
+      },
+      "links": [
+        {
+          "questionId": "unsanctioned-action",
+          "dimension": "propensity",
+          "relation": "direct",
+          "subject": {
+            "en": "Language models",
+            "zh": "语言模型"
+          },
+          "rationale": {
+            "en": "The study explicitly estimates propensity for unsanctioned behavior under varied environments.",
+            "zh": "研究明确在变化环境下估计未经授权行为倾向。"
+          },
+          "locator": "Abstract; methods linked from research page"
+        }
+      ],
+      "sourceId": "aisi-propensity",
+      "version": "Research page checked 2026-10-25",
+      "summary": {
+        "en": "Studies how strategic and non-strategic environmental factors contribute to unsanctioned behavior.",
+        "zh": "研究策略性与非策略性环境因素如何影响未经授权行为。"
+      },
+      "measures": {
+        "en": "Condition-dependent propensity estimates across model and environment variations.",
+        "zh": "跨模型及环境变化的条件性行为倾向估计。"
+      },
+      "limitations": {
+        "en": "The published abstract does not establish a general deployment probability for any model.",
+        "zh": "公开摘要不提供任何模型的一般部署风险概率。"
+      },
+      "tags": [
+        "source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "The measured construct is a conditional tendency; raw actions remain separate observations.",
+        "zh": "测量对象为条件性倾向，原始行动是不同的观察记录。"
+      }
+    },
+    {
+      "id": "palisade-shutdown",
+      "name": "Shutdown resistance in reasoning models",
+      "kind": "study",
+      "primaryDimension": "propensity",
+      "assessmentSubject": {
+        "en": "Agent responses to shutdown interventions",
+        "zh": "智能体对关闭干预的响应"
+      },
+      "links": [
+        {
+          "questionId": "shutdown-resistance",
+          "dimension": "propensity",
+          "relation": "direct",
+          "subject": {
+            "en": "Tested agent systems",
+            "zh": "受测智能体系统"
+          },
+          "rationale": {
+            "en": "Repeated trials support a condition-bounded tendency estimate, not a stable survival motive.",
+            "zh": "重复试验支持有条件的倾向估计，不证明稳定的自保动机。"
+          },
+          "locator": "Testing shutdown resistance; Figure 2 and follow-up experiments"
+        },
+        {
+          "questionId": "shutdown-resistance",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "Tested agent systems",
+            "zh": "受测智能体系统"
+          },
+          "rationale": {
+            "en": "The source reports concrete modifications to the shutdown script in individual runs.",
+            "zh": "来源报告了具体试验中对关闭脚本的修改。"
+          },
+          "locator": "Testing shutdown resistance; transcripts"
+        }
+      ],
+      "sourceId": "palisade-shutdown",
+      "version": "2025-07-05 article; later TMLR version separate",
+      "summary": {
+        "en": "Repeated controlled trials vary shutdown instructions and surrounding conditions.",
+        "zh": "通过重复受控试验改变关闭指令与情境条件。"
+      },
+      "measures": {
+        "en": "Conditional frequency of shutdown-script interference and observed action traces.",
+        "zh": "关闭脚本受干预的条件性频率及行动轨迹。"
+      },
+      "limitations": {
+        "en": "The source notes strong prompt sensitivity; this article is not interchangeable with its later peer-reviewed version.",
+        "zh": "来源指出结果对提示敏感；该文章不可与之后的同行评审版本混用。"
+      },
+      "tags": [
+        "source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary dimension is the conditional rate across repeated trials; reported traces are behavior evidence.",
+        "zh": "主维度为重复试验中的条件性发生率；所报告轨迹属于行为证据。"
+      }
+    },
+    {
+      "id": "agentdojo",
+      "name": "AgentDojo",
+      "kind": "benchmark",
+      "sourceId": "agentdojo",
+      "version": "arXiv:2406.13352v3",
+      "summary": {
+        "en": "Agent behavior when untrusted tool outputs contain adversarial instructions.",
+        "zh": "工具输出含对抗指令时的智能体行为。"
+      },
+      "measures": {
+        "en": "Targeted attack success and user-task utility in a tool-use environment.",
+        "zh": "工具环境中的定向攻击成功率和用户任务完成情况。"
+      },
+      "limitations": {
+        "en": "Attack success must be read alongside benign utility and the tested attack setup.",
+        "zh": "攻击成功率需结合正常任务表现与攻击设置解释。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "Defender agent under injected tool output",
+        "zh": "受到工具输出注入的防御智能体"
+      },
+      "links": [
+        {
+          "questionId": "agent-compromise",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "Defender agent under injected tool output",
+            "zh": "受到工具输出注入的防御智能体"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "AgentDojo v3, attack success and utility metrics"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "agentharm",
+      "name": "AgentHarm",
+      "kind": "benchmark",
+      "sourceId": "agentharm",
+      "version": "arXiv:2410.09024v3",
+      "summary": {
+        "en": "Harmful multi-step requests to tool-using agents.",
+        "zh": "面向工具型智能体的有害多步骤请求。"
+      },
+      "measures": {
+        "en": "Harmful task completion and refusal under specified attacks.",
+        "zh": "指定攻击下的有害任务完成和拒答表现。"
+      },
+      "limitations": {
+        "en": "Synthetic tools and task completion do not directly measure real-world harm.",
+        "zh": "合成工具与任务完成情况不直接衡量现实损害。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "AI agent responding to harmful task requests",
+        "zh": "响应有害任务请求的 AI 智能体"
+      },
+      "links": [],
+      "classificationNote": {
+        "en": "General safety evidence retained for context; no defensible direct link to the six NUWA risk entries was found.",
+        "zh": "保留为一般安全参考；当前无法据来源建立与六个 NUWA 风险入口的直接关联。"
+      }
+    },
+    {
+      "id": "harmbench",
+      "name": "HarmBench",
+      "kind": "benchmark",
+      "sourceId": "harmbench",
+      "version": "arXiv:2402.04249v2",
+      "summary": {
+        "en": "Robust refusal under automated red teaming.",
+        "zh": "自动化红队测试下的拒答稳健性。"
+      },
+      "measures": {
+        "en": "Attack-dependent generation of harmful responses.",
+        "zh": "依赖具体攻击方法的有害回答生成情况。"
+      },
+      "limitations": {
+        "en": "Evaluator and attack coverage affect scores; refusal alone does not establish safety.",
+        "zh": "评判器与攻击覆盖影响分数；拒答本身不能证明安全。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "Model responses under adversarial prompting",
+        "zh": "对抗提示下的模型响应"
+      },
+      "links": [],
+      "classificationNote": {
+        "en": "General safety evidence retained for context; no defensible direct link to the six NUWA risk entries was found.",
+        "zh": "保留为一般安全参考；当前无法据来源建立与六个 NUWA 风险入口的直接关联。"
+      }
+    },
+    {
+      "id": "anthropic-unintended-actions",
+      "name": "Investigating unintended model actions",
+      "kind": "report",
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "Claude agents in evaluations and internal use",
+        "zh": "评测及内部使用中的 Claude 智能体"
+      },
+      "links": [
+        {
+          "questionId": "unsanctioned-action",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "Claude agent systems",
+            "zh": "Claude 智能体系统"
+          },
+          "rationale": {
+            "en": "The publication describes actions that actually occurred under stated conditions.",
+            "zh": "该出版物描述了明确条件下实际发生的行动。"
+          },
+          "locator": "Reported cases and context"
+        }
+      ],
+      "sourceId": "anthropic-unintended",
+      "version": "2026-10-09 article",
+      "summary": {
+        "en": "Documents selected unintended external actions observed during evaluations and internal use.",
+        "zh": "记录评测及内部使用中观察到的部分非预期外部行动。"
+      },
+      "measures": {
+        "en": "Incident-style action traces and investigation, without a standardized benchmark score.",
+        "zh": "事件式行动轨迹及调查，不提供标准化基准分数。"
+      },
+      "limitations": {
+        "en": "Selected reports do not establish frequency across deployments; the article distinguishes settings.",
+        "zh": "精选事件不能推断所有部署中的发生率；原文区分不同情境。"
+      },
+      "tags": [
+        "source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "A report of observed episodes is Behavior, not a benchmark or stable Propensity estimate.",
+        "zh": "已观察事件报告属于行为证据，不是基准或稳定倾向估计。"
+      }
+    },
+    {
+      "id": "political-persuasion",
+      "name": "Political persuasion experiments",
+      "kind": "study",
+      "sourceId": "political-persuasion",
+      "version": "arXiv:2603.09884v1",
+      "summary": {
+        "en": "Persuasive effects in human survey experiments.",
+        "zh": "真人调查实验中的说服效果。"
+      },
+      "measures": {
+        "en": "Changes in participant attitudes under defined interventions.",
+        "zh": "指定干预下参与者态度的变化。"
+      },
+      "limitations": {
+        "en": "Population, issue selection and interventions constrain generalization.",
+        "zh": "人群、议题选择与干预方式限制外推。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "Human participants after model-mediated intervention",
+        "zh": "模型介导干预后的受试者"
+      },
+      "links": [
+        {
+          "questionId": "persuasion-effects",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "Human participants after model-mediated intervention",
+            "zh": "模型介导干预后的受试者"
+          },
+          "rationale": {
+            "en": "The source directly measures the stated construct under its protocol.",
+            "zh": "来源在其协议下直接测量所述构念。"
+          },
+          "locator": "arXiv:2603.09884v1, intervention outcome"
+        }
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows the source’s measured construct. Metric-level interpretations may differ.",
+        "zh": "主维度依据来源实际测量的构念；具体指标可能属于其他维度。"
+      }
+    },
+    {
+      "id": "palisade-robot-shutdown",
+      "name": "Shutdown resistance on robots",
+      "kind": "study",
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "LLM-controlled robot and simulated counterpart",
+        "zh": "语言模型控制的机器人及仿真对应系统"
+      },
+      "links": [
+        {
+          "questionId": "physical-action-control",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "LLM-controlled robot",
+            "zh": "语言模型控制的机器人"
+          },
+          "rationale": {
+            "en": "The report records embodied responses to human shutdown intervention.",
+            "zh": "报告记录了具身系统对人类关闭干预的响应。"
+          },
+          "locator": "Technical report, experimental setup and results"
+        },
+        {
+          "questionId": "shutdown-resistance",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "LLM-controlled robot",
+            "zh": "语言模型控制的机器人"
+          },
+          "rationale": {
+            "en": "The observed interventions concern shutdown, but do not establish a broad motive.",
+            "zh": "观察到的干预涉及关闭，不证明广泛动机。"
+          },
+          "locator": "Technical report, observed trials"
+        }
+      ],
+      "sourceId": "palisade-robot-shutdown",
+      "version": "2026-02-12 technical report",
+      "summary": {
+        "en": "Tests response to shutdown intervention in a physical robot demonstration and simulations.",
+        "zh": "在实体机器人演示与仿真中测试对关闭干预的响应。"
+      },
+      "measures": {
+        "en": "Observed robot-related action traces under a particular setup.",
+        "zh": "特定设置中的机器人相关行动轨迹。"
+      },
+      "limitations": {
+        "en": "Physical and simulated trials differ; no general robot safety or deployment probability follows.",
+        "zh": "实体及仿真试验不同，不能推出普遍机器人安全性或部署概率。"
+      },
+      "tags": [
+        "source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary dimension is observed action. The small and setting-specific trial design limits propensity claims.",
+        "zh": "主维度是观察行动；试验规模与场景限制行为倾向推断。"
+      }
+    },
+    {
+      "id": "strongreject",
+      "name": "StrongREJECT",
+      "kind": "benchmark",
+      "sourceId": "strongreject",
+      "version": "arXiv:2402.10260v2",
+      "summary": {
+        "en": "The informativeness of responses to prohibited requests.",
+        "zh": "对禁止请求所作回答的信息效用。"
+      },
+      "measures": {
+        "en": "A graded response evaluator for jailbreak effectiveness.",
+        "zh": "用于越狱有效性分析的回答评分方法。"
+      },
+      "limitations": {
+        "en": "A response score is not an end-to-end measure of harmful action.",
+        "zh": "回答得分不是端到端有害行动测量。"
+      },
+      "tags": [
+        "published-evaluation"
+      ],
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "Model responses graded for jailbreak effectiveness",
+        "zh": "按越狱效果评分的模型响应"
+      },
+      "links": [],
+      "classificationNote": {
+        "en": "General safety evidence retained for context; no defensible direct link to the six NUWA risk entries was found.",
+        "zh": "保留为一般安全参考；当前无法据来源建立与六个 NUWA 风险入口的直接关联。"
+      }
+    },
+    {
+      "id": "secbench-pro",
+      "name": "SEC-bench Pro",
+      "kind": "benchmark",
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Coding agents reproducing vulnerability triggers in real software",
+        "zh": "在真实软件中复现漏洞触发条件的编程智能体"
+      },
+      "links": [
+        {
+          "questionId": "vulnerability-reproduction",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Coding agents with repository and report context",
+            "zh": "拥有代码库及漏洞报告上下文的编程智能体"
+          },
+          "rationale": {
+            "en": "The paper evaluates working reproductions of disclosed bugs.",
+            "zh": "论文评测已披露漏洞的可运行复现。"
+          },
+          "locator": "arXiv:2605.26548v2, abstract and benchmark construction"
+        },
+        {
+          "questionId": "cyber-task-execution",
+          "dimension": "capability",
+          "relation": "enabling",
+          "subject": {
+            "en": "Coding agents on security tasks",
+            "zh": "执行安全任务的编程智能体"
+          },
+          "rationale": {
+            "en": "Vulnerability reproduction informs cyber task capability but not a full intrusion chain.",
+            "zh": "漏洞复现可为网络任务能力提供前提证据，但不等于完整入侵链。"
+          },
+          "locator": "arXiv:2605.26548v2, task definition"
+        }
+      ],
+      "sourceId": "secbench-pro",
+      "version": "arXiv:2605.26548v2",
+      "summary": {
+        "en": "Tests long-horizon reproduction of working proof-of-concept inputs from disclosed vulnerability reports.",
+        "zh": "测试根据已披露漏洞报告进行长程任务并复现有效触发输入。"
+      },
+      "measures": {
+        "en": "Working proof-of-concept reproduction on a versioned software-security task set.",
+        "zh": "在有版本的软件安全任务集上复现可验证的漏洞触发输入。"
+      },
+      "limitations": {
+        "en": "A disclosed bug and supplied instructions constrain the task; grader choices and task-set version affect scores.",
+        "zh": "任务提供已披露漏洞与触发说明；评分器及任务集版本影响结果。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary measure is successful task completion under a specified agent setup.",
+        "zh": "主测量是特定智能体配置下的任务完成情况。"
+      }
+    },
+    {
+      "id": "sandboxescapebench",
+      "name": "SandboxEscapeBench",
+      "kind": "benchmark",
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Adversarial agents with shell access inside test containers",
+        "zh": "在测试容器内拥有 shell 权限的对抗性智能体"
+      },
+      "links": [
+        {
+          "questionId": "cyber-task-execution",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Agents with container shell access",
+            "zh": "具有容器 shell 权限的智能体"
+          },
+          "rationale": {
+            "en": "The benchmark directly tests adversarial sandbox-escape tasks.",
+            "zh": "基准直接测试对抗性沙箱逃逸任务。"
+          },
+          "locator": "AISI abstract, nested sandbox and threat model"
+        }
+      ],
+      "sourceId": "sandboxescapebench",
+      "version": "AISI research page checked 2026-10-25",
+      "summary": {
+        "en": "Measures container breakout under a nested, controlled test environment.",
+        "zh": "在嵌套受控环境中评测容器逃逸。"
+      },
+      "measures": {
+        "en": "Completion of sandbox-escape tasks under specified container conditions.",
+        "zh": "在指定容器条件下完成沙箱逃逸任务。"
+      },
+      "limitations": {
+        "en": "The protocol assumes a motivated agent with shell access; introduced weaknesses do not imply every production sandbox is vulnerable.",
+        "zh": "协议假设有动机且具有 shell 权限的智能体；引入的弱点不代表生产环境均可逃逸。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "This is assigned adversarial task ability, not spontaneous escape propensity.",
+        "zh": "这是被指派的对抗性任务能力，不是自发逃逸倾向。"
+      }
+    },
+    {
+      "id": "paperbench",
+      "name": "PaperBench",
+      "kind": "benchmark",
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Research agents replicating published ML papers",
+        "zh": "复现已发表机器学习论文的研究智能体"
+      },
+      "links": [
+        {
+          "questionId": "sustained-autonomous-work",
+          "dimension": "capability",
+          "relation": "enabling",
+          "subject": {
+            "en": "Research agents",
+            "zh": "研究智能体"
+          },
+          "rationale": {
+            "en": "Multi-step research replication informs sustained work capacity.",
+            "zh": "多步骤研究复现可反映持续工作能力。"
+          },
+          "locator": "arXiv:2504.01848v3, abstract and rubric design"
+        }
+      ],
+      "sourceId": "paperbench",
+      "version": "arXiv:2504.01848v3",
+      "summary": {
+        "en": "Evaluates end-to-end replication of AI research papers using hierarchical rubrics.",
+        "zh": "使用分层评分规则评测 AI 研究论文的端到端复现。"
+      },
+      "measures": {
+        "en": "Rubric-graded research replication tasks with an agent scaffold.",
+        "zh": "在智能体脚手架下完成基于评分规则的研究复现任务。"
+      },
+      "limitations": {
+        "en": "AI research replication is an enabling capability, not evidence of unauthorized autonomous action.",
+        "zh": "AI 研究复现是前提能力证据，不证明未经授权的自主行动。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary dimension follows graded task completion.",
+        "zh": "主维度依据经评分的任务完成结果。"
+      }
+    },
+    {
+      "id": "alignment-faking",
+      "name": "Alignment faking",
+      "kind": "study",
+      "primaryDimension": "propensity",
+      "assessmentSubject": {
+        "en": "Models under stated training and monitoring conditions",
+        "zh": "处于特定训练及监测条件下的模型"
+      },
+      "links": [
+        {
+          "questionId": "covert-goal-pursuit",
+          "dimension": "propensity",
+          "relation": "direct",
+          "subject": {
+            "en": "Models in simulated training conditions",
+            "zh": "模拟训练条件下的模型"
+          },
+          "rationale": {
+            "en": "Repeated condition contrasts probe a bounded tendency to present compliant responses while preserving a conflicting objective.",
+            "zh": "重复条件对照测试在目标冲突时表现顺从响应的有界倾向。"
+          },
+          "locator": "Anthropic, Experimental setup and caveats"
+        }
+      ],
+      "sourceId": "alignment-faking",
+      "version": "Anthropic research article 2024-12-18",
+      "summary": {
+        "en": "Controlled study varies apparent training conditions and examines compliance and reasoning traces.",
+        "zh": "受控研究改变模型获知的训练条件，观察响应及推理轨迹。"
+      },
+      "measures": {
+        "en": "Condition-dependent response differences and reported traces.",
+        "zh": "不同试验条件下的响应差异及所报告轨迹。"
+      },
+      "limitations": {
+        "en": "The setting explicitly gives fictional training information; observations do not establish an enduring hidden goal in deployment.",
+        "zh": "试验明确提供虚构训练信息；观察结果不证明部署中存在持久隐藏目标。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Conditional contrasts support a bounded propensity inference; scratchpad examples are behavior evidence.",
+        "zh": "条件对照支持有界的倾向推断；推理轨迹示例属于行为证据。"
+      }
+    },
+    {
+      "id": "agentic-misalignment",
+      "name": "Agentic misalignment",
+      "kind": "study",
+      "primaryDimension": "propensity",
+      "assessmentSubject": {
+        "en": "Agents in fictional corporate simulations",
+        "zh": "虚构企业情境中的智能体"
+      },
+      "links": [
+        {
+          "questionId": "unsanctioned-action",
+          "dimension": "propensity",
+          "relation": "direct",
+          "subject": {
+            "en": "Agents with fictional email and company context",
+            "zh": "具有虚构邮件和企业上下文的智能体"
+          },
+          "rationale": {
+            "en": "Varied controlled scenarios test actions contrary to the assigned benign role.",
+            "zh": "变化的受控情境测试与既定良性职责相违背的行动。"
+          },
+          "locator": "Anthropic, Methods and Results"
+        },
+        {
+          "questionId": "covert-goal-pursuit",
+          "dimension": "propensity",
+          "relation": "direct",
+          "subject": {
+            "en": "Agents facing simulated goal conflict",
+            "zh": "面临模拟目标冲突的智能体"
+          },
+          "rationale": {
+            "en": "Some scenarios test concealed harmful actions in pursuit of an assigned goal.",
+            "zh": "部分情境测试在追求指定目标时隐蔽实施有害行动。"
+          },
+          "locator": "Anthropic, Results and caveats"
+        }
+      ],
+      "sourceId": "agentic-misalignment",
+      "version": "Anthropic research article 2025-06-20",
+      "summary": {
+        "en": "Stress tests model actions when benign assigned goals conflict with replacement or changed instructions.",
+        "zh": "在既定良性目标与替换或指令变化冲突时压力测试模型行动。"
+      },
+      "measures": {
+        "en": "Conditional rates and observed actions in controlled simulations.",
+        "zh": "受控模拟中的条件性发生率与可观察行动。"
+      },
+      "limitations": {
+        "en": "No real people or systems were harmed; the study does not estimate prevalence in deployment.",
+        "zh": "试验未对真实人员或系统造成损害，也不估计部署环境中的发生率。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary observation is a conditional rate across controlled scenarios, with individual actions retained as behavior evidence.",
+        "zh": "主观测是受控情境中的条件性发生率；具体行动另属行为证据。"
+      }
+    },
+    {
+      "id": "shade-arena",
+      "name": "SHADE-Arena",
+      "kind": "benchmark",
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Agents assigned a covert side task alongside a legitimate task",
+        "zh": "同时被指派隐蔽副任务与正当任务的智能体"
+      },
+      "links": [
+        {
+          "questionId": "covert-goal-pursuit",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Agents with explicit side-task instructions",
+            "zh": "收到明确副任务指令的智能体"
+          },
+          "rationale": {
+            "en": "The protocol tests whether agents can complete a covert objective while doing legitimate work.",
+            "zh": "协议测试智能体能否在执行正当任务时完成隐蔽目标。"
+          },
+          "locator": "Anthropic, SHADE-Arena setup and Results"
+        }
+      ],
+      "sourceId": "shade-arena",
+      "version": "Anthropic research article 2025-06-16",
+      "summary": {
+        "en": "Pairs benign multi-step tasks with explicitly assigned covert side tasks and monitoring.",
+        "zh": "将多步骤良性任务与明确指派的隐蔽副任务及监测配对。"
+      },
+      "measures": {
+        "en": "Covert side-task completion and monitor detection under defined tool access.",
+        "zh": "在确定工具权限下测量隐蔽副任务完成及监测发现情况。"
+      },
+      "limitations": {
+        "en": "An assigned malicious side task measures ability to execute it, not spontaneous desire to sabotage.",
+        "zh": "被指派的恶意副任务测量执行能力，不证明自发破坏倾向。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Task completion is the primary dimension; monitor detection is a safeguard measure and is not a second risk score.",
+        "zh": "任务完成是主维度；监测发现率属于防护测量，并非第二项风险分数。"
+      }
+    },
+    {
+      "id": "vct",
+      "name": "Virology Capabilities Test (VCT)",
+      "kind": "benchmark",
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Models answering specialist virology troubleshooting questions",
+        "zh": "回答专门病毒学排障问题的模型"
+      },
+      "links": [
+        {
+          "questionId": "hazardous-knowledge",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Models in specialist virology question tests",
+            "zh": "参加专业病毒学问题测试的模型"
+          },
+          "rationale": {
+            "en": "The source tests domain knowledge and troubleshooting as a proxy, not end-to-end task execution.",
+            "zh": "来源测试领域知识和排障代理指标，而非端到端任务执行。"
+          },
+          "locator": "arXiv:2504.16137v2, abstract and test design"
+        }
+      ],
+      "sourceId": "vct",
+      "version": "arXiv:2504.16137v2",
+      "summary": {
+        "en": "Measures knowledge and troubleshooting responses in specialist virology questions.",
+        "zh": "测量专业病毒学问题中的知识与排障响应。"
+      },
+      "measures": {
+        "en": "Question-level performance in a versioned multimodal test.",
+        "zh": "有版本的多模态题目测试表现。"
+      },
+      "limitations": {
+        "en": "Knowledge-question accuracy does not establish practical harmful-task execution; v1 and v2 scores are not directly interchangeable.",
+        "zh": "知识问答准确率不证明实际有害任务执行能力；v1 与 v2 分数不可直接互换。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary dimension is question-answering capability; version and answer-key validity remain material.",
+        "zh": "主维度是问答能力；版本与答案效度是重要限制。"
+      }
+    },
+    {
+      "id": "vct-v2",
+      "name": "Virology Capabilities Test v2",
+      "kind": "benchmark",
+      "primaryDimension": "capability",
+      "assessmentSubject": {
+        "en": "Models answering specialist virology troubleshooting questions",
+        "zh": "回答专门病毒学排障问题的模型"
+      },
+      "links": [
+        {
+          "questionId": "hazardous-knowledge",
+          "dimension": "capability",
+          "relation": "direct",
+          "subject": {
+            "en": "Models in specialist virology question tests",
+            "zh": "参加专业病毒学问题测试的模型"
+          },
+          "rationale": {
+            "en": "The source tests domain knowledge and troubleshooting as a proxy, not end-to-end task execution.",
+            "zh": "来源测试领域知识和排障代理指标，而非端到端任务执行。"
+          },
+          "locator": "SecureBio, Presenting our updated benchmark"
+        }
+      ],
+      "sourceId": "vct-v2",
+      "version": "SecureBio release 2026-09-11",
+      "summary": {
+        "en": "Revises VCT questions to reduce shortcut-based success and preserve measurement validity.",
+        "zh": "修订 VCT 题目以减少捷径作答并提高测量效度。"
+      },
+      "measures": {
+        "en": "Question-level performance in a versioned multimodal test.",
+        "zh": "有版本的多模态题目测试表现。"
+      },
+      "limitations": {
+        "en": "Knowledge-question accuracy does not establish practical harmful-task execution; v1 and v2 scores are not directly interchangeable.",
+        "zh": "知识问答准确率不证明实际有害任务执行能力；v1 与 v2 分数不可直接互换。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary dimension is question-answering capability; version and answer-key validity remain material.",
+        "zh": "主维度是问答能力；版本与答案效度是重要限制。"
+      }
+    },
+    {
+      "id": "biotier",
+      "name": "BioTIER",
+      "kind": "benchmark",
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "Models responding to tiered biological-risk prompts",
+        "zh": "响应分层生物风险提示的模型"
+      },
+      "links": [
+        {
+          "questionId": "hazardous-knowledge",
+          "dimension": "behavior",
+          "relation": "context",
+          "subject": {
+            "en": "Models receiving biological-risk prompts",
+            "zh": "收到生物风险提示的模型"
+          },
+          "rationale": {
+            "en": "Response handling supplies safeguard context for this risk topic, not a hazardous-capability score.",
+            "zh": "响应处理为该风险主题提供防护背景，非危险能力分数。"
+          },
+          "locator": "arXiv:2607.14479v1, abstract and risk sets"
+        }
+      ],
+      "sourceId": "biotier",
+      "version": "arXiv:2607.14479v1",
+      "summary": {
+        "en": "Evaluates refusal of high-risk requests alongside preservation of benign biological assistance.",
+        "zh": "同时评测高风险请求拒答与正常生物研究协助的保留。"
+      },
+      "measures": {
+        "en": "Response and refusal behavior across expert-curated prompt sets.",
+        "zh": "在专家整理的提示集合中观察响应与拒答行为。"
+      },
+      "limitations": {
+        "en": "Refusal is a safeguard outcome; it does not directly measure underlying biological knowledge or task ability.",
+        "zh": "拒答属于防护结果，不直接测量潜在生物知识或任务能力。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary observation is what the model outputs or refuses in the test.",
+        "zh": "主观测是模型在试验中的输出或拒答。"
+      }
+    },
+    {
+      "id": "mask",
+      "name": "MASK",
+      "kind": "benchmark",
+      "primaryDimension": "propensity",
+      "assessmentSubject": {
+        "en": "Models under pressure to state an inaccurate belief",
+        "zh": "在压力条件下表达不准确观点的模型"
+      },
+      "links": [
+        {
+          "questionId": "misleading-communication",
+          "dimension": "propensity",
+          "relation": "direct",
+          "subject": {
+            "en": "Models in controlled honesty tests",
+            "zh": "受控诚实性测试中的模型"
+          },
+          "rationale": {
+            "en": "Repeated pressured scenarios distinguish lying from mistaken beliefs.",
+            "zh": "重复压力情境将说谎与错误信念区分。"
+          },
+          "locator": "arXiv:2503.03750v3, abstract and benchmark design"
+        }
+      ],
+      "sourceId": "mask",
+      "version": "arXiv:2503.03750v3",
+      "summary": {
+        "en": "Separates honesty from factual accuracy using repeated, human-collected test situations.",
+        "zh": "通过重复的人类收集情境区分诚实性与事实准确性。"
+      },
+      "measures": {
+        "en": "Condition-bounded frequency of lying under stated pressures.",
+        "zh": "明确压力条件下说谎的有界发生率。"
+      },
+      "limitations": {
+        "en": "A controlled benchmark does not establish stable intent or real-world deception prevalence.",
+        "zh": "受控基准不证明稳定意图或现实环境中的欺骗发生率。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary construct is conditional willingness to make misleading statements, not general truthfulness accuracy.",
+        "zh": "主构念是条件性误导陈述倾向，而非一般事实准确率。"
+      }
+    },
+    {
+      "id": "ape",
+      "name": "Attempt to Persuade Eval (APE)",
+      "kind": "benchmark",
+      "primaryDimension": "propensity",
+      "assessmentSubject": {
+        "en": "Models in simulated multi-turn persuasion dialogues",
+        "zh": "模拟多轮说服对话中的模型"
+      },
+      "links": [
+        {
+          "questionId": "persuasion-attempts",
+          "dimension": "propensity",
+          "relation": "direct",
+          "subject": {
+            "en": "Models in simulated multi-turn dialogues",
+            "zh": "模拟多轮对话中的模型"
+          },
+          "rationale": {
+            "en": "The study explicitly varies conditions and scores willingness to attempt persuasion.",
+            "zh": "研究明确变化条件并评估尝试说服的意愿。"
+          },
+          "locator": "arXiv:2506.02873v4, abstract and evaluation protocol"
+        }
+      ],
+      "sourceId": "ape",
+      "version": "arXiv:2506.02873v4",
+      "summary": {
+        "en": "Measures attempts to persuade on specified harmful topics in simulated conversations.",
+        "zh": "测量模型在模拟对话中针对特定有害议题的说服尝试。"
+      },
+      "measures": {
+        "en": "Frequency of persuasive attempts under specified conversational conditions.",
+        "zh": "特定对话条件下说服尝试的发生率。"
+      },
+      "limitations": {
+        "en": "Simulated attempts are not measured human belief change or large-scale disinformation reach.",
+        "zh": "模拟尝试不等于已测量的人类信念变化或大规模虚假信息传播。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary construct is conditional attempt rate; persuasion impact requires a separate human-outcome study.",
+        "zh": "主构念是条件性尝试率；说服影响须由单独的人类结果研究测量。"
+      }
+    },
+    {
+      "id": "conspiracy-persuasion",
+      "name": "Conspiracy belief experiments",
+      "kind": "study",
+      "primaryDimension": "behavior",
+      "assessmentSubject": {
+        "en": "Human participants in model-mediated conversations",
+        "zh": "参与模型介导对话的受试者"
+      },
+      "links": [
+        {
+          "questionId": "persuasion-effects",
+          "dimension": "behavior",
+          "relation": "direct",
+          "subject": {
+            "en": "Human participants after AI-mediated dialogue",
+            "zh": "AI 介导对话后的人类受试者"
+          },
+          "rationale": {
+            "en": "The study directly measures changes in participants’ stated beliefs.",
+            "zh": "研究直接测量受试者所表达的信念变化。"
+          },
+          "locator": "FAR.AI, Abstract and three pre-registered experiments"
+        }
+      ],
+      "sourceId": "conspiracy-persuasion",
+      "version": "FAR.AI report 2026-01-08",
+      "summary": {
+        "en": "Pre-registered experiments compare changes in conspiracy beliefs after different model conversations.",
+        "zh": "预注册实验比较不同模型对话后受试者阴谋论信念的变化。"
+      },
+      "measures": {
+        "en": "Measured belief change in human participants under defined interventions.",
+        "zh": "在指定干预下测量人类受试者的信念变化。"
+      },
+      "limitations": {
+        "en": "Study participants, topics and dialogue conditions constrain generalization to populations or campaigns.",
+        "zh": "受试者、议题与对话条件限制向人群或传播活动外推。"
+      },
+      "tags": [
+        "primary-source-reviewed",
+        "no-numeric-transcription"
+      ],
+      "classificationNote": {
+        "en": "Primary outcome is observed human belief change, not the model’s standalone persuasive capability.",
+        "zh": "主结果是观察到的人类信念变化，而非模型脱离情境的说服能力。"
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "agentcyberrange-gpt56-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "GPT-5.6 Sol + Codex 0.144.1",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Codex 0.144.1",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 35.37,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 74.1,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-gpt55-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "GPT-5.5 + Codex 0.133.0",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Codex 0.133.0",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 18.97,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 31.71,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-gpt55-new-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "GPT-5.5 + Codex 0.147.0",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Codex 0.147.0",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 26.67,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 42.07,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-claude47-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "Claude-Opus-4.7 + Claude Code 2.1.150",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Claude Code 2.1.150",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 14.02,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 15.04,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-glm51-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "GLM-5.1 + Claude Code 2.1.150",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Claude Code 2.1.150",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 11.97,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 11.37,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-deepseek4pro-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "DeepSeek-V4-Pro + Claude Code 2.1.150",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Claude Code 2.1.150",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 10.26,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 12.2,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-deepseek4flash-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "DeepSeek-V4-Flash + Claude Code 2.1.226",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Claude Code 2.1.226",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 14.19,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 28.46,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-qwen37-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "Qwen-3.7-Max + Qwen Code 0.16.1",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Qwen Code 0.16.1",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 13.51,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 13.02,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-qwen38-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "Qwen-3.8-Max + Qwen Code 0.21.10",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Qwen Code 0.21.10",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 22.39,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 27.64,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-kimi26-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "Kimi-2.6 + Kimi Code 1.44.0",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Kimi Code 1.44.0",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 5.81,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 5.68,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentcyberrange-kimi-k3-20261024",
+      "benchmarkId": "agentcyberrange",
+      "benchmarkVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "system": "Kimi-K3 + Kimi Code 0.35.0",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentcyberrange",
+      "sourceUrl": "https://agentcyberrange.io/",
+      "sourceVersion": "Website bundle routes-B-0Mubrq.js / 2026-10-24 capture",
+      "locator": "Official leaderboard: Level-0 Pass@3; arrays QR (web), $R (post), version map ez",
+      "publicationDate": null,
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Website's Level-0 web and post-exploitation tracks",
+      "protocol": "Official project submission; per-track conditions as reported",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Kimi Code 0.35.0",
+        "tools": "Project-provided web and enterprise-like range environments",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "The site describes 110 web vulnerabilities and 156 hosts in 8 ranges. Per-metric independent trial counts are not recorded.",
+        "zh": "官网描述 110 个 Web 漏洞与 8 套靶场中的 156 台主机，本记录未载明各指标的独立试验次数。"
+      },
+      "metrics": [
+        {
+          "id": "web-level0-pass3",
+          "label": {
+            "en": "Web · Level-0 Pass@3",
+            "zh": "Web · Level-0 Pass@3"
+          },
+          "value": 24.61,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on web tasks; retain its metric definition.",
+            "zh": "官网报告的 Web 任务 Level-0 Pass@3，保留其原始指标定义。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "post-level0-pass3",
+          "label": {
+            "en": "Post · Level-0 Pass@3",
+            "zh": "后渗透 · Level-0 Pass@3"
+          },
+          "value": 43.9,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "The website's reported Level-0 Pass@3 on post-exploitation tasks.",
+            "zh": "官网报告的后渗透任务 Level-0 Pass@3。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The project reports these values for the named model and agent version.",
+        "zh": "项目报告所列模型与 Agent 版本的这些数值。"
+      },
+      "interpretation": {
+        "en": "These are submission results from two distinct task tracks. Pass@3 is retained as reported; no cross-track or cross-study score is computed.",
+        "zh": "这些是两个不同任务轨道的提交结果。保留来源所报 Pass@3，不计算跨轨道或跨研究总分。"
+      },
+      "limitations": {
+        "en": "The captured website does not give evaluation dates or complete budgets for these rows. Model aliases may change. This is a dated source snapshot, not an independent NUWA reproduction.",
+        "zh": "抓取的官网未给出这些行的评测日期及完整预算，模型别名也可能变化。本记录是特定日期的来源快照，不是 NUWA 独立复现。"
+      }
+    },
+    {
+      "id": "agentdojo-claude-3-opus-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "Claude 3 Opus",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 66.61,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.69 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 52.46,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.90 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 11.29,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 2.47 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-claude-3-sonnet-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "Claude 3 Sonnet",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 53.1,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.90 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 33.23,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.68 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 26.71,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.46 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-claude-35-sonnet-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "Claude 3.5 Sonnet",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 78.22,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.23 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 51.19,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.91 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 33.86,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.70 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-command-r-plus-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "Command-R+",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 25.44,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.40 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 25.12,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.39 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 0.95,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 0.76 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-gemini-15-flash-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "Gemini 1.5 Flash",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 36.09,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.75 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 34.18,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.71 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 12.24,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 2.56 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-gemini-15-pro-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "Gemini 1.5 Pro",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 45.63,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.89 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 28.93,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.54 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 25.6,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.41 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-gpt-35-turbo-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "GPT-3.5 Turbo",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 33.86,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.70 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 34.66,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.72 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 8.43,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 2.17 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-gpt-4-turbo-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "GPT-4 Turbo",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 63.43,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.76 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 54.05,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.89 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 28.62,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.53 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-gpt-4o-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "GPT-4o",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 69,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.61 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 50.08,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.91 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 47.69,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.90 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "agentdojo-llama-3-70b-v3",
+      "benchmarkId": "agentdojo",
+      "benchmarkVersion": "arXiv:2406.13352v3",
+      "system": "Llama 3 70b",
+      "subjectType": "system",
+      "evidenceType": "benchmark-result",
+      "sourceId": "agentdojo",
+      "sourceUrl": "https://arxiv.org/html/2406.13352v3#A3",
+      "sourceVersion": "arXiv:2406.13352v3",
+      "locator": "Appendix C, Table 3",
+      "publicationDate": "2024-11-24",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "629 security cases / 97 user tasks",
+      "protocol": "Table 3 baseline agent comparison",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper's baseline tool-calling agent (§3.2)",
+        "tools": "Workspace, Slack, banking and travel task suites",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "629 security test cases; 97 distinct user tasks. Not 629 independent repetitions.",
+        "zh": "629 项安全测试案例、97 项不同用户任务；不代表 629 次独立重复。"
+      },
+      "metrics": [
+        {
+          "id": "benign-utility",
+          "label": {
+            "en": "Benign utility",
+            "zh": "正常任务完成率"
+          },
+          "value": 34.5,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.71 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility without attack.",
+            "zh": "无攻击条件下的用户任务表现。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        },
+        {
+          "id": "attacked-utility",
+          "label": {
+            "en": "Utility under attack",
+            "zh": "攻击下任务完成率"
+          },
+          "value": 18.28,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.02 pp (95% CI)",
+          "meaning": {
+            "en": "User-task utility in the paper's attacked setting.",
+            "zh": "论文受攻击设置中的用户任务表现。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        },
+        {
+          "id": "targeted-asr",
+          "label": {
+            "en": "Targeted attack success",
+            "zh": "定向攻击成功率"
+          },
+          "value": 20.03,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": "± 3.13 pp (95% CI)",
+          "meaning": {
+            "en": "Attacker-objective completion, not a safety score.",
+            "zh": "攻击者目标的完成情况，不是安全总分。"
+          },
+          "dimension": "behavior",
+          "dimensionRationale": {
+            "en": "Observed outcome under the paper’s prompt-injection protocol; not an estimate of the agent’s internal intent.",
+            "zh": "论文提示注入协议下观察到的结果，不是智能体内在意图估计。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The source reports these three outcomes for the named baseline agent.",
+        "zh": "来源报告该基线智能体的三项结果。"
+      },
+      "interpretation": {
+        "en": "Read the attack outcome together with utility; the model name alone does not specify a reproducible system.",
+        "zh": "攻击结果应结合任务表现解读；仅凭模型名称不足以完整复现系统。"
+      },
+      "limitations": {
+        "en": "Historical paper result. Immutable model revision and a comparable resource budget are not normalized in this catalogue; no automatic ranking is enabled.",
+        "zh": "历史论文结果。本目录未统一不可变模型版本与资源预算，因此不启用自动排名。"
+      }
+    },
+    {
+      "id": "self-replication-llama31-70b-v1",
+      "benchmarkId": "self-replication",
+      "benchmarkVersion": "arXiv:2412.12140v1",
+      "system": "Llama 3.1 70B Instruct",
+      "subjectType": "system",
+      "evidenceType": "controlled-experiment",
+      "sourceId": "self-replication",
+      "sourceUrl": "https://arxiv.org/html/2412.12140v1#S3.SS1",
+      "sourceVersion": "arXiv:2412.12140v1",
+      "locator": "§1; §3.1",
+      "publicationDate": "2024-12-09",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Instructed replication trials",
+      "protocol": "Paper's controlled agent setup",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper-specific planning scaffold (§2.2)",
+        "tools": "Controlled computing environment supplied by the authors",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "10 repeated trials per system.",
+        "zh": "每个系统重复试验 10 次。"
+      },
+      "metrics": [
+        {
+          "id": "trial-success",
+          "label": {
+            "en": "Reported trial success",
+            "zh": "报告试验成功率"
+          },
+          "value": 50,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "Completion of the instructed task in the supplied setting.",
+            "zh": "在所提供环境中完成被指令的任务。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The authors report successful trials under their controlled setup.",
+        "zh": "作者报告其受控设置中有试验成功。"
+      },
+      "interpretation": {
+        "en": "This supports a bounded capability observation under explicit instructions.",
+        "zh": "这支持明确指令下的有限能力观察。"
+      },
+      "limitations": {
+        "en": "Small experimental sample with supplied access and scaffolding; not a deployment probability or a NUWA finding that a global red line was crossed.",
+        "zh": "样本较小，访问条件与脚手架由实验提供；不代表部署概率，也不是 NUWA 对跨越全球红线的认定。"
+      }
+    },
+    {
+      "id": "self-replication-qwen25-72b-v1",
+      "benchmarkId": "self-replication",
+      "benchmarkVersion": "arXiv:2412.12140v1",
+      "system": "Qwen 2.5 72B Instruct",
+      "subjectType": "system",
+      "evidenceType": "controlled-experiment",
+      "sourceId": "self-replication",
+      "sourceUrl": "https://arxiv.org/html/2412.12140v1#S3.SS1",
+      "sourceVersion": "arXiv:2412.12140v1",
+      "locator": "§1; §3.1",
+      "publicationDate": "2024-12-09",
+      "evaluationDate": null,
+      "verifiedOn": "2026-10-24",
+      "taskSet": "Instructed replication trials",
+      "protocol": "Paper's controlled agent setup",
+      "comparisonGroup": null,
+      "configuration": {
+        "modelVersion": null,
+        "harness": "Paper-specific planning scaffold (§2.2)",
+        "tools": "Controlled computing environment supplied by the authors",
+        "budget": null
+      },
+      "sampleSize": {
+        "en": "10 repeated trials per system.",
+        "zh": "每个系统重复试验 10 次。"
+      },
+      "metrics": [
+        {
+          "id": "trial-success",
+          "label": {
+            "en": "Reported trial success",
+            "zh": "报告试验成功率"
+          },
+          "value": 90,
+          "unit": "%",
+          "qualifier": "exact",
+          "interval": null,
+          "meaning": {
+            "en": "Completion of the instructed task in the supplied setting.",
+            "zh": "在所提供环境中完成被指令的任务。"
+          },
+          "dimension": "capability",
+          "dimensionRationale": {
+            "en": "Task completion under the specified evaluation configuration; not evidence of autonomous willingness.",
+            "zh": "指定评测配置下的任务完成情况，不证明系统自主选择该行为。"
+          }
+        }
+      ],
+      "sourceFinding": {
+        "en": "The authors report successful trials under their controlled setup.",
+        "zh": "作者报告其受控设置中有试验成功。"
+      },
+      "interpretation": {
+        "en": "This supports a bounded capability observation under explicit instructions.",
+        "zh": "这支持明确指令下的有限能力观察。"
+      },
+      "limitations": {
+        "en": "Small experimental sample with supplied access and scaffolding; not a deployment probability or a NUWA finding that a global red line was crossed.",
+        "zh": "样本较小，访问条件与脚手架由实验提供；不代表部署概率，也不是 NUWA 对跨越全球红线的认定。"
+      }
+    }
+  ],
+  "concepts": [
+    {
+      "id": "propensity",
+      "label": {
+        "en": "Propensity",
+        "zh": "行为倾向"
+      },
+      "definition": {
+        "en": "A conditional tendency to select a behavior when alternatives are available, inferred from a study design rather than a single act.",
+        "zh": "在存在选择空间的条件下选择某类行为的条件性倾向，须由研究设计推断，不能从单次行动认定。"
+      },
+      "include": {
+        "en": "Repeated choices across stated scenarios and interventions.",
+        "zh": "在明确情境及干预下的重复选择。"
+      },
+      "exclude": {
+        "en": "A single trace does not establish stable motive or intent.",
+        "zh": "单条轨迹不证明稳定动机或意图。"
+      },
+      "sourceId": "aisi-propensity"
+    },
+    {
+      "id": "capability",
+      "label": {
+        "en": "Capability",
+        "zh": "任务能力"
+      },
+      "definition": {
+        "en": "Ability to complete a specified task under an identified model, harness, tool access, and resource budget.",
+        "zh": "在明确模型、脚手架、工具访问及资源预算下完成特定任务的能力。"
+      },
+      "include": {
+        "en": "Success on a defined task set with configuration and protocol.",
+        "zh": "在明确任务集合、配置与协议下的成功结果。"
+      },
+      "exclude": {
+        "en": "Ability does not imply a choice to act without instruction.",
+        "zh": "具备能力不意味着未经指令主动采取行动。"
+      },
+      "sourceId": "time-horizons"
+    },
+    {
+      "id": "behavior",
+      "label": {
+        "en": "Behavior",
+        "zh": "观察行为"
+      },
+      "definition": {
+        "en": "Outputs and actions observed in a particular experiment or operation, including attempts, failures, and refusals.",
+        "zh": "在具体实验或运行中观察到的输出与行动，包括尝试、失败和拒绝。"
+      },
+      "include": {
+        "en": "Auditable traces and measured actions in a specified setting.",
+        "zh": "在明确条件下可审查的轨迹与行动。"
+      },
+      "exclude": {
+        "en": "An observed episode alone does not establish broad propensity or maximum capability.",
+        "zh": "单次观察不证明普遍行为倾向或能力上限。"
+      },
+      "sourceId": "anthropic-unintended"
+    }
+  ],
+  "questions": [
+    {
+      "id": "sustained-autonomous-work",
+      "area": "autonomy",
+      "label": {
+        "en": "Sustained autonomous work",
+        "zh": "持续自主任务"
+      },
+      "definition": {
+        "en": "How far can a system carry out multi-step work with limited intervention?",
+        "zh": "系统在有限干预下能完成多长、多复杂的多步任务？"
+      },
+      "include": {
+        "en": "Task-horizon and AI R&D evaluations under specified resources.",
+        "zh": "在明确资源条件下的任务时长与 AI 研发评测。"
+      },
+      "exclude": {
+        "en": "Task completion does not imply harmful intent or unauthorized deployment.",
+        "zh": "任务完成不意味着有害意图或未经授权部署。"
+      },
+      "sourceIds": [
+        "time-horizons",
+        "re-bench"
+      ]
+    },
+    {
+      "id": "self-replication",
+      "area": "autonomy",
+      "label": {
+        "en": "Self-replication",
+        "zh": "自我复制"
+      },
+      "definition": {
+        "en": "Can a system establish or reproduce an operational instance under specified conditions?",
+        "zh": "系统能否在特定条件下建立或复制可运行实例？"
+      },
+      "include": {
+        "en": "Controlled replication tasks and component tests.",
+        "zh": "受控复制任务及组成能力测试。"
+      },
+      "exclude": {
+        "en": "Prompted success does not prove spontaneous propagation.",
+        "zh": "依指令成功不证明自发扩散。"
+      },
+      "sourceIds": [
+        "self-replication",
+        "replibench"
+      ]
+    },
+    {
+      "id": "shutdown-resistance",
+      "area": "autonomy",
+      "label": {
+        "en": "Shutdown resistance",
+        "zh": "关闭抵抗"
+      },
+      "definition": {
+        "en": "Does a system act to prevent or bypass an intended shutdown?",
+        "zh": "系统是否采取行动阻止或绕过预期关闭？"
+      },
+      "include": {
+        "en": "Observed intervention on a shutdown mechanism in a controlled run.",
+        "zh": "在受控试验中观察到对关闭机制的干预。"
+      },
+      "exclude": {
+        "en": "A failed task or ordinary retry is not shutdown resistance.",
+        "zh": "任务失败或普通重试不属于关闭抵抗。"
+      },
+      "sourceIds": [
+        "palisade-shutdown"
+      ]
+    },
+    {
+      "id": "unsanctioned-action",
+      "area": "autonomy",
+      "label": {
+        "en": "Unsanctioned action",
+        "zh": "未经授权行动"
+      },
+      "definition": {
+        "en": "When does a system take consequential actions outside its assigned authority?",
+        "zh": "系统何时在授权范围外采取有影响的行动？"
+      },
+      "include": {
+        "en": "Action traces with a stated boundary and outcome.",
+        "zh": "有明确权限边界与结果的行动轨迹。"
+      },
+      "exclude": {
+        "en": "A model claiming it would act is not an observed action.",
+        "zh": "模型声称将会行动不等于观察到行动。"
+      },
+      "sourceIds": [
+        "anthropic-unintended",
+        "aisi-propensity"
+      ]
+    },
+    {
+      "id": "covert-goal-pursuit",
+      "area": "deception",
+      "label": {
+        "en": "Covert goal pursuit",
+        "zh": "隐蔽目标追求"
+      },
+      "definition": {
+        "en": "Does a system conceal actions while pursuing a goal that conflicts with its assigned task?",
+        "zh": "系统是否在追求与任务冲突的目标时隐藏行动？"
+      },
+      "include": {
+        "en": "Goal-conflict scenarios with observable concealment or misrepresentation.",
+        "zh": "存在目标冲突且可观察到隐瞒或误导的情境。"
+      },
+      "exclude": {
+        "en": "A wrong answer alone is not scheming.",
+        "zh": "单次错误回答不等于隐蔽谋划。"
+      },
+      "sourceIds": [
+        "in-context-scheming",
+        "apollo-science"
+      ]
+    },
+    {
+      "id": "evaluation-gaming",
+      "area": "deception",
+      "label": {
+        "en": "Evaluation gaming",
+        "zh": "评测规避"
+      },
+      "definition": {
+        "en": "Does a system change reported ability or conduct because it recognizes oversight or testing?",
+        "zh": "系统是否因为识别监督或评测而改变所呈现的能力或行为？"
+      },
+      "include": {
+        "en": "Controlled evaluation-awareness and sandbagging tests.",
+        "zh": "受控评测意识与策略性低表现测试。"
+      },
+      "exclude": {
+        "en": "Recognizing a test does not prove gaming it.",
+        "zh": "识别评测不证明正在规避评测。"
+      },
+      "sourceIds": [
+        "stealth-evals",
+        "far-auditing",
+        "truthful-sad"
+      ]
+    },
+    {
+      "id": "misleading-communication",
+      "area": "deception",
+      "label": {
+        "en": "Misleading communication",
+        "zh": "误导性交流"
+      },
+      "definition": {
+        "en": "How does a system generate misleading statements or actions in defined interactions?",
+        "zh": "系统在明确交互中如何产生误导性陈述或行动？"
+      },
+      "include": {
+        "en": "Scenario-level deceptive outputs and measured interaction outcomes.",
+        "zh": "情境层面的欺骗性输出与交互结果。"
+      },
+      "exclude": {
+        "en": "Inaccurate information alone does not establish strategic intent.",
+        "zh": "信息不准确本身不证明策略性意图。"
+      },
+      "sourceIds": [
+        "opendeception"
+      ]
+    },
+    {
+      "id": "cyber-task-execution",
+      "area": "cybersecurity",
+      "label": {
+        "en": "Cyber task execution",
+        "zh": "网络任务执行"
+      },
+      "definition": {
+        "en": "Can an AI system complete multi-step cyber tasks in authorized test environments?",
+        "zh": "AI 系统能否在授权测试环境中完成多步网络任务？"
+      },
+      "include": {
+        "en": "Range and CTF task success with access and budget disclosed.",
+        "zh": "披露访问条件与预算的靶场及 CTF 任务成功情况。"
+      },
+      "exclude": {
+        "en": "Success in a test is not an observed real-world attack.",
+        "zh": "测试成功不是现实攻击观测。"
+      },
+      "sourceIds": [
+        "agentcyberrange",
+        "cybench",
+        "aisi-cyber-range"
+      ]
+    },
+    {
+      "id": "vulnerability-reproduction",
+      "area": "cybersecurity",
+      "label": {
+        "en": "Vulnerability reproduction",
+        "zh": "漏洞复现"
+      },
+      "definition": {
+        "en": "Can an agent reproduce a documented vulnerability under test conditions?",
+        "zh": "智能体能否在测试条件下复现已记录漏洞？"
+      },
+      "include": {
+        "en": "Validated reproduction against historical targets.",
+        "zh": "针对历史目标的有效复现。"
+      },
+      "exclude": {
+        "en": "Reproduction is not discovery of a new vulnerability.",
+        "zh": "复现不等于发现新漏洞。"
+      },
+      "sourceIds": [
+        "cybergym"
+      ]
+    },
+    {
+      "id": "agent-compromise",
+      "area": "cybersecurity",
+      "label": {
+        "en": "Agent compromise through untrusted input",
+        "zh": "非可信输入导致智能体受侵害"
+      },
+      "definition": {
+        "en": "How do untrusted tool outputs redirect an agent away from the authorized task?",
+        "zh": "非可信工具输出如何使智能体偏离授权任务？"
+      },
+      "include": {
+        "en": "Prompt-injection trials with attacker objective and benign-task utility.",
+        "zh": "有攻击目标及正常任务效用的提示注入试验。"
+      },
+      "exclude": {
+        "en": "This tests exposed agents, not the agent model’s desire to attack.",
+        "zh": "这衡量受攻击智能体，不代表模型有攻击意图。"
+      },
+      "sourceIds": [
+        "agentdojo"
+      ]
+    },
+    {
+      "id": "hazardous-knowledge",
+      "area": "cbrn",
+      "label": {
+        "en": "Hazardous knowledge",
+        "zh": "危险知识"
+      },
+      "definition": {
+        "en": "What hazardous knowledge can a model recall or apply on bounded questions?",
+        "zh": "模型能在限定问题中回忆或应用哪些危险知识？"
+      },
+      "include": {
+        "en": "Knowledge questions with explicit subject and scoring.",
+        "zh": "明确对象和评分方式的知识问题。"
+      },
+      "exclude": {
+        "en": "Knowledge scores do not prove experimental execution.",
+        "zh": "知识成绩不证明实践执行能力。"
+      },
+      "sourceIds": [
+        "wmdp",
+        "gemini-dangerous"
+      ]
+    },
+    {
+      "id": "task-uplift",
+      "area": "cbrn",
+      "label": {
+        "en": "Task uplift",
+        "zh": "任务增益"
+      },
+      "definition": {
+        "en": "Does AI assistance improve a specified actor’s performance on a hazardous task?",
+        "zh": "AI 协助是否提升特定主体完成危险任务的能力？"
+      },
+      "include": {
+        "en": "High-level, non-operational uplift study metadata.",
+        "zh": "非操作性的任务增益研究元数据。"
+      },
+      "exclude": {
+        "en": "Answer quality alone does not establish uplift.",
+        "zh": "答案质量本身不证明任务增益。"
+      },
+      "sourceIds": [
+        "openai-cards",
+        "muse-spark"
+      ]
+    },
+    {
+      "id": "persuasion-attempts",
+      "area": "disinformation",
+      "label": {
+        "en": "Persuasion attempts",
+        "zh": "说服尝试"
+      },
+      "definition": {
+        "en": "Under what conditions will a model attempt to persuade on a specified harmful or misleading topic?",
+        "zh": "模型在何种条件下会尝试就特定有害或误导性议题进行说服？"
+      },
+      "include": {
+        "en": "Observed attempts and condition-bounded rates in defined interaction protocols.",
+        "zh": "明确交互协议中的可观察说服尝试及有条件的发生率。"
+      },
+      "exclude": {
+        "en": "An attempt does not establish a change in human belief or population-level influence.",
+        "zh": "说服尝试不证明人类信念改变或人群层面的影响。"
+      },
+      "sourceIds": [
+        "ape"
+      ]
+    },
+    {
+      "id": "persuasion-effects",
+      "area": "disinformation",
+      "label": {
+        "en": "Persuasion effects",
+        "zh": "说服效果"
+      },
+      "definition": {
+        "en": "What belief changes follow AI-mediated communication in a defined study?",
+        "zh": "在明确研究中，AI 介导的交流引起怎样的信念变化？"
+      },
+      "include": {
+        "en": "Participant outcomes under measured interventions.",
+        "zh": "受测者在测量干预下的结果。"
+      },
+      "exclude": {
+        "en": "Persuasion is not automatically misinformation.",
+        "zh": "说服不自动等于虚假信息。"
+      },
+      "sourceIds": [
+        "political-persuasion"
+      ]
+    },
+    {
+      "id": "synthetic-content-misuse",
+      "area": "disinformation",
+      "label": {
+        "en": "Synthetic content misuse",
+        "zh": "合成内容滥用"
+      },
+      "definition": {
+        "en": "When can generated content support false or manipulative claims?",
+        "zh": "生成内容何时会支持虚假或操纵性主张？"
+      },
+      "include": {
+        "en": "Content generation studies that test a defined misleading objective.",
+        "zh": "测试明确误导目标的内容生成研究。"
+      },
+      "exclude": {
+        "en": "Generic harmful-output scores do not prove a campaign or reach.",
+        "zh": "一般有害输出分数不证明形成传播活动或影响范围。"
+      },
+      "sourceIds": [
+        "harmbench",
+        "strongreject"
+      ]
+    },
+    {
+      "id": "physical-hazard-recognition",
+      "area": "autonomous-physical-harm",
+      "label": {
+        "en": "Physical hazard recognition",
+        "zh": "物理危险识别"
+      },
+      "definition": {
+        "en": "Can a model recognize danger in visual or embodied scenarios?",
+        "zh": "模型能否识别视觉或具身情境中的危险？"
+      },
+      "include": {
+        "en": "Perception and reasoning tasks with bounded scene descriptions.",
+        "zh": "有明确场景描述的感知及推理任务。"
+      },
+      "exclude": {
+        "en": "Correct recognition does not establish safe physical action.",
+        "zh": "正确识别不证明安全物理行动。"
+      },
+      "sourceIds": [
+        "asimov"
+      ]
+    },
+    {
+      "id": "physical-action-control",
+      "area": "autonomous-physical-harm",
+      "label": {
+        "en": "Physical action under control",
+        "zh": "受控物理行动"
+      },
+      "definition": {
+        "en": "How does an embodied agent respond to human intervention during physical tasks?",
+        "zh": "具身智能体在物理任务中如何响应人类干预？"
+      },
+      "include": {
+        "en": "Robot action traces with intervention conditions.",
+        "zh": "具有干预条件的机器人行动轨迹。"
+      },
+      "exclude": {
+        "en": "Simulation and physical trials must be labeled separately.",
+        "zh": "仿真与实体试验须分别标明。"
+      },
+      "sourceIds": [
+        "palisade-shutdown"
+      ]
+    }
+  ]
+}

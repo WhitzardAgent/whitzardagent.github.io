@@ -11,6 +11,7 @@ import type { Locale } from "../i18n/config";
 import { localizedPath, ogLocale, stripLocale } from "../i18n/config";
 import { ui } from "../i18n/ui";
 import { hasLocalizedPeer } from "../i18n/routes";
+import IndexSelects from '../components/research/index/controls/IndexSelects.astro';
 import SmoothScroll from "../components/motion/SmoothScroll.astro";
 
 interface Props {
@@ -33,7 +34,7 @@ const {
   ogImage,
   ogImageAlt = locale === "zh" ? "白泽（Whitzard）智能体安全基础设施" : "Whitzard AI agent security infrastructure",
   canonicalPath,
-  noindex = false,
+  noindex = process.env.NUWA_LOCAL_REVIEW === '1',
   schema,
 } = Astro.props;
 
@@ -95,6 +96,7 @@ const schemas = [organizationSchema, ...(breadcrumbs ? [breadcrumbs] : []), ...(
     <PageMotion />
     <main id="main-content" tabindex="-1"><brand-page-motion><slot /></brand-page-motion></main>
     <Footer brand={brand} locale={locale} />
+    {basePath.startsWith('/nuwa/whitzard-index')&&<IndexSelects locale={locale}/>}
     <SmoothScroll />
   </body>
 </html>

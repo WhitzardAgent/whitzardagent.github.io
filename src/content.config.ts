@@ -2,6 +2,7 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { researchBlogSchema } from "./content/researchBlogSchema";
+import { indexReportSchema } from './content/indexReportSchema';
 
 const commonSchema = z.object({
   title: z.string(),
@@ -48,4 +49,6 @@ const researchBlog = defineCollection({
   schema: researchBlogSchema,
 });
 
-export const collections = { posts, briefs, notes, reports, researchBlog };
+const indexReports = defineCollection({ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/index-reports' }), schema: indexReportSchema });
+const nuwaWiki = defineCollection({loader:glob({pattern:'**/*.md',base:'./src/content/nuwa-wiki'}),schema:z.object({recordId:z.string(),locale:z.enum(['en','zh']),updatedOn:z.string(),sourceRefs:z.array(z.object({sourceId:z.string().optional(),url:z.url().optional(),title:z.string().optional(),locator:z.string()})),caseType:z.enum(['source-example','source-workflow']),caseLabel:z.string()})});
+export const collections = { posts, briefs, notes, reports, researchBlog, indexReports, nuwaWiki };

@@ -1,0 +1,60 @@
+---
+import {chartMarkup,tableMarkup,readChartState,metricLabel} from '../../../lib/evidenceCharts.mjs';
+import type {ChartSpec,Evidence} from '../../../data/nuwa-index/types';
+import type {Locale} from '../../../i18n/config';
+interface Props {spec:ChartSpec;records:Evidence[];locale:Locale;namespace?:string}
+const {records,locale,namespace}=Astro.props,spec={...Astro.props.spec,...(namespace?{queryPrefix:namespace}:{})},en=locale==='en';
+const state=readChartState('',spec,records);
+---
+<evidence-chart id={`chart-${spec.id}`} class="ec" data-locale={locale} data-spec={JSON.stringify(spec)} data-records={JSON.stringify(records)}>
+ <header class="ec-heading"><div><h2>{spec.title[locale]}</h2><p>{spec.description[locale]}</p></div></header>
+ <div class="ec-controls" hidden>
+  {spec.layout!=='panels'&&<label>{en?'Metric':'指标'}<select data-metric>{spec.metricIds.map(id=><option value={id} selected={id===spec.defaultMetricId}>{metricLabel(records,id,locale)}</option>)}{spec.pairedMetricIds?.length&&<option value="paired">{en?'Utility before / under attack':'攻击前后效用'}</option>}</select></label>}
+  <details class="ec-systems"><summary>{en?'Select systems':'筛选系统'}</summary><fieldset><legend>{en?'All systems when none selected':'未勾选时显示全部系统'}</legend>{records.map(r=><label><input type="checkbox" value={r.id} data-system/>{r.system}</label>)}</fieldset></details>
+  <div class="ec-view" role="group" aria-label={en?'Display':'展示方式'}><button type="button" data-view="chart" aria-pressed="true">{en?'Chart':'图表'}</button><button type="button" data-view="table" aria-pressed="false">{en?'Table':'数据表'}</button></div>
+  <div class="ec-download"><button type="button" data-download="csv">CSV ↓</button><button type="button" data-download="svg">SVG ↓</button></div>
+ </div>
+ <div class:list={['ec-plots',{'ec-plots--panels':spec.layout==='panels'}]} data-plots set:html={chartMarkup(spec,records,state,locale)}/>
+ <div class="ec-count"><span data-count>{en?`Showing ${Math.min(12,records.length)} of ${records.length} systems`:`显示 ${Math.min(12,records.length)} / ${records.length} 个系统`}</span><button type="button" data-all hidden>{en?'Show all':'显示全部'}</button></div>
+ <p class="ec-meaning">{spec.meaning[locale]}</p><p class="ni-note">{spec.conditions[locale]} {spec.dateLabel[locale]}</p>
+ <details class="ec-config"><summary>{en?'Evaluation conditions and system configurations':'评测条件与系统配置'}</summary>{records.map(r=><dl><dt>{r.system}</dt><dd>{r.sampleSize[locale]} · {r.taskSet}</dd><dd>{Object.entries(r.configuration).map(([k,v])=>`${k}: ${v??(en?'not specified':'未注明')}`).join(' · ')}</dd></dl>)}</details>
+ <div class="ec-table" data-table tabindex="0" role="region" aria-label={en?'Result data table':'结果数据表'} set:html={tableMarkup(spec,records,{...state,all:true,allMetrics:true},locale)}/>
+ <noscript><p class="ni-note">{en?'The default chart and complete data table are shown. Interactive filters and downloads require JavaScript.':'当前显示默认图表和完整数据表。交互筛选与下载需启用 JavaScript。'}</p></noscript>
+</evidence-chart>
+<script>
+import {embedSvgMarks} from '../../../lib/svgAssets';
+ import {chartMarkup,tableMarkup,readChartState,writeChartState,chartRows,chartCsv,chartSvg} from '../../../lib/evidenceCharts.mjs';
+ class EvidenceChart extends HTMLElement {
+  connectedCallback(){
+   this._abort?.abort();const abort=new AbortController();this._abort=abort;const signal=abort.signal;
+   const spec=JSON.parse(this.dataset.spec!),records=JSON.parse(this.dataset.records!),locale=this.dataset.locale!;
+   let state=readChartState(location.search,spec,records);
+   const draw=()=>{
+    this.querySelector('[data-plots]')!.innerHTML=chartMarkup(spec,records,state,locale);this.querySelector('[data-plots]')!.classList.toggle('ec-plots--panels',spec.layout==='panels'||state.metric==='paired');
+    this.querySelector('[data-table]')!.innerHTML=tableMarkup(spec,records,state,locale);
+    (this.querySelector('[data-plots]') as HTMLElement).hidden=state.view==='table';(this.querySelector('[data-table]') as HTMLElement).hidden=state.view!=='table';
+    const metric=this.querySelector('[data-metric]') as HTMLSelectElement;if(metric)metric.value=state.metric;
+    this.querySelectorAll<HTMLInputElement>('[data-system]').forEach(input=>input.checked=state.systems.includes(input.value));
+    this.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String((b as HTMLElement).dataset.view===state.view)));
+    const {rows,total}=chartRows(spec,records,state);this.querySelector('[data-count]')!.textContent=locale==='en'?`Showing ${rows.length} of ${total} systems`:`显示 ${rows.length} / ${total} 个系统`;
+    const all=this.querySelector('[data-all]') as HTMLButtonElement;all.hidden=total<=12;all.textContent=state.all?(locale==='en'?'Show first 12':'显示前 12 项'):(locale==='en'?'Show all':'显示全部');
+   };
+   const update=()=>{const url=new URL(location.href);url.search=writeChartState(url.search,state,spec);history.pushState(history.state,'',url);draw();window.dispatchEvent(new Event('nuwa:chart-state'));};
+   const resetTip=(event:Event)=>{const row=(event.target as Element)?.closest('.ec-row__plot');row?.querySelector<HTMLElement>('.ec-tip')?.style.removeProperty('display');};this.addEventListener('focusin',resetTip,{signal});this.addEventListener('pointerover',resetTip,{signal});
+   this.addEventListener('keydown',e=>{if(e.key==='Escape'){this.querySelectorAll<HTMLDetailsElement>('.ec-systems').forEach(d=>d.open=false);this.querySelectorAll<HTMLElement>('.ec-tip').forEach(t=>t.style.display='none');}},{signal});
+   this.querySelector('[data-metric]')?.addEventListener('change',e=>{state.metric=(e.target as HTMLSelectElement).value;update();},{signal});
+   this.querySelectorAll<HTMLInputElement>('[data-system]').forEach(input=>input.addEventListener('change',()=>{state.systems=Array.from(this.querySelectorAll<HTMLInputElement>('[data-system]:checked')).map(i=>i.value);update();},{signal}));
+   this.querySelectorAll<HTMLElement>('[data-view]').forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view!;update();},{signal}));
+   this.querySelector('[data-all]')?.addEventListener('click',()=>{state.all=!state.all;update();},{signal});
+   this.querySelectorAll<HTMLElement>('[data-download]').forEach(b=>b.addEventListener('click',async()=>{const ext=b.dataset.download!,content=ext==='csv'?chartCsv(spec,records,state,locale):await embedSvgMarks(chartSvg(spec,records,state,locale));const url=URL.createObjectURL(new Blob([content],{type:ext==='csv'?'text/csv;charset=utf-8':'image/svg+xml'}));const a=document.createElement('a');a.href=url;a.download=spec.id+'.'+ext;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);},{signal}));
+   window.addEventListener('popstate',()=>{state=readChartState(location.search,spec,records);draw();},{signal});
+   (this.querySelector('.ec-controls') as HTMLElement).hidden=false;this.classList.add('ec--ready');draw();
+  }
+  _abort?:AbortController;
+  disconnectedCallback(){this._abort?.abort();}
+ }
+ if(!customElements.get('evidence-chart'))customElements.define('evidence-chart',EvidenceChart);
+</script>
+<style is:global>
+.ec{display:block;margin:0 0 3rem;padding:clamp(18px,2.5vw,32px);border:1px solid #d2dfdc;background:#fafcf9;border-radius:12px;min-width:0}.ec-heading{display:flex;justify-content:space-between;align-items:start;gap:20px;margin-bottom:20px}.ec-heading h2{font-size:clamp(23px,3vw,32px);margin:6px 0}.ec-heading p{margin:5px 0;color:#53636c}.ec-heading>a{white-space:nowrap;color:#1b615f;font-size:14px}.ec-controls{display:flex;gap:12px;align-items:end;flex-wrap:wrap;border-top:1px solid #d7e2df;border-bottom:1px solid #d7e2df;padding:16px 0;margin-bottom:28px}.ec-controls[hidden]{display:none}.ec-controls label{font-size:13px;display:grid;gap:5px}.ec-controls select,.ec-controls button,.ec-systems summary,.ec-count button{font:inherit;color:#193e48;border:1px solid #b6ccc5;border-radius:5px;background:#fff;padding:9px 12px;min-height:42px}.ec-controls select{max-width:100%}.ec-controls button,.ec-systems summary,.ec-count button{cursor:pointer;font-size:13px}.ec-controls button[aria-pressed=true]{background:#194b50;color:#fff;border-color:#194b50}.ec-view,.ec-download{display:flex;gap:4px}.ec-download{margin-left:auto}.ec-systems{position:relative}.ec-systems fieldset{position:absolute;z-index:12;top:100%;left:0;width:340px;max-width:75vw;max-height:360px;overflow:auto;background:#fff;border:1px solid #b6ccc5;box-shadow:0 12px 25px #1733381a;padding:16px}.ec-systems fieldset legend{font-size:12px;color:#4d6265;background:white}.ec-systems fieldset label{display:flex;align-items:start;gap:8px;line-height:1.5;padding:7px 0}.ec-systems input{margin-top:3px;accent-color:#267c76}.ec-plots{display:grid;gap:34px}.ec-plots[hidden],.ec-table[hidden]{display:none}.ec-plots--panels{grid-template-columns:1fr 1fr;gap:32px}.ec-panel{min-width:0}.ec-panel__heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline;min-height:56px}.ec-panel h3{font-size:17px;line-height:1.5;margin:0;max-width:85%}.ec-panel__heading span{font-size:12px;color:#53686b;white-space:nowrap}.ec-axis{display:flex;justify-content:space-between;margin:0 74px 8px 0;color:#627477;font-size:11px}.ec-row{display:grid;grid-template-columns:minmax(0,1fr) 68px;gap:5px 8px;padding:11px 0;border-bottom:1px solid #e0e9e5}.ec-row__label{grid-column:1/-1;font-size:13px;line-height:1.5;color:#263c47;overflow-wrap:anywhere;min-height:20px}.ec-row__label small{display:block;font-size:11px;color:#52676b;margin-top:3px}.ec-row__plot{position:relative;min-width:0;height:24px;align-self:center;outline-offset:3px}.ec-row__plot svg{display:block;width:100%;height:100%;overflow:visible}.ec-grid{stroke:#dbe6e1;stroke-width:.2}.ec-bar{fill:#267c76}.ec-bar--1{fill:#304f78}.ec-interval{stroke:#132d40;stroke-width:.45;fill:none}.ec-threshold{stroke:#b34a32;stroke-width:.5;stroke-dasharray:1 1}.ec-row__value{font-size:14px;text-align:right;align-self:center;white-space:nowrap;font-variant-numeric:tabular-nums;color:#152e43}.ec-tip{display:none;position:absolute;bottom:calc(100% + 6px);left:0;z-index:10;width:340px;max-width:70vw;padding:12px;background:#132d40;color:white;font-size:12px;line-height:1.6;box-shadow:0 5px 15px #0002;pointer-events:auto;max-height:260px;overflow:auto}.ec-row__plot:focus .ec-tip,.ec-row__plot:hover .ec-tip{display:block}.ec-count{display:flex;align-items:center;gap:15px;justify-content:space-between;margin:20px 0;color:#52676b;font-size:12px}.ec-meaning{font-size:15px;line-height:1.7;color:#294a4d;margin:26px 0 8px}.ec-config{margin:22px 0;font-size:13px;color:#4c6269}.ec-config summary{cursor:pointer;padding:10px 0}.ec-config dl{padding:12px 0;border-top:1px solid #dce6e0}.ec-config dt{font-weight:600;color:#263b4c}.ec-config dd{margin:5px 0;line-height:1.7;overflow-wrap:anywhere}.ec-table{max-width:100%;overflow:auto;font-size:13px;margin:24px 0 0}.ec-table table{width:100%;border-collapse:collapse;text-align:left}.ec-table caption{text-align:left;font-size:16px;font-weight:600;padding-bottom:14px}.ec-table th,.ec-table td{padding:13px 12px;border-bottom:1px solid #d7e2df;vertical-align:top;min-width:120px}.ec-table th{font-weight:500}.ec-table th:first-child{min-width:220px}.ec-table small{display:block;font-weight:400;font-size:11px;line-height:1.5;color:#53676c;margin-top:5px}.ec :focus-visible{outline:2px solid #13776d;outline-offset:3px}@media(min-width:1200px){.ec-plots:not(.ec-plots--panels) .ec-row{grid-template-columns:280px minmax(0,1fr) 85px;gap:20px}.ec-plots:not(.ec-plots--panels) .ec-row__label{grid-column:auto}.ec-plots:not(.ec-plots--panels) .ec-axis{margin-left:300px}}@media(max-width:700px){.ec-plots--panels{grid-template-columns:1fr}.ec-controls>label{width:100%}.ec-download{margin-left:0}.ec-heading>a{font-size:12px}.ec-heading{gap:10px}.ec-row__label{font-size:13px}.ec-panel__heading{min-height:unset;margin-bottom:12px}.ec-table th:first-child{min-width:180px}.ec-systems fieldset{width:280px}.ec-tip{max-width:62vw}.ec{padding:18px 14px}}
+</style>

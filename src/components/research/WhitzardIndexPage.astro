@@ -1,15 +1,7 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import IndexExplorer from './index/IndexExplorer.astro';
 import type { Locale } from "../../i18n/config";
-import { localizedPath } from "../../i18n/config";
-import type { WhitzardIndexCopy } from "../../i18n/pages/whitzardIndex";
-interface Props { locale: Locale; copy: WhitzardIndexCopy }
-const { locale, copy } = Astro.props;
+interface Props { locale: Locale }
+const { locale } = Astro.props;
 ---
-<BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa/whitzard-index">
-  <section class="index-placeholder"><div class="site-container"><p class="eyebrow">{locale === "zh" ? "女娲实验室" : "NUWA"}</p><h1>{locale === "zh" ? "NUWA Index" : "NUWA Index"}</h1><p class="index-placeholder__status">{copy.status}</p><a class="text-link" href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "返回女娲实验室" : "Back to NUWA"} →</a></div></section>
-</BaseLayout>
-<style>
-  .index-placeholder{display:grid;min-height:65vh;align-items:center;padding:88px 0 120px;background:var(--wz-moon)}.index-placeholder h1{margin:16px 0 24px;color:var(--wz-ink);font-size:clamp(40px,5vw,72px);font-weight:500;line-height:1.2;letter-spacing:-.03em}.index-placeholder__status{margin:0 0 36px;color:var(--wz-body);font-size:18px}.index-placeholder a{font-size:14px}
-  @media(max-width:700px){.index-placeholder{min-height:60vh;padding:64px 0 88px}}
-</style>
+<IndexExplorer locale={locale} />

@@ -1,0 +1,19 @@
+---
+import {catalogue} from '../../../data/nuwa-index';
+import {organizationBrand} from '../../../lib/organizationBrands.mjs';
+import type {Locale} from '../../../i18n/config';
+interface Props {organizationId:string;locale:Locale;size?:'small'|'large';showName?:boolean}
+const {organizationId,locale,size='small',showName=true}=Astro.props;
+const organization=catalogue.organizations.find(o=>o.id===organizationId);
+const asset=organizationBrand(organizationId)?.asset;
+const dimension=size==='large'?40:20;
+---
+<span class:list={['nm-org-mark',{'nm-org-mark--large':size==='large'}]}>{asset&&<img src={asset.path} alt="" width={dimension} height={dimension} loading="lazy" decoding="async" class:list={{'nm-org-mark__dark':asset.background==='dark'}}/>}{showName&&<span>{organization?.name[locale]??organizationBrand(organizationId)?.displayName??organizationId}</span>}</span>
+<style>
+.nm-org-mark{display:inline-flex;align-items:center;gap:8px;max-width:100%;font-size:inherit;line-height:inherit;vertical-align:middle}
+.nm-org-mark img{width:20px;height:20px;object-fit:contain;flex-shrink:0;background:#fff;border-radius:3px;padding:2px;box-sizing:border-box}
+.nm-org-mark img.nm-org-mark__dark{background:#182234}
+.nm-org-mark--large{gap:14px}
+.nm-org-mark--large img{width:40px;height:40px;padding:3px;border-radius:5px}
+.nm-org-mark span{overflow-wrap:anywhere}
+</style>

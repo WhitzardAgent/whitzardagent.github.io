@@ -1,0 +1,3 @@
+export function comparisonOperations(group){const reviewed=Boolean(group?.reviewId),complete=reviewed&&group.conditionsComplete===true;return {display:true,rank:complete&&['matched','longitudinal'].includes(group.level),connect:complete&&group.level==='longitudinal',difference:complete&&['matched','longitudinal'].includes(group.level)};}
+export function selectEvidenceAsOf(records,cutoff){return records.filter(r=>r.publicSince&&r.publicSince<=cutoff);}
+export function makeMonitoringCandidates(before,after){const old=new Map(before.map(v=>[v.id,v]));return after.filter(v=>!old.has(v.id)).map(v=>({id:`new-${v.id}`,kind:'new-evidence',evidenceIds:[v.id],status:'review-required',claim:null}));}

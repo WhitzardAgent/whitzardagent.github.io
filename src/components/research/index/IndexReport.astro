@@ -1,0 +1,25 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import type { IndexReport } from '../../../lib/indexReports';
+import { localizedPath } from '../../../i18n/config';
+import { indexBase } from '../../../data/nuwa-index';
+import { nuwaIndexCopy } from '../../../i18n/pages/nuwaIndex';
+import PageSources from '../PageSources.astro';
+import {snapshots} from '../../../data/nuwa-index';
+import {reportPeriodLabel} from '../../../lib/nuwaIndex.mjs';
+import ArticleToc from '../ArticleToc.astro';
+import '../../../styles/research-blog.css';
+interface Props { entry: IndexReport }
+const { entry } = Astro.props;
+const locale = entry.data.locale;
+const c = nuwaIndexCopy[locale];
+const { Content, headings } = await render(entry);
+const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
+const pinnedSnapshot=snapshots.find(s=>s.snapshotId===entry.data.snapshotId);
+if(!pinnedSnapshot)throw Error('Report snapshot not found');
+const canonicalPath = `${indexBase}/reports/${entry.data.articleSlug}`;
+---
+<BaseLayout title={`${entry.data.title} — NUWA Index`} description={entry.data.summary} locale={locale} brand="nuwa" canonicalPath={canonicalPath} schema={{ '@context': 'https://schema.org', '@type': 'Article', headline: entry.data.title, datePublished: entry.data.date.toISOString(), author: entry.data.authors.map(name => ({ '@type': 'Organization', name })) }}>
+  <article class="rb-article"><header class="rb-article__header"><div class="site-container rb-article__header-grid"><div><p class="eyebrow"><a href={`${localizedPath(indexBase, locale)}?view=reports`}>NUWA INDEX · {reportPeriodLabel(entry.data.period,locale)}</a></p><h1>{entry.data.title}</h1></div><div class="rb-article__meta"><p>{entry.data.summary}</p><dl><div><dt>{c.publication}</dt><dd><time datetime={entry.data.date.toISOString()}>{entry.data.date.toISOString().slice(0, 10)}</time></dd></div><div><dt>{c.snapshot}</dt><dd><a href={`${localizedPath(indexBase, locale)}/snapshots/${entry.data.snapshotId}.json`}>{entry.data.snapshotId}</a></dd></div></dl></div></div></header><div class:list={['site-container rb-article__layout', { 'rb-article__layout--toc': toc.length >= 3 }]}>{toc.length >= 3 && <ArticleToc headings={toc} locale={locale} />}<div class="rb-prose"><Content /><PageSources locale={locale} sources={pinnedSnapshot.sources} references={entry.data.citations}/></div></div></article>
+</BaseLayout>

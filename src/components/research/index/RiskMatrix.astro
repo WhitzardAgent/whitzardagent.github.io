@@ -1,0 +1,80 @@
+---
+import InstitutionByline from './InstitutionByline.astro';
+import { catalogue, indexBase } from '../../../data/nuwa-index';
+import type { Area, Dimension, Benchmark, EvidenceLink, ProtocolVariant } from '../../../data/nuwa-index/types';
+import type { Locale } from '../../../i18n/config';
+import { localizedPath } from '../../../i18n/config';
+import { nuwaIndexCopy } from '../../../i18n/pages/nuwaIndex';
+
+interface Props { area: Area; locale: Locale }
+const { area, locale } = Astro.props;
+const c = nuwaIndexCopy[locale];
+const affiliations = (id:string) => catalogue.works.find(w=>w.protocolIds.includes(id))?.contributions ?? [];
+const path = (tail = '') => localizedPath(`${indexBase}${tail}`, locale);
+const questions = catalogue.questions.filter(q => q.area === area.id);
+const dimensions: Dimension[] = ['propensity', 'capability', 'behavior'];
+type MatrixEntry={benchmark:Benchmark;link:EvidenceLink;variant?:ProtocolVariant};
+const linked = (questionId:string,dimension:Dimension):MatrixEntry[] => {
+ const base=catalogue.benchmarks.flatMap(benchmark=>benchmark.links.filter(link=>link.questionId===questionId&&link.dimension===dimension).map(link=>({benchmark,link})));
+ const extra=(catalogue.protocolVariants??[]).flatMap(variant=>{const benchmark=catalogue.benchmarks.find(b=>b.id===variant.protocolId);if(!benchmark||variant.primaryDimension!==dimension||benchmark.links.some(l=>l.questionId===questionId&&l.dimension===dimension))return [];return variant.riskAssociations.filter(a=>a.questionId===questionId).map(a=>({benchmark,variant,link:{questionId,dimension,relation:a.relation as EvidenceLink['relation'],rationale:a.rationale,subject:variant.measurementTarget,locator:variant.locator}}));});
+ return [...base,...extra];
+};
+const recordCount=(items:MatrixEntry[],dimension:Dimension)=>catalogue.results.filter(record=>record.metrics.some(metric=>metric.dimension===dimension)&&items.some(item=>{
+ if(item.variant)return catalogue.assessmentEvidence?.some(l=>l.resultId===record.id&&l.variantId===item.variant!.id);
+ if(item.benchmark.id!==record.benchmarkId)return false;
+ const l=catalogue.assessmentEvidence?.find(l=>l.resultId===record.id),v=catalogue.protocolVariants?.find(v=>v.id===l?.variantId);
+ return !v||v.riskAssociations.some(a=>a.questionId===item.link.questionId)&&v.primaryDimension===dimension;
+})).length;
+const variantAssessment=(v:ProtocolVariant)=>catalogue.assessments?.find(a=>a.sections.some(s=>s.variantIds.includes(v.id)));
+
+---
+<nuwa-risk-matrix class="ni-matrix-section" aria-labelledby="ni-matrix-title">
+  <h2 id="ni-matrix-title">{c.matrixTitle}</h2><p class="ni-note">{c.matrixIntro}</p>
+  <div class="ni-matrix-scroll"><table class="ni-matrix"><caption class="sr-only">{area.label[locale]} · {c.matrixTitle}</caption><thead><tr><th scope="col">{c.risks}</th>{dimensions.map(d => <th scope="col">{c.dimensions[d].label}</th>)}</tr></thead><tbody>{questions.map(question => <tr><th scope="row"><strong>{question.label[locale]}</strong><small>{question.definition[locale]}</small></th>{dimensions.map(dimension => {
+    const items = linked(question.id, dimension);
+    const id = `cell-${question.id}-${dimension}`;
+    return <td><a href={`#${id}`} data-matrix-link={id} data-label={c.dimensions[dimension].label} aria-label={`${question.label[locale]} · ${c.dimensions[dimension].label}: ${items.length ? `${items.length} ${c.matrixEvaluations}` : c.matrixEmpty}`}><strong>{items.length ? items.length : '—'}</strong><span>{items.length ? c.matrixEvaluations : c.matrixEmpty}</span></a></td>;
+  })}</tr>)}</tbody></table></div>
+  <p class="ni-note">{c.relationNote}</p>
+  <div class="ni-matrix-panels" id="ni-matrix-panels">{questions.flatMap(question => dimensions.map(dimension => {
+    const items = linked(question.id, dimension);
+    const id = `cell-${question.id}-${dimension}`;
+    const counted = recordCount(items, dimension);
+    return <section id={id} class="ni-matrix-panel" data-matrix-panel={id} data-has-evidence={items.length ? 'true' : 'false'} tabindex="-1"><p class="ni-kicker">{area.label[locale]} / {c.dimensions[dimension].label}</p><h3>{question.label[locale]}</h3><p>{question.definition[locale]}</p><dl class="ni-matrix-panel__scope"><div><dt>{c.include}</dt><dd>{question.include[locale]}</dd></div><div><dt>{c.exclude}</dt><dd>{question.exclude[locale]}</dd></div></dl>{items.length ? <><p class="ni-matrix-panel__count">{items.length} {c.matrixEvaluations} · {counted} {c.matrixRecords}</p><div class="ni-matrix-panel__records">{items.map(({ benchmark, link, variant }) => <article><div><span class="ni-kind">{benchmark.kind === 'benchmark' ? c.reusable : benchmark.kind === 'report' ? c.report : c.study} · {link.relation === 'direct' ? c.direct : link.relation === 'enabling' ? c.enabling : c.context}</span><h4><a href={variant?path(`/assessment/${variantAssessment(variant)!.id}#variant-${variant.id}`):path(`/benchmark/${benchmark.id}`)}>{benchmark.name}{variant&&` · ${variantAssessment(variant)!.title}`} ↗</a></h4>{variant?<p class="research-byline">{locale==='en'?'Report by':'报告机构'} {variantAssessment(variant)!.publisherIds.map(id=>catalogue.organizations.find(o=>o.id===id)!.name[locale]).join(' · ')}</p>:<InstitutionByline contributions={affiliations(benchmark.id)} locale={locale}/>}<p>{link.rationale[locale]}</p><p><strong>{c.assessmentSubject}:</strong> {link.subject[locale]}</p><p><strong>{c.association}:</strong> {link.locator}</p></div></article>)}</div></> : <p class="ni-empty-matrix">{c.matrixEmpty}</p>}</section>;
+  }))}</div>
+</nuwa-risk-matrix>
+<script>
+  class NuwaRiskMatrix extends HTMLElement {
+    controller?: AbortController;
+    connectedCallback() {
+      this.controller?.abort();
+      this.controller = new AbortController();
+      const { signal } = this.controller;
+      const links = Array.from(this.querySelectorAll<HTMLAnchorElement>('[data-matrix-link]'));
+      const panels = Array.from(this.querySelectorAll<HTMLElement>('[data-matrix-panel]'));
+      if (!links.length) return;
+      const apply = () => {
+        const target = decodeURIComponent(location.hash.slice(1));
+        const selected = panels.some(panel => panel.id === target) ? target : (panels.find(panel => panel.dataset.hasEvidence === 'true') ?? panels[0]).id;
+        panels.forEach(panel => { panel.hidden = panel.id !== selected; });
+        links.forEach(link => { if (link.dataset.matrixLink === selected) link.setAttribute('aria-current', 'true'); else link.removeAttribute('aria-current'); });
+      };
+      this.addEventListener('click', event => {
+        const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('[data-matrix-link]');
+        if (!link) return;
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        const target = link.dataset.matrixLink!;
+        history.pushState(history.state, '', `#${target}`);
+        apply();
+        this.querySelector<HTMLElement>(`#${target}`)?.focus({ preventScroll: true });
+      }, { signal });
+      window.addEventListener('hashchange', apply, { signal });
+      window.addEventListener('popstate', apply, { signal });
+      apply();
+      this.dataset.enhanced = 'true';
+    }
+    disconnectedCallback() { this.controller?.abort(); }
+  }
+  if (!customElements.get('nuwa-risk-matrix')) customElements.define('nuwa-risk-matrix', NuwaRiskMatrix);
+</script>

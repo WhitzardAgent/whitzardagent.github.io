@@ -1,0 +1,8 @@
+---
+import {catalogue} from '../../../../data/nuwa-index';
+import {loadResearchSyntheses} from '../../../../lib/nuwa-intelligence/researchReading.mjs';
+import LocalResearchSynthesis from '../../../../components/research/index/LocalResearchSynthesis.astro';
+export function getStaticPaths(){return loadResearchSyntheses(catalogue).map((analysis:any)=>({params:{slug:analysis.id},props:{analysis}}));}
+const{analysis}=Astro.props;
+---
+<LocalResearchSynthesis analysis={analysis} locale="zh"/>

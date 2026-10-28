@@ -1,0 +1,7 @@
+import fs from 'node:fs/promises';
+import {effectiveCatalogue} from '../src/lib/nuwa-intelligence/lineage.mjs';
+import {displayCoverage} from '../src/lib/nuwa-intelligence/panorama.mjs';
+const raw=JSON.parse(await fs.readFile(new URL('../src/data/nuwa-index/catalogue.json',import.meta.url))),data=effectiveCatalogue(raw),audit=displayCoverage(data);
+const target=new URL('../docs/website-v2/nuwa-display-coverage.json',import.meta.url);await fs.writeFile(target,JSON.stringify(audit,null,2)+'\n');
+await fs.writeFile(new URL('../docs/website-v2/nuwa-display-coverage.md',import.meta.url),`# Monitoring display coverage\n\nSnapshot ${audit.snapshotId}. Presentation projection only; original review levels and historical measurements are unchanged. Counts describe result–metric observations, not independent experiments.\n\n${audit.summary.observations} observations across ${audit.summary.sets} display sets; ${audit.summary.dated} have sourced model release dates, ${audit.summary.unlocated} remain in non-time views.\n\n| Display set | Observations | Dated | Task facets |\n|---|---:|---:|---:|\n`+audit.sets.map(s=>`| ${s.label.replaceAll('|','/')} | ${s.observations} | ${s.dated} | ${s.facets} |`).join('\n')+'\n\nNo synthetic dates, score conversion, averages or maximum selection. Accepted measurement aliases are suppressed only when their canonical observation is present.\n');
+console.log(audit.summary);

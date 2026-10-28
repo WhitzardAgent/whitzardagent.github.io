@@ -1,0 +1,26 @@
+---
+import {catalogue,indexBase} from '../../../data/nuwa-index';
+import {localizedPath,type Locale} from '../../../i18n/config';
+import {modelBenchmarkMatrix,monitorValue,comparisonPermissions} from '../../../lib/nuwa-intelligence/monitoring.mjs';
+import EvidenceDataTable from './EvidenceDataTable.astro';
+interface Props{locale:Locale;modelId:string}
+const {locale,modelId}=Astro.props,en=locale==='en',base=localizedPath(indexBase,locale),matrix=modelBenchmarkMatrix(catalogue,modelId);
+const core=catalogue.monitoring?.benchmarkSelections.filter(s=>s.tier==='core'&&s.reusable)??[];
+const allMeasurements=matrix.flatMap(entry=>entry.records.map(row=>({...row,benchmarkName:entry.name}))).map(row=>{const group=catalogue.monitoring?.groups.find(group=>group.id===row.groupId);return {...row,key:`${row.resultId}|${row.metricId}`,conditionStatus:comparisonPermissions(group).rank?'matched':group?.conditionsComplete?'conditional':'incomplete'};});
+const rows=core.map(selection=>({selection,row:matrix.find(r=>r.benchmarkId===selection.benchmarkId)}));
+---
+<section class="nm-model-monitoring"><p class="ni-kicker">{en?'MODEL MONITORING':'模型监测'}</p><h2>{en?'Representative benchmark coverage':'代表性 Benchmark 覆盖'}</h2><p>{en?'Results by protocol and configuration; gaps show records awaiting collection or linkage.':'按协议和配置呈现结果，缺口标明待收录或待关联的证据。'}</p><div class="nm-model-monitoring-grid">{rows.map(({selection,row})=><article><h3><a href={`${base}/benchmark/${selection.benchmarkId}/#monitoring`}>{catalogue.benchmarks.find(b=>b.id===selection.benchmarkId)?.name} →</a></h3>{row?.records.length?<><p>{row.records.length} {en?'measurements':'项测量'}</p><ul>{row.records.slice(0,3).map(r=><li><a href={`${base}/result/${r.resultId}/`}>{monitorValue(r)}</a>{r.experimentalConditions&&<span>{r.experimentalConditions.goal} · {r.experimentalConditions.threat}</span>}<span>{r.attribution.evaluator} · {r.configuration.harness??(en?'Harness not disclosed':'Harness 未披露')}</span></li>)}</ul>{row.records.length>3&&<a href={`${base}/benchmark/${selection.benchmarkId}/#monitoring`}>{en?'All conditions':'全部条件'} →</a>}</>:<p class="ni-note">{en?'No eligible measurement linked to this model version.':'尚未关联该模型版本的合格测量。'}</p>}</article>)}</div><section class="nm-model-all-evidence"><h3>{en?'All linked measurements':'全部已关联测量'}</h3><p>{en?'Each result retains its protocol and unit.':'各项结果保留原始协议与单位。'}</p><nuwa-model-coverage-grid><EvidenceDataTable rows={allMeasurements} locale={locale} namespace={`model-${modelId}`} active={false} rankAllowed={false}/></nuwa-model-coverage-grid></section></section>
+<style is:global>.nm-model-monitoring{border-top:1px solid #cddbd1;padding:32px 0}.nm-model-monitoring>p{font-size:14px;line-height:1.9;color:#4d6669;max-width:900px}.nm-model-monitoring-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:25px}.nm-model-monitoring-grid article{min-width:0;padding:20px;border:1px solid #cbdcd1;background:#fafcf9}.nm-model-monitoring-grid h3{font-size:18px;font-weight:500;line-height:1.5;margin:0 0 13px}.nm-model-monitoring-grid p,.nm-model-monitoring-grid a{font-size:13px;line-height:1.8}.nm-model-monitoring-grid ul{list-style:none;padding:0;margin:12px 0}.nm-model-monitoring-grid li{padding:9px 0;border-top:1px solid #dbe5dd}.nm-model-monitoring-grid li>a{font-weight:500;font-size:17px}.nm-model-monitoring-grid span{display:block;font-size:11px;line-height:1.8;color:#4e6b62;margin-top:6px}@media(max-width:900px){.nm-model-monitoring-grid{grid-template-columns:1fr 1fr}}@media(max-width:550px){.nm-model-monitoring-grid{grid-template-columns:1fr}}</style>
+
+<script>
+class NuwaModelCoverageGrid extends HTMLElement {
+ observer?:IntersectionObserver;
+ connectedCallback(){
+  this.observer?.disconnect();
+  customElements.whenDefined('nuwa-evidence-grid').then(()=>{if(!this.isConnected)return;const grid=this.querySelector('nuwa-evidence-grid') as HTMLElement&{setActive?:(active:boolean)=>void};this.observer=new IntersectionObserver(entries=>{grid.setActive?.(entries.some(entry=>entry.isIntersecting));});this.observer.observe(this);});
+ }
+ disconnectedCallback(){this.observer?.disconnect();(this.querySelector('nuwa-evidence-grid') as HTMLElement&{setActive?:(active:boolean)=>void})?.setActive?.(false);}
+}
+if(!customElements.get('nuwa-model-coverage-grid'))customElements.define('nuwa-model-coverage-grid',NuwaModelCoverageGrid);
+</script>
+<style is:global>.nm-model-all-evidence{margin-top:32px;padding-top:24px;border-top:1px solid #d2dfd8;min-width:0}.nm-model-all-evidence>h3{font-size:22px;font-weight:500}.nm-model-all-evidence>p{font-size:13px;line-height:1.8;color:#4d6669}nuwa-model-coverage-grid{display:block;min-width:0}</style>

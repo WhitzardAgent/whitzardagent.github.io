@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageSources from '../PageSources.astro';
+import OfficialEvidenceChart from './OfficialEvidenceChart.astro';
+import {catalogue,indexBase} from '../../../data/nuwa-index';
+import {localizedPath,type Locale} from '../../../i18n/config';
+import '../../../styles/nuwa-index.css';
+interface Props{locale:Locale;id:string}
+const{locale,id}=Astro.props,en=locale==='en',unit=catalogue.sourceUnits!.find(u=>u.id===id)!,version=catalogue.sourceVersions!.find(v=>v.id===unit.sourceVersionId)!,rows=catalogue.officialObservations?.filter(o=>o.unitId===id)??[],claims=catalogue.claims?.filter(c=>c.sourceVersionId===version.id)??[],base=localizedPath(indexBase,locale);
+---
+<BaseLayout title={`${unit.title} — NUWA Index`} description={unit.summary[locale]} locale={locale} brand="nuwa" canonicalPath={`${indexBase}/source/${id}`}>
+<article class="ni-page ns-source"><header class="ni-header site-container"><a class="ni-back" href={`${base}?view=overview`}>← NUWA Index</a><p class="ni-kicker">{en?'Source record':'来源档案'}</p><h1>{unit.title}</h1><p class="ni-lead">{unit.summary[locale]}</p><p><a href="#research-sources">{en?'Original source and provenance':'原始来源与出处'} ↓</a>{unit.assessmentId&&<> · <a href={`${base}/assessment/${unit.assessmentId}`}>{en?'Assessment record':'评估档案'} →</a></>}</p></header>
+<div class="site-container ns-body">
+ {rows.length>0&&<OfficialEvidenceChart unit={unit} records={rows} locale={locale}/>}
+ <section><h2>{en?'Scope and attribution':'范围与归属'}</h2><dl class="ni-facts"><div><dt>{en?'Reported by':'数据报告方'}</dt><dd>{unit.reporter}</dd></div><div><dt>{en?'Actual evaluator':'实际评测方'}</dt><dd>{unit.executor??(en?'Not established for every observation':'各观测的执行方未完整确定')}</dd></div><div><dt>{en?'Captured version':'抓取版本'}</dt><dd>{unit.capturedAt?.slice(0,10)??(en?'Capture time not established':'抓取时间未确定')}</dd></div><div><dt>{en?'Source identity':'来源身份'}</dt><dd>{version.bundleHash.slice(0,16)}</dd></div></dl><p>{unit.limits[locale]}</p></section>
+ {claims.length>0&&<section><h2>{en?'Source findings':'来源发现'}</h2><p class="ni-note">{en?'The following statements summarize the source. They are not independent NUWA experimental findings.':'以下陈述整理自原始来源，未作为 NUWA 独立实验结论。'}</p>{claims.map(c=><article class="ns-claim"><p>{c.text[locale]}</p><small>{c.locator}</small><p class="ni-note">{c.limitations[locale]}</p></article>)}</section>}
+ <section><h2>{en?'Extraction coverage':'提取范围'}</h2><p>{en?'Each entry records the treatment of the source section. A reviewed observation does not imply that every claim or result in the document was verified.':'以下条目说明来源各部分的处理状态。个别观测已核验，不代表整份文档的全部结论和结果均已验证。'}</p><details><summary>{en?`View ${unit.coverage.length} coverage entries`:`查看 ${unit.coverage.length} 项覆盖记录`}</summary><div class="ns-coverage"><table><thead><tr><th>{en?'Section':'章节'}</th><th>{en?'Treatment':'处理状态'}</th><th>{en?'Location and scope':'定位与范围'}</th></tr></thead><tbody>{unit.coverage.map(s=><tr><th scope="row">{s.heading}</th><td>{s.status}</td><td>{s.locator}<small>{s.note}</small></td></tr>)}</tbody></table></div></details></section>
+ {unit.conflicts.length>0&&<section><h2>{en?'Unresolved source issues':'来源待核实事项'}</h2>{unit.conflicts.map(c=><p>{c.description}</p>)}</section>}
+ <details class="ns-artifacts"><summary>{en?'Version fingerprints':'版本指纹'}</summary>{version.artifacts.map(a=><div><strong>{a.role}</strong><p>{a.url}</p><code>{a.sha256}</code></div>)}</details>
+ <PageSources locale={locale} sources={catalogue.sources} references={[{sourceId:unit.sourceId,appliesTo:en?'Source findings, measurements and extraction coverage':'来源发现、记录数值与提取范围'}]} numerical={rows.length>0}/>
+</div></article>
+</BaseLayout>
+<style is:global>
+.ns-body,.ns-source>.ni-header{max-width:1180px}.ns-source>.ni-header{padding-top:28px;padding-bottom:12px}.ns-source .ni-back{margin-bottom:12px}.ns-source .ni-header .ni-kicker{margin:14px 0}.ns-source .ni-header h1{margin:8px 0 14px}.ns-source h1{overflow-wrap:anywhere;font-size:clamp(32px,4vw,54px)}.ns-body>section{border-top:1px solid #cfddd4;padding:30px 0}.ns-body h2{font-size:27px;font-weight:500;margin-bottom:20px}.ns-body p{font-size:15px;line-height:1.85;color:#435f63}.ns-body summary{cursor:pointer;padding:15px 0;color:#246657}.ns-claim{border-left:2px solid #589383;padding:0 0 0 22px;margin:26px 0}.ns-claim small{font-size:12px;overflow-wrap:anywhere;color:#567167}.ns-coverage{overflow:auto;max-height:560px}.ns-coverage table{width:100%;font-size:13px;border-collapse:collapse}.ns-coverage td,.ns-coverage th{padding:14px;border:1px solid #d7e3da;text-align:left;vertical-align:top;min-width:100px}.ns-coverage td:last-child{min-width:260px}.ns-coverage small{display:block;line-height:1.8;margin-top:8px}.ns-artifacts{margin:25px 0}.ns-artifacts code{font-size:11px;overflow-wrap:anywhere}.ns-artifacts p{overflow-wrap:anywhere;font-size:12px}
+</style>

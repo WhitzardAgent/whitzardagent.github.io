@@ -1,0 +1,100 @@
+/* CSS-first Tailwind foundation. Runtime brand tokens remain in global.css and
+   brand-system.css, including locale-specific --font-sans overrides. */
+@theme {
+  --font-sans: "Geist Local", "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
+  --font-reading: var(--font-display);
+  --font-mono: "SFMono-Regular", Consolas, ui-monospace, monospace;
+  --font-display: var(--font-sans);
+  --text-hero: clamp(3.5rem, 7.4vw, 6.9rem);
+  --text-display: clamp(2.75rem, 5.6vw, 5.25rem);
+  --text-h1: clamp(2.6rem, 5vw, 4.75rem);
+  --text-h2: clamp(2rem, 3.8vw, 3.5rem);
+  --text-h3: clamp(1.35rem, 2vw, 1.75rem);
+  --text-title: 1.125rem;
+  --text-body-lg: clamp(1.08rem, 1.5vw, 1.25rem);
+  --default-ring-width: 3px;
+  --default-ring-color: rgb(59 130 246 / 0.5);
+}
+
+/* Inline aliases resolve the live brand token where a utility is applied. */
+@theme inline {
+  --color-wz-xuan: var(--wz-xuan);
+  --color-wz-indigo: var(--wz-indigo);
+  --color-wz-bright-blue: var(--wz-bright-blue);
+  --color-wz-moon: var(--wz-moon);
+  --color-wz-frost: var(--wz-frost);
+  --color-wz-cinnabar: var(--wz-cinnabar);
+  --color-wz-success: var(--wz-success);
+  --color-wz-ink: var(--wz-ink);
+  --color-wz-navy: var(--wz-navy);
+  --color-wz-blue: var(--wz-blue);
+  --color-wz-blue-active: var(--wz-blue-active);
+  --color-wz-azure: var(--wz-azure);
+  --color-wz-teal: var(--wz-teal);
+  --color-wz-teal-soft: var(--wz-teal-soft);
+  --color-wz-mist: var(--wz-mist);
+  --color-wz-canvas: var(--wz-canvas);
+  --color-wz-body: var(--wz-body);
+  --color-wz-muted: var(--wz-muted);
+  --color-wz-subtle: var(--wz-subtle);
+  --color-wz-hairline: var(--wz-hairline);
+  --color-wz-border-strong: var(--wz-border-strong);
+  --color-wz-panel: var(--wz-panel);
+  --color-wz-panel-blue: var(--wz-panel-blue);
+  --color-wz-panel-ink: var(--wz-panel-ink);
+  --color-nw-ink: var(--nw-ink);
+  --color-nw-deep-blue: var(--nw-deep-blue);
+  --color-nw-sky-blue: var(--nw-sky-blue);
+  --color-nw-jade: var(--nw-jade);
+  --color-nw-jade-soft: var(--nw-jade-soft);
+  --color-nw-jade-pale: var(--nw-jade-pale);
+  --color-nw-canvas: var(--nw-canvas);
+  --color-nw-paper: var(--nw-paper);
+  --color-nw-warm-paper: var(--nw-warm-paper);
+  --color-nw-mist: var(--nw-mist);
+  --color-nw-hairline: var(--nw-hairline);
+  --color-nw-body: var(--nw-body);
+  --color-nw-muted: var(--nw-muted);
+  --color-nw-subtle: var(--nw-subtle);
+  --color-stone-ink: var(--stone-ink);
+  --color-stone-jade: var(--stone-jade);
+  --color-stone-vermilion: var(--stone-vermilion);
+  --color-stone-ochre: var(--stone-ochre);
+  --color-stone-ivory: var(--stone-ivory);
+  --color-wz-cinnabar-ink: var(--wz-cinnabar-ink);
+  --color-wz-cinnabar-light: var(--wz-cinnabar-light);
+  --color-nw-deep-jade: var(--nw-deep-jade);
+
+  /* The site's --radius-* tokens predate Tailwind v4. Keep legacy utility
+     geometry literal so site card tokens cannot enlarge rounded utilities. */
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  /* Existing hero labels use the v3 small backdrop blur. */
+  --blur-sm: 4px;
+}
+
+/* Preserve v3 defaults where existing components do not specify a value.
+   Keep these in base so explicit component and utility styles still win. */
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    border-color: #e5e7eb;
+  }
+  input::placeholder, textarea::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+  }
+  button, [role="button"] {
+    cursor: pointer;
+  }
+  :disabled {
+    cursor: default;
+  }
+  dialog {
+    margin: auto;
+  }
+}

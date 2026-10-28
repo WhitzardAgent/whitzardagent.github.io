@@ -1,0 +1,5 @@
+import path from 'node:path';import fs from 'node:fs';import {fileURLToPath}from'node:url';
+const repository=fs.realpathSync(fileURLToPath(new URL('../../../',import.meta.url)));
+function resolved(file){let p=path.resolve(file),parts=[];while(!fs.existsSync(p)){parts.unshift(path.basename(p));const parent=path.dirname(p);if(parent===p)break;p=parent;}return path.join(fs.realpathSync(p),...parts);}
+export function assertPrivateRoot(root){if(!root)throw Error('Set NUWA_PRIVATE_ROOT explicitly');const target=resolved(root),relative=path.relative(repository,target);if(!relative||!relative.startsWith('..'+path.sep)&&relative!=='..'&&!path.isAbsolute(relative))throw Error('Private source artifacts must remain outside the repository');return target;}
+export function assertPrivateOutput(file,root){const target=resolved(file),base=assertPrivateRoot(root),relative=path.relative(base,target);if(relative.startsWith('..'+path.sep)||relative==='..'||path.isAbsolute(relative))throw Error('Candidate output must remain within the private root');return target;}

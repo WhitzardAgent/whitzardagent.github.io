@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-27",
+  "organizations": [
+    {
+      "organizationId": "minimax",
+      "displayName": "MiniMax",
+      "officialHomepage": "https://www.minimax.io/",
+      "retrievedOn": "2026-10-27",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/minimax.png",
+        "format": "png",
+        "width": 32,
+        "height": 32,
+        "sourceUrl": "https://www.minimax.io/favicon.ico",
+        "resolvedSourceUrl": "https://www.minimax.io/favicon.ico",
+        "sourcePage": "https://www.minimax.io/",
+        "kind": "official-site-icon",
+        "sha256": "94944f81c6ec4d3323d9d5fd460c14e83880c7bd9b9b4d5f90f4b30ddc023f55",
+        "sourceSha256": "43ce4c9b9e627b391a116cd5da09e4c062d9c4e3d585509c65a4a3d16f386256",
+        "background": "light"
+      },
+      "note": "Official homepage icon; supplemental reported-model family attribution, independent of endpoint identity."
+    },
+    {
+      "organizationId": "cohere",
+      "displayName": "Cohere",
+      "officialHomepage": "https://cohere.com/",
+      "retrievedOn": "2026-10-27",
+      "status": "available",
+      "asset": {
+        "path": "/assets/organizations/cohere.png",
+        "format": "png",
+        "width": 160,
+        "height": 160,
+        "sourceUrl": "https://cohere.com/apple-touch-icon.png",
+        "resolvedSourceUrl": "https://cohere.com/apple-touch-icon.png",
+        "sourcePage": "https://cohere.com/",
+        "kind": "official-site-icon",
+        "sha256": "165c0115c50f12e112aec373940a5794a358aee1ecc2fdf753487a8e1489a0f6",
+        "sourceSha256": "3403a04361a061b7e765e85e746b961a601a73015d4569baef9e781ec89a0286",
+        "background": "light"
+      },
+      "note": "Official homepage icon; supplemental reported-model family attribution, independent of endpoint identity."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "reviewedOn": "2026-10-27",
+  "documents": [{
+    "id": "palisade:robot-shutdown-2026",
+    "sourceIds": ["palisade-robot-shutdown", "palisade-robot-technical-report"],
+    "title": "Shutdown Resistance in Large Language Models, on robots!",
+    "evidenceUrl": "https://palisaderesearch.org/research/shutdown-resistance-on-robots",
+    "basis": "The publication page directly links this PDF as its technical report; matching authors and subject confirmed.",
+    "dateRoles": {"palisade-robot-shutdown": "web-publication", "palisade-robot-technical-report": "report-date"}
+  }]
+}

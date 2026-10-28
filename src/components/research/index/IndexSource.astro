@@ -1,0 +1,7 @@
+---
+import { sourceFor } from '../../../data/nuwa-index';
+interface Props { id: string; locator?: string }
+const { id, locator } = Astro.props;
+const source = sourceFor(id);
+---
+<a class="ni-source" href={source.url} target="_blank" rel="noreferrer">{source.title}{locator && <span> · {locator}</span>} <span aria-hidden="true">↗</span></a>

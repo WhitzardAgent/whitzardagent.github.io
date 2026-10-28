@@ -1,0 +1,27 @@
+---
+import {catalogue,indexBase} from '../../../data/nuwa-index';
+import type {Evidence} from '../../../data/nuwa-index/types';
+import type {Locale} from '../../../i18n/config';
+import {localizedPath} from '../../../i18n/config';
+import {sortBenchmarkEntries,benchmarkResultEntries} from '../../../lib/nuwa-intelligence/monitoring.mjs';
+import {benchmarkCardProjection} from '../../../lib/benchmarkCards.mjs';
+import InstitutionByline from './InstitutionByline.astro';
+interface Props{records:Evidence[];locale:Locale;filterable?:boolean}
+const {records,locale,filterable=false}=Astro.props,en=locale==='en',entries=sortBenchmarkEntries(benchmarkResultEntries(catalogue,records).filter(e=>e.benchmark.kind!=='report'),'priority',catalogue.monitoring?.benchmarkSelections),base=localizedPath(indexBase,locale);
+const missing=catalogue.benchmarks.filter(b=>b.kind!=='report'&&!entries.some(e=>e.id===b.id));
+const cards=[...entries.map((entry:any)=>({...entry,projection:benchmarkCardProjection(entry)})),...missing.map(benchmark=>({id:benchmark.id,benchmark,latestEvidenceDate:'',projection:[],observationCount:0,systemCount:0,sourceCount:0}))];
+---
+<p class="nw-compare-link"><a href={`${base}/compare/`}>{en?'Compare 2–4 protocol designs':'比较 2–4 项协议设计'} →</a></p>
+<div class="ni-results ni-results--benchmarks">
+ {cards.map((entry:any)=>{const b=entry.benchmark,work=catalogue.works.find(w=>w.protocolIds.includes(b.id)),source=catalogue.sources.find(s=>s.id===b.sourceId);return <article class="nm-result-benchmark" data-index-group data-benchmark-parent={entry.id} data-benchmark-no-results={entry.projection.length?undefined:''} data-sort-name={b.name} data-sort-date={entry.latestEvidenceDate} data-areas={[...new Set(b.links.map((l:any)=>catalogue.questions.find(q=>q.id===l.questionId)?.area).filter(Boolean))].join(' ')} data-dimensions={b.primaryDimension} data-search={`${b.name} ${b.summary.en} ${b.summary.zh}`}>
+ <p class="ni-kind">{b.kind==='benchmark'?'Benchmark':en?'Research evaluation':'研究评测'}</p>
+ <h3><a href={`${base}/benchmark/${entry.id}/`}>{b.name} <span aria-hidden="true">↗</span></a></h3>
+ <InstitutionByline contributions={work?.contributions??[]} locale={locale} unverified={Boolean(work?.localReviewBatchId||work?.contentEditionId)}/>
+ <p class="nm-result-date">{en?'Protocol publication':'协议发表'} · <time datetime={source?.publicationDate??undefined}>{source?.publicationDate??(en?'Date not verified':'日期未核实')}</time></p>
+ <p class="nm-result-summary">{b.summary[locale]}</p>
+ <div class="nm-result-card-scope">{entry.projection.length?<p class="nm-result-totals" data-result-totals>{entry.observationCount} {en?'observations':'条观测'} · {entry.systemCount} {en?'systems':'个系统'} · {entry.sourceCount} {en?'sources':'个来源'}</p>:<p class="nm-result-totals">{en?'Protocol indexed · no structured result linked':'已收录协议 · 尚未关联结构化结果'}</p>}</div>
+ <div class="nm-result-card-actions"><a class="nm-open-comparison" href={`${base}/benchmark/${entry.id}/${entry.projection.length?'#monitoring':''}`}>{entry.projection.length?(en?'Explore results and conditions':'查看结果与比较条件'):(en?'Measurement scope and original evidence':'测量范围与原始证据')} →</a></div>
+ {/* Metadata preserves exact observation filtering without embedding result tables in the directory. */}
+ {filterable&&<div hidden data-benchmark-projection>{entry.projection.map((r:any)=><span data-index-record data-result-ids={r.resultIds.join(' ')} data-system-key={r.systemKey} data-source-id={r.sourceId} data-areas={r.areas.join(' ')} data-dimensions={r.dimensions.join(' ')} data-benchmark={r.benchmark} data-search={r.search}></span>)}</div>}
+ </article>;})}
+</div>

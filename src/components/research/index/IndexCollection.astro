@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {catalogue,indexBase} from '../../../data/nuwa-index';
+import {localizedPath,type Locale} from '../../../i18n/config';
+import {knowledgeCopy} from '../../../i18n/pages/nuwaKnowledge';
+import ResearchCard from './ResearchCard.astro';
+import OrganizationMark from './OrganizationMark.astro';
+import {sortResearchRecords} from '../../../lib/nuwaIndex.mjs';
+import '../../../styles/nuwa-index.css';
+interface Props {locale:Locale; kind:'function'|'organization'; id:string}
+const {locale,kind,id}=Astro.props,k=knowledgeCopy[locale];
+const legacyTag=id==='monitoring'?'risk-monitoring':id==='investigation'?'incident-investigation':'',functionId=id==='monitoring'?'evaluation':id==='investigation'?'governance':id;
+const f=catalogue.functions.find(f=>f.id===functionId),o=catalogue.organizations.find(o=>o.id===id);
+const title=kind==='function'?f!.label[locale]:o!.name[locale];
+const description=kind==='function'?f!.description[locale]:k.roleNote;
+const works=sortResearchRecords(catalogue.works.filter(w=>kind==='function'?(w.primaryFunction===functionId||w.secondaryFunctions.some(f=>f.function===functionId))&&(!legacyTag||w.tags?.includes(legacyTag)):w.contributions.some(c=>c.organizationId===id))) as typeof catalogue.works;
+---
+<BaseLayout title={`${title} — NUWA Index`} description={description} locale={locale} brand="nuwa" canonicalPath={`${indexBase}/${kind}/${id}`}>
+<div class="ni-page nk-page site-container"><header class="ni-header nk-header"><a class="ni-back" href={`${localizedPath(indexBase,locale)}?view=library`}>← {k.library}</a><p class="ni-kicker">{kind==='function'?k.functions:k.organization}</p><h1>{kind==='organization'?<OrganizationMark organizationId={id} locale={locale} size="large"/>:title}</h1><p class="ni-lead">{description}</p><a class="nk-collection-filter" href={`${localizedPath(indexBase,locale)}?view=library&${kind}=${kind==='function'?functionId:id}${legacyTag?`&tag=${legacyTag}`:''}#ni-library`}>{k.more} →</a>{o?.homepage&&<p><a href={o.homepage} target="_blank" rel="noreferrer">{o.name[locale]} ↗</a></p>}</header><div class="nk-library">{works.map(w=><ResearchCard work={w} locale={locale}/>)}</div></div>
+</BaseLayout>

@@ -1,0 +1,9 @@
+import {citationAuthors} from '../researchCitations.mjs';
+const bib=s=>String(s??'').replaceAll('\\','\\textbackslash{}').replace(/[{}]/g,'').replaceAll('&','\\&').replace(/[\r\n]+/g,' ');
+const line=s=>String(s??'').replace(/[\r\n]+/g,' ');
+export function researchCitation(work,catalogue,{format='bib',kind='original',locale='en'}={}){
+ const note=kind==='nuwa',source=catalogue.sources.find(s=>s.id===work.sourceId),authors=note?[]:citationAuthors(work.authors?.length?work.authors:source?.authors??[]),title=note?`${work.title} — NUWA research record`:work.title,url=note?`https://whitzard.tech${locale==='zh'?'':'/en'}/nuwa/whitzard-index/work/${work.id}/`:work.originalUrl,date=note?null:work.publicationDate,version=note?catalogue.snapshotId:source?.version,description=note?`NUWA research note. Source-reading scope and independent review status are stated on the record. Snapshot ${catalogue.snapshotId}. Retained note edition: https://whitzard.tech/nuwa/whitzard-index/data/record-editions/${catalogue.snapshotId}--${work.id}.json.`:source?.version;
+ if(format==='ris')return ['TY  - ELEC',`ID  - ${work.id}${note?'-nuwa':''}`,`TI  - ${line(title)}`,...authors.map(a=>`AU  - ${line(a)}`),...(date?[`PY  - ${date.slice(0,4)}`,`DA  - ${date}`]:[]),`UR  - ${url}`,...(version?[`ET  - ${line(version)}`]:[]),...(note?['PB  - NUWA Frontier AI Safety Lab']:[]),`N1  - ${line(description)}`,'ER  -',''].join('\n');
+ const fields={title,url,...(authors.length?{author:authors.join(' and ')}:{}),...(date?{year:date.slice(0,4),date}:{}),...(version?{version}:{}),...(note?{organization:'NUWA Frontier AI Safety Lab',howpublished:`Retained note edition: https://whitzard.tech/nuwa/whitzard-index/data/record-editions/${catalogue.snapshotId}--${work.id}.json`}:{}),note:description};
+ return `@misc{${work.id}${note?'-nuwa':''},\n${Object.entries(fields).filter(([,v])=>v).map(([k,v])=>`  ${k} = {${bib(v)}}`).join(',\n')}\n}\n`;
+}

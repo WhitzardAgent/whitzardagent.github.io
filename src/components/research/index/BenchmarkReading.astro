@@ -1,0 +1,27 @@
+---
+import {formatMetric} from '../../../lib/evidenceCharts.mjs';
+import type {Locale} from '../../../i18n/config';
+interface Props {benchmark:any;work?:any;record?:any;locale:Locale;profileOnly?:boolean}
+const {benchmark:b,work,record,locale,profileOnly=false}=Astro.props,en=locale==='en';
+const metric=record?.metrics[0];
+const paragraphs=[work?.note?.method?.[locale]].filter(p=>p&&p!==b.assessmentSubject[locale]&&p!==b.summary[locale]);
+const conditions=record?[record.taskSet,record.configuration?.harness,record.configuration?.budget].filter(v=>v&&String(v).length<=160):[];
+---
+<div class="nw-benchmark-reading" data-benchmark-reading>
+<section id="task-and-measurement"><h2>{en?'Task and measurement':'任务与测量'}</h2><p class="nw-profile-kind">{en?'Benchmark protocol profile':'Benchmark 协议档案'}</p><dl class="nw-protocol-profile"><div><dt>{en?'Task / subject':'任务／对象'}</dt><dd>{b.assessmentSubject[locale]}</dd></div><div><dt>{en?'Measurement target':'测量目标'}</dt><dd>{b.measures[locale]}</dd></div>{metric&&<div><dt>{en?'Scoring / outcome':'评分／结果口径'}</dt><dd>{metric.label[locale]}{metric.meaning?.[locale]&&<> · {metric.meaning[locale]}</>}</dd></div>}<div id="reading-boundary"><dt>{en?'Interpretation boundary':'解释边界'}</dt><dd>{b.limitations[locale]}</dd></div></dl>{!profileOnly&&paragraphs.map(p=><p>{p}</p>)}</section>
+{!profileOnly && record && metric && (
+ <section id="reported-evaluation" data-reported-example>
+  <h2>{en?'A reported evaluation':'一项已报告评测'}</h2>
+  <p>{en?'The source evaluates':'来源评测'} <strong>{record.system}</strong> · <em>{record.taskSet}</em>.</p>
+  {conditions.length>1 && <p>{en?'Run configuration':'运行配置'}: {conditions.slice(1).join(' · ')}.</p>}
+  <p>{en?'Reported measurement':'报告指标'}: <strong>{metric.label[locale]}</strong> · <strong>{formatMetric(metric)}</strong>.</p>
+  <p>{metric.meaning?.[locale]} {record.sampleSize?.[locale]}</p>
+  {record.sourceFinding?.[locale] && record.sourceFinding[locale]!==b.summary[locale] && <p>{record.sourceFinding[locale]}</p>}
+ </section>
+)}
+
+{!profileOnly&&work?.note?.connections?.[locale]&&<section id="research-interpretation"><h2>{en?'Research interpretation':'研究解读'}</h2><p>{work.note.connections[locale]}</p></section>}
+</div>
+<style>
+.nw-benchmark-reading{max-width:760px;margin:0 auto 32px;font-size:17px;line-height:1.85;color:#304954}.nw-benchmark-reading section{margin-bottom:30px;scroll-margin-top:110px}.nw-benchmark-reading h2{font-size:25px;line-height:1.4;letter-spacing:-.025em;margin:0 0 15px;color:#172e40}.nw-benchmark-reading p{overflow-wrap:anywhere;margin:0 0 15px}.nw-benchmark-reading em{font-style:normal;color:#365f64}.nw-profile-kind{font-size:12px;color:#2b6557}.nw-protocol-profile{margin:0 0 20px}.nw-protocol-profile>div{display:grid;grid-template-columns:145px minmax(0,1fr);gap:18px;border-top:1px solid #d8e2dc;padding:13px 0}.nw-protocol-profile dt{font-size:12px;color:#46665f}.nw-protocol-profile dd{margin:0;font-size:15px;line-height:1.8;overflow-wrap:anywhere}@media(max-width:600px){.nw-benchmark-reading{font-size:16px}.nw-benchmark-reading h2{font-size:23px}.nw-protocol-profile>div{grid-template-columns:1fr;gap:4px}}
+</style>

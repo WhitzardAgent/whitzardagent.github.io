@@ -1,0 +1,8 @@
+---
+interface Props {wiki:any;prefix?:string}
+const {wiki}=Astro.props;const Content=wiki.Content;
+---
+<div class="nw-wiki-prose" data-wiki-content data-case-type={wiki.entry.data.caseType}><Content/></div>
+<style is:global>
+.nw-wiki-prose{max-width:760px;margin:0 auto 36px;color:#304954;font-size:17px;line-height:1.85}.nw-wiki-prose h2{font-size:26px;font-weight:550;letter-spacing:-.025em;line-height:1.4;margin:36px 0 16px;scroll-margin-top:110px;color:#172e40}.nw-wiki-prose h2:first-child{margin-top:0}.nw-wiki-prose h3{font-size:20px;margin:24px 0 12px;scroll-margin-top:110px}.nw-wiki-prose p{margin:0 0 17px;max-width:100%}.nw-wiki-prose a{color:#21685e;text-decoration:underline;text-underline-offset:3px}.nw-wiki-prose li{margin-bottom:7px}.nw-wiki-prose img{height:auto;max-width:100%}.nw-wiki-prose strong{font-weight:600;color:#203d48}@media(max-width:600px){.nw-wiki-prose{font-size:16px;line-height:1.85}.nw-wiki-prose h2{font-size:23px;margin-top:28px}}
+</style>

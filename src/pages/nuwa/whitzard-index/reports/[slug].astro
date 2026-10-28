@@ -1,0 +1,7 @@
+---
+import IndexReport from '../../../../components/research/index/IndexReport.astro';
+import { indexReportPaths } from '../../../../lib/indexReports';
+export const getStaticPaths = indexReportPaths;
+const { entry } = Astro.props;
+---
+<IndexReport entry={entry} />
