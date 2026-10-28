@@ -1,13 +1,13 @@
 {
   "schemaVersion": "nuwa-public-release-1",
-  "snapshotId": "2026-10-28.1",
+  "snapshotId": "2026-10-28.2",
   "publishedOn": "2026-10-28",
   "publication": {
     "state": "published",
     "publishedOn": "2026-10-28",
     "authorizationReference": "user-authorized-full-reading-release-2026-10-28"
   },
-  "readingEditionHash": "b2c5024c588cb4c79513d34bd6e0eca6135182b3b43b84c60df75ddc23ebd994",
+  "readingEditionHash": "654431e793af623859be70eaabeddd7ead91e7fc8926c74961285bf818546947",
   "bootstrapBaseRevision": "da9c04a3b63c0c4338ec7bdd1eb6f07f4a32646d",
   "counts": {
     "works": 175,
@@ -17,8 +17,8 @@
     "rawResults": 1076
   },
   "changes": {
-    "en": "Public launch of the bilingual reading index, measurement profiles and evidence-linked research analyses.",
-    "zh": "双语研究索引、测量档案及证据关联专题正式公开。"
+    "en": "Correct the catalogue coverage description, which retained an outdated count. The catalogue still contains 175 records and 79 protocols; research text and numerical results are unchanged.",
+    "zh": "更正目录覆盖说明中遗留的旧数量。目录仍为 175 项研究、79 项协议；研究正文与数值结果未变。"
   },
   "review": {
     "independentEvidenceReview": "pending-human-review",
