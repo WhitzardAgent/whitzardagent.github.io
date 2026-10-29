@@ -23,3 +23,9 @@ src/data/nuwa-index/public-editions/2026-10-29.1.json是完整版本化公开包
 通过现有检查和公开产物隐私检查后，经GitHub PR/Pages流程发布。部署后核对正式域名双语首页、代表Record/Benchmark、Opinion/Sources、静态搜索、版本下载及旧范围入口。回退部署旧Git提交，保留历史文件，不强推历史。
 
 40–60份完整来源深读、全部相关表图/附录审计及237项旧结果逐值来源链复核继续作为研究队列，不能因公开操作标完成。每周五16:00 Asia/Shanghai保持准备与集中审阅机制；本次批准仅覆盖本次版本，不授权未来批次自动公开。后续准备从实际线上release和已部署Git基底继续，不把旧私有candidate重新当作新发布版本。
+
+## 风险框架入口恢复
+
+用户指出整体风险体系入口缺失。生产复现确认框架内容完整，直接`?view=framework`能显示机制图、风险主题与观测维度；但共享顶栏将Framework置于折叠About中，手机端又隐藏About，导致核心入口不可见。修复将Framework／风险框架恢复为第一个一级入口，Methodology／方法说明也保留一级入口；手机导航换行显示核心入口。默认首页仍是Trend，原Framework查询参数、锚点、原图及交互保持。
+
+浏览器回归另确认Astro页面切换时自定义组件首次连接早于URL更新，一级导航可出现地址变了但栏目仍是上一项。IndexExplorer在astro:page-load后沿用现有restore重新读取查询与锚点；原popstate/hashchange逻辑保留。验证覆盖点击框架、机制图与六风险主题、切回Trend和浏览器返回。
