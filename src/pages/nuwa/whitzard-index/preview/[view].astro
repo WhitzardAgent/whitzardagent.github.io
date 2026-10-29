@@ -1,0 +1,5 @@
+---
+import ResearchPreview from '../../../../components/research/index/preview/ResearchPreview.astro';
+export function getStaticPaths(){return ['trend','search','record','benchmark','opinion'].map(view=>({params:{view}}));}
+---
+<ResearchPreview locale="zh" view={Astro.params.view!}/>
