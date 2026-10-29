@@ -19,7 +19,7 @@ export function monitorChartOption(rows,group,locale='en',state={}){
  if(isConditionMatrix(rows))return conditionMatrixOption(rows,group,locale,state);
  state=normalizeChartState(rows,state);const facets=chartFacets(rows,state);
  if(facets.visible.length>1){
-  const columns=state.narrow?1:2,gap=42,panelHeight=state.display==='timeline'?290:Math.max(280,...facets.visible.map(f=>(state.exportAll?rows.filter(r=>r.facetId===f.id).length:Math.min(12,rows.filter(r=>r.facetId===f.id).length))*systemRowHeight(rows,state.narrow)+120));
+  const columns=1,gap=42,panelHeight=state.display==='timeline'?290:Math.max(280,...facets.visible.map(f=>(state.exportAll?rows.filter(r=>r.facetId===f.id).length:Math.min(12,rows.filter(r=>r.facetId===f.id).length))*systemRowHeight(rows,state.narrow)+120));
   const grids=[],xs=[],ys=[],series=[],titles=[];let common;
   facets.visible.forEach((f,i)=>{const rs=rows.filter(r=>(r.facetId??'source')===f.id),option=singleChart(rs,group,locale,{...state,facetOnly:true}),col=i%columns,row=Math.floor(i/columns),width=100/columns;
    common??=option;const left=col*width+(state.display==='timeline'?6:2),right=100-(col+1)*width+(state.display==='timeline'?3:5),top=55+row*(panelHeight+gap);
@@ -42,8 +42,8 @@ export function orderChartRows(rows,group,state={}){
  }));
 }
 function modelAxisLabels(rows,labels=rows.map(r=>r.system),width=190){
- const rich={name:{fontSize:11,lineHeight:18}},marks=[];for(const [i,r]of rows.entries()){const ids=r.developerIds??[r.developerId],tokens=[];for(const [j,id]of ids.entries()){const asset=organizationBrand(id)?.asset;if(asset){const key='brand'+i+(j?'_'+j:'');rich[key]={width:16,height:16,verticalAlign:'middle',backgroundColor:{image:asset.path},padding:[0,0,0,0]};tokens.push('{'+key+'|}');}}marks[i]=tokens.join(' ');}
- return {fontSize:11,lineHeight:18,align:'left',margin:width+35,rich,formatter:(_,index)=>`${marks[index]?marks[index]+'  ':''}{name|${labels[index]}}`};
+ const rich={name:{fontSize:11,lineHeight:18,width,overflow:'break'}},marks=[];for(const [i,r]of rows.entries()){const ids=r.developerIds??[r.developerId],tokens=[];for(const [j,id]of ids.entries()){const asset=organizationBrand(id)?.asset;if(asset){const key='brand'+i+(j?'_'+j:'');rich[key]={width:16,height:16,verticalAlign:'middle',backgroundColor:{image:asset.path},padding:[0,0,0,0]};tokens.push('{'+key+'|}');}}marks[i]=tokens.join(' ');}
+ return {fontSize:11,lineHeight:18,align:'right',margin:12,rich,formatter:(_,index)=>`${marks[index]?marks[index]+'  ':''}{name|${labels[index]}}`};
 }
 function singleChart(rows,group,locale,state){
  rows=orderChartRows(rows.some(r=>!r.observationLabel)?contextualizeObservations(rows):rows,group,state);
@@ -65,11 +65,11 @@ function singleChart(rows,group,locale,state){
  const intervals=visible.flatMap((r,index)=>Number.isFinite(r.interval?.lower)&&Number.isFinite(r.interval?.upper)?[{type:'line',silent:true,tooltip:{show:false},symbol:'none',lineStyle:{width:2,color:'#344f5b'},data:[[r.interval.lower,index],[r.interval.upper,index]]}]:[]);
  return {...common,grid:{left:12,right:65,top:42,bottom:40,containLabel:true},xAxis:{type:'value',min:0,max:metric?.unit==='%'?upper:undefined,name:metricName,nameLocation:'middle',nameGap:28,axisLabel:{fontSize:12},splitLine:{lineStyle:{color:'#e1e9e3'}}},yAxis:{type:'category',inverse:true,data:visible.map(r=>label(r.observationLabel,locale)||r.system),axisLine:{show:false},axisTick:{show:false},axisLabel:{...modelAxisLabels(visible,visible.map(r=>label(r.observationLabel,locale)||r.system),state.narrow?105:190),width:state.narrow?140:225,overflow:'break'}},series:[{type:'bar',barMaxWidth:22,label:{show:true,position:'right',offset:[0,-11],fontSize:11,formatter:p=>monitorValue(p.data.record)},data:visible.map(r=>({value:r.value,record:r,itemStyle:{color:companyColor(r.developerId??'unresolved'),borderRadius:[0,3,3,0]}}))},...intervals]};
 }
-export function monitorChartHeight(rows,state={}){if(isConditionMatrix(rows)){const n=chartFacets(rows,{...state,display:'bars'}).visible.length;return Math.ceil(n/(state.narrow||state.compact&&!state.exportAll?1:2))*570;}const fs=chartFacets(rows,state).visible;if(fs.length>1){const cols=state.narrow?1:2,panel=state.display==='timeline'?290:Math.max(280,...fs.map(f=>(state.exportAll?rows.filter(r=>(r.facetId??'source')===f.id).length:Math.min(12,rows.filter(r=>(r.facetId??'source')===f.id).length))*systemRowHeight(rows,state.narrow)+120));return Math.ceil(fs.length/cols)*(panel+42);}const shown=chartVisibleRows(rows,state);return state.display==='timeline'?(state.compact?300:400):Math.max(260,Math.min(state.exportAll?shown.length:12,shown.length)*systemRowHeight(shown,state.narrow)+100);}
+export function monitorChartHeight(rows,state={}){if(isConditionMatrix(rows)){const n=chartFacets(rows,{...state,display:'bars'}).visible.length;return n*570;}const fs=chartFacets(rows,state).visible;if(fs.length>1){const cols=1,panel=state.display==='timeline'?290:Math.max(280,...fs.map(f=>(state.exportAll?rows.filter(r=>(r.facetId??'source')===f.id).length:Math.min(12,rows.filter(r=>(r.facetId??'source')===f.id).length))*systemRowHeight(rows,state.narrow)+120));return Math.ceil(fs.length/cols)*(panel+42);}const shown=chartVisibleRows(rows,state);return state.display==='timeline'?(state.compact?300:400):Math.max(260,Math.min(state.exportAll?shown.length:12,shown.length)*systemRowHeight(shown,state.narrow)+100);}
 
 /** Factorial experiments use their measured goal/threat axes, not model release dates. */
 function conditionMatrixOption(rows,group,locale,state){
- const en=locale==='en',facets=chartFacets(rows,{...state,display:'bars'}).visible,columns=state.narrow||state.compact&&!state.exportAll?1:2;
+ const en=locale==='en',facets=chartFacets(rows,{...state,display:'bars'}).visible,columns=1;
  const grids=[],xs=[],ys=[],series=[],titles=[];
  for(const [i,f]of facets.entries()){
   const rs=rows.filter(r=>(r.facetId??'source')===f.id),threats=[...new Set(rs.map(r=>r.experimentalConditions.threat))];

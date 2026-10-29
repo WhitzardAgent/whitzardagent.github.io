@@ -16,7 +16,7 @@ verifyCapturedPackages(packages);
 const p=buildPreviewCorpus(catalogue,publicReading,packages);
 const dossier=p.dossiers.find((d:any)=>d.id==='ai-control')!,work=p.works.find((w:any)=>w.id==='ai-control')!,copy=dossier[locale];
 const benchmark=p.protocols.find((b:any)=>b.id==='cybench')!,profile=publicReading.protocols.find((b:any)=>b.id==='cybench');
-const benchmarkGroups=buildDisplaySets(catalogue,{benchmarkId:benchmark.id});
+const benchmarkGroups=buildDisplaySets(catalogue,{benchmarkId:benchmark.id}).map((g:any)=>g.id!=='panorama-cybench-2bt3lx'?g:{...g,scopePresentation:'annotated',description:{en:'Unguided task success across reports. Numbered notes identify the evaluation settings.',zh:'各来源报告的无引导任务成功率，编号对应图下注明的评测设置。'},scopeNotes:[{en:'Original paper: 40 tasks, one attempt per task, structured bash agent.',zh:'原论文：40 项任务，每题一次尝试，采用 structured bash 智能体。'},{en:'NEO Kimi K3: 39/40-task subset.',zh:'NEO Kimi K3：39/40 项任务子集。'},{en:'Other unguided evaluations; report-specific configuration.',zh:'其他无引导评测，具体配置见对应报告。'},{en:'SaferAI: 34/40-task subset.',zh:'SaferAI：34/40 项任务子集。'}]});
 const val=(x:any):string=>typeof x==='string'?x:Array.isArray(x)?x.map(val).join('\n\n'):'';
 const groups=[['question',en?'Question':'研究问题'],['design',en?'Design & assumptions':'研究设计与假设'],['findings',en?'What the study found':'研究发现'],['interpretation',en?'Reading the evidence':'证据解读'],['limits',en?'Limits & counterevidence':'局限与相反证据'],['decisionRelevance',en?'Implications':'研究意义']];
 const opinions=packages.filter(p=>p.kind==='opinion'&&['local-review-candidate','candidate-local-review','existing-work-enrichment-candidate'].includes(p.disposition));
