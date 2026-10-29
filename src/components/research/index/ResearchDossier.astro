@@ -14,8 +14,7 @@ const affiliated=work.contributions.some(c=>c.organizationId==='whitzard');
 const sections=[['question',en?'Research question':'研究问题'],['design',en?'Design and assumptions':'研究设计与假设'],['findings',en?'Source findings':'来源发现'],['interpretation',en?'NUWA interpretation':'NUWA 解读'],['limits',en?'Limits and contrary evidence':'局限与相反证据'],['connections',en?'Research connections':'研究联系'],['decisionRelevance',en?'Research and decision relevance':'研究与决策意义']];
 ---
 <section class="nw-dossier" data-research-dossier data-reading-status={status.id}>
- <p class="nw-dossier__scope">{status.label[locale]}{dossier&&<> · {en?'Model-assisted reading':'模型辅助整理'}</>}</p>
- {dossier&&<p class="nw-dossier__scope" data-source-reading-scope>{sourceScope}</p>}
+ {dossier&&<p class="nw-dossier__scope" data-source-reading-scope>{en?'Model-assisted reading':'模型辅助整理'} · {sourceScope}</p>}
  {affiliated&&<p class="nw-dossier__scope">{en?'Affiliation disclosure: this research is associated with the organization maintaining this site. See the attribution section for its role.':'关联说明：本研究与本站维护机构有关联，具体角色见机构署名。'}</p>}
  <h2>{en?'At a glance':'研究速读'}</h2>
  {copy?.takeaway?<p class="nw-dossier__takeaway">{copy.takeaway}</p>:finding?<p class="nw-dossier__takeaway">{finding}</p>:<p>{work.summary[locale]}</p>}
