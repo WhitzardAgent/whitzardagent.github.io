@@ -5,7 +5,7 @@ import {researchCitation} from '../../../lib/nuwa-intelligence/researchCite.mjs'
 interface Props {workId:string;locale:Locale}
 const {workId,locale}=Astro.props,en=locale==='en',work=catalogue.works.find(w=>w.id===workId)!;
 const bib=researchCitation(work,catalogue,{kind:'original',format:'bib',locale});
-const note=currentEdition||work.localReviewBatchId?null:researchCitation(work,catalogue,{kind:'nuwa',format:'bib',locale});
+const note=(currentEdition&&currentEdition.publication?.state!=='published')||work.localReviewBatchId?null:researchCitation(work,catalogue,{kind:'nuwa',format:'bib',locale});
 const subject=`NUWA Index correction: ${work.title} (${catalogue.snapshotId})`;
 const privateReview=process.env.NUWA_LOCAL_REVIEW==='1'&&Boolean(process.env.NUWA_DOSSIER_ROOT);
 ---

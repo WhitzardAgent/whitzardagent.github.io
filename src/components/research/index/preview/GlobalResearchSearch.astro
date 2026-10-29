@@ -17,6 +17,7 @@ const {locale,candidateId,searchUrl}=Astro.props,en=locale==='en';
  </dialog>
 </nuwa-global-search>
 <script>
+import {searchNuwa} from '../../../../lib/nuwa-intelligence/searchClient';
 class NuwaGlobalSearch extends HTMLElement {
  connectedCallback(){
   const en=this.dataset.locale==='en',dialog=this.querySelector('dialog')!,input=this.querySelector('input')!,trigger=this.querySelector<HTMLAnchorElement>('[data-search-open]')!,status=this.querySelector<HTMLElement>('[data-global-status]')!,hits=this.querySelector<HTMLElement>('[data-global-hits]')!,all=this.querySelector<HTMLAnchorElement>('[data-global-all]')!;
@@ -34,15 +35,14 @@ class NuwaGlobalSearch extends HTMLElement {
    if(!query){status.textContent=en?'Research · Benchmarks · Findings · Perspectives':'研究 · 测量协议 · 评测结果 · 观点';return;}
    const active=new AbortController();request=active;status.textContent=en?'Searching…':'正在检索…';
    try{
-    const response=await fetch('/api/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query,locale:this.dataset.locale,snapshotId:this.dataset.version}),signal:active.signal});
-    if(!response.ok)throw Error('search');const data=await response.json();if(active.signal.aborted||!this.isConnected||!dialog.open)return;if(data.snapshotId!==this.dataset.version)throw Error('version');
-    const labels:Record<string,string>=en?{research:'Research',benchmark:'Benchmark',observation:'Result',synthesis:'Analysis',opinion:'Opinion',organization:'Organization'}:{research:'研究',benchmark:'测量协议',observation:'评测结果',synthesis:'专题',opinion:'观点',organization:'机构'};
+    const data=await searchNuwa({query,locale:this.dataset.locale,snapshotId:this.dataset.version},{signal:active.signal,endpoint:this.dataset.api});if(active.signal.aborted||!this.isConnected||!dialog.open)return;if(data.snapshotId!==this.dataset.version)throw Error('version');
+    const labels:Record<string,string>=en?{research:'Research',benchmark:'Benchmark',observation:'Result',synthesis:'Analysis',opinion:'Opinion',organization:'Organization',researcher:'Researcher'}:{research:'研究',benchmark:'测量协议',observation:'评测结果',synthesis:'专题',opinion:'观点',organization:'机构',researcher:'研究者'};
     for(const hit of data.hits.slice(0,8)){
      const a=document.createElement('a'),meta=document.createElement('span'),title=document.createElement('strong'),snippet=document.createElement('p');a.href=hit.url;if(!en&&a.getAttribute('href')?.startsWith('/en/'))a.href=a.getAttribute('href')!.slice(3);if(en&&hit.url.startsWith('/nuwa/'))a.href='/en'+hit.url;
      meta.textContent=labels[hit.type]??hit.type;title.textContent=hit.title;snippet.textContent=hit.snippet;a.append(meta,title,snippet);hits.append(a);
     }
-    status.textContent=data.hits.length?(en?(data.mode==='hybrid'?'Semantic + keyword search':'Keyword search'):(data.mode==='hybrid'?'语义与关键词检索':'关键词检索')):(en?'No matching results.':'暂无匹配结果。');
-   }catch(error){if((error as Error).name==='AbortError')return;status.textContent=en?'Search is unavailable.':'检索暂不可用。';}
+    status.textContent=data.hits.length?(en?(data.mode==='hybrid'?'Semantic + keyword search':data.mode==='static-lexical'?'Basic keyword search':'Keyword search'):(data.mode==='hybrid'?'语义与关键词检索':data.mode==='static-lexical'?'基础关键词检索':'关键词检索')):(en?'No matching results.':'暂无匹配结果。');
+   }catch(error){if((error as Error).name==='AbortError')return;status.textContent=(error as Error).message==='version'?(en?'The search index changed. Reload this page.':'检索版本已更新，请刷新页面。'):(en?'Search is unavailable.':'检索暂不可用。');}
   };
   input.addEventListener('input',()=>{request?.abort();clearTimeout(timer);timer=setTimeout(search,250);},{signal});
   this.querySelector('form')!.addEventListener('submit',event=>{event.preventDefault();clearTimeout(timer);search();},{signal});

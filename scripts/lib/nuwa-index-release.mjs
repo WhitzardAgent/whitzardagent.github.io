@@ -23,6 +23,6 @@ export async function releasedSnapshotErrors(base,cwd=process.cwd()){
 }
 /** Compare Git blob identities without buffering the full immutable JSON through child stdout. */
 export async function releasedReadingEditionErrors(base,cwd=process.cwd()){
- const files=splitPaths(git(['ls-tree','-r','--name-only','-z',base,'--','src/data/nuwa-index/reading/','src/data/nuwa-index/record-editions/'],cwd)).filter(file=>file.endsWith('.json'));
+ const files=splitPaths(git(['ls-tree','-r','--name-only','-z',base,'--','src/data/nuwa-index/reading/','src/data/nuwa-index/record-editions/','src/data/nuwa-index/public-editions/'],cwd)).filter(file=>file.endsWith('.json'));
  return retainedFileErrors(base,files,cwd);
 }

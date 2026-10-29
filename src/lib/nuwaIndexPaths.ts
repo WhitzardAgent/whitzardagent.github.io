@@ -9,7 +9,7 @@ export function indexDetailPaths() {
     ...catalogue.functions.map(f => ({ params: {kind:'function',id:f.id}, props:{kind:'function' as const,id:f.id} })),
     ...catalogue.organizations.map(o => ({ params: {kind:'organization',id:o.id}, props:{kind:'organization' as const,id:o.id} })),
     ...catalogue.areas.map(a => ({ params: { kind: 'risk', id: a.id }, props: { kind: 'risk' as const, id: a.id } })),
-    ...catalogue.benchmarks.map(b => ({ params: { kind: 'benchmark', id: b.id }, props: { kind: 'benchmark' as const, id: b.id } })),
+    ...[...catalogue.benchmarks,...historicalCatalogue.benchmarks.filter(b=>!catalogue.benchmarks.some(c=>c.id===b.id))].map(b => ({ params: { kind: 'benchmark', id: b.id }, props: { kind: 'benchmark' as const, id: b.id } })),
     ...[...historicalCatalogue.results,...catalogue.results.filter(r=>!historicalCatalogue.results.some(h=>h.id===r.id))].map(r => ({ params: { kind: 'result', id: r.id }, props: { kind: 'result' as const, id: r.id } })),
   ];
 }

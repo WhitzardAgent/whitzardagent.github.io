@@ -86,7 +86,7 @@ export function assembleCurrentEdition(base,reading,packages,channels=[]){
  validateCurrentEdition({candidateId,catalogue,reading:edition});
  const errors=base.schemaVersion?validateCatalogue(catalogue):[];if(errors.length)throw Error('Candidate catalogue invalid: '+errors.join('\n'));
  const projected=effectiveCatalogue(catalogue);
- return {candidateId,baseSnapshotId:base.snapshotId,catalogue:projected,reading:edition,publications,opinions,researchers,channels,scopeDispositions,changes,documents};
+ return {candidateId,publication:catalogue.publication,baseSnapshotId:base.snapshotId,catalogue:projected,reading:edition,publications,opinions,researchers,channels,scopeDispositions,changes,documents};
 }
 
 export function validateCurrentEdition({candidateId,catalogue,reading}){
