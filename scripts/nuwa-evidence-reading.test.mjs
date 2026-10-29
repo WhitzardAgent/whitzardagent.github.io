@@ -98,3 +98,10 @@ test('retained public record editions are complete, content-hashed and exclude n
 test('measurement pages keep unknown reviewed methods explicit and do not expose internal profile metadata as prose',async()=>{
  const {protocolProfileText}=await import('../src/lib/nuwa-intelligence/protocolComparison.mjs');const p={en:{scoring:null},scoring:{en:'Unverified legacy scoring'},conditions:{sourceVersion:'opaque-hash',variants:[{id:'internal-id',configuration:{en:'Tool budget not reported'}}]},statistics:{catalogueResultCount:42,denominator:null}};assert.match(protocolProfileText(p,'scoring'),/Not established/);assert.doesNotMatch(protocolProfileText(p,'conditions'),/internal-id|opaque-hash/);assert.match(protocolProfileText(p,'conditions'),/not independently reverified/);assert.doesNotMatch(protocolProfileText(p,'statistics'),/42|catalogueResultCount/);
 });
+
+test('system conditions use the reviewed design in the selected language',async()=>{
+ const {protocolProfileText}=await import('../src/lib/nuwa-intelligence/protocolComparison.mjs');
+ const p={conditions:{sourceVersion:'opaque-id',reviewedProtocolDesign:{en:'Container tasks with guided and unguided modes.',zh:'容器任务，包含无指导与子任务模式。'},variants:[{configuration:{en:'Consult the report.',zh:'见报告。'}}]}};
+ assert.equal(protocolProfileText(p,'conditions','en'),'Container tasks with guided and unguided modes.');
+ assert.equal(protocolProfileText(p,'conditions','zh'),'容器任务，包含无指导与子任务模式。');
+});

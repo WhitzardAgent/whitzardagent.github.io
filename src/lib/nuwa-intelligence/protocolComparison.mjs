@@ -4,7 +4,7 @@ export function protocolProfileText(profile,key,locale='en'){
  if(copy&&Object.hasOwn(copy,key))return copy[key]??unknown;
  const value=profile?.[key];if(typeof value==='string')return value;if(value?.[locale])return value[locale];
  if(key==='statistics')return value?.sourceMethods?.[locale]??unknown;
- if(key==='conditions'){const notes=[...new Set((value?.variants??[]).map(v=>v.configuration?.[locale]).filter(Boolean))];return notes.length?`${en?'Retained configuration notes; not independently reverified in this reading:':'既有配置笔记；此次阅读未独立重新核实：'} ${notes.join(' · ')}`:unknown;}
+ if(key==='conditions'){if(value?.reviewedProtocolDesign?.[locale])return value.reviewedProtocolDesign[locale];const notes=[...new Set((value?.variants??[]).map(v=>v.configuration?.[locale]).filter(Boolean))];return notes.length?`${en?'Retained configuration notes; not independently reverified in this reading:':'既有配置笔记；此次阅读未独立重新核实：'} ${notes.join(' · ')}`:unknown;}
  return unknown;
 }
 export function protocolComparison(catalogue,ids,locale='en',{profiles=[]}={}){
