@@ -37,3 +37,17 @@ Trend 从这批有来源和配置的观测汇聚：匹配条件可直接比较�
 ### 顶部全局搜索
 
 NUWA 样板页的顶部使用搜索图标替代检索导航标签，点击或使用 Cmd+K / Ctrl+K 打开同一全局搜索弹窗。原生 dialog 处理模态焦点，Esc 关闭并返回原焦点；输入后显示来源语料中的结果，支持方向键选取、Enter打开。完整搜索页继续提供查询链接和筛选；无JavaScript时图标链接直接进入该页。使用现有搜索服务，不增加UI依赖。
+
+## 全站本地接入（2026-10-29）
+
+用户已确认v0并授权完整推广。当前版本入口为currentEdition，正式路径共用顶栏搜索；新增Opinion、Sources、作者署名索引和完整Search。当前候选单独使用local-*版本，旧公开2026-10-28.2及冻结正文不改。默认构建继续读取公开基底；显式NUWA_GLOBAL_RESEARCH_ROOT加载外部候选。
+
+运行 `node scripts/prepare-nuwa-current-edition.mjs /absolute/private/root` 生成complete/candidate.json和changes.json，并把已核验原图复制到本地candidate素材目录。来源包、完整PDF及派生文本、原图均核对哈希；交付载荷去除文件路径。编译先执行既有目录校验，再应用既有纠正关系生成有效目录。未获正式监测复核的新组保留在candidateMonitoringGroups，图表复用原引擎，不能伪装成获批组。
+
+当前214研究、85协议、4观点；其中7项新协议为ASB、SafeAgentBench、ToolEmu、RedCode、TensorTrust、LinuxArena、BashArena。新增候选成绩1,333条，带原值、定位、来源版本和条件；ASB重复引用及非实验统计不入图。来源原始观测仍在Record证据表，不能将2,408条有效目录结果称作2,408个独立实验。图点尺寸仅来自原有已披露元数据，不采用论文猜测的闭源模型参数。
+
+研究工作产物：46来源包，厂商199、实验室96、学术1,607条源数值；这1,902条包含库存、验证统计和重复引用，不是1,902项评测成绩。原文交叉核查保持模型辅助身份。HTTP巡检覆盖136入口、252库存和79协议，465唯一URL中462成功取得，失败和未解析保留；至多1MiB捕获不等于全文阅读。40–60份完整深读、全表图/附录审计及237旧结果逐值复核尚未完成，不能以以上统计替代。
+
+检索使用同一候选语料，结果片段定位真实匹配位置，双语URL保持语言；支持带类型的相关对象及分类指标。内容指纹+模型+维度缓存跨版本复用，当前manifest绑定实际文档。无API凭据时只有明确的基础检索，不登记语义验收通过。周更接入脚本只输出隔离审阅包，HTTP巡检不能替代成功检索标志。
+
+本地启动：`python3 services/nuwa-search/server.py --site dist --corpus /absolute/private/root/complete/candidate.json --port 4346 --cache /absolute/private/root/complete/vectors.json`。完整入口 `/nuwa/whitzard-index/`，英文 `/en/nuwa/whitzard-index/`。本轮未推送、未部署。

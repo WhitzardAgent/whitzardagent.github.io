@@ -17,19 +17,27 @@ Search accepts query, locale, filters(type/area/primaryFunction), cursor and sna
 
 ## Semantic mode
 
-Set OPENAI_API_KEY in the server environment, not browser code. Optional NUWA_EMBED_MODEL defaults to text-embedding-3-large. Start once with --embed to create a version-bound 1024-dimensional vector cache; this performs paid external API requests for the full selected corpus. Restart without --embed for normal use. Only indexed public/review text is sent; original captures and internal review files are not indexed. Never put keys in this repository.
+Set OPENAI_API_KEY in the server environment, not browser code. Optional NUWA_EMBED_MODEL defaults to text-embedding-3-large. Start with --embed to prepare the vector cache. NUWA_EMBED_DIMENSIONS defaults to 1024. This makes paid API requests for new or changed indexed content; unchanged text reuses its embedding across candidate versions. Restart without --embed for normal use. Only indexed public/review text is sent; original captures and internal review files are not indexed. Never put keys in this repository.
 
-Semantic mode requires both credentials and complete matching vectors. Otherwise the response explicitly says lexical. Embedding failures downgrade that query; no generated answer is returned. Query vectors are cached in memory, content vectors in the external cache. Quality has not been accepted until real semantic evaluation is run.
+The v2 cache keys each vector by the exact embedded text, model and dimensions. Its manifest binds the current candidate to the complete document-to-content mapping. After a candidate changes, run --embed again to bind the new manifest; unchanged content incurs no new embedding requests. Invalid dimensions, nonfinite values, zero vectors and incomplete API batches cannot enable semantic mode. Legacy caches must be rebuilt.
+
+Semantic mode requires both credentials and a complete matching manifest. Otherwise the response explicitly says lexical. Embedding failures downgrade that query; no generated answer is returned. Query vectors are cached in memory, content vectors in the external cache. Quality has not been accepted until real semantic evaluation is run.
 
 ```
 cd services/nuwa-search
 python3 -m unittest
 ```
 
-Evaluate with evaluate.py --corpus FILE --tasks FILE --out FILE. The present evaluator reports lexical quality, not semantic quality. Judgments are model-assisted and await researcher review.
+Evaluate with evaluate.py --corpus FILE --tasks FILE --out FILE. Use --mode lexical for the lexical baseline or --mode hybrid --cache FILE for real hybrid evaluation. Hybrid mode requires valid credentials and a complete current cache, and fails if any query downgrades to lexical. Tasks accept typed expected objects: [{"type":"benchmark","id":"cybench","relevance":2}]. The report includes graded nDCG@10, Recall@10, category scores, and cold/warm p95 including actual query API time. Cold means first encounter in this evaluation process, not a cold service startup. Judgments are model-assisted and await researcher review.
 
 ## Container and backups
 
 Build from this directory with docker build -t nuwa-search-local . . Mount site read-only at /site, candidate read-only at /data and a writable private cache at /cache; bind host port to 127.0.0.1:4345. Pass API key through the container environment if needed. Container execution has not been verified in this delivery.
 
 Back up candidate JSON, research captures, source hashes, task judgments and vector cache together. Restore only a matching candidate/cache pair. SQLite FTS is reconstructed at startup. Production deployment remains a later reviewed step with an appropriate HTTP reverse proxy and API budget controls.
+
+## Complete local review
+
+The full-site candidate uses `node scripts/prepare-nuwa-current-edition.mjs /absolute/private/research`, then `NUWA_GLOBAL_RESEARCH_ROOT=/absolute/private/research npm run build`. Serve `complete/candidate.json` with `--port 4346` and open `/nuwa/whitzard-index/` (English: `/en/nuwa/whitzard-index/`). This uses real catalogue records and explicit candidate-only measurement groups, rather than only the five-page prototype. Source PDFs, derived text and images are checked before preparation. Current downloads carry the candidate ID; immutable public editions retain their original IDs.
+
+The current user review uses lexical search; semantic activation is deferred. The Docker image was built and its lexical API exercised with the candidate mounted read-only. A restored candidate JSON reconstructed the lexical index and returned the same version and Cybench result. This does not verify embedding-cache recovery without actual vectors.

@@ -16,7 +16,7 @@ const dimensions=[...new Set(catalogue.benchmarks.filter(p=>w.protocolIds.includ
 const search=[w.title,...(w.tags??[]),...w.aliases,...w.authors,w.summary.en,w.summary.zh,w.note.question?.en??'',w.note.question?.zh??'',...contributions.flatMap(x=>[x.org.name.en,x.org.name.zh,...x.org.aliases])].join(' ');
 const dossier=loadResearchDossiers(catalogue).find((d:any)=>d.id===w.id),draft=dossier?.[locale];
 const en=locale==='en',reading=readingStatus(w,{dossier}),recordUrl=path(`/work/${w.id}`);
-const question=draft?.question??w.note.question?.[locale],finding=(typeof draft?.findings?.[0]==='string'?draft.findings[0]:draft?.takeaway)??w.note.finding?.[locale]??w.summary[locale];
+const question=draft?.question??w.note.question?.[locale],finding=(Array.isArray(draft?.findings)&&typeof draft.findings[0]==='string'?draft.findings[0]:draft?.takeaway)??w.note.finding?.[locale]??w.summary[locale];
 const scopeLabels:Record<string,string>=en?{question:'question',method:'method',finding:'findings',supports:'interpretation',limits:'limits',connections:'connections'}:{question:'问题',method:'方法',finding:'发现',supports:'解读',limits:'局限',connections:'关联'};
 const availableScope=reading.sections.filter((s:{id:string;available:boolean})=>s.available).map((s:{id:string})=>scopeLabels[s.id]).join(' / ');
 ---

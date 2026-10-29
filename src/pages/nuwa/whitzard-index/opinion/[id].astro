@@ -1,0 +1,7 @@
+---
+import Page from '../../../../components/research/index/EditionRecord.astro';
+import {currentEdition} from '../../../../data/nuwa-index';
+export const getStaticPaths=()=> (currentEdition?.opinions??[]).map((p:any)=>({params:{id:p.id}}));
+const {id}=Astro.params;
+---
+<Page locale="zh" id={id!} opinion/>

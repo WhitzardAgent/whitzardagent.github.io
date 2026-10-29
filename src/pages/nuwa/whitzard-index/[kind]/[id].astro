@@ -1,4 +1,7 @@
 ---
+import {currentEdition,historicalCatalogue} from '../../../../data/nuwa-index';
+import EditionRecord from '../../../../components/research/index/EditionRecord.astro';
+import ScopeNotice from '../../../../components/research/index/ScopeNotice.astro';
 import SourceDetail from '../../../../components/research/index/SourceDetail.astro';
 import ModelDetail from '../../../../components/research/index/ModelDetail.astro';
 import AssessmentDetail from '../../../../components/research/index/AssessmentDetail.astro';
@@ -8,5 +11,9 @@ import IndexDetail from '../../../../components/research/index/IndexDetail.astro
 import { indexDetailPaths } from '../../../../lib/nuwaIndexPaths';
 export const getStaticPaths = indexDetailPaths;
 const { kind, id } = Astro.props;
+const removedWorkIds=new Set(currentEdition?.scopeDispositions.map((d:any)=>d.id)??[]);
+const removedSources=new Set(historicalCatalogue.works.filter(w=>removedWorkIds.has(w.id)).map(w=>w.sourceId));
+const removed=kind==='work'&&removedWorkIds.has(id)||kind==='result'&&removedSources.has(historicalCatalogue.results.find(r=>r.id===id)?.sourceId??'');
+const candidate=kind==='work'&&!historicalCatalogue.works.some(w=>w.id===id)&&currentEdition?.publications.some((p:any)=>p.id===id);
 ---
-{kind === "source" ? <SourceDetail locale="zh" id={id}/> : kind === "model" ? <ModelDetail locale="zh" id={id}/> : kind === "assessment" ? <AssessmentDetail locale="zh" id={id}/> : kind === 'work' ? <WorkDetail locale="zh" id={id}/> : kind === 'function' || kind === 'organization' ? <IndexCollection locale="zh" kind={kind} id={id}/> : <IndexDetail locale="zh" kind={kind} id={id}/> }
+{removed ? <ScopeNotice locale="zh"/> : candidate ? <EditionRecord locale="zh" id={id}/> : kind === "source" ? <SourceDetail locale="zh" id={id}/> : kind === "model" ? <ModelDetail locale="zh" id={id}/> : kind === "assessment" ? <AssessmentDetail locale="zh" id={id}/> : kind === 'work' ? <WorkDetail locale="zh" id={id}/> : kind === 'function' || kind === 'organization' ? <IndexCollection locale="zh" kind={kind} id={id}/> : <IndexDetail locale="zh" kind={kind} id={id}/> }

@@ -8,3 +8,5 @@ export function loadResearchSyntheses(catalogue:any,environment?:any):any[];
 export function dossierFingerprint(catalogue:any,dossier:any):string;
 export function synthesisEvidenceFingerprint(catalogue:any,analysis:any):string;
 export function registerResearchSupplement(data:any):void;
+
+export function registerCurrentReading(reading:any):void;

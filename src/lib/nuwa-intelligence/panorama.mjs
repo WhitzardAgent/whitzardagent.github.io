@@ -1,3 +1,4 @@
+import presentationPolicy from '../../data/nuwa-index/presentation-policy.json' with {type:'json'};
 /** Presentation projections only: they never promote source review or comparison status. */
 import {contextualizeObservations,separateConditionScopes,taskConditionText} from './observationContext.mjs';
 import {metricDefinition} from './editorial.mjs';
@@ -28,7 +29,7 @@ export function measurementFamily(record,metric){
  return {id:`${key}|${metric.unit}|${metric.dimension}`,label:title??T(key)};
 }
 function facetFor(r,m){
- // Distinct task scopes and denominators are never overlaid on one plot.
+ // Retain task scopes for condition footnotes or separate experimental panels.
  const task=String(r.taskSet??'Task scope not disclosed').trim();
  const category=/category/.test(norm(m.label?.en))?String(r.configuration?.category??r.protocol??''):'';
  const key=`${norm(task)}|${category}`;
@@ -36,14 +37,14 @@ function facetFor(r,m){
 }
 export function buildDisplaySets(data,{area,benchmarkId}={}){
  const sets=new Map(),resultMap=new Map(data.results.map(r=>[r.id,r]));
- for(const sourceGroup of data.monitoring?.groups??[]){
+ for(const sourceGroup of [...data.monitoring?.groups??[],...data.candidateMonitoringGroups??[]]){
   if(benchmarkId&&sourceGroup.benchmarkId!==benchmarkId)continue;
   const benchmark=data.benchmarks.find(b=>b.id===sourceGroup.benchmarkId);if(!benchmark||benchmark.kind==='report')continue;
   for(const binding of sourceGroup.bindings??[]){
    const r=resultMap.get(binding.resultId),metric=r?.metrics.find(m=>m.id===binding.metricId);if(!r||!metric||!Number.isFinite(metric.value))continue;
    const areas=sourceGroup.areas?.length?sourceGroup.areas:resultAreas(data,r);if(area&&!areas.includes(area))continue;
    const family=measurementFamily(r,metric),id=`panorama-${benchmark.id}-${hash(family.id)}`;
-   if(!sets.has(id))sets.set(id,{id,revision:'display-1',benchmarkId:benchmark.id,title:T(`${benchmark.name} · ${family.label.en}`,`${benchmark.name} · ${family.label.zh}`),description:T('Published measurements across source reports. Task scopes are faceted; configuration differences remain attached to each observation.','跨来源报告的已发表测量。任务范围分别成图，配置差异保留在每条观测中。'),level:'panorama',conditionsComplete:false,review:{status:'presentation-only'},areas:[],sourceIds:[],sourceGroupIds:[],bindings:[],facets:[],limits:T('Compare results within the stated task and configuration.','结合任务范围与运行配置解读结果。'),defaultDisplay:'timeline'});
+   if(!sets.has(id))sets.set(id,{id,revision:'display-1',benchmarkId:benchmark.id,title:T(`${benchmark.name} · ${family.label.en}`,`${benchmark.name} · ${family.label.zh}`),description:T('Published measurements across source reports. Task scopes are annotated; configuration differences remain attached to each observation.','跨来源报告的已发表测量。任务范围通过注释区分，配置差异保留在每条观测中。'),level:'panorama',conditionsComplete:false,review:{status:'presentation-only'},areas:[],sourceIds:[],sourceGroupIds:[],bindings:[],facets:[],limits:T('Compare results within the stated task and configuration.','结合任务范围与运行配置解读结果。'),defaultDisplay:'timeline'});
    const set=sets.get(id),key=`${r.id}|${metric.id}`,prior=set.bindings.find(b=>b.key===key),facet=facetFor(r,metric);
    const exactLinks=[...new Set((data.assessmentEvidence??[]).filter(l=>l.resultId===r.id).map(l=>l.modelId).filter(Boolean))];
    const modelId=binding.modelId??(exactLinks.length===1?exactLinks[0]:null);
@@ -60,6 +61,10 @@ export function buildDisplaySets(data,{area,benchmarkId}={}){
   const aliases=data.monitoring?.measurementAliases??[];
   set.aliasBindings=[];set.bindings=set.bindings.filter(b=>{const alias=aliases.find(a=>a.resultId===b.resultId&&a.metricId===b.metricId);const canonical=alias&&set.bindings.find(x=>x.resultId===alias.canonicalResultId&&x.metricId===alias.canonicalMetricId);if(!canonical)return true;canonical.quotedResultIds=[...new Set([...(canonical.quotedResultIds??[]),b.resultId])];set.aliasBindings.push({...b,canonicalKey:canonical.key});return false;});
   set.facets=set.facets.filter(f=>[...set.bindings,...set.aliasBindings].some(b=>b.facetId===f.id));
+  if(presentationPolicy.sameMeasurementScopes==='annotated'&&set.facets.length>1&&!set.facets.some(f=>f.condition)&&!set.bindings.some(b=>resultMap.get(b.resultId)?.experimentalConditions)){
+   set.scopePresentation='annotated';set.presentationVersion=presentationPolicy.version;
+   set.scopeNotes=set.facets.map(f=>({en:f.label.en,zh:f.label.zh}));
+  }
  }
  const tiers=new Map((data.monitoring?.benchmarkSelections??[]).map((s,i)=>[s.benchmarkId,(s.tier==='core'?0:s.tier==='supplement'?1000:2000)+i]));
  return [...sets.values()].sort((a,b)=>{const topicPriority=s=>area==='deception'?(s.benchmarkId==='deceptionbench'&&/single.turn/i.test(s.title.en)?0:s.benchmarkId==='deceptionbench'?1:3):area==='cybersecurity'?(s.benchmarkId==='cybergym'&&/reproduction rate/i.test(s.title.en)?0:1):1;const dated=s=>s.bindings.filter(b=>data.models?.find(m=>m.id===b.modelId)?.releaseDate).length,primary=s=>/50% task|reproduction rate|single.turn deception|Web exploitation|Unguided task|Headline success|Turn.1 persuasion/i.test(s.title.en)?1:0;return topicPriority(a)-topicPriority(b)||primary(b)-primary(a)||(dated(b)>=2?1:0)-(dated(a)>=2?1:0)||(tiers.get(a.benchmarkId)??9999)-(tiers.get(b.benchmarkId)??9999)||b.bindings.length-a.bindings.length||a.id.localeCompare(b.id);});
