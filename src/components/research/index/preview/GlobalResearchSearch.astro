@@ -1,0 +1,57 @@
+---
+interface Props {locale:'en'|'zh';candidateId:string;searchUrl:string}
+const {locale,candidateId,searchUrl}=Astro.props,en=locale==='en';
+---
+<nuwa-global-search data-locale={locale} data-version={candidateId} data-search-url={searchUrl}>
+ <a class="ngs-trigger" href={searchUrl} data-search-open aria-label={en?'Search research':'搜索研究'} aria-haspopup="dialog" aria-keyshortcuts="Meta+K Control+K" title={en?'Search (⌘K / Ctrl+K)':'搜索（⌘K / Ctrl+K）'}>
+  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><kbd aria-hidden="true" data-search-shortcut>⌘K</kbd>
+ </a>
+ <dialog class="ngs-dialog" aria-labelledby="ngs-title">
+  <div class="ngs-content">
+   <div class="ngs-heading"><h2 id="ngs-title">{en?'Search NUWA Index':'搜索 NUWA Index'}</h2><button type="button" data-search-close aria-label={en?'Close search':'关闭搜索'}><span aria-hidden="true">×</span><kbd>Esc</kbd></button></div>
+   <form role="search"><label for="ngs-query" class="sr-only">{en?'Research question, model or benchmark':'研究问题、模型或 Benchmark'}</label><input id="ngs-query" type="search" name="q" placeholder={en?'Ask a question or search a benchmark…':'输入研究问题、模型或 Benchmark…'} autocomplete="off" maxlength="1000" autofocus/></form>
+   <p class="ngs-status" data-global-status role="status">{en?'Research · Benchmarks · Findings · Perspectives':'研究 · 测量协议 · 评测结果 · 观点'}</p>
+   <div class="ngs-results" data-global-hits></div>
+   <footer><span>{en?'↑ ↓ Navigate · Enter Open':'↑ ↓ 选择 · Enter 打开'}</span><a href={searchUrl} data-global-all>{en?'Full search':'完整检索'} →</a></footer>
+  </div>
+ </dialog>
+</nuwa-global-search>
+<script>
+import {searchNuwa} from '../../../../lib/nuwa-intelligence/searchClient';
+class NuwaGlobalSearch extends HTMLElement {
+ connectedCallback(){
+  const en=this.dataset.locale==='en',dialog=this.querySelector('dialog')!,input=this.querySelector('input')!,trigger=this.querySelector<HTMLAnchorElement>('[data-search-open]')!,status=this.querySelector<HTMLElement>('[data-global-status]')!,hits=this.querySelector<HTMLElement>('[data-global-hits]')!,all=this.querySelector<HTMLAnchorElement>('[data-global-all]')!;
+  const life=new AbortController();this.cleanup=()=>{life.abort();request?.abort();clearTimeout(timer);if(dialog.open)dialog.close();};const {signal}=life;let request:AbortController|null=null,timer:ReturnType<typeof setTimeout>,returnFocus:HTMLElement|null=null;
+  this.querySelector('[data-search-shortcut]')!.textContent=/Mac|iPhone|iPad/.test(navigator.platform)?'⌘K':'Ctrl K';
+  const open=()=>{if(dialog.open){input.focus();return;}returnFocus=document.activeElement as HTMLElement;dialog.showModal();input.focus();};
+  trigger.addEventListener('click',event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();open();},{signal});
+  this.querySelector('[data-search-close]')!.addEventListener('click',()=>dialog.close(),{signal});
+  dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();},{signal});
+  dialog.addEventListener('close',()=>{if(dialog.open)return;request?.abort();clearTimeout(timer);if(returnFocus?.isConnected)returnFocus.focus();},{signal});
+  document.addEventListener('keydown',event=>{if((event.metaKey||event.ctrlKey)&&!event.altKey&&event.key.toLowerCase()==='k'){event.preventDefault();dialog.open?dialog.close():open();}},{signal});
+  dialog.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();dialog.close();return;}if(event.key!=='ArrowDown'&&event.key!=='ArrowUp')return;const links=[...hits.querySelectorAll<HTMLAnchorElement>('a')];if(!links.length)return;const index=links.indexOf(document.activeElement as HTMLAnchorElement),next=event.key==='ArrowDown'?Math.min(index+1,links.length-1):Math.max(index-1,0);event.preventDefault();links[next].focus();},{signal});
+  const search=async()=>{
+   request?.abort();const query=input.value.trim();all.href=this.dataset.searchUrl!+(query?'?q='+encodeURIComponent(query):'');hits.replaceChildren();
+   if(!query){status.textContent=en?'Research · Benchmarks · Findings · Perspectives':'研究 · 测量协议 · 评测结果 · 观点';return;}
+   const active=new AbortController();request=active;status.textContent=en?'Searching…':'正在检索…';
+   try{
+    const data=await searchNuwa({query,locale:this.dataset.locale,snapshotId:this.dataset.version},{signal:active.signal,endpoint:this.dataset.api});if(active.signal.aborted||!this.isConnected||!dialog.open)return;if(data.snapshotId!==this.dataset.version)throw Error('version');
+    const labels:Record<string,string>=en?{research:'Research',benchmark:'Benchmark',observation:'Result',synthesis:'Analysis',opinion:'Opinion',organization:'Organization',researcher:'Researcher'}:{research:'研究',benchmark:'测量协议',observation:'评测结果',synthesis:'专题',opinion:'观点',organization:'机构',researcher:'研究者'};
+    for(const hit of data.hits.slice(0,8)){
+     const a=document.createElement('a'),meta=document.createElement('span'),title=document.createElement('strong'),snippet=document.createElement('p');a.href=hit.url;if(!en&&a.getAttribute('href')?.startsWith('/en/'))a.href=a.getAttribute('href')!.slice(3);if(en&&hit.url.startsWith('/nuwa/'))a.href='/en'+hit.url;
+     meta.textContent=labels[hit.type]??hit.type;title.textContent=hit.title;snippet.textContent=hit.snippet;a.append(meta,title,snippet);hits.append(a);
+    }
+    status.textContent=data.hits.length?(en?(data.mode==='hybrid'?'Semantic + keyword search':data.mode==='static-lexical'?'Basic keyword search':'Keyword search'):(data.mode==='hybrid'?'语义与关键词检索':data.mode==='static-lexical'?'基础关键词检索':'关键词检索')):(en?'No matching results.':'暂无匹配结果。');
+   }catch(error){if((error as Error).name==='AbortError')return;status.textContent=(error as Error).message==='version'?(en?'The search index changed. Reload this page.':'检索版本已更新，请刷新页面。'):(en?'Search is unavailable.':'检索暂不可用。');}
+  };
+  input.addEventListener('input',()=>{request?.abort();clearTimeout(timer);timer=setTimeout(search,250);},{signal});
+  this.querySelector('form')!.addEventListener('submit',event=>{event.preventDefault();clearTimeout(timer);search();},{signal});
+ }
+ cleanup?:()=>void;
+ disconnectedCallback(){this.cleanup?.();}
+}
+if(!customElements.get('nuwa-global-search'))customElements.define('nuwa-global-search',NuwaGlobalSearch);
+</script>
+<style is:global>
+.ngs-trigger{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-width:44px;min-height:44px;border-radius:5px;text-decoration:none;color:#235e53}.ngs-trigger:hover{background:#e8efea}.ngs-trigger kbd{font:11px var(--font-sans);padding:3px 5px;border:1px solid #ccd9d3;border-radius:4px;color:#53665d;letter-spacing:0}.ngs-dialog{position:fixed;inset:0;width:min(720px,calc(100vw - 32px));max-height:calc(100dvh - 100px);margin:12vh auto auto;border:1px solid #ccd9d3;border-radius:10px;padding:0;background:#f8faf7;color:#182234;box-shadow:0 20px 80px #102b5c30}.ngs-dialog::backdrop{background:#132b35a0}.ngs-content{display:flex;flex-direction:column;max-height:calc(100dvh - 140px)}.ngs-heading{display:flex;justify-content:space-between;align-items:center;padding:16px 22px 0}.ngs-heading h2{font-size:13px;letter-spacing:0;font-weight:500;margin:0;color:#476258}.ngs-heading button{display:flex;gap:10px;align-items:center;min-height:36px;border:0;background:transparent;color:#52665c;cursor:pointer}.ngs-heading button>span{font-size:25px;font-weight:300}.ngs-heading kbd{font-size:10px}.ngs-content form{padding:10px 22px 0}.ngs-content input{width:100%;border:0;border-bottom:1px solid #bccfc3;border-radius:0;background:transparent;font-size:20px;line-height:1.5;padding:12px 0;color:#182234;outline-offset:4px}.ngs-status{font-size:12px;color:#52665c;margin:0;padding:15px 22px}nuwa-global-search .ngs-results{overflow:auto;overscroll-behavior:contain;min-height:0}nuwa-global-search .ngs-results a{display:block;padding:15px 22px;border-top:1px solid #dce5dd;text-decoration:none;color:#182234}nuwa-global-search .ngs-results a:hover,nuwa-global-search .ngs-results a:focus{background:#eaf2eb}nuwa-global-search .ngs-results span{font-size:11px;letter-spacing:.02em;color:#2e6c58}nuwa-global-search .ngs-results strong{display:block;font-size:16px;line-height:1.45;font-weight:550;margin:5px 0}nuwa-global-search .ngs-results p{font-size:13px;line-height:1.6;color:#52635d;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.ngs-content footer{display:flex;justify-content:space-between;gap:12px;padding:14px 22px;border-top:1px solid #ccd9d3;font-size:11px;color:#52665c}.ngs-content footer a{color:#235e53}.ngs-trigger:focus-visible,.ngs-dialog :focus-visible{outline:2px solid #2f7f7a;outline-offset:3px}@media(max-width:600px){.ngs-trigger kbd{display:none}.ngs-dialog{margin:24px auto auto;max-height:calc(100dvh - 48px)}.ngs-content{max-height:calc(100dvh - 48px)}.ngs-content input{font-size:17px}.ngs-heading,.ngs-status,nuwa-global-search .ngs-results a,.ngs-content footer{padding-left:16px;padding-right:16px}.ngs-content form{padding-left:16px;padding-right:16px}.ngs-content footer>span{display:none}}
+</style>

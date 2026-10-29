@@ -5,6 +5,7 @@ import "../styles/brand-system.css";
 import { companyIdentity } from "../data/companyIdentity";
 import PageMotion from "../components/brand/PageMotion.astro";
 import { ClientRouter } from "astro:transitions";
+import IndexMasthead from "../components/research/index/IndexMasthead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import type { Locale } from "../i18n/config";
@@ -34,7 +35,7 @@ const {
   ogImage,
   ogImageAlt = locale === "zh" ? "白泽（Whitzard）智能体安全基础设施" : "Whitzard AI agent security infrastructure",
   canonicalPath,
-  noindex = process.env.NUWA_LOCAL_REVIEW === '1',
+  noindex = process.env.NUWA_LOCAL_REVIEW === '1'||Boolean(process.env.NUWA_GLOBAL_RESEARCH_ROOT),
   schema,
 } = Astro.props;
 
@@ -93,6 +94,7 @@ const schemas = [organizationSchema, ...(breadcrumbs ? [breadcrumbs] : []), ...(
   <body class:list={["brand-site", brand === "nuwa" ? "nuwa-brand" : "whitzard-brand", locale === "zh" && "locale-zh"]}>
     <a class="skip-link" href="#main-content">{ui[locale].skip}</a>
     <Header brand={brand} locale={locale} currentPath={basePath} />
+    {basePath.startsWith("/nuwa/whitzard-index")&&!basePath.includes("/preview/")&&<IndexMasthead locale={locale} pathname={Astro.url.pathname}/>}
     <PageMotion />
     <main id="main-content" tabindex="-1"><brand-page-motion><slot /></brand-page-motion></main>
     <Footer brand={brand} locale={locale} />

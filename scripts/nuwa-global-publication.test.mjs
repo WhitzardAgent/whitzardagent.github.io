@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {digest} from '../src/lib/nuwa-intelligence/sourceVersions.mjs';
+import {globalPublicationErrors} from './check-nuwa-global-publication.mjs';
+import {restoreValidationCatalogue} from './build-nuwa-public-edition.mjs';
+const edition=JSON.parse(fs.readFileSync(new URL('../src/data/nuwa-index/public-editions/2026-10-29.1.json',import.meta.url),'utf8'));
+test('published global edition validates full raw catalogue and exact effective projection',()=>{assert.deepEqual(globalPublicationErrors(edition),[]);assert.equal(edition.catalogue.results.length,2408);assert.equal(edition.validationCatalogue.results.length,2409);assert.equal(edition.reading.works.length,214);assert.equal(edition.reading.protocols.length,85);});
+test('publication authorization leaves source transcription and independent review distinct',()=>{assert.equal(edition.publication.reviewedCandidateId,'local-6efe31bc4a0c0f37');assert.ok(edition.catalogue.candidateMonitoringGroups.every(g=>g.review.status!=='accepted'));assert.ok(edition.reading.works.every(d=>d.publication.state==='published'&&d.review.independentEvidenceReview==='pending-human-review'));assert.ok(edition.catalogue.works.every(w=>!w.localReviewBatchId));});
+test('current catalogue tampering cannot be hidden by recomputing only its release hash',()=>{const copy=structuredClone(edition);copy.catalogue.results[0].metrics[0].value+=1;copy.release.catalogueHash=digest(copy.catalogue);const{contentHash,...body}=copy;copy.contentHash=digest(body);assert.ok(globalPublicationErrors(copy).includes('Effective projection differs from validated raw catalogue'));});
+test('raw restoration restores only lineage-required source-backed records',()=>{const base={results:[{id:'required',sourceId:'s'},{id:'unrelated',sourceId:'s'},{id:'outside',sourceId:'removed'}],protocolVariants:[{id:'withdrawn',sourceId:'s'},{id:'other',sourceId:'s'}]};const current={sources:[{id:'s'}],results:[],protocolVariants:[],evidenceLineage:[{from:'current',to:'required'}],mappingCorrections:[{variantId:'withdrawn'}]};const result=restoreValidationCatalogue(current,base);assert.deepEqual(result.results.map(r=>r.id),['required']);assert.deepEqual(result.protocolVariants.map(r=>r.id),['withdrawn']);assert.equal(current.results.length,0);});

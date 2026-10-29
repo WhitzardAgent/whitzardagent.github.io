@@ -7,6 +7,8 @@ export const readingSectionsContract=['question','method','finding','supports','
 const nativeRead=file=>fs.readFileSync(file,'utf8');
 const dossierCache=new Map();
 let supplementalDossiers=[],supplementalProtocols=[];
+let currentReading=null;
+export function registerCurrentReading(reading){currentReading=reading;}
 export function registerResearchSupplement(data){supplementalDossiers=data?.dossiers??[];supplementalProtocols=data?.protocols??[];}
 const text=value=>typeof value==='string'?value.trim():'';
 /** Availability is a content inventory, not scholarly quality or a human sign-off. */
@@ -33,6 +35,7 @@ export function validateAssertion(assertion,catalogue){
 export function dossierFingerprint(catalogue,dossier){const resource=dossier.reviewedResource??dossier.sourceArtifact;return digest({refs:(dossier.sourceRefs??[]).map(ref=>({sourceId:ref.sourceId,url:ref.url,version:ref.version,locator:ref.locator,artifactSha256:ref.artifactSha256,source:catalogue.sources.find(s=>s.id===ref.sourceId)??null,sourceVersions:(catalogue.sourceVersions??[]).filter(v=>v.sourceId===ref.sourceId)})),resource:resource?{url:resource.url,sha256:resource.sha256,version:resource.version,captureFormat:resource.captureFormat}:null});}
 export function synthesisEvidenceFingerprint(catalogue,analysis){const results=(analysis.resultIds??[]).map(id=>({id,result:catalogue.results.find(r=>r.id===id)??null})),sourceIds=new Set(results.map(r=>r.result?.sourceId)),versionIds=new Set(results.map(r=>r.result?.sourceVersionId));return digest({results,sourceVersions:(catalogue.sourceVersions??[]).filter(v=>sourceIds.has(v.sourceId)||versionIds.has(v.id)),group:analysis.groupId?catalogue.monitoring?.groups.find(g=>g.id===analysis.groupId)??null:null});}
 export function loadResearchDossiers(catalogue,environment=process.env,read=nativeRead){
+ if(currentReading)return currentReading.works;
  if(environment.NUWA_LOCAL_REVIEW!=='1'||!environment.NUWA_DOSSIER_ROOT)return (publicEditionFor(catalogue)?.works??[]).map(d=>({...d,review:{...d.review,state:d.review.preparedFingerprint!==dossierFingerprint(catalogue,d)?'review-pending':'published-note'}}));
  const root=assertPrivateRoot(environment.NUWA_DOSSIER_ROOT),file=path.join(root,'dossiers.json'),key=read===nativeRead?`${file}|${fs.statSync(file).mtimeMs}|${catalogue.snapshotId}`:null;let data=key?dossierCache.get(key):null;if(!data){data=JSON.parse(read(file));if(key){dossierCache.clear();dossierCache.set(key,data);}}
  if(data.snapshotId!==catalogue.snapshotId)throw Error('Research dossier snapshot does not match catalogue');
@@ -40,6 +43,7 @@ export function loadResearchDossiers(catalogue,environment=process.env,read=nati
  return [...works.values()].filter(d=>catalogue.works.some(w=>w.id===d.id)&&d.en?.takeaway&&d.zh?.takeaway).map(d=>({...d,review:{...d.review,state:d.review?.state==='review-pending'||d.review?.preparedFingerprint&&d.review.preparedFingerprint!==dossierFingerprint(catalogue,d)?'review-pending':'local-review'}}));
 }
 export function loadProtocolDossiers(catalogue,environment=process.env){
+ if(currentReading)return currentReading.protocols;
  if(environment.NUWA_LOCAL_REVIEW!=='1'||!environment.NUWA_DOSSIER_ROOT)return (publicEditionFor(catalogue)?.protocols??[]).map(p=>({...p,review:{...p.review,state:p.review.preparedFingerprint!==dossierFingerprint(catalogue,p)?'review-pending':'published-note'}}));
  const root=assertPrivateRoot(environment.NUWA_DOSSIER_ROOT),file=path.join(root,'protocols.json');
  if(!fs.existsSync(file))return [];
@@ -50,6 +54,7 @@ export function readingManifest(catalogue,{dossiers=[]}={}){
 }
 
 export function loadResearchSyntheses(catalogue,environment=process.env){
+ if(currentReading)return currentReading.analyses.map(a=>({...a,status:'published-note'}));
  if(environment.NUWA_LOCAL_REVIEW!=='1'||!environment.NUWA_DOSSIER_ROOT)return (publicEditionFor(catalogue)?.analyses??[]).map(a=>({...a,status:a.review.preparedFingerprint!==dossierFingerprint(catalogue,a)||a.completeEvidenceBinding.resultFingerprint!==synthesisEvidenceFingerprint(catalogue,a)?'review-pending':'published-note'}));
  const root=assertPrivateRoot(environment.NUWA_DOSSIER_ROOT),data=JSON.parse(fs.readFileSync(path.join(root,'syntheses.json'),'utf8'));
  if(data.snapshotId!==catalogue.snapshotId)throw Error('Synthesis snapshot mismatch');

@@ -1,0 +1,8 @@
+---
+import '../../../styles/nuwa-index.css';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {currentEdition,catalogue} from '../../../data/nuwa-index';
+interface Props{locale:'en'|'zh';id:string}
+const {locale,id}=Astro.props,en=locale==='en',person=currentEdition!.researchers.find((p:any)=>p.id===id)!,base=`${en?'/en':''}/nuwa/whitzard-index`;
+---
+<BaseLayout title={`${person.name} · NUWA Index`} locale={locale} brand="nuwa" noindex={currentEdition?.publication?.state!=='published'}><main class="site-container ne-record"><header><p class="ne-kicker">{en?'PUBLICATION BYLINE':'文献署名'}</p><h1>{person.name}</h1><p>{en?'Indexed publications with this author name. Affiliation and author identity require publication-specific evidence.':'按原文作者姓名整理的已收录成果。机构与作者身份以具体文献为依据。'}</p></header>{person.workIds.map((id:string)=>{const w=catalogue.works.find(w=>w.id===id)!;return <article style="padding:20px 0;border-top:1px solid #ccd9cf;max-width:900px"><h2 style="font-size:23px"><a href={`${base}/work/${id}/`}>{w.title}</a></h2><p>{w.summary[locale]}</p><a href={w.originalUrl}>{en?'Verify byline in the original':'核对原文署名'} ↗</a></article>;})}</main></BaseLayout>

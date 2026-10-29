@@ -13,7 +13,7 @@ test('bars order by primary metric before pagination and place an official mark 
  const {monitorChartOption}=await import('../src/lib/nuwa-intelligence/monitorChart.mjs');const g={id:'ordered',level:'panorama',title:{en:'Results'}};
  const rows=[{...row,resultId:'old',system:'Older model',releaseDate:'2025-01-01',value:12},{...row,resultId:'new',system:'Newer model',releaseDate:'2026-01-01',value:80}, {...row,resultId:'unknown',releaseDate:null,value:2}];
  const o=monitorChartOption(rows,g,'en',{display:'bars'});assert.deepEqual(o.series[0].data.map(d=>d.record.resultId),['new','old','unknown']);
- assert.equal(o.yAxis.axisLabel.align,'left');assert.equal(o.yAxis.axisLabel.rich.name.width,undefined);assert.match(o.yAxis.axisLabel.formatter('Newer model',0),/brand0/);assert.match(o.yAxis.axisLabel.rich.brand0.backgroundColor.image,/organizations\/openai/);
+ assert.equal(o.yAxis.axisLabel.align,'right');assert.equal(o.yAxis.axisLabel.rich.name.width,190);assert.match(o.yAxis.axisLabel.formatter('Newer model',0),/brand0/);assert.match(o.yAxis.axisLabel.rich.brand0.backgroundColor.image,/organizations\/openai/);
  const alphabetical=monitorChartOption(rows,g,'en',{display:'bars',sort:'name'});assert.equal(alphabetical.series[0].data[0].record.system,'Full system');
  assert.equal(monitorChartOption(rows,g,'en',{display:'bars',sort:'source'}).series[0].data[0].record.resultId,'old');
 });
@@ -27,4 +27,21 @@ test('value ordering works for descriptive and comparable evidence without chang
 test('an explicitly lower-first primary metric controls the default, while release and source orders remain optional',async()=>{
  const{monitorChartOption}=await import('../src/lib/nuwa-intelligence/monitorChart.mjs');const rs=[{...row,resultId:'high',value:80},{...row,resultId:'low',value:5}],g={id:'low-first',title:{en:'Metric'},metricPresentation:{order:'asc'},level:'source-report'};
  assert.equal(monitorChartOption(rs,g,'en',{display:'bars'}).series[0].data[0].record.resultId,'low');assert.equal(g.level,'source-report');
+});
+test('multiple chart scopes use full-width vertically separated panels',async()=>{
+ const {monitorChartOption}=await import('../src/lib/nuwa-intelligence/monitorChart.mjs');
+ const o=monitorChartOption([{...row,facetId:'a',facetLabel:{en:'Scope A'}},{...row,facetId:'b',facetLabel:{en:'Scope B'}}],{id:'full-width',level:'panorama',title:{en:'Results'}},'en',{display:'bars'});
+ assert.equal(o.grid[0].left,o.grid[1].left);assert(o.grid[1].top>o.grid[0].top);
+});
+test('annotated scopes share one chart while preserving every result and condition',async()=>{
+ const {buildDisplaySets,displayRows}=await import('../src/lib/nuwa-intelligence/panorama.mjs');const fs=await import('node:fs');const c=JSON.parse(fs.readFileSync('src/data/nuwa-index/catalogue.json'));
+ const g=buildDisplaySets(c,{benchmarkId:'cybench'}).find(g=>g.title.en.includes('Unguided task success'));
+ const before=displayRows(c,g),after=displayRows(c,{...g,scopePresentation:'annotated'});
+ assert.equal(new Set(after.map(r=>r.facetId)).size,1);
+ assert.deepEqual(after.map(r=>[r.resultId,r.value,r.taskSet,r.protocol]),before.map(r=>[r.resultId,r.value,r.taskSet,r.protocol]));
+ assert(after.every(r=>r.scopeReference>0&&r.sourceFacetId&&!r.canRank));
+});
+test('model labels leave space for the bar plot on narrow screens',async()=>{
+ const {monitorChartOption}=await import('../src/lib/nuwa-intelligence/monitorChart.mjs');const o=monitorChartOption([row],{id:'mobile',level:'panorama',title:{en:'Results'}},'en',{display:'bars',narrow:true});
+ assert(o.yAxis.axisLabel.margin<=16);assert.equal(o.yAxis.axisLabel.align,'right');
 });

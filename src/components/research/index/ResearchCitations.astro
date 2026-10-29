@@ -1,11 +1,11 @@
 ---
-import {catalogue,indexBase} from '../../../data/nuwa-index';
+import {catalogue,indexBase,currentEdition} from '../../../data/nuwa-index';
 import type {Locale} from '../../../i18n/config';
 import {researchCitation} from '../../../lib/nuwa-intelligence/researchCite.mjs';
 interface Props {workId:string;locale:Locale}
 const {workId,locale}=Astro.props,en=locale==='en',work=catalogue.works.find(w=>w.id===workId)!;
 const bib=researchCitation(work,catalogue,{kind:'original',format:'bib',locale});
-const note=work.localReviewBatchId?null:researchCitation(work,catalogue,{kind:'nuwa',format:'bib',locale});
+const note=(currentEdition&&currentEdition.publication?.state!=='published')||work.localReviewBatchId?null:researchCitation(work,catalogue,{kind:'nuwa',format:'bib',locale});
 const subject=`NUWA Index correction: ${work.title} (${catalogue.snapshotId})`;
 const privateReview=process.env.NUWA_LOCAL_REVIEW==='1'&&Boolean(process.env.NUWA_DOSSIER_ROOT);
 ---
@@ -14,7 +14,7 @@ const privateReview=process.env.NUWA_LOCAL_REVIEW==='1'&&Boolean(process.env.NUW
  <p>{en?'Cite the original publication for its findings. Cite this NUWA record separately for its explanation and retained snapshot.':'引用研究发现时请引用原始出版物；引用 NUWA 的整理与解释时，单独引用本站记录及对应快照。'}</p>
  {work.localReviewBatchId&&<p>{en?'This record was added for local editorial review. Original-publication exports are available; a public NUWA edition has not been published.':'本记录为本地新增编辑审阅稿。可以导出原始出版物引用；NUWA 公开记录版本尚未发布。'}</p>}
  {privateReview&&!work.localReviewBatchId&&<p>{en?'These exports refer to the retained public catalogue note. The local editorial draft on this page is not included in that edition and remains pending human approval.':'以下导出对应保留的公开目录笔记，不包含本页新增的本地编辑草稿；新稿仍待人工批准。'}</p>}
- <div class="nw-citation-actions"><a href={`${indexBase}/exports/${locale}/${workId}.bib`} download>BibTeX ↓</a><a href={`${indexBase}/exports/${locale}/${workId}.ris`} download>RIS ↓</a><a href={work.localReviewBatchId?`${indexBase}/data/review/${workId}.json`:`${indexBase}/data/record-editions/${catalogue.snapshotId}--${workId}.json`} download>{work.localReviewBatchId?(en?'Local review evidence':'本地审阅证据'):(en?'Record + source metadata':'记录与来源元数据')} · JSON ↓</a><a href={`${indexBase}/data/reading.json`}>{en?'Reading coverage':'阅读覆盖'} · JSON</a><a href={`mailto:whitzardindex@fudan.edu.cn?subject=${encodeURIComponent(subject)}`}>{en?'Suggest a correction':'提交更正'}</a></div>
+ <div class="nw-citation-actions"><a href={`${indexBase}/exports/${locale}/${workId}.bib`} download>BibTeX ↓</a><a href={`${indexBase}/exports/${locale}/${workId}.ris`} download>RIS ↓</a><a href={currentEdition?`${indexBase}/data/current-record/${workId}.json`:work.localReviewBatchId?`${indexBase}/data/review/${workId}.json`:`${indexBase}/data/record-editions/${catalogue.snapshotId}--${workId}.json`} download>{work.localReviewBatchId?(en?'Local review evidence':'本地审阅证据'):(en?'Record + source metadata':'记录与来源元数据')} · JSON ↓</a><a href={`${indexBase}/data/reading.json`}>{en?'Reading coverage':'阅读覆盖'} · JSON</a><a href={`mailto:whitzardindex@fudan.edu.cn?subject=${encodeURIComponent(subject)}`}>{en?'Suggest a correction':'提交更正'}</a></div>
  <details><summary>{en?'Original publication · BibTeX':'原始出版物 · BibTeX'}</summary><pre>{bib}</pre></details>
  {note&&<details><summary>{en?'NUWA record · BibTeX':'NUWA 记录 · BibTeX'}</summary><pre>{note}</pre></details>}
  <p class="nw-citation-snapshot">{work.localReviewBatchId?(en?'Base snapshot for local review':'本地审阅所依据的快照'):(en?'Evidence snapshot':'证据快照')} {catalogue.snapshotId} · <a href={`${indexBase}/updates.xml`}>{en?'Index updates · RSS':'索引更新 · RSS'}</a></p>

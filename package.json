@@ -24,7 +24,7 @@
     "new:research-blog": "node scripts/new-research-blog.mjs",
     "audit:nuwa-reading": "node scripts/audit-nuwa-reading.mjs && node scripts/audit-nuwa-evidence-reading.mjs",
     "prepare:nuwa-reading-review": "node scripts/prepare-nuwa-reading-review.mjs && node scripts/validate-nuwa-reading-package.mjs",
-    "check:nuwa-publication": "node scripts/check-nuwa-publication.mjs",
+    "check:nuwa-publication": "node scripts/check-nuwa-publication-all.mjs",
     "prepare:nuwa-weekly": "node scripts/prepare-nuwa-weekly.mjs"
   },
   "repository": {

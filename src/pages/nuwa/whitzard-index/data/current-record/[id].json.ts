@@ -1,0 +1,3 @@
+import {catalogue,currentEdition,publicReading} from '../../../../../data/nuwa-index';
+export function getStaticPaths(){return catalogue.works.map(w=>({params:{id:w.id},props:{id:w.id}}));}
+export function GET({props}:{props:{id:string}}){return Response.json({schemaVersion:'nuwa-current-record-1',version:currentEdition?.candidateId??catalogue.snapshotId,publication:currentEdition?.publication?.state??'published',work:catalogue.works.find(w=>w.id===props.id),reading:(currentEdition?.reading??publicReading).works.find((w:any)=>w.id===props.id),sources:catalogue.sources.filter(s=>s.id===catalogue.works.find(w=>w.id===props.id)?.sourceId)});}

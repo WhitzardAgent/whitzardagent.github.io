@@ -1,0 +1,7 @@
+---
+import '../../../styles/nuwa-index.css';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {historicalCatalogue as catalogue} from '../../../data/nuwa-index';
+const {locale}=Astro.props,en=locale==='en',base=`${en?'/en':''}/nuwa/whitzard-index`;
+---
+<BaseLayout title="NUWA Index · Archive" locale={locale} brand="nuwa" noindex><article class="site-container ne-record"><h1>{en?'Archived record':'历史记录'}</h1><p>{en?'This record is outside the current technical research scope. Retained snapshots preserve its historical context.':'本条目已退出当前技术研究范围，原记录保留在历史快照中。'}</p><a href={`${base}/snapshots/${catalogue.snapshotId}.json`}>{en?'Historical snapshot':'历史快照'}</a><p><a href={`${base}/?view=research`}>{en?'Current research':'当前研究目录'} →</a></p></article></BaseLayout>
