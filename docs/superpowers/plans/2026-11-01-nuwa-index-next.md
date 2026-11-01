@@ -26,9 +26,15 @@
 
 ## Task 4: 验收与上线
 - [x] npm test、check、check:nuwa-index、check:nuwa-publication、check:terminology、check:research-blog、ingest:info、build、check:content、check:links、公开输出隐私。
-- [ ] 最终提交浏览器双语 1440/1024/808/390、键盘/触屏、URL历史/语言切换、无JS/reduced-motion、旧入口及CSV/SVG。
+- [x] 最终提交浏览器双语 1440/1024/808/390、键盘/触屏、URL历史/语言切换、无JS/reduced-motion、旧入口及CSV/SVG。
 - [x] 验证首页不内联完整 catalogue，历史哈希无变；独立代码审查并修复关键发现。
 - [ ] PR 检查通过，正常合并 main，等待 Pages，线上复验并交付 SHA/PR/部署结果；发现核心回归正常回退。
 
 ## Review Focus
 结果身份包括配置；描述性排序不升级严格比较；未知值与零值不混；语言/历史状态一致；外部成果不重标 NUWA 执行。
+
+## 本地验证结果（2026-11-01）
+
+282 项单元测试通过；Astro 459 文件 0 errors/warnings/hints；构建、数据/出版门禁、内容、术语、Research Blog、链接、公开产物隐私检查通过。双语 40 组布局通过，并覆盖选择/排序、默认与非默认协议分享、刷新、语言/历史、空主题、旧查询和锚点、键盘、触屏、无 JS、reduced-motion、CSV/SVG。18 份历史文件哈希不变。界面版本 1.0.0 与证据版本 2026-10-29.1 分开；首页 HTML 22,880 bytes，不作为线上性能指标。
+
+独立审查的四项 URL/历史状态问题均已修复并加入回归；审查未发现科学排名或来源归属问题。全部源码在正常 PR/Pages 验证后发布。
