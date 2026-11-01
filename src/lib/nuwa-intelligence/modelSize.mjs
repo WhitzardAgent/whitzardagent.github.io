@@ -17,5 +17,6 @@ export function modelSizeDescription(row,locale='en'){
 }
 export function modelSizeLegend(rows,locale='en'){
  const en=locale==='en',known=rows.filter(r=>modelSizeMark(r).known).length;
+ if(!known)return '';
  return `<div class="nv-size-key"><strong>${en?'Point size · total parameters (B = billion)':'点大小 · 总参数量（B = 十亿）'}</strong>${modelSizeScale.bands.map(b=>`<span><i style="--point-size:${b.diameter}px"${b.id==='unknown'?' class="nv-size-unknown"':''} aria-hidden="true"></i>${b.label[locale]}</span>`)}</div><p>${en?`${known}/${rows.length} plotted observations have disclosed, source-backed sizes. Fixed size bands, not proportional area; dashed outlines mean size unknown. Selection changes the outline only.`:`${rows.length} 条绘图观测中 ${known} 条有来源支持的已披露尺寸。采用固定档位，不按参数比例缩放面积；虚线轮廓表示尺寸未知，选中仅改变轮廓。`} ${en?'Scores retain each protocol’s meaning; this does not establish a size–risk causal relationship.':'成绩仍按各协议解释，不能据此确定尺寸与风险的因果关系。'} <a href="${modelSizeScale.source}" target="_blank" rel="noreferrer">${en?'Size bands adapted from Artificial Analysis':'分档参考 Artificial Analysis'} ↗</a></p>`;
 }

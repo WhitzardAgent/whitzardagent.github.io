@@ -10,3 +10,6 @@ output/playwright/
 
 # Local source-batch implementation scratch
 .superpowers/nuwa-source-first-2026-10-26/
+
+# Scratch ledger for the authorized NUWA platform iteration
+.superpowers/sdd/2026-11-01-nuwa-index-next/
