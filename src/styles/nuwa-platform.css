@@ -5,3 +5,5 @@
 @media(prefers-reduced-motion:reduce){.np-platform *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
 .np-selection{max-height:300px;overflow:auto}.ne-channels>summary{cursor:pointer;font-size:16px;padding:15px 0;color:#285e4c}
+
+nuwa-model-comparison.np-container,nuwa-assessments.np-container{display:block;padding-bottom:40px}

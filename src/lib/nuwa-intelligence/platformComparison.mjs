@@ -33,3 +33,7 @@ export function validatePublishedRun(run,context) {
  if(run.receipt?.startedAt&&run.receipt?.completedAt&&!(Date.parse(run.receipt.completedAt)>=Date.parse(run.receipt.startedAt)))errors.push('Invalid receipt chronology');
  return errors;
 }
+/** URL restoration preserves explicit selections; only an intentional protocol change resets them. */
+export function resolveComparisonState(dataset,state,{resetSystems=false,hasSelection=true}={}) {
+ return {...state,group:dataset.id,systems:resetSystems||!hasSelection?dataset.rows.slice(0,3).map(r=>r.resultId):state.systems};
+}

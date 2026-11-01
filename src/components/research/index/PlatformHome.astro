@@ -23,7 +23,8 @@ const {locale}=Astro.props,en=locale==='en',base=localizedPath(indexBase,locale)
 </div>
 <script>
  import {navigate} from 'astro:transitions/client';
- function restoreLegacy(){const p=location.pathname.replace(/\/$/,'');if(!/^\/(?:en\/)?nuwa\/whitzard-index$/.test(p))return;const q=new URLSearchParams(location.search);if(q.has('view')||q.has('series')||location.hash.startsWith('#ni-')||location.hash==='#source-series'||location.hash==='#indicator-register'){void navigate(p+'/research/'+location.search+location.hash,{history:'replace'});}}
+ import {legacyWorkspaceSearch} from '../../../lib/nuwaNavigation.mjs';
+ function restoreLegacy(){const p=location.pathname.replace(/\/$/,'');if(!/^\/(?:en\/)?nuwa\/whitzard-index$/.test(p))return;const query=legacyWorkspaceSearch(location.search,location.hash);if(query!==null){void navigate(p+'/research/?'+query+location.hash,{history:'replace'});}}
  restoreLegacy();document.addEventListener('astro:page-load',restoreLegacy);
 </script>
 </BaseLayout>

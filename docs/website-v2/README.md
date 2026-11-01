@@ -8,6 +8,8 @@
 
 ## 设计目标
 
+NUWA Index 最新定位、首页与比较规则见 [41-nuwa-evaluation-platform.md](41-nuwa-evaluation-platform.md)，覆盖旧知识库首页规则，保留数据与复核约束。
+
 最新研究导航与亮点展示基线见 [17-research-highlights-and-navigation.md](17-research-highlights-and-navigation.md)，覆盖历史导航与指数命名条目。
 
 最新中英文文案、两位创始人与友情链接规则见 [18-editorial-audit.md](18-editorial-audit.md)，覆盖历史团队、导师与口语化标题要求。

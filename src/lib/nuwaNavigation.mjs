@@ -12,7 +12,7 @@ export function readIndexFilters(search) {
   return { ...(p.has('reviewScope')?{reviewScope:['bibliographic','source-note','local-review'].includes(p.get('reviewScope'))?p.get('reviewScope'):''}:{}), view, trendMode: legacy==='models'||p.get('trendMode')==='model'?'model':'topic', researchMode:legacy==='reports'||p.get('researchMode')==='reports'?'reports':'works', model:p.get('model')??'', resultSort:['coverage','name','updated'].includes(p.get('resultSort'))?p.get('resultSort')??'priority':'priority', scenario:p.get('scenario')==='multi-agent'?'multi-agent':'', area: p.get('area') ?? '', dimension: observationDimensions.includes(p.get('dimension')) ? p.get('dimension') : '', q: p.get('q') ?? '', benchmark: p.get('benchmark') ?? '', function: researchFunctions.includes(functionAlias) ? functionAlias : '', tag, organization: p.get('organization') ?? '', kind: p.get('kind') ?? '', year: p.get('year') ?? '', sort: ['relevance','updated'].includes(p.get('sort')) ? p.get('sort') ?? 'published' : 'published' };
 }
 export function readIndexLocation(search,hash=''){
- const p=new URLSearchParams(search),views={'#ni-overview':'overview','#ni-risks':'overview','#ni-models':'models','#ni-library':'library','#ni-reports':'reports','#ni-results':'results','#ni-methodology':'methodology'};
+ const p=new URLSearchParams(search),views={'#ni-framework':'framework','#ni-trend':'trend','#source-series':'methodology','#indicator-register':'methodology','#methodology':'methodology','#published-evidence':'trend','#ni-overview':'overview','#ni-risks':'overview','#ni-models':'models','#ni-library':'library','#ni-reports':'reports','#ni-results':'results','#ni-methodology':'methodology'};
  if(p.get('view')==='framework'&&['#indicator-register','#source-series','#ni-methodology'].includes(hash))p.set('view','methodology');
  if(!p.has('view')&&views[hash])p.set('view',views[hash]);return readIndexFilters(p.toString());
 }
@@ -31,3 +31,16 @@ export function sortResearchRecords(records, sort = 'published', query = '') {
   return [...records].sort((a,b) => (sort === 'relevance' ? relevance(b)-relevance(a) : 0) || (sort === 'updated' ? (b.updatedOn ?? '').localeCompare(a.updatedOn ?? '') : 0) || (b.publicationDate ?? '').localeCompare(a.publicationDate ?? '') || a.id.localeCompare(b.id));
 }
 
+
+/** Research is the new workspace default; explicit legacy query/hash views win. */
+export function readResearchLocation(search,hash='') {
+ const p=new URLSearchParams(search);
+ if(!p.has('view')&&!p.has('series')&&!/^#(?:ni-|source-series|indicator-register|methodology|published-evidence)/.test(hash))p.set('view','research');
+ return readIndexLocation(p.toString(),hash);
+}
+export function legacyWorkspaceSearch(search,hash='') {
+ const p=new URLSearchParams(search),keys=['view','series','metric','trendMode','researchMode','area','dimension','q','benchmark','function','organization','kind','year','sort','scenario','resultSort','tag','reviewScope'];
+ const legacy=[...p.keys()].some(k=>keys.includes(k)||k.startsWith('mon-')||k.startsWith('model'))||/^#(?:ni-|source-series|indicator-register|methodology|published-evidence)/.test(hash);
+ if(!legacy)return null;
+ p.set('view',readIndexLocation(search,hash).view);return p.toString();
+}
