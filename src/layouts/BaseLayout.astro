@@ -98,7 +98,7 @@ const schemas = [organizationSchema, ...(breadcrumbs ? [breadcrumbs] : []), ...(
     <PageMotion />
     <main id="main-content" tabindex="-1"><brand-page-motion><slot /></brand-page-motion></main>
     <Footer brand={brand} locale={locale} />
-    {basePath.startsWith('/nuwa/whitzard-index')&&<IndexSelects locale={locale}/>}
+    {basePath.startsWith('/nuwa/whitzard-index')&&basePath.replace(/\/$/,'')!=='/nuwa/whitzard-index'&&<IndexSelects locale={locale}/>}
     <SmoothScroll />
   </body>
 </html>
