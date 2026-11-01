@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+export async function checkNuwaPlatformBrowser(browser,base='http://127.0.0.1:4341',out='output/playwright/nuwa-next'){
+ await fs.mkdir(out,{recursive:true});const cases=[],errors=[];
+ const ctx=await browser.newContext({reducedMotion:'reduce',acceptDownloads:true});await ctx.route('https://cloud.umami.is/**',r=>r.abort());const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(15000);
+ try{
+ for(const locale of ['zh','en'])for(const width of [1440,1024,808,390]){
+  await page.setViewportSize({width,height:width===390?844:900});const index=`${base}${locale==='en'?'/en':''}/nuwa/whitzard-index`;
+  for(const route of ['','models/compare/','trends/','evaluations/','assessments/']){
+   await page.goto(index+'/'+route,{waitUntil:'networkidle'});assert.equal(await page.locator('main h1').count(),1);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${locale} ${width} ${route}: horizontal overflow`);
+   assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),`https://whitzard.tech${locale==='en'?'/en':''}/nuwa/whitzard-index${route?'/'+route.replace(/\/$/,''):''}`);
+   if(route===''){assert.equal(await page.locator('nuwa-index-explorer').count(),0);assert.equal(await page.locator('[data-monitor-data]').count(),0);assert.equal(await page.locator('#risk-trends .np-topic').count(),6);}
+   if(route==='models/compare/'){assert.equal(await page.locator('[data-comparison-rows] tr').count(),3);assert.ok((await page.locator('[data-comparison-rows]').innerText()).includes('SaferAI'));}
+   if(route==='evaluations/')assert.equal(await page.locator('.np-program').count(),3);
+   if((width===1440||width===390)&&['','models/compare/'].includes(route))await page.screenshot({path:`${out}/${locale}-${route?'compare':'home'}-${width}.png`,fullPage:true});
+   cases.push({locale,width,route});
+  }
+ }
+ const index=base+'/nuwa/whitzard-index';await page.setViewportSize({width:1440,height:900});await page.goto(index+'/models/compare/',{waitUntil:'networkidle'});
+ await page.locator('select[name=order]').selectOption('asc');const ascending=await page.locator('[data-comparison-rows] .np-value').allTextContents();assert.deepEqual(ascending.map(parseFloat),[...ascending.map(parseFloat)].sort((a,b)=>a-b));assert.equal(new URL(page.url()).searchParams.get('order'),'asc');
+ const checkboxes=page.locator('[data-system-choices] input');await checkboxes.nth(0).uncheck();assert.equal(await page.locator('[data-comparison-rows] tr').count(),2);
+ const csvEvent=page.waitForEvent('download');await page.locator('[data-comparison-csv]').click();const csv=await csvEvent;const csvText=await fs.readFile(await csv.path(),'utf8');assert.equal(csvText.split('\r\n').length,3);assert.ok(csvText.includes('sourceVersion'));
+ const svgEvent=page.waitForEvent('download');await page.locator('[data-comparison-svg]').click();const svg=await svgEvent;assert.ok((await fs.readFile(await svg.path(),'utf8')).includes('Snapshot: 2026-10-29.1'));
+ await page.reload({waitUntil:'networkidle'});assert.equal(await page.locator('[data-comparison-rows] tr').count(),2);
+ await page.locator('[data-platform-language]').click();await page.waitForURL('**/en/nuwa/whitzard-index/models/compare/**');await page.waitForLoadState('networkidle');assert.equal(await page.locator('[data-comparison-rows] tr').count(),2);assert.equal(await page.locator('html').getAttribute('lang'),'en');
+ await page.locator('select[name=scope]').selectOption('strict');assert.equal(await page.locator('[data-comparison-rows] tr').count(),0);await page.goBack();await page.waitForLoadState('networkidle');assert.equal(await page.locator('[data-comparison-rows] tr').count(),2);
+ const boxes=page.locator('[data-system-choices] input:checked');while(await boxes.count())await boxes.first().uncheck();assert.equal(await page.locator('[data-comparison-rows] tr').count(),0);await page.reload({waitUntil:'networkidle'});assert.equal(await page.locator('[data-comparison-rows] tr').count(),0);
+ await page.goto(index+'/assessments/',{waitUntil:'networkidle'});const total=await page.locator('[data-assessment]:visible').count();await page.locator('select[name=area]').selectOption('cybersecurity');const filtered=await page.locator('[data-assessment]:visible').count();assert.ok(filtered>0&&filtered<total);await page.reload({waitUntil:'networkidle'});assert.equal(await page.locator('[data-assessment]:visible').count(),filtered);await page.locator('button[type=reset]').click();await page.waitForFunction(n=>document.querySelectorAll('[data-assessment]:not([hidden])').length===n,total);
+ await page.goto(index+'/?view=framework',{waitUntil:'networkidle'});assert.equal(await page.locator('[data-index-panel=framework]').isVisible(),true);await page.locator('[data-index-view=trend]').click();assert.equal(await page.locator('[data-index-panel=trend]').isVisible(),true);await page.goBack();await page.waitForFunction(()=>!document.querySelector('[data-index-panel=framework]')?.hidden);
+ await page.goto(index+'/compare/',{waitUntil:'networkidle'});assert.equal(await page.locator('nuwa-protocol-comparison').count(),1);
+ await page.goto(index+'/research/?view=research&q=TraceProbe',{waitUntil:'networkidle'});assert.ok(await page.locator('[data-work-record][data-id=traceprobe]').isVisible());
+ await page.goto(index+'/models/compare/',{waitUntil:'networkidle'});await page.locator('select[name=order]').focus();await page.keyboard.press('ArrowDown');await page.keyboard.press('Tab');assert.ok(await page.evaluate(()=>document.activeElement?.tagName!=='BODY'));
+ const plain=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844},reducedMotion:'reduce'}),nojs=await plain.newPage();for(const locale of ['','/en']){await nojs.goto(base+locale+'/nuwa/whitzard-index/');assert.equal(await nojs.locator('#risk-trends .np-topic').count(),6);await nojs.goto(base+locale+'/nuwa/whitzard-index/models/compare/');assert.equal(await nojs.locator('[data-comparison-rows] tr').count(),3);assert.equal(await nojs.locator('[data-comparison-plot] svg').count(),1);}await plain.close();
+ assert.deepEqual(errors,[]);const result={cases:cases.length,layouts:cases,exports:true,history:true,localeState:true,noJS:true,reducedMotion:true,legacy:true,errors};await fs.writeFile(out+'/results.json',JSON.stringify(result,null,2));return result;
+ }finally{await ctx.close();}
+}

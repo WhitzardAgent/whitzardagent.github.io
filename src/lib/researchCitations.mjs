@@ -41,5 +41,5 @@ export function citationDisplay(entry,locale='en'){
 }
 
 export function citationAuthors(authors=[]){
- return authors.filter(a=>!/[{}@]/.test(a)).map(a=>a.replace(/\s+\d+(?:\s+\d+)?\s+footnotemark:\s*\d+/gi,'').replace(/[†‡*]+$/g,'').trim()).filter(Boolean);
+ return authors.flatMap(a=>a.includes('\\authorname')?[...a.matchAll(/\\authorname\s+(.+?)(?=\\authorinstitution|\\authorname|$)/g)].map(m=>m[1].trim()):[a]).filter(a=>!/[{}@\\]/.test(a)).map(a=>a.replace(/\s+\d+(?:\s+\d+)?\s+footnotemark:\s*\d+/gi,'').replace(/[†‡*]+$/g,'').trim()).filter(Boolean);
 }

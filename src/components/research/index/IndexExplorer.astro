@@ -38,7 +38,7 @@ const years=[...new Set(works.map(w=>w.publicationDate?.slice(0,4)).filter(Boole
 const kinds=[...new Set(works.map(w=>w.kind))];
 const dimensions=['propensity','capability','behavior'] as const;
 ---
-<BaseLayout title={c.title} description={k.description} locale={locale} brand="nuwa" canonicalPath={indexBase} ogImage="/assets/og/nuwa-og.png" ogImageAlt={c.title}>
+<BaseLayout title={c.title} description={k.description} locale={locale} brand="nuwa" canonicalPath={Astro.url.pathname.replace(/^\/en(?=\/)/,'').replace(/\/$/,'')} ogImage="/assets/og/nuwa-og.png" ogImageAlt={c.title}>
 <div class="ni-page nk-page">
   <header class="ni-header nk-header nm-index-header site-container"><a class="ni-back" href={localizedPath('/nuwa',locale)}>← {c.lab}</a><p class="ni-kicker">NUWA INDEX</p><h1>NUWA Frontier AI Safety Index</h1><p class="ni-lead">{k.description}</p></header>
   <script is:inline>document.documentElement.classList.add('nuwa-interactive');</script>

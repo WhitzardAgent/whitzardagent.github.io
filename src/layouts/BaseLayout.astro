@@ -93,7 +93,7 @@ const schemas = [organizationSchema, ...(breadcrumbs ? [breadcrumbs] : []), ...(
   </head>
   <body class:list={["brand-site", brand === "nuwa" ? "nuwa-brand" : "whitzard-brand", locale === "zh" && "locale-zh"]}>
     <a class="skip-link" href="#main-content">{ui[locale].skip}</a>
-    <Header brand={brand} locale={locale} currentPath={basePath} />
+    {(!basePath.startsWith("/nuwa/whitzard-index")||basePath.includes("/preview/"))&&<Header brand={brand} locale={locale} currentPath={basePath} />}
     {basePath.startsWith("/nuwa/whitzard-index")&&!basePath.includes("/preview/")&&<IndexMasthead locale={locale} pathname={Astro.url.pathname}/>}
     <PageMotion />
     <main id="main-content" tabindex="-1"><brand-page-motion><slot /></brand-page-motion></main>
