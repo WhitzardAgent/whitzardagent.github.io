@@ -199,10 +199,15 @@ const homeRequirements = [
   "AgentGuard",
   "WhitzardGateway",
   "女娲实验室",
-  "NUWA Index",
   "最新动态",
 ];
 for (const marker of homeRequirements) if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing homepage marker: ${marker}`);
+for (const file of ["dist/index.html", "dist/en/index.html"]) {
+  const html = withoutEmbeddedCode(await readFile(file, "utf8"));
+  if (/href=["\'][^"\']*whitzard-index/.test(html) || html.includes("data-home-nuwa-index")) {
+    violations.push(`${file}: NUWA Index promotion must remain withdrawn from the homepage`);
+  }
+}
 for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", "send_email_to", "真实策略，真实处置"]) {
   if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
 }
