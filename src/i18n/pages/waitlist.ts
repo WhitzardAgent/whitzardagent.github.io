@@ -1,3 +1,4 @@
+import { products } from "../../data/products";
 import type { Locale } from "../config";
 
 export type WaitlistCopy = {
@@ -62,7 +63,7 @@ export const waitlistCopy: Record<Locale, WaitlistCopy> = {
       consent: "我同意白泽为处理本次申请和后续沟通而使用以上信息。",
     },
     options: {
-      interests: ["AgentGuard", "WhitzardGateway", "模型服务", "AgentGuard 与模型服务"],
+      interests: [...products.map(product => product.name), "模型服务"],
       stages: ["调研与验证", "原型开发", "内部试点", "生产环境"],
       timelines: ["尽快", "1–3 个月", "3–6 个月", "6 个月以后", "暂未确定"],
     },
@@ -102,7 +103,7 @@ export const waitlistCopy: Record<Locale, WaitlistCopy> = {
       consent: "I agree that Whitzard may use this information to review this request and contact me about product access.",
     },
     options: {
-      interests: ["AgentGuard", "WhitzardGateway", "Model Services", "AgentGuard and Model Services"],
+      interests: [...products.map(product => product.name), "Model Services"],
       stages: ["Research and evaluation", "Prototype", "Internal pilot", "Production"],
       timelines: ["As soon as possible", "1–3 months", "3–6 months", "More than 6 months", "Not decided"],
     },

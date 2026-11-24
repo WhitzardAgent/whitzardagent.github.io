@@ -1,4 +1,6 @@
 ---
+import { products } from "../../data/products";
+import ProductShowcase from "./ProductShowcase.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Locale } from "../../i18n/config";
 import { localizedPath } from "../../i18n/config";
@@ -17,10 +19,6 @@ interface Props { locale: Locale; copy: HomeCopy }
 const { locale, copy } = Astro.props;
 const path = (value: string) => localizedPath(value, locale);
 const zh = locale === "zh";
-const products = [
-  { copy: copy.products.agentguard, segments: [], href: "/agentguard", image: "/assets/agentguard/dashboard.png", width: 2505, height: 1229, caption: zh ? "AgentGuard 社区版 · 安全审计控制台" : "AgentGuard Community · Security audit console", dark: false },
-  { copy: copy.products.gateway, segments: copy.products.gateway.titleSegments ?? [], href: "/gateway", image: "/assets/gateway/sign-in-800.webp", width: 2684, height: 1636, caption: zh ? "WhitzardGateway 登录界面" : "WhitzardGateway sign-in · Shown in Chinese", dark: true },
-];
 const highlights = await getResearchHighlights(locale, "home");
 const selectedResearch = [
   { arxivId: "2603.07427", label: zh ? "前沿风险评测环境" : "Executable frontier-risk evaluations" },
@@ -34,23 +32,19 @@ const selectedResearch = [
 ---
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} canonicalPath="/">
   <div class="enterprise-home">
-    <BrandHero locale={locale} artwork="home" eyebrow={copy.hero.eyebrow} title={copy.hero.title} segments={zh ? ["打造", "智能体时代", "的", "安全基础设施"] : undefined} description={copy.hero.description} centered>
+    <BrandHero locale={locale} artwork="home" eyebrow={copy.hero.eyebrow} title={copy.hero.title} segments={zh ? ["打造", "智能体时代", "的", "安全基础设施"] : undefined} description={zh ? "为企业提供代码审计、安全接入、智能体运行治理与安全评测能力。" : "Code auditing, secure access, runtime governance, and security evaluation for AI agents."} centered>
       <a class="button button--primary" href="#products">{copy.hero.primary} <span aria-hidden="true">→</span></a>
-      <a class="button button--secondary" href={path("/waitlist")} data-umami-event="waitlist-cta-click">{zh ? "加入心愿单" : "Join the waitlist"}</a>
+      <a class="button button--secondary" href={path("/contact")}>{zh ? "联系团队" : "Contact us"}</a>
+      <nav class="home-product-shortcuts" aria-label={zh ? "产品直达" : "Jump to a product"}>
+        {products.map(product => <a href={`#product-${product.id}`}>{product.name}</a>)}
+      </nav>
     </BrandHero>
 
     <section id="products" class="section home-products">
       <div class="site-container">
-        <header class="home-section-head"><div><p class="eyebrow">{copy.products.eyebrow}</p><h2>{copy.products.title}</h2></div><p>{zh ? "贯穿评测、防护与审计，为智能体建立可信边界。" : "Evaluation, runtime protection, and audit across the agent lifecycle."}</p></header>
-        <div class="home-product-showcase">
-          <div class="home-product-pair">{products.map(product => <article class="home-product-main">
-            <div class="home-product-main__copy"><span class="home-product-name">{product.copy.label}</span><h3>{product.segments.length ? product.segments.map(segment => <span class="brand-phrase">{segment}</span>) : product.copy.title}</h3><p>{product.copy.body}</p><ul>{product.copy.features.slice(0,3).map(feature => <li>{feature}</li>)}</ul></div>
-            <a class:list={["home-product-screen", { "home-product-screen--dark": product.dark }]} href={path(product.href)} aria-label={product.copy.cta}><div class="home-product-screen__image"><img src={product.image} srcset={product.dark ? "/assets/gateway/sign-in-800.webp 800w, /assets/gateway/sign-in-1600.webp 1600w" : undefined} sizes={product.dark ? "(max-width: 1023px) calc(100vw - 80px), 620px" : undefined} alt={product.caption} width={product.width} height={product.height} loading="lazy" decoding="async"/></div><small>{product.caption}</small></a>
-            <a class="text-link home-product-link" href={path(product.href)}>{product.copy.cta} →</a>
-          </article>)}</div>
-          <article class="home-model-service"><div><span class="eyebrow">MODEL SERVICES</span><h3>{copy.products.models.title}</h3><p>{copy.products.models.body}</p></div><a class="text-link" href={path("/models")}>{copy.products.models.cta} →</a></article>
-        </div>
-        <p class="home-product-principles">{zh ? "可信边界 · 可核实证据 · 最小必要干预" : "Trusted boundaries · Verifiable evidence · Minimal necessary intervention"}</p>
+        <header class="home-section-head"><div><p class="eyebrow">{copy.products.eyebrow}</p><h2>{copy.products.title}</h2></div><p>{zh ? "从代码审计、统一接入，到运行治理与安全评测。" : "From code auditing and secure access to runtime governance and security evaluation."}</p></header>
+        <ProductShowcase locale={locale}/>
+
       </div>
     </section>
 
@@ -68,3 +62,8 @@ const selectedResearch = [
     <section id="join" class="home-join"><div class="site-container"><p class="eyebrow">{copy.closing.eyebrow}</p><h2>{copy.closing.title}</h2><p>{copy.closing.body}</p><div><a class="button button--primary" href={path("/waitlist")} data-umami-event="waitlist-cta-click">{copy.closing.primary} →</a><a class="button button--secondary" href={path("/contact")}>{zh ? "联系白泽" : "Contact Whitzard"}</a></div></div></section>
   </div>
 </BaseLayout>
+
+<style>
+  .home-product-shortcuts { flex-basis: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; }
+  .home-product-shortcuts a { color: #173f39; background: #f8faf8; padding: 6px 10px; border-radius: 5px; font-size: 13px; }
+</style>

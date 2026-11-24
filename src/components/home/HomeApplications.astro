@@ -1,9 +1,12 @@
 ---
+import { products } from "../../data/products";
+import { localizedPath } from "../../i18n/config";
 import type { Locale } from "../../i18n/config";
 import { companyCopy } from "../../i18n/pages/company";
 import "../../styles/use-cases.css";
 interface Props { locale: Locale }
 const { locale } = Astro.props;
+const relatedProducts = [[1, 2], [0, 2], [2, 3], [1, 3]];
 const copy = companyCopy[locale].solutions;
 ---
 <home-applications class="home-applications" aria-label={copy.explorer.ariaLabel}>
@@ -14,6 +17,7 @@ const copy = companyCopy[locale].solutions;
     {copy.scenarios.map((item, index) => <article id={`home-case-panel-${index}`} class="home-applications__panel" aria-labelledby={`home-case-tab-${index}`}>
       <header><span>{item.index}</span><h3>{item.title}</h3></header>
       <dl><div><dt>{copy.explorer.tasks}</dt><dd>{item.tasks}</dd></div><div><dt>{copy.explorer.securityDimensions}</dt><dd><ul class="security-dimensions">{item.securityDimensions.map(dimension => <li>{dimension}</li>)}</ul></dd></div><div><dt>{copy.explorer.value}</dt><dd>{item.value}</dd></div></dl>
+      <p>{relatedProducts[index]?.map(productIndex => <a class="text-link" style="margin-inline-end: 16px" href={localizedPath(products[productIndex].href, locale)}>{products[productIndex].name} →</a>)}</p>
     </article>)}
   </div>
 </home-applications>

@@ -78,7 +78,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
   en: {
     meta: {
       title: "Whitzard — Security Infrastructure for the Agentic AI Era",
-      description: "Whitzard builds security infrastructure for AI agents through AgentGuard, WhitzardGateway, Model Services, NUWA research, and an open ecosystem.",
+      description: "Whitzard brings together WhitzardAudit, WhitzardGateway, AgentGuard, and WhitzardEval for code auditing, secure access, runtime operations, and security evaluation.",
     },
     hero: {
       eyebrow: "Whitzard",
@@ -161,7 +161,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
   zh: {
     meta: {
       title: "白泽（Whitzard）— 智能体安全基础设施",
-      description: "白泽通过 AgentGuard、WhitzardGateway、模型服务、女娲实验室研究与开放技术生态，打造智能体时代的安全基础设施。",
+      description: "白泽通过 WhitzardAudit、WhitzardGateway、AgentGuard 与 WhitzardEval，提供代码审计、安全接入、智能体安全运营与安全评测。",
     },
     hero: {
       eyebrow: "白泽 · Whitzard",

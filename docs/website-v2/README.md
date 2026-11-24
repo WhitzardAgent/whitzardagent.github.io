@@ -47,6 +47,8 @@ NUWA Index 最新定位、首页与比较规则见 [41-nuwa-evaluation-platform.
 
 ## 当前产品展示补充
 
+- [22｜四产品矩阵与真实界面](22-four-products-real-evidence.md)：2026-11-24 当前四产品命名、首页切换展位与详情页撤下规则，覆盖此前双产品及未发布三产品草稿。
+
 - [19｜双产品展示与静态产品证据](19-dual-products-and-static-evidence.md)：WhitzardGateway、首页等权展位、全站模拟演示撤下及本地验收。
 - [20｜企业应用场景与安全价值](20-use-cases-and-security-value.md)：四类场景、双语安全维度、产品职责及验收。
 - [21｜研究图示与长文阅读](21-research-reading-and-figures.md)：AgentCyberRange 新图、Markdown 图注、左侧目录与响应式长文。

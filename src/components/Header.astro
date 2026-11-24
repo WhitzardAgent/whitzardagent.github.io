@@ -3,6 +3,7 @@ import type { Locale } from "../i18n/config";
 import { localizedPath, stripLocale } from "../i18n/config";
 import { ui } from "../i18n/ui";
 import LanguageSwitch from "./LanguageSwitch.astro";
+import ProductIcon from "./ProductIcon.astro";
 import NavIcon from "./NavIcon.astro";
 
 interface Props { brand?: "whitzard" | "nuwa"; locale: Locale; currentPath: string; }
@@ -43,27 +44,25 @@ function isGroupActive(children?: { href: string }[]) {
       </a>
       <nav class="site-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
         {copy.nav.map((item, index) => item.children ? (
-          <div class:list={["site-nav__group", item.icon === "research" && "site-nav__group--research", item.href !== "#" && "site-nav__group--linked", index > 0 && "site-nav__item--divided", isGroupActive(item.children) && "is-active"]} data-dropdown>
+          <div class:list={["site-nav__group", item.icon === "research" && "site-nav__group--research", item.icon === "products" && "site-nav__group--products", item.href !== "#" && "site-nav__group--linked", index > 0 && "site-nav__item--divided", isGroupActive(item.children) && "is-active"]} data-dropdown>
             {item.href !== "#" && <a href={localizedPath(item.href, locale)} class:list={["site-nav__link", "site-nav__destination", isGroupActive(item.children) && "is-active"]} aria-current={isActive(item.href) ? "page" : undefined}><NavIcon name={item.icon} /><span>{item.label}</span></a>}
             <button
               class:list={["site-nav__link", "site-nav__toggle", item.href !== "#" && "site-nav__toggle--split", isGroupActive(item.children) && "is-active"]}
               type="button"
               aria-expanded="false"
-              aria-haspopup="true"
               data-dropdown-toggle
               aria-label={item.href !== "#" ? `${copy.menuOpen}: ${item.label}` : undefined}
             >
               {item.href === "#" && <><NavIcon name={item.icon} /><span>{item.label}</span></>}
               <svg class="site-nav__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="site-nav__dropdown" data-dropdown-panel role="menu" aria-label={item.label}>
+            <div class="site-nav__dropdown" data-dropdown-panel aria-label={item.label}>
               {item.children.map((child, childIndex) => (
                 <a
                   href={localizedPath(child.href, locale)}
                   class:list={["site-nav__dropdown-link", item.icon === "research" && childIndex === 0 && "site-nav__lab-intro", isActive(child.href) && "is-active"]}
-                  role="menuitem"
                   aria-current={isActive(child.href) ? "page" : undefined}
-                >{child.label}{item.icon === "research" && childIndex === 0 && <small>{locale === "zh" ? "前沿 AI 风险研究与治理" : "Frontier AI risk research and governance"}</small>}</a>
+                >{child.description ? <>{child.iconPath && <ProductIcon path={child.iconPath}/>}<span class="product-nav__copy"><strong>{child.label}</strong><small>{child.description}</small></span></> : child.label}{item.icon === "research" && childIndex === 0 && <small>{locale === "zh" ? "前沿 AI 风险研究与治理" : "Frontier AI risk research and governance"}</small>}</a>
               ))}
             </div>
           </div>
@@ -105,9 +104,10 @@ function isGroupActive(children?: { href: string }[]) {
               {item.children.map((child) => (
                 <a
                   href={localizedPath(child.href, locale)}
-                  class:list={["mobile-navigation__sublink", isActive(child.href) && "is-active"]}
+                  aria-current={isActive(child.href) ? "page" : undefined}
+                  class:list={["mobile-navigation__sublink", child.description && "product-nav__mobile-row", isActive(child.href) && "is-active"]}
                   data-mobile-first={index === 0 ? "true" : undefined}
-                >{child.label}</a>
+                >{child.description ? <>{child.iconPath && <ProductIcon path={child.iconPath}/>}<span class="product-nav__copy"><strong>{child.label}</strong><small>{child.description}</small></span></> : child.label}</a>
               ))}
             </div>
           </div>
@@ -275,3 +275,25 @@ function isGroupActive(children?: { href: string }[]) {
   }
   if (!customElements.get("site-menu")) customElements.define("site-menu", SiteMenu);
 </script>
+
+<style is:global>
+  .brand-site .site-nav__group--products .site-nav__dropdown {
+    width: min(360px, calc(100vw - 32px));
+    min-width: 0;
+    grid-template-columns: 1fr;
+  }
+  .brand-site .site-nav__group--products .site-nav__dropdown-link,
+  .brand-site .mobile-navigation__sublink.product-nav__mobile-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 60px;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 8px;
+  }
+  .product-nav__copy { display: grid; gap: 3px; min-width: 0; }
+  .product-nav__copy strong { font-size: 15px; font-weight: 600; }
+  .product-nav__copy small { color: #45605e; font-size: 13px; line-height: 1.45; }
+  .site-nav__group--products svg, .product-nav__mobile-row svg { flex-shrink: 0; color: #236d62; }
+</style>
