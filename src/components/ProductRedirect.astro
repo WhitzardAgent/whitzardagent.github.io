@@ -1,0 +1,13 @@
+---
+import type { Locale } from "../i18n/config";
+import { localizedPath } from "../i18n/config";
+interface Props { locale: Locale; product: "agentguard" | "whitzardgateway" }
+const { locale, product } = Astro.props;
+const target = localizedPath(`/#product-${product}`, locale);
+const title = locale === "zh" ? "白泽产品" : "Whitzard products";
+---
+<!doctype html>
+<html lang={locale === "zh" ? "zh-CN" : "en"}>
+  <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{title}</title><meta name="robots" content="noindex,follow"/><link rel="canonical" href={`https://whitzard.tech${target}`}/><meta http-equiv="refresh" content={`0;url=${target}`}/></head>
+  <body><main><h1>{title}</h1><p><a href={target}>{locale === "zh" ? "前往首页查看产品" : "View products on the homepage"}</a></p><span id="system-map"></span><span id="engine"></span><span id="runtime"></span></main></body>
+</html>

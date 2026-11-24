@@ -1,0 +1,121 @@
+---
+import { products } from "../../data/products";
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import ProductIcon from "../ProductIcon.astro";
+import "../../styles/product-showcase.css";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const zh = locale === "zh";
+---
+<product-showcase class="product-showcase" data-locale={locale}>
+  <nav class="product-showcase__tabs" aria-label={zh ? "选择产品" : "Choose a product"}>
+    {products.map(product => <a id={`product-tab-${product.id}`} href={`#product-${product.id}`} data-product-tab={product.id}>
+      <ProductIcon path={product.icon}/>
+      <span><strong>{product.name}</strong><small>{product.label[locale]}</small></span>
+    </a>)}
+  </nav>
+  {products.map(product => <article id={`product-${product.id}`} class="product-showcase__panel" data-product-panel={product.id} aria-labelledby={`product-tab-${product.id}`}>
+    <header class="product-showcase__head">
+      <div><p class="product-showcase__role">{product.role[locale]}</p><h3>{product.headline[locale]}</h3><p class="product-showcase__description">{product.value[locale]}</p></div>
+      <div class="product-showcase__aside">
+        <ul>{product.capabilities[locale].map(item => <li>{item}</li>)}</ul>
+        <a class="product-showcase__contact" href={`${localizedPath("/contact", locale)}?product=${product.id}`}>{zh ? "咨询产品" : "Contact the team"} <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <figure>
+      <a class="product-showcase__screen" href={`/assets/products/${product.image}-1600.webp`} data-product-zoom aria-label={zh ? `查看 ${product.name} 大图` : `Enlarge ${product.name} screenshot`}>
+        <img src={`/assets/products/${product.image}-1280.webp`} srcset={`/assets/products/${product.image}-800.webp 800w, /assets/products/${product.image}-1280.webp 1280w, /assets/products/${product.image}-1600.webp 1600w`} sizes="(max-width: 700px) calc(100vw - 60px), (max-width: 1440px) calc(100vw - 140px), 1280px" width="1600" height="1200" alt={`${product.name} · ${product.caption[locale]}${zh ? "，完整产品界面" : ", full product interface in Chinese"}`} loading="lazy" decoding="async"/>
+      </a>
+      <figcaption><span>{product.caption[locale]}</span><a href={`/assets/products/${product.image}-1600.webp`} data-product-zoom>{zh ? "查看大图" : "Enlarge image"} <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+  </article>)}
+  <p class="product-showcase__note">{zh ? "实际产品界面，部分信息已脱敏。" : "Actual product interfaces, shown in Chinese with selected information redacted."}</p>
+  <dialog class="product-showcase__dialog" aria-label={zh ? "产品界面大图" : "Product screenshot"}>
+    <form method="dialog"><button type="submit" autofocus>{zh ? "关闭" : "Close"} <span aria-hidden="true">×</span></button></form>
+    <img data-product-full-image width="1600" height="1200" alt=""/>
+    <p data-product-full-caption></p>
+  </dialog>
+</product-showcase>
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  class ProductShowcase extends HTMLElement {
+    private aborter?: AbortController;
+    connectedCallback() {
+      this.aborter?.abort();
+      this.aborter = new AbortController();
+      const signal = this.aborter.signal;
+      const tabs = Array.from(this.querySelectorAll<HTMLAnchorElement>("[data-product-tab]"));
+      const panels = Array.from(this.querySelectorAll<HTMLElement>("[data-product-panel]"));
+      const dialog = this.querySelector<HTMLDialogElement>("dialog")!;
+      const image = this.querySelector<HTMLImageElement>("[data-product-full-image]")!;
+      const caption = this.querySelector<HTMLElement>("[data-product-full-caption]")!;
+      const idFromHash = () => location.hash.replace(/^#product-/, "");
+      const select = (id: string, focus = false) => {
+        const selected = tabs.find(tab => tab.dataset.productTab === id) ?? tabs[0];
+        tabs.forEach((tab, index) => {
+          const active = tab === selected;
+          tab.setAttribute("aria-selected", String(active));
+          tab.tabIndex = active ? 0 : -1;
+          panels[index].hidden = !active;
+        });
+        if (focus) selected.focus({ preventScroll: true });
+      };
+      const move = async (id: string, focus: boolean, preserveScroll: boolean) => {
+        const position = { left: scrollX, top: scrollY };
+        select(id, focus);
+        await navigate(`#product-${id}`, { history: "push" });
+        if (preserveScroll) window.scrollTo({ ...position, behavior: "instant" });
+        else this.scrollIntoView({ block: "start" });
+      };
+      this.querySelector("nav")!.setAttribute("role", "tablist");
+      tabs.forEach((tab, index) => {
+        tab.setAttribute("role", "tab");
+        tab.setAttribute("aria-controls", panels[index].id);
+        panels[index].setAttribute("role", "tabpanel");
+        panels[index].tabIndex = 0;
+        tab.addEventListener("keydown", event => {
+          let next = index;
+          if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+          else if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+          else if (event.key === "Home") next = 0;
+          else if (event.key === "End") next = tabs.length - 1;
+          else return;
+          event.preventDefault();
+          void move(tabs[next].dataset.productTab!, true, true);
+        }, { signal });
+      });
+      this.dataset.enhanced = "true";
+      select(idFromHash());
+      const readLocation = () => select(idFromHash());
+      window.addEventListener("popstate", readLocation, { signal });
+      window.addEventListener("hashchange", readLocation, { signal });
+      document.addEventListener("click", async event => {
+        if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const link = (event.target as Element).closest<HTMLAnchorElement>("a[href]");
+        if (!link) return;
+        const url = new URL(link.href);
+        if (url.origin !== location.origin || url.pathname !== location.pathname || !panels.some(panel => `#${panel.id}` === url.hash)) return;
+        event.preventDefault();
+        const external = !this.contains(link);
+        await move(url.hash.slice("#product-".length), external, !external);
+      }, { signal });
+      this.querySelectorAll<HTMLAnchorElement>("[data-product-zoom]").forEach(link => {
+        link.addEventListener("click", event => {
+          if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          const panel = link.closest("[data-product-panel]")!;
+          image.src = link.href;
+          image.alt = panel.querySelector("img")!.alt;
+          caption.textContent = panel.querySelector("figcaption > span")!.textContent;
+          dialog.showModal();
+        }, { signal });
+      });
+      dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); }, { signal });
+      if (panels.some(panel => `#${panel.id}` === location.hash)) requestAnimationFrame(() => this.scrollIntoView({ block: "start" }));
+    }
+    disconnectedCallback() { this.aborter?.abort(); }
+  }
+  if (!customElements.get("product-showcase")) customElements.define("product-showcase", ProductShowcase);
+</script>

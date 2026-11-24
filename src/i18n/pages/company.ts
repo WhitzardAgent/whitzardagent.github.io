@@ -173,7 +173,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       meta: {
         title: "Contact Whitzard",
         description:
-          "Talk with Whitzard about AgentGuard, WhitzardGateway, team deployment, research, or open-source collaboration.",
+          "Contact Whitzard about agent security products, deployment, research, or open-source collaboration.",
       },
       eyebrow: "CONTACT",
       title: "Product and research enquiries",
@@ -183,7 +183,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       paths: [
         {
           title: "Product access",
-          body: "Discuss AgentGuard or WhitzardGateway, your agent stack, security requirements, and team deployment.",
+          body: "Discuss product access, your agent stack, security requirements, and deployment options.",
           subject: "Whitzard product enquiry",
         },
         {
@@ -326,7 +326,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       meta: {
         title: "联系白泽 — 白泽（Whitzard）",
         description:
-          "与白泽讨论 AgentGuard、WhitzardGateway、团队部署、研究或开源合作。",
+          "联系白泽，咨询智能体安全产品、部署方式、研究或开源合作。",
       },
       eyebrow: "联系团队",
       title: "产品咨询与研究合作",
@@ -336,7 +336,7 @@ export const companyCopy: Record<Locale, CompanyCopy> = {
       paths: [
         {
           title: "产品接入",
-          body: "围绕 AgentGuard 或 WhitzardGateway，讨论智能体技术栈、安全需求与团队部署。",
+          body: "沟通产品接入、智能体技术栈、安全需求与部署方式。",
           subject: "白泽产品咨询",
         },
         {

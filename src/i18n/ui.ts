@@ -1,6 +1,7 @@
+import { productNavigation } from "../data/products";
 import type { Locale } from "./config";
 
-export type NavChild = { href: string; label: string };
+export type NavChild = { href: string; label: string; description?: string; iconPath?: string };
 export type NavIconName = "products" | "research" | "ecosystem" | "about";
 export type NavItem = { href: string; label: string; icon: NavIconName; children?: NavChild[] };
 
@@ -31,10 +32,7 @@ export const ui: Record<Locale, UiCopy> = {
         href: "#",
         label: "Products",
         icon: "products",
-        children: [
-          { href: "/agentguard", label: "AgentGuard" },
-          { href: "/gateway", label: "WhitzardGateway" },
-        ],
+        children: productNavigation("en"),
       },
       {
         href: "/nuwa",
@@ -72,10 +70,7 @@ export const ui: Record<Locale, UiCopy> = {
         href: "#",
         label: "核心产品",
         icon: "products",
-        children: [
-          { href: "/agentguard", label: "AgentGuard" },
-          { href: "/gateway", label: "WhitzardGateway" },
-        ],
+        children: productNavigation("zh"),
       },
       {
         href: "/nuwa",

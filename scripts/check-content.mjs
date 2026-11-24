@@ -145,7 +145,6 @@ const approvedExtendedHeadings = new Set([
 const coreRoutes = ["", "agentguard", "gateway", "solutions", "models", "nuwa", "open-ecosystem", "news", "about", "contact", "waitlist", "login"];
 for (const [route, zhHeadings, enHeadings] of [
   ["nuwa", ["核心问题", "研究方向"], ["Core questions", "Research areas"]],
-  ["agentguard", ["行动边界控制"], ["Action boundary control"]],
   ["models", ["模型来源"], ["Model provenance"]],
   ["about", ["创始团队"], ["Founders"]],
 ]) for (const [prefix, headings] of [["", zhHeadings], ["en", enHeadings]]) {
@@ -193,9 +192,9 @@ const homeHtml = withoutEmbeddedCode(await readFile("dist/index.html", "utf8"));
 const homeRequirements = [
   "守其边界，行其智能",
   "产品与服务",
-  "可信边界",
-  "可核实证据",
-  "最小必要干预",
+  "WhitzardAudit",
+  "WhitzardEval",
+  "product-showcase",
   "AgentGuard",
   "WhitzardGateway",
   "女娲实验室",
@@ -212,7 +211,7 @@ for (const legacy of ["admin@example.com", "alice@example.com", "retrieve_doc", 
   if (homeHtml.includes(legacy)) violations.push(`dist/index.html: legacy homepage marker must not remain: ${legacy}`);
 }
 // V4: concise product screenshots and selected research evidence are allowed on home.
-for (const productOnly of ["细粒度管控行为链、思维链和数据链", "WhitzardOS", "WhitzardEval", "MATE"]) {
+for (const productOnly of ["细粒度管控行为链、思维链和数据链", "WhitzardOS", "MATE"]) {
   if (homeHtml.includes(productOnly)) violations.push(`dist/index.html: content with a dedicated destination must not be duplicated on the homepage: ${productOnly}`);
 }
 
@@ -234,7 +233,7 @@ const homeSource = await readFile("src/components/home/HomePage.astro", "utf8");
 for (const component of ["AgentGuardBoundaryFlow", "AgentGuardRiskSimulator", "AgentGuardSystemMap", "UnifiedSecurityInfluenceEngine", "AgentGuardOperationsCenter"]) {
   if (homeSource.includes(component)) violations.push(`src/components/home/HomePage.astro: homepage must not import or render ${component}`);
 }
-for (const marker of ['id="products"', 'id="applications"', 'id="research"', 'id="ecosystem"', '/assets/agentguard/dashboard.png']) {
+for (const marker of ['id="products"', 'id="applications"', 'id="research"', 'id="ecosystem"', '/assets/products/operations-1280.webp']) {
   if (!homeHtml.includes(marker)) violations.push(`dist/index.html: missing enterprise homepage content: ${marker}`);
 }
 
@@ -319,22 +318,21 @@ for (const file of htmlFiles) {
   }
 }
 
-const agentGuardZh = withoutEmbeddedCode(await readFile("dist/agentguard/index.html", "utf8"));
-const agentGuardEn = withoutEmbeddedCode(await readFile("dist/en/agentguard/index.html", "utf8"));
-for (const [file, content] of [["dist/agentguard/index.html", agentGuardZh], ["dist/en/agentguard/index.html", agentGuardEn]]) {
-  if (!content.includes("AgentGuard Community") || !content.includes("AgentGuard Enterprise")) violations.push(`${file}: both AgentGuard editions must be present`);
-}
-
-const agentGuardRequirements = [
-  ["dist/agentguard/index.html", agentGuardZh, ["保护对象", "覆盖智能体行动的完整上下文", "行动边界控制", "控制位置", "策略配置", "审计记录", "补充智能体运行时上下文", "IAM", "DLP", "API Gateway", "SIEM"]],
-  ["dist/en/agentguard/index.html", agentGuardEn, ["Cover the complete context of agent action", "Action boundary control", "Control points", "Policy configuration", "Audit records", "Add agent-aware runtime context", "IAM", "DLP", "API Gateway", "SIEM"]],
-];
-for (const [file, content, required] of agentGuardRequirements) {
-  for (const marker of required) if (!content.includes(marker)) violations.push(`${file}: missing AgentGuard product content: ${marker}`);
-  for (const id of ["system-map", "engine", "runtime"]) if (!content.includes(`id="${id}"`)) violations.push(`${file}: missing legacy anchor ${id}`);
-  for (const legacy of ["retrieve_doc", "send_email_to", "admin@example.com", "alice@example.com", "执行模拟", "Run simulation", "risk-simulator", "ag-system-map__", "influence-engine__"]) {
-    if (content.includes(legacy)) violations.push(`${file}: legacy two-node product demo must not remain: ${legacy}`);
+// Product details were retired by the owner on 2026-11-24. Old URLs
+// retain static redirects and legacy fragment targets, without exposing detail copy.
+for (const [route, product] of [["agentguard", "agentguard"], ["gateway", "whitzardgateway"]]) {
+  for (const prefix of ["", "en/"]) {
+    const file = `dist/${prefix}${route}/index.html`;
+    const content = withoutEmbeddedCode(await readFile(file, "utf8"));
+    const target = `/${prefix}#product-${product}`;
+    if (!content.includes('http-equiv="refresh"') || !content.includes(`url=${target}`)) violations.push(`${file}: missing homepage product redirect`);
+    if (!content.includes('noindex,follow')) violations.push(`${file}: retired product detail must not be indexed`);
+    for (const id of ["system-map", "engine", "runtime"]) if (!content.includes(`id="${id}"`)) violations.push(`${file}: missing legacy anchor ${id}`);
+    for (const marker of ["ag-hero", "gateway-hero", "risk-simulator", "influence-engine__"]) if (content.includes(marker)) violations.push(`${file}: retired product detail content remains: ${marker}`);
   }
+}
+for (const product of ["whitzardaudit", "whitzardgateway", "agentguard", "whitzardeval"]) {
+  if (!homeHtml.includes(`id="product-${product}"`)) violations.push(`dist/index.html: missing product ${product}`);
 }
 for (const file of ["dist/solutions/index.html", "dist/en/solutions/index.html"]) {
   const content = withoutEmbeddedCode(await readFile(file, "utf8"));
