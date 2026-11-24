@@ -38,6 +38,8 @@ const zh = locale === "zh";
   </dialog>
 </product-showcase>
 <script>
+  import { navigate } from "astro:transitions/client";
+
   class ProductShowcase extends HTMLElement {
     private aborter?: AbortController;
     connectedCallback() {
@@ -60,6 +62,13 @@ const zh = locale === "zh";
         });
         if (focus) selected.focus({ preventScroll: true });
       };
+      const move = async (id: string, focus: boolean, preserveScroll: boolean) => {
+        const position = { left: scrollX, top: scrollY };
+        select(id, focus);
+        await navigate(`#product-${id}`, { history: "push" });
+        if (preserveScroll) window.scrollTo({ ...position, behavior: "instant" });
+        else this.scrollIntoView({ block: "start" });
+      };
       this.querySelector("nav")!.setAttribute("role", "tablist");
       tabs.forEach((tab, index) => {
         tab.setAttribute("role", "tab");
@@ -74,8 +83,7 @@ const zh = locale === "zh";
           else if (event.key === "End") next = tabs.length - 1;
           else return;
           event.preventDefault();
-          select(tabs[next].dataset.productTab!, true);
-          history.pushState(null, "", tabs[next].hash);
+          void move(tabs[next].dataset.productTab!, true, true);
         }, { signal });
       });
       this.dataset.enhanced = "true";
@@ -83,16 +91,15 @@ const zh = locale === "zh";
       const readLocation = () => select(idFromHash());
       window.addEventListener("popstate", readLocation, { signal });
       window.addEventListener("hashchange", readLocation, { signal });
-      document.addEventListener("click", event => {
+      document.addEventListener("click", async event => {
         if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         const link = (event.target as Element).closest<HTMLAnchorElement>("a[href]");
         if (!link) return;
         const url = new URL(link.href);
         if (url.origin !== location.origin || url.pathname !== location.pathname || !panels.some(panel => `#${panel.id}` === url.hash)) return;
         event.preventDefault();
-        select(url.hash.slice("#product-".length));
-        history.pushState(null, "", url.hash);
-        if (!this.contains(link)) { this.scrollIntoView({ block: "start" }); select(idFromHash(), true); }
+        const external = !this.contains(link);
+        await move(url.hash.slice("#product-".length), external, !external);
       }, { signal });
       this.querySelectorAll<HTMLAnchorElement>("[data-product-zoom]").forEach(link => {
         link.addEventListener("click", event => {
