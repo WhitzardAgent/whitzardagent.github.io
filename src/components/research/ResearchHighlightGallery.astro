@@ -1,0 +1,44 @@
+---
+import type { Locale } from "../../i18n/config";
+import { localizedPath } from "../../i18n/config";
+import type { ResolvedHighlight } from "../../lib/researchHighlights";
+import { reportPath, reportTitle, reportSummary } from "../../data/lossOfControlReport";
+import ResearchHighlightBanner from "./ResearchHighlightBanner.astro";
+import ResearchTabs from "./ResearchTabs.astro";
+const cover = "/nuwa/research/loc-assets/cover.webp";
+const { locale, highlight } = Astro.props as { locale: Locale; highlight?: ResolvedHighlight };
+const zh = locale === "zh";
+const href = localizedPath(reportPath, locale);
+const items = [
+  { id: "highlight-loss-of-control", label: zh ? "失控风险评测报告" : "Loss-of-control report" },
+  ...(highlight ? [{ id: "highlight-agentcyberrange", label: "AgentCyberRange" }] : []),
+];
+---
+<div class="site-container research-library-highlight">
+  <ResearchTabs label={zh ? "研究亮点" : "Featured research"} items={items}>
+    <section id="highlight-loss-of-control">
+      <article class="research-highlight research-highlight--compact" data-highlight-id="loss-of-control">
+        <div class="research-highlight__main">
+          <div class="research-highlight__copy">
+            <p class="eyebrow">{zh ? "女娲实验室 · 技术报告" : "NUWA · Technical report"}</p>
+            <h2><a href={href}>{reportTitle[locale]}</a></h2>
+            <p>{reportSummary[locale]}</p>
+            <p class="research-highlight__impact">{zh ? "五款开放权重模型 · 九项基准 · 执行轨迹复核" : "Five open-weight models · Nine benchmarks · Trajectory review"}</p>
+            <div class="research-highlight__actions"><a class="text-link" href={href}>{zh ? "查看研究发现" : "Explore the findings"} →</a></div>
+          </div>
+          <figure class="report-cover">
+            <a href={href} aria-label={reportTitle[locale]}><img src={cover} width="953" height="1348" alt={zh ? "《理解前沿 AI 系统的失控风险》报告封面" : "Cover of Understanding Loss-of-Control Risk in Frontier AI Systems"} decoding="async" /></a>
+          </figure>
+        </div>
+      </article>
+    </section>
+    {highlight && <section id="highlight-agentcyberrange"><ResearchHighlightBanner {highlight} {locale} compact /></section>}
+  </ResearchTabs>
+</div>
+
+<style>
+  .report-cover { margin: 0; padding: 18px; background: #eaf0eb; border-radius: 10px; }
+  .report-cover img { display: block; margin: auto; width: auto; max-width: 100%; height: clamp(245px, 25vw, 350px); object-fit: contain; box-shadow: 0 8px 24px #18272724; }
+  #highlight-agentcyberrange { margin-block-start: 1rem; }
+  #highlight-agentcyberrange[role="tabpanel"] { margin-block-start: 0; }
+</style>

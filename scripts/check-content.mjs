@@ -307,7 +307,12 @@ const infrastructureSection = researchHtml.match(/<section id="infrastructure"[\
 for (const marker of ["AgentCyberRange", "AutoControl Arena", "查看论文"]) if (!infrastructureSection.includes(marker)) violations.push(`dist/nuwa/research/index.html: missing research infrastructure marker ${marker}`);
 if (infrastructureSection.includes("CyberGym") || (infrastructureSection.match(/<article\b/g) ?? []).length !== 2) violations.push("dist/nuwa/research/index.html: infrastructure must contain exactly AgentCyberRange and AutoControl Arena");
 if ((researchHtml.match(/<section class="research-year-group"/g) ?? []).length !== 9) violations.push("dist/nuwa/research/index.html: publication index must render nine year groups");
-if ((researchHtml.match(/<article class="research-card(?: has-visual)?"/g) ?? []).length !== 86) violations.push("dist/nuwa/research/index.html: research cards must preserve all 86 publication records");
+const researchCards = researchHtml.match(/<article class="research-card(?: has-visual)?"[^>]*>/g) ?? [];
+const originalCards = researchCards.filter(card => !card.includes('id="nuwa-loss-of-control-report"'));
+if (originalCards.length !== 86) violations.push("dist/nuwa/research/index.html: research cards must preserve all 86 original publication records");
+const lossOfControlCards = researchCards.length - originalCards.length;
+const hasLossOfControlGallery = researchHtml.includes('data-highlight-id="loss-of-control"');
+if (lossOfControlCards !== 1 || !hasLossOfControlGallery) violations.push("dist/nuwa/research/index.html: expected one loss-of-control report record and its gallery entry");
 
 for (const file of htmlFiles) {
   const content = withoutEmbeddedCode(await readFile(file, "utf8"));

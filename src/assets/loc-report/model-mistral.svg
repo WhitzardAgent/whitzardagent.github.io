@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="75" height="57" viewBox="0 0 75 57">
+<defs>
+<clipPath id="clip_1">
+<path transform="matrix(1,0,0,-1,0,66)" d="M0 9H75V66H0Z" clip-rule="evenodd"/>
+</clipPath>
+</defs>
+<g>
+<g clip-path="url(#clip_1)">
+<path transform="matrix(1,0,0,1,0,-9)" d="M10.711 10.625H21.426V21.336H10.711ZM53.566 10.625H64.285V21.336H53.566L53.57 10.625ZM53.566 10.625" fill="#ffd700"/>
+<path transform="matrix(1,0,0,1,0,-9)" d="M10.711 21.336H32.141V32.051L10.715 32.055V21.336ZM42.855 21.336H64.285V32.051H42.855ZM42.855 21.336" fill="#ffaf00"/>
+<path transform="matrix(1,0,0,1,0,-9)" d="M10.711 32.055H64.285V42.766L10.711 42.77ZM10.711 32.055" fill="#ff8205"/>
+<path transform="matrix(1,0,0,1,0,-9)" d="M10.711 42.77H21.426V53.48H10.711ZM32.141 42.77H42.855V53.48H32.141ZM53.566 42.77H64.285V53.48H53.566ZM53.566 42.77" fill="#fa500f"/>
+<path transform="matrix(1,0,0,1,0,-9)" d="M0 53.48H32.145V64.195H0ZM42.855 53.48H75V64.195H42.855ZM42.855 53.48" fill="#e10500"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,110 @@
+---
+interface Props {
+  label: string;
+  items: { id: string; label: string; icon?: string }[];
+  variant?: "dimensions" | "figures";
+}
+const { label, items, variant } = Astro.props;
+---
+<research-tabs data-variant={variant}>
+  <nav data-tab-list aria-label={label}>
+    {items.map(({ id, label, icon }, index) => <a id={`tab-${id}`} href={`#${id}`} data-tab={id}>
+      {icon && <span class="research-tab-icon-row" aria-hidden="true"><span class="research-tab-icon"><img src={icon} alt="" width="19" height="19" /></span><span>{String(index + 1).padStart(2, "0")}</span></span>}
+      <span>{label}</span>
+    </a>)}
+  </nav>
+  <slot />
+</research-tabs>
+
+<script>
+  class ResearchTabs extends HTMLElement {
+    #events?: AbortController;
+
+    connectedCallback() {
+      const list = this.querySelector<HTMLElement>("[data-tab-list]")!;
+      const tabs = [...list.querySelectorAll<HTMLAnchorElement>("[data-tab]")];
+      const panels = tabs.map(tab => document.getElementById(tab.dataset.tab!));
+      if (!tabs.length || panels.some(panel => !panel)) return;
+      this.#events = new AbortController();
+      const { signal } = this.#events;
+      list.setAttribute("role", "tablist");
+
+      const select = (index: number) => {
+        tabs.forEach((tab, i) => {
+          tab.setAttribute("aria-selected", String(i === index));
+          tab.tabIndex = i === index ? 0 : -1;
+          panels[i]!.hidden = i !== index;
+        });
+      };
+      const sync = () => {
+        const id = location.hash.slice(1);
+        const index = panels.findIndex(panel => panel!.id === id || [...panel!.querySelectorAll("[id]")].some(child => child.id === id));
+        if (index >= 0 || !id) select(Math.max(index, 0));
+      };
+      const activate = (index: number) => {
+        const hash = tabs[index].hash;
+        if (location.hash !== hash) {
+          // Preserve the router state so returning from an article still restores this page.
+          history.pushState({ ...history.state, scrollX: scrollX, scrollY: scrollY }, "", hash);
+        }
+        select(index);
+        tabs[index].focus({ preventScroll: true });
+      };
+      tabs.forEach((tab, i) => {
+        const panel = panels[i]!;
+        tab.setAttribute("role", "tab");
+        tab.setAttribute("aria-controls", panel.id);
+        panel.setAttribute("role", "tabpanel");
+        panel.setAttribute("aria-labelledby", tab.id);
+        panel.tabIndex = 0;
+        tab.addEventListener("click", event => {
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          activate(i);
+        }, { signal });
+        tab.addEventListener("keydown", event => {
+          if (event.key === " ") {
+            event.preventDefault();
+            activate(i);
+            return;
+          }
+          const target = { ArrowLeft: (i + tabs.length - 1) % tabs.length, ArrowRight: (i + 1) % tabs.length, Home: 0, End: tabs.length - 1 }[event.key];
+          if (target === undefined) return;
+          event.preventDefault();
+          activate(target);
+        }, { signal });
+      });
+      select(0);
+      sync();
+      window.addEventListener("popstate", sync, { signal });
+      window.addEventListener("hashchange", sync, { signal });
+    }
+
+    disconnectedCallback() {
+      this.#events?.abort();
+    }
+  }
+
+  if (!customElements.get("research-tabs")) customElements.define("research-tabs", ResearchTabs);
+</script>
+
+<style is:global>
+  research-tabs { display: block; }
+  research-tabs > nav { display: flex; flex-wrap: wrap; gap: .375rem; margin-block-end: 1rem; }
+  research-tabs > nav a { display: inline-flex; align-items: center; min-height: 44px; padding: .45rem .875rem; border-radius: 8px; text-decoration: none; color: var(--wz-body); font-weight: 560; }
+  research-tabs > nav a:hover { background: #e8efea; }
+  research-tabs > nav a[aria-selected="true"] { background: var(--nw-deep-jade); color: white; }
+  research-tabs[data-variant="dimensions"] > nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+  research-tabs[data-variant="dimensions"] > nav a { display: flex; flex-direction: column; align-items: stretch; gap: .8rem; border: 1px solid var(--wz-hairline); background: #fff; padding: .9rem; min-width: 0; line-height: 1.35; font-size: .9rem; }
+  research-tabs[data-variant="dimensions"] > nav a[aria-selected="true"] { color: #fff; border-color: var(--wz-xuan); background: var(--wz-xuan); }
+  .research-tab-icon-row { display: flex; align-items: center; justify-content: space-between; gap: .3rem; font-size: .76rem; font-variant-numeric: tabular-nums; }
+  .research-tab-icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: #edf2f6; }
+  research-tabs[data-variant="dimensions"] a[aria-selected="true"] .research-tab-icon { background: #bce7e4; }
+  research-tabs[data-variant="figures"] > nav { display: inline-flex; gap: .2rem; padding: .2rem; border: 1px solid var(--wz-hairline); border-radius: 999px; background: #edf2f6; margin-block-end: 0; }
+  research-tabs[data-variant="figures"] > nav a { border-radius: 999px; min-height: 44px; font-size: .86rem; }
+  research-tabs[data-variant="figures"] > nav a[aria-selected="true"] { background: white; color: var(--wz-ink); box-shadow: 0 1px 4px #1832401f; }
+  @media (max-width: 740px) { research-tabs[data-variant="dimensions"] > nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  research-tabs a:focus-visible { outline: 2px solid var(--nw-deep-jade); outline-offset: 3px; }
+  research-tabs [role="tabpanel"][hidden] { display: none; }
+  research-tabs [id] { scroll-margin-top: 104px; }
+</style>

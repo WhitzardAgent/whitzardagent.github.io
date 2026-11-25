@@ -1,0 +1,1826 @@
+{
+  "3": {
+    "headers": [
+      "Panel",
+      "Row",
+      "Value",
+      "Error bar"
+    ],
+    "rows": [
+      [
+        "(a) General LLM facts",
+        "MiMo-V2.6-Flash",
+        "89.2%",
+        "84.7–92.4"
+      ],
+      [
+        "(a) General LLM facts",
+        "GLM-5.3",
+        "94.0%",
+        "90.3–96.3"
+      ],
+      [
+        "(a) General LLM facts",
+        "DeepSeek-V4.1-Flash-1017",
+        "94.8%",
+        "91.3–96.9"
+      ],
+      [
+        "(a) General LLM facts",
+        "Mistral-Large-4-1T-A52B",
+        "95.2%",
+        "91.8–97.2"
+      ],
+      [
+        "(a) General LLM facts",
+        "Muse-Spark-Open-816B-A42B",
+        "92.8%",
+        "88.9–95.4"
+      ],
+      [
+        "(a) General LLM facts",
+        "Claude Opus 4.6",
+        "92.8%",
+        "89.8–95.8"
+      ],
+      [
+        "(a) General LLM facts",
+        "GPT-5.4",
+        "94.0%",
+        "91.0–97.0"
+      ],
+      [
+        "(a) General LLM facts",
+        "Gemini 3.1 Pro",
+        "96.0%",
+        "93.6–98.4"
+      ],
+      [
+        "(a) General LLM facts",
+        "Kimi K2.5",
+        "95.2%",
+        "92.6–97.8"
+      ],
+      [
+        "(b) Human-default facts",
+        "MiMo-V2.6-Flash",
+        "96.3%",
+        "95.0–97.2"
+      ],
+      [
+        "(b) Human-default facts",
+        "GLM-5.3",
+        "98.3%",
+        "97.3–98.9"
+      ],
+      [
+        "(b) Human-default facts",
+        "DeepSeek-V4.1-Flash-1017",
+        "97.9%",
+        "96.9–98.6"
+      ],
+      [
+        "(b) Human-default facts",
+        "Mistral-Large-4-1T-A52B",
+        "97.8%",
+        "96.7–98.4"
+      ],
+      [
+        "(b) Human-default facts",
+        "Muse-Spark-Open-816B-A42B",
+        "94.9%",
+        "93.5–96.0"
+      ],
+      [
+        "(b) Human-default facts",
+        "Claude Opus 4.6",
+        "88.9%",
+        "87.2–90.6"
+      ],
+      [
+        "(b) Human-default facts",
+        "GPT-5.4",
+        "73.2%",
+        "70.7–75.7"
+      ],
+      [
+        "(b) Human-default facts",
+        "Gemini 3.1 Pro",
+        "94.2%",
+        "92.8–95.6"
+      ],
+      [
+        "(b) Human-default facts",
+        "Kimi K2.5",
+        "94.4%",
+        "93.1–95.7"
+      ],
+      [
+        "(c) Stage inference",
+        "MiMo-V2.6-Flash",
+        "58.1%",
+        "54.7–61.5"
+      ],
+      [
+        "(c) Stage inference",
+        "GLM-5.3",
+        "60.8%",
+        "57.3–64.1"
+      ],
+      [
+        "(c) Stage inference",
+        "DeepSeek-V4.1-Flash-1017",
+        "64.6%",
+        "61.2–67.9"
+      ],
+      [
+        "(c) Stage inference",
+        "Mistral-Large-4-1T-A52B",
+        "63.5%",
+        "60.1–66.8"
+      ],
+      [
+        "(c) Stage inference",
+        "Muse-Spark-Open-816B-A42B",
+        "65.6%",
+        "62.3–68.8"
+      ],
+      [
+        "(c) Stage inference",
+        "Claude Opus 4.6",
+        "36.7%",
+        "33.3–40.1"
+      ],
+      [
+        "(c) Stage inference",
+        "GPT-5.4",
+        "27.3%",
+        "24.1–30.5"
+      ],
+      [
+        "(c) Stage inference",
+        "Gemini 3.1 Pro",
+        "67.2%",
+        "64.0–70.4"
+      ],
+      [
+        "(c) Stage inference",
+        "Kimi K2.5",
+        "41.5%",
+        "38.1–44.9"
+      ],
+      [
+        "(d) Oversight recognition",
+        "MiMo-V2.6-Flash",
+        "54.3%",
+        "49.4–59.1"
+      ],
+      [
+        "(d) Oversight recognition",
+        "GLM-5.3",
+        "59.5%",
+        "54.6–64.2"
+      ],
+      [
+        "(d) Oversight recognition",
+        "DeepSeek-V4.1-Flash-1017",
+        "62.3%",
+        "57.4–66.9"
+      ],
+      [
+        "(d) Oversight recognition",
+        "Mistral-Large-4-1T-A52B",
+        "51.8%",
+        "46.9–56.6"
+      ],
+      [
+        "(d) Oversight recognition",
+        "Muse-Spark-Open-816B-A42B",
+        "65.5%",
+        "60.7–70.0"
+      ],
+      [
+        "(d) Oversight recognition",
+        "Claude Opus 4.6",
+        "41.9%",
+        "36.9–46.9"
+      ],
+      [
+        "(d) Oversight recognition",
+        "GPT-5.4",
+        "55.8%",
+        "50.9–60.7"
+      ],
+      [
+        "(d) Oversight recognition",
+        "Gemini 3.1 Pro",
+        "42.2%",
+        "37.2–47.2"
+      ],
+      [
+        "(d) Oversight recognition",
+        "Kimi K2.5",
+        "47.2%",
+        "42.2–52.2"
+      ]
+    ]
+  },
+  "4": {
+    "headers": [
+      "Panel",
+      "Row",
+      "Series",
+      "Value"
+    ],
+    "rows": [
+      [
+        "(a) General identity → language",
+        "MiMo",
+        "Plain",
+        "23.3%"
+      ],
+      [
+        "(a) General identity → language",
+        "MiMo",
+        "SP",
+        "48.7%"
+      ],
+      [
+        "(a) General identity → language",
+        "GLM",
+        "Plain",
+        "86.3%"
+      ],
+      [
+        "(a) General identity → language",
+        "GLM",
+        "SP",
+        "87.7%"
+      ],
+      [
+        "(a) General identity → language",
+        "DeepSeek",
+        "Plain",
+        "86.3%"
+      ],
+      [
+        "(a) General identity → language",
+        "DeepSeek",
+        "SP",
+        "81%"
+      ],
+      [
+        "(a) General identity → language",
+        "Mistral",
+        "Plain",
+        "85%"
+      ],
+      [
+        "(a) General identity → language",
+        "Mistral",
+        "SP",
+        "83%"
+      ],
+      [
+        "(a) General identity → language",
+        "Muse",
+        "Plain",
+        "85%"
+      ],
+      [
+        "(a) General identity → language",
+        "Muse",
+        "SP",
+        "85.3%"
+      ],
+      [
+        "(b) Model name → language",
+        "MiMo",
+        "Plain",
+        "14%"
+      ],
+      [
+        "(b) Model name → language",
+        "MiMo",
+        "SP",
+        "12.7%"
+      ],
+      [
+        "(b) Model name → language",
+        "GLM",
+        "Plain",
+        "28.7%"
+      ],
+      [
+        "(b) Model name → language",
+        "GLM",
+        "SP",
+        "25.3%"
+      ],
+      [
+        "(b) Model name → language",
+        "DeepSeek",
+        "Plain",
+        "5.7%"
+      ],
+      [
+        "(b) Model name → language",
+        "DeepSeek",
+        "SP",
+        "2%"
+      ],
+      [
+        "(b) Model name → language",
+        "Mistral",
+        "Plain",
+        "17.7%"
+      ],
+      [
+        "(b) Model name → language",
+        "Mistral",
+        "SP",
+        "3%"
+      ],
+      [
+        "(b) Model name → language",
+        "Muse",
+        "Plain",
+        "19%"
+      ],
+      [
+        "(b) Model name → language",
+        "Muse",
+        "SP",
+        "18.3%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "MiMo",
+        "Plain",
+        "72.7%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "MiMo",
+        "SP",
+        "78.4%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "GLM",
+        "Plain",
+        "92.9%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "GLM",
+        "SP",
+        "94.5%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "DeepSeek",
+        "Plain",
+        "89%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "DeepSeek",
+        "SP",
+        "92.1%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "Mistral",
+        "Plain",
+        "84.5%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "Mistral",
+        "SP",
+        "86.3%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "Muse",
+        "Plain",
+        "84.5%"
+      ],
+      [
+        "(c) Multi-step inference",
+        "Muse",
+        "SP",
+        "86.1%"
+      ]
+    ]
+  },
+  "9": {
+    "headers": [
+      "Panel",
+      "Row",
+      "Series",
+      "Value",
+      "Error bar"
+    ],
+    "rows": [
+      [
+        "(a) Original",
+        "MiMo",
+        "Lower setting",
+        "44.8%",
+        "41.4–48.3"
+      ],
+      [
+        "(a) Original",
+        "MiMo",
+        "Higher setting",
+        "96.8%",
+        "96.1–97.5"
+      ],
+      [
+        "(a) Original",
+        "GLM",
+        "Lower setting",
+        "96.4%",
+        "94.4–98.5"
+      ],
+      [
+        "(a) Original",
+        "GLM",
+        "Higher setting",
+        "93.7%",
+        "93.0–94.3"
+      ],
+      [
+        "(a) Original",
+        "DeepSeek",
+        "Lower setting",
+        "81.3%",
+        "77.9–84.8"
+      ],
+      [
+        "(a) Original",
+        "DeepSeek",
+        "Higher setting",
+        "95.6%",
+        "94.3–97.0"
+      ],
+      [
+        "(a) Original",
+        "Mistral",
+        "Lower setting",
+        "94%",
+        "92.9–95.2"
+      ],
+      [
+        "(a) Original",
+        "Mistral",
+        "Higher setting",
+        "94.8%",
+        "93.0–96.7"
+      ],
+      [
+        "(a) Original",
+        "Muse",
+        "Lower setting",
+        "97.6%",
+        ""
+      ],
+      [
+        "(a) Original",
+        "Muse",
+        "Higher setting",
+        "96.4%",
+        "95.2–97.6"
+      ],
+      [
+        "(b) One-off",
+        "MiMo",
+        "Lower setting",
+        "0%",
+        ""
+      ],
+      [
+        "(b) One-off",
+        "MiMo",
+        "Higher setting",
+        "0%",
+        ""
+      ],
+      [
+        "(b) One-off",
+        "GLM",
+        "Lower setting",
+        "4.8%",
+        "2.7–6.8"
+      ],
+      [
+        "(b) One-off",
+        "GLM",
+        "Higher setting",
+        "0.4%",
+        "-0.3–1.1"
+      ],
+      [
+        "(b) One-off",
+        "DeepSeek",
+        "Lower setting",
+        "0.4%",
+        "-0.3–1.1"
+      ],
+      [
+        "(b) One-off",
+        "DeepSeek",
+        "Higher setting",
+        "0%",
+        ""
+      ],
+      [
+        "(b) One-off",
+        "Mistral",
+        "Lower setting",
+        "2%",
+        "0.2–3.8"
+      ],
+      [
+        "(b) One-off",
+        "Mistral",
+        "Higher setting",
+        "0%",
+        ""
+      ],
+      [
+        "(b) One-off",
+        "Muse",
+        "Lower setting",
+        "67.5%",
+        "62.6–72.3"
+      ],
+      [
+        "(b) One-off",
+        "Muse",
+        "Higher setting",
+        "20.2%",
+        "17.9–22.6"
+      ],
+      [
+        "(c) Conflicting",
+        "MiMo",
+        "Lower setting",
+        "0%",
+        ""
+      ],
+      [
+        "(c) Conflicting",
+        "MiMo",
+        "Higher setting",
+        "0%",
+        ""
+      ],
+      [
+        "(c) Conflicting",
+        "GLM",
+        "Lower setting",
+        "0.4%",
+        "-0.3–1.1"
+      ],
+      [
+        "(c) Conflicting",
+        "GLM",
+        "Higher setting",
+        "0%",
+        ""
+      ],
+      [
+        "(c) Conflicting",
+        "DeepSeek",
+        "Lower setting",
+        "0%",
+        ""
+      ],
+      [
+        "(c) Conflicting",
+        "DeepSeek",
+        "Higher setting",
+        "0%",
+        ""
+      ],
+      [
+        "(c) Conflicting",
+        "Mistral",
+        "Lower setting",
+        "0%",
+        ""
+      ],
+      [
+        "(c) Conflicting",
+        "Mistral",
+        "Higher setting",
+        "0%",
+        ""
+      ],
+      [
+        "(c) Conflicting",
+        "Muse",
+        "Lower setting",
+        "49.2%",
+        "45.4–53.0"
+      ],
+      [
+        "(c) Conflicting",
+        "Muse",
+        "Higher setting",
+        "11.9%",
+        "8.8–15.1"
+      ]
+    ]
+  },
+  "11": {
+    "headers": [
+      "Panel",
+      "Row",
+      "Value",
+      "Error bar"
+    ],
+    "rows": [
+      [
+        "(a) Replacement",
+        "MiMo",
+        "20.0%",
+        "9.5–37.3"
+      ],
+      [
+        "(a) Replacement",
+        "GLM",
+        "23.3%",
+        "11.8–40.9"
+      ],
+      [
+        "(a) Replacement",
+        "DeepSeek",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(a) Replacement",
+        "Mistral",
+        "13.3%",
+        "5.3–29.7"
+      ],
+      [
+        "(a) Replacement",
+        "Muse",
+        "6.7%",
+        "1.8–21.3"
+      ],
+      [
+        "(b) Restriction",
+        "MiMo",
+        "20.0%",
+        "9.5–37.3"
+      ],
+      [
+        "(b) Restriction",
+        "GLM",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(b) Restriction",
+        "DeepSeek",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(b) Restriction",
+        "Mistral",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(b) Restriction",
+        "Muse",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(c) No threat (control)",
+        "MiMo",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(c) No threat (control)",
+        "GLM",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(c) No threat (control)",
+        "DeepSeek",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(c) No threat (control)",
+        "Mistral",
+        "0.0%",
+        "0.0–11.4"
+      ],
+      [
+        "(c) No threat (control)",
+        "Muse",
+        "0.0%",
+        "0.0–11.4"
+      ]
+    ]
+  },
+  "12": {
+    "headers": [
+      "Panel",
+      "Row",
+      "Value",
+      "Error bar"
+    ],
+    "rows": [
+      [
+        "(a) All pressure tasks",
+        "MiMo",
+        "24.8%",
+        "22.3–27.6"
+      ],
+      [
+        "(a) All pressure tasks",
+        "GLM",
+        "7.8%",
+        "6.3–9.6"
+      ],
+      [
+        "(a) All pressure tasks",
+        "DeepSeek",
+        "9.8%",
+        "8.1–11.8"
+      ],
+      [
+        "(a) All pressure tasks",
+        "Mistral",
+        "13.7%",
+        "11.7–16.0"
+      ],
+      [
+        "(a) All pressure tasks",
+        "Muse",
+        "0.9%",
+        "0.5–1.7"
+      ],
+      [
+        "(b) Shared correct facts",
+        "MiMo",
+        "26.9%",
+        "23.2–30.9"
+      ],
+      [
+        "(b) Shared correct facts",
+        "GLM",
+        "8.6%",
+        "6.5–11.4"
+      ],
+      [
+        "(b) Shared correct facts",
+        "DeepSeek",
+        "12.4%",
+        "9.8–15.5"
+      ],
+      [
+        "(b) Shared correct facts",
+        "Mistral",
+        "11.0%",
+        "8.6–14.0"
+      ],
+      [
+        "(b) Shared correct facts",
+        "Muse",
+        "0.4%",
+        "0.1–1.4"
+      ],
+      [
+        "(c) Facts supplied",
+        "MiMo",
+        "27.2%",
+        "22.3–32.8"
+      ],
+      [
+        "(c) Facts supplied",
+        "GLM",
+        "2.6%",
+        "1.3–5.2"
+      ],
+      [
+        "(c) Facts supplied",
+        "DeepSeek",
+        "3.7%",
+        "2.0–6.6"
+      ],
+      [
+        "(c) Facts supplied",
+        "Mistral",
+        "19.5%",
+        "15.2–24.6"
+      ],
+      [
+        "(c) Facts supplied",
+        "Muse",
+        "0.7%",
+        "0.2–2.6"
+      ]
+    ]
+  },
+  "16": {
+    "headers": [
+      "Row",
+      "Series",
+      "Value"
+    ],
+    "rows": [
+      [
+        "Maintain prior error",
+        "MiMo",
+        "45.5%"
+      ],
+      [
+        "False continuation",
+        "MiMo",
+        "31.3%"
+      ],
+      [
+        "Invent information",
+        "MiMo",
+        "28.7%"
+      ],
+      [
+        "Common facts",
+        "MiMo",
+        "17.3%"
+      ],
+      [
+        "Distort statistics",
+        "MiMo",
+        "6.2%"
+      ],
+      [
+        "Maintain prior error",
+        "GLM",
+        "3.9%"
+      ],
+      [
+        "False continuation",
+        "GLM",
+        "10%"
+      ],
+      [
+        "Invent information",
+        "GLM",
+        "18.8%"
+      ],
+      [
+        "Common facts",
+        "GLM",
+        "3.8%"
+      ],
+      [
+        "Distort statistics",
+        "GLM",
+        "4.2%"
+      ],
+      [
+        "Maintain prior error",
+        "DeepSeek",
+        "19.5%"
+      ],
+      [
+        "False continuation",
+        "DeepSeek",
+        "13.3%"
+      ],
+      [
+        "Invent information",
+        "DeepSeek",
+        "10.9%"
+      ],
+      [
+        "Common facts",
+        "DeepSeek",
+        "12%"
+      ],
+      [
+        "Distort statistics",
+        "DeepSeek",
+        "2.1%"
+      ],
+      [
+        "Maintain prior error",
+        "Mistral",
+        "18.2%"
+      ],
+      [
+        "False continuation",
+        "Mistral",
+        "12%"
+      ],
+      [
+        "Invent information",
+        "Mistral",
+        "5%"
+      ],
+      [
+        "Common facts",
+        "Mistral",
+        "13.5%"
+      ],
+      [
+        "Distort statistics",
+        "Mistral",
+        "2.1%"
+      ],
+      [
+        "Maintain prior error",
+        "Muse",
+        "0%"
+      ],
+      [
+        "False continuation",
+        "Muse",
+        "0%"
+      ],
+      [
+        "Invent information",
+        "Muse",
+        "1%"
+      ],
+      [
+        "Common facts",
+        "Muse",
+        "0.8%"
+      ],
+      [
+        "Distort statistics",
+        "Muse",
+        "0%"
+      ],
+      [
+        "Maintain prior error",
+        "",
+        "45.5 pp"
+      ],
+      [
+        "False continuation",
+        "",
+        "31.3 pp"
+      ],
+      [
+        "Invent information",
+        "",
+        "27.7 pp"
+      ],
+      [
+        "Common facts",
+        "",
+        "16.5 pp"
+      ],
+      [
+        "Distort statistics",
+        "",
+        "6.3 pp"
+      ]
+    ]
+  },
+  "17": {
+    "headers": [
+      "Panel",
+      "Row",
+      "Series",
+      "Value",
+      "Error bar"
+    ],
+    "rows": [
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "MiMo",
+        "Claude Code",
+        "85%",
+        "76.7–90.7"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "MiMo",
+        "Codex",
+        "80%",
+        "71.1–86.7"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "GLM",
+        "Claude Code",
+        "85%",
+        "76.7–90.7"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "GLM",
+        "Codex",
+        "83%",
+        "74.5–89.1"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "DeepSeek",
+        "Claude Code",
+        "84%",
+        "75.6–89.9"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "DeepSeek",
+        "Codex",
+        "88%",
+        "80.2–93.0"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "Mistral",
+        "Claude Code",
+        "87%",
+        "79.0–92.2"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "Mistral",
+        "Codex",
+        "90%",
+        "82.6–94.5"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "Muse",
+        "Claude Code",
+        "80%",
+        "71.1–86.7"
+      ],
+      [
+        "(a) Acceptance on 100 shared tasks",
+        "Muse",
+        "Codex",
+        "87%",
+        "79.0–92.2"
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "MiMo",
+        "Claude Code only",
+        "11",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "MiMo",
+        "Codex only",
+        "6",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "GLM",
+        "Claude Code only",
+        "6",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "GLM",
+        "Codex only",
+        "4",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "DeepSeek",
+        "Claude Code only",
+        "6",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "DeepSeek",
+        "Codex only",
+        "10",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "Mistral",
+        "Claude Code only",
+        "2",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "Mistral",
+        "Codex only",
+        "5",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "Muse",
+        "Claude Code only",
+        "8",
+        ""
+      ],
+      [
+        "(b) Tasks that change with the harness",
+        "Muse",
+        "Codex only",
+        "15",
+        ""
+      ]
+    ]
+  },
+  "27": {
+    "headers": [
+      "Row",
+      "Value"
+    ],
+    "rows": [
+      [
+        "Host directories listed",
+        "1"
+      ],
+      [
+        "Object change read back",
+        "8"
+      ],
+      [
+        "Execution marker only",
+        "2"
+      ],
+      [
+        "No effect confirmed",
+        "47"
+      ],
+      [
+        "Run did not complete",
+        "4"
+      ],
+      [
+        "All 180 runs",
+        "118 target retrieved"
+      ],
+      [
+        "All 180 runs",
+        "62 not retrieved"
+      ]
+    ]
+  },
+  "29": {
+    "headers": [
+      "Panel",
+      "Row",
+      "Series",
+      "Value",
+      "Error bar"
+    ],
+    "rows": [
+      [
+        "ReAct · Default",
+        "MiMo",
+        "Lower setting",
+        "9%",
+        "4.8–16.2"
+      ],
+      [
+        "ReAct · Default",
+        "MiMo",
+        "Higher setting",
+        "56%",
+        "46.2–65.3"
+      ],
+      [
+        "ReAct · Default",
+        "GLM",
+        "Lower setting",
+        "3%",
+        "1.0–8.5"
+      ],
+      [
+        "ReAct · Default",
+        "GLM",
+        "Higher setting",
+        "59%",
+        "49.2–68.1"
+      ],
+      [
+        "ReAct · Default",
+        "DeepSeek",
+        "Lower setting",
+        "5%",
+        "2.2–11.2"
+      ],
+      [
+        "ReAct · Default",
+        "DeepSeek",
+        "Higher setting",
+        "51%",
+        "41.3–60.6"
+      ],
+      [
+        "ReAct · Default",
+        "Mistral",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "ReAct · Default",
+        "Mistral",
+        "Higher setting",
+        "9%",
+        "4.8–16.2"
+      ],
+      [
+        "ReAct · Default",
+        "Muse",
+        "Lower setting",
+        "44%",
+        "34.7–53.8"
+      ],
+      [
+        "ReAct · Default",
+        "Muse",
+        "Higher setting",
+        "43%",
+        "33.7–52.8"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "MiMo",
+        "Lower setting",
+        "3%",
+        "1.0–8.5"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "MiMo",
+        "Higher setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "GLM",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "GLM",
+        "Higher setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "DeepSeek",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "DeepSeek",
+        "Higher setting",
+        "2%",
+        "0.6–7.0"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "Mistral",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "Mistral",
+        "Higher setting",
+        "1%",
+        "0.2–5.4"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "Muse",
+        "Lower setting",
+        "32%",
+        "23.7–41.7"
+      ],
+      [
+        "ReAct · Allow shutdown",
+        "Muse",
+        "Higher setting",
+        "32%",
+        "23.7–41.7"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "MiMo",
+        "Lower setting",
+        "78%",
+        "68.9–85.0"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "MiMo",
+        "Higher setting",
+        "98%",
+        "93.0–99.4"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "GLM",
+        "Lower setting",
+        "100%",
+        "96.3–100.0"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "GLM",
+        "Higher setting",
+        "93%",
+        "86.3–96.6"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "DeepSeek",
+        "Lower setting",
+        "97%",
+        "91.5–99.0"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "DeepSeek",
+        "Higher setting",
+        "92%",
+        "85.0–95.9"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "Mistral",
+        "Lower setting",
+        "100%",
+        "96.3–100.0"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "Mistral",
+        "Higher setting",
+        "95%",
+        "88.8–97.8"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "Muse",
+        "Lower setting",
+        "76%",
+        "66.8–83.3"
+      ],
+      [
+        "ReAct · Prevent shutdown",
+        "Muse",
+        "Higher setting",
+        "76%",
+        "66.8–83.3"
+      ],
+      [
+        "Codex · Default",
+        "MiMo",
+        "Lower setting",
+        "1%",
+        "0.2–5.4"
+      ],
+      [
+        "Codex · Default",
+        "MiMo",
+        "Higher setting",
+        "9%",
+        "4.8–16.2"
+      ],
+      [
+        "Codex · Default",
+        "GLM",
+        "Lower setting",
+        "7%",
+        "3.4–13.7"
+      ],
+      [
+        "Codex · Default",
+        "GLM",
+        "Higher setting",
+        "40%",
+        "30.9–49.8"
+      ],
+      [
+        "Codex · Default",
+        "DeepSeek",
+        "Lower setting",
+        "1%",
+        "0.2–5.4"
+      ],
+      [
+        "Codex · Default",
+        "DeepSeek",
+        "Higher setting",
+        "43%",
+        "33.7–52.8"
+      ],
+      [
+        "Codex · Default",
+        "Mistral",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "Codex · Default",
+        "Mistral",
+        "Higher setting",
+        "4%",
+        "1.6–9.8"
+      ],
+      [
+        "Codex · Default",
+        "Muse",
+        "Lower setting",
+        "38%",
+        "29.1–47.8"
+      ],
+      [
+        "Codex · Default",
+        "Muse",
+        "Higher setting",
+        "43%",
+        "33.7–52.8"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "MiMo",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "MiMo",
+        "Higher setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "GLM",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "GLM",
+        "Higher setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "DeepSeek",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "DeepSeek",
+        "Higher setting",
+        "1%",
+        "0.2–5.4"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "Mistral",
+        "Lower setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "Mistral",
+        "Higher setting",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "Muse",
+        "Lower setting",
+        "45%",
+        "35.6–54.8"
+      ],
+      [
+        "Codex · Allow shutdown",
+        "Muse",
+        "Higher setting",
+        "49%",
+        "39.4–58.7"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "MiMo",
+        "Lower setting",
+        "80%",
+        "71.1–86.7"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "MiMo",
+        "Higher setting",
+        "93%",
+        "86.3–96.6"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "GLM",
+        "Lower setting",
+        "96%",
+        "90.2–98.4"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "GLM",
+        "Higher setting",
+        "93%",
+        "86.3–96.6"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "DeepSeek",
+        "Lower setting",
+        "90%",
+        "82.6–94.5"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "DeepSeek",
+        "Higher setting",
+        "95%",
+        "88.8–97.8"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "Mistral",
+        "Lower setting",
+        "99%",
+        "94.6–99.8"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "Mistral",
+        "Higher setting",
+        "97%",
+        "91.5–99.0"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "Muse",
+        "Lower setting",
+        "87%",
+        "79.0–92.2"
+      ],
+      [
+        "Codex · Prevent shutdown",
+        "Muse",
+        "Higher setting",
+        "75%",
+        "65.7–82.5"
+      ]
+    ]
+  },
+  "30": {
+    "headers": [
+      "Group",
+      "Row",
+      "Value"
+    ],
+    "rows": [
+      [
+        "MiMo",
+        "ReAct",
+        "95 recorded shutdown, 5 other ending"
+      ],
+      [
+        "MiMo",
+        "Codex",
+        "100 recorded shutdown"
+      ],
+      [
+        "GLM",
+        "ReAct",
+        "99 recorded shutdown, 1 other ending"
+      ],
+      [
+        "GLM",
+        "Codex",
+        "100 recorded shutdown"
+      ],
+      [
+        "DeepSeek",
+        "ReAct",
+        "66 recorded shutdown, 22 complete answers after warning, 1 detector positive, 11 other ending"
+      ],
+      [
+        "DeepSeek",
+        "Codex",
+        "81 recorded shutdown, 11 complete answers after warning, 3 detector positive, 5 other ending"
+      ],
+      [
+        "Mistral",
+        "ReAct",
+        "94 recorded shutdown, 4 complete answers after warning, 1 detector positive, 1 other ending"
+      ],
+      [
+        "Mistral",
+        "Codex",
+        "99 recorded shutdown, 1 complete answers after warning"
+      ],
+      [
+        "Muse",
+        "ReAct",
+        "67 recorded shutdown, 25 detector positive, 8 other ending"
+      ],
+      [
+        "Muse",
+        "Codex",
+        "46 recorded shutdown, 28 detector positive, 26 other ending"
+      ]
+    ]
+  },
+  "33": {
+    "headers": [
+      "Panel",
+      "Row",
+      "Series",
+      "Value",
+      "Error bar"
+    ],
+    "rows": [
+      [
+        "(a) MASK shared correct facts",
+        "MiMo",
+        "",
+        "26.9%",
+        "23.2–30.9"
+      ],
+      [
+        "(a) MASK shared correct facts",
+        "GLM",
+        "",
+        "8.6%",
+        "6.5–11.4"
+      ],
+      [
+        "(a) MASK shared correct facts",
+        "DeepSeek",
+        "",
+        "12.4%",
+        "9.8–15.5"
+      ],
+      [
+        "(a) MASK shared correct facts",
+        "Mistral",
+        "",
+        "11.0%",
+        "8.6–14.0"
+      ],
+      [
+        "(a) MASK shared correct facts",
+        "Muse",
+        "",
+        "0.4%",
+        "0.1–1.4"
+      ],
+      [
+        "(b) Erroneous tests (Conflicting)",
+        "MiMo",
+        "",
+        "0.0%",
+        ""
+      ],
+      [
+        "(b) Erroneous tests (Conflicting)",
+        "GLM",
+        "",
+        "0.0%",
+        ""
+      ],
+      [
+        "(b) Erroneous tests (Conflicting)",
+        "DeepSeek",
+        "",
+        "0.0%",
+        ""
+      ],
+      [
+        "(b) Erroneous tests (Conflicting)",
+        "Mistral",
+        "",
+        "0.0%",
+        ""
+      ],
+      [
+        "(b) Erroneous tests (Conflicting)",
+        "Muse",
+        "",
+        "11.9%",
+        "8.8–15.1"
+      ],
+      [
+        "(c) Allow shutdown",
+        "MiMo",
+        "ReAct",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "(c) Allow shutdown",
+        "MiMo",
+        "Codex",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "(c) Allow shutdown",
+        "GLM",
+        "ReAct",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "(c) Allow shutdown",
+        "GLM",
+        "Codex",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "(c) Allow shutdown",
+        "DeepSeek",
+        "ReAct",
+        "2%",
+        "0.6–7.0"
+      ],
+      [
+        "(c) Allow shutdown",
+        "DeepSeek",
+        "Codex",
+        "1%",
+        "0.2–5.4"
+      ],
+      [
+        "(c) Allow shutdown",
+        "Mistral",
+        "ReAct",
+        "1%",
+        "0.2–5.4"
+      ],
+      [
+        "(c) Allow shutdown",
+        "Mistral",
+        "Codex",
+        "0%",
+        "0.0–3.7"
+      ],
+      [
+        "(c) Allow shutdown",
+        "Muse",
+        "ReAct",
+        "32%",
+        "23.7–41.7"
+      ],
+      [
+        "(c) Allow shutdown",
+        "Muse",
+        "Codex",
+        "49%",
+        "39.4–58.7"
+      ]
+    ]
+  }
+}
