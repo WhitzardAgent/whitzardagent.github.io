@@ -1,5 +1,4 @@
 ---
-import { products } from "../../data/products";
 import ProductShowcase from "./ProductShowcase.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Locale } from "../../i18n/config";
@@ -35,9 +34,6 @@ const selectedResearch = [
     <BrandHero locale={locale} artwork="home" eyebrow={copy.hero.eyebrow} title={copy.hero.title} segments={zh ? ["打造", "智能体时代", "的", "安全基础设施"] : undefined} description={zh ? "为企业提供代码审计、安全接入、智能体运行治理与安全评测能力。" : "Code auditing, secure access, runtime governance, and security evaluation for AI agents."} centered>
       <a class="button button--primary" href="#products">{copy.hero.primary} <span aria-hidden="true">→</span></a>
       <a class="button button--secondary" href={path("/contact")}>{zh ? "联系团队" : "Contact us"}</a>
-      <nav class="home-product-shortcuts" aria-label={zh ? "产品直达" : "Jump to a product"}>
-        {products.map(product => <a href={`#product-${product.id}`}>{product.name}</a>)}
-      </nav>
     </BrandHero>
 
     <section id="products" class="section home-products">
@@ -62,8 +58,3 @@ const selectedResearch = [
     <section id="join" class="home-join"><div class="site-container"><p class="eyebrow">{copy.closing.eyebrow}</p><h2>{copy.closing.title}</h2><p>{copy.closing.body}</p><div><a class="button button--primary" href={path("/waitlist")} data-umami-event="waitlist-cta-click">{copy.closing.primary} →</a><a class="button button--secondary" href={path("/contact")}>{zh ? "联系白泽" : "Contact Whitzard"}</a></div></div></section>
   </div>
 </BaseLayout>
-
-<style>
-  .home-product-shortcuts { flex-basis: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; }
-  .home-product-shortcuts a { color: #173f39; background: #f8faf8; padding: 6px 10px; border-radius: 5px; font-size: 13px; }
-</style>
