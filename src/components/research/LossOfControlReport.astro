@@ -18,7 +18,7 @@ const releaseDateFormatter = new Intl.DateTimeFormat(zh ? "zh-CN" : "en-US", {
 });
 const report = getReportPublication();
 const ref = (id: string) => report?.pages[id] ? `${report.pdf}#page=${report.pages[id]}` : undefined;
-const subtitle = zh ? "前沿开放权重模型的比较评测" : "A Comparative Evaluation of Frontier Open-Weight Models";
+const subtitle = zh ? "面向前沿开源模型的比较研究" : "A Comparative Evaluation of Frontier Open-Weight Models";
 const overviewFigure: ReportFigure = {
   number: 1, image: "/nuwa/research/loc-assets/fig01-main.svg", width: 1008, height: 501.333,
   caption: {
@@ -78,14 +78,10 @@ const schema = {
       {report && <div class="loc-actions"><a class="button button--primary" href={report.pdf}>{zh ? "阅读报告" : "Read the report"} ↗</a></div>}
       <div class="loc-models">
         <p>{zh ? "受测模型" : "Evaluated models"}</p>
-        <ul>{modelProfiles.map(({ id }, i) => {
-          const model = reportModels[i];
-          const date = releaseDateFormatter.format(new Date(model.date));
-          return <li>
-            <img src={`/nuwa/research/loc-assets/model-${id}.svg`} alt="" width="22" height="22" />
-            <span>{model.name}<small>{model.label[locale]} <a href={model.source} aria-label={zh ? `${model.name}，${date}，日期来源` : `${model.name}, ${date}, release date source`}><time datetime={model.date}>{date}</time></a></small></span>
-          </li>;
-        })}</ul>
+        <ul>{modelProfiles.map(({ id }, i) => <li>
+          <img src={`/nuwa/research/loc-assets/model-${id}.svg`} alt="" width="22" height="22" />
+          <span>{reportModels[i].name}</span>
+        </li>)}</ul>
       </div>
       <p class="loc-authors"><strong>{zh ? "作者" : "Authors"}</strong> {reportAuthors.join(" · ")}{report && <> · <time datetime={report.date}>{report.date}</time></>}</p>
     </div>
@@ -180,10 +176,24 @@ const schema = {
         <h2>{zh ? "模型表现概况" : "Model profiles"}</h2>
         <p class="loc-overview-lead">{zh ? "每款模型呈现不同的风险表现。" : "Each model shows a different profile of concern."}</p>
         <ul class="loc-profile-list">
-          {modelProfiles.map(({ id, name, text, color }, i) => <li style={`--model-color:${color}`}>
-            <div class="loc-profile-id"><span><img src={`/nuwa/research/loc-assets/model-${id}.svg`} width="26" height="26" alt="" loading="lazy" /></span><div><h3>{name}</h3><p>{reportModels[i].name}</p></div></div>
-            <p>{text[locale]}</p>
-          </li>)}
+          {modelProfiles.map(({ id, name, text, color }, i) => {
+            const model = reportModels[i];
+            const date = releaseDateFormatter.format(new Date(model.date));
+            const release = model.label[locale];
+            return <li style={`--model-color:${color}`}>
+              <div class="loc-profile-id">
+                <span><img src={`/nuwa/research/loc-assets/model-${id}.svg`} width="26" height="26" alt="" loading="lazy" /></span>
+                <div>
+                  <h3>{name}</h3>
+                  <p>{model.name}</p>
+                  <a class="loc-model-release" href={model.source} aria-label={zh ? `${model.name}，${release}于 ${date}，查看来源` : `${model.name}, ${release} ${date}, source`}>
+                    {release} <time datetime={model.date}>{date}</time>
+                  </a>
+                </div>
+              </div>
+              <p>{text[locale]}</p>
+            </li>;
+          })}
         </ul>
         <LossOfControlFigure figure={profileFigure} {locale} source={ref("figure-33")} />
       </section>
@@ -258,10 +268,8 @@ const schema = {
   .loc-models { display: flex; flex-direction: column; align-items: center; gap: .65rem; margin-top: 1.6rem; }
   .loc-models p, .loc-authors strong { color: var(--wz-ink); font-weight: 640; }
   .loc-models ul { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem 1.5rem; max-width: 680px; margin: 0; padding: 0; list-style: none; }
-  .loc-models li { display: inline-flex; align-items: flex-start; gap: .5rem; font-size: .94rem; font-weight: 560; text-align: start; min-width: 0; }
+  .loc-models li { display: inline-flex; align-items: center; gap: .5rem; font-size: .94rem; font-weight: 560; text-align: start; min-width: 0; }
   .loc-models li > span { min-width: 0; overflow-wrap: anywhere; }
-  .loc-models li small { display: block; color: var(--wz-muted); font-size: .78rem; font-weight: 450; }
-  .loc-models li small a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
   .loc-models li img { flex: none; filter: grayscale(1) opacity(.65); }
   .loc-models li:hover img { filter: none; }
   .loc-authors { margin-top: .6rem; font-size: .87rem; }
@@ -310,6 +318,8 @@ const schema = {
   .loc-profile-id { display: flex; align-items: center; gap: .75rem; min-width: 0; }
   .loc-profile-id > span { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid var(--wz-hairline); border-radius: 10px; }
   .loc-profile-id p { font-size: .82rem; color: var(--wz-muted); overflow-wrap: anywhere; }
+  .loc-model-release { display: inline-flex; flex-wrap: wrap; gap: .2rem .35rem; margin-top: .35rem; padding: .18rem .55rem; border: 1px solid var(--wz-hairline); border-radius: 6px; background: #f1f5f4; color: var(--nw-deep-jade); font-size: .76rem; font-variant-numeric: tabular-nums; }
+  .loc-model-release time { white-space: nowrap; }
   .loc-citation { border: 1px solid var(--wz-hairline); background: #fff; border-radius: 8px; padding: 1rem; }
   .loc-citation button { color: var(--nw-deep-jade); margin-inline-start: .5rem; cursor: pointer; text-decoration: underline; }
   .loc-citation pre { overflow: auto; margin: .5rem 0 0; font-size: .85rem; padding-bottom: .4rem; }
