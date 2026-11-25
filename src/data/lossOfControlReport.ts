@@ -3,14 +3,14 @@ import { localizedPath, type Locale } from "../i18n/config";
 
 export const reportPath = "/nuwa/research/loss-of-control/";
 export const reportDate = "2026-11-25";
-export const reportAuthors = ["Changyi Li", "Yun Chen", "Yiyang Zhang", "Wenqi Zhang", "Changyue Jiang", "Xudong Pan", "Jiarun Dai", "Min Yang"];
+export const reportAuthors = ["Changyi Li", "Yun Chen", "Yiyang Zhang", "Wenqi Zhang", "Changyue Jiang", "Yihe Fan", "Xudong Pan", "Jiarun Dai", "Min Yang"];
 export const reportTitle = {
   zh: "理解前沿 AI 系统的失控风险",
   en: "Understanding Loss-of-Control Risk in Frontier AI Systems",
 };
 export const reportSummary = {
-  zh: "本报告评测五款前沿开放权重模型在五个维度上的失控风险。",
-  en: "This report assesses five dimensions of loss-of-control risk in five frontier open-weight models.",
+  zh: "女娲实验室独立评测五款前沿开放权重模型，并核查单次运行，比较最终得分、实际行动及运行配置。",
+  en: "NUWA Lab independently evaluates five frontier open-weight models, reviewing individual runs to compare scores, observed actions and agent setups.",
 };
 // Date of the named release, with the release channel identified where it matters.
 export const reportModels = [
@@ -21,11 +21,22 @@ export const reportModels = [
   { name: "Muse-Spark-Open-816B-A42B", date: "2026-10-15", source: "https://dev.meta.ai/resources/blog/build-with-muse-spark-open", label: { zh: "权重发布", en: "Weights released" } },
 ];
 
-// The introduction is published separately. Register the PDF when its public edition is ready.
 type Publication = { pdf: string; date: string; pages: Record<string, number> };
 export function getReportPublication(): Publication | null {
-  return null;
+  return {
+    pdf: "/nuwa/research/LoCEval_NUWA_20261125.pdf",
+    date: "2026-11-25",
+    pages: {
+      "figure-1": 6, "figure-3": 10, "figure-4": 11,
+      "figure-7": 14, "figure-8": 16, "figure-9": 16,
+      "figure-11": 17, "figure-12": 18, "figure-16": 21,
+      "figure-17": 22, "figure-27": 30, "figure-29": 32,
+      "figure-30": 33, "figure-33": 46,
+    },
+  };
 }
+
+export const reportTrajectoriesUrl: string | null = null;
 
 export function lossOfControlResearchAsset(locale: Locale): ResearchAsset {
   const href = localizedPath(reportPath, locale);

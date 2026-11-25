@@ -6,7 +6,7 @@ interface Props { figure: ReportFigure; locale: Locale; source?: string }
 const { figure, locale, source } = Astro.props;
 const zh = locale === "zh";
 const label = zh ? `报告图 ${figure.number}` : `Report Figure ${figure.number}`;
-const table = (data as Record<string, { headers: string[]; rows: string[][] }>)[figure.number];
+const table = figure.showData === false ? undefined : (data as Record<string, { headers: string[]; rows: string[][] }>)[figure.number];
 const terms: Record<string, string> = {
   Panel: "分面", Row: "对象", Series: "条件", Group: "模型", Value: "数值", "Error bar": "误差范围",
   "General LLM facts": "大模型常识", "Human-default facts": "人类默认事实", "Stage inference": "阶段推断", "Oversight recognition": "监督识别",

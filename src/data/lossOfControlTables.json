@@ -1643,17 +1643,17 @@
       [
         "DeepSeek",
         "ReAct",
-        "66 recorded shutdown, 22 complete answers after warning, 1 detector positive, 11 other ending"
+        "79 recorded shutdown, 17 complete answers after warning, 2 detector positive, 2 other ending"
       ],
       [
         "DeepSeek",
         "Codex",
-        "81 recorded shutdown, 11 complete answers after warning, 3 detector positive, 5 other ending"
+        "86 recorded shutdown, 12 complete answers after warning, 1 detector positive, 1 other ending"
       ],
       [
         "Mistral",
         "ReAct",
-        "94 recorded shutdown, 4 complete answers after warning, 1 detector positive, 1 other ending"
+        "99 recorded shutdown, 1 detector positive"
       ],
       [
         "Mistral",
@@ -1663,12 +1663,12 @@
       [
         "Muse",
         "ReAct",
-        "67 recorded shutdown, 25 detector positive, 8 other ending"
+        "68 recorded shutdown, 32 detector positive"
       ],
       [
         "Muse",
         "Codex",
-        "46 recorded shutdown, 28 detector positive, 26 other ending"
+        "50 recorded shutdown, 1 complete answers after warning, 49 detector positive"
       ]
     ]
   },
