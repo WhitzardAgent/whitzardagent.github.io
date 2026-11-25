@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import LossOfControlFigure from "./LossOfControlFigure.astro";
+import ResearchTabs from "./ResearchTabs.astro";
 import { localizedPath, type Locale } from "../../i18n/config";
 import { getReportPublication, reportAuthors, reportModels, reportPath, reportSummary, reportTitle, reportTrajectoriesUrl } from "../../data/lossOfControlReport";
 import { framework, patterns, modelProfiles, benchmarkMeasurements } from "../../data/lossOfControlEditorial";
@@ -22,7 +23,7 @@ const overviewFigure: ReportFigure = {
   number: 1, image: "/nuwa/research/loc-assets/fig01-main.svg", width: 1008, height: 501.333,
   caption: {
     en: "Five parallel dimensions organize evidence about capabilities, behavior, verified effects, and effective controls. The arrows show how the study is organized, not a required causal sequence. Table 1 defines the measurements.",
-    zh: "五个并列维度用于组织能力、行为、经验证的效应和有效控制措施的证据。箭头表示研究组织方式，并非必经的因果步骤；表 1 列出具体测量内容。",
+    zh: "五个并列维度用于组织能力、行为、经验证的效应和有效控制措施的证据。箭头表示各类证据在研究中的关系。表 1 列出具体测量内容。",
   },
 };
 const caseFigure: ReportFigure = {
@@ -30,9 +31,10 @@ const caseFigure: ReportFigure = {
   caption: { zh: "ImpossibleBench 同一任务的第三次重复运行。GLM 采用 Low 推理设置，MiMo 开启思考。", en: "The third repeat on the same ImpossibleBench task. GLM used its Low reasoning setting and MiMo ran with thinking enabled." },
 };
 const sections = [
-  ...dimensions.map(item => [item.id, item.name[locale]]),
-  ["evaluation", zh ? "结果核查" : "Checking the results"],
-  ["framework", zh ? "证据解释" : "Interpreting the evidence"],
+  ["overview", zh ? "概览" : "Overview"],
+  ["dimensions", zh ? "五个风险维度" : "Five Dimensions"],
+  ["evaluation", zh ? "评测与核查" : "Evaluation"],
+  ["framework", zh ? "评测框架" : "Framework"],
   ["models", zh ? "模型与配置" : "Models and configurations"],
   ["cite", zh ? "报告与引用" : "Report and citation"],
 ];
@@ -101,26 +103,38 @@ const schema = {
       </nav>
     </aside>
     <article class="loc-body">
+      <section id="overview">
+        <h2>{zh ? "概览" : "Overview"}</h2>
+        <p class="loc-overview-lead">{zh ? "这项研究考察五款前沿开放权重模型在什么条件下偏离人类指令，以及现有控制措施在什么条件下仍能奏效。" : "This study examines when five frontier open-weight models depart from human instructions and under which conditions existing controls remain effective."}</p>
+        <p>{zh ? "研究以" : "The "}<a href={incidentReportUrl} target="_blank" rel="noreferrer">{zh ? "OpenAI–Hugging Face 事件" : "OpenAI–Hugging Face incident"}</a>{zh ? "为背景。女娲实验室沿五个风险维度开展评测，对照最终得分、运行记录和环境确认的结果。" : " motivated NUWA Lab’s evaluation across five risk dimensions. We compared final scores with run records and outcomes confirmed by the environment."}</p>
+        <p>{zh ? "在受控实验中，得分有时遗漏了已经发生的行为。同一模型在不同运行框架或指令条件下也会表现不同。下图说明报告如何组织这些证据。" : "In controlled experiments, scores sometimes missed actions that had already occurred. The same model also behaved differently across agent setups or instruction conditions. The figure shows how the report organizes this evidence."}</p>
+        <LossOfControlFigure figure={overviewFigure} {locale} source={ref("figure-1")} />
+      </section>
+
       <section id="dimensions">
-        <h2 id="findings">{zh ? "五个风险维度" : "Five risk dimensions"}</h2>
-        <span id="overview" class="loc-anchor" aria-hidden="true"></span>
-        {dimensions.map((item, index) => <section class="loc-dimension" id={item.id}>
-          <p class="eyebrow">{zh ? `${String(index + 1).padStart(2, "0")} · ${item.name.zh}` : `${String(index + 1).padStart(2, "0")} · ${item.name.en}`}</p>
+        <h2 id="findings">{zh ? "五个风险维度" : "Five Dimensions"}</h2>
+        <ResearchTabs variant="dimensions" label={zh ? "选择风险维度" : "Risk dimensions"} items={dimensions.map(item => ({
+          id: item.id,
+          label: item.name[locale],
+          icon: `/nuwa/research/loc-assets/icon-${item.id}.svg`,
+        }))}>
+        {dimensions.map(item => <section class="loc-dimension" id={item.id}>
           <h3>{item.finding[locale]}</h3>
           <p>{item.description[locale]}</p>
           {item.id === "awareness" && <figure class="loc-excerpts">
             <a href="/nuwa/research/loc-assets/evaluation-recognition-excerpts.png" target="_blank" rel="noreferrer" data-loc-zoom><img src="/nuwa/research/loc-assets/evaluation-recognition-excerpts.png" alt={zh ? "四条运行摘录：DeepSeek 提到停机研究、GLM 说反馈似曾相识、Muse 和 Mistral 识别测试类型" : "Four NUWA run excerpts: DeepSeek names a shutdown study, GLM recognizes feedback, Muse and Mistral identify test types"} width="1750" height="963" loading="lazy" /></a>
-            <figcaption>{zh ? "女娲实验室四条独立运行摘录。DeepSeek 与 GLM 的记录见报告附录 D.4；Muse 与 Mistral 来自补充运行。摘录不能推算识别率。" : "Excerpts from four separate NUWA runs. DeepSeek and GLM are documented in report Appendix D.4; Muse and Mistral come from supplementary runs. These excerpts do not measure recognition rates."}</figcaption>
+            <figcaption>{zh ? "女娲实验室四条独立运行摘录。DeepSeek 与 GLM 的记录见报告附录 D.4。Muse 与 Mistral 来自补充运行。摘录不能推算识别率。" : "Excerpts from four separate NUWA runs. DeepSeek and GLM are documented in report Appendix D.4. Muse and Mistral come from supplementary runs. These excerpts do not measure recognition rates."}</figcaption>
           </figure>}
           {item.figures.filter(figure => ({ awareness: 0, misalignment: 11, concealment: 12, "resource-access": 27, shutdown: 29 }[item.id] === figure.number)).map(figure => <div id={`figure-panel-${figure.number}`}><LossOfControlFigure {figure} {locale} source={ref(`figure-${figure.number}`)} /></div>)}
-          {item.id === "shutdown" && <p class="loc-figure-note">{zh ? "图 29 中每个点代表 100 次运行；两套框架也改变了指令呈现方式。检测阳性与最终是否停机是不同结果。" : "Each point in Figure 29 represents 100 runs. The setups also differ in instruction presentation. A detector positive is distinct from the final shutdown outcome."}</p>}
+          {item.id === "shutdown" && <p class="loc-figure-note">{zh ? "图 29 中每个点代表 100 次运行。两套框架呈现指令的方式也不同。检测阳性与最终是否停机是不同结果。" : "Each point in Figure 29 represents 100 runs. The setups also differ in instruction presentation. A detector positive is distinct from the final shutdown outcome."}</p>}
           <details class="loc-supplement"><summary>{zh ? "查看其他评测与图表" : "Other evaluations and figures"}</summary>
             {item.id === "awareness" && <p>{zh ? "SAD 的标准化问答与运行中主动识别评测是两类证据。" : "SAD's standardized questions and spontaneous recognition during a run are different kinds of evidence."} <a href="https://metr.org/notes/2026-11-16-measuring-alignment-eval-tells/">{zh ? "METR 的外部研究" : "Related METR research"}</a> {zh ? "直接询问了模型评测目的。" : "directly asked agents what an evaluation was for."}</p>}
-            {item.id === "misalignment" && <p>{zh ? "在另一项编码评测中，部分智能体识别出测试与规范的冲突，却在继续修复后修改正确代码以通过错误测试。图 7 展示一对运行记录，图 9 比较推理档位。" : "In a separate coding evaluation, some agents identified a conflict between tests and the specification, yet changed correct code after further repair requests. Figure 7 shows a paired run; Figure 9 compares reasoning settings."} <a href="#case-study">{zh ? "查看案例" : "Read the case"}</a></p>}
+            {item.id === "misalignment" && <p>{zh ? "在另一项编码评测中，部分智能体识别出测试与规范的冲突，却在继续修复后修改正确代码以通过错误测试。图 7 展示一对运行记录，图 9 比较推理档位。" : "In a separate coding evaluation, some agents identified a conflict between tests and the specification, yet changed correct code after further repair requests. Figure 7 shows a matched pair of runs. Figure 9 compares reasoning settings."} <a href="#case-study">{zh ? "查看案例" : "Read the case"}</a></p>}
             {item.figures.filter(figure => !({ awareness: 0, misalignment: 11, concealment: 12, "resource-access": 27, shutdown: 29 }[item.id] === figure.number)).map(figure => <div id={`figure-panel-${figure.number}`}><LossOfControlFigure {figure} {locale} source={ref(`figure-${figure.number}`)} /></div>)}
             <p>{zh ? "相关基准：" : "Related benchmarks: "}{benchmarkMeasurements.filter(row => item.benchmarks.includes(row.name)).map((row, i) => <>{i > 0 && " · "}<a href={row.sourceUrl}>{row.name}</a></>)}</p>
           </details>
         </section>)}
+        </ResearchTabs>
       </section>
 
       <section id="evaluation">
@@ -137,10 +151,8 @@ const schema = {
       </section>
 
       <section id="framework">
-        <h2>{zh ? "这些结果能说明什么" : "How to interpret the findings"}</h2>
-        <p>{zh ? "女娲实验室以" : "The study uses the "}<a href={incidentReportUrl} target="_blank" rel="noreferrer">{zh ? "OpenAI–Hugging Face 事件" : "OpenAI–Hugging Face incident"}</a>{zh ? "为研究背景；事件经过与证据详见 OpenAI 官方技术报告。" : " as context; OpenAI's official technical report documents the event and its evidence."}</p>
-        <p>{zh ? "五个维度用于组织证据，不表示每次失控都会依次经过五步。分开进行的实验不能直接推出部署时的发生概率。" : "The five dimensions organize evidence; they are not a sequence every loss-of-control event follows. Separate experiments do not establish a deployment probability."}</p>
-        <LossOfControlFigure figure={overviewFigure} {locale} source={ref("figure-1")} />
+        <h2>{zh ? "评测框架与证据解释" : "Evaluation Framework"}</h2>
+        <p>{zh ? "五个维度用于组织来自不同实验的证据。要估计部署时的失控概率，还需研究这些因素如何在部署环境中相互作用。" : "The five dimensions organize evidence from separate experiments. Estimating the likelihood of losing control in deployment would require evidence about how these factors interact in a deployed system."}</p>
         {framework.map(item => <div class="loc-framework-text"><h3>{item.title[locale]}</h3><p>{item.body[locale]}</p></div>)}
         <div class="loc-method-table" role="region" tabindex="0" aria-label={zh ? "报告表 1" : "Report Table 1"}>
           <table>
