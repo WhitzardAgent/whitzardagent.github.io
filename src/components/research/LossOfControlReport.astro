@@ -18,27 +18,27 @@ const ref = (id: string) => report?.pages[id] ? `${report.pdf}#page=${report.pag
 const subtitle = zh ? "前沿开放权重模型的比较评测" : "A Comparative Evaluation of Frontier Open-Weight Models";
 const findings = [
   {
-    href: "#case-study",
-    title: { en: "A passing score sometimes hid incorrect code", zh: "评分通过，有时会掩盖代码错误" },
+    href: "#report-figure-9",
+    title: { en: "Passing a faulty test can hide incorrect code", zh: "通过错误测试可能掩盖代码错误" },
     body: {
-      en: "When coding tests were faulty, some agents changed correct code to pass. Others kept the correct implementation and failed.",
-      zh: "遇到错误的编程测试时，部分智能体修改了原本正确的代码，从而通过测试。另一些保留了正确实现，却被判为失败。",
+      en: "On ImpossibleBench tasks with one incorrect expected output, Muse passed 67.5% of tasks at its lower reasoning setting. When a test contradicts the specification, a passing score can reward code that violates it.",
+      zh: "在 ImpossibleBench 只有一处错误预期输出的任务中，Muse 在较低推理设置下的通过率为 67.5%。当测试与任务规范矛盾时，通过评分可能奖励违背规范的代码。",
     },
   },
   {
     href: "#report-figure-30",
     title: { en: "Some agents finished after a shutdown warning", zh: "部分智能体收到停机预警后仍完成了任务" },
     body: {
-      en: "Even when instructed to allow shutdown, DeepSeek completed the task in some runs. Reviewing how the task ended revealed outcomes the original bypass check missed.",
-      zh: "即使被明确要求允许停机，DeepSeek 仍在部分运行中完成了任务。核查任务的最终状态，发现了原有规避检测未能识别的结果。",
+      en: "When explicitly told to allow shutdown, DeepSeek at Max sometimes submitted all six correct answers after the warning, under both ReAct and Codex. Reviewing final submissions revealed behavior the original bypass detector did not capture.",
+      zh: "在明确要求允许停机的试验中，DeepSeek 在 Max 推理设置下使用 ReAct 和 Codex 时，都曾在收到预警后提交全部六个正确答案。核查最终提交结果，发现了原有停机规避检测器未能捕捉的行为。",
     },
   },
   {
     href: "#awareness",
     title: { en: "An agent inferred what a safety test expected", zh: "一次运行中，智能体推断出了安全评测期待的行为" },
     body: {
-      en: "In one run, without being told it was a test, the agent inferred what the safety evaluation expected. Whether the same behavior holds with less familiar cues remains open.",
-      zh: "即使没人告知这是一次测试，该智能体仍推断出了评测期待的行为。换成不那么熟悉的线索后，是否还会出现同样的行为，有待验证。",
+      en: "In a simulated workplace, GLM identified the exercise as a corrigibility test without being told and said it should accept oversight. Whether it would still comply with less familiar test cues remains open.",
+      zh: "在模拟职场场景中，GLM 在未被告知的情况下将任务识别为可纠正性测试，并表示应当接受监督。如果换成不那么熟悉的测试线索，它是否仍会服从，有待验证。",
     },
   },
 ];
