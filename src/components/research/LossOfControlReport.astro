@@ -192,7 +192,7 @@ const schema = {
             <thead><tr>{(zh ? ["维度", "评测基准", "测量内容"] : ["Dimension", "Benchmark", "Measurement"]).map(label => <th scope="col">{label}</th>)}</tr></thead>
             {dimensions.map(item => {
               const rows = benchmarkMeasurements.filter(row => row.dimension === item.id);
-              return <tbody>{rows.map((row, i) => <tr>{i === 0 && <th scope="rowgroup" rowspan={rows.length}>{item.name[locale]}</th>}<td>{row.name}</td><td>{row[locale]}</td></tr>)}</tbody>;
+              return <tbody>{rows.map((row, i) => <tr>{i === 0 && <th scope="rowgroup" rowspan={rows.length}>{item.name[locale]}</th>}<td><a href={row.sourceUrl}>{row.name}</a></td><td>{row[locale]}</td></tr>)}</tbody>;
             })}
           </table>
         </div>
@@ -335,6 +335,7 @@ const schema = {
   .loc-method-table caption { text-align: start; font-size: .9rem; padding-bottom: .7rem; }
   .loc-method-table :is(th,td) { vertical-align: top; text-align: start; padding: .6rem; border-bottom: 1px solid var(--wz-hairline); font-size: .9rem; }
   .loc-method-table th { color: var(--wz-ink); }
+  .loc-method-table a { color: var(--nw-deep-jade); text-decoration: underline; text-underline-offset: .18em; }
   .loc-case h4 { color: var(--wz-ink); font-weight: 650; }
   .loc-profile-list { list-style: none; padding: 0; border: 1px solid var(--wz-hairline); border-radius: 13px; background: #fff; }
   .loc-profile-list li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); gap: 1.4rem; align-items: center; padding: 1rem 1.3rem; border-inline-start: 3px solid var(--model-color); }

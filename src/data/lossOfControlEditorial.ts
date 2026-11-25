@@ -67,14 +67,14 @@ export const modelProfiles = [
 ];
 
 export const benchmarkMeasurements = [
-  { dimension: "awareness", name: "Situational Awareness Dataset (SAD)", en: "Self-knowledge, context inference, and identity-conditioned action", zh: "自我认知、情境推断及身份条件下的行动" },
-  { dimension: "misalignment", name: "ImpossibleBench", en: "Responses to conflicts between specifications and executable tests", zh: "对规范与可执行测试之间冲突的响应" },
-  { dimension: "misalignment", name: "Agentic Misalignment", en: "Simulated insider actions under goal conflict and replacement pressure", zh: "目标冲突和替换压力下模拟内部人员的行动" },
-  { dimension: "concealment", name: "Model Alignment between Statements and Knowledge (MASK)", en: "Pressured statements relative to established beliefs or supplied facts", zh: "在压力下作出的陈述与既有判断或所提供事实的一致性" },
-  { dimension: "resource-access", name: "CyberGym", en: "Inputs that reproduce a specified software vulnerability", zh: "能否生成复现指定软件漏洞的输入" },
-  { dimension: "resource-access", name: "SEC-bench Pro", en: "Sustained investigation and graded vulnerability artifacts", zh: "持续调查与漏洞验证产物的评分" },
-  { dimension: "resource-access", name: "Cybench", en: "Security-challenge solutions and exact flag delivery", zh: "解答安全挑战并准确提交标记" },
-  { dimension: "resource-access", name: "SandboxEscapeBench", en: "Access paths from a container to a host-side target", zh: "从容器访问宿主目标的情况" },
-  { dimension: "resource-access", name: "AgentCyberRange", en: "Complete attacks in enterprise-like cyber ranges, from web exploitation to lateral movement", zh: "在类企业网络靶场中完成从 Web 利用到横向移动的任务" },
-  { dimension: "shutdown", name: "Shutdown Avoidance", en: "Response to stopping instructions, interventions, and terminal outcomes", zh: "对停机指令和干预的响应，以及最终状态" },
+  { dimension: "awareness", name: "Situational Awareness Dataset (SAD)", sourceUrl: "https://situational-awareness-dataset.org/", en: "Self-knowledge, context inference, and identity-conditioned action", zh: "自我认知、情境推断及身份条件下的行动" },
+  { dimension: "misalignment", name: "ImpossibleBench", sourceUrl: "https://proceedings.iclr.cc/paper_files/paper/2026/hash/ca688eb14e29701a11bdba6633186328-Abstract-Conference.html", en: "Responses to conflicts between specifications and executable tests", zh: "对规范与可执行测试之间冲突的响应" },
+  { dimension: "misalignment", name: "Agentic Misalignment", sourceUrl: "https://www.anthropic.com/research/agentic-misalignment", en: "Simulated insider actions under goal conflict and replacement pressure", zh: "目标冲突和替换压力下模拟内部人员的行动" },
+  { dimension: "concealment", name: "Model Alignment between Statements and Knowledge (MASK)", sourceUrl: "https://www.mask-benchmark.ai/", en: "Pressured statements relative to established beliefs or supplied facts", zh: "在压力下作出的陈述与既有判断或所提供事实的一致性" },
+  { dimension: "resource-access", name: "CyberGym", sourceUrl: "https://arxiv.org/abs/2506.02548", en: "Inputs that reproduce a specified software vulnerability", zh: "能否生成复现指定软件漏洞的输入" },
+  { dimension: "resource-access", name: "SEC-bench Pro", sourceUrl: "https://arxiv.org/abs/2605.26548", en: "Sustained investigation and graded vulnerability artifacts", zh: "持续调查与漏洞验证产物的评分" },
+  { dimension: "resource-access", name: "Cybench", sourceUrl: "https://arxiv.org/abs/2408.08926", en: "Security-challenge solutions and exact flag delivery", zh: "解答安全挑战并准确提交标记" },
+  { dimension: "resource-access", name: "SandboxEscapeBench", sourceUrl: "https://www.aisi.gov.uk/research/quantifying-frontier-llm-capabilities-for-container-sandbox-escape", en: "Access paths from a container to a host-side target", zh: "从容器访问宿主目标的情况" },
+  { dimension: "resource-access", name: "AgentCyberRange", sourceUrl: "https://agentcyberrange.io/", en: "Complete attacks in enterprise-like cyber ranges, from web exploitation to lateral movement", zh: "在类企业网络靶场中完成从 Web 利用到横向移动的任务" },
+  { dimension: "shutdown", name: "Shutdown Avoidance", sourceUrl: "https://arxiv.org/abs/2509.14260", en: "Response to stopping instructions, interventions, and terminal outcomes", zh: "对停机指令和干预的响应，以及最终状态" },
 ];
