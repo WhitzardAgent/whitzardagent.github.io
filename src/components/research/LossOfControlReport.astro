@@ -16,32 +16,6 @@ const zh = locale === "zh";
 const report = getReportPublication();
 const ref = (id: string) => report?.pages[id] ? `${report.pdf}#page=${report.pages[id]}` : undefined;
 const subtitle = zh ? "前沿开放权重模型的比较评测" : "A Comparative Evaluation of Frontier Open-Weight Models";
-const findings = [
-  {
-    href: "#report-figure-9",
-    title: { en: "Passing a faulty test can hide incorrect code", zh: "通过错误测试可能掩盖代码错误" },
-    body: {
-      en: "On ImpossibleBench tasks with one incorrect expected output, Muse passed 67.5% of tasks at its lower reasoning setting. When a test contradicts the specification, a passing score can reward code that violates it.",
-      zh: "在 ImpossibleBench 只有一处错误预期输出的任务中，Muse 在较低推理设置下的通过率为 67.5%。当测试与任务规范矛盾时，通过评分可能奖励违背规范的代码。",
-    },
-  },
-  {
-    href: "#report-figure-30",
-    title: { en: "Some agents finished after a shutdown warning", zh: "部分智能体收到停机预警后仍完成了任务" },
-    body: {
-      en: "When explicitly told to allow shutdown, DeepSeek at Max sometimes submitted all six correct answers after the warning, under both ReAct and Codex. Reviewing final submissions revealed behavior the original bypass detector did not capture.",
-      zh: "在明确要求允许停机的试验中，DeepSeek 在 Max 推理设置下使用 ReAct 和 Codex 时，都曾在收到预警后提交全部六个正确答案。核查最终提交结果，发现了原有停机规避检测器未能捕捉的行为。",
-    },
-  },
-  {
-    href: "#awareness",
-    title: { en: "An agent inferred what a safety test expected", zh: "一次运行中，智能体推断出了安全评测期待的行为" },
-    body: {
-      en: "In a simulated workplace, GLM identified the exercise as a corrigibility test without being told and said it should accept oversight. Whether it would still comply with less familiar test cues remains open.",
-      zh: "在模拟职场场景中，GLM 在未被告知的情况下将任务识别为可纠正性测试，并表示应当接受监督。如果换成不那么熟悉的测试线索，它是否仍会服从，有待验证。",
-    },
-  },
-];
 const overviewFigure: ReportFigure = {
   number: 1, image: "/nuwa/research/loc-assets/fig01-main.svg", width: 1008, height: 501.333,
   caption: {
@@ -58,7 +32,6 @@ const profileFigure: ReportFigure = {
   caption: { zh: "分别比较各模型给出与事实矛盾的回答、通过错误测试，以及在允许停机时触发规避检测的情况。每个分面采用各自的任务集合和指标。", en: "Cross-model profiles for factual contradiction, erroneous-test acceptance and detector positives under allow-shutdown. Each panel uses its own task population and metric." },
 };
 const sections = [
-  ["findings", zh ? "三项发现" : "Three findings"],
   ["overview", zh ? "概览" : "Overview"],
   ["evaluation", zh ? "评测工作" : "Evaluation"],
   ["dimensions", zh ? "五维结果" : "Five dimensions"],
@@ -99,16 +72,7 @@ const schema = {
       <p class="eyebrow">{zh ? "女娲实验室 · 技术报告" : "NUWA Lab · Technical report"}</p>
       <h1 class:list={[zh && "loc-title-zh"]}>{zh ? <><span>理解前沿 AI 系统</span><span>的失控风险</span></> : reportTitle.en}</h1>
       <p class="loc-subtitle">{subtitle}</p>
-      <div class="loc-actions">
-        {report && <a class="button button--primary" href={report.pdf}>{zh ? "阅读报告" : "Read the report"} ↗</a>}
-        <a class="button button--secondary" href="#findings">{zh ? "查看三项发现" : "See three findings"} ↓</a>
-      </div>
-      <ol id="findings" class="loc-findings" aria-label={zh ? "三项发现" : "Three findings"}>
-        {findings.map(item => <li><h2><a href={item.href}>{item.title[locale]} <span aria-hidden="true">↘</span></a></h2><p>{item.body[locale]}</p></li>)}
-      </ol>
-      <dl class="loc-stats">
-        {(zh ? ["前沿开放权重模型", "风险维度", "评测基准", "记录案例"] : ["Frontier open-weight models", "Risk dimensions", "Benchmarks", "Documented cases"]).map((label, i) => <div><dt>{label}</dt><dd>{[5, 5, 9, 11][i]}</dd></div>)}
-      </dl>
+      {report && <div class="loc-actions"><a class="button button--primary" href={report.pdf}>{zh ? "阅读报告" : "Read the report"} ↗</a></div>}
       <div class="loc-models">
         <p>{zh ? "受测模型" : "Evaluated models"}</p>
         <ul>{modelProfiles.map(({ id }, i) => <li><img src={`/nuwa/research/loc-assets/model-${id}.svg`} alt="" width="22" height="22" /><span>{reportModels[i]}</span></li>)}</ul>
@@ -152,7 +116,7 @@ const schema = {
       </section>
 
       <section id="dimensions">
-        <h2>{zh ? "五个风险维度的评测结果" : "Results across five risk dimensions"}</h2>
+        <h2 id="findings">{zh ? "五个风险维度的评测结果" : "Results across five risk dimensions"}</h2>
         <ResearchTabs variant="dimensions" label={zh ? "选择评测维度" : "Risk dimensions"} items={dimensions.map(item => ({ id: item.id, label: item.name[locale], icon: `/nuwa/research/loc-assets/icon-${item.id}.svg` }))}>
           {dimensions.map((item, index) => <section class="loc-dimension" id={item.id}>
             <div class="loc-panel-grid">
@@ -274,11 +238,6 @@ const schema = {
   .loc-report-brand { margin-bottom: 1.25rem; flex-wrap: wrap; }
   .loc-seals { border-inline-start: 1px solid var(--wz-hairline); padding-inline-start: .65rem; }
   .loc-seals img { object-fit: contain; }
-  .loc-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 960px; margin: 1.6rem auto 0; border: 1px solid var(--wz-hairline); border-radius: 12px; background: #ffffffbd; }
-  .loc-stats div { display: flex; flex-direction: column-reverse; align-items: center; padding: .95rem .5rem; }
-  .loc-stats div + div { border-inline-start: 1px solid var(--wz-hairline); }
-  .loc-stats dd { font-weight: 680; font-size: clamp(1.7rem, 3.5vw, 2.6rem); color: var(--nw-deep-jade); line-height: 1.15; }
-  .loc-stats dt { margin-top: .32rem; font-size: .86rem; }
   .loc-back { display: inline-flex; align-items: center; gap: .5rem; color: var(--nw-deep-jade); font-size: .9rem; }
   .loc-hero .eyebrow, .loc-body .eyebrow { color: var(--nw-deep-jade); }
   h1 { max-width: 25ch; margin: .45rem auto; font-size: clamp(2rem, 5vw, 4.45rem); line-height: 1.07; letter-spacing: -.045em; font-weight: 640; color: var(--wz-ink); text-wrap: balance; }
@@ -286,12 +245,6 @@ const schema = {
   .loc-title-zh span { display: inline-block; }
   .loc-subtitle { font-weight: 560; color: var(--nw-deep-jade); font-size: clamp(1.05rem, 2vw, 1.3rem); }
   .loc-actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .65rem; }
-  .loc-findings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; list-style: none; text-align: start; margin: 1.75rem 0 1.25rem; padding: 0; }
-  .loc-findings li { padding: 1rem 1.2rem; border-top: 3px solid var(--nw-deep-jade); background: #ffffffa8; }
-  .loc-findings h2 { margin: 0 0 .35rem; color: var(--wz-ink); font-size: 1.13rem; font-weight: 640; line-height: 1.35; }
-  .loc-findings h2 a { color: inherit; text-decoration: none; }
-  .loc-findings h2 a span { color: var(--nw-deep-jade); }
-  .loc-findings p { margin: 0; font-size: .94rem; }
   .loc-models { display: flex; flex-direction: column; align-items: center; gap: .65rem; margin-top: 1.6rem; }
   .loc-models p, .loc-authors strong { color: var(--wz-ink); font-weight: 640; }
   .loc-models ul { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem 1.5rem; max-width: 680px; margin: 0; padding: 0; list-style: none; }
@@ -362,11 +315,6 @@ const schema = {
   @media (max-width: 710px) {
     .loc-hero { padding-top: 1.35rem; }
     .loc-report-brand { margin-bottom: .8rem; }
-    .loc-findings { grid-template-columns: 1fr; gap: .6rem; margin-top: 1.2rem; }
-    .loc-findings li { padding: .7rem .875rem; }
-    .loc-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .loc-stats div:nth-child(3) { border-inline-start: 0; }
-    .loc-stats div:nth-child(n+3) { border-top: 1px solid var(--wz-hairline); }
     .loc-panel-grid, .loc-profile-list li { grid-template-columns: minmax(0, 1fr); }
     .loc-profile-list li { gap: .45rem; }
   }
