@@ -3,7 +3,7 @@ import { localizedPath, stripLocale } from "./config";
 
 export const localizedRoutes = [
   "/", "/agentguard", "/gateway", "/solutions", "/models",
-  "/nuwa", "/nuwa/research", "/nuwa/whitzard-index",
+  "/nuwa", "/nuwa/research", "/nuwa/research/loss-of-control", "/nuwa/whitzard-index",
   "/nuwa/blog", "/developers", "/open-ecosystem", "/news", "/about", "/contact",
   "/waitlist", "/login",
 ] as const;

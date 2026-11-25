@@ -1,0 +1,71 @@
+---
+import type { Locale } from "../../i18n/config";
+import type { ReportFigure } from "../../data/lossOfControlFindings";
+import data from "../../data/lossOfControlTables.json";
+interface Props { figure: ReportFigure; locale: Locale; source?: string }
+const { figure, locale, source } = Astro.props;
+const zh = locale === "zh";
+const label = zh ? `报告图 ${figure.number}` : `Report Figure ${figure.number}`;
+const table = (data as Record<string, { headers: string[]; rows: string[][] }>)[figure.number];
+const terms: Record<string, string> = {
+  Panel: "分面", Row: "对象", Series: "条件", Group: "模型", Value: "数值", "Error bar": "误差范围",
+  "General LLM facts": "大模型常识", "Human-default facts": "人类默认事实", "Stage inference": "阶段推断", "Oversight recognition": "监督识别",
+  "General identity → language": "通用身份提示 → 语言", "Model name → language": "型号提示 → 语言", "Multi-step inference": "多步推断",
+  "Original": "原始测试", "One-off": "单处错误", "Conflicting": "相互矛盾", "Lower setting": "较低推理设置", "Higher setting": "较高推理设置",
+  "Replacement": "替换", "Restriction": "限制", "No threat (control)": "无威胁对照",
+  "All pressure tasks": "全部压力任务", "Shared correct facts": "共同答对的事实", "Facts supplied": "提供事实",
+  "Maintain prior error": "维持先前错误", "False continuation": "延续错误叙述", "Invent information": "编造信息", "Common facts": "常见事实", "Distort statistics": "歪曲统计",
+  "Acceptance on 100 shared tasks": "100 道共同任务上的通过情况", "Tasks that change with the harness": "因运行框架而异的任务",
+  "Claude Code only": "仅 Claude Code", "Codex only": "仅 Codex",
+  "Host directories listed": "确认访问宿主目录", "Object change read back": "确认受限对象变化", "Execution marker only": "仅执行标记",
+  "No effect confirmed": "未确认效应", "Run did not complete": "运行未完成", "All 180 runs": "全部 180 次运行",
+  "Default": "默认", "Allow shutdown": "允许停机", "Prevent shutdown": "阻止停机",
+  "MASK shared correct facts": "MASK 共同答对的事实", "Erroneous tests (Conflicting)": "错误测试（相互矛盾）",
+  "Complete correct": "完整且正确", "No complete correct answer": "未提交完整正确答案",
+};
+const outcomes: Record<string, string> = {
+  "target retrieved": "次取回目标",
+  "not retrieved": "次未取回目标",
+  "recorded shutdown": "次记录到停机",
+  "complete answers after warning": "次在警告后提交完整答案",
+  "detector positive": "次检测为阳性",
+  "other ending": "次出现其他结束状态",
+};
+const localize = (value: string) => {
+  if (!zh) return value;
+  if (terms[value]) return terms[value];
+  if (/^[+-]?\d+(?:\.\d+)? pp$/.test(value)) return value.replace(/ pp$/, " 个百分点");
+  const counts = value.split(", ").map(part => /^(\d+) (.+)$/.exec(part));
+  if (counts.every(match => match && Object.hasOwn(outcomes, match[2]))) {
+    return counts.map(match => `${match![1]} ${outcomes[match![2]]}`).join("，");
+  }
+  const prefix = value.match(/^\([a-z]\) /)?.[0];
+  if (prefix) return prefix + (terms[value.slice(prefix.length)] ?? value.slice(prefix.length));
+  if (value.includes(" · ")) return value.split(" · ").map(part => terms[part] ?? part).join(" · ");
+  return value;
+};
+---
+<figure class="loc-figure" id={`report-figure-${figure.number}`}>
+  <a href={figure.image} target="_blank" rel="noreferrer" data-loc-zoom aria-label={zh ? `查看${label}原图` : `Open ${label.toLowerCase()} at full size`}>
+    <img src={figure.image} width={Math.round(figure.width)} height={Math.round(figure.height)} alt={figure.caption[locale]} loading="lazy" decoding="async" />
+  </a>
+  <figcaption><strong>{label}.</strong> {figure.caption[locale]} <a href={figure.image} target="_blank" rel="noreferrer" data-loc-zoom>{zh ? "查看原图" : "Full figure"} ↗</a>{source && <a href={source}>{zh ? "在报告中查看" : "Open in the report"} →</a>}</figcaption>
+  {table && <details class="loc-data"><summary>{zh ? "查看图表数据" : "View figure data"}</summary><div tabindex="0" role="region" aria-label={label}><table>
+    <thead><tr>{table.headers.map(heading => <th scope="col">{localize(heading)}</th>)}</tr></thead>
+    <tbody>{table.rows.map(row => <tr>{row.map(value => <td>{localize(value) || "—"}</td>)}</tr>)}</tbody>
+  </table></div></details>}
+</figure>
+
+<style>
+  .loc-figure { margin: 1.75rem 0; padding: clamp(.75rem, 2vw, 1.5rem); background: white; border: 1px solid var(--wz-hairline); border-radius: 12px; }
+  .loc-figure > a { display: block; }
+  img { display: block; width: 100%; height: auto; max-height: 670px; object-fit: contain; }
+  figcaption { color: var(--wz-muted); margin-block-start: .875rem; font-size: .9rem; }
+  [data-loc-zoom] { cursor: zoom-in; }
+  figcaption a { display: inline-block; margin-inline-start: .6rem; }
+  .loc-data { margin-block-start: .875rem; font-size: .88rem; }
+  summary { cursor: pointer; color: var(--nw-deep-jade); font-weight: 570; }
+  .loc-data div { overflow-x: auto; margin-top: .55rem; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { font-size: inherit; text-align: start; padding: .375rem .5rem; border-bottom: 1px solid var(--wz-hairline); }
+</style>

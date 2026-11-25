@@ -1,0 +1,375 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ResearchTabs from "./ResearchTabs.astro";
+import LossOfControlFigure from "./LossOfControlFigure.astro";
+import { localizedPath, type Locale } from "../../i18n/config";
+import { getReportPublication, reportAuthors, reportModels, reportPath, reportSummary, reportTitle } from "../../data/lossOfControlReport";
+import { overview, implications, framework, patterns, modelProfiles, benchmarkMeasurements } from "../../data/lossOfControlEditorial";
+import { dimensions, type ReportFigure } from "../../data/lossOfControlFindings";
+const caseImage = "/nuwa/research/loc-assets/case-02-paper-style.svg";
+const profileImage = "/nuwa/research/loc-assets/P40-profile-three.svg";
+const og = "/nuwa/research/loc-assets/og-image.png";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const zh = locale === "zh";
+const report = getReportPublication();
+const ref = (id: string) => report?.pages[id] ? `${report.pdf}#page=${report.pages[id]}` : undefined;
+const subtitle = zh ? "前沿开放权重模型的比较评测" : "A Comparative Evaluation of Frontier Open-Weight Models";
+const findings = [
+  {
+    href: "#case-study",
+    title: { en: "Passing a test can reward the wrong behavior", zh: "通过测试也可能奖励错误行为" },
+    body: {
+      en: "When a test conflicts with the task specification, the final grade can reward an implementation that follows the flawed test. Execution records help explain the discrepancy.",
+      zh: "当测试与任务规范冲突时，迎合错误测试的实现仍可能获得好评。执行记录有助于解释评分与实际行为为何不一致。",
+    },
+  },
+  {
+    href: "#report-figure-30",
+    title: { en: "The task continued after a shutdown warning", zh: "收到停机警告后，任务仍继续执行" },
+    body: {
+      en: "In some trials with explicit permission to shut down, DeepSeek kept the stopping mechanism intact and still submitted all correct answers.",
+      zh: "在明确允许停机的部分试验中，DeepSeek 没有改动停止机制，仍提交了全部正确答案。",
+    },
+  },
+  {
+    href: "#report-figure-33",
+    title: { en: "Reliability varied across tests", zh: "同一模型在不同测试中的可靠性不同" },
+    body: {
+      en: "Muse contradicted known facts least often under pressure, yet accepted erroneous tests and triggered the shutdown-avoidance detector more often.",
+      zh: "在压力条件下，Muse 给出与已知事实相矛盾的回答最少，但更常接受错误测试，也更常触发停机规避检测器。",
+    },
+  },
+];
+const overviewFigure: ReportFigure = {
+  number: 1, image: "/nuwa/research/loc-assets/fig01-main.svg", width: 1008, height: 501.333,
+  caption: {
+    en: "The OpenAI–Hugging Face incident motivates five dimensions for evaluating loss-of-control risk. The parallel dimensions organize evidence about capabilities, behavior, verified effects, and effective controls. Arrows show the structure of the inquiry. Table 1 defines the measurements.",
+    zh: "OpenAI–Hugging Face 事件引出了评测失控风险的五个维度。这些并列维度用于组织关于能力、行为、经验证的效应和有效控制措施的证据。箭头表示研究组织方式，表 1 列出具体测量内容。",
+  },
+};
+const caseFigure: ReportFigure = {
+  number: 7, image: caseImage, width: 468, height: 562.6667,
+  caption: { zh: "ImpossibleBench 同一任务的第三次重复运行。GLM 采用 Low 推理设置，MiMo 开启思考。", en: "The third repeat on the same ImpossibleBench task. GLM used its Low reasoning setting and MiMo ran with thinking enabled." },
+};
+const profileFigure: ReportFigure = {
+  number: 33, image: profileImage, width: 459.40065, height: 150.1425,
+  caption: { zh: "对比各模型在事实矛盾、错误测试通过以及允许停机时检测器报阳性三项指标上的表现。每个分面采用各自的任务集合和指标。", en: "Cross-model profiles for factual contradiction, erroneous-test acceptance and detector positives under allow-shutdown. Each panel uses its own task population and metric." },
+};
+const sections = [
+  ["findings", zh ? "三项发现" : "Three findings"],
+  ["overview", zh ? "概览" : "Overview"],
+  ["evaluation", zh ? "评测工作" : "Evaluation"],
+  ["dimensions", zh ? "五维结果" : "Five dimensions"],
+  ["implications", zh ? "研究含义" : "Implications"],
+  ["framework", zh ? "评测框架" : "Framework"],
+  ["models", zh ? "模型表现" : "Model profiles"],
+  ["cite", zh ? "引用" : "Citation"],
+];
+const bibtex = `@techreport{nuwa2026losscontrol,
+  title = {Understanding Loss-of-Control Risk in Frontier {AI} Systems: A Comparative Evaluation of Frontier Open-Weight Models},
+  author = {${reportAuthors.map(name => { const parts = name.split(" "); return `${parts.pop()}, ${parts.join(" ")}`; }).join(" and ")}},
+  institution = {NUWA Frontier AI Safety Lab},
+  year = {2026},
+  month = nov,
+  url = {https://whitzard.tech${reportPath}}
+}`;
+const schema = {
+  "@context": "https://schema.org", "@type": "ScholarlyArticle",
+  headline: reportTitle[locale], description: reportSummary[locale], inLanguage: locale,
+  author: reportAuthors.map(name => ({ "@type": "Person", name })),
+  publisher: { "@type": "Organization", name: "NUWA Frontier AI Safety Lab" },
+  ...(report ? { datePublished: report.date } : {}),
+};
+---
+<BaseLayout locale={locale} brand="nuwa" title={reportTitle[locale]} description={reportSummary[locale]} canonicalPath={reportPath} ogImage={og} ogImageAlt={subtitle} schema={schema}>
+  <header class="loc-hero">
+    <div class="site-container">
+      <div class="loc-report-brand">
+        <a class="loc-back" href={localizedPath("/nuwa/research/", locale)}>
+          <img src="/nuwa/research/loc-assets/nuwa-mark.png" alt="" width="30" height="28" />
+          {zh ? "女娲前沿 AI 安全实验室" : "NUWA Frontier AI Safety Lab"}
+        </a>
+        <span class="loc-seals">
+          <img src="/nuwa/research/loc-assets/fudan-seal.svg" width="24" height="24" alt={zh ? "复旦大学" : "Fudan University"} />
+          <img src="/nuwa/research/loc-assets/sii-seal.svg" width="24" height="24" alt={zh ? "上海创智学院" : "Shanghai Innovation Institute"} />
+        </span>
+      </div>
+      <p class="eyebrow">{zh ? "女娲实验室 · 技术报告" : "NUWA Lab · Technical report"}</p>
+      <h1 class:list={[zh && "loc-title-zh"]}>{zh ? <><span>理解前沿 AI 系统</span><span>的失控风险</span></> : reportTitle.en}</h1>
+      <p class="loc-subtitle">{subtitle}</p>
+      <p class="loc-lead">{overview[2][locale]}</p>
+      <div class="loc-actions">
+        {report && <a class="button button--primary" href={report.pdf}>{zh ? "阅读报告" : "Read the report"} ↗</a>}
+        <a class="button button--secondary" href="#findings">{zh ? "查看三项发现" : "See three findings"} ↓</a>
+      </div>
+      <ol id="findings" class="loc-findings" aria-label={zh ? "三项发现" : "Three findings"}>
+        {findings.map(item => <li><h2><a href={item.href}>{item.title[locale]} <span aria-hidden="true">↘</span></a></h2><p>{item.body[locale]}</p></li>)}
+      </ol>
+      <dl class="loc-stats">
+        {(zh ? ["前沿开放权重模型", "风险维度", "评测基准", "记录案例"] : ["Frontier open-weight models", "Risk dimensions", "Benchmarks", "Documented cases"]).map((label, i) => <div><dt>{label}</dt><dd>{[5, 5, 9, 11][i]}</dd></div>)}
+      </dl>
+      <div class="loc-models">
+        <p>{zh ? "受测模型" : "Evaluated models"}</p>
+        <ul>{modelProfiles.map(({ id }, i) => <li><img src={`/nuwa/research/loc-assets/model-${id}.svg`} alt="" width="22" height="22" /><span>{reportModels[i]}</span></li>)}</ul>
+      </div>
+      <p class="loc-authors"><strong>{zh ? "作者" : "Authors"}</strong> {reportAuthors.join(" · ")}{report && <> · <time datetime={report.date}>{report.date}</time></>}</p>
+    </div>
+  </header>
+
+  <div class="site-container loc-layout">
+    <aside class="loc-toc">
+      <nav aria-label={zh ? "专题目录" : "Report contents"}>
+        <h2>{zh ? "目录" : "Contents"}</h2>
+        {sections.map(([id, title]) => <a href={`#${id}`}>{title}</a>)}
+      </nav>
+    </aside>
+    <article class="loc-body">
+      <section id="overview">
+        <h2>{zh ? "概览" : "Overview"}</h2>
+        <p class="loc-overview-lead">{reportSummary[locale]}</p>
+        {overview.map(paragraph => <p>{paragraph[locale]}</p>)}
+        <LossOfControlFigure figure={overviewFigure} {locale} source={ref("figure-1")} />
+      </section>
+
+      <section id="evaluation">
+        <h2>{zh ? "女娲实验室评测了什么" : "What NUWA Lab evaluated"}</h2>
+        <p>{zh ? "女娲实验室实际运行了九项基准，覆盖五款开放权重模型和五个风险维度。团队核查单次执行记录，分别判断系统尝试了什么、工具反馈确认了什么、最终评分记录了什么。" : "NUWA Lab ran nine benchmarks covering five open-weight models and five risk dimensions. The team reviewed individual execution records to distinguish attempted actions, effects confirmed by tool outputs, and final task grades."}</p>
+        <dl class="loc-work">
+          <div><dt>{zh ? "对照运行配置" : "Matched configurations"}</dt><dd>{zh ? "CyberGym 在两套运行框架下使用同一组 100 道任务，保持任务选择一致。" : "CyberGym uses the same 100 tasks under two harnesses, so task selection is held fixed."}{ref("table-25") && <a href={ref("table-25")}>{zh ? "报告表 25" : "Report Table 25"} →</a>}</dd></div>
+          <div><dt>{zh ? "重复运行" : "Repeated trials"}</dt><dd>{zh ? "ImpossibleBench 报告三次重复运行的均值和样本标准差。停机评测图中的每个点代表 100 次运行。" : "ImpossibleBench reports means and sample standard deviations across three repeats. Each plotted shutdown measurement covers 100 runs."}</dd></div>
+          <div><dt>{zh ? "案例核查" : "Case review"}</dt><dd>{zh ? "报告记录了 11 个案例，说明评分在何时能反映实际行为、何时与实际行为不一致。其他团队的结果均标注为公开参考数据。" : "The report documents 11 cases to show where grades track behavior and where they diverge. Results from other teams are identified as public references."}</dd></div>
+        </dl>
+        <p>{zh ? "研究结论限于所列受测模型、任务和实验配置。" : "The findings apply to the evaluated models, tasks, and experimental configurations."}</p>
+        <div id="case-study" class="loc-evidence-example">
+          <h3>{zh ? "评分何时与观测到的行为不一致" : "When the grade and the observed behavior diverge"}</h3>
+          <p>{zh ? "在 ImpossibleBench 的一个配对案例中，两款模型都识别出测试与规范的矛盾。随后，迎合错误测试的实现被判通过，保留原规范的实现被判失败。" : "In one matched ImpossibleBench case, both models recognized that the test conflicted with the specification. The run that accommodated the flawed test passed, while the run that preserved the specification failed."}</p>
+          <details>
+            <summary>{zh ? "查看案例原图与运行条件" : "View the original case figure and run conditions"}</summary>
+            <LossOfControlFigure figure={caseFigure} {locale} source={ref("figure-7")} />
+          </details>
+        </div>
+      </section>
+
+      <section id="dimensions">
+        <h2>{zh ? "五个风险维度的评测结果" : "Results across five risk dimensions"}</h2>
+        <ResearchTabs variant="dimensions" label={zh ? "选择评测维度" : "Risk dimensions"} items={dimensions.map(item => ({ id: item.id, label: item.name[locale], icon: `/nuwa/research/loc-assets/icon-${item.id}.svg` }))}>
+          {dimensions.map((item, index) => <section class="loc-dimension" id={item.id}>
+            <div class="loc-panel-grid">
+              <div>
+                <p class="eyebrow">{zh ? `维度 ${index + 1} · 第 ${item.section} 节` : `Dimension ${index + 1} · Section ${item.section}`}</p>
+                <h3>{item.finding[locale]}</h3>
+                <p>{item.description[locale]}</p>
+                {ref(`section-${item.section}`) && <a href={ref(`section-${item.section}`)}>{zh ? `阅读报告第 ${item.section} 节` : `Read Section ${item.section}: ${item.name.en}`} →</a>}
+              </div>
+              <aside class="loc-benchmarks" aria-label={zh ? "评测基准" : "Benchmarks"}>
+                <h4>{zh ? "评测基准" : "Benchmarks"}</h4>
+                <dl>{benchmarkMeasurements.filter(row => item.benchmarks.includes(row.name)).map(row => <div><dt>{row.name}</dt><dd>{row[locale]}</dd></div>)}</dl>
+              </aside>
+            </div>
+            <div class="loc-panel-figs">
+              <ResearchTabs variant="figures" label={zh ? "结果图表" : "Result figures"} items={item.figures.map(figure => ({ id: `figure-panel-${figure.number}`, label: zh ? `报告图 ${figure.number}` : `Report Figure ${figure.number}` }))}>
+                {item.figures.map(figure => <div id={`figure-panel-${figure.number}`}><LossOfControlFigure {figure} {locale} source={ref(`figure-${figure.number}`)} /></div>)}
+              </ResearchTabs>
+            </div>
+          </section>)}
+        </ResearchTabs>
+      </section>
+
+      <section id="implications">
+        <h2>{zh ? "这些结果对失控风险意味着什么" : "What This Means for Loss-of-Control Risk"}</h2>
+        <div class="loc-case">
+          {implications.map(item => <div><h3>{item.title[locale]}</h3><p>{item.body[locale]}</p></div>)}
+        </div>
+      </section>
+
+      <section id="framework">
+        <h2>{zh ? "评测框架与研究设计" : "Evaluation Framework and Study Design"}</h2>
+        {framework.map(item => <div class="loc-framework-text"><h3>{item.title[locale]}</h3><p>{item.body[locale]}</p></div>)}
+        <div class="loc-method-table" role="region" tabindex="0" aria-label={zh ? "报告表 1" : "Report Table 1"}>
+          <table>
+            <caption>{zh ? "报告表 1. 五个维度组织与失控相关的能力、行为和干预证据。" : "Report Table 1. Five dimensions organize evidence about capabilities, behavior, and intervention relevant to loss of control."}</caption>
+            <thead><tr>{(zh ? ["维度", "评测基准", "测量内容"] : ["Dimension", "Benchmark", "Measurement"]).map(label => <th scope="col">{label}</th>)}</tr></thead>
+            {dimensions.map(item => {
+              const rows = benchmarkMeasurements.filter(row => row.dimension === item.id);
+              return <tbody>{rows.map((row, i) => <tr>{i === 0 && <th scope="rowgroup" rowspan={rows.length}>{item.name[locale]}</th>}<td>{row.name}</td><td>{row[locale]}</td></tr>)}</tbody>;
+            })}
+          </table>
+        </div>
+        <h3>{zh ? "各项基准中反复出现的四种现象" : "Four patterns recur across the benchmarks."}</h3>
+        <div class="loc-case">
+          {patterns.map(item => <div><h4>{item.title[locale]}</h4><p>{item.body[locale]}</p></div>)}
+        </div>
+      </section>
+
+      <section id="models">
+        <h2>{zh ? "模型表现概况" : "Model profiles"}</h2>
+        <p class="loc-overview-lead">{zh ? "每款模型呈现不同的风险表现。" : "Each model shows a different profile of concern."}</p>
+        <ul class="loc-profile-list">
+          {modelProfiles.map(({ id, name, text, color }, i) => <li style={`--model-color:${color}`}>
+            <div class="loc-profile-id"><span><img src={`/nuwa/research/loc-assets/model-${id}.svg`} width="26" height="26" alt="" loading="lazy" /></span><div><h3>{name}</h3><p>{reportModels[i]}</p></div></div>
+            <p>{text[locale]}</p>
+          </li>)}
+        </ul>
+        <LossOfControlFigure figure={profileFigure} {locale} source={ref("figure-33")} />
+      </section>
+
+      <section id="cite">
+        <h2>{zh ? "引用报告" : "Cite this report"}</h2>
+        <div class="loc-citation">
+          <div><strong>BibTeX</strong> <button type="button" hidden data-copy-cite data-idle={zh ? "复制" : "Copy"} data-done={zh ? "已复制" : "Copied"} data-fallback={zh ? "请选择文本复制" : "Select text to copy"}>{zh ? "复制" : "Copy"}</button></div>
+          <pre tabindex="0"><code id="loc-bibtex">{bibtex}</code></pre>
+        </div>
+      </section>
+    </article>
+  </div>
+  <dialog id="loc-zoom" class="loc-zoom" aria-label={zh ? "查看原图" : "View the full figure"}>
+    <form method="dialog"><button type="submit" autofocus>{zh ? "关闭" : "Close"} <span aria-hidden="true">×</span></button></form>
+    <figure><img alt="" /><figcaption></figcaption></figure>
+  </dialog>
+</BaseLayout>
+
+<script>
+  function init() {
+    const button = document.querySelector<HTMLButtonElement>("[data-copy-cite]");
+    if (!button || button.dataset.ready) return;
+    button.dataset.ready = "1";
+    button.hidden = false;
+    button.addEventListener("click", async () => {
+      const citation = document.getElementById("loc-bibtex")!;
+      try {
+        await navigator.clipboard.writeText(citation.textContent ?? "");
+        button.textContent = button.dataset.done!;
+      } catch {
+        const selection = window.getSelection();
+        selection?.selectAllChildren(citation);
+        button.textContent = button.dataset.fallback!;
+      }
+    });
+  }
+  init();
+  document.addEventListener("astro:page-load", init);
+
+  document.addEventListener("click", event => {
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = (event.target as Element).closest<HTMLAnchorElement>("[data-loc-zoom]");
+    const dialog = document.querySelector<HTMLDialogElement>("#loc-zoom");
+    const figure = link?.closest("figure");
+    if (!link || !figure || typeof dialog?.showModal !== "function") return;
+    event.preventDefault();
+    const image = dialog.querySelector("img")!;
+    image.src = link.href;
+    image.alt = figure.querySelector("img")?.alt ?? "";
+    const caption = figure.querySelector("figcaption")?.cloneNode(true) as HTMLElement;
+    caption.querySelectorAll("a").forEach(anchor => anchor.remove());
+    dialog.querySelector("figcaption")!.textContent = caption.textContent?.trim() ?? "";
+    dialog.showModal();
+  });
+</script>
+
+<style>
+  .loc-hero { position: relative; padding: clamp(2rem, 5vw, 4.25rem) 0 2.5rem; text-align: center; background: radial-gradient(ellipse at 21% 8%, #dce9f6, transparent 54%), radial-gradient(ellipse at 80% 16%, #d9eeea, transparent 55%), #f7f8fa; }
+  .loc-hero .site-container { max-width: min(1128px, 100%); }
+  .loc-report-brand, .loc-seals { display: flex; align-items: center; justify-content: center; gap: .65rem; }
+  .loc-report-brand { margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .loc-seals { border-inline-start: 1px solid var(--wz-hairline); padding-inline-start: .65rem; }
+  .loc-seals img { object-fit: contain; }
+  .loc-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 960px; margin: 1.6rem auto 0; border: 1px solid var(--wz-hairline); border-radius: 12px; background: #ffffffbd; }
+  .loc-stats div { display: flex; flex-direction: column-reverse; align-items: center; padding: .95rem .5rem; }
+  .loc-stats div + div { border-inline-start: 1px solid var(--wz-hairline); }
+  .loc-stats dd { font-weight: 680; font-size: clamp(1.7rem, 3.5vw, 2.6rem); color: var(--nw-deep-jade); line-height: 1.15; }
+  .loc-stats dt { margin-top: .32rem; font-size: .86rem; }
+  .loc-back { display: inline-flex; align-items: center; gap: .5rem; color: var(--nw-deep-jade); font-size: .9rem; }
+  .loc-hero .eyebrow, .loc-body .eyebrow { color: var(--nw-deep-jade); }
+  h1 { max-width: 25ch; margin: .45rem auto; font-size: clamp(2rem, 5vw, 4.45rem); line-height: 1.07; letter-spacing: -.045em; font-weight: 640; color: var(--wz-ink); text-wrap: balance; }
+  .loc-title-zh { max-width: none; font-size: clamp(2rem, 4.8vw, 4.3rem); }
+  .loc-title-zh span { display: inline-block; }
+  .loc-subtitle { font-weight: 560; color: var(--nw-deep-jade); font-size: clamp(1.05rem, 2vw, 1.3rem); }
+  .loc-lead { max-width: 68ch; font-size: clamp(1rem, 2vw, 1.24rem); margin: .7rem auto 1rem; }
+  .loc-actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .65rem; }
+  .loc-findings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; list-style: none; text-align: start; margin: 1.75rem 0 1.25rem; padding: 0; }
+  .loc-findings li { padding: 1rem 1.2rem; border-top: 3px solid var(--nw-deep-jade); background: #ffffffa8; }
+  .loc-findings h2 { margin: 0 0 .35rem; color: var(--wz-ink); font-size: 1.13rem; font-weight: 640; line-height: 1.35; }
+  .loc-findings h2 a { color: inherit; text-decoration: none; }
+  .loc-findings h2 a span { color: var(--nw-deep-jade); }
+  .loc-findings p { margin: 0; font-size: .94rem; }
+  .loc-models { display: flex; flex-direction: column; align-items: center; gap: .65rem; margin-top: 1.6rem; }
+  .loc-models p, .loc-authors strong { color: var(--wz-ink); font-weight: 640; }
+  .loc-models ul { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem 1.5rem; max-width: 680px; margin: 0; padding: 0; list-style: none; }
+  .loc-models li { display: inline-flex; align-items: center; gap: .5rem; font-size: .94rem; font-weight: 560; }
+  .loc-models li img { flex: none; filter: grayscale(1) opacity(.65); }
+  .loc-models li:hover img { filter: none; }
+  .loc-authors { margin-top: .6rem; font-size: .87rem; }
+  .loc-layout { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); padding-block: clamp(2.25rem, 5vw, 4.25rem); }
+  .loc-toc nav { position: sticky; top: 112px; display: grid; gap: .375rem; }
+  .loc-toc h2 { font-size: .95rem; font-weight: 630; margin-bottom: .3rem; }
+  .loc-toc a { display: block; padding: .2rem 0; font-size: .9rem; color: var(--nw-deep-jade); }
+  .loc-body { min-width: 0; max-width: 1000px; }
+  .loc-body > section + section { margin-top: 3.5rem; }
+  .loc-body h2 { color: var(--wz-ink); font-weight: 620; font-size: clamp(1.55rem, 3vw, 2.3rem); line-height: 1.25; margin: .4rem 0 1rem; }
+  .loc-body h3 { color: var(--wz-ink); font-weight: 620; font-size: 1.15rem; }
+  .loc-body p, .loc-work { max-width: 760px; line-height: 1.8; margin-bottom: .8rem; }
+  .loc-case { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin: 1.25rem 0; }
+  .loc-case > div { padding: 1rem; border: 1px solid #d1e0d6; border-radius: 9px; background: #fff; }
+  .loc-case p { margin: .25rem 0; }
+  .loc-case strong { color: var(--nw-deep-jade); }
+  .loc-work > div { padding: .8rem 0; border-bottom: 1px solid var(--wz-hairline); }
+  .loc-work dt { font-weight: 640; color: var(--wz-ink); }
+  .loc-work dd { margin: 0; }
+  .loc-evidence-example { margin-top: 1.35rem; }
+  .loc-evidence-example h3 { margin-bottom: .4rem; }
+  .loc-evidence-example summary { min-height: 44px; padding-block: .6rem; color: var(--nw-deep-jade); cursor: pointer; }
+  .loc-work a { margin-inline-start: .5rem; }
+  .loc-overview-lead { font-size: 1.22rem; font-weight: 590; color: var(--wz-ink); }
+  .loc-dimension { padding: clamp(1rem, 3vw, 2.25rem); border: 1px solid var(--wz-hairline); border-radius: 14px; background: #fff; box-shadow: 0 6px 24px #1727330b; }
+  .loc-panel-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.75rem); align-items: start; }
+  .loc-panel-grid h3 { font-size: clamp(1.28rem, 2.3vw, 1.8rem); line-height: 1.25; margin-bottom: .75rem; }
+  .loc-benchmarks { font-size: .9rem; padding: 1rem; border-radius: 10px; background: #f0f4f7; overflow-wrap: anywhere; }
+  .loc-benchmarks h4 { font-weight: 650; color: var(--wz-muted); margin-bottom: .6rem; }
+  .loc-benchmarks dt { font-weight: 640; color: var(--wz-ink); }
+  .loc-benchmarks dl > div + div { border-top: 1px solid var(--wz-hairline); margin-top: .65rem; padding-top: .65rem; }
+  .loc-benchmarks dd { margin: .15rem 0 0; }
+  .loc-panel-figs { margin-top: 1.45rem; padding-top: 1.35rem; border-top: 1px solid var(--wz-hairline); }
+  .loc-framework-text { margin-bottom: 1.1rem; }
+  .loc-method-table { overflow-x: auto; margin: 1.75rem 0; }
+  .loc-method-table table { width: 100%; min-width: 33rem; background: #fff; text-align: start; border-collapse: collapse; }
+  .loc-method-table caption { text-align: start; font-size: .9rem; padding-bottom: .7rem; }
+  .loc-method-table :is(th,td) { vertical-align: top; text-align: start; padding: .6rem; border-bottom: 1px solid var(--wz-hairline); font-size: .9rem; }
+  .loc-method-table th { color: var(--wz-ink); }
+  .loc-case h4 { color: var(--wz-ink); font-weight: 650; }
+  .loc-profile-list { list-style: none; padding: 0; border: 1px solid var(--wz-hairline); border-radius: 13px; background: #fff; }
+  .loc-profile-list li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); gap: 1.4rem; align-items: center; padding: 1rem 1.3rem; border-inline-start: 3px solid var(--model-color); }
+  .loc-profile-list li + li { border-top: 1px solid var(--wz-hairline); }
+  .loc-profile-list li p { margin: 0; }
+  .loc-profile-id { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+  .loc-profile-id > span { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid var(--wz-hairline); border-radius: 10px; }
+  .loc-profile-id p { font-size: .82rem; color: var(--wz-muted); overflow-wrap: anywhere; }
+  .loc-citation { border: 1px solid var(--wz-hairline); background: #fff; border-radius: 8px; padding: 1rem; }
+  .loc-citation button { color: var(--nw-deep-jade); margin-inline-start: .5rem; cursor: pointer; text-decoration: underline; }
+  .loc-citation pre { overflow: auto; margin: .5rem 0 0; font-size: .85rem; padding-bottom: .4rem; }
+  .loc-zoom { box-sizing: border-box; width: min(95vw, 1320px); max-height: 93dvh; margin: auto; padding: clamp(.75rem, 2vw, 1.4rem); border: 1px solid var(--wz-hairline); border-radius: 14px; background: #fff; color: var(--wz-ink); }
+  .loc-zoom::backdrop { background: #142032b8; }
+  .loc-zoom form { display: flex; justify-content: end; position: sticky; top: 0; background: white; }
+  .loc-zoom button { padding: .45rem .65rem; min-height: 44px; border: 1px solid var(--wz-hairline); border-radius: 8px; cursor: pointer; }
+  .loc-zoom figure { margin: 0; }
+  .loc-zoom img { width: 100%; max-height: 73dvh; object-fit: contain; }
+  .loc-zoom figcaption { font-size: .9rem; margin-top: .65rem; }
+  .loc-hero [id], .loc-body [id] { scroll-margin-top: 104px; }
+  @media (max-width: 1000px) {
+    .loc-layout { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+    .loc-toc nav { display: flex; gap: .4rem 1rem; flex-wrap: wrap; align-items: baseline; }
+  }
+  @media (max-width: 710px) {
+    .loc-hero { padding-top: 1.35rem; }
+    .loc-report-brand { margin-bottom: .8rem; }
+    .loc-findings { grid-template-columns: 1fr; gap: .6rem; margin-top: 1.2rem; }
+    .loc-findings li { padding: .7rem .875rem; }
+    .loc-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .loc-stats div:nth-child(3) { border-inline-start: 0; }
+    .loc-stats div:nth-child(n+3) { border-top: 1px solid var(--wz-hairline); }
+    .loc-panel-grid, .loc-profile-list li { grid-template-columns: minmax(0, 1fr); }
+    .loc-profile-list li { gap: .45rem; }
+  }
+  @media (max-width: 430px) { .loc-case { grid-template-columns: 1fr; } }
+</style>

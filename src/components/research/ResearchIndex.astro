@@ -11,7 +11,8 @@ import { links } from "../../data/links";
 import ResearchExplorer from "./ResearchExplorer";
 import PublicImpactPath from "./PublicImpactPath.astro";
 import ResearchMission from "./ResearchMission.astro";
-import ResearchHighlightBanner from "./ResearchHighlightBanner.astro";
+import ResearchHighlightGallery from "./ResearchHighlightGallery.astro";
+import { lossOfControlResearchAsset } from "../../data/lossOfControlReport";
 import ResearchMediaWall from "./ResearchMediaWall.astro";
 import { getResearchHighlights } from "../../lib/researchHighlights";
 import { allResearchBlogEntries, publishedResearchBlog, researchBlogSlug } from "../../lib/researchBlog";
@@ -24,6 +25,7 @@ import "../../styles/research-library.css";
 interface Props { locale: Locale; copy: ResearchCopy["research"] }
 const { locale, copy } = Astro.props;
 const sorted = [...researchAssets].sort((a, b) => b.year - a.year || (a.featuredRank ?? 99) - (b.featuredRank ?? 99) || a.title.localeCompare(b.title));
+sorted.unshift(lossOfControlResearchAsset(locale));
 const featured = researchAssets.filter((item) => item.featuredRank).sort((a, b) => (a.featuredRank ?? 99) - (b.featuredRank ?? 99));
 const primaryLink = (item: typeof researchAssets[number]) => item.links.find((link) => link.kind === "paper")?.url ?? item.links[0].url;
 const blogEntries = await allResearchBlogEntries();
@@ -53,7 +55,7 @@ const schema = {
 <BaseLayout title={copy.meta.title} description={copy.meta.description} locale={locale} brand="nuwa" canonicalPath="/nuwa/research" schema={schema}>
   <section class="research-library-hero"><div class="site-container"><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.lead}</p><div><a href={localizedPath("/nuwa", locale)}>{locale === "zh" ? "女娲实验室" : "NUWA"} <span aria-hidden="true">→</span></a><a href={localizedPath("/nuwa/whitzard-index", locale)}>NUWA Index</a></div></div></section>
 
-  {highlights[0] && <div class="site-container research-library-highlight"><ResearchHighlightBanner highlight={highlights[0]} locale={locale} compact /></div>}
+  <ResearchHighlightGallery highlight={highlights[0]} {locale} />
 
   <section id="research-index" class="research-library" aria-labelledby="research-library-title">
     <span id="featured" aria-hidden="true"></span>
