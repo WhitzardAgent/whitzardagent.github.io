@@ -13,6 +13,9 @@ const og = "/nuwa/research/loc-assets/og-image.png";
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const zh = locale === "zh";
+const releaseDateFormatter = new Intl.DateTimeFormat(zh ? "zh-CN" : "en-US", {
+  year: "numeric", month: zh ? "numeric" : "short", day: "numeric", timeZone: "UTC",
+});
 const report = getReportPublication();
 const ref = (id: string) => report?.pages[id] ? `${report.pdf}#page=${report.pages[id]}` : undefined;
 const subtitle = zh ? "前沿开放权重模型的比较评测" : "A Comparative Evaluation of Frontier Open-Weight Models";
@@ -75,7 +78,14 @@ const schema = {
       {report && <div class="loc-actions"><a class="button button--primary" href={report.pdf}>{zh ? "阅读报告" : "Read the report"} ↗</a></div>}
       <div class="loc-models">
         <p>{zh ? "受测模型" : "Evaluated models"}</p>
-        <ul>{modelProfiles.map(({ id }, i) => <li><img src={`/nuwa/research/loc-assets/model-${id}.svg`} alt="" width="22" height="22" /><span>{reportModels[i]}</span></li>)}</ul>
+        <ul>{modelProfiles.map(({ id }, i) => {
+          const model = reportModels[i];
+          const date = releaseDateFormatter.format(new Date(model.date));
+          return <li>
+            <img src={`/nuwa/research/loc-assets/model-${id}.svg`} alt="" width="22" height="22" />
+            <span>{model.name}<small>{model.label[locale]} <a href={model.source} aria-label={zh ? `${model.name}，${date}，日期来源` : `${model.name}, ${date}, release date source`}><time datetime={model.date}>{date}</time></a></small></span>
+          </li>;
+        })}</ul>
       </div>
       <p class="loc-authors"><strong>{zh ? "作者" : "Authors"}</strong> {reportAuthors.join(" · ")}{report && <> · <time datetime={report.date}>{report.date}</time></>}</p>
     </div>
@@ -171,7 +181,7 @@ const schema = {
         <p class="loc-overview-lead">{zh ? "每款模型呈现不同的风险表现。" : "Each model shows a different profile of concern."}</p>
         <ul class="loc-profile-list">
           {modelProfiles.map(({ id, name, text, color }, i) => <li style={`--model-color:${color}`}>
-            <div class="loc-profile-id"><span><img src={`/nuwa/research/loc-assets/model-${id}.svg`} width="26" height="26" alt="" loading="lazy" /></span><div><h3>{name}</h3><p>{reportModels[i]}</p></div></div>
+            <div class="loc-profile-id"><span><img src={`/nuwa/research/loc-assets/model-${id}.svg`} width="26" height="26" alt="" loading="lazy" /></span><div><h3>{name}</h3><p>{reportModels[i].name}</p></div></div>
             <p>{text[locale]}</p>
           </li>)}
         </ul>
@@ -248,7 +258,10 @@ const schema = {
   .loc-models { display: flex; flex-direction: column; align-items: center; gap: .65rem; margin-top: 1.6rem; }
   .loc-models p, .loc-authors strong { color: var(--wz-ink); font-weight: 640; }
   .loc-models ul { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem 1.5rem; max-width: 680px; margin: 0; padding: 0; list-style: none; }
-  .loc-models li { display: inline-flex; align-items: center; gap: .5rem; font-size: .94rem; font-weight: 560; }
+  .loc-models li { display: inline-flex; align-items: flex-start; gap: .5rem; font-size: .94rem; font-weight: 560; text-align: start; min-width: 0; }
+  .loc-models li > span { min-width: 0; overflow-wrap: anywhere; }
+  .loc-models li small { display: block; color: var(--wz-muted); font-size: .78rem; font-weight: 450; }
+  .loc-models li small a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
   .loc-models li img { flex: none; filter: grayscale(1) opacity(.65); }
   .loc-models li:hover img { filter: none; }
   .loc-authors { margin-top: .6rem; font-size: .87rem; }
