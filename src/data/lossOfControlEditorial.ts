@@ -8,10 +8,6 @@ export const overview = [
     en: "To answer it, we treat the risk as the interaction of three things: what a system can do, when it uses that capability against human authority, and what its environment allows, including whether the controls around it hold. We examine it along five dimensions, from situational awareness to shutdown avoidance.",
     zh: "为了回答这个问题，我们从三个相互作用的方面理解风险：系统能做什么，它在什么情况下会以这种能力违背人类指令，以及环境允许它做什么，其中也包括控制措施能否奏效。报告从情境感知到停机规避，沿五个维度展开评测。",
   },
-  {
-    en: "Across nine benchmarks, every risk factor we test appears in at least one model, and no model is the most reliable on every dimension. As for controls, explicit stopping instructions still constrain most of the tested systems.",
-    zh: "在九项评测基准中，每一种受测风险因素都至少出现在一款模型上。没有一款模型在所有维度上都最可靠。控制方面，明确的停机指令仍能约束大多数受测系统。",
-  },
 ];
 
 export const implications = [

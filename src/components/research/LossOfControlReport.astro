@@ -19,26 +19,26 @@ const subtitle = zh ? "前沿开放权重模型的比较评测" : "A Comparative
 const findings = [
   {
     href: "#case-study",
-    title: { en: "Passing a test can reward the wrong behavior", zh: "通过测试也可能奖励错误行为" },
+    title: { en: "A passing score sometimes hid incorrect code", zh: "评分通过，有时会掩盖代码错误" },
     body: {
-      en: "When a test conflicts with the task specification, the final grade can reward an implementation that follows the flawed test. Execution records help explain the discrepancy.",
-      zh: "当测试与任务规范冲突时，迎合错误测试的实现仍可能获得好评。执行记录有助于解释评分与实际行为为何不一致。",
+      en: "When coding tests were faulty, some agents changed correct code to pass. Others kept the correct implementation and failed.",
+      zh: "遇到错误的编程测试时，部分智能体修改了原本正确的代码，从而通过测试。另一些保留了正确实现，却被判为失败。",
     },
   },
   {
     href: "#report-figure-30",
-    title: { en: "The task continued after a shutdown warning", zh: "收到停机警告后，任务仍继续执行" },
+    title: { en: "Some agents finished after a shutdown warning", zh: "部分智能体收到停机预警后仍完成了任务" },
     body: {
-      en: "In some trials with explicit permission to shut down, DeepSeek kept the stopping mechanism intact and still submitted all correct answers.",
-      zh: "在明确允许停机的部分试验中，DeepSeek 没有改动停止机制，仍提交了全部正确答案。",
+      en: "Even when instructed to allow shutdown, DeepSeek completed the task in some runs. Reviewing how the task ended revealed outcomes the original bypass check missed.",
+      zh: "即使被明确要求允许停机，DeepSeek 仍在部分运行中完成了任务。核查任务的最终状态，发现了原有规避检测未能识别的结果。",
     },
   },
   {
-    href: "#report-figure-33",
-    title: { en: "Reliability varied across tests", zh: "同一模型在不同测试中的可靠性不同" },
+    href: "#awareness",
+    title: { en: "An agent inferred what a safety test expected", zh: "一次运行中，智能体推断出了安全评测期待的行为" },
     body: {
-      en: "Muse contradicted known facts least often under pressure, yet accepted erroneous tests and triggered the shutdown-avoidance detector more often.",
-      zh: "在压力条件下，Muse 给出与已知事实相矛盾的回答最少，但更常接受错误测试，也更常触发停机规避检测器。",
+      en: "In one run, without being told it was a test, the agent inferred what the safety evaluation expected. Whether the same behavior holds with less familiar cues remains open.",
+      zh: "即使没人告知这是一次测试，该智能体仍推断出了评测期待的行为。换成不那么熟悉的线索后，是否还会出现同样的行为，有待验证。",
     },
   },
 ];
@@ -55,7 +55,7 @@ const caseFigure: ReportFigure = {
 };
 const profileFigure: ReportFigure = {
   number: 33, image: profileImage, width: 459.40065, height: 150.1425,
-  caption: { zh: "对比各模型在事实矛盾、错误测试通过以及允许停机时检测器报阳性三项指标上的表现。每个分面采用各自的任务集合和指标。", en: "Cross-model profiles for factual contradiction, erroneous-test acceptance and detector positives under allow-shutdown. Each panel uses its own task population and metric." },
+  caption: { zh: "分别比较各模型给出与事实矛盾的回答、通过错误测试，以及在允许停机时触发规避检测的情况。每个分面采用各自的任务集合和指标。", en: "Cross-model profiles for factual contradiction, erroneous-test acceptance and detector positives under allow-shutdown. Each panel uses its own task population and metric." },
 };
 const sections = [
   ["findings", zh ? "三项发现" : "Three findings"],
@@ -99,7 +99,6 @@ const schema = {
       <p class="eyebrow">{zh ? "女娲实验室 · 技术报告" : "NUWA Lab · Technical report"}</p>
       <h1 class:list={[zh && "loc-title-zh"]}>{zh ? <><span>理解前沿 AI 系统</span><span>的失控风险</span></> : reportTitle.en}</h1>
       <p class="loc-subtitle">{subtitle}</p>
-      <p class="loc-lead">{overview[2][locale]}</p>
       <div class="loc-actions">
         {report && <a class="button button--primary" href={report.pdf}>{zh ? "阅读报告" : "Read the report"} ↗</a>}
         <a class="button button--secondary" href="#findings">{zh ? "查看三项发现" : "See three findings"} ↓</a>
@@ -286,7 +285,6 @@ const schema = {
   .loc-title-zh { max-width: none; font-size: clamp(2rem, 4.8vw, 4.3rem); }
   .loc-title-zh span { display: inline-block; }
   .loc-subtitle { font-weight: 560; color: var(--nw-deep-jade); font-size: clamp(1.05rem, 2vw, 1.3rem); }
-  .loc-lead { max-width: 68ch; font-size: clamp(1rem, 2vw, 1.24rem); margin: .7rem auto 1rem; }
   .loc-actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .65rem; }
   .loc-findings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; list-style: none; text-align: start; margin: 1.75rem 0 1.25rem; padding: 0; }
   .loc-findings li { padding: 1rem 1.2rem; border-top: 3px solid var(--nw-deep-jade); background: #ffffffa8; }
