@@ -79,10 +79,10 @@ const schema = {
           <span>{zh ? "评测报告" : "Evaluation Report"}</span>
           {!report && <small>{zh ? "待发布" : "Coming soon"}</small>}
         </a>
-        <a class="button button--secondary loc-resource" href={reportTrajectoriesUrl ?? undefined} role={reportTrajectoriesUrl ? undefined : "link"} aria-disabled={reportTrajectoriesUrl ? undefined : "true"} title="Hugging Face">
+        <a class="button button--secondary loc-resource" href={reportTrajectoriesUrl} title="Hugging Face">
           <span class="loc-hf-icon" aria-hidden="true">🤗</span>
           <span>{zh ? "实验数据" : "Trajectory Data"}</span>
-          {reportTrajectoriesUrl ? <span aria-hidden="true">↗</span> : <small>{zh ? "待发布" : "Coming soon"}</small>}
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
       <div class="loc-models">

@@ -36,7 +36,7 @@ export function getReportPublication(): Publication | null {
   };
 }
 
-export const reportTrajectoriesUrl: string | null = null;
+export const reportTrajectoriesUrl = "https://huggingface.co/datasets/WhitzardAgent/NUWA-Loss-of-Control-Eval";
 
 export function lossOfControlResearchAsset(locale: Locale): ResearchAsset {
   const href = localizedPath(reportPath, locale);
